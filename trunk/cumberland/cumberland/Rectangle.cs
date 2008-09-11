@@ -24,35 +24,38 @@
 
 namespace Cumberland
 {
-    public class Rectangle
-    {
-        public double x;
-        public double y;
-        public double width;
-        public double height;
-        
-        public Rectangle(double tx, double ty, double twidth, double theight)
-        {
-            this.x = tx;
-            this.y = ty;
-            this.width = twidth;
-            this.height = theight;
-        }
+	public class Rectangle
+	{
+#region properties
+		
+		Point min;
+		
+		public Point Min {
+			get {
+				return min;
+			}
+			set {
+				min = value;
+			}
+		}
 
-		public static bool operator == (Rectangle p1, Rectangle p2)
-		{
-			if (p1.x == p2.x && p1.y == p2.y && 
-				p1.width == p2.width && p1.height == p2.height) 
-				return true;
-			else return false;
+		public Point Max {
+			get {
+				return max;
+			}
+			set {
+				max = value;
+			}
 		}
-		   
-		public static bool operator != (Rectangle p1, Rectangle p2)
+		
+		Point max;
+		
+#endregion
+		
+		public Rectangle(double minx, double miny, double maxx, double maxy)
 		{
-			if (p1.x != p2.x || p1.y != p2.y ||
-				p1.width != p2.width || p1.height != p2.height) 
-				return true;
-			else return false;
+			min = new Point(minx, miny);
+			max = new Point(maxx, maxy);
 		}
-    }
+	}
 }

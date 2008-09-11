@@ -24,258 +24,220 @@
 
 using System.IO;
 using System;
-//using Gtk;
-//using Gdk;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 
-// obviously this isn't done
+using Tao.OpenGl;
+using Tao.FreeGlut;
 
-/*
+
 namespace Cumberland 
 {
-	public class MapGdkCanvas : DrawingArea
+	public class MapRenderer
 	{
-		Gdk.Pixmap pixmap;
-		MainWindow mainWin;
-	
-		public MapGdkCanvas (MainWindow mw) : base ()
-		{
-			mainWin = mw;
+		List<Shapefile> layers = new List<Shapefile>();
 		
-			this.SetSizeRequest (mainWin.da_width, mainWin.da_height);
-			this.ExposeEvent += new ExposeEventHandler (ExposeCanvas);
-			this.ConfigureEvent += new ConfigureEventHandler (ConfigureCanvas);
-			this.ButtonPressEvent += new ButtonPressEventHandler (MyButtonPressEvent);			
-			this.MotionNotifyEvent += new MotionNotifyEventHandler (MouseOverCanvas);
-			this.AddEvents((int)EventMask.ExposureMask |
-							   (int)EventMask.LeaveNotifyMask |
-							   (int)EventMask.ButtonPressMask |
-							   (int)EventMask.PointerMotionMask |
-							   (int)EventMask.PointerMotionHintMask);
-		}
-
-		void ExposeCanvas (object obj, ExposeEventArgs args)
-		{
-			//Console.WriteLine("ExposeEvent");
-			// Redraw stored pixmap of map
-			Gdk.Rectangle area = args.Event.Area;
-			args.Event.Window.DrawDrawable (this.Style.WhiteGC, pixmap,
-					area.X, area.Y,
-					area.X, area.Y,
-					area.Width, area.Height);
-		}
-
-		void ConfigureCanvas (object obj, ConfigureEventArgs args)
-		{
-			//Console.WriteLine("ConfigureEvent");
-			Gdk.EventConfigure ev = args.Event;
-			Gdk.Window window = ev.Window;
-			Gdk.Rectangle allocation = this.Allocation;
-
-			if (pixmap == null)
-			{
-				pixmap = new Gdk.Pixmap (window, this.Allocation.Width,
-					this.Allocation.Height, -1);
-				pixmap.DrawRectangle (this.Style.WhiteGC, true, 0, 0,
-					this.Allocation.Width, this.Allocation.Height);
+		public List<Shapefile> Layers {
+			get {
+				return layers;
 			}
-			else if (mainWin.da_width != allocation.Width || 
-				mainWin.da_height != allocation.Height)
+			set {
+				layers = value;
+			}
+		}
+	
+		public Bitmap Draw(int width, int height)
+		{
+			int[] temp = new int[1];
+			int fbo = -1;
+			int depthBuffer = -1;
+			int colorBuffer = -1;
+			
+			Bitmap b = null;
+			
+			try
 			{
-				pixmap = new Gdk.Pixmap (window, this.Allocation.Width,
-					this.Allocation.Height, -1);
-				pixmap.DrawRectangle (this.Style.WhiteGC, true, 0, 0,
-					this.Allocation.Width, this.Allocation.Height);
+				Glut.glutInit();
+				Glut.glutCreateWindow("Salmon Viewer");
 				
-				// FIXME: Should resizing map affect extents/ratio?
-				//da_width = allocation.Width;
-				//da_height = allocation.Height;
-				// Resizing should roll up and affect the app properties
-				mainWin.AdjustExtents();
-				DrawMap();
-			}
-			else
-			{
-				args.Event.Window.DrawDrawable (this.Style.WhiteGC, pixmap,
-					-1, -1,
-					-1, -1,
-					-1, -1);
-			}			
-		}
-	
-		public void ClearCanvas()
-		{
-			//pixmap = new Gdk.Pixmap (window, this.Allocation.Width,
-			//	this.Allocation.Height, -1);
-			pixmap.DrawRectangle (this.Style.WhiteGC, true, 0, 0,
-				this.Allocation.Width, this.Allocation.Height);	
-			QueueDraw();					
-		}
-
-		void MouseOverCanvas (object obj, MotionNotifyEventArgs args)
-		{
-			if (mainWin.ActiveTool > 0)
-				ParentWindow.Cursor = new Gdk.Cursor(Gdk.CursorType.Crosshair);
-
-			int x, y;
-			//Gdk.ModifierType state;
-			Gdk.EventMotion ev = args.Event;
-			Gdk.Window window = ev.Window;
-
-			if (ev.IsHint) {
-				Gdk.ModifierType s;
-				window.GetPointer (out x, out y, out s);
-				//state = s;
-			} else {
-				x = (int) ev.X;
-				y = (int) ev.Y;
-				//state = ev.State;
-			}
-			
-			//TODO: Convert to Map Coords
-			//Console.WriteLine(x + " " + y);
-			mainWin.sb.Push(1,"x: " + x + " y:" + y);
-		}	
-
-		void MyButtonPressEvent (object obj, ButtonPressEventArgs args)
-		{
-			//Console.WriteLine ("<<ButtonPressEvent>>");
-			if (mainWin.shps.Count == 0) return;
-
-			Gdk.EventButton e = args.Event;
-			Appomattox.Point max = mainWin.max;
-			Appomattox.Point min = mainWin.min;
-			
-			// Grab the width and height in map coordinates
-			double mwidth = Math.Abs(max.X - min.X);
-			double mheight = Math.Abs(max.Y - min.Y);
-	
-			// calculate the ratio of map to image coordinates
-			double xratio = mwidth / mainWin.image_width;
-			double yratio = mheight / mainWin.image_height;
-
-			// calculate the map coordinates of the pixel coords
-			double mx = min.X + (e.X * xratio);
-			double my = min.Y + ((mainWin.image_height - e.Y) * yratio);
-
-			if (e.Button == 1)
-			{ 
-				switch (mainWin.ActiveTool)
+				Gl.glMatrixMode(Gl.GL_PROJECTION);
+				Gl.glLoadIdentity();
+				Gl.glOrtho(0, width, 0, height, 0, 1);
+				Gl.glMatrixMode(Gl.GL_MODELVIEW);
+				
+				if (!Gl.glGetString(Gl.GL_EXTENSIONS).Contains("GL_EXT_framebuffer_object"))
 				{
-					case (uint) MainWindow.GisTools.ZoomIn:
-						mwidth /= 2;
-						mheight /= 2;
-						break;
-					case (uint) MainWindow.GisTools.ZoomOut:
-						mwidth *= 2;
-						mheight *= 2;
-						break;
+					throw new NotSupportedException("Your video card does not support frame buffers");	
 				}
+				
+//				// set up and bind frame buffer
+//				Gl.glGenFramebuffersEXT(1, temp);
+//				fbo = temp[0];
+//				System.Console.WriteLine(fbo);
+//				Gl.glBindFramebufferEXT(Gl.GL_FRAMEBUFFER_EXT, fbo);
+//	
+//				// create, bind, and associate our depth buffer to the frame buffer			
+////				Gl.glGenRenderbuffersEXT(1, temp);
+////				depthBuffer = temp[0];
+////				Gl.glBindRenderbufferEXT(Gl.GL_RENDERBUFFER_EXT, depthBuffer);
+////				Gl.glRenderbufferStorageEXT(Gl.GL_RENDERBUFFER_EXT, Gl.GL_DEPTH_COMPONENT, width, height);	
+////				Gl.glFramebufferRenderbufferEXT(Gl.GL_FRAMEBUFFER_EXT, Gl.GL_DEPTH_ATTACHMENT_EXT, Gl.GL_RENDERBUFFER_EXT, depthBuffer);
+//								
+//				// create, bind, and associate our color buffer to the frame buffer	
+//				Gl.glGenRenderbuffersEXT(1, temp);
+//				colorBuffer = temp[0];
+//				Gl.glBindRenderbufferEXT(Gl.GL_RENDERBUFFER_EXT, colorBuffer);
+//				Gl.glRenderbufferStorageEXT(Gl.GL_RENDERBUFFER_EXT, Gl.GL_RGBA, width, height);
+//				Gl.glFramebufferRenderbufferEXT(Gl.GL_FRAMEBUFFER_EXT, Gl.GL_COLOR_ATTACHMENT0_EXT, Gl.GL_RENDERBUFFER_EXT, colorBuffer);
+//				
+//				System.Console.WriteLine(Gl.glCheckFramebufferStatusEXT(Gl.GL_FRAMEBUFFER_EXT));
+//				System.Console.WriteLine( "error: " + Gl.glGetError());
+//
+//				
+//				// check state
+//				if (Gl.glCheckFramebufferStatusEXT(Gl.GL_FRAMEBUFFER_EXT) != Gl.GL_FRAMEBUFFER_COMPLETE_EXT)
+//					throw new InvalidOperationException("This video card may not support Framebuffers");
 
-				// TODO: Write function to update extents.
-				min.X = mx - mwidth/2;
-				min.Y = my - mheight/2;
-				max.X = mx + mwidth/2;
-				max.Y = my + mheight/2;
-	
-				DrawMap();
+				//Gl.glClearColor(1f, 1f, 1f, 1f);
+				Gl.glClear(Gl.GL_COLOR_BUFFER_BIT);
+				
+				// render here
+				Render(layers);
+				
+				Gl.glFlush(); 
+				
+				b = new Bitmap(width, height, PixelFormat.Format32bppArgb);
+				BitmapData bd = b.LockBits(new System.Drawing.Rectangle(0, 0, width, height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
+				//Gl.glPixelStorei(Gl.GL_PACK_ALIGNMENT, 3);
+				Gl.glReadPixels(0, 0, width, height, Gl.GL_BGRA, Gl.GL_UNSIGNED_BYTE, bd.Scan0);
+				b.UnlockBits(bd);
+				b.RotateFlip(RotateFlipType.Rotate180FlipX);
 			}
+			finally
+			{
+				// free memory
+				if (fbo >= 0) Gl.glDeleteFramebuffersEXT(1, new int[] { fbo });
+				if (depthBuffer >= 0) Gl.glDeleteRenderbuffersEXT(1, new int[] { depthBuffer });
+				if (colorBuffer >= 0) Gl.glDeleteRenderbuffersEXT(1, new int[] { colorBuffer });
+			}
+			
+			return b;
 		}
 		
-		public void DrawMap()
+		public void Render(List<Shapefile> shapes)
 		{
-
-			if (mainWin.shps.Count == 0) 
-			{
-				ClearCanvas();
-				return;
-			}
-
-			Appomattox.Point max = mainWin.max;
-			Appomattox.Point min = mainWin.min;
+			Rectangle env = new Rectangle(0,0, 10, 10);
 			
-			double height = mainWin.image_height;
-			double width = mainWin.image_width;
+			double height = 100;
+			double width = 100;
 			
 			// FIXME: These will only change with resizing or new map coords
 			// So move.
-			double xratio = width / Math.Abs(max.X - min.X);
-			double yratio = height / Math.Abs(max.Y - min.Y);
+			double xratio = width / Math.Abs(env.Max.X - env.Min.X);
+			double yratio = height / Math.Abs(env.Max.Y - env.Min.Y);
 			
-			pixmap.DrawRectangle (this.Style.WhiteGC, true, 0, 0,
-			this.Allocation.Width, this.Allocation.Height);		
+//			pixmap.DrawRectangle (this.Style.WhiteGC, true, 0, 0,
+//			this.Allocation.Width, this.Allocation.Height);		
 		
-			foreach (Shapefile shp in mainWin.shps)
+			foreach (Shapefile shp in shapes)
 			{
-				if (shp.features.Count == 0) continue;
-
-				//Console.WriteLine(shp.filename);
+				if (shp.features.Count == 0)
+				{
+					continue;
+				}
 
 				uint ctest = 0;
-				switch (shp.shapetype)
+				switch (shp.Shapetype)
 				{
-					case 1:
+					case Shapefile.ShapeType.Point:
+					
+					    Gl.glBegin(Gl.GL_POINT);
+					
 						for (int ii=0; ii < shp.features.Count; ii++)
 						{
 							//FIXME: Convert to 'AS'
-							Appomattox.Point p = (Appomattox.Point) shp.features[ii];
-							if (p.X >= min.X && p.X <= max.X && p.Y >= min.Y && p.Y <= max.Y)
+							Point p = (Point) shp.features[ii];
+							if (p.X >= env.Min.X && p.X <= env.Max.X && p.Y >= env.Min.Y && p.Y <= env.Max.Y)
 							{		
 								ctest++;
 								//FIXME: Redundancy with all cases.  move ToMapPoint
-								int px = Convert.ToInt32( (p.X - min.X) * xratio);						
-								int py = Convert.ToInt32( height - ((p.Y - min.Y) * yratio));
-								pixmap.DrawRectangle (this.Style.BlackGC, true, px, py, 2, 2);
+								//int px = Convert.ToInt32( (p.X - env.Min.X) * xratio);						
+								//int py = Convert.ToInt32( height - ((p.Y - env.Min.Y) * yratio));
+								//pixmap.DrawRectangle (this.Style.BlackGC, true, px, py, 2, 2);
 								//pxt.DrawRectangle (darea.Style.BlackGC, true, px, py, 2, 2);
+							
+							    Gl.glVertex2d(p.X, p.Y);
 							}					
 						}
+					
+					    Gl.glEnd();
+					
 						break;
-					case 3:
-						for (int ii=0; ii < shp.features.Count; ii++)
+					
+					case Shapefile.ShapeType.PolyLine:
+
+					    for (int ii=0; ii < shp.features.Count; ii++)
 						{
 							ctest++;
 							PolyLine pol = (PolyLine) shp.features[ii];
-							for (int jj=0; jj < pol.lines.Count; jj++)
+							for (int jj=0; jj < pol.Lines.Count; jj++)
 							{
 								//FIXME: Convert to 'AS'
-								Line r = (Line) pol.lines[jj];
-								Gdk.Point[] pts = new Gdk.Point[r.points.Count];
-								for (int kk = 0; kk < r.points.Count; kk++)
+								Line r = (Line) pol.Lines[jj];
+								//Gdk.Point[] pts = new Gdk.Point[env.points.Count];
+							
+							    Gl.glBegin(Gl.GL_LINES);
+								
+							    for (int kk = 0; kk < r.points.Count; kk++)
 								{	
 									//FIXME: Convert to 'AS'
-									Appomattox.Point pt = (Appomattox.Point) r.points[kk];
+									Point pt = (Point) r.points[kk];
 									//FIXME: Redundancy with all cases.  move ToMapPoint
-									int pox = Convert.ToInt32( (pt.X - min.X) * xratio);						
-									int poy = Convert.ToInt32( height - ((pt.Y - min.Y) * yratio));
-									pts[kk] = new Gdk.Point(pox,poy);
+									//int pox = Convert.ToInt32( (pt.X - env.Min.X) * xratio);						
+									//int poy = Convert.ToInt32( height - ((pt.Y - env.Min.Y) * yratio));
+									//pts[kk] = new Gdk.Point(pox,poy);
+								
+								    Gl.glVertex2d(pt.X, pt.Y);
 								}
-								pixmap.DrawLines(this.Style.BlackGC, pts);
+								//pixmap.DrawLines(this.Style.BlackGC, pts);
 								//pxt.DrawLines(darea.Style.BlackGC, pts);
+							
+							    Gl.glEnd();
 							}
 							//Console.WriteLine(Convert.ToDouble(ii)/Convert.ToDouble(shp.features.Count));
 							//pb.Fraction = Convert.ToDouble(ii)/Convert.ToDouble(shp.features.Count);
 						}
-						break;							
-					case 5:
+						break;
+					
+					case Shapefile.ShapeType.Polygon:
+					
 						for (int ii=0; ii < shp.features.Count; ii++)
 						{
 							ctest++;
-							
+						
 							Polygon po = (Polygon) shp.features[ii];
-							for (int jj=0; jj < po.rings.Count; jj++)
+							for (int jj=0; jj < po.Rings.Count; jj++)
 							{
-								//FIXME: Convert to 'AS'
-								Ring r = (Ring) po.rings[jj];
-								Gdk.Point[] pts = new Gdk.Point[r.points.Count];
-								for (int kk = 0; kk < r.points.Count; kk++)
+							    Gl.glBegin(Gl.GL_POLYGON);
+							
+							    //FIXME: Convert to 'AS'
+								Ring r = (Ring) po.Rings[jj];
+								//Gdk.Point[] pts = new Gdk.Point[env.points.Count];
+								for (int kk = 0; kk < r.Points.Count; kk++)
 								{
 									//FIXME: Convert to 'AS'
-									Appomattox.Point pt = (Appomattox.Point) r.points[kk];
+									Point pt = (Point) r.Points[kk];
 									//FIXME: Redundancy with all cases.  move ToMapPoint
-									int pox = Convert.ToInt32( (pt.X - min.X) * xratio);						
-									int poy = Convert.ToInt32( height - ((pt.Y - min.Y) * yratio));
-									pts[kk] = new Gdk.Point(pox,poy);
+									int pox = Convert.ToInt32( (pt.X - env.Min.X) * xratio);						
+									int poy = Convert.ToInt32( height - ((pt.Y - env.Min.Y) * yratio));
+									//pts[kk] = new Gdk.Point(pox,poy);
+								
+								    Gl.glVertex2d(pt.X, pt.Y);
 								}
 
+ 							    Gl.glEnd();
+							
 								//Gdk.Color red_color = new Gdk.Color (0xff, 0, 0);
 								//Gdk.GC poly_gc = new Gdk.GC(pixmap);
 								//poly_gc.Background = new Gdk.Color (0xff, 0, 0);
@@ -293,22 +255,21 @@ namespace Cumberland
 				               	//gc.Foreground = shp.colors[0];
 				               	//gc.Background = colors[1];
 				               	//gc.Fill = Fill.Solid;
-								pixmap.DrawPolygon(this.Style.BlackGC, false, pts);
+								//pixmap.DrawPolygon(this.Style.BlackGC, false, pts);
 								//pixmap.DrawPolygon(gc, true, pts);
 								//gc.Foreground = shp.colors[1];
 								//pixmap.DrawPolygon(gc, false, pts);
 								//pxt.DrawPolygon(gc, false, pts);
 							}
-
 						}
+					
 						break;
 						
 				}
 				//Console.WriteLine(ctest + " Features Drawn");
 				//Console.Write(px + "," + py + " ");
 			}
-			QueueDraw();
+
 		}
 	}
 }
-*/

@@ -41,11 +41,5 @@ namespace Cumberland
         public Line()
 		{
 		}
-
-		public void AddPoint(Point p)
-		{
-			points.Add(p);
-		}
-		
     }
 }

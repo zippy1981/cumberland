@@ -1,4 +1,4 @@
-// Ring.cs
+// Main.cs
 //
 // Copyright (c) 2008 Scott Ellington and Authors
 //
@@ -21,25 +21,27 @@
 // THE SOFTWARE.
 //
 //
+using System;
+using System.Drawing;
+using System.Drawing.Imaging;
 
-using System.Collections.Generic;
+using Cumberland;
 
-namespace Cumberland
+namespace Cumberland.DrawMap
 {
-	
-	
-    public class Ring
-    {
-        public List<Point> points = new List<Point>();
-        
-        public List<Point> Points {
-        	get {
-        		return points;
-        	}
-        }
-		
-        public Ring()
+	class MainClass
+	{
+		public static void Main(string[] args)
 		{
+			MapRenderer map = new MapRenderer();
+			
+			map.Layers.Add(new Shapefile("/home/scottell/gis/data/county/county.shp"));
+			
+			Bitmap b = map.Draw(400, 400);
+			
+			b.Save("/home/scottell/Desktop/test.png", ImageFormat.Png);
+			               
+			               
 		}
-    }
+	}
 }

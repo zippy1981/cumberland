@@ -90,7 +90,7 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <MonoDevelop>
-      <Properties xmlns="">
+      <Properties>
         <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="NoChangeLog" />
       </Properties>
     </MonoDevelop>
