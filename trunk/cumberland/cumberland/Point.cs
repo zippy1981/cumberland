@@ -28,6 +28,8 @@ namespace Cumberland
     {
         private double x, y, z, m;
         
+#region properties
+		
 		public double X	{
 
 			get
@@ -77,6 +79,10 @@ namespace Cumberland
 			}
 		}
 		
+#endregion
+		
+#region ctors
+		
         public Point(double tx, double ty)
         {
             X = tx;
@@ -98,6 +104,10 @@ namespace Cumberland
             M = tm;
         }
 
+#endregion
+		
+#region operator overrides
+		
 		public static bool operator == (Point p1, Point p2)
 		{
 			if (p1.X == p2.X && p1.Y == p2.Y) return true;
@@ -109,6 +119,10 @@ namespace Cumberland
 			if (p1.X != p2.X || p1.Y != p2.Y) return true;
 			else return false;
 		}
+
+#endregion
+		
+#region overrides
 		
 		public override int GetHashCode()
 		{
@@ -131,5 +145,7 @@ namespace Cumberland
 			return this == p;
 		}
 
+#endregion
+		
     }
 }

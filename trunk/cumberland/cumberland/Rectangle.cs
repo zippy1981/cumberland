@@ -24,7 +24,7 @@
 
 namespace Cumberland
 {
-    class Rectangle
+    public class Rectangle
     {
         public double x;
         public double y;

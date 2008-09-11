@@ -1,4 +1,4 @@
-// PolyLine.cs
+// PointTests.cs
 //
 // Copyright (c) 2008 Scott Ellington and Authors
 //
@@ -22,45 +22,40 @@
 //
 //
 
-using System.Collections.Generic;
+using System;
+using Cumberland;
+using NUnit.Framework;
 
-namespace Cumberland
+namespace Cumberland.Tests
 {
-    public class PolyLine : Feature
-    {
-		Point min, max;
-		
-#region properties
-		
-		public List<Line> Lines {
-			get {
-				return lines;
-			}
-		}
-        List<Line> lines = new List<Line>();
-		
-#endregion
-		
-#region ctors
-		
-        public PolyLine(double xmin, double ymin, double xmax, double ymax)
-        {
-			min = new Point(xmin, ymin);
-			max = new Point(xmax, ymax);
-		}
-
-#endregion
-		
-#region methods
-		
-		public bool Intersects(Point p)
+	[TestFixture]	
+	public class PointTests
+	{		
+		[Test]
+		public void TestEqualityOperator()
 		{
-			if (p.X >= min.X && p.X <= max.X && p.Y >= min.Y && p.Y <= max.Y)
-			   	return true;
-			else return false;			
+			Point p1 = new Point(1,1);
+			Point p2 = new Point(1, 1);
+			
+			Assert.IsTrue(p1 == p2);
 		}
 		
-#endregion
+		[Test]
+		public void TestInequalityOperator()
+		{
+			Point p1 = new Point(1,1);
+			Point p2 = new Point(1,3);
+			
+			Assert.IsTrue(p1 != p2);
+		}
 		
-    }
+		[Test]
+		public void TestEqualsMethod()
+		{
+			Point p1 = new Point(1,1);
+			Point p2 = new Point(1,1);
+			
+			Assert.AreEqual(p1, p2);
+		}
+	}
 }

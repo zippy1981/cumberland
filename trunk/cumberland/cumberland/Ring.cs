@@ -29,16 +29,9 @@ namespace Cumberland
     public class Ring
     {
         public ArrayList points;
-        public uint ID;
 		
         public Ring()
 		{
-			points = new ArrayList();
-		}
-       
-		public Ring(uint myID)
-        { 
-		   	ID = myID; 
 			points = new ArrayList();
 		}
 
@@ -46,6 +39,5 @@ namespace Cumberland
 		{
 			points.Add(p);
 		}
-		
     }
 }

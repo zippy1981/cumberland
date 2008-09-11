@@ -22,25 +22,24 @@
 //
 //
 
-using System.Collections;
+using System.Collections.Generic;
 
 namespace Cumberland
 {
     public class Line
     {
-        public ArrayList points;
-        public uint ID;
+        public List<Point> Points {
+        	get {
+        		return points;
+        	}
+        	set {
+        		points = value;
+        	}
+        }
+		public List<Point> points = new List<Point>();
 		
         public Line()
 		{
-			points = new ArrayList();
-		}
-        
-       
-		public Line(uint myID)
-        { 
-		   	ID = myID; 
-			points = new ArrayList();
 		}
 
 		public void AddPoint(Point p)
