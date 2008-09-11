@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cumberland", "cumberland\cumberland.csproj", "{0F516D1A-446C-46E6-8AD0-7C6573C338D8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0F516D1A-446C-46E6-8AD0-7C6573C338D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F516D1A-446C-46E6-8AD0-7C6573C338D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F516D1A-446C-46E6-8AD0-7C6573C338D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F516D1A-446C-46E6-8AD0-7C6573C338D8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		name = cumberland
+		version = 0.1
+		StartupItem = cumberland\cumberland.csproj
+	EndGlobalSection
+EndGlobal

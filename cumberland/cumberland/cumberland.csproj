@@ -43,4 +43,7 @@
     <Compile Include="MapRenderer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <None Include="ChangeLog" />
+  </ItemGroup>
 </Project>
