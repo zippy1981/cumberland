@@ -24,27 +24,13 @@
 
 using System;
 using System.IO;
-using System.Collections;
+using System.Collections.Generic;
 
 namespace Cumberland 
 {
     public class Shapefile 
-	{
-        public Point min;
-        public Point max;
-		private uint filelength;
-        public uint shapetype;
-		public uint version;
-		public string filename;
-		//spublic int stamp;
-
-		//FIXME: temporary location
-		//public Gdk.Color[] colors;
-		public byte[] forecolor, backcolor;
-		
-		public ArrayList features;
-
-        public enum ShapeTypes
+	{				
+        public enum ShapeType
         {
             Null        = 0,
             Point       = 1,
@@ -61,13 +47,51 @@ namespace Cumberland
             MultiPointM = 28,
             MultiPatch  = 31
         }
+		
+#region Vars
+		
+		// TODO: expose extents
+        Point min;
+        Point max;
 
+		uint filelength;
+		uint version;
+		string filename;
+		//spublic int stamp;
+		
+#endregion
+		
+#region Properties
+	
+		public ShapeType Shapetype {
+			get {
+				return shapetype;
+			}
+			set {
+				shapetype = value;
+			}
+		}
+		ShapeType shapetype = ShapeType.Null;
+		
+		public List<Feature> Features {
+			get {
+				return features;
+			}
+			set {
+				features = value;
+			}
+		}
+		public List<Feature> features = new List<Feature>();
+
+#endregion
+
+#region ctor
+		
         public Shapefile(string fname)
         {
 	        FileStream file;
 
 			file = new FileStream(fname, FileMode.Open, FileAccess.Read); 
-			features = new ArrayList();
            	
 			BinaryReader str = new BinaryReader(file);
             str.BaseStream.Seek(0, SeekOrigin.Begin); 
@@ -79,32 +103,31 @@ namespace Cumberland
 			
             filename = fname.Substring(fname.LastIndexOf('/')+1);
             
-            //FIXME: temporary location
-			Random randomgen = new Random();
-			forecolor = new byte[4];
-			backcolor = new byte[4];
-			randomgen.NextBytes(forecolor);
-			randomgen.NextBytes(backcolor);
 			//colors = new Gdk.Color[2];
 			//colors[0] = new Gdk.Color(backcolor[0], backcolor[1],backcolor[2]);
 			//colors[1] = new Gdk.Color(forecolor[0], forecolor[1],forecolor[2]);
 		}
 
-        private uint FlipEndian(uint iin)
+		
+#endregion
+		
+#region Helper methods		
+		
+        uint FlipEndian(uint iin)
         {
             byte[] temp = BitConverter.GetBytes(iin);
             Array.Reverse(temp);
             return BitConverter.ToUInt32(temp,0);
         }
 
-        private void ReadFileHeader(BinaryReader stream)
+        void ReadFileHeader(BinaryReader stream)
         {
             // grab the File Code
             uint filecode = FlipEndian(stream.ReadUInt32());
 
             if (filecode != 9994)
             {
-                Console.WriteLine("ERROR: This file does not appear to be a shapefile");
+				throw new InvalidDataException("This file does not appear to be a shapefile");
             }
 
             // the next 20 bytes are junk
@@ -113,15 +136,15 @@ namespace Cumberland
 
             // grab the file length
             filelength = FlipEndian(stream.ReadUInt32());
-            Console.WriteLine("INFO: File Length (in 16-bit words) is " + filelength);
+            //Console.WriteLine("INFO: File Length (in 16-bit words) is " + filelength);
 
             // get version
             version = stream.ReadUInt32();
             //Console.WriteLine("INFO: Version is " + version);
 
             // get shape type
-            shapetype = stream.ReadUInt32();
-            Console.WriteLine("INFO: ShapeType is " + shapetype);
+            shapetype = (ShapeType) stream.ReadUInt32();
+            //Console.WriteLine("INFO: ShapeType is " + shapetype);
 
             // get extents
             double xmin, ymin, zmin, mmin, xmax, ymax, zmax, mmax;
@@ -136,11 +159,12 @@ namespace Cumberland
             min = new Point(xmin, ymin, zmin, mmin);
             max = new Point(xmax, ymax, zmax, mmax);
             
-            Console.WriteLine("INFO: Extents: (" + min.X + "," + min.Y + "," + min.Z + 
-                   "," + min.M + ") (" + max.X + "," + max.Y + "," + max.Z + "," + max.M + ")");
+            //Console.WriteLine("INFO: Extents: (" + min.X + "," + min.Y + "," + min.Z + 
+            //       "," + min.M + ") (" + max.X + "," + max.Y + "," + max.Z + "," + max.M + ")");
+			
         }
 
-		private void ReadShapeRecords(BinaryReader stream)
+		void ReadShapeRecords(BinaryReader stream)
 		{
 		   	uint loc = 50;  // current position in file
 		   
@@ -159,7 +183,7 @@ namespace Cumberland
 				{
 				   	case 0:
 					   	// Null Object, nothing to read in
-					   	Console.WriteLine("INFO: Null Shape Found");
+					   	//Console.WriteLine("INFO: Null Shape Found");
 						break;
 					case 1:
 						// Read in Point object
@@ -169,13 +193,13 @@ namespace Cumberland
 						break;
 					case 3:
 						// Read in PolyLine object
-					   	PolyLine po = getPolyLine(stream, dataleft);
+					   	PolyLine po = GetPolyLine(stream, dataleft);
 						po.Id = recordNum;
 						features.Add(po);						
 						break;
 					case 5:
 						// Read in Polygon object
-					   	Polygon pol = getPolygon(stream, dataleft);
+					   	Polygon pol = GetPolygon(stream, dataleft);
 						pol.Id = recordNum;
 						features.Add(pol);						
 						break;
@@ -192,7 +216,7 @@ namespace Cumberland
 			}
 		}
 		
-		private Polygon getPolygon(BinaryReader stream, uint dlen)
+		Polygon GetPolygon(BinaryReader stream, uint dlen)
 		{
 			double xmin = stream.ReadDouble();
 			double ymin = stream.ReadDouble();
@@ -226,10 +250,11 @@ namespace Cumberland
 				rings[ii].AddPoint(p);				
 			}
 			po.AddRing(rings[ii]);
+			
 			return po;
 		}
 		
-		private PolyLine getPolyLine(BinaryReader stream, uint dlen)
+		PolyLine GetPolyLine(BinaryReader stream, uint dlen)
 		{
 			double xmin = stream.ReadDouble();
 			double ymin = stream.ReadDouble();
@@ -263,29 +288,11 @@ namespace Cumberland
 				lines[ii].AddPoint(p);				
 			}
 			po.AddLine(lines[ii]);
+			
 			return po;
-
 		}
 		
-	/*	public static void Main(string[] args)
-		{
-		   string f;
-		   if (args.Length == 0)
-			  f = "data/district_bnd.shp";
-		   else 
-			  f = args[0];
-
-		   Shapefile sf = new Shapefile(f);
-		   Console.WriteLine("*** End of File Load***");
-
-		   //Point p = (Point) ((Polygon) sf.features[0]).min;
-		   //Console.WriteLine(sf.features[0].GetType());
-
-		   //Feature fea = (Feature) sf.features[0];
-		   //Console.WriteLine(sf.features.Count + " records " + (sf.Query(new Point(100000,3300000))).Count);
-			ArrayList al = sf.Query(new Point(100000,3300000));
-			if (al.Count > 0) Console.WriteLine(((Feature) al[0]).ID);
-		}*/
+#endregion
     }
 }
 
