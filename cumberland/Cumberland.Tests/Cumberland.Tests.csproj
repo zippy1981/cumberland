@@ -40,6 +40,7 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="ShapefileTests.cs" />
+    <Compile Include="PointTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shape_eg_data\mexico\cities.dbf" />
@@ -87,4 +88,11 @@
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions>
+    <MonoDevelop>
+      <Properties xmlns="">
+        <MonoDevelop.ChangeLogAddIn.ChangeLogInfo policy="NoChangeLog" />
+      </Properties>
+    </MonoDevelop>
+  </ProjectExtensions>
 </Project>

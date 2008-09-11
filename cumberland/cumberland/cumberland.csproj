@@ -37,13 +37,13 @@
     <Compile Include="Point.cs" />
     <Compile Include="Polygon.cs" />
     <Compile Include="PolyLine.cs" />
-    <Compile Include="Rectangle.cs" />
     <Compile Include="Ring.cs" />
     <Compile Include="Shapefile.cs" />
     <Compile Include="MapRenderer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
+    <None Include="Rectangle.cs" />
     <None Include="ChangeLog" />
   </ItemGroup>
 </Project>

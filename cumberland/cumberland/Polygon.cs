@@ -22,32 +22,46 @@
 //
 //
 
+using System.Collections.Generic;
+
 namespace Cumberland
 {
-	using System.Collections;
-
     public class Polygon : Feature
     {
-        public ArrayList rings;
-		public Point min, max;
-        
+		// TODO: expose extents
+		Point min, max;
+		
+#region Properties
+		
+		public List<Ring> Rings {
+			get {
+				return rings;
+			}
+		}
+        List<Ring> rings = new List<Ring>();
+		
+#endregion
+		
+#region ctors
+		
         public Polygon(double xmin, double ymin, double xmax, double ymax)
         {
-			rings = new ArrayList();
 			min = new Point(xmin, ymin);
 			max = new Point(xmax, ymax);
 		}
+		
+#endregion
 
-		public void AddRing(Ring r)
-		{
-			rings.Add(r);
-		}
-
+#region Methods
+		
 		public bool Intersects(Point p)
 		{
 			if (p.X >= min.X && p.X <= max.X && p.Y >= min.Y && p.Y <= max.Y)
 			   	return true;
 			else return false;
 		}
+		
+#endregion
+		
     }
 }

@@ -102,10 +102,6 @@ namespace Cumberland
             file.Close();
 			
             filename = fname.Substring(fname.LastIndexOf('/')+1);
-            
-			//colors = new Gdk.Color[2];
-			//colors[0] = new Gdk.Color(backcolor[0], backcolor[1],backcolor[2]);
-			//colors[1] = new Gdk.Color(forecolor[0], forecolor[1],forecolor[2]);
 		}
 
 		
@@ -243,13 +239,13 @@ namespace Cumberland
 				if (ii < parts.Length-1)
 				   	if (parts[ii+1] == jj)
 					{
-						po.AddRing(rings[ii]);
+						po.Rings.Add(rings[ii]);
 					   	ii++;
 					}
 				Point p = new Point(stream.ReadDouble(), stream.ReadDouble());
 				rings[ii].AddPoint(p);				
 			}
-			po.AddRing(rings[ii]);
+			po.Rings.Add(rings[ii]);
 			
 			return po;
 		}
@@ -281,13 +277,13 @@ namespace Cumberland
 				if (ii < parts.Length-1)
 				   	if (parts[ii+1] == jj)
 					{
-						po.AddLine(lines[ii]);
+						po.Lines.Add(lines[ii]);
 					   	ii++;
 					}
 				Point p = new Point(stream.ReadDouble(), stream.ReadDouble());
 				lines[ii].AddPoint(p);				
 			}
-			po.AddLine(lines[ii]);
+			po.Lines.Add(lines[ii]);
 			
 			return po;
 		}
