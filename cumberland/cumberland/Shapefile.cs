@@ -243,7 +243,7 @@ namespace Cumberland
 					   	ii++;
 					}
 				Point p = new Point(stream.ReadDouble(), stream.ReadDouble());
-				rings[ii].AddPoint(p);				
+				rings[ii].Points.Add(p);				
 			}
 			po.Rings.Add(rings[ii]);
 			
@@ -281,7 +281,7 @@ namespace Cumberland
 					   	ii++;
 					}
 				Point p = new Point(stream.ReadDouble(), stream.ReadDouble());
-				lines[ii].AddPoint(p);				
+				lines[ii].Points.Add(p);				
 			}
 			po.Lines.Add(lines[ii]);
 			
