@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{102E6FF6-201B-4366-BE2B-6304EF756F2B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>Cumberland</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="nunit.framework, Version=2.2.0.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\cumberland\cumberland.csproj">
+      <Project>{102E6FF6-201B-4366-BE2B-6304EF756F2B}</Project>
+      <Name>cumberland</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="ShapefileTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shape_eg_data\mexico\cities.dbf" />
+    <None Include="shape_eg_data\mexico\cities.sbn" />
+    <None Include="shape_eg_data\mexico\cities.sbx" />
+    <None Include="shape_eg_data\mexico\cities.shx" />
+    <None Include="shape_eg_data\mexico\drainage.dbf" />
+    <None Include="shape_eg_data\mexico\drainage.sbn" />
+    <None Include="shape_eg_data\mexico\drainage.sbx" />
+    <None Include="shape_eg_data\mexico\drainage.shp" />
+    <None Include="shape_eg_data\mexico\drainage.shx" />
+    <None Include="shape_eg_data\mexico\lakes.dbf" />
+    <None Include="shape_eg_data\mexico\lakes.sbn" />
+    <None Include="shape_eg_data\mexico\lakes.sbx" />
+    <None Include="shape_eg_data\mexico\lakes.shp" />
+    <None Include="shape_eg_data\mexico\lakes.shx" />
+    <None Include="shape_eg_data\mexico\rivers.dbf" />
+    <None Include="shape_eg_data\mexico\rivers.sbn" />
+    <None Include="shape_eg_data\mexico\rivers.sbx" />
+    <None Include="shape_eg_data\mexico\rivers.shp" />
+    <None Include="shape_eg_data\mexico\rivers.shx" />
+    <None Include="shape_eg_data\mexico\roads.dbf" />
+    <None Include="shape_eg_data\mexico\roads.sbn" />
+    <None Include="shape_eg_data\mexico\roads.sbx" />
+    <None Include="shape_eg_data\mexico\roads.shx" />
+    <None Include="shape_eg_data\mexico\roads_rt.dbf" />
+    <None Include="shape_eg_data\mexico\roads_rt.sbn" />
+    <None Include="shape_eg_data\mexico\roads_rt.sbx" />
+    <None Include="shape_eg_data\mexico\roads_rt.shp" />
+    <None Include="shape_eg_data\mexico\roads_rt.shx" />
+    <None Include="shape_eg_data\mexico\states.dbf" />
+    <None Include="shape_eg_data\mexico\states.sbn" />
+    <None Include="shape_eg_data\mexico\states.sbx" />
+    <None Include="shape_eg_data\mexico\states.shx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="shape_eg_data\mexico\cities.shp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="shape_eg_data\mexico\roads.shp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="shape_eg_data\mexico\states.shp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>
