@@ -35,13 +35,13 @@ namespace Cumberland.DrawMap
 		{
 			MapRenderer map = new MapRenderer();
 			
-			map.Layers.Add(new Shapefile("/home/scottell/gis/data/county/county.shp"));
+			map.Layers.Add(new Shapefile("/home/scottell/Projects/cumberland/Cumberland.Tests/shape_eg_data/mexico/cities.shp"));
+			map.Layers.Add(new Shapefile("/home/scottell/Projects/cumberland/Cumberland.Tests/shape_eg_data/mexico/states.shp"));
+			map.Layers.Add(new Shapefile("/home/scottell/Projects/cumberland/Cumberland.Tests/shape_eg_data/mexico/roads.shp"));
 			
-			Bitmap b = map.Draw(400, 400);
+			Bitmap b = map.Draw();
 			
 			b.Save("/home/scottell/Desktop/test.png", ImageFormat.Png);
-			               
-			               
 		}
 	}
 }
