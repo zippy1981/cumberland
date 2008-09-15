@@ -50,12 +50,81 @@ namespace Cumberland
 		
 		Point max;
 		
+		public Point Center {
+			get {
+				return new Point(Width/2 + min.X, 
+				                 Height/2 + min.Y);
+			}
+		}
+		
+		public double Width {
+			get {
+				return max.X-min.X;
+			}
+			set {
+				if (Width == value) return;
+
+				Point center = Center;
+				
+				max.X = center.X + value / 2;
+				min.X = center.X - value / 2;				
+			}
+		}
+		
+		public double Height {
+			get {
+				return max.Y-min.Y;
+			}
+			set
+			{
+				if (Height == value) return;
+				
+				Point center = Center;
+						
+				max.Y = center.Y + value / 2;
+				min.Y = center.Y - value / 2;
+			}
+		}
+		
+		public double AspectRatioOfWidth {
+			get {
+				return Width / Height;
+			}
+			set {
+				if (value == AspectRatioOfWidth) return;
+			
+				if (value > AspectRatioOfWidth)
+				{
+					Width = value * Height;
+				}
+				else
+				{
+					Height = Width / value;
+				}
+			}
+		}
+		
 #endregion
+		
+#region Constructors
 		
 		public Rectangle(double minx, double miny, double maxx, double maxy)
 		{
 			min = new Point(minx, miny);
 			max = new Point(maxx, maxy);
 		}
+		
+#endregion
+		
+		public Rectangle Clone()
+		{
+			return new Rectangle(min.X, min.Y, max.X, max.Y);
+		}
+		
+		public override string ToString ()
+		{
+			return string.Format("{{minx:{0}, miny:{1} maxx:{2} maxy:{3}}}", min.X, min.Y, max.X, max.Y);
+		}
+
 	}
 }

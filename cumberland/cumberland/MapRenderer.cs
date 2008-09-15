@@ -96,10 +96,12 @@ namespace Cumberland
 			
 			try
 			{
+				// hack to get an opengl context
 				Glut.glutInit();
 				Glut.glutCreateWindow("Salmon Viewer");
 				Glut.glutHideWindow();
 				
+				// test for fbo support
 				if (!Gl.glGetString(Gl.GL_EXTENSIONS).Contains("GL_EXT_framebuffer_object"))
 				{
 					throw new NotSupportedException("Your video card does not support frame buffers");	
@@ -142,43 +144,45 @@ namespace Cumberland
 				Gl.glClearColor(1f, 1f, 1f, 0f);
 				Gl.glClear(Gl.GL_COLOR_BUFFER_BIT);
 				
-				
+				// switch to projection matrix
 				Gl.glMatrixMode(Gl.GL_PROJECTION);
 				Gl.glLoadIdentity();
-				//Gl.glOrtho(0, width, 0, height, 0, 1);
-				Gl.glOrtho(extents.Min.X, extents.Max.X, extents.Min.Y, extents.Max.Y, 0, 1);
+				
+				//Rectangle r = extents.Clone();
+				Rectangle r = new Rectangle(-115, 14, -87, 34);
+
+				// set aspect ratio to image to avoid distortion
+				r.AspectRatioOfWidth = width / height;
+
+				// set projection matrix to our extents				
+				Gl.glOrtho(r.Min.X, r.Max.X, r.Min.Y, r.Max.Y, 0, 1);
+				
+				// switch back to model view
 				Gl.glMatrixMode(Gl.GL_MODELVIEW);
 				
+				// 2d image
 				Gl.glDisable(Gl.GL_DEPTH_TEST);
 				
 				// render here
 				Render();
 				
-				// Draw top triangle
-				Gl.glBegin(Gl.GL_TRIANGLES);
-				Gl.glColor3d(0.0, 0.0, 1.0);
-				Gl.glVertex2i(60, 200);
-				Gl.glColor3d(0.0, 1.0, 0);
-				Gl.glVertex2i(200, 340);
-				Gl.glColor3d(1, 0.0, 0);
-				Gl.glVertex2i(340, 200);
-				Gl.glEnd();
-							
-				//int[] arr = new int[160000];
-				//b = new Bitmap(width, height, PixelFormat.Format32bppArgb);
-				b = new Bitmap(width, height);
-				//BitmapData bd = b.LockBits(new System.Drawing.Rectangle(0, 0, width, height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
+				// testing
+//				// Draw top triangle
+//				Gl.glBegin(Gl.GL_TRIANGLES);
+//				Gl.glColor3d(0.0, 0.0, 1.0);
+//				Gl.glVertex2i(60, 200);
+//				Gl.glColor3d(0.0, 1.0, 0);
+//				Gl.glVertex2i(200, 340);
+//				Gl.glColor3d(1, 0.0, 0);
+//				Gl.glVertex2i(340, 200);
+//				Gl.glEnd();
+						
+				// acquire the pixels from openGL and draw to bitmap
+				b = new Bitmap(width, height, PixelFormat.Format32bppArgb);
 				BitmapData bd = b.LockBits(new System.Drawing.Rectangle(0, 0, width, height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
-				//Gl.glPixelStorei(Gl.GL_PACK_ALIGNMENT, 3);
-				//Gl.glReadPixels(0, 0, width, height, Gl.GL_BGRA, Gl.GL_UNSIGNED_BYTE, bd.Scan0);
 				Gl.glReadPixels(0, 0, width, height, Gl.GL_RGBA, Gl.GL_UNSIGNED_BYTE, bd.Scan0);
 				b.UnlockBits(bd);
-				//b.RotateFlip(RotateFlipType.Rotate180FlipX);
-				
-//				for (int ii=0; ii<100; ii++)
-//				{
-//					System.Console.Write(arr[ii] + " ");
-//				}
+				b.RotateFlip(RotateFlipType.Rotate180FlipX);
 				
 				int errorcode;
 				if ((errorcode = Gl.glGetError()) != Gl.GL_NO_ERROR)
@@ -199,8 +203,8 @@ namespace Cumberland
 		
 		public void Render()
 		{
-//			double xratio = width / Math.Abs(env.Max.X - env.Min.X);
-//			double yratio = height / Math.Abs(env.Max.Y - env.Min.Y);	
+//			double xratio = width / Math.Abs(extents.Max.X - extents.Min.X);
+//			double yratio = height / Math.Abs(extents.Max.Y - extents.Min.Y);	
 		
 			foreach (Shapefile shp in layers)
 			{
@@ -241,6 +245,9 @@ namespace Cumberland
 					
 					case Shapefile.ShapeType.PolyLine:
 
+					    Gl.glEnable(Gl.GL_LINE_SMOOTH);
+					    Gl.glLineWidth(3f);
+					
 					    for (int ii=0; ii < shp.features.Count; ii++)
 						{
 							ctest++;
@@ -269,6 +276,9 @@ namespace Cumberland
 							    Gl.glEnd();
 							}
 						}
+					
+					    Gl.glDisable(Gl.GL_LINE_SMOOTH);
+					
 						break;
 					
 					case Shapefile.ShapeType.Polygon:
@@ -277,31 +287,43 @@ namespace Cumberland
 						{
 							ctest++;
 						
-							Polygon po = (Polygon) shp.features[ii];
-							for (int jj=0; jj < po.Rings.Count; jj++)
-							{
-							    //System.Console.Write("i");
-							    Gl.glBegin(Gl.GL_POLYGON);
-							    Gl.glColor3d(0.6, 0.8, 0.7);
-							
-							    //FIXME: Convert to 'AS'
-								Ring r = (Ring) po.Rings[jj];
-								//Gdk.Point[] pts = new Gdk.Point[env.points.Count];
-								for (int kk = 0; kk < r.Points.Count; kk++)
+						    for (int ll = 0; ll < 2; ll++)
+						    {
+								Polygon po = (Polygon) shp.features[ii];
+								for (int jj=0; jj < po.Rings.Count; jj++)
 								{
-									//FIXME: Convert to 'AS'
-									Point pt = (Point) r.Points[kk];
-									//FIXME: Redundancy with all cases.  move ToMapPoint
-//									int pox = Convert.ToInt32( (pt.X - env.Min.X) * xratio);						
-//									int poy = Convert.ToInt32( height - ((pt.Y - env.Min.Y) * yratio));
-									//pts[kk] = new Gdk.Point(pox,poy);
+									if (ll == 0)
+									{
+									    Gl.glBegin(Gl.GL_POLYGON);
+									    Gl.glColor3d(0.6, 0.8, 0.7);
+									}
+									else
+										
+									{
+										Gl.glBegin(Gl.GL_LINES);
+									    Gl.glColor3d(0,0,0);
+									}
 								
-								    Gl.glVertex2d(pt.X, pt.Y);
+								    //FIXME: Convert to 'AS'
+									Ring r = (Ring) po.Rings[jj];
+									//Gdk.Point[] pts = new Gdk.Point[env.points.Count];
+									for (int kk = 0; kk < r.Points.Count; kk++)
+									{
+										//FIXME: Convert to 'AS'
+										Point pt = (Point) r.Points[kk];
+										//FIXME: Redundancy with all cases.  move ToMapPoint
+	//									int pox = Convert.ToInt32( (pt.X - env.Min.X) * xratio);						
+	//									int poy = Convert.ToInt32( height - ((pt.Y - env.Min.Y) * yratio));
+										//pts[kk] = new Gdk.Point(pox,poy);
+									
+									    Gl.glVertex2d(pt.X, pt.Y);
+									}
+	
+	 							    Gl.glEnd();
+								
 								}
-
- 							    Gl.glEnd();
 							
-							}
+						    }
 						}
 					
 						break;
