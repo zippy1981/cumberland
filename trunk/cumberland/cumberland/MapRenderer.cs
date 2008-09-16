@@ -37,6 +37,7 @@ namespace Cumberland
 	public class MapRenderer
 	{
 #region Properties
+		
 		int width = 400;
 		int height = 400;
 		
@@ -80,11 +81,8 @@ namespace Cumberland
 		
 		Rectangle extents = new Rectangle(-180, -90, 180, 90);
 		
-		
-		
-		
 #endregion
-		
+
 		public Bitmap Draw()
 		{
 			int[] temp = new int[1];
@@ -98,7 +96,7 @@ namespace Cumberland
 			{
 				// hack to get an opengl context
 				Glut.glutInit();
-				Glut.glutCreateWindow("Salmon Viewer");
+				Glut.glutCreateWindow(string.Empty);
 				Glut.glutHideWindow();
 				
 				// test for fbo support
@@ -140,6 +138,9 @@ namespace Cumberland
 					throw new InvalidOperationException("This video card may not support Framebuffers");
 				}
 				
+				// acquire the proper space
+				Gl.glViewport(0, 0, width, height);
+				
 				// clear to white
 				Gl.glClearColor(1f, 1f, 1f, 0f);
 				Gl.glClear(Gl.GL_COLOR_BUFFER_BIT);
@@ -148,8 +149,8 @@ namespace Cumberland
 				Gl.glMatrixMode(Gl.GL_PROJECTION);
 				Gl.glLoadIdentity();
 				
-				//Rectangle r = extents.Clone();
-				Rectangle r = new Rectangle(-115, 14, -87, 34);
+				Rectangle r = extents.Clone();
+				//Rectangle r = new Rectangle(-115, 14, -87, 34);
 
 				// set aspect ratio to image to avoid distortion
 				r.AspectRatioOfWidth = width / height;
@@ -167,20 +168,20 @@ namespace Cumberland
 				Render();
 				
 				// testing
-//				// Draw top triangle
+				// Draw top triangle
 //				Gl.glBegin(Gl.GL_TRIANGLES);
 //				Gl.glColor3d(0.0, 0.0, 1.0);
-//				Gl.glVertex2i(60, 200);
+//				Gl.glVertex2i(0, 0);
 //				Gl.glColor3d(0.0, 1.0, 0);
-//				Gl.glVertex2i(200, 340);
+//				Gl.glVertex2i(200, 400);
 //				Gl.glColor3d(1, 0.0, 0);
-//				Gl.glVertex2i(340, 200);
+//				Gl.glVertex2i(400, 0);
 //				Gl.glEnd();
 						
 				// acquire the pixels from openGL and draw to bitmap
 				b = new Bitmap(width, height, PixelFormat.Format32bppArgb);
 				BitmapData bd = b.LockBits(new System.Drawing.Rectangle(0, 0, width, height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
-				Gl.glReadPixels(0, 0, width, height, Gl.GL_RGBA, Gl.GL_UNSIGNED_BYTE, bd.Scan0);
+				Gl.glReadPixels(0, 0, width, height, Gl.GL_BGRA, Gl.GL_UNSIGNED_BYTE, bd.Scan0);
 				b.UnlockBits(bd);
 				b.RotateFlip(RotateFlipType.Rotate180FlipX);
 				
@@ -203,9 +204,6 @@ namespace Cumberland
 		
 		public void Render()
 		{
-//			double xratio = width / Math.Abs(extents.Max.X - extents.Min.X);
-//			double yratio = height / Math.Abs(extents.Max.Y - extents.Min.Y);	
-		
 			foreach (Shapefile shp in layers)
 			{
 				if (shp.features.Count == 0)
@@ -226,17 +224,7 @@ namespace Cumberland
 						{
 							//FIXME: Convert to 'AS'
 							Point p = (Point) shp.features[ii];
-//							if (p.X >= env.Min.X && p.X <= env.Max.X && p.Y >= env.Min.Y && p.Y <= env.Max.Y)
-//							{		
-//								ctest++;
-//								//FIXME: Redundancy with all cases.  move ToMapPoint
-//								//int px = Convert.ToInt32( (p.X - env.Min.X) * xratio);						
-//								//int py = Convert.ToInt32( height - ((p.Y - env.Min.Y) * yratio));
-//								//pixmap.DrawRectangle (this.Style.BlackGC, true, px, py, 2, 2);
-//								//pxt.DrawRectangle (darea.Style.BlackGC, true, px, py, 2, 2);
-							
-							    Gl.glVertex2d(p.X, p.Y);
-//							}					
+							Gl.glVertex2d(p.X, p.Y);			
 						}
 					
 					    Gl.glEnd();
@@ -256,7 +244,6 @@ namespace Cumberland
 							{
 								//FIXME: Convert to 'AS'
 								Line r = (Line) pol.Lines[jj];
-								//Gdk.Point[] pts = new Gdk.Point[env.points.Count];
 							
 							    Gl.glBegin(Gl.GL_LINES);
   							    Gl.glColor3d(0.2, 0.2, 0.2);
@@ -265,11 +252,6 @@ namespace Cumberland
 								{	
 									//FIXME: Convert to 'AS'
 									Point pt = (Point) r.points[kk];
-									//FIXME: Redundancy with all cases.  move ToMapPoint
-									//int pox = Convert.ToInt32( (pt.X - env.Min.X) * xratio);						
-									//int poy = Convert.ToInt32( height - ((pt.Y - env.Min.Y) * yratio));
-									//pts[kk] = new Gdk.Point(pox,poy);
-								
 								    Gl.glVertex2d(pt.X, pt.Y);
 								}
 							
@@ -300,26 +282,28 @@ namespace Cumberland
 									else
 										
 									{
+									Gl.glEnable(Gl.GL_LINE_SMOOTH);
 										Gl.glBegin(Gl.GL_LINES);
+									
 									    Gl.glColor3d(0,0,0);
 									}
 								
 								    //FIXME: Convert to 'AS'
 									Ring r = (Ring) po.Rings[jj];
-									//Gdk.Point[] pts = new Gdk.Point[env.points.Count];
+
 									for (int kk = 0; kk < r.Points.Count; kk++)
 									{
 										//FIXME: Convert to 'AS'
 										Point pt = (Point) r.Points[kk];
-										//FIXME: Redundancy with all cases.  move ToMapPoint
-	//									int pox = Convert.ToInt32( (pt.X - env.Min.X) * xratio);						
-	//									int poy = Convert.ToInt32( height - ((pt.Y - env.Min.Y) * yratio));
-										//pts[kk] = new Gdk.Point(pox,poy);
-									
 									    Gl.glVertex2d(pt.X, pt.Y);
 									}
 	
 	 							    Gl.glEnd();
+								
+									if (ll == 1)
+									{
+										Gl.glDisable(Gl.GL_LINE_SMOOTH);
+									}
 								
 								}
 							
