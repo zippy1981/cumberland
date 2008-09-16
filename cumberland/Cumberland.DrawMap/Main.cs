@@ -43,6 +43,7 @@ namespace Cumberland.DrawMap
 			Bitmap b = map.Draw();
 			
 			b.Save("/home/scottell/Desktop/test.png", ImageFormat.Png);
+			//b.Save("/home/scottell/Desktop/test.bmp", ImageFormat.Bmp);
 		}
 	}
 }

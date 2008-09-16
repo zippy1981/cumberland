@@ -49,15 +49,9 @@ namespace Cumberland
         }
 		
 #region Vars
-		
-		// TODO: expose extents
-        Point min;
-        Point max;
 
 		uint filelength;
 		uint version;
-		string filename;
-		//spublic int stamp;
 		
 #endregion
 		
@@ -82,6 +76,21 @@ namespace Cumberland
 			}
 		}
 		public List<Feature> features = new List<Feature>();
+		
+		public Rectangle ListedExtents {
+			get {
+				return listedExtents;
+			}
+		}
+
+		public uint Version {
+			get {
+				return version;
+			}
+		}
+
+		
+		Rectangle listedExtents;
 
 #endregion
 
@@ -100,8 +109,6 @@ namespace Cumberland
 			ReadShapeRecords(str);
 			
             file.Close();
-			
-            filename = fname.Substring(fname.LastIndexOf('/')+1);
 		}
 
 		
@@ -132,32 +139,25 @@ namespace Cumberland
 
             // grab the file length
             filelength = FlipEndian(stream.ReadUInt32());
-            //Console.WriteLine("INFO: File Length (in 16-bit words) is " + filelength);
 
             // get version
             version = stream.ReadUInt32();
-            //Console.WriteLine("INFO: Version is " + version);
 
             // get shape type
             shapetype = (ShapeType) stream.ReadUInt32();
-            //Console.WriteLine("INFO: ShapeType is " + shapetype);
 
             // get extents
-            double xmin, ymin, zmin, mmin, xmax, ymax, zmax, mmax;
+            double xmin, ymin, xmax, ymax; // zmin, mmin, zmax, mmax;
             xmin = stream.ReadDouble();
             ymin = stream.ReadDouble();
             xmax = stream.ReadDouble();
             ymax = stream.ReadDouble();
-            zmin = stream.ReadDouble();
-            zmax = stream.ReadDouble();
-            mmin = stream.ReadDouble();
-            mmax = stream.ReadDouble();
-            min = new Point(xmin, ymin, zmin, mmin);
-            max = new Point(xmax, ymax, zmax, mmax);
-            
-            //Console.WriteLine("INFO: Extents: (" + min.X + "," + min.Y + "," + min.Z + 
-            //       "," + min.M + ") (" + max.X + "," + max.Y + "," + max.Z + "," + max.M + ")");
+            stream.ReadDouble(); // zmin =
+            stream.ReadDouble(); // zmax =
+            stream.ReadDouble(); // mmin = 
+            stream.ReadDouble(); // mmax =
 			
+            listedExtents = new Rectangle(xmin, ymin, xmax, ymax);
         }
 
 		void ReadShapeRecords(BinaryReader stream)
@@ -170,9 +170,6 @@ namespace Cumberland
 				uint recordLen = FlipEndian(stream.ReadUInt32());
 				uint recordShp = stream.ReadUInt32();
 				
-				//Console.WriteLine("INFO: Record # " + recordNum + " has length " + recordLen +
-				//	  				" and type " + recordShp);  
-
 				// Chop off 32 bit from our remaining record because we read the shape type
 				uint dataleft = recordLen - 2;
 				switch (recordShp)
@@ -289,6 +286,7 @@ namespace Cumberland
 		}
 		
 #endregion
+		
     }
 }
 
