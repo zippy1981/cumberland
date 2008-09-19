@@ -99,10 +99,17 @@ namespace Cumberland
 				Glut.glutCreateWindow(string.Empty);
 				Glut.glutHideWindow();
 				
+				string glext = Gl.glGetString(Gl.GL_EXTENSIONS);
+				
 				// test for fbo support
-				if (!Gl.glGetString(Gl.GL_EXTENSIONS).Contains("GL_EXT_framebuffer_object"))
+//				if (!glext.Contains("GL_EXT_framebuffer_object"))
+//				{
+//					throw new NotSupportedException("Your video card does not support frame buffers");	
+//				}
+				
+				if (!glext.Contains("GL_ARB_multisample"))
 				{
-					throw new NotSupportedException("Your video card does not support frame buffers");	
+					throw new NotSupportedException("multi-sampling is not supported by your video card");
 				}
 				
 				// get frame buffer from openGL
@@ -126,8 +133,13 @@ namespace Cumberland
 				// bind it
 				Gl.glBindRenderbufferEXT(Gl.GL_RENDERBUFFER_EXT, colorBuffer);
 				
+//				Gl.glGetIntegerv(Gl.GL_MAX_SAMPLES_EXT, temp);
+//				System.Console.WriteLine(temp[0]);
+				
 				// allocate memory
 				Gl.glRenderbufferStorageEXT(Gl.GL_RENDERBUFFER_EXT, Gl.GL_RGBA, width, height);
+				//Gl.glRenderbufferStorageMultisampleEXT(Gl.GL_RENDERBUFFER_EXT, 16, Gl.GL_RGBA, width, height);
+				//Gl.glRenderbufferStorageMultisampleCoverageNV(Gl.GL_RENDERBUFFER_EXT, 4, 16, Gl.GL_RGBA, width, height);
 				
 				// attach render buffer to fbo
 				Gl.glFramebufferRenderbufferEXT(Gl.GL_FRAMEBUFFER_EXT, Gl.GL_COLOR_ATTACHMENT0_EXT, Gl.GL_RENDERBUFFER_EXT, colorBuffer);
@@ -169,19 +181,24 @@ namespace Cumberland
 				
 				// testing
 				// Draw top triangle
-//				Gl.glBegin(Gl.GL_TRIANGLES);
+				//Gl.glBegin(Gl.GL_TRIANGLES);
+//				Gl.glBegin(Gl.GL_LINES);
+//				Gl.glBegin(Gl.GL_POLYGON);
 //				Gl.glColor3d(0.0, 0.0, 1.0);
-//				Gl.glVertex2i(0, 0);
+//				Gl.glVertex2d(r.Min.X, r.Min.Y);
 //				Gl.glColor3d(0.0, 1.0, 0);
-//				Gl.glVertex2i(200, 400);
+//				Gl.glVertex2d(r.Min.X + r.Width/2, r.Max.Y);
+//				//Gl.glVertex2d(r.Min.X + r.Width/2, r.Max.Y);
 //				Gl.glColor3d(1, 0.0, 0);
-//				Gl.glVertex2i(400, 0);
+//				Gl.glVertex2d(r.Max.X, r.Min.Y);
 //				Gl.glEnd();
 						
 				// acquire the pixels from openGL and draw to bitmap
 				b = new Bitmap(width, height, PixelFormat.Format32bppArgb);
 				BitmapData bd = b.LockBits(new System.Drawing.Rectangle(0, 0, width, height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
+
 				Gl.glReadPixels(0, 0, width, height, Gl.GL_BGRA, Gl.GL_UNSIGNED_BYTE, bd.Scan0);
+
 				b.UnlockBits(bd);
 				b.RotateFlip(RotateFlipType.Rotate180FlipX);
 				
@@ -211,109 +228,113 @@ namespace Cumberland
 					continue;
 				}
 
-				uint ctest = 0;
-				switch (shp.Shapetype)
+
+				if (shp.Shapetype == Shapefile.ShapeType.Point)
+			    {					
+				    Gl.glBegin(Gl.GL_POINTS);
+				
+				    Gl.glColor3d(1, 0, 0);
+				
+					for (int ii=0; ii < shp.features.Count; ii++)
+					{
+						Point p = shp.features[ii] as Point;
+						Gl.glVertex2d(p.X, p.Y);			
+					}
+				
+				    Gl.glEnd();
+				}
+				else if (shp.Shapetype == Shapefile.ShapeType.PolyLine)
 				{
-					case Shapefile.ShapeType.Point:
-					
-					    Gl.glBegin(Gl.GL_POINTS);
-					
-					    Gl.glColor3d(1, 0, 0);
-					
-						for (int ii=0; ii < shp.features.Count; ii++)
+				    Gl.glEnable(Gl.GL_LINE_SMOOTH);
+					Gl.glEnable(Gl.GL_BLEND);
+					Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE_MINUS_SRC_ALPHA);
+				    
+					Gl.glLineWidth(3f);
+				
+				    for (int ii=0; ii < shp.features.Count; ii++)
+					{
+						PolyLine pol = (PolyLine) shp.features[ii];
+						for (int jj=0; jj < pol.Lines.Count; jj++)
 						{
 							//FIXME: Convert to 'AS'
-							Point p = (Point) shp.features[ii];
-							Gl.glVertex2d(p.X, p.Y);			
-						}
-					
-					    Gl.glEnd();
-					
-						break;
-					
-					case Shapefile.ShapeType.PolyLine:
-
-					    Gl.glEnable(Gl.GL_LINE_SMOOTH);
-					    Gl.glLineWidth(3f);
-					
-					    for (int ii=0; ii < shp.features.Count; ii++)
-						{
-							ctest++;
-							PolyLine pol = (PolyLine) shp.features[ii];
-							for (int jj=0; jj < pol.Lines.Count; jj++)
-							{
-								//FIXME: Convert to 'AS'
-								Line r = (Line) pol.Lines[jj];
+							Line r = (Line) pol.Lines[jj];
+						
+						    Gl.glBegin(Gl.GL_LINES);
+						    Gl.glColor3d(0.2, 0.2, 0.2);
 							
-							    Gl.glBegin(Gl.GL_LINES);
-  							    Gl.glColor3d(0.2, 0.2, 0.2);
+						    for (int kk = 1; kk < r.Points.Count; kk++)
+							{	
+							    Gl.glVertex2d(r.Points[kk-1].X, r.Points[kk-1].Y);
+								Gl.glVertex2d(r.Points[kk].X, r.Points[kk].Y);
+							}
+						
+						    Gl.glEnd();
+						}
+					}
+				
+					Gl.glDisable(Gl.GL_BLEND);
+				    Gl.glDisable(Gl.GL_LINE_SMOOTH);	
+				}	
+				else if (shp.Shapetype == Shapefile.ShapeType.Polygon)
+				{
+					for (int ii=0; ii < shp.features.Count; ii++)
+					{
+					    for (int ll = 0; ll < 2; ll++)
+					    {
+							Polygon po = (Polygon) shp.features[ii];
+							for (int jj=0; jj < po.Rings.Count; jj++)
+							{
+								if (ll == 0)
+								{
+								    Gl.glBegin(Gl.GL_POLYGON);
+								    Gl.glColor3d(0.6, 0.8, 0.7);
+								}
+								else
+									
+								{
+								    Gl.glEnable(Gl.GL_LINE_SMOOTH);
+									Gl.glEnable(Gl.GL_BLEND);
+									Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE_MINUS_SRC_ALPHA);
+									
+								    Gl.glBegin(Gl.GL_LINES);
 								
-							    for (int kk = 0; kk < r.points.Count; kk++)
-								{	
-									//FIXME: Convert to 'AS'
-									Point pt = (Point) r.points[kk];
-								    Gl.glVertex2d(pt.X, pt.Y);
+								    Gl.glColor3d(0,0,0);
 								}
 							
-							    Gl.glEnd();
-							}
-						}
-					
-					    Gl.glDisable(Gl.GL_LINE_SMOOTH);
-					
-						break;
-					
-					case Shapefile.ShapeType.Polygon:
-					
-						for (int ii=0; ii < shp.features.Count; ii++)
-						{
-							ctest++;
-						
-						    for (int ll = 0; ll < 2; ll++)
-						    {
-								Polygon po = (Polygon) shp.features[ii];
-								for (int jj=0; jj < po.Rings.Count; jj++)
-								{
-									if (ll == 0)
-									{
-									    Gl.glBegin(Gl.GL_POLYGON);
-									    Gl.glColor3d(0.6, 0.8, 0.7);
-									}
-									else
-										
-									{
-									Gl.glEnable(Gl.GL_LINE_SMOOTH);
-										Gl.glBegin(Gl.GL_LINES);
-									
-									    Gl.glColor3d(0,0,0);
-									}
-								
-								    //FIXME: Convert to 'AS'
-									Ring r = (Ring) po.Rings[jj];
+							    //FIXME: Convert to 'AS'
+								Ring r = (Ring) po.Rings[jj];
 
+								if (ll == 0)
+								{
 									for (int kk = 0; kk < r.Points.Count; kk++)
 									{
 										//FIXME: Convert to 'AS'
 										Point pt = (Point) r.Points[kk];
 									    Gl.glVertex2d(pt.X, pt.Y);
 									}
-	
-	 							    Gl.glEnd();
-								
-									if (ll == 1)
-									{
-										Gl.glDisable(Gl.GL_LINE_SMOOTH);
-									}
-								
 								}
+								else
+								{
+									for (int kk = 1; kk < r.Points.Count; kk++)
+									{
+										Gl.glVertex2d(r.Points[kk-1].X, r.Points[kk-1].Y);
+									    Gl.glVertex2d(r.Points[kk].X, r.Points[kk].Y);
+									}									
+								}
+
+ 							    Gl.glEnd();
 							
-						    }
-						}
-					
-						break;
+								if (ll == 1)
+								{
+									Gl.glDisable(Gl.GL_BLEND);
+									
+									Gl.glDisable(Gl.GL_LINE_SMOOTH);
+								}							
+							}
+					    }
+					}
 				}
 			}
-
 		}
 	}
 }

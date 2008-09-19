@@ -30,7 +30,7 @@ namespace Cumberland
 	
     public class Ring
     {
-        public List<Point> points = new List<Point>();
+        List<Point> points = new List<Point>();
         
         public List<Point> Points {
         	get {
