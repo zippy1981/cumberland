@@ -36,6 +36,7 @@ namespace Cumberland
 {
 	public class MapRenderer
 	{
+
 #region Properties
 		
 		int width = 400;
@@ -80,6 +81,7 @@ namespace Cumberland
 		List<Shapefile> layers = new List<Shapefile>();
 		
 		Rectangle extents = new Rectangle(-180, -90, 180, 90);
+
 		
 #endregion
 
@@ -245,11 +247,23 @@ namespace Cumberland
 				}
 				else if (shp.Shapetype == Shapefile.ShapeType.PolyLine)
 				{
+					// enable antia-aliasing					
 				    Gl.glEnable(Gl.GL_LINE_SMOOTH);
 					Gl.glEnable(Gl.GL_BLEND);
-					Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE_MINUS_SRC_ALPHA);
-				    
-					Gl.glLineWidth(3f);
+					
+					// to get the anti-aliased line to properly blend with the background color,
+					// we tell OpenGL to:
+					// multiply the R,G,B values of the line times it's alpha value 
+					// this alters the color by it's opacity
+					// next, we multiply the R,G,B values of the background times 1-the line's alpha value
+					// this applies the remaining alpha value to the background color
+					// (i.e. if the line is fully opaque, we want no interaction from the background color)
+					// the alpha values are preserved as is
+					// lastly, the two colors are merged (added together)
+					// http://glprogramming.com/red/chapter06.html#name1
+					Gl.glBlendFuncSeparate(Gl.GL_SRC_ALPHA, Gl.GL_ONE_MINUS_SRC_ALPHA, Gl.GL_ONE, Gl.GL_ONE);
+					
+					Gl.glLineWidth(2f);
 				
 				    for (int ii=0; ii < shp.features.Count; ii++)
 					{
@@ -260,7 +274,7 @@ namespace Cumberland
 							Line r = (Line) pol.Lines[jj];
 						
 						    Gl.glBegin(Gl.GL_LINES);
-						    Gl.glColor3d(0.2, 0.2, 0.2);
+						    Gl.glColor3d(0.3, 0.3, 0.3);
 							
 						    for (int kk = 1; kk < r.Points.Count; kk++)
 							{	
@@ -294,11 +308,14 @@ namespace Cumberland
 								{
 								    Gl.glEnable(Gl.GL_LINE_SMOOTH);
 									Gl.glEnable(Gl.GL_BLEND);
-									Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE_MINUS_SRC_ALPHA);
+									
+									//Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE_MINUS_SRC_ALPHA);
+									//Gl.glBlendFunc(Gl.GL_SRC_ALPHA_SATURATE, Gl.GL_ONE_MINUS_SRC_ALPHA);
+									Gl.glBlendFuncSeparate(Gl.GL_SRC_ALPHA, Gl.GL_ONE_MINUS_SRC_ALPHA, Gl.GL_ONE, Gl.GL_ONE);
 									
 								    Gl.glBegin(Gl.GL_LINES);
 								
-								    Gl.glColor3d(0,0,0);
+								    Gl.glColor3d(0.2,0.4,0.3);
 								}
 							
 							    //FIXME: Convert to 'AS'
