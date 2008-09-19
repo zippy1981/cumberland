@@ -36,7 +36,7 @@ namespace Cumberland
         		points = value;
         	}
         }
-		public List<Point> points = new List<Point>();
+		List<Point> points = new List<Point>();
 		
         public Line()
 		{
