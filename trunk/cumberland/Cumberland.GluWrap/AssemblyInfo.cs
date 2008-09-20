@@ -1,4 +1,4 @@
-// Main.cs
+// AssemblyInfo.cs
 //
 // Copyright (c) 2008 Scott Ellington and Authors
 //
@@ -21,33 +21,28 @@
 // THE SOFTWARE.
 //
 //
-using System;
-using System.Drawing;
-using System.Drawing.Imaging;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 
-using Cumberland;
+// Information about this assembly is defined by the following attributes. 
+// Change them to the values specific to your project.
 
-namespace Cumberland.DrawMap
-{
-	class MainClass
-	{
-		public static void Main(string[] args)
-		{
-			MapRenderer map = new MapRenderer();
-			map.Extents = new Rectangle(-115, 14, -87, 34);
+[assembly: AssemblyTitle("Cumberland.GluWrap")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("")]
+[assembly: AssemblyCopyright("")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
 
-			map.Width = 800;
-			map.Height = 800;
-			
-			map.Layers.Add(new Shapefile("/home/scottell/gis/data/world_adm0/world_adm0.shp"));
-			map.Layers.Add(new Shapefile("/home/scottell/Projects/cumberland/Cumberland.Tests/shape_eg_data/mexico/states.shp"));
-			map.Layers.Add(new Shapefile("/home/scottell/Projects/cumberland/Cumberland.Tests/shape_eg_data/mexico/roads.shp"));
-			map.Layers.Add(new Shapefile("/home/scottell/Projects/cumberland/Cumberland.Tests/shape_eg_data/mexico/cities.shp"));
-			
-			Bitmap b = map.Draw();
-			
-			b.Save("/home/scottell/Desktop/test.png", ImageFormat.Png);
-			//b.Save("/home/scottell/Desktop/test.bmp", ImageFormat.Bmp);
-		}
-	}
-}
+// The assembly version has the format "{Major}.{Minor}.{Build}.{Revision}".
+// If the build and revision are set to '*' they will be updated automatically.
+
+[assembly: AssemblyVersion("1.0.*.*")]
+
+// The following attributes are used to specify the signing key for the assembly, 
+// if desired. See the Mono documentation for more information about signing.
+
+[assembly: AssemblyDelaySign(false)]
+[assembly: AssemblyKeyFile("")]

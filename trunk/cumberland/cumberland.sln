@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cumberland.Tests", "Cumberl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cumberland.DrawMap", "Cumberland.DrawMap\Cumberland.DrawMap.csproj", "{05A6F104-D839-4B9C-B704-91F9BB608D73}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cumberland.GluWrap", "Cumberland.GluWrap\Cumberland.GluWrap.csproj", "{F33E8484-1638-4FB8-BBA4-30D46DD0EF54}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,10 +26,15 @@ Global
 		{102E6FF6-201B-4366-BE2B-6304EF756F2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{102E6FF6-201B-4366-BE2B-6304EF756F2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{102E6FF6-201B-4366-BE2B-6304EF756F2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{102E6FF6-201B-4366-BE2B-6304EF756F2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F33E8484-1638-4FB8-BBA4-30D46DD0EF54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F33E8484-1638-4FB8-BBA4-30D46DD0EF54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F33E8484-1638-4FB8-BBA4-30D46DD0EF54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F33E8484-1638-4FB8-BBA4-30D46DD0EF54}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		name = cumberland
 		version = 0.1
-		StartupItem = cumberland\cumberland.csproj
+		StartupItem = Cumberland.DrawMap\Cumberland.DrawMap.csproj
 	EndGlobalSection
 EndGlobal

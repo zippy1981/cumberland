@@ -4,11 +4,9 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
-    <ProjectGuid>{0F516D1A-446C-46E6-8AD0-7C6573C338D8}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AssemblyName>cumberland</AssemblyName>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace>Cumberland</RootNamespace>
+    <ProjectGuid>{F33E8484-1638-4FB8-BBA4-30D46DD0EF54}</ProjectGuid>
+    <OutputType>Library</OutputType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -19,6 +17,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <AssemblyName>Cumberland.GluWrap</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -27,45 +26,23 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <AssemblyName>Cumberland</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="Tao.OpenGl, Version=2.1.0.4, Culture=neutral, PublicKeyToken=1ca010269a4501ef">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\Tao.OpenGl.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Drawing" />
-    <Reference Include="Tao.FreeGlut, Version=2.4.0.1, Culture=neutral, PublicKeyToken=6e602a6ad6c0d06d">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\Tao.FreeGlut.dll</HintPath>
+      <HintPath>..\cumberland\lib\Tao.OpenGl.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GluMethods.cs" />
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="Feature.cs" />
-    <Compile Include="Line.cs" />
-    <Compile Include="Point.cs" />
-    <Compile Include="Polygon.cs" />
-    <Compile Include="PolyLine.cs" />
-    <Compile Include="Ring.cs" />
-    <Compile Include="Shapefile.cs" />
-    <Compile Include="MapRenderer.cs" />
-    <Compile Include="Rectangle.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Cumberland.GluWrap.dll.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <None Include="ChangeLog" />
-    <None Include="lib\Tao.OpenGl.dll" />
-    <None Include="lib\Tao.OpenGl.dll.config" />
-    <None Include="lib\Tao.OpenGl.xml" />
-    <None Include="lib\Tao.FreeGlut.dll" />
-    <None Include="lib\Tao.FreeGlut.dll.config" />
-    <None Include="lib\Tao.FreeGlut.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Cumberland.GluWrap\Cumberland.GluWrap.csproj">
-      <Project>{0F516D1A-446C-46E6-8AD0-7C6573C338D8}</Project>
-      <Name>Cumberland.GluWrap</Name>
-    </ProjectReference>
-  </ItemGroup>
 </Project>

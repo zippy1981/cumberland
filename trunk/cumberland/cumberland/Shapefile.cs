@@ -75,7 +75,7 @@ namespace Cumberland
 				features = value;
 			}
 		}
-		public List<Feature> features = new List<Feature>();
+		List<Feature> features = new List<Feature>();
 		
 		public Rectangle ListedExtents {
 			get {

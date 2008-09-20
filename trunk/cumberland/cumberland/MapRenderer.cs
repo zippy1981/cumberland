@@ -31,6 +31,7 @@ using System.Drawing.Imaging;
 using Tao.OpenGl;
 using Tao.FreeGlut;
 
+using Cumberland.GluWrap;
 
 namespace Cumberland 
 {
@@ -85,6 +86,8 @@ namespace Cumberland
 		
 #endregion
 
+#region Methods
+				
 		public Bitmap Draw()
 		{
 			int[] temp = new int[1];
@@ -164,7 +167,6 @@ namespace Cumberland
 				Gl.glLoadIdentity();
 				
 				Rectangle r = extents.Clone();
-				//Rectangle r = new Rectangle(-115, 14, -87, 34);
 
 				// set aspect ratio to image to avoid distortion
 				r.AspectRatioOfWidth = width / height;
@@ -225,28 +227,33 @@ namespace Cumberland
 		{
 			foreach (Shapefile shp in layers)
 			{
-				if (shp.features.Count == 0)
+				if (shp.Features.Count == 0)
 				{
 					continue;
 				}
 
-
 				if (shp.Shapetype == Shapefile.ShapeType.Point)
-			    {					
+			    {	
+#region handle point rendering
+					
 				    Gl.glBegin(Gl.GL_POINTS);
 				
 				    Gl.glColor3d(1, 0, 0);
 				
-					for (int ii=0; ii < shp.features.Count; ii++)
+					for (int ii=0; ii < shp.Features.Count; ii++)
 					{
-						Point p = shp.features[ii] as Point;
+						Point p = shp.Features[ii] as Point;
 						Gl.glVertex2d(p.X, p.Y);			
 					}
 				
 				    Gl.glEnd();
+
+#endregion
 				}
 				else if (shp.Shapetype == Shapefile.ShapeType.PolyLine)
 				{
+#region Handle line rendering
+					
 					// enable antia-aliasing					
 				    Gl.glEnable(Gl.GL_LINE_SMOOTH);
 					Gl.glEnable(Gl.GL_BLEND);
@@ -265,9 +272,9 @@ namespace Cumberland
 					
 					Gl.glLineWidth(2f);
 				
-				    for (int ii=0; ii < shp.features.Count; ii++)
+				    for (int ii=0; ii < shp.Features.Count; ii++)
 					{
-						PolyLine pol = (PolyLine) shp.features[ii];
+						PolyLine pol = (PolyLine) shp.Features[ii];
 						for (int jj=0; jj < pol.Lines.Count; jj++)
 						{
 							//FIXME: Convert to 'AS'
@@ -287,71 +294,84 @@ namespace Cumberland
 					}
 				
 					Gl.glDisable(Gl.GL_BLEND);
-				    Gl.glDisable(Gl.GL_LINE_SMOOTH);	
+				    Gl.glDisable(Gl.GL_LINE_SMOOTH);
+					
+#endregion
 				}	
 				else if (shp.Shapetype == Shapefile.ShapeType.Polygon)
 				{
-					for (int ii=0; ii < shp.features.Count; ii++)
+					IntPtr tess = GluMethods.gluNewTess(); 
+				
+					Glu.TessBeginCallback tessBegin = new Tao.OpenGl.Glu.TessBeginCallback(Gl.glBegin);
+					Glu.TessEndCallback tessEnd = new Tao.OpenGl.Glu.TessEndCallback(Gl.glEnd);
+					Glu.TessVertexCallback tessVert = new Tao.OpenGl.Glu.TessVertexCallback(Gl.glVertex3dv);
+							
+					GluMethods.gluTessCallback(tess, Glu.GLU_TESS_BEGIN, tessBegin);
+					GluMethods.gluTessCallback(tess, Glu.GLU_TESS_END, tessEnd);
+					GluMethods.gluTessCallback(tess, Glu.GLU_TESS_VERTEX, tessVert);
+					
+					for (int ii=0; ii < shp.Features.Count; ii++)
 					{
-					    for (int ll = 0; ll < 2; ll++)
+						Polygon po = (Polygon) shp.Features[ii];
+
+						for (int jj = 0; jj < po.Rings.Count; jj++)
 					    {
-							Polygon po = (Polygon) shp.features[ii];
-							for (int jj=0; jj < po.Rings.Count; jj++)
+							Ring r = po.Rings[jj];
+							
+							//int tl = Gl.glGenLists(1);
+						    
+						    Gl.glColor3d(0.6, 0.8, 0.7);
+						
+							//Gl.glNewList(tl, Gl.GL_COMPILE);
+							
+							GluMethods.gluTessBeginPolygon(tess, IntPtr.Zero);
+							GluMethods.gluTessBeginContour(tess);
+							
+							for (int kk = 1; kk < r.Points.Count; kk++)
 							{
-								if (ll == 0)
-								{
-								    Gl.glBegin(Gl.GL_POLYGON);
-								    Gl.glColor3d(0.6, 0.8, 0.7);
-								}
-								else
-									
-								{
-								    Gl.glEnable(Gl.GL_LINE_SMOOTH);
-									Gl.glEnable(Gl.GL_BLEND);
-									
-									//Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE_MINUS_SRC_ALPHA);
-									//Gl.glBlendFunc(Gl.GL_SRC_ALPHA_SATURATE, Gl.GL_ONE_MINUS_SRC_ALPHA);
-									Gl.glBlendFuncSeparate(Gl.GL_SRC_ALPHA, Gl.GL_ONE_MINUS_SRC_ALPHA, Gl.GL_ONE, Gl.GL_ONE);
-									
-								    Gl.glBegin(Gl.GL_LINES);
+								//Glu.gluTessVertex(tess, 
+								double[] data = new double[] {r.Points[kk].X, r.Points[kk].Y};
+								GluMethods.gluTessVertex(tess, data, data );
+							}	
+							
+							GluMethods.gluTessEndContour(tess);
+							GluMethods.gluTessEndPolygon(tess);
+							
+							//Gl.glEndList();
+							
+#region draw polygon outline
+
+							Gl.glEnable(Gl.GL_LINE_SMOOTH);
+							Gl.glEnable(Gl.GL_BLEND);
+							
+							//Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE_MINUS_SRC_ALPHA);
+							//Gl.glBlendFunc(Gl.GL_SRC_ALPHA_SATURATE, Gl.GL_ONE_MINUS_SRC_ALPHA);
+							Gl.glBlendFuncSeparate(Gl.GL_SRC_ALPHA, Gl.GL_ONE_MINUS_SRC_ALPHA, Gl.GL_ONE, Gl.GL_ONE);
+							
+						    Gl.glBegin(Gl.GL_LINES);
+						    Gl.glColor3d(0.2,0.4,0.3);
 								
-								    Gl.glColor3d(0.2,0.4,0.3);
-								}
-							
-							    //FIXME: Convert to 'AS'
-								Ring r = (Ring) po.Rings[jj];
+							for (int kk = 1; kk < r.Points.Count; kk++)
+							{
+								Gl.glVertex2d(r.Points[kk-1].X, r.Points[kk-1].Y);
+							    Gl.glVertex2d(r.Points[kk].X, r.Points[kk].Y);
+							}									
 
-								if (ll == 0)
-								{
-									for (int kk = 0; kk < r.Points.Count; kk++)
-									{
-										//FIXME: Convert to 'AS'
-										Point pt = (Point) r.Points[kk];
-									    Gl.glVertex2d(pt.X, pt.Y);
-									}
-								}
-								else
-								{
-									for (int kk = 1; kk < r.Points.Count; kk++)
-									{
-										Gl.glVertex2d(r.Points[kk-1].X, r.Points[kk-1].Y);
-									    Gl.glVertex2d(r.Points[kk].X, r.Points[kk].Y);
-									}									
-								}
-
- 							    Gl.glEnd();
-							
-								if (ll == 1)
-								{
-									Gl.glDisable(Gl.GL_BLEND);
-									
-									Gl.glDisable(Gl.GL_LINE_SMOOTH);
-								}							
-							}
+ 							Gl.glEnd();
+							Gl.glDisable(Gl.GL_BLEND);
+							Gl.glDisable(Gl.GL_LINE_SMOOTH);
+												
+#endregion
 					    }
 					}
+					
+					GluMethods.gluDeleteTess(tess);
 				}
+				
 			}
 		}
+
+#endregion
+		
 	}
 }
