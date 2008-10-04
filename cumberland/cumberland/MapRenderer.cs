@@ -107,14 +107,9 @@ namespace Cumberland
 				string glext = Gl.glGetString(Gl.GL_EXTENSIONS);
 				
 				// test for fbo support
-//				if (!glext.Contains("GL_EXT_framebuffer_object"))
-//				{
-//					throw new NotSupportedException("Your video card does not support frame buffers");	
-//				}
-				
-				if (!glext.Contains("GL_ARB_multisample"))
+				if (!glext.Contains("GL_EXT_framebuffer_object"))
 				{
-					throw new NotSupportedException("multi-sampling is not supported by your video card");
+					throw new NotSupportedException("Your video card does not support frame buffers");	
 				}
 				
 				// get frame buffer from openGL

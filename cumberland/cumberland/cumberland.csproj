@@ -19,7 +19,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
-    <AssemblyName>Cumberland</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -28,7 +27,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
-    <AssemblyName>cumberland</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -64,6 +62,8 @@
     <None Include="lib\Tao.FreeGlut.dll" />
     <None Include="lib\Tao.FreeGlut.dll.config" />
     <None Include="lib\Tao.FreeGlut.xml" />
+    <None Include="lib\Tao.FreeGlut.dll.osx.config" />
+    <None Include="lib\Tao.OpenGl.dll.osx.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cumberland.GluWrap\Cumberland.GluWrap.csproj">
