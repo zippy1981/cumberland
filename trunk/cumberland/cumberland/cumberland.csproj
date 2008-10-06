@@ -52,6 +52,7 @@
     <Compile Include="MapRenderer.cs" />
     <Compile Include="Rectangle.cs" />
     <Compile Include="ProjFourWrapper.cs" />
+    <Compile Include="Layer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

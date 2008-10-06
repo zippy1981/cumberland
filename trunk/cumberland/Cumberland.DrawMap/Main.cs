@@ -25,6 +25,8 @@ using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 
+using System.Diagnostics;
+
 using Cumberland;
 
 namespace Cumberland.DrawMap
@@ -33,17 +35,21 @@ namespace Cumberland.DrawMap
 	{
 		public static void Main(string[] args)
 		{
+			Stopwatch sw = new Stopwatch();
+			
+			sw.Start();
+			
 			MapRenderer map = new MapRenderer();
-			//map.Extents = new Rectangle(-115, 14, -87, 34);
+			map.Extents = new Rectangle(-115, 14, -87, 34);
 			//map.Extents = new Rectangle(-85, 29, -81, 31);
 			
 			map.Width = 400;
 			map.Height = 400;
 			
-			map.Layers.Add(new Shapefile("/home/scottell/gis/data/world_adm0/world_adm0.shp"));
-			map.Layers.Add(new Shapefile("/home/scottell/Projects/cumberland/Cumberland.Tests/shape_eg_data/mexico/states.shp"));
-			map.Layers.Add(new Shapefile("/home/scottell/Projects/cumberland/Cumberland.Tests/shape_eg_data/mexico/roads.shp"));
-			map.Layers.Add(new Shapefile("/home/scottell/Projects/cumberland/Cumberland.Tests/shape_eg_data/mexico/cities.shp"));
+			AddShapefile(map, new Shapefile("/home/scottell/gis/data/world_adm0/world_adm0.shp"));
+			AddShapefile(map, new Shapefile("/home/scottell/Projects/cumberland/Cumberland.Tests/shape_eg_data/mexico/states.shp"));
+			AddShapefile(map, new Shapefile("/home/scottell/Projects/cumberland/Cumberland.Tests/shape_eg_data/mexico/roads.shp"));
+			AddShapefile(map, new Shapefile("/home/scottell/Projects/cumberland/Cumberland.Tests/shape_eg_data/mexico/cities.shp"));
 			
 //			Shapefile shp = new Shapefile("/home/scottell/gis/data/florida/cntshr/cntshr.shp");
 //			using (ProjFourWrapper proj = new ProjFourWrapper("+proj=aea +lat_1=24 +lat_2=31.5 +lat_0=24 +lon_0=-84 +x_0=400000 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m"))
@@ -66,7 +72,24 @@ namespace Cumberland.DrawMap
 			
 			Bitmap b = map.Draw();
 			
-			b.Save("/home/scottell/Desktop/test.png", ImageFormat.Png);     
+			b.Save("/home/scottell/Desktop/test.png", ImageFormat.Png);   
+			
+			sw.Stop();
+			
+			System.Console.WriteLine("Elapsed Time (ms): " + sw.Elapsed.TotalMilliseconds);
+		}
+		
+		static void AddShapefile(MapRenderer map, Shapefile shapefile)
+		{
+			Random r = new Random();
+			
+			Layer l = new Layer();
+			l.Data = shapefile;
+			l.PointSize = r.Next(5)+1;
+			l.FillColor =  Color.FromArgb(r.Next(255), r.Next(255), r.Next(255));
+			l.LineColor = Color.FromArgb(r.Next(155), r.Next(155), r.Next(155));
+			l.LineWidth = r.Next(3)+1;
+			map.Layers.Add(l);
 		}
 	}
 }

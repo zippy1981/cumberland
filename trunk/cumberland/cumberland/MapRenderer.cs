@@ -43,7 +43,7 @@ namespace Cumberland
 		int width = 400;
 		int height = 400;
 		
-		public List<Shapefile> Layers {
+		public List<Layer> Layers {
 			get {
 				return layers;
 			}
@@ -79,7 +79,7 @@ namespace Cumberland
 			}
 		}
 		
-		List<Shapefile> layers = new List<Shapefile>();
+		List<Layer> layers = new List<Layer>();
 		
 		Rectangle extents = new Rectangle(-180, -90, 180, 90);
 
@@ -204,7 +204,7 @@ namespace Cumberland
 				int errorcode;
 				if ((errorcode = Gl.glGetError()) != Gl.GL_NO_ERROR)
 				{
-					throw new InvalidOperationException("OpenGL reports an error.  Code: " + errorcode);
+					throw new InvalidOperationException("OpenGL reports an error: " + GluWrap.GluMethods.gluErrorString(errorcode));
 				}
 			}
 			finally
@@ -220,8 +220,15 @@ namespace Cumberland
 		
 		public void Render()
 		{
-			foreach (Shapefile shp in layers)
+			foreach (Layer layer in layers)
 			{
+				if (layer.Data == null)
+				{
+					continue;
+				}
+				
+				Shapefile shp = layer.Data;
+				
 				if (shp.Features.Count == 0)
 				{
 					continue;
@@ -231,9 +238,12 @@ namespace Cumberland
 			    {	
 #region handle point rendering
 					
+					Gl.glPointSize(layer.PointSize);
 				    Gl.glBegin(Gl.GL_POINTS);
-				
-				    Gl.glColor3d(1, 0, 0);
+					
+					
+					Gl.glColor4ub(layer.FillColor.R, layer.FillColor.G, layer.FillColor.B, layer.FillColor.A);
+				    //Gl.glColor3d(1, 0, 0);
 				
 					for (int ii=0; ii < shp.Features.Count; ii++)
 					{
@@ -249,7 +259,7 @@ namespace Cumberland
 				{
 #region Handle line rendering
 					
-					// enable antia-aliasing					
+					// enable anti-aliasing					
 				    Gl.glEnable(Gl.GL_LINE_SMOOTH);
 					Gl.glEnable(Gl.GL_BLEND);
 					
@@ -265,7 +275,7 @@ namespace Cumberland
 					// http://glprogramming.com/red/chapter06.html#name1
 					Gl.glBlendFuncSeparate(Gl.GL_SRC_ALPHA, Gl.GL_ONE_MINUS_SRC_ALPHA, Gl.GL_ONE, Gl.GL_ONE);
 					
-					Gl.glLineWidth(2f);
+					Gl.glLineWidth(layer.LineWidth);
 				
 				    for (int ii=0; ii < shp.Features.Count; ii++)
 					{
@@ -276,7 +286,8 @@ namespace Cumberland
 							Line r = (Line) pol.Lines[jj];
 						
 						    Gl.glBegin(Gl.GL_LINES);
-						    Gl.glColor3d(0.3, 0.3, 0.3);
+							Gl.glColor4ub(layer.LineColor.R, layer.LineColor.G, layer.LineColor.B, layer.LineColor.A);
+						    //Gl.glColor3d(0.3, 0.3, 0.3);
 							
 						    for (int kk = 1; kk < r.Points.Count; kk++)
 							{	
@@ -315,7 +326,7 @@ namespace Cumberland
 							
 							//int tl = Gl.glGenLists(1);
 						    
-						    Gl.glColor3d(0.6, 0.8, 0.7);
+						    Gl.glColor4ub(layer.FillColor.R, layer.FillColor.G, layer.FillColor.B, layer.FillColor.A);
 						
 							//Gl.glNewList(tl, Gl.GL_COMPILE);
 							
@@ -343,8 +354,10 @@ namespace Cumberland
 							//Gl.glBlendFunc(Gl.GL_SRC_ALPHA_SATURATE, Gl.GL_ONE_MINUS_SRC_ALPHA);
 							Gl.glBlendFuncSeparate(Gl.GL_SRC_ALPHA, Gl.GL_ONE_MINUS_SRC_ALPHA, Gl.GL_ONE, Gl.GL_ONE);
 							
+							Gl.glLineWidth(layer.LineWidth);
+							
 						    Gl.glBegin(Gl.GL_LINES);
-						    Gl.glColor3d(0.2,0.4,0.3);
+						    Gl.glColor4ub(layer.LineColor.R, layer.LineColor.G, layer.LineColor.B, layer.LineColor.A);
 								
 							for (int kk = 1; kk < r.Points.Count; kk++)
 							{
