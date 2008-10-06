@@ -20,7 +20,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -150,10 +149,22 @@ namespace Cumberland
 			double[] x = new double[] { point.X };
 			double[] y = new double[] { point.Y };
 			
+			if (this.IsLatLong)
+			{
+				x[0] = x[0] * DegreesToRadians;
+				y[0] = y[0] * DegreesToRadians;
+			}
+			
 			int errno = pj_transform(this.projPJ, destinationProj.projPJ, 1, 0, x, y, new double[] {0}) ;
 			if (errno != 0)
 			{
 				throw new InvalidOperationException("Proj4 transform failed: " + GetError());
+			}
+			
+			if (destinationProj.IsLatLong)
+			{
+				x[0] = x[0] / DegreesToRadians;
+				y[0] = y[0] / DegreesToRadians;
 			}
 			
 			return new Point(x[0], y[0]);

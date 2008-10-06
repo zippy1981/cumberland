@@ -36,12 +36,95 @@ namespace Cumberland.Tests
 		[Test]
 		public void TestConvertFromLatLong()
 		{
-			using (ProjFourWrapper proj = new ProjFourWrapper("epsg:2236"))
+			using (ProjFourWrapper proj = new ProjFourWrapper("+init=epsg:2236"))
 			{
-				Assert.AreEqual(new Point(48031503.46, -8832169.02),
-				                proj.ConvertFromLatLong(new Point(0,0)));
+				Point pt = proj.ConvertFromLatLong(new Point(-81, 26));
+				pt.X = Math.Round(pt.X, 2);
+				pt.Y = Math.Round(pt.Y, 2);
+
+				// used proj command line to acquire this
+				Assert.AreEqual(new Point(656166.67, 605690.54), pt);				
+			}
+		}
+		
+		[Test]
+		public void TestConvertToLatLong()
+		{
+			using (ProjFourWrapper proj = new ProjFourWrapper("+init=epsg:2236"))
+			{
+				Point pt = proj.ConvertToLatLong(new Point(656166.67, 605690.54));
+				pt.X = Math.Round(pt.X, 2);
+				pt.Y = Math.Round(pt.Y, 2);
 				
-				
+				// used proj command line to acquire this
+				Assert.AreEqual(new Point(-81, 26), pt);				
+			}
+		}
+		
+		[Test]
+		public void TestTransformPointFromCSToLL()
+		{
+			using (ProjFourWrapper src = new ProjFourWrapper("+init=epsg:2236"))
+			{
+				using (ProjFourWrapper dst = new ProjFourWrapper("+init=epsg:4326"))
+				{
+					Point pt = src.Transform(dst, new Point(656166.67, 605690.54));
+					pt.X = Math.Round(pt.X);
+					pt.Y = Math.Round(pt.Y);
+					
+					// used proj command line to acquire this
+					Assert.AreEqual(new Point(-81, 26), pt);
+				}
+			}
+		}
+		
+		[Test]
+		public void TestTransformPointFromLLToCS()
+		{
+			using (ProjFourWrapper src = new ProjFourWrapper("+init=epsg:4326"))
+			{
+				using (ProjFourWrapper dst = new ProjFourWrapper("+init=epsg:2236"))
+				{
+					Point pt = src.Transform(dst, new Point(-81, 26));
+					pt.X = Math.Round(pt.X, 2);
+					pt.Y = Math.Round(pt.Y, 2);
+					
+					// used proj command line to acquire this
+					Assert.AreEqual(new Point(656166.67, 605690.54), pt);
+				}
+			}
+		}
+		
+		[Test]
+		public void TestTransformPointFromLLToLL()
+		{
+			using (ProjFourWrapper src = new ProjFourWrapper("+init=epsg:4326"))
+			{
+				using (ProjFourWrapper dst = new ProjFourWrapper("+init=epsg:4269"))
+				{
+					Point pt1 = new Point(-81, 26);
+					Point pt2 = src.Transform(dst, pt1);
+
+					// NAD83 and WGS84 should be essentially same
+					Assert.AreEqual(pt1, pt2);
+				}
+			}
+		}
+		
+		[Test]
+		public void TestTransformPointFromCSToCS()
+		{
+			using (ProjFourWrapper src = new ProjFourWrapper("+init=epsg:2236"))
+			{
+				using (ProjFourWrapper dst = new ProjFourWrapper("+init=epsg:3086"))
+				{
+					Point pt = src.Transform(dst,  new Point(656166.67, 605690.54));
+					pt.X = Math.Round(pt.X, 2);
+					pt.Y = Math.Round(pt.Y, 2);
+
+					// used cs2cs command line to acquire this
+					Assert.AreEqual(new Point(699831.04, 225395.97), pt);
+				}
 			}
 		}
 	}
