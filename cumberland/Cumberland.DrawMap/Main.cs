@@ -46,42 +46,20 @@ namespace Cumberland.DrawMap
 			
 			map.Width = 400;
 			map.Height = 400;
+			map.Projection = "+init=epsg:4326";
 			
 //			AddShapefile(map, new Shapefile("/home/scottell/gis/data/world_adm0/world_adm0.shp"));
 //			AddShapefile(map, new Shapefile("/home/scottell/Projects/cumberland/Cumberland.Tests/shape_eg_data/mexico/states.shp"));
 //			AddShapefile(map, new Shapefile("/home/scottell/Projects/cumberland/Cumberland.Tests/shape_eg_data/mexico/roads.shp"));
 //			AddShapefile(map, new Shapefile("/home/scottell/Projects/cumberland/Cumberland.Tests/shape_eg_data/mexico/cities.shp"));
-//			
-			Shapefile shp = new Shapefile("/home/scottell/gis/data/florida/cntshr/cntshr.shp");
-			Shapefile rds = new Shapefile("/home/scottell/gis/data/florida/majrds_apr08/majrds_apr08.shp");
-			
+			AddShapefile(map, new Shapefile("/home/scottell/gis/data/florida/cntshr/cntshr.shp"));
+			AddShapefile(map, new Shapefile("/home/scottell/gis/data/florida/par_citylm_2007/par_citylm_2007.shp"));
+			AddShapefile(map, new Shapefile("/home/scottell/gis/data/florida/majrds_apr08/majrds_apr08.shp"));
 			
 			System.Console.WriteLine("Load Time (ms): " + sw.Elapsed.TotalMilliseconds);
-			
-			using (ProjFourWrapper src = new ProjFourWrapper("+init=epsg:3087"))
-			{
-				using (ProjFourWrapper dst = new ProjFourWrapper("+init=epsg:4326"))
-				{
-					foreach (Polygon f in shp.Features)
-					{
-						src.Transform(dst, f);
-//						System.Console.Write(++cnt + " ");
-					}
-					
-					foreach (PolyLine l in rds.Features)
-					{
-						src.Transform(dst, l);
-					}
-				}
-			}
-
-			System.Console.WriteLine("Transform Time (ms): " + sw.Elapsed.TotalMilliseconds);
-			
-			AddShapefile(map, shp);
-			AddShapefile(map, rds);
+		
 			
 			Bitmap b = map.Draw();
-			
 			b.Save("/home/scottell/Desktop/test.png", ImageFormat.Png);   
 			
 			sw.Stop();
@@ -99,6 +77,8 @@ namespace Cumberland.DrawMap
 			l.FillColor =  Color.FromArgb(r.Next(255), r.Next(255), r.Next(255));
 			l.LineColor = Color.FromArgb(r.Next(155), r.Next(155), r.Next(155));
 			l.LineWidth = r.Next(3)+1;
+			l.Projection = "+init=epsg:3087";
+			//l.LineStyle = LineStyle.None;
 			map.Layers.Add(l);
 		}
 	}
