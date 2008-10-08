@@ -169,6 +169,68 @@ namespace Cumberland
 			
 			return new Point(x[0], y[0]);
 		}
+		
+		public void Transform(ProjFourWrapper destinationProj, Polygon polygon)
+		{
+			
+			foreach (Ring r in polygon.Rings)
+			{
+				for (int ii=0; ii<r.Points.Count; ii++)
+				{
+					r.Points[ii] = this.Transform(destinationProj, r.Points[ii]);
+				}
+			}		
+//			double[] x = null;
+//			double[] y = null;
+//			
+//			int pc = 0;
+//			
+//			foreach (Ring r in polygon.Rings)
+//			{
+//				pc += r.Points.Count;
+//			}
+//				
+//			
+//			x = new double[pc];
+//			y = new double[pc];
+//			int idx = 0;
+//			
+//			foreach (Ring r in polygon.Rings)
+//			{
+//				foreach (Point p in r.Points)
+//				{
+//					x[idx] = p.X;
+//					y[idx] = p.Y;
+//					idx++;
+//				}
+//			}
+//			int errno = pj_transform(this.projPJ, destinationProj.projPJ, pc, 0, x, y, null);
+//			if (errno != 0)
+//			{
+//				throw new InvalidOperationException("Proj4 transform failed: " + GetError());
+//			}
+//			idx = 0;
+//			foreach (Ring r in polygon.Rings)
+//			{
+//				foreach (Point p in r.Points)
+//				{
+//					p.X = x[idx];
+//					p.Y = y[idx];
+//					idx++;
+//				}
+//			}
+		}
+		
+		public void Transform(ProjFourWrapper destinationProj, PolyLine polyline)
+		{
+			foreach (Line line in polyline.Lines)
+			{
+				for (int ii=0; ii<line.Points.Count; ii++)
+				{
+					line.Points[ii] = this.Transform(destinationProj, line.Points[ii]);
+				}
+			}
+		}
 
 		public static string GetError()
 		{
