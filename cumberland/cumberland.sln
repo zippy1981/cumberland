@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cumberland.DrawMap", "Cumbe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cumberland.GluWrap", "Cumberland.GluWrap\Cumberland.GluWrap.csproj", "{F33E8484-1638-4FB8-BBA4-30D46DD0EF54}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cumberland.TileViewerTest", "Cumberland.TileViewerTest\Cumberland.TileViewerTest.csproj", "{8E6E9F69-F1F5-46A1-BA6B-95A762F9CBC3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{102E6FF6-201B-4366-BE2B-6304EF756F2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{102E6FF6-201B-4366-BE2B-6304EF756F2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{102E6FF6-201B-4366-BE2B-6304EF756F2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E6E9F69-F1F5-46A1-BA6B-95A762F9CBC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E6E9F69-F1F5-46A1-BA6B-95A762F9CBC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E6E9F69-F1F5-46A1-BA6B-95A762F9CBC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E6E9F69-F1F5-46A1-BA6B-95A762F9CBC3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F33E8484-1638-4FB8-BBA4-30D46DD0EF54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F33E8484-1638-4FB8-BBA4-30D46DD0EF54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F33E8484-1638-4FB8-BBA4-30D46DD0EF54}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -35,6 +41,6 @@ Global
 	GlobalSection(MonoDevelopProperties) = preSolution
 		name = cumberland
 		version = 0.1
-		StartupItem = Cumberland.DrawMap\Cumberland.DrawMap.csproj
+		StartupItem = Cumberland.TileViewerTest\Cumberland.TileViewerTest.csproj
 	EndGlobalSection
 EndGlobal
