@@ -110,7 +110,13 @@ namespace Cumberland
 			try
 			{
 				// hack to get an opengl context
-				Glut.glutInit();
+				int glutTime = Glut.glutGet(Glut.GLUT_ELAPSED_TIME);
+				//System.Console.WriteLine(glutTime);
+				if (glutTime == 0)
+				{		
+					Glut.glutInit();
+				}
+				
 				Glut.glutCreateWindow(string.Empty);
 				Glut.glutHideWindow();
 				
@@ -388,6 +394,7 @@ namespace Cumberland
 											Gl.glBlendFuncSeparate(Gl.GL_SRC_ALPHA, Gl.GL_ONE_MINUS_SRC_ALPHA, Gl.GL_ONE, Gl.GL_ONE);
 										}
 										
+										// TODO: use display lists for interactive viewer
 										//int tl = Gl.glGenLists(1);
 									    
 									    Gl.glColor4ub(layer.FillColor.R, layer.FillColor.G, layer.FillColor.B, layer.FillColor.A);

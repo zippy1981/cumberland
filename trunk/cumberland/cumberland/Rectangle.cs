@@ -114,6 +114,13 @@ namespace Cumberland
 			max = new Point(maxx, maxy);
 		}
 		
+		public Rectangle(Point minPoint, Point maxPoint)
+		{
+			min = minPoint;
+			max = maxPoint;
+		}
+		
+		
 #endregion
 		
 		public Rectangle Clone()

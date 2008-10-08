@@ -34,6 +34,8 @@ namespace Cumberland
 		
 		public const string SphericalMercatorProjection  = "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs";
 		
+		public const string WGS84 = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs";
+		
         IntPtr projPJ;
 		
 		[StructLayout(LayoutKind.Sequential)]
@@ -160,7 +162,7 @@ namespace Cumberland
 			int errno = pj_transform(this.projPJ, destinationProj.projPJ, 1, 0, x, y, new double[] {0}) ;
 			if (errno != 0)
 			{
-				throw new InvalidOperationException("Proj4 transform failed: " + GetError());
+				throw new InvalidOperationException("Proj4 transform failed: " + GetError() + " " + point.ToString());
 			}
 			
 			if (destinationProj.IsLatLong)
