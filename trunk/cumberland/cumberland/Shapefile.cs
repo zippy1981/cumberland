@@ -145,6 +145,11 @@ namespace Cumberland
 
             // get shape type
             shapetype = (ShapeType) stream.ReadUInt32();
+			
+			if (shapetype != ShapeType.Point && shapetype != ShapeType.Polygon && shapetype != ShapeType.PolyLine)
+			{
+				throw new NotSupportedException("Unsuppored shapefile type: " + shapetype);
+			}
 
             // get extents
             double xmin, ymin, xmax, ymax; // zmin, mmin, zmax, mmax;

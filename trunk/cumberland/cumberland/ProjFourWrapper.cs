@@ -32,6 +32,8 @@ namespace Cumberland
     {
 		const double DegreesToRadians = Math.PI / 180;
 		
+		public const string SphericalMercatorProjection  = "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs";
+		
         IntPtr projPJ;
 		
 		[StructLayout(LayoutKind.Sequential)]
@@ -180,45 +182,6 @@ namespace Cumberland
 					r.Points[ii] = this.Transform(destinationProj, r.Points[ii]);
 				}
 			}		
-//			double[] x = null;
-//			double[] y = null;
-//			
-//			int pc = 0;
-//			
-//			foreach (Ring r in polygon.Rings)
-//			{
-//				pc += r.Points.Count;
-//			}
-//				
-//			
-//			x = new double[pc];
-//			y = new double[pc];
-//			int idx = 0;
-//			
-//			foreach (Ring r in polygon.Rings)
-//			{
-//				foreach (Point p in r.Points)
-//				{
-//					x[idx] = p.X;
-//					y[idx] = p.Y;
-//					idx++;
-//				}
-//			}
-//			int errno = pj_transform(this.projPJ, destinationProj.projPJ, pc, 0, x, y, null);
-//			if (errno != 0)
-//			{
-//				throw new InvalidOperationException("Proj4 transform failed: " + GetError());
-//			}
-//			idx = 0;
-//			foreach (Ring r in polygon.Rings)
-//			{
-//				foreach (Point p in r.Points)
-//				{
-//					p.X = x[idx];
-//					p.Y = y[idx];
-//					idx++;
-//				}
-//			}
 		}
 		
 		public void Transform(ProjFourWrapper destinationProj, PolyLine polyline)

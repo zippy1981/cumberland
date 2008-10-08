@@ -28,6 +28,14 @@ using System.Drawing;
 
 namespace Cumberland
 {
+	public enum LineStyle
+	{
+		None = 0x0000,
+		Solid = 0x1111,
+		Dashed = 0x0011,
+		Dotted = 0x0101
+	}
+	
 	public class Layer
 	{
 		public float LineWidth {
@@ -74,6 +82,24 @@ namespace Cumberland
 				data = value;
 			}
 		}
+
+		public LineStyle LineStyle {
+			get {
+				return lineStyle;
+			}
+			set {
+				lineStyle = value;
+			}
+		}
+
+		public string Projection {
+			get {
+				return projection;
+			}
+			set {
+				projection = value;
+			}
+		}
 		
 		float lineWidth = 1;
 		
@@ -85,9 +111,8 @@ namespace Cumberland
 		
 		Shapefile data;
 		
-		public Layer()
-		{
-			
-		}
+		LineStyle lineStyle = LineStyle.Solid;
+		
+		string projection = null;
 	}
 }
