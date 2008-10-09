@@ -7,7 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{05A6F104-D839-4B9C-B704-91F9BB608D73}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <AssemblyName>Cumberland</AssemblyName>
+    <AssemblyName>Cumberland.DrawMap</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,9 +30,9 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\cumberland\cumberland.csproj">
+    <ProjectReference Include="..\cumberland\Cumberland.csproj">
       <Project>{05A6F104-D839-4B9C-B704-91F9BB608D73}</Project>
-      <Name>cumberland</Name>
+      <Name>Cumberland</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
