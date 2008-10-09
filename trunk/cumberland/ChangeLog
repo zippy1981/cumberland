@@ -1,3 +1,7 @@
+2008-10-09  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.DrawMap/Main.cs: parameterize
+
 2008-10-08  Scott Ellington <scott.ellington@gmail.com> 
 
 	

@@ -130,6 +130,11 @@ namespace Cumberland
 			}
         }
 		
+		public ProjFourWrapper(int epsg) : this("+init=epsg:" + epsg)
+		{
+		}
+		
+		
 #endregion
 
 #region public methods

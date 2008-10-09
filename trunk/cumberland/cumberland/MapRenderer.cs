@@ -297,7 +297,7 @@ namespace Cumberland
 							if (layer.LineStyle != LineStyle.Solid)
 							{
 								Gl.glEnable(Gl.GL_LINE_STIPPLE);
-								Gl.glLineStipple(3, (short) layer.LineStyle);
+								Gl.glLineStipple(1, (short) layer.LineStyle);
 							}
 							
 							// to get the anti-aliased line to properly blend with the background color,
@@ -321,17 +321,11 @@ namespace Cumberland
 								{
 									Line r = pol.Lines[jj] as Line;
 								
-								    Gl.glBegin(Gl.GL_LINES);
+								    Gl.glBegin(Gl.GL_LINE_STRIP);
+
 									Gl.glColor4ub(layer.LineColor.R, layer.LineColor.G, layer.LineColor.B, layer.LineColor.A);
 									
-									// GL_LINES requires two points
-									Point prev = r.Points[0];
-									if (reproject)
-									{
-										prev = src.Transform(dst, prev);
-									}
-									
-								    for (int kk = 1; kk < r.Points.Count; kk++)
+								    for (int kk = 0; kk < r.Points.Count; kk++)
 									{	
 										Point p = r.Points[kk];
 										
@@ -340,10 +334,7 @@ namespace Cumberland
 											p = src.Transform(dst, p);
 										}
 										
-									    Gl.glVertex2d(prev.X, prev.Y);
 										Gl.glVertex2d(p.X, p.Y);
-										
-										prev = p;
 									}
 								
 								    Gl.glEnd();
@@ -450,17 +441,11 @@ namespace Cumberland
 											
 											Gl.glLineWidth(layer.LineWidth);
 											
-										    Gl.glBegin(Gl.GL_LINES);
+										    Gl.glBegin(Gl.GL_LINE_STRIP);
+											
 										    Gl.glColor4ub(layer.LineColor.R, layer.LineColor.G, layer.LineColor.B, layer.LineColor.A);
 												
-											// GL_LINES requires two points 
-											Point prev = r.Points[0];
-											if (reproject)
-											{
-												prev = src.Transform(dst, prev);
-											}
-											
-										    for (int kk = 1; kk < r.Points.Count; kk++)
+											for (int kk = 0; kk < r.Points.Count; kk++)
 											{	
 												Point p = r.Points[kk];
 												
@@ -469,10 +454,7 @@ namespace Cumberland
 													p = src.Transform(dst, p);
 												}
 												
-											    Gl.glVertex2d(prev.X, prev.Y);
 												Gl.glVertex2d(p.X, p.Y);
-												
-												prev = p;
 											}							
 				
 				 							Gl.glEnd();
