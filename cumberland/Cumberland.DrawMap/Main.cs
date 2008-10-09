@@ -22,12 +22,14 @@
 //
 //
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
-
 using System.Diagnostics;
 
 using Cumberland;
+
+using NDesk.Options;
 
 namespace Cumberland.DrawMap
 {
@@ -35,51 +37,113 @@ namespace Cumberland.DrawMap
 	{
 		public static void Main(string[] args)
 		{
+			MapRenderer map = new MapRenderer();
+			map.Width = 400;
+			map.Height = 400;
+			map.Projection = ProjFourWrapper.WGS84;
+			
+			bool showHelp = false;
+			string path = "out.png";
+			
+			OptionSet options = new OptionSet();
+			options.Add("e|extents=", 
+			            "comma-delimited extents (e.g. -180,-90,180,90) ",
+			            delegate (string v) { map.Extents = ParseExtents(v); });
+			options.Add("h|help",  "show this message and exit",
+			            delegate (string v) { showHelp = v!= null; });
+			options.Add("o|output=",
+			            "the path of the PNG image to create",
+			            delegate (string v) { path = v; });
+			options.Add("w|width=",
+			            "the width of the image in pixels",
+			            delegate (string v) { map.Width = int.Parse(v); });
+			options.Add("t|height=",
+			            "the height of the image in pixels",
+			            delegate (string v) { map.Height = int.Parse(v); });
+			options.Add("p|proj=",
+			            "the output projection. can be a quoted proj4 string or an epsg code",
+			            delegate (string v) { map.Projection = ParseProjection(v); });
+			            
+		
+			List<string> rest = options.Parse(args);
+
+			if (showHelp)
+			{
+				ShowHelp(options);
+				return;
+			}
+			
 			Stopwatch sw = new Stopwatch();
 			
 			sw.Start();
+
+			Random r = new Random();
 			
-			MapRenderer map = new MapRenderer();
-			//map.Extents = new Rectangle(-115, 14, -87, 34);
-			map.Extents = new Rectangle(-85, 29, -81, 31);
-			//map.Extents = new Rectangle(-80777, 42799, 936488, 786156);
-			
-			map.Width = 400;
-			map.Height = 400;
-			map.Projection = "+init=epsg:4326";
-			
-//			AddShapefile(map, new Shapefile("/home/scottell/gis/data/world_adm0/world_adm0.shp"));
-//			AddShapefile(map, new Shapefile("/home/scottell/Projects/cumberland/Cumberland.Tests/shape_eg_data/mexico/states.shp"));
-//			AddShapefile(map, new Shapefile("/home/scottell/Projects/cumberland/Cumberland.Tests/shape_eg_data/mexico/roads.shp"));
-//			AddShapefile(map, new Shapefile("/home/scottell/Projects/cumberland/Cumberland.Tests/shape_eg_data/mexico/cities.shp"));
-			AddShapefile(map, new Shapefile("/home/scottell/gis/data/florida/cntshr/cntshr.shp"));
-			AddShapefile(map, new Shapefile("/home/scottell/gis/data/florida/par_citylm_2007/par_citylm_2007.shp"));
-			AddShapefile(map, new Shapefile("/home/scottell/gis/data/florida/majrds_apr08/majrds_apr08.shp"));
+			foreach (string arg in rest)
+			{
+				string[] layerArgs = arg.Split(',');
+
+				Layer l = new Layer();
+				l.Data = new Shapefile(layerArgs[0]);
+				l.PointSize = r.Next(5)+1;
+				l.FillColor =  Color.FromArgb(r.Next(255), r.Next(255), r.Next(255));
+				l.LineColor = Color.FromArgb(r.Next(155), r.Next(155), r.Next(155));
+				l.LineWidth = r.Next(3)+1;
+				
+				if (layerArgs.Length > 1)
+				{
+					l.Projection = ParseProjection(layerArgs[1]);;
+				}
+				
+				//l.LineStyle = LineStyle.None;
+				
+				map.Layers.Add(l);
+			}
 			
 			System.Console.WriteLine("Load Time (ms): " + sw.Elapsed.TotalMilliseconds);
 		
-			
 			Bitmap b = map.Draw();
-			b.Save("/home/scottell/Desktop/test.png", ImageFormat.Png);   
+			
+			if (System.IO.Path.GetExtension(path) != ".png")
+			{
+				path += ".png";
+			}
+			
+			b.Save(path, ImageFormat.Png);   
 			
 			sw.Stop();
 			
 			System.Console.WriteLine("Elapsed Time (ms): " + sw.Elapsed.TotalMilliseconds);
 		}
 		
-		static void AddShapefile(MapRenderer map, Shapefile shapefile)
+		static void ShowHelp (OptionSet p)
+	    {
+	        Console.WriteLine ("Usage: [mono] Cumberland.DrawMap.exe [OPTIONS]+ [\"path to shapefile\",epsg/\"proj4 string\"]+ ");
+	        Console.WriteLine ("Draws a map based on the given layers and options.");
+	        Console.WriteLine ();
+			Console.WriteLine ("example: mono Cumberland.DrawMap.exe -o=my.png -p=4326 \"path/to/shape.shp\",3087  ");
+			Console.WriteLine ();
+	        Console.WriteLine ("Options:");
+	        p.WriteOptionDescriptions (Console.Out);
+	    }
+		
+		static Rectangle ParseExtents(string extents)
 		{
-			Random r = new Random();
-			
-			Layer l = new Layer();
-			l.Data = shapefile;
-			l.PointSize = r.Next(5)+1;
-			l.FillColor =  Color.FromArgb(r.Next(255), r.Next(255), r.Next(255));
-			l.LineColor = Color.FromArgb(r.Next(155), r.Next(155), r.Next(155));
-			l.LineWidth = r.Next(3)+1;
-			l.Projection = "+init=epsg:3087";
-			//l.LineStyle = LineStyle.None;
-			map.Layers.Add(l);
+			string[] coords = extents.Split(',');
+			return new Rectangle(Convert.ToDouble(coords[0]),
+			                     Convert.ToDouble(coords[1]),
+			                     Convert.ToDouble(coords[2]),
+			                     Convert.ToDouble(coords[3]));
 		}
+		
+		static string ParseProjection(string v)
+		{
+			int epsg;
+			if (int.TryParse(v, out epsg))
+			{
+				return "+init=epsg:" + v;
+			}
+			else return v;
+		}		
 	}
 }
