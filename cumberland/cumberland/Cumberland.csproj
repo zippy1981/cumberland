@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <ProjectGuid>{0F516D1A-446C-46E6-8AD0-7C6573C338D8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>Cumberland</AssemblyName>
+    <SchemaVersion>2.0</SchemaVersion>
+    <RootNamespace>Cumberland</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <AssemblyName>Cumberland</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <AssemblyName>cumberland</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="Tao.OpenGl, Version=2.1.0.4, Culture=neutral, PublicKeyToken=1ca010269a4501ef">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Tao.OpenGl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="Tao.FreeGlut, Version=2.4.0.1, Culture=neutral, PublicKeyToken=6e602a6ad6c0d06d">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Tao.FreeGlut.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Feature.cs" />
+    <Compile Include="Line.cs" />
+    <Compile Include="Point.cs" />
+    <Compile Include="Polygon.cs" />
+    <Compile Include="PolyLine.cs" />
+    <Compile Include="Ring.cs" />
+    <Compile Include="Shapefile.cs" />
+    <Compile Include="MapRenderer.cs" />
+    <Compile Include="Rectangle.cs" />
+    <Compile Include="ProjFourWrapper.cs" />
+    <Compile Include="Layer.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <None Include="ChangeLog" />
+    <None Include="lib\Tao.OpenGl.dll" />
+    <None Include="lib\Tao.OpenGl.dll.config" />
+    <None Include="lib\Tao.OpenGl.xml" />
+    <None Include="lib\Tao.FreeGlut.dll" />
+    <None Include="lib\Tao.FreeGlut.dll.config" />
+    <None Include="lib\Tao.FreeGlut.xml" />
+    <None Include="lib\Tao.FreeGlut.dll.osx.config" />
+    <None Include="lib\Tao.OpenGl.dll.osx.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cumberland.GluWrap\Cumberland.GluWrap.csproj">
+      <Project>{0F516D1A-446C-46E6-8AD0-7C6573C338D8}</Project>
+      <Name>Cumberland.GluWrap</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Cumberland.dll.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+</Project>
