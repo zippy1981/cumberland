@@ -7,7 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{102E6FF6-201B-4366-BE2B-6304EF756F2B}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AssemblyName>Cumberland</AssemblyName>
+    <AssemblyName>Cumberland.Tests</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,9 +32,9 @@
     <Reference Include="nunit.framework, Version=2.2.0.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\cumberland\cumberland.csproj">
+    <ProjectReference Include="..\cumberland\Cumberland.csproj">
       <Project>{102E6FF6-201B-4366-BE2B-6304EF756F2B}</Project>
-      <Name>cumberland</Name>
+      <Name>Cumberland</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

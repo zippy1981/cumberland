@@ -162,7 +162,7 @@ namespace Cumberland
 				// check state
 				if (Gl.glCheckFramebufferStatusEXT(Gl.GL_FRAMEBUFFER_EXT) != Gl.GL_FRAMEBUFFER_COMPLETE_EXT)
 				{
-					throw new InvalidOperationException("This video card may not support Framebuffers");
+					throw new InvalidOperationException("An error has occured setting up Framebuffers");
 				}
 				
 				// acquire the proper space

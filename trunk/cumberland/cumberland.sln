@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cumberland", "cumberland\cumberland.csproj", "{0F516D1A-446C-46E6-8AD0-7C6573C338D8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cumberland", "cumberland\Cumberland.csproj", "{0F516D1A-446C-46E6-8AD0-7C6573C338D8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cumberland.Tests", "Cumberland.Tests\Cumberland.Tests.csproj", "{102E6FF6-201B-4366-BE2B-6304EF756F2B}"
 EndProject
@@ -26,13 +26,9 @@ Global
 		{0F516D1A-446C-46E6-8AD0-7C6573C338D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F516D1A-446C-46E6-8AD0-7C6573C338D8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{102E6FF6-201B-4366-BE2B-6304EF756F2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{102E6FF6-201B-4366-BE2B-6304EF756F2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{102E6FF6-201B-4366-BE2B-6304EF756F2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{102E6FF6-201B-4366-BE2B-6304EF756F2B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8E6E9F69-F1F5-46A1-BA6B-95A762F9CBC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8E6E9F69-F1F5-46A1-BA6B-95A762F9CBC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E6E9F69-F1F5-46A1-BA6B-95A762F9CBC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8E6E9F69-F1F5-46A1-BA6B-95A762F9CBC3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F33E8484-1638-4FB8-BBA4-30D46DD0EF54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F33E8484-1638-4FB8-BBA4-30D46DD0EF54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F33E8484-1638-4FB8-BBA4-30D46DD0EF54}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -42,5 +38,7 @@ Global
 		name = cumberland
 		version = 0.1
 		StartupItem = Cumberland.TileViewerTest\Cumberland.TileViewerTest.csproj
+		MonoDevelop.ChangeLogAddIn.ChangeLogInfo = $0
+		$0.policy = UpdateNearestChangeLog
 	EndGlobalSection
 EndGlobal
