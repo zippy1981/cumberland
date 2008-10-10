@@ -355,6 +355,13 @@ namespace Cumberland
 						{
 							IntPtr tess = IntPtr.Zero;
 							
+							// we need to hold references to these delegates because we are going unmanaged
+							Glu.TessBeginCallback tessBegin = new Tao.OpenGl.Glu.TessBeginCallback(Gl.glBegin);
+							Glu.TessEndCallback tessEnd = new Tao.OpenGl.Glu.TessEndCallback(Gl.glEnd);
+							//Glu.TessVertexCallback tessVert = new Tao.OpenGl.Glu.TessVertexCallback(Gl.glVertex3dv);
+							Glu.TessVertexCallback tessVert = new Tao.OpenGl.Glu.TessVertexCallback(TessVertexHandler);
+							Glu.TessErrorCallback tessErr = new Glu.TessErrorCallback(TessErrorHandler);
+									
 							try
 							{
 #region configure glu tess
@@ -370,11 +377,6 @@ namespace Cumberland
 								// --red book, chp 11
 								
 								tess = GluMethods.gluNewTess();
-						
-								Glu.TessBeginCallback tessBegin = new Tao.OpenGl.Glu.TessBeginCallback(Gl.glBegin);
-								Glu.TessEndCallback tessEnd = new Tao.OpenGl.Glu.TessEndCallback(Gl.glEnd);
-								Glu.TessVertexCallback tessVert = new Tao.OpenGl.Glu.TessVertexCallback(Gl.glVertex3dv);
-								Glu.TessErrorCallback tessErr = new Glu.TessErrorCallback(Error);
 										
 								GluMethods.gluTessCallback(tess, Glu.GLU_TESS_BEGIN, tessBegin);
 								GluMethods.gluTessCallback(tess, Glu.GLU_TESS_END, tessEnd);
@@ -401,6 +403,10 @@ namespace Cumberland
 #region tessalate and render polygon fill
 									
 									GluMethods.gluTessBeginPolygon(tess, IntPtr.Zero);
+									
+									// tess callbacks do not occur until gluTessEndPolygon	
+									// this shit is getting GC'd?
+									//double[] dummy = new double[] {0,0,0};
 									
 									for (int jj = 0; jj < po.Rings.Count; jj++)
 								    {
@@ -441,12 +447,13 @@ namespace Cumberland
 												p = src.Transform(dst, p);
 											}
 											
-											double[] data = new double[] {p.X, p.Y, 0d};
-											GluMethods.gluTessVertex(tess, data, data );
+											double[] coord = new double[] {p.X, p.Y, 0d};
+											
+											GluMethods.gluTessVertex(tess, coord, coord);
 										}	
 										
 										GluMethods.gluTessEndContour(tess);
-										
+
 //										if (layer.LineStyle == LineStyle.None)
 //										{
 //											Gl.glDisable(Gl.GL_BLEND);
@@ -459,9 +466,9 @@ namespace Cumberland
 										
 
 								    }
-
+									
 									GluMethods.gluTessEndPolygon(tess);
-						
+									
 #region draw polygon outline
 			
 									if (layer.LineStyle != LineStyle.None)
@@ -521,7 +528,12 @@ namespace Cumberland
 								{
 									GluMethods.gluDeleteTess(tess);
 									
-									
+									// hack: it seems neccessary on Mono to call this so as the pointers to these
+									// delegates stay alive in unmanaged land
+									GC.KeepAlive(tessBegin);
+									GC.KeepAlive(tessVert);
+									GC.KeepAlive(tessErr);
+									GC.KeepAlive(tessEnd);								
 								}
 							}
 						}
@@ -549,11 +561,23 @@ namespace Cumberland
 
 #region helper methods
 		
-		void Error(int errorCode) 
+		void TessErrorHandler(int errorCode) 
 		{
             throw new InvalidOperationException("Tessellation Error: " + GluWrap.GluMethods.gluErrorString(errorCode));
 
         }
+		
+		void TessVertexHandler(IntPtr v)
+		{
+//			double[] c= new double[3];
+//			System.Runtime.InteropServices.Marshal.Copy(v, c, 0, 3);
+//			
+//			System.Console.WriteLine("\t\tvertex callback: " + c[0] + "," + c[1] + "," + c[2] );
+//			
+//			
+//			Gl.glVertex2d(c[0],c[1]);
+			Gl.glVertex3dv(v);
+		}
 
 #endregion
 	
