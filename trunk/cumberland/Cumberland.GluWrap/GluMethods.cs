@@ -58,6 +58,7 @@ namespace Cumberland.GluWrap
 		
 		[DllImport("glu32.dll"), SuppressUnmanagedCodeSecurity]
         public static extern void gluTessVertex([In] IntPtr tess, [In] double[] location, [In] double[] data);
+		//public static extern void gluTessVertex([In] IntPtr tess, [In] double[] location, IntPtr data);
 		
 		[DllImport("glu32.dll"), SuppressUnmanagedCodeSecurity]
         public static extern void gluTessEndContour([In] IntPtr tess);
