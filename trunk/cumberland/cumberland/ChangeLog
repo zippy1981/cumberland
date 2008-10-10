@@ -1,5 +1,9 @@
 2008-10-09  Scott Ellington <scott.ellington@gmail.com> 
 
+	
+
+2008-10-09  Scott Ellington <scott.ellington@gmail.com> 
+
 	* MapRenderer.cs: switch from GL_LINES to GL_LINE_STRIP
 	* ProjFourWrapper.cs: add ctor
 

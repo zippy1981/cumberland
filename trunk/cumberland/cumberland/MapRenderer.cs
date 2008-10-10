@@ -362,10 +362,13 @@ namespace Cumberland
 								Glu.TessBeginCallback tessBegin = new Tao.OpenGl.Glu.TessBeginCallback(Gl.glBegin);
 								Glu.TessEndCallback tessEnd = new Tao.OpenGl.Glu.TessEndCallback(Gl.glEnd);
 								Glu.TessVertexCallback tessVert = new Tao.OpenGl.Glu.TessVertexCallback(Gl.glVertex3dv);
+								Glu.TessErrorCallback tessErr = new Glu.TessErrorCallback(Error);
 										
 								GluMethods.gluTessCallback(tess, Glu.GLU_TESS_BEGIN, tessBegin);
 								GluMethods.gluTessCallback(tess, Glu.GLU_TESS_END, tessEnd);
 								GluMethods.gluTessCallback(tess, Glu.GLU_TESS_VERTEX, tessVert);
+								GluMethods.gluTessCallback(tess, Glu.GLU_TESS_ERROR, tessErr);
+
 								
 								for (int ii=0; ii < shp.Features.Count; ii++)
 								{
@@ -373,17 +376,22 @@ namespace Cumberland
 
 #region tessalate and render polygon fill
 									
+									GluMethods.gluTessBeginPolygon(tess, IntPtr.Zero);
+									
 									for (int jj = 0; jj < po.Rings.Count; jj++)
 								    {
 										Ring r = po.Rings[jj];
 										
+										// FIXME: temporalily ignore holes
+										if (!r.IsClockwise) continue;
+										
 										// FIXME: not working.  maybe need to use multisampling
-										if (layer.LineStyle == LineStyle.None)
-										{
-											Gl.glEnable(Gl.GL_POLYGON_SMOOTH);
-											Gl.glEnable(Gl.GL_BLEND);
-											Gl.glBlendFuncSeparate(Gl.GL_SRC_ALPHA, Gl.GL_ONE_MINUS_SRC_ALPHA, Gl.GL_ONE, Gl.GL_ONE);
-										}
+//										if (layer.LineStyle == LineStyle.None)
+//										{
+//											Gl.glEnable(Gl.GL_POLYGON_SMOOTH);
+//											Gl.glEnable(Gl.GL_BLEND);
+//											Gl.glBlendFuncSeparate(Gl.GL_SRC_ALPHA, Gl.GL_ONE_MINUS_SRC_ALPHA, Gl.GL_ONE, Gl.GL_ONE);
+//										}
 										
 										// TODO: use display lists for interactive viewer
 										//int tl = Gl.glGenLists(1);
@@ -392,7 +400,6 @@ namespace Cumberland
 									
 										//Gl.glNewList(tl, Gl.GL_COMPILE);
 										
-										GluMethods.gluTessBeginPolygon(tess, IntPtr.Zero);
 										GluMethods.gluTessBeginContour(tess);
 										
 										for (int kk = 1; kk < r.Points.Count; kk++)
@@ -409,22 +416,30 @@ namespace Cumberland
 										}	
 										
 										GluMethods.gluTessEndContour(tess);
-										GluMethods.gluTessEndPolygon(tess);
 										
-										if (layer.LineStyle == LineStyle.None)
-										{
-											Gl.glDisable(Gl.GL_BLEND);
-											Gl.glDisable(Gl.GL_POLYGON_SMOOTH);
-										}
+//										if (layer.LineStyle == LineStyle.None)
+//										{
+//											Gl.glDisable(Gl.GL_BLEND);
+//											Gl.glDisable(Gl.GL_POLYGON_SMOOTH);
+//										}
 	
 										//Gl.glEndList();
 										
 		#endregion
 										
-			#region draw polygon outline
+
+								    }
+
+									GluMethods.gluTessEndPolygon(tess);
+						
+#region draw polygon outline
 			
-										if (layer.LineStyle != LineStyle.None)
-										{
+									if (layer.LineStyle != LineStyle.None)
+									{
+									
+										for (int jj = 0; jj < po.Rings.Count; jj++)
+									    {
+											Ring r = po.Rings[jj];
 									
 											if (layer.LineStyle != LineStyle.Solid)
 											{
@@ -465,18 +480,18 @@ namespace Cumberland
 											{
 												Gl.glDisable(Gl.GL_LINE_STIPPLE);
 											}								
-											
 										}
-			#endregion
-								    }
+									}
+#endregion
 								}
-								
 							}
 							finally
 							{
 								if (tess != IntPtr.Zero) 
 								{
 									GluMethods.gluDeleteTess(tess);
+									
+									
 								}
 							}
 						}
@@ -501,5 +516,16 @@ namespace Cumberland
 			}
 		}
 #endregion
+
+#region helper methods
+		
+		void Error(int errorCode) 
+		{
+            throw new InvalidOperationException("Tessellation Error: " + GluWrap.GluMethods.gluErrorString(errorCode));
+
+        }
+
+#endregion
+	
 	}
 }

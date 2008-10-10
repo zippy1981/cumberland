@@ -247,6 +247,7 @@ namespace Cumberland
 				Point p = new Point(stream.ReadDouble(), stream.ReadDouble());
 				rings[ii].Points.Add(p);				
 			}
+			
 			po.Rings.Add(rings[ii]);
 			
 			return po;

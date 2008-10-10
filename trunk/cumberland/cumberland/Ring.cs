@@ -27,11 +27,29 @@ using System.Collections.Generic;
 namespace Cumberland
 {
 	
-	
+	/// <summary>
+	/// A polygon that is not self-intersecting
+	/// </summary>
     public class Ring
     {
         List<Point> points = new List<Point>();
         
+		public bool IsClockwise
+		{
+			get
+			{
+				return CalculateArea() >= 0;
+			}
+		}
+		
+		public bool IsClosed
+		{
+			get
+			{
+				return points.Count > 3 && points[0] == points[points.Count-1];
+			}
+		}
+		
         public List<Point> Points {
         	get {
         		return points;
@@ -41,5 +59,19 @@ namespace Cumberland
         public Ring()
 		{
 		}
+		
+		public double CalculateArea()
+		{
+			double area = 0;
+			
+			for (int ii=0; ii<points.Count-1; ii++)
+			{
+				area += (points[ii].X * points[ii+1].Y) - (points[ii+1].X * points[ii].Y);
+			}
+			
+			// flip the sign as clockwise is the positive here	
+			return (area / 2) * -1;
+		}
+		
     }
 }
