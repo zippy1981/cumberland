@@ -357,6 +357,18 @@ namespace Cumberland
 							
 							try
 							{
+#region configure glu tess
+								
+								// OpenGL can directly display only simple convex polygons. 
+								// A polygon is simple if the edges intersect only at vertices, 
+								// there are no duplicate vertices, and exactly two edges meet at any vertex. 
+								// If your application requires the display of concave polygons, 
+								// polygons containing holes, or polygons with intersecting edges, 
+								// those polygons must first be subdivided into simple convex polygons 
+								// before they can be displayed. Such subdivision is called tessellation, 
+								// and the GLU provides a collection of routines that perform tessellation.
+								// --red book, chp 11
+								
 								tess = GluMethods.gluNewTess();
 						
 								Glu.TessBeginCallback tessBegin = new Tao.OpenGl.Glu.TessBeginCallback(Gl.glBegin);
@@ -368,11 +380,23 @@ namespace Cumberland
 								GluMethods.gluTessCallback(tess, Glu.GLU_TESS_END, tessEnd);
 								GluMethods.gluTessCallback(tess, Glu.GLU_TESS_VERTEX, tessVert);
 								GluMethods.gluTessCallback(tess, Glu.GLU_TESS_ERROR, tessErr);
+								
+								// For a single contour, the winding number of a point is the signed number of 
+								// revolutions we make around that point while traveling once around the contour 
+								// (where a counterclockwise revolution is positive and a clockwise revolution is negative). 
+								// When there are several contours, the individual winding numbers are summed. 
+								// This procedure associates a signed integer value with each point in the plane. 
+								// Note that the winding number is the same for all points in a single region.
+								
+								// exterior are clockwise, holes are counter, so we use odd
+								// FIXME: not working...
+								GluMethods.gluTessProperty(tess, Glu.GLU_TESS_WINDING_RULE, Glu.GLU_TESS_WINDING_ODD);
 
+#endregion
 								
 								for (int ii=0; ii < shp.Features.Count; ii++)
 								{
-									Polygon po = (Polygon) shp.Features[ii];
+									Polygon po = shp.Features[ii] as Polygon;
 
 #region tessalate and render polygon fill
 									
@@ -382,8 +406,14 @@ namespace Cumberland
 								    {
 										Ring r = po.Rings[jj];
 										
-										// FIXME: temporalily ignore holes
-										if (!r.IsClockwise) continue;
+										// another exterior hole is a new polygon
+										// (for simplicity's sake, I am going to assume that a hole is associated with the last ring)
+										if (r.IsClockwise && jj > 0)
+										{
+											// end the last exterior polygon
+											GluMethods.gluTessEndPolygon(tess);
+											GluMethods.gluTessBeginPolygon(tess, IntPtr.Zero);
+										}          
 										
 										// FIXME: not working.  maybe need to use multisampling
 //										if (layer.LineStyle == LineStyle.None)
@@ -402,7 +432,7 @@ namespace Cumberland
 										
 										GluMethods.gluTessBeginContour(tess);
 										
-										for (int kk = 1; kk < r.Points.Count; kk++)
+										for (int kk = 0; kk < r.Points.Count; kk++)
 										{
 											Point p = r.Points[kk];
 											
@@ -411,7 +441,7 @@ namespace Cumberland
 												p = src.Transform(dst, p);
 											}
 											
-											double[] data = new double[] {p.X, p.Y};
+											double[] data = new double[] {p.X, p.Y, 0d};
 											GluMethods.gluTessVertex(tess, data, data );
 										}	
 										

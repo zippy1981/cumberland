@@ -88,7 +88,7 @@ namespace Cumberland.DrawMap
 				l.PointSize = r.Next(5)+1;
 				l.FillColor =  Color.FromArgb(r.Next(255), r.Next(255), r.Next(255));
 				l.LineColor = Color.FromArgb(r.Next(155), r.Next(155), r.Next(155));
-				l.LineWidth = r.Next(3)+1;
+				l.LineWidth = 1; //r.Next(3)+1;
 				
 				if (layerArgs.Length > 1)
 				{

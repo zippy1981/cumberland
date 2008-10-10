@@ -28,6 +28,10 @@ using System.Collections.Generic;
 
 namespace Cumberland 
 {
+	//TODO: Because this specification does not forbid consecutive points with identical coordinates, 
+	// shapefile readers must handle such cases.
+
+	
     public class Shapefile 
 	{				
         public enum ShapeType
@@ -216,6 +220,20 @@ namespace Cumberland
 		
 		Polygon GetPolygon(BinaryReader stream, uint dlen)
 		{
+			//Polygons stored in a shapefile must be clean. A clean polygon is one that
+			// 1.  Has no self-intersections. This means that a segment belonging to one ring may
+			//     not intersect a segment belonging to another ring. The rings of a polygon can
+			//     touch each other at vertices but not along segments. Colinear segments are
+			//     considered intersecting.
+			// 2.  Has the inside of the polygon on the "correct" side of the line that defines it. The
+			//     neighborhood to the right of an observer walking along the ring in vertex order is
+			//     the inside of the polygon. Vertices for a single, ringed polygon are, therefore,
+			//     always in clockwise order. Rings defining holes in these polygons have a
+			//     counterclockwise orientation. "Dirty" polygons occur when the rings that define
+			//     holes in the polygon also go clockwise, which causes overlapping interiors.
+			
+			// The order of rings in the points array is not significant.
+			
 			double xmin = stream.ReadDouble();
 			double ymin = stream.ReadDouble();
 			double xmax = stream.ReadDouble();
@@ -234,20 +252,24 @@ namespace Cumberland
 			   	rings[ii] = new Ring();
 			
 			Polygon po = new Polygon(xmin, ymin, xmax, ymax);
-
+			
 			ii=0;
 			for (int jj=0; jj < numPoints; jj++)
 			{
 				if (ii < parts.Length-1)
+				{
 				   	if (parts[ii+1] == jj)
 					{
 						po.Rings.Add(rings[ii]);
+
 					   	ii++;
 					}
+				}
+				
 				Point p = new Point(stream.ReadDouble(), stream.ReadDouble());
 				rings[ii].Points.Add(p);				
 			}
-			
+
 			po.Rings.Add(rings[ii]);
 			
 			return po;

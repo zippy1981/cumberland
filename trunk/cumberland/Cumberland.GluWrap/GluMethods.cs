@@ -67,7 +67,10 @@ namespace Cumberland.GluWrap
 		
 		[DllImport("glu32.dll", EntryPoint="gluErrorString"), SuppressUnmanagedCodeSecurity]
 		private static extern IntPtr gluErrorStringUnsafe(int errorCode);
-	  	 
+	  	
+		[DllImport("glu32.dll"), SuppressUnmanagedCodeSecurity]
+        public static extern void gluTessProperty([In] IntPtr tess, int which, double data);
+		
 	  	public static string gluErrorString(int errorCode) 
 		{
 			return Marshal.PtrToStringAnsi(gluErrorStringUnsafe(errorCode));
