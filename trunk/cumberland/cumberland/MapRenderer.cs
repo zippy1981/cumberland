@@ -29,6 +29,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 
+using System.Runtime.InteropServices;
+
 using Tao.OpenGl;
 using Tao.FreeGlut;
 
@@ -356,10 +358,14 @@ namespace Cumberland
 							IntPtr tess = IntPtr.Zero;
 							
 							// we need to hold references to these delegates because we are going unmanaged
-							Glu.TessBeginCallback tessBegin = new Tao.OpenGl.Glu.TessBeginCallback(Gl.glBegin);
-							Glu.TessEndCallback tessEnd = new Tao.OpenGl.Glu.TessEndCallback(Gl.glEnd);
+							//Glu.TessBeginCallback tessBegin = new Tao.OpenGl.Glu.TessBeginCallback(Gl.glBegin);
+							Glu.TessBeginCallback tessBegin = new Tao.OpenGl.Glu.TessBeginCallback(TessBeginHandler);
+							Glu.TessEndCallback tessEnd = new Tao.OpenGl.Glu.TessEndCallback(TessEndHandler);
 							//Glu.TessVertexCallback tessVert = new Tao.OpenGl.Glu.TessVertexCallback(Gl.glVertex3dv);
-							Glu.TessVertexCallback tessVert = new Tao.OpenGl.Glu.TessVertexCallback(TessVertexHandler);
+							//Glu.TessVertexCallback tessVert = new Tao.OpenGl.Glu.TessVertexCallback(TessVertexHandler);
+							GluMethods.TessVertexCallback1 tessVert = new Cumberland.GluWrap.GluMethods.TessVertexCallback1(TessVertexHandler);
+							//Glu.TessVertexDataCallback tessVert = new Tao.OpenGl.Glu.TessVertexDataCallback(TessVertexHandler);
+							//GluMethods.TessVertexDataCallback1 tessVert = new GluWrap.GluMethods.TessVertexDataCallback1(TessVertexHandler);
 							Glu.TessErrorCallback tessErr = new Glu.TessErrorCallback(TessErrorHandler);
 									
 							try
@@ -381,6 +387,7 @@ namespace Cumberland
 								GluMethods.gluTessCallback(tess, Glu.GLU_TESS_BEGIN, tessBegin);
 								GluMethods.gluTessCallback(tess, Glu.GLU_TESS_END, tessEnd);
 								GluMethods.gluTessCallback(tess, Glu.GLU_TESS_VERTEX, tessVert);
+								//GluMethods.gluTessCallback(tess, Glu.GLU_TESS_VERTEX_DATA, tessVert);
 								GluMethods.gluTessCallback(tess, Glu.GLU_TESS_ERROR, tessErr);
 								
 								// For a single contour, the winding number of a point is the signed number of 
@@ -405,8 +412,11 @@ namespace Cumberland
 									GluMethods.gluTessBeginPolygon(tess, IntPtr.Zero);
 									
 									// tess callbacks do not occur until gluTessEndPolygon	
-									// this shit is getting GC'd?
-									//double[] dummy = new double[] {0,0,0};
+									// we must pin our vertexes because agressive garbage collectors (i.e. MS.NET)
+									// will move this around and corrupt the pointers GLU has
+									// http://blogs.msdn.com/clyon/archive/2004/09/17/230985.aspx
+									// TODO: can this be optimized?
+									List<GCHandle> handles = new List<GCHandle>();
 									
 									for (int jj = 0; jj < po.Rings.Count; jj++)
 								    {
@@ -414,10 +424,19 @@ namespace Cumberland
 										
 										// another exterior hole is a new polygon
 										// (for simplicity's sake, I am going to assume that a hole is associated with the last ring)
-										if (r.IsClockwise && jj > 0)
+										if (!r.IsClockwise)
+										{
+											continue;
+										}
+										else if (jj > 0)
 										{
 											// end the last exterior polygon
 											GluMethods.gluTessEndPolygon(tess);
+											
+											// clear out handles to this polygon's coords
+											FreeAndClearHandles(handles);
+											
+											// start a new exterior polygon
 											GluMethods.gluTessBeginPolygon(tess, IntPtr.Zero);
 										}          
 										
@@ -449,7 +468,12 @@ namespace Cumberland
 											
 											double[] coord = new double[] {p.X, p.Y, 0d};
 											
-											GluMethods.gluTessVertex(tess, coord, coord);
+											// get a handle that is pinned (i.e. will not move)
+											GCHandle gch = GCHandle.Alloc(coord, GCHandleType.Pinned);
+											handles.Add(gch);
+
+											// now we can pass the actual pointer to the array
+											GluMethods.gluTessVertex(tess, gch.AddrOfPinnedObject(), gch.AddrOfPinnedObject());
 										}	
 										
 										GluMethods.gluTessEndContour(tess);
@@ -463,12 +487,12 @@ namespace Cumberland
 										//Gl.glEndList();
 										
 		#endregion
-										
-
 								    }
 									
 									GluMethods.gluTessEndPolygon(tess);
-									
+
+									// clear out these last handles
+									FreeAndClearHandles(handles);
 #region draw polygon outline
 			
 									if (layer.LineStyle != LineStyle.None)
@@ -567,16 +591,30 @@ namespace Cumberland
 
         }
 		
-		void TessVertexHandler(IntPtr v)
+		void TessVertexHandler(double[] c)
+		{		
+			Gl.glVertex2d(c[0],c[1]);
+			//Gl.glVertex3dv(v);
+		}
+		
+		void TessBeginHandler(int which)
 		{
-//			double[] c= new double[3];
-//			System.Runtime.InteropServices.Marshal.Copy(v, c, 0, 3);
-//			
-//			System.Console.WriteLine("\t\tvertex callback: " + c[0] + "," + c[1] + "," + c[2] );
-//			
-//			
-//			Gl.glVertex2d(c[0],c[1]);
-			Gl.glVertex3dv(v);
+			Gl.glBegin(which);
+			
+		}
+		
+		void TessEndHandler()
+		{ 
+			Gl.glEnd();
+		}
+		
+		void FreeAndClearHandles(List<GCHandle> handles)
+		{
+			foreach (GCHandle gch in handles)
+			{
+				gch.Free();
+			}
+			handles.Clear();
 		}
 
 #endregion

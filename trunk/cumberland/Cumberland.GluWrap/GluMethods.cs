@@ -50,6 +50,15 @@ namespace Cumberland.GluWrap
 		[DllImport("glu32.dll", EntryPoint="gluTessCallback"), SuppressUnmanagedCodeSecurity]
         public static extern void gluTessCallback([In] IntPtr tess, int which, [In] Glu.TessErrorCallback func);
 		
+		[DllImport("glu32.dll", EntryPoint="gluTessCallback"), SuppressUnmanagedCodeSecurity]
+        public static extern void gluTessCallback([In] IntPtr tess, int which, [In] TessVertexCallback1 func);
+		
+		[DllImport("glu32.dll", EntryPoint="gluTessCallback"), SuppressUnmanagedCodeSecurity]
+        public static extern void gluTessCallback([In] IntPtr tess, int which, [In] Glu.TessVertexDataCallback func);
+		
+		[DllImport("glu32.dll", EntryPoint="gluTessCallback"), SuppressUnmanagedCodeSecurity]
+        public static extern void gluTessCallback([In] IntPtr tess, int which, [In] TessVertexDataCallback1 func);
+
 		[DllImport("glu32.dll"), SuppressUnmanagedCodeSecurity]
         public static extern void gluTessBeginPolygon([In] IntPtr tess, [In] IntPtr data);
 		
@@ -57,8 +66,8 @@ namespace Cumberland.GluWrap
         public static extern void gluTessBeginContour([In] IntPtr tess);
 		
 		[DllImport("glu32.dll"), SuppressUnmanagedCodeSecurity]
-        public static extern void gluTessVertex([In] IntPtr tess, [In] double[] location, [In] double[] data);
-		//public static extern void gluTessVertex([In] IntPtr tess, [In] double[] location, IntPtr data);
+        //public static extern void gluTessVertex([In] IntPtr tess, [In] double[] location, [In] double[] data);
+		public static extern void gluTessVertex([In] IntPtr tess,[In] IntPtr vertex,[In] IntPtr data);
 		
 		[DllImport("glu32.dll"), SuppressUnmanagedCodeSecurity]
         public static extern void gluTessEndContour([In] IntPtr tess);
@@ -71,6 +80,10 @@ namespace Cumberland.GluWrap
 	  	
 		[DllImport("glu32.dll"), SuppressUnmanagedCodeSecurity]
         public static extern void gluTessProperty([In] IntPtr tess, int which, double data);
+		
+		public delegate void TessVertexCallback1([MarshalAs(UnmanagedType.LPArray, SizeConst=3),In] double[] vertexData);
+		
+		public delegate void TessVertexDataCallback1([MarshalAs(UnmanagedType.LPArray, SizeConst=3),In] double[] vertexData, IntPtr polygonData);
 		
 	  	public static string gluErrorString(int errorCode) 
 		{
