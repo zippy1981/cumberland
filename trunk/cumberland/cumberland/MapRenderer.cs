@@ -40,6 +40,8 @@ namespace Cumberland
 {
 	public class MapRenderer
 	{
+		
+		List<int> glList = new List<int>();
 
 #region Properties
 		
@@ -232,8 +234,11 @@ namespace Cumberland
 					dst = new ProjFourWrapper(Projection);
 				}
 								
+				int idx = -1;
 				foreach (Layer layer in layers)
 				{
+					idx++;
+					
 					if (layer.Data == null)
 					{
 						continue;
@@ -245,6 +250,16 @@ namespace Cumberland
 					{
 						continue;
 					}
+					
+					// use a GlList for performance
+					if (glList.Count > 0)
+					{
+						Gl.glCallList(glList[idx]);
+						return;
+					}
+					
+					glList.Add(Gl.glGenLists(1));
+					Gl.glNewList(glList[idx], Gl.GL_COMPILE);
 	
 					ProjFourWrapper src = null;
 					
@@ -570,6 +585,8 @@ namespace Cumberland
 							src.Dispose();
 						}
 					}
+					
+					Gl.glEndList();
 				}
 			}
 			finally
