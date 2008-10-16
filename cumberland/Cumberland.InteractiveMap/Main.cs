@@ -166,6 +166,8 @@ namespace Cumberland.InteractiveMap
 			Glut.glutMainLoop();
 		}
 		
+#region helper methods
+		
 		static void ShowHelp (OptionSet p)
 	    {
 	        Console.WriteLine ("Usage: [mono] Cumberland.DrawMap.exe [OPTIONS]+ [\"path to shapefile\",epsg/\"proj4 string\"]+ ");
@@ -195,6 +197,17 @@ namespace Cumberland.InteractiveMap
 			}
 			else return v;
 		}		
+
+		static void Clamp ()
+		{
+			for (int i = 0; i < 3; i ++)
+				if (rot[i] >= 360 || rot[i] < -360)
+					rot[i] = 0;
+		}
+		
+#endregion
+		
+#region FreeGlut callbacks
 		
 		static void Display() 
 		{
@@ -305,11 +318,8 @@ namespace Cumberland.InteractiveMap
 			Glut.glutPostRedisplay();	
 		}
 		
-		static void Clamp ()
-		{
-			for (int i = 0; i < 3; i ++)
-				if (rot[i] >= 360 || rot[i] < -360)
-					rot[i] = 0;
-		}
+#endregion
+	
+
 	}
 }
