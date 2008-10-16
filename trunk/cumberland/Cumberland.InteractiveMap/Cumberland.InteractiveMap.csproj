@@ -18,7 +18,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Commandlineparameters>/home/scottell/gis/data/world_adm0/world_adm0.shp</Commandlineparameters>
-    <AssemblyName>Cumberland.InteractiveMap</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -26,7 +25,6 @@
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AssemblyName>Cumberland</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
