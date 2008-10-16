@@ -64,7 +64,7 @@ namespace Cumberland.TileViewerTest
 					
 					// create our layer
 					Layer l = new Layer();
-					l.Data = new Shapefile("/home/scottell/Projects/cumberland/Cumberland.Tests/shape_eg_data/mexico/states.shp");
+					l.Data = new Shapefile("../Cumberland.Tests/shape_eg_data/mexico/states.shp");
 					//FIXME:	//new Shapefile("/home/scottell/gis/data/world_adm0/world_adm0.shp");
 					
 					// data is in WGS84
@@ -107,7 +107,7 @@ namespace Cumberland.TileViewerTest
 				{
 					gr.DrawString(ex.Message,
 					              new Font("Arial", 10),
-					              Brushes.Black,
+					              Brushes.Red,
 					              10, 
 					              10);
 				}
