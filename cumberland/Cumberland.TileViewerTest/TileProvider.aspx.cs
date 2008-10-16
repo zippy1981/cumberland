@@ -48,10 +48,10 @@ namespace Cumberland.TileViewerTest
 			// clear out response
 			Response.Clear();
 			Response.ContentType = "image/png";
-				
-			try
+
+			lock (padLock)
 			{
-				lock (padLock)
+				try
 				{
 					// create our map renderer
 					OpenGLMap map = new OpenGLMap();
@@ -94,25 +94,26 @@ namespace Cumberland.TileViewerTest
 					
 					// draw our map
 					b = map.Draw();
-				}
-			}
-			catch (Exception ex)
-			{
-				System.Console.WriteLine(ex.Message);
 
-				b = new Bitmap(256, 256);
-				
-				// draw the exception on the tile
-				using (Graphics gr = Graphics.FromImage(b))
+				}
+				catch (Exception ex)
 				{
-					gr.DrawString(ex.Message,
-					              new Font("Arial", 10),
-					              Brushes.Red,
-					              10, 
-					              10);
+					System.Console.WriteLine(ex.Message);
+	
+					b = new Bitmap(256, 256);
+					
+					// draw the exception on the tile
+					using (Graphics gr = Graphics.FromImage(b))
+					{
+						gr.DrawString(ex.Message,
+						              new Font("Arial", 10),
+						              Brushes.Red,
+						              10, 
+						              10);
+					}
 				}
 			}
-			
+	
 			using (b)
 			{
 				// stream out the image

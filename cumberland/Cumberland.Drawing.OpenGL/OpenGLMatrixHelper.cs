@@ -24,9 +24,9 @@
 
 using System;
 
-namespace Cumberland
+namespace Cumberland.Drawing.OpenGL
 {
-	public class Matrix
+	public static class OpenGLMatrixHelper
 	{
 		const double ATR = .01745;
 		
