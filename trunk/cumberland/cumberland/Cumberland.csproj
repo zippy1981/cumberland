@@ -64,8 +64,6 @@
     <None Include="lib\Tao.FreeGlut.dll" />
     <None Include="lib\Tao.FreeGlut.dll.config" />
     <None Include="lib\Tao.FreeGlut.xml" />
-    <None Include="lib\Tao.FreeGlut.dll.osx.config" />
-    <None Include="lib\Tao.OpenGl.dll.osx.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cumberland.GluWrap\Cumberland.GluWrap.csproj">
