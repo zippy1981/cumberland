@@ -2,6 +2,10 @@
 
 	
 
+2008-10-16  Scott Ellington <scott.ellington@gmail.com> 
+
+	
+
 2008-10-14  Scott Ellington <scott.ellington@gmail.com> 
 
 	* MapRenderer.cs: short term set up for generating glList

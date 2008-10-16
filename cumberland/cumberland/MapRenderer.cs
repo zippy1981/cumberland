@@ -195,7 +195,7 @@ namespace Cumberland
 				Gl.glDisable(Gl.GL_DEPTH_TEST);
 				
 				// render here
-				Render();
+				Render(false);
 						
 				// acquire the pixels from openGL and draw to bitmap
 				b = new Bitmap(width, height, PixelFormat.Format32bppArgb);
@@ -222,7 +222,7 @@ namespace Cumberland
 			return b;
 		}
 		
-		public void Render()
+		public void Render(bool useGlList)
 		{
 			ProjFourWrapper dst = null;
 			
@@ -251,16 +251,19 @@ namespace Cumberland
 						continue;
 					}
 					
-					// use a GlList for performance
-					if (glList.Count > 0)
-					{
-						Gl.glCallList(glList[idx]);
-						return;
+					if (useGlList)
+					{					
+						// use a GlList for performance
+						if (glList.Count > 0)
+						{
+							Gl.glCallList(glList[idx]);
+							return;
+						}
+						
+						glList.Add(Gl.glGenLists(1));
+						Gl.glNewList(glList[idx], Gl.GL_COMPILE);
 					}
 					
-					glList.Add(Gl.glGenLists(1));
-					Gl.glNewList(glList[idx], Gl.GL_COMPILE);
-	
 					ProjFourWrapper src = null;
 					
 					try
@@ -586,7 +589,10 @@ namespace Cumberland
 						}
 					}
 					
-					Gl.glEndList();
+					if (useGlList)
+					{
+						Gl.glEndList();
+					}
 				}
 			}
 			finally

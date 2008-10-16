@@ -225,7 +225,7 @@ namespace Cumberland.InteractiveMap
 			//Gl.glLightfv( Gl.GL_LIGHT0, Gl.GL_POSITION, light);
 			
 			// render
-			map.Render();
+			map.Render(true);
 			
 			// flush out what in the OpenGL context
 			Gl.glFlush ();
