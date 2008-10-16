@@ -26,11 +26,13 @@ using System.Collections.Generic;
 using System.Drawing;
 
 using Cumberland;
+using Cumberland.Drawing.OpenGL;
 
 using NDesk.Options;
 
 using Tao.FreeGlut;
 using Tao.OpenGl;
+
 
 namespace Cumberland.InteractiveMap
 {
@@ -39,7 +41,7 @@ namespace Cumberland.InteractiveMap
 		// angle to radian
 		const double ATR = .01745;
 		
-		static MapRenderer map;
+		static OpenGLMap map;
 		
 		static float[] rot = new float[] {0,0,0}; /* Amount to rotate */
 		static float[] eye = new float[] {0,0,0}; /* Position of our eye or camera */
@@ -56,7 +58,7 @@ namespace Cumberland.InteractiveMap
 		{
 #region initialize map configuration
 			
-			map = new MapRenderer();
+			map = new OpenGLMap();
 			map.Width = 400;
 			map.Height = 400;
 			map.Projection = ProjFourWrapper.WGS84;
