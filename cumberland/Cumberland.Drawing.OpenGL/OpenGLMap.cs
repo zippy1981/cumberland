@@ -36,70 +36,12 @@ using Tao.FreeGlut;
 
 using Cumberland.GluWrap;
 
-namespace Cumberland 
+namespace Cumberland.Drawing.OpenGL
 {
-	public class MapRenderer
+	public class OpenGLMap : Map
 	{
 		
 		List<int> glList = new List<int>();
-
-#region Properties
-		
-		int width = 400;
-		int height = 400;
-		
-		public List<Layer> Layers {
-			get {
-				return layers;
-			}
-			set {
-				layers = value;
-			}
-		}
-
-		public int Width {
-			get {
-				return width;
-			}
-			set {
-				width = value;
-			}
-		}
-		
-		public int Height {
-			get {
-				return height;
-			}
-			set {
-				height = value;
-			}
-		}
-
-		public Rectangle Extents {
-			get {
-				return extents;
-			}
-			set {
-				extents = value;
-			}
-		}
-
-		public string Projection {
-			get {
-				return projection;
-			}
-			set {
-				projection = value;
-			}
-		}
-		
-		List<Layer> layers = new List<Layer>();
-		
-		Rectangle extents = new Rectangle(-180, -90, 180, 90);
-
-		string projection = null;
-		
-#endregion
 
 #region Methods
 				
@@ -142,7 +84,7 @@ namespace Cumberland
 //				Gl.glGenRenderbuffersEXT(1, temp);
 //				depthBuffer = temp[0];
 //				Gl.glBindRenderbufferEXT(Gl.GL_RENDERBUFFER_EXT, depthBuffer);
-//				Gl.glRenderbufferStorageEXT(Gl.GL_RENDERBUFFER_EXT, Gl.GL_DEPTH_COMPONENT, width, height);	
+//				Gl.glRenderbufferStorageEXT(Gl.GL_RENDERBUFFER_EXT, Gl.GL_DEPTH_COMPONENT, Width, Height);	
 //				Gl.glFramebufferRenderbufferEXT(Gl.GL_FRAMEBUFFER_EXT, Gl.GL_DEPTH_ATTACHMENT_EXT, Gl.GL_RENDERBUFFER_EXT, depthBuffer);
 								
 				//  get render buffer from opengl
@@ -156,9 +98,9 @@ namespace Cumberland
 //				System.Console.WriteLine(temp[0]);
 				
 				// allocate memory
-				Gl.glRenderbufferStorageEXT(Gl.GL_RENDERBUFFER_EXT, Gl.GL_RGBA, width, height);
-				//Gl.glRenderbufferStorageMultisampleEXT(Gl.GL_RENDERBUFFER_EXT, 16, Gl.GL_RGBA, width, height);
-				//Gl.glRenderbufferStorageMultisampleCoverageNV(Gl.GL_RENDERBUFFER_EXT, 4, 16, Gl.GL_RGBA, width, height);
+				Gl.glRenderbufferStorageEXT(Gl.GL_RENDERBUFFER_EXT, Gl.GL_RGBA, Width, Height);
+				//Gl.glRenderbufferStorageMultisampleEXT(Gl.GL_RENDERBUFFER_EXT, 16, Gl.GL_RGBA, Width, Height);
+				//Gl.glRenderbufferStorageMultisampleCoverageNV(Gl.GL_RENDERBUFFER_EXT, 4, 16, Gl.GL_RGBA, Width, Height);
 				
 				// attach render buffer to fbo
 				Gl.glFramebufferRenderbufferEXT(Gl.GL_FRAMEBUFFER_EXT, Gl.GL_COLOR_ATTACHMENT0_EXT, Gl.GL_RENDERBUFFER_EXT, colorBuffer);
@@ -170,7 +112,7 @@ namespace Cumberland
 				}
 				
 				// acquire the proper space
-				Gl.glViewport(0, 0, width, height);
+				Gl.glViewport(0, 0, Width, Height);
 				
 				// clear out
 				Gl.glClearColor(1f, 1f, 1f, 0f);
@@ -180,10 +122,10 @@ namespace Cumberland
 				Gl.glMatrixMode(Gl.GL_PROJECTION);
 				Gl.glLoadIdentity();
 				
-				Rectangle r = extents.Clone();
+				Rectangle r = Extents.Clone();
 
 				// set aspect ratio to image to avoid distortion
-				r.AspectRatioOfWidth = width / height;
+				r.AspectRatioOfWidth = Width / Height;
 
 				// set projection matrix to our extents				
 				Gl.glOrtho(r.Min.X, r.Max.X, r.Min.Y, r.Max.Y, 0, 1);
@@ -198,9 +140,9 @@ namespace Cumberland
 				Render(false);
 						
 				// acquire the pixels from openGL and draw to bitmap
-				b = new Bitmap(width, height, PixelFormat.Format32bppArgb);
-				BitmapData bd = b.LockBits(new System.Drawing.Rectangle(0, 0, width, height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
-				Gl.glReadPixels(0, 0, width, height, Gl.GL_BGRA, Gl.GL_UNSIGNED_BYTE, bd.Scan0);
+				b = new Bitmap(Width, Height, PixelFormat.Format32bppArgb);
+				BitmapData bd = b.LockBits(new System.Drawing.Rectangle(0, 0, Width, Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
+				Gl.glReadPixels(0, 0, Width, Height, Gl.GL_BGRA, Gl.GL_UNSIGNED_BYTE, bd.Scan0);
 				b.UnlockBits(bd);
 				b.RotateFlip(RotateFlipType.Rotate180FlipX);
 				
@@ -235,7 +177,7 @@ namespace Cumberland
 				}
 								
 				int idx = -1;
-				foreach (Layer layer in layers)
+				foreach (Layer layer in Layers)
 				{
 					idx++;
 					
@@ -260,6 +202,8 @@ namespace Cumberland
 							return;
 						}
 						
+						
+						// FIXME: temporary as it doesn't allow for map changes
 						glList.Add(Gl.glGenLists(1));
 						Gl.glNewList(glList[idx], Gl.GL_COMPILE);
 					}

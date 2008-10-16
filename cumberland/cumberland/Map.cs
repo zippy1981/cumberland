@@ -1,4 +1,5 @@
-// AssemblyInfo.cs
+
+// MapRenderer.cs
 //
 // Copyright (c) 2008 Scott Ellington and Authors
 //
@@ -21,28 +22,77 @@
 // THE SOFTWARE.
 //
 //
-using System.Reflection;
-using System.Runtime.CompilerServices;
 
-// Information about this assembly is defined by the following attributes. 
-// Change them to the values specific to your project.
+using System.IO;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 
-[assembly: AssemblyTitle("Cumberland.Drawing.OpenGL")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
+using System.Runtime.InteropServices;
 
-// The assembly version has the format "{Major}.{Minor}.{Build}.{Revision}".
-// If the build and revision are set to '*' they will be updated automatically.
+namespace Cumberland 
+{
+	public class Map
+	{
 
-[assembly: AssemblyVersion("1.0.0.0")]
+#region Properties
+		
+		int width = 400;
+		int height = 400;
+		
+		public List<Layer> Layers {
+			get {
+				return layers;
+			}
+			set {
+				layers = value;
+			}
+		}
 
-// The following attributes are used to specify the signing key for the assembly, 
-// if desired. See the Mono documentation for more information about signing.
+		public int Width {
+			get {
+				return width;
+			}
+			set {
+				width = value;
+			}
+		}
+		
+		public int Height {
+			get {
+				return height;
+			}
+			set {
+				height = value;
+			}
+		}
 
-[assembly: AssemblyDelaySign(false)]
-[assembly: AssemblyKeyFile("")]
+		public Rectangle Extents {
+			get {
+				return extents;
+			}
+			set {
+				extents = value;
+			}
+		}
+
+		public string Projection {
+			get {
+				return projection;
+			}
+			set {
+				projection = value;
+			}
+		}
+		
+		List<Layer> layers = new List<Layer>();
+		
+		Rectangle extents = new Rectangle(-180, -90, 180, 90);
+
+		string projection = null;
+		
+#endregion
+
+	}
+}

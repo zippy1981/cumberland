@@ -30,6 +30,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 
 using Cumberland;
+using Cumberland.Drawing.OpenGL;
 
 namespace Cumberland.TileViewerTest
 {
@@ -53,7 +54,7 @@ namespace Cumberland.TileViewerTest
 				lock (padLock)
 				{
 					// create our map renderer
-					MapRenderer map = new MapRenderer();
+					OpenGLMap map = new OpenGLMap();
 
 					// reproject to Google's spherical mercator
 					map.Projection = ProjFourWrapper.SphericalMercatorProjection;

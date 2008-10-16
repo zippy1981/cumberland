@@ -28,6 +28,7 @@ using System.Drawing.Imaging;
 using System.Diagnostics;
 
 using Cumberland;
+using Cumberland.Drawing.OpenGL;
 
 using NDesk.Options;
 
@@ -37,7 +38,7 @@ namespace Cumberland.DrawMap
 	{
 		public static void Main(string[] args)
 		{
-			MapRenderer map = new MapRenderer();
+			OpenGLMap map = new OpenGLMap();
 			map.Width = 400;
 			map.Height = 400;
 			map.Projection = ProjFourWrapper.WGS84;

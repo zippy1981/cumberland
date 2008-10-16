@@ -17,7 +17,7 @@
     <DefineConstants>DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Commandlineparameters>../../../Cumberland.Tests/shape_eg_data/mexico/states.shp</Commandlineparameters>
+    <Commandlineparameters>-e=-110,20,-90,35 ../../../Cumberland.Tests/shape_eg_data/mexico/states.shp</Commandlineparameters>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -38,6 +38,10 @@
     <ProjectReference Include="..\cumberland\Cumberland.csproj">
       <Project>{05A6F104-D839-4B9C-B704-91F9BB608D73}</Project>
       <Name>Cumberland</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cumberland.Drawing.OpenGL\Cumberland.Drawing.OpenGL.csproj">
+      <Project>{05A6F104-D839-4B9C-B704-91F9BB608D73}</Project>
+      <Name>Cumberland.Drawing.OpenGL</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
