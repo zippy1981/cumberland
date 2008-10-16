@@ -219,8 +219,8 @@ namespace Cumberland.InteractiveMap
 			//Gl.glDisable(Gl.GL_POLYGON_SMOOTH);
 
 			// create our view matrix and load into OpenGL
-			float[] matrix = Matrix.Transform ( rot[0], rot[1], rot[2], eye[0], eye[1], eye[2] );
-			matrix = Matrix.Inverse ( matrix );
+			float[] matrix = OpenGLMatrixHelper.Transform ( rot[0], rot[1], rot[2], eye[0], eye[1], eye[2] );
+			matrix = OpenGLMatrixHelper.Inverse ( matrix );
 			Gl.glLoadMatrixf ( matrix );
 
 			// set the lighting

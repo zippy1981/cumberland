@@ -106,9 +106,46 @@ namespace Cumberland.Drawing.OpenGL
 				Gl.glFramebufferRenderbufferEXT(Gl.GL_FRAMEBUFFER_EXT, Gl.GL_COLOR_ATTACHMENT0_EXT, Gl.GL_RENDERBUFFER_EXT, colorBuffer);
 
 				// check state
-				if (Gl.glCheckFramebufferStatusEXT(Gl.GL_FRAMEBUFFER_EXT) != Gl.GL_FRAMEBUFFER_COMPLETE_EXT)
+				int fboState = Gl.glCheckFramebufferStatusEXT(Gl.GL_FRAMEBUFFER_EXT);
+				if (fboState != Gl.GL_FRAMEBUFFER_COMPLETE_EXT)
 				{
-					throw new InvalidOperationException("An error has occured setting up Framebuffers");
+					string fbErr = "Unknown Error";
+
+					switch (fboState)
+	                {
+	                    case Gl.GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT_EXT:
+	                        fbErr = "Framebuffer has an incomplete attachment";
+	                        break;
+	                    case Gl.GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS_EXT:
+	                        fbErr = "Framebuffer has wrong dimensions";
+	                        break;
+	                    case Gl.GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER_EXT:
+	                        fbErr = "Framebuffer has incomplete draw buffer";
+	                        break;
+	                    case Gl.GL_FRAMEBUFFER_INCOMPLETE_FORMATS_EXT:
+	                        fbErr = "Framebuffer has incomplete formats";
+	                        break;
+	                    case Gl.GL_FRAMEBUFFER_INCOMPLETE_LAYER_COUNT_EXT:
+	                        fbErr = "Framebuffer has wrong layer count";
+	                        break;
+	                    case Gl.GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS_EXT:
+	                        fbErr = "Framebuffer has wrong layer targets";
+	                        break;
+	                    case Gl.GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT_EXT:
+	                        fbErr = "Framebuffer has missing attachment";
+	                        break;
+	                    case Gl.GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_EXT:
+	                        fbErr = "Framebuffer has multisample error";
+	                        break;
+	                    case Gl.GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER_EXT:
+	                        fbErr = "Framebuffer has incomplete readbuffer";
+	                        break;
+	                    case Gl.GL_FRAMEBUFFER_UNSUPPORTED_EXT:
+	                        fbErr = "Framebuffer is unsupported";
+	                        break;
+	                }
+
+					throw new InvalidOperationException("Framebuffer Error: " + fbErr);
 				}
 				
 				// acquire the proper space
