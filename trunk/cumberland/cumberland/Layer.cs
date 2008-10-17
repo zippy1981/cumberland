@@ -100,6 +100,15 @@ namespace Cumberland
 				projection = value;
 			}
 		}
+
+		public string Id {
+			get {
+				return id;
+			}
+			set {
+				id = value;
+			}
+		}
 		
 		float lineWidth = 1;
 		
@@ -114,5 +123,7 @@ namespace Cumberland
 		LineStyle lineStyle = LineStyle.Solid;
 		
 		string projection = null;
+		
+		string id;
 	}
 }

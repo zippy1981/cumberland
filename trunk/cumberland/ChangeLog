@@ -1,5 +1,11 @@
 2008-10-17  Scott Ellington <scott.ellington@gmail.com> 
 
+	* Cumberland.InteractiveMap/Main.cs: track changes
+	* Cumberland.Drawing.OpenGL/OpenGlMapDrawer.cs: use a dictionary to
+	  store refs to glLists
+
+2008-10-17  Scott Ellington <scott.ellington@gmail.com> 
+
 	
 
 2008-10-17  Scott Ellington <scott.ellington@gmail.com> 

@@ -42,10 +42,20 @@ namespace Cumberland.Drawing.OpenGL
 {
 	public class OpenGlMapDrawer : IMapDrawer
 	{
-		List<int> glList = new List<int>();
-
-#region Methods
-				
+		Dictionary<string,int> glLists = new Dictionary<string,int>();
+		
+#region IMapDrawer Methods
+		
+		/// <summary>
+		/// Uses OpenGL's frame buffer object to draw a map offscreen and then convert to bitmap. 
+		/// Opens an openGL context via freeGLUT.
+		/// </summary>
+		/// <param name="map">
+		/// A <see cref="Map"/>
+		/// </param>
+		/// <returns>
+		/// A <see cref="Bitmap"/>
+		/// </returns>
 		public Bitmap Draw(Map map)
 		{
 			int[] temp = new int[1];
@@ -202,6 +212,20 @@ namespace Cumberland.Drawing.OpenGL
 			return b;
 		}
 		
+#endregion
+		
+#region Methods
+		
+		/// <summary>
+		/// Renders the map to an openGL context.
+		/// </summary>
+		/// <param name="map">
+		/// A <see cref="Map"/>.  
+		/// </param>
+		/// <param name="useGlList">
+		/// A <see cref="System.Boolean"/>.  True will use glLists, which will increase performance.
+		/// In order to have a layer compiled into a glList.  It must have a unique Id
+		/// </param>
 		public void Render(Map map, bool useGlList)
 		{
 			ProjFourWrapper dst = null;
@@ -231,19 +255,25 @@ namespace Cumberland.Drawing.OpenGL
 						continue;
 					}
 					
-					if (useGlList)
+					if (useGlList  && !string.IsNullOrEmpty(layer.Id))
 					{					
 						// use a GlList for performance
-						if (glList.Count > 0)
+						
+						int glListNo = -1;
+						if (glLists.TryGetValue(layer.Id, out glListNo))
 						{
-							Gl.glCallList(glList[idx]);
+							// this layer has already been loaded
+							// so have openGL draw it
+							Gl.glCallList(glListNo);
 							return;
 						}
 						
-						
-						// FIXME: temporary as it doesn't allow for map changes
-						glList.Add(Gl.glGenLists(1));
-						Gl.glNewList(glList[idx], Gl.GL_COMPILE);
+						// generate a list number for reference and store it with the layer id						
+						glListNo = Gl.glGenLists(1);
+						glLists.Add(layer.Id, glListNo);
+
+						// create the glList
+						Gl.glNewList(glListNo, Gl.GL_COMPILE);
 					}
 					
 					ProjFourWrapper src = null;
@@ -571,7 +601,7 @@ namespace Cumberland.Drawing.OpenGL
 						}
 					}
 					
-					if (useGlList)
+					if (useGlList && !string.IsNullOrEmpty(layer.Id))
 					{
 						Gl.glEndList();
 					}
