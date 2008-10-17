@@ -1,5 +1,9 @@
 2008-10-17  Scott Ellington <scott.ellington@gmail.com> 
 
+	* Layer.cs: add Id property
+
+2008-10-17  Scott Ellington <scott.ellington@gmail.com> 
+
 	* Drawing, Drawing/IMapDrawer.cs, Drawing/GdiPlus, Cumberland.csproj:
 	  add new interface
 	* Point.cs: clean up

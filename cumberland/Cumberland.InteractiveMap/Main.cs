@@ -108,6 +108,9 @@ namespace Cumberland.InteractiveMap
 				// l.LineColor = Color.RoyalBlue;
 				l.LineWidth = 1; //r.Next(3)+1;
 				
+				// set an id in order to have the renderer use a glList
+				l.Id = System.IO.Path.GetFileName(layerArgs[0]);
+				
 				if (layerArgs.Length > 1)
 				{
 					l.Projection = ParseProjection(layerArgs[1]);;
