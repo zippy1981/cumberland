@@ -1,5 +1,9 @@
 2008-10-17  Scott Ellington <scott.ellington@gmail.com> 
 
+	
+
+2008-10-17  Scott Ellington <scott.ellington@gmail.com> 
+
 	* Cumberland.DrawMap/Main.cs,
 	  Cumberland.InteractiveMap/Cumberland.InteractiveMap.csproj,
 	  Cumberland.InteractiveMap/Main.cs: track changes
