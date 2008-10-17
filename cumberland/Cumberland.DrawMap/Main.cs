@@ -28,6 +28,7 @@ using System.Drawing.Imaging;
 using System.Diagnostics;
 
 using Cumberland;
+using Cumberland.Data.Shapefile;
 using Cumberland.Drawing.OpenGL;
 
 using NDesk.Options;

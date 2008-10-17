@@ -35,6 +35,7 @@ using Tao.OpenGl;
 using Tao.FreeGlut;
 
 using Cumberland;
+using Cumberland.Data;
 using Cumberland.Drawing;
 using Cumberland.GluWrap;
 
@@ -248,9 +249,10 @@ namespace Cumberland.Drawing.OpenGL
 						continue;
 					}
 					
-					Shapefile shp = layer.Data;
+					// query our data
+					List<Feature> features = layer.Data.GetFeatures(map.Extents);
 					
-					if (shp.Features.Count == 0)
+					if (features.Count == 0)
 					{
 						continue;
 					}
@@ -288,7 +290,7 @@ namespace Cumberland.Drawing.OpenGL
 							reproject = true;
 						}
 					
-						if (shp.Shapetype == Shapefile.ShapeType.Point)
+						if (layer.Data.SourceFeatureType == FeatureType.Point)
 					    {	
 		#region handle point rendering
 							
@@ -297,9 +299,9 @@ namespace Cumberland.Drawing.OpenGL
 							
 							Gl.glColor4ub(layer.FillColor.R, layer.FillColor.G, layer.FillColor.B, layer.FillColor.A);
 						
-							for (int ii=0; ii < shp.Features.Count; ii++)
+							for (int ii=0; ii < features.Count; ii++)
 							{
-								Point p = shp.Features[ii] as Point;
+								Point p = features[ii] as Point;
 									
 								if (reproject)
 								{
@@ -313,7 +315,7 @@ namespace Cumberland.Drawing.OpenGL
 	
 		#endregion
 						}
-						else if (shp.Shapetype == Shapefile.ShapeType.PolyLine)
+						else if (layer.Data.SourceFeatureType == FeatureType.Polyline)
 						{
 		#region Handle line rendering
 							
@@ -346,9 +348,9 @@ namespace Cumberland.Drawing.OpenGL
 							
 							Gl.glLineWidth(layer.LineWidth);
 						
-						    for (int ii=0; ii < shp.Features.Count; ii++)
+						    for (int ii=0; ii < features.Count; ii++)
 							{
-								PolyLine pol = (PolyLine) shp.Features[ii];
+								PolyLine pol = (PolyLine) features[ii];
 								for (int jj=0; jj < pol.Lines.Count; jj++)
 								{
 									Line r = pol.Lines[jj] as Line;
@@ -383,7 +385,7 @@ namespace Cumberland.Drawing.OpenGL
 							
 		#endregion
 						}	
-						else if (shp.Shapetype == Shapefile.ShapeType.Polygon)
+						else if (layer.Data.SourceFeatureType == FeatureType.Polygon)
 						{
 							IntPtr tess = IntPtr.Zero;
 							
@@ -433,9 +435,9 @@ namespace Cumberland.Drawing.OpenGL
 
 #endregion
 								
-								for (int ii=0; ii < shp.Features.Count; ii++)
+								for (int ii=0; ii < features.Count; ii++)
 								{
-									Polygon po = shp.Features[ii] as Polygon;
+									Polygon po = features[ii] as Polygon;
 
 #region tessalate and render polygon fill
 									

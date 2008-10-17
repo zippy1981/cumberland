@@ -40,12 +40,13 @@
     <Compile Include="Polygon.cs" />
     <Compile Include="PolyLine.cs" />
     <Compile Include="Ring.cs" />
-    <Compile Include="Shapefile.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Rectangle.cs" />
     <Compile Include="ProjFourWrapper.cs" />
     <Compile Include="Layer.cs" />
     <Compile Include="Drawing\IMapDrawer.cs" />
+    <Compile Include="Data\IFeatureSource.cs" />
+    <Compile Include="Data\Shapefile\Shapefile.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

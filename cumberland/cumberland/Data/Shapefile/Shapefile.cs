@@ -26,13 +26,12 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 
-namespace Cumberland 
+namespace Cumberland.Data.Shapefile
 {
 	//TODO: Because this specification does not forbid consecutive points with identical coordinates, 
 	// shapefile readers must handle such cases.
 
-	
-    public class Shapefile 
+    public class Shapefile : IFeatureSource
 	{				
         public enum ShapeType
         {
@@ -71,14 +70,6 @@ namespace Cumberland
 		}
 		ShapeType shapetype = ShapeType.Null;
 		
-		public List<Feature> Features {
-			get {
-				return features;
-			}
-			set {
-				features = value;
-			}
-		}
 		List<Feature> features = new List<Feature>();
 		
 		public Rectangle ListedExtents {
@@ -93,6 +84,13 @@ namespace Cumberland
 			}
 		}
 
+		public Cumberland.Data.FeatureType SourceFeatureType {
+			get {
+				return featureType;
+			}
+		}
+		
+		FeatureType featureType;
 		
 		Rectangle listedExtents;
 
@@ -117,7 +115,7 @@ namespace Cumberland
 
 		
 #endregion
-		
+	
 #region Helper methods		
 		
         uint FlipEndian(uint iin)
@@ -150,7 +148,19 @@ namespace Cumberland
             // get shape type
             shapetype = (ShapeType) stream.ReadUInt32();
 			
-			if (shapetype != ShapeType.Point && shapetype != ShapeType.Polygon && shapetype != ShapeType.PolyLine)
+			if (shapetype == ShapeType.Point)
+			{
+				featureType = FeatureType.Point;
+			}
+			else if (shapetype == ShapeType.Polygon)
+			{
+				featureType = FeatureType.Polygon;
+			}
+			else if (shapetype == ShapeType.PolyLine)
+			{
+				featureType = FeatureType.Polyline;
+			}
+			else
 			{
 				throw new NotSupportedException("Unsuppored shapefile type: " + shapetype);
 			}
@@ -311,6 +321,16 @@ namespace Cumberland
 			po.Lines.Add(lines[ii]);
 			
 			return po;
+		}
+
+#endregion
+		
+#region IFeatureSource methods
+		
+		public List<Cumberland.Feature> GetFeatures (Cumberland.Rectangle rectangle)
+		{
+			// we've got no spatial index 
+			return features;
 		}
 		
 #endregion
