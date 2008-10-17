@@ -65,4 +65,9 @@
       <Name>Cumberland.GluWrap</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="lib\Tao.COPYING">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>
