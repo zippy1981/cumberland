@@ -1,3 +1,9 @@
+2008-10-17  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Drawing, Drawing/IMapDrawer.cs, Drawing/GdiPlus, Cumberland.csproj:
+	  add new interface
+	* Point.cs: clean up
+
 2008-10-16  Scott Ellington <scott.ellington@gmail.com> 
 
 	

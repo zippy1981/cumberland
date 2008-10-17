@@ -1,5 +1,16 @@
 2008-10-17  Scott Ellington <scott.ellington@gmail.com> 
 
+	* Cumberland.DrawMap/Main.cs,
+	  Cumberland.InteractiveMap/Cumberland.InteractiveMap.csproj,
+	  Cumberland.InteractiveMap/Main.cs: track changes
+	* Cumberland.Drawing.OpenGL/OpenGLMap.cs,
+	  Cumberland.Drawing.OpenGL/OpenGLMatrixHelper.cs: renamed
+	* Cumberland.Drawing.OpenGL/OpenGlMapDrawer: rename, use IMapDrawer
+	  interface
+	* Cumberland.Drawing.OpenGL/MatrixHelper.cs: rename
+
+2008-10-17  Scott Ellington <scott.ellington@gmail.com> 
+
 	
 
 2008-10-16  Scott Ellington <scott.ellington@gmail.com> 

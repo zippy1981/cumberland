@@ -41,7 +41,8 @@ namespace Cumberland.InteractiveMap
 		// angle to radian
 		const double ATR = .01745;
 		
-		static OpenGLMap map;
+		static Map map;
+		static OpenGlMapDrawer renderer;
 		
 		static float[] rot = new float[] {0,0,0}; /* Amount to rotate */
 		static float[] eye = new float[] {0,0,0}; /* Position of our eye or camera */
@@ -56,9 +57,11 @@ namespace Cumberland.InteractiveMap
 		
 		public static void Main(string[] args)
 		{
+			renderer = new OpenGlMapDrawer();
+			
 #region initialize map configuration
 			
-			map = new OpenGLMap();
+			map = new Map();
 			map.Width = 400;
 			map.Height = 400;
 			map.Projection = ProjFourWrapper.WGS84;
@@ -224,15 +227,15 @@ namespace Cumberland.InteractiveMap
 			//Gl.glDisable(Gl.GL_POLYGON_SMOOTH);
 
 			// create our view matrix and load into OpenGL
-			float[] matrix = OpenGLMatrixHelper.Transform ( rot[0], rot[1], rot[2], eye[0], eye[1], eye[2] );
-			matrix = OpenGLMatrixHelper.Inverse ( matrix );
+			float[] matrix = MatrixHelper.Transform ( rot[0], rot[1], rot[2], eye[0], eye[1], eye[2] );
+			matrix = MatrixHelper.Inverse ( matrix );
 			Gl.glLoadMatrixf ( matrix );
 
 			// set the lighting
 			//Gl.glLightfv( Gl.GL_LIGHT0, Gl.GL_POSITION, light);
 			
 			// render
-			map.Render(true);
+			renderer.Render(map, true);
 			
 			// flush out what in the OpenGL context
 			Gl.glFlush ();
