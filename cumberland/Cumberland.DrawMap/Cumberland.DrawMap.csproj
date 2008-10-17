@@ -51,5 +51,6 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <None Include="lib\NDesk.Options.dll" />
+    <None Include="lib\NDesk,Options.COPYING" />
   </ItemGroup>
 </Project>

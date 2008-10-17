@@ -115,6 +115,11 @@ namespace Cumberland.InteractiveMap
 				map.Layers.Add(l);
 			}
 			
+			// set initial "eye" point in 3d space
+			Point c = map.Extents.Center;
+			eye[0] = Convert.ToSingle(c.X);
+			eye[1] = Convert.ToSingle(c.Y);
+			
 #endregion
 			
 #region init freeglut
@@ -294,7 +299,8 @@ namespace Cumberland.InteractiveMap
 			Gl.glMatrixMode(Gl.GL_PROJECTION);
 			Gl.glLoadIdentity();
 			//Glu.gluPerspective(30.0, (float) w / (float) h, 1.0, 20.0);
-			Glu.gluPerspective (90, map.Width / map.Height, 1, 9999);
+			//Glu.gluPerspective (90, map.Width / map.Height, 1, 9999);
+			Glu.gluPerspective (45, map.Width / map.Height, 1, 9999);
 			Gl.glMatrixMode(Gl.GL_MODELVIEW);
 			Gl.glLoadIdentity();
 		}

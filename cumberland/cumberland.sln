@@ -49,7 +49,7 @@ Global
 	GlobalSection(MonoDevelopProperties) = preSolution
 		name = cumberland
 		version = 0.1
-		StartupItem = Cumberland.TileViewerTest\Cumberland.TileViewerTest.csproj
+		StartupItem = Cumberland.InteractiveMap\Cumberland.InteractiveMap.csproj
 		MonoDevelop.ChangeLogAddIn.ChangeLogInfo = $0
 		$0.policy = UpdateNearestChangeLog
 	EndGlobalSection
