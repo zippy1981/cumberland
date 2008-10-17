@@ -104,9 +104,26 @@ namespace Cumberland
 			}
 		}
 		
+		public bool IsEmpty
+		{
+			get
+			{
+				return Min.X > Max.X || Min.Y > Max.Y;
+			}
+		}
+		
 #endregion
 		
 #region Constructors
+		
+		/// <summary>
+		/// Creates an empty rectangle
+		/// </summary>
+		public Rectangle()
+		{
+			min = new Point(double.MaxValue, double.MaxValue);
+			max = new Point(double.MinValue, double.MinValue);
+		}
 		
 		public Rectangle(double minx, double miny, double maxx, double maxy)
 		{
@@ -122,16 +139,75 @@ namespace Cumberland
 		
 		
 #endregion
+	
+#region operator overrides
 		
-		public Rectangle Clone()
+		public static bool operator == (Rectangle r1, Rectangle r2)
 		{
-			return new Rectangle(min.X, min.Y, max.X, max.Y);
+			if (r1.Min == r2.Min && r1.Max == r2.Max) 
+			{
+				return true;
+			}
+			else 
+			{
+				return false;
+			}
+		}
+		   
+		public static bool operator != (Rectangle r1, Rectangle r2)
+		{
+			return !(r1 == r2);
+		}
+
+#endregion
+		
+#region overrides
+		
+		public override int GetHashCode()
+		{
+			return Min.GetHashCode() ^ Max.GetHashCode();
+		}
+
+
+		public override bool Equals(object ob)
+		{
+			if (ob is Rectangle)
+			{
+				Rectangle r = (Rectangle) ob;
+				
+				return this == r;
+			}
+			else return false;
 		}
 		
 		public override string ToString ()
 		{
 			return string.Format("{{minx:{0}, miny:{1} maxx:{2} maxy:{3}}}", min.X, min.Y, max.X, max.Y);
 		}
-
+		
+#endregion
+		
+#region public methods
+		
+		/// <summary>
+		/// Creates a deep copy
+		/// </summary>
+		/// <returns>
+		/// A <see cref="Rectangle"/>
+		/// </returns>
+		public Rectangle Clone()
+		{
+			return new Rectangle(min.X, min.Y, max.X, max.Y);
+		}
+	
+		public static Rectangle Union(Rectangle a, Rectangle b)
+		{
+			return new Rectangle(a.Min.X < b.Min.X ? a.Min.X : b.Min.X,
+			                     a.Min.Y < b.Min.Y ? a.Min.Y : b.Min.Y,
+			                     a.Max.X > b.Max.X ? a.Max.X : b.Max.X,
+			                     a.Max.Y > b.Max.Y ? a.Max.Y : b.Max.Y);
+		}
+		
+#endregion
 	}
 }

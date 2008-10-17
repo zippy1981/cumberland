@@ -1,4 +1,4 @@
-// PolyLine.cs
+// RectangleTests.cs
 //
 // Copyright (c) 2008 Scott Ellington and Authors
 //
@@ -22,51 +22,68 @@
 //
 //
 
-using System.Collections.Generic;
+using System;
+using Cumberland;
+using NUnit.Framework;
 
-namespace Cumberland
+namespace Cumberland.Tests
 {
-    public class PolyLine : Feature
-    {
-		Point min, max;
-		
-#region properties
-		
-		public List<Line> Lines {
-			get {
-				return lines;
-			}
-		}
-        List<Line> lines = new List<Line>();
-		
-#endregion
-		
-#region ctors
-		
-        public PolyLine(double xmin, double ymin, double xmax, double ymax)
-        {
-			min = new Point(xmin, ymin);
-			max = new Point(xmax, ymax);
-		}
-
-#endregion
-		
-#region methods
-		
-		public override Rectangle CalculateBounds ()
+	[TestFixture]	
+	public class RectangleTests
+	{
+		[Test]
+		public void TestUnionAndEquals()
 		{
-			// empty rectangle
-			Rectangle e = new Rectangle();
+			Rectangle r1 = new Rectangle(0, 0, 10, 10);
+			Rectangle r2 = new Rectangle(-5, 5, 5, 15);
 			
-			foreach (Line l in Lines)
-			{
-				e = Rectangle.Union(e, l.CalculateBounds());
-			}
-			
-			return e;
+			// simple math 
+			// TODO: should test for more union cases
+			Assert.AreEqual(new Rectangle(-5,0,10,15), Rectangle.Union(r1,r2));	
 		}
 		
-#endregion
+		[Test]
+		public void TestIsEmpty()
+		{
+			Rectangle r = new Rectangle(5, 5, 0, 0);
+			
+			Assert.IsTrue(r.IsEmpty);
+		}
 		
-    }
+		[Test]
+		public void TestWidthGetter()
+		{
+			Rectangle r = new Rectangle(-5,-5, 5, 5);
+			
+			// simple math
+			Assert.AreEqual(10, r.Width);
+		}
+		
+		[Test]
+		public void TestHeightGetter()
+		{
+			Rectangle r = new Rectangle(-5,-5, 5, 5);
+			
+			// simple math
+			Assert.AreEqual(10, r.Height);
+		}
+		
+		[Test]
+		public void TestCenterGetter()
+		{
+			Rectangle r = new Rectangle(-5,-5, 5, 5);
+			
+			// simple math
+			Assert.AreEqual(new Point(0,0), r.Center);
+		}
+		
+		[Test]
+		public void TestAspectRatioOfWidthGetter()
+		{
+			Rectangle r = new Rectangle(0,0,10,5);
+			
+			// simple math
+			Assert.AreEqual(2, r.AspectRatioOfWidth);
+		}
+	}
 }

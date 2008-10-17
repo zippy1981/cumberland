@@ -54,12 +54,26 @@ namespace Cumberland
 
 #region Methods
 		
-		public bool Intersects(Point p)
+//		public bool Intersects(Point p)
+//		{
+//			if (p.X >= min.X && p.X <= max.X && p.Y >= min.Y && p.Y <= max.Y)
+//			   	return true;
+//			else return false;
+//		}
+		
+		public override Rectangle CalculateBounds ()
 		{
-			if (p.X >= min.X && p.X <= max.X && p.Y >= min.Y && p.Y <= max.Y)
-			   	return true;
-			else return false;
+			// empty rectangle
+			Rectangle e = new Rectangle();
+			
+			foreach (Ring r in Rings)
+			{
+				e = Rectangle.Union(e, r.CalculateBounds());
+			}
+			
+			return e;
 		}
+
 		
 #endregion
 		

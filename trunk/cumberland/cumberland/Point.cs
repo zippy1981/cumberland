@@ -110,14 +110,19 @@ namespace Cumberland
 		
 		public static bool operator == (Point p1, Point p2)
 		{
-			if (p1.X == p2.X && p1.Y == p2.Y) return true;
-			else return false;
+			if (p1.X == p2.X && p1.Y == p2.Y) 
+			{
+				return true;
+			}
+			else 
+			{
+				return false;
+			}
 		}
 		   
 		public static bool operator != (Point p1, Point p2)
 		{
-			if (p1.X != p2.X || p1.Y != p2.Y) return true;
-			else return false;
+			return !(p1 == p2);
 		}
 
 #endregion
@@ -137,7 +142,10 @@ namespace Cumberland
 				Point p = (Point) ob;
 				return this == p;
 			}
-			else return false;
+			else
+			{
+				return false;
+			}
 		}
 
 		public override string ToString ()
@@ -145,16 +153,33 @@ namespace Cumberland
 			return string.Format("{{x:{0} y:{1} z:{2} m:{3}}}", x, y, z, m);
 		}
 		
+		public override Rectangle CalculateBounds ()
+		{
+			return new Rectangle(X, Y, X, Y);
+		}
+
+		
 #endregion
 
+#region Methods
+		
+		/// <summary>
+		/// Creates a deep copy
+		/// </summary>
+		/// <returns>
+		/// A <see cref="Point"/>
+		/// </returns>
 		public Point Clone()
 		{
 			return new Point(x, y, z, m);
 		}
 		
-		public bool Intersects(Point p)
-		{
-			return this == p;
-		}
+//		public bool Intersects(Point p)
+//		{
+//			return this == p;
+//		}
+		
+#endregion
+		
     }
 }

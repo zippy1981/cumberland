@@ -57,5 +57,13 @@ namespace Cumberland.Tests
 			
 			Assert.AreEqual(p1, p2);
 		}
+		
+		[Test]
+		public void TestCalculateBounds()
+		{
+			Point p = new Point(1,1);
+			
+			Assert.AreEqual(new Rectangle(p.X,p.Y,p.X,p.Y), p.CalculateBounds());
+		}
 	}
 }
