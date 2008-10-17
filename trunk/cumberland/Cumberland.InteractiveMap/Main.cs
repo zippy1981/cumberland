@@ -26,6 +26,7 @@ using System.Collections.Generic;
 using System.Drawing;
 
 using Cumberland;
+using Cumberland.Data.Shapefile;
 using Cumberland.Drawing.OpenGL;
 
 using NDesk.Options;

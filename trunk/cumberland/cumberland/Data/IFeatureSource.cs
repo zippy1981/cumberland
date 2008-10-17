@@ -1,4 +1,4 @@
-// ShapefileTests.cs
+// IFeatureSource.cs
 //
 // Copyright (c) 2008 Scott Ellington and Authors
 //
@@ -23,37 +23,24 @@
 //
 
 using System;
-using NUnit.Framework;
-using Cumberland;
-using Cumberland.Data.Shapefile;
+using System.Collections.Generic;
 
-namespace Cumberland.Tests
+using Cumberland;
+
+namespace Cumberland.Data
 {
-	[TestFixture]
-	public class ShapefileTests
+	public enum FeatureType
 	{
-		[Test]
-		public void LoadPointShapefile()
-		{
-			Shapefile shp = new Shapefile("cities.shp");
-			
-			Assert.AreEqual(Shapefile.ShapeType.Point, shp.Shapetype);
-		}
+		None,
+		Point,
+		Polygon,
+		Polyline
+	}
+	
+	public interface IFeatureSource
+	{
+		FeatureType SourceFeatureType { get; }
 		
-		[Test]
-		public void LoadLineShapefile()
-		{
-			Shapefile shp = new Shapefile("roads.shp");
-			
-			Assert.AreEqual(Shapefile.ShapeType.PolyLine, shp.Shapetype);
-		}
-		
-		[Test]
-		public void LoadPolygonShapefile()
-		{
-			Shapefile shp = new Shapefile("states.shp");
-			
-			Assert.AreEqual(Shapefile.ShapeType.Polygon, shp.Shapetype);
-		}
+		List<Feature> GetFeatures(Rectangle rectangle);
 	}
 }

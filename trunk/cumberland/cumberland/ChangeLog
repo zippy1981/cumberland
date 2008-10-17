@@ -1,5 +1,9 @@
 2008-10-17  Scott Ellington <scott.ellington@gmail.com> 
 
+	
+
+2008-10-17  Scott Ellington <scott.ellington@gmail.com> 
+
 	* Polygon.cs, Line.cs, Point.cs, PolyLine.cs, Feature.cs, Ring.cs,
 	  Rectangle.cs: add methods
 

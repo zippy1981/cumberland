@@ -26,6 +26,8 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 
+using Cumberland.Data;
+
 namespace Cumberland
 {
 	public enum LineStyle
@@ -74,7 +76,7 @@ namespace Cumberland
 			}
 		}
 
-		public Shapefile Data {
+		public IFeatureSource Data {
 			get {
 				return data;
 			}
@@ -118,7 +120,7 @@ namespace Cumberland
 		
 		Color fillColor = Color.AliceBlue;
 		
-		Shapefile data;
+		IFeatureSource data;
 		
 		LineStyle lineStyle = LineStyle.Solid;
 		
