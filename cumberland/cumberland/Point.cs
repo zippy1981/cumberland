@@ -139,24 +139,22 @@ namespace Cumberland
 			}
 			else return false;
 		}
-		
-		public bool Intersects(Point p)
-		{
-			return this == p;
-		}
 
+		public override string ToString ()
+		{
+			return string.Format("{{x:{0} y:{1} z:{2} m:{3}}}", x, y, z, m);
+		}
+		
 #endregion
 
 		public Point Clone()
 		{
 			return new Point(x, y, z, m);
-
 		}
 		
-		public override string ToString ()
+		public bool Intersects(Point p)
 		{
-			return string.Format("{{x:{0} y:{1} z:{2} m:{3}}}", x, y, z, m);
+			return this == p;
 		}
-
     }
 }

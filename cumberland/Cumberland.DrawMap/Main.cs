@@ -38,7 +38,7 @@ namespace Cumberland.DrawMap
 	{
 		public static void Main(string[] args)
 		{
-			OpenGLMap map = new OpenGLMap();
+			Map map = new Map();
 			map.Width = 400;
 			map.Height = 400;
 			map.Projection = ProjFourWrapper.WGS84;
@@ -102,8 +102,10 @@ namespace Cumberland.DrawMap
 			}
 			
 			System.Console.WriteLine("Load Time (ms): " + sw.Elapsed.TotalMilliseconds);
-		
-			Bitmap b = map.Draw();
+			
+			OpenGlMapDrawer drawer = new OpenGlMapDrawer();
+			
+			Bitmap b = drawer.Draw(map);
 			
 			if (System.IO.Path.GetExtension(path) != ".png")
 			{
