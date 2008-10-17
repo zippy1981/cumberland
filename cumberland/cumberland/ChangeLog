@@ -1,5 +1,10 @@
 2008-10-17  Scott Ellington <scott.ellington@gmail.com> 
 
+	* Polygon.cs, Line.cs, Point.cs, PolyLine.cs, Feature.cs, Ring.cs,
+	  Rectangle.cs: add methods
+
+2008-10-17  Scott Ellington <scott.ellington@gmail.com> 
+
 	* Layer.cs: add Id property
 
 2008-10-17  Scott Ellington <scott.ellington@gmail.com> 

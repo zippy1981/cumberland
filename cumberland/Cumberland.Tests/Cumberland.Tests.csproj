@@ -42,6 +42,7 @@
     <Compile Include="ShapefileTests.cs" />
     <Compile Include="PointTests.cs" />
     <Compile Include="ProjFourWrapperTests.cs" />
+    <Compile Include="RectangleTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shape_eg_data\mexico\cities.dbf" />

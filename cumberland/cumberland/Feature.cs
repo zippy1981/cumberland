@@ -40,5 +40,7 @@ namespace Cumberland
 				id = value;
 			}
 		}
+		
+		abstract public Rectangle CalculateBounds();
 	}
 }

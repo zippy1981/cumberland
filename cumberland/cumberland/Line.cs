@@ -41,5 +41,38 @@ namespace Cumberland
         public Line()
 		{
 		}
+		
+		public Rectangle CalculateBounds()
+		{
+			double minx, miny;
+			minx = miny = double.MaxValue;
+			double maxx, maxy;
+			maxx = maxy = double.MinValue;
+			
+			foreach (Point p in Points)
+			{
+				if (p.X < minx)
+				{
+					minx = p.X;
+				}
+				
+				if (p.X > maxx)
+				{
+					maxx = p.X;
+				}
+				
+				if (p.Y < miny)
+				{
+					miny = p.Y;
+				}
+				
+				if (p.Y > maxy)
+				{
+					maxy = p.Y;
+				}
+			}
+			
+			return new Rectangle(minx, miny, maxx, maxy);
+		}
     }
 }
