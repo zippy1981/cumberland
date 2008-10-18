@@ -1,5 +1,10 @@
 2008-10-17  Scott Ellington <scott.ellington@gmail.com> 
 
+	* Map.cs, Drawing/MapDrawer.cs, Cumberland.csproj: add stub for GDI+
+	  drawer
+
+2008-10-17  Scott Ellington <scott.ellington@gmail.com> 
+
 	
 
 2008-10-17  Scott Ellington <scott.ellington@gmail.com> 

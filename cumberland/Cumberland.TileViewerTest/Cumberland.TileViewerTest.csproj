@@ -45,10 +45,6 @@
       <Project>{8E6E9F69-F1F5-46A1-BA6B-95A762F9CBC3}</Project>
       <Name>Cumberland</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Cumberland.Drawing.OpenGL\Cumberland.Drawing.OpenGL.csproj">
-      <Project>{8E6E9F69-F1F5-46A1-BA6B-95A762F9CBC3}</Project>
-      <Name>Cumberland.Drawing.OpenGL</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax">

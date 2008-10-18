@@ -31,7 +31,8 @@ using System.Drawing.Imaging;
 
 using Cumberland;
 using Cumberland.Data.Shapefile;
-using Cumberland.Drawing.OpenGL;
+using Cumberland.Drawing;
+
 
 namespace Cumberland.TileViewerTest
 {
@@ -91,14 +92,11 @@ namespace Cumberland.TileViewerTest
 				
 				map.Extents = new Rectangle(min, max);
 				
-				lock (padLock)
-				{
-					OpenGlMapDrawer renderer = new OpenGlMapDrawer();
-				
-					// draw our map
-					b = renderer.Draw(map);
-				}
 
+				MapDrawer renderer = new MapDrawer();
+			
+				// draw our map
+				b = renderer.Draw(map);
 			}
 			catch (Exception ex)
 			{
