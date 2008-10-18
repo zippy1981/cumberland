@@ -28,7 +28,7 @@ using System.Security;
 
 using Tao.OpenGl;
 
-namespace Cumberland.GluWrap
+namespace Cumberland.Drawing.OpenGL
 {
 	public static class GluMethods
 	{

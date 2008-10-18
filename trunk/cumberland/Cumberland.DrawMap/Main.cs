@@ -29,6 +29,7 @@ using System.Diagnostics;
 
 using Cumberland;
 using Cumberland.Data.Shapefile;
+using Cumberland.Drawing;
 using Cumberland.Drawing.OpenGL;
 
 using NDesk.Options;
@@ -43,6 +44,8 @@ namespace Cumberland.DrawMap
 			map.Width = 400;
 			map.Height = 400;
 			map.Projection = ProjFourWrapper.WGS84;
+			
+			IMapDrawer drawer = new MapDrawer();
 			
 			bool showHelp = false;
 			string path = "out.png";
@@ -65,6 +68,9 @@ namespace Cumberland.DrawMap
 			options.Add("p|proj=",
 			            "the output projection. can be a quoted proj4 string or an epsg code",
 			            delegate (string v) { map.Projection = ParseProjection(v); });
+			options.Add("g|opengl",
+			            "set this switch to enable drawing with openGL",
+			            delegate (string v) { if (v != null) drawer = new OpenGlMapDrawer(); });
 			            
 		
 			List<string> rest = options.Parse(args);
@@ -103,8 +109,6 @@ namespace Cumberland.DrawMap
 			}
 			
 			System.Console.WriteLine("Load Time (ms): " + sw.Elapsed.TotalMilliseconds);
-			
-			OpenGlMapDrawer drawer = new OpenGlMapDrawer();
 			
 			Bitmap b = drawer.Draw(map);
 			

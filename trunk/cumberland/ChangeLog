@@ -1,5 +1,19 @@
 2008-10-17  Scott Ellington <scott.ellington@gmail.com> 
 
+	* Cumberland.DrawMap/Main.cs,
+	  Cumberland.TileViewerTest/TileProvider.aspx.cs: add stub for GDI+
+	  drawer
+	* cumberland.sln, Cumberland.Drawing.OpenGL/GluMethods.cs,
+	  Cumberland.Drawing.OpenGL/app.config,
+	  Cumberland.Drawing.OpenGL/Cumberland.Drawing.OpenGL.csproj,
+	  Cumberland.Drawing.OpenGL/OpenGlMapDrawer.cs, Cumberland.GluWrap,
+	  Cumberland.GluWrap/AssemblyInfo.cs,
+	  Cumberland.GluWrap/GluMethods.cs, Cumberland.GluWrap/app.config,
+	  Cumberland.GluWrap/Cumberland.GluWrap.csproj: move GluMethods into
+	  Drawing.OpenGL
+
+2008-10-17  Scott Ellington <scott.ellington@gmail.com> 
+
 	
 
 2008-10-17  Scott Ellington <scott.ellington@gmail.com> 

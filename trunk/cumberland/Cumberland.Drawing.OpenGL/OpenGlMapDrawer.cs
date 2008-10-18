@@ -37,7 +37,6 @@ using Tao.FreeGlut;
 using Cumberland;
 using Cumberland.Data;
 using Cumberland.Drawing;
-using Cumberland.GluWrap;
 
 namespace Cumberland.Drawing.OpenGL
 {
@@ -199,7 +198,7 @@ namespace Cumberland.Drawing.OpenGL
 				int errorcode;
 				if ((errorcode = Gl.glGetError()) != Gl.GL_NO_ERROR)
 				{
-					throw new InvalidOperationException("OpenGL reports an error: " + GluWrap.GluMethods.gluErrorString(errorcode));
+					throw new InvalidOperationException("OpenGL reports an error: " + GluMethods.gluErrorString(errorcode));
 				}
 			}
 			finally
@@ -395,7 +394,7 @@ namespace Cumberland.Drawing.OpenGL
 							Glu.TessEndCallback tessEnd = new Tao.OpenGl.Glu.TessEndCallback(TessEndHandler);
 							//Glu.TessVertexCallback tessVert = new Tao.OpenGl.Glu.TessVertexCallback(Gl.glVertex3dv);
 							//Glu.TessVertexCallback tessVert = new Tao.OpenGl.Glu.TessVertexCallback(TessVertexHandler);
-							GluMethods.TessVertexCallback1 tessVert = new Cumberland.GluWrap.GluMethods.TessVertexCallback1(TessVertexHandler);
+							GluMethods.TessVertexCallback1 tessVert = new GluMethods.TessVertexCallback1(TessVertexHandler);
 							//Glu.TessVertexDataCallback tessVert = new Tao.OpenGl.Glu.TessVertexDataCallback(TessVertexHandler);
 							//GluMethods.TessVertexDataCallback1 tessVert = new GluWrap.GluMethods.TessVertexDataCallback1(TessVertexHandler);
 							Glu.TessErrorCallback tessErr = new Glu.TessErrorCallback(TessErrorHandler);
@@ -624,7 +623,7 @@ namespace Cumberland.Drawing.OpenGL
 		
 		void TessErrorHandler(int errorCode) 
 		{
-            throw new InvalidOperationException("Tessellation Error: " + GluWrap.GluMethods.gluErrorString(errorCode));
+            throw new InvalidOperationException("Tessellation Error: " + GluMethods.gluErrorString(errorCode));
 
         }
 		
