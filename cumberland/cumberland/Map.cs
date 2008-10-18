@@ -35,7 +35,6 @@ namespace Cumberland
 {
 	public class Map
 	{
-
 #region Properties
 		
 		int width = 400;
@@ -93,18 +92,5 @@ namespace Cumberland
 		string projection = null;
 		
 #endregion
-		
-//		System.Drawing.Point ConvertMapToPixel(Point p)
-//		{
-//			Rectangle r = Extents.Clone();
-//
-//			// set aspect ratio to image
-//			r.AspectRatioOfWidth = Width / Height;
-//			
-//			// get the scale
-//			double scale = r.Width / Width;
-//			
-//			return new System.Drawing.Point(
-//		}
 	}
 }

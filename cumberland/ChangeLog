@@ -1,5 +1,9 @@
 2008-10-17  Scott Ellington <scott.ellington@gmail.com> 
 
+	* Cumberland.TileViewerTest/TileProvider.aspx.cs: add more layers
+
+2008-10-17  Scott Ellington <scott.ellington@gmail.com> 
+
 	* Cumberland.DrawMap/Main.cs,
 	  Cumberland.TileViewerTest/TileProvider.aspx.cs: add stub for GDI+
 	  drawer
