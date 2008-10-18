@@ -39,8 +39,6 @@ namespace Cumberland.TileViewerTest
 
 	public partial class TileProvider : System.Web.UI.Page
 	{
-		static object padLock = new object();
-		
 		protected override void OnLoad (EventArgs e)
 		{
 			base.OnLoad (e);
@@ -62,20 +60,30 @@ namespace Cumberland.TileViewerTest
 				// Google tile size is 256
 				map.Width = map.Height = 256;
 				
-				// create our layer
-				Layer l = new Layer();
-				l.Data = new Shapefile("../Cumberland.Tests/shape_eg_data/mexico/states.shp");
-				//FIXME:	//new Shapefile("/home/scottell/gis/data/world_adm0/world_adm0.shp");
+				// create our layers
 				
-				// data is in WGS84
-				l.Projection = ProjFourWrapper.WGS84;
+				Layer polygonLayer = new Layer();
+				polygonLayer.Data = new Shapefile("../Cumberland.Tests/shape_eg_data/mexico/states.shp");
+				polygonLayer.Projection = ProjFourWrapper.WGS84; // data is in WGS84
+				polygonLayer.LineColor = Color.RoyalBlue;
+				polygonLayer.FillColor = Color.AliceBlue;
+				polygonLayer.LineWidth = 1;
+				polygonLayer.LineStyle = LineStyle.Dotted;
+				map.Layers.Add(polygonLayer);
 				
-				// set up symbology
-				l.LineColor = Color.RoyalBlue;
-				l.FillColor = Color.AliceBlue;
-				l.LineWidth = 1;
+				Layer lineLayer = new Layer();
+				lineLayer.Data = new Shapefile("../Cumberland.Tests/shape_eg_data/mexico/roads.shp");
+				lineLayer.Projection = ProjFourWrapper.WGS84; // data is in WGS84
+				lineLayer.LineColor = Color.Green;
+				lineLayer.LineWidth = 2;
+				map.Layers.Add(lineLayer);
 				
-				map.Layers.Add(l);
+				Layer pointLayer = new Layer();
+				pointLayer.Data = new Shapefile("../Cumberland.Tests/shape_eg_data/mexico/cities.shp");
+				pointLayer.Projection = ProjFourWrapper.WGS84;
+				pointLayer.PointSize = 4;
+				pointLayer.FillColor = Color.Red;
+				map.Layers.Add(pointLayer);
 	
 				// our web page will provide us with the lat/long boundaries of the tile
 				Point min = new Point(Convert.ToDouble(Request.QueryString["minx"]), 
@@ -91,7 +99,6 @@ namespace Cumberland.TileViewerTest
 				}
 				
 				map.Extents = new Rectangle(min, max);
-				
 
 				MapDrawer renderer = new MapDrawer();
 			

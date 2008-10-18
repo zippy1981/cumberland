@@ -40,7 +40,7 @@ namespace Cumberland
 	
 	public class Layer
 	{
-		public float LineWidth {
+		public int LineWidth {
 			get {
 				return lineWidth;
 			}
@@ -49,7 +49,7 @@ namespace Cumberland
 			}
 		}
 
-		public float PointSize {
+		public int PointSize {
 			get {
 				return pointSize;
 			}
@@ -112,9 +112,9 @@ namespace Cumberland
 			}
 		}
 		
-		float lineWidth = 1;
+		int lineWidth = 1;
 		
-		float pointSize = 1;
+		int pointSize = 1;
 		
 		Color lineColor = Color.RoyalBlue;
 		

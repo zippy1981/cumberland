@@ -1,5 +1,10 @@
 2008-10-17  Scott Ellington <scott.ellington@gmail.com> 
 
+	* Layer.cs: use int for width props
+	* Drawing/MapDrawer.cs: get gdi+ drawer functional
+
+2008-10-17  Scott Ellington <scott.ellington@gmail.com> 
+
 	* Map.cs, Drawing/MapDrawer.cs, Cumberland.csproj: add stub for GDI+
 	  drawer
 
