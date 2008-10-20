@@ -4,11 +4,10 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
-    <ProjectGuid>{0F516D1A-446C-46E6-8AD0-7C6573C338D8}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AssemblyName>Cumberland</AssemblyName>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace>Cumberland</RootNamespace>
+    <ProjectGuid>{6F5ECB63-A48C-42B8-B4E2-CD613C8CAFD2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Cumberland.Data.PostGIS</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -19,6 +18,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <AssemblyName>Cumberland.Data.PostGIS</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -27,38 +27,34 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <AssemblyName>Cumberland.Data</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Drawing" />
+    <Reference Include="Npgsql, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Npgsql.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\cumberland\Cumberland.csproj">
+      <Project>{6F5ECB63-A48C-42B8-B4E2-CD613C8CAFD2}</Project>
+      <Name>Cumberland</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="Feature.cs" />
-    <Compile Include="Line.cs" />
-    <Compile Include="Point.cs" />
-    <Compile Include="Polygon.cs" />
-    <Compile Include="PolyLine.cs" />
-    <Compile Include="Ring.cs" />
-    <Compile Include="Map.cs" />
-    <Compile Include="Rectangle.cs" />
-    <Compile Include="Layer.cs" />
-    <Compile Include="Drawing\IMapDrawer.cs" />
-    <Compile Include="Data\IFeatureSource.cs" />
-    <Compile Include="Data\Shapefile\Shapefile.cs" />
-    <Compile Include="Drawing\MapDrawer.cs" />
-    <Compile Include="Projection\ProjFourWrapper.cs" />
-    <Compile Include="Projection\SphericalMercatorProjector.cs" />
-    <Compile Include="Projection\IProjector.cs" />
-    <Compile Include="WellKnownText.cs" />
-  </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <None Include="ChangeLog" />
+    <Compile Include="PostGIS.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app.config">
+    <None Include="lib\Npgsql.dll" />
+    <None Include="lib\Npgsql.dll.mdb" />
+    <None Include="lib\Npgsql.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="lib\NPGSQL.LICENSE.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

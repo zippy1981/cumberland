@@ -94,24 +94,30 @@ namespace Cumberland.Drawing
 						continue;
 					}
 					
-					// query our data
-					List<Feature> features = layer.Data.GetFeatures(map.Extents);
-					
-					if (features.Count == 0)
-					{
-						continue;
-					}
-					
 					ProjFourWrapper src = null;
 					
 					try
 					{
+						Rectangle extents = map.Extents.Clone();
+						
 						// instantiate layer projection
 						bool reproject = false;
 						if (dst != null && !string.IsNullOrEmpty(layer.Projection))
 						{
 							src = new ProjFourWrapper(layer.Projection);
 							reproject = true;
+							
+							// reproject extents to our source for querying
+							extents = new Rectangle(dst.Transform(src, extents.Min),
+							                        dst.Transform(src, extents.Max));
+						}
+
+						// query our data
+						List<Feature> features = layer.Data.GetFeatures(extents);
+						
+						if (features.Count == 0)
+						{
+							continue;
 						}
 					
 						if (layer.Data.SourceFeatureType == FeatureType.Point)

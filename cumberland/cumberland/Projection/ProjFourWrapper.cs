@@ -130,7 +130,7 @@ namespace Cumberland.Projection
 			}
         }
 		
-		public ProjFourWrapper(int epsg) : this("+init=epsg:" + epsg)
+		public ProjFourWrapper(int epsg) : this(PrepareEPSGCode(epsg))
 		{
 		}
 		
@@ -205,6 +205,15 @@ namespace Cumberland.Projection
 		public static string GetError()
 		{
 			return Marshal.PtrToStringAnsi(pj_strerrno(Marshal.ReadInt32(pj_get_errno_ref())));
+		}
+		
+#endregion
+		
+#region public static methods
+		
+		public static string PrepareEPSGCode(int epsg)
+		{
+			return "+init=epsg:" + epsg;
 		}
 		
 #endregion
