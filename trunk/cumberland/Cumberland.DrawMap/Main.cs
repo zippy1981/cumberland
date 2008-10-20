@@ -31,6 +31,7 @@ using Cumberland;
 using Cumberland.Data.Shapefile;
 using Cumberland.Drawing;
 using Cumberland.Drawing.OpenGL;
+using Cumberland.Projection;
 
 using NDesk.Options;
 

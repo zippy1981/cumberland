@@ -28,6 +28,7 @@ using System.Drawing;
 using Cumberland;
 using Cumberland.Data.Shapefile;
 using Cumberland.Drawing.OpenGL;
+using Cumberland.Projection;
 
 using NDesk.Options;
 

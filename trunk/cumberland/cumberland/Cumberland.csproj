@@ -42,12 +42,15 @@
     <Compile Include="Ring.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Rectangle.cs" />
-    <Compile Include="ProjFourWrapper.cs" />
     <Compile Include="Layer.cs" />
     <Compile Include="Drawing\IMapDrawer.cs" />
     <Compile Include="Data\IFeatureSource.cs" />
     <Compile Include="Data\Shapefile\Shapefile.cs" />
     <Compile Include="Drawing\MapDrawer.cs" />
+    <Compile Include="KeyholeMarkupLanguage.cs" />
+    <Compile Include="Projection\ProjFourWrapper.cs" />
+    <Compile Include="Projection\SphericalMercatorProjector.cs" />
+    <Compile Include="Projection\IProjector.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
