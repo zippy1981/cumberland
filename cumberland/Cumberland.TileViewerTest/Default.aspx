@@ -9,19 +9,8 @@
 
 		function CustomGetTileUrl(a,b) 
 		{
-			var tilePx = new GPoint(a.x*256, a.y*256);
- 		 	var prj = G_NORMAL_MAP.getProjection();
-			
-			var tlLL = prj.fromPixelToLatLng(tilePx, b);
-			
-			tilePx.x += 256;
-			tilePx.y += 256;
-			var brLL = prj.fromPixelToLatLng(tilePx, b);
-
-			var f = "TileProvider.aspx?minx=" + tlLL.x + "&miny=" + brLL.y + "&maxx=" + brLL.x + "&maxy=" + tlLL.y;
-			
-			return f;
-		}
+			return "TileProvider.aspx?x=" + a.x + "&y=" + a.y + "&zl=" + b;
+		}			
 
 	    function initialize() 
 	    {

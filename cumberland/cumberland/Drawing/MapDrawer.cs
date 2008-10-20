@@ -29,6 +29,7 @@ using System.Drawing.Drawing2D;
 
 using Cumberland;
 using Cumberland.Data;
+using Cumberland.Projection;
 
 
 namespace Cumberland.Drawing

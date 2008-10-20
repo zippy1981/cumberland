@@ -26,7 +26,7 @@ using System.Text;
 
 using System.Runtime.InteropServices;
 
-namespace Cumberland
+namespace Cumberland.Projection
 {
     public class ProjFourWrapper : IDisposable
     {

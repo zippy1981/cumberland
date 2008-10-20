@@ -26,6 +26,7 @@ using System;
 using NUnit.Framework;
 
 using Cumberland;
+using Cumberland.Projection;
 
 namespace Cumberland.Tests
 {

@@ -32,6 +32,7 @@ using System.Drawing.Imaging;
 using Cumberland;
 using Cumberland.Data.Shapefile;
 using Cumberland.Drawing;
+using Cumberland.Projection;
 
 
 namespace Cumberland.TileViewerTest
@@ -68,7 +69,7 @@ namespace Cumberland.TileViewerTest
 				polygonLayer.LineColor = Color.RoyalBlue;
 				polygonLayer.FillColor = Color.AliceBlue;
 				polygonLayer.LineWidth = 1;
-				polygonLayer.LineStyle = LineStyle.Dotted;
+				//polygonLayer.LineStyle = LineStyle.Dotted;
 				map.Layers.Add(polygonLayer);
 				
 				Layer lineLayer = new Layer();
@@ -85,21 +86,31 @@ namespace Cumberland.TileViewerTest
 				pointLayer.FillColor = Color.Red;
 				map.Layers.Add(pointLayer);
 	
-				// our web page will provide us with the lat/long boundaries of the tile
-				Point min = new Point(Convert.ToDouble(Request.QueryString["minx"]), 
-				                      Convert.ToDouble(Request.QueryString["miny"]));
-				Point max = new Point(Convert.ToDouble(Request.QueryString["maxx"]), 
-				                      Convert.ToDouble(Request.QueryString["maxy"]));
+				// acquire the tile index and zoom level
+				int x = Convert.ToInt32(Request.QueryString["x"]);
+				int y = Convert.ToInt32(Request.QueryString["y"]);
+				int zoomLevel = Convert.ToInt32(Request.QueryString["zl"]);
 				
-				// we must reproject the extents to google's spherical mercator
-				using (ProjFourWrapper prj = new ProjFourWrapper(map.Projection))
-				{
-					min = prj.ConvertFromLatLong(min);
-					max = prj.ConvertFromLatLong(max);
-				}
+				// calculate number of tiles across
+				int numTiles = Convert.ToInt32(Math.Pow(2, zoomLevel));
 				
-				map.Extents = new Rectangle(min, max);
+				// get projection to grab circumference
+				SphericalMercatorProjector prj = new SphericalMercatorProjector();
+				
+				// get meters/pixel resolution for zoomlevel
+				double resolution = (prj.Circumference / 256) / numTiles;
+				
+				// mercator origin
+				double origin = prj.Circumference/2;
 
+				// convert pixels to meters and translate to origin
+				map.Extents = new Rectangle((256*x) * resolution - origin,
+				                            (256*(numTiles-y-1)) * resolution - origin, // google tiles are top left
+				                            (256*(x+1)) * resolution - origin,
+				                            (256*(numTiles-y)) * resolution - origin);
+				
+//				System.Console.WriteLine(map.Extents);
+				
 				MapDrawer renderer = new MapDrawer();
 			
 				// draw our map
@@ -121,13 +132,14 @@ namespace Cumberland.TileViewerTest
 					              10);
 				}
 			}
-			
 	
 			using (b)
 			{
 				// stream out the image
 				b.Save(Response.OutputStream, ImageFormat.Png);
 			}
-		}	 
+			
+			Response.Flush();
+		}	
 	}
 }
