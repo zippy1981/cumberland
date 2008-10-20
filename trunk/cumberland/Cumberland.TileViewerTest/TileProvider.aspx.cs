@@ -30,6 +30,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 
 using Cumberland;
+using Cumberland.Data.PostGIS;
 using Cumberland.Data.Shapefile;
 using Cumberland.Drawing;
 using Cumberland.Projection;
@@ -85,6 +86,13 @@ namespace Cumberland.TileViewerTest
 				pointLayer.PointSize = 4;
 				pointLayer.FillColor = Color.Red;
 				map.Layers.Add(pointLayer);
+				
+//				Layer pgLayer = new Layer();
+//				pgLayer.Data = new PostGIS("Server=127.0.0.1;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;", 
+//				                           "fdot_roads");
+//				pgLayer.Projection = ProjFourWrapper.PrepareEPSGCode(2958);
+//				pgLayer.LineColor = Color.Orange;
+//				map.Layers.Add(pgLayer);
 	
 				// acquire the tile index and zoom level
 				int x = Convert.ToInt32(Request.QueryString["x"]);
@@ -109,8 +117,6 @@ namespace Cumberland.TileViewerTest
 				                            (256*(x+1)) * resolution - origin,
 				                            (256*(numTiles-y)) * resolution - origin);
 				
-//				System.Console.WriteLine(map.Extents);
-				
 				MapDrawer renderer = new MapDrawer();
 			
 				// draw our map
@@ -125,6 +131,11 @@ namespace Cumberland.TileViewerTest
 				// draw the exception on the tile
 				using (Graphics gr = Graphics.FromImage(b))
 				{
+					//string msg = ex.Message;
+					//if (msg.Length*10 > b.Width - 20) msg = msg.Insert(b.Width/10-2, "\r\n");
+					
+					//System.Console.Write(msg);
+					
 					gr.DrawString(ex.Message,
 					              new Font("Arial", 10),
 					              Brushes.Red,

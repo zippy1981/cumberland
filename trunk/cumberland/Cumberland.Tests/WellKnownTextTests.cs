@@ -1,4 +1,4 @@
-// KeyholeMarkupLanguage.cs
+// WellKnownTextTests.cs
 //
 // Copyright (c) 2008 Scott Ellington and Authors
 //
@@ -23,26 +23,31 @@
 //
 
 using System;
+using Cumberland;
 
-namespace Cumberland
+using NUnit.Framework;
+
+namespace Cumberland.Tests
 {
-	public static class KeyholeMarkupLanguage
+	[TestFixture]
+	public class WellKnownTextTests
 	{
-//		public static string CreateFromFeature(Point p, string name, string description)
-//		{
-//			return "<Placemark>" +
-//				(!string.IsNullOrEmpty(name) ? "<name>" + name + "</name>" : string.Empty) +
-//				(!string.IsNullOrEmpty(description) ? "<description>" + description + "</description>" : string.Empty) +
-//				"<Point><coordinates>" + p.X + "," + p.Y + "," + p.Z + "</coordinates></Point>" +
-//				 "</Placemark>";
-//		}
-//		
-//		public static string WrapKmlInRootNode(string kml)
-//		{
-//			return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + 
-//				"<kml xmlns=\"http://www.opengis.net/kml/2.2\">" +
-//				kml + "</kml>";
-//
-//		}
+		[Test]
+		public void TestWKTPoint()
+		{
+			string wkt = "POINT(0 0)";
+			
+			Point p = WellKnownText.ParsePoint(wkt);
+			
+			Assert.AreEqual(new Point(0,0), p);
+		}
+		
+		[Test]
+		public void TestWKTMultLineString()
+		{
+			string wkt = "MULTILINESTRING((0 0 0,1 1 0,1 2 1),(2 3 1,3 2 1,5 4 1))";
+			
+			WellKnownText.ParseMultiLineString(wkt);
+		}
 	}
 }

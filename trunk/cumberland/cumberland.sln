@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cumberland.InteractiveMap",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cumberland.Drawing.OpenGL", "Cumberland.Drawing.OpenGL\Cumberland.Drawing.OpenGL.csproj", "{6C7C534C-CD55-4C47-A3C0-A85B87682453}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cumberland.Data.PostGIS", "Cumberland.Data.PostGIS\Cumberland.Data.PostGIS.csproj", "{6F5ECB63-A48C-42B8-B4E2-CD613C8CAFD2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{6C7C534C-CD55-4C47-A3C0-A85B87682453}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C7C534C-CD55-4C47-A3C0-A85B87682453}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C7C534C-CD55-4C47-A3C0-A85B87682453}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F5ECB63-A48C-42B8-B4E2-CD613C8CAFD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F5ECB63-A48C-42B8-B4E2-CD613C8CAFD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F5ECB63-A48C-42B8-B4E2-CD613C8CAFD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F5ECB63-A48C-42B8-B4E2-CD613C8CAFD2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8E6E9F69-F1F5-46A1-BA6B-95A762F9CBC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8E6E9F69-F1F5-46A1-BA6B-95A762F9CBC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C7EB468-F7C6-440D-9CE5-6EF81223BDC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

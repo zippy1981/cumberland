@@ -45,6 +45,10 @@
       <Project>{8E6E9F69-F1F5-46A1-BA6B-95A762F9CBC3}</Project>
       <Name>Cumberland</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Cumberland.Data.PostGIS\Cumberland.Data.PostGIS.csproj">
+      <Project>{8E6E9F69-F1F5-46A1-BA6B-95A762F9CBC3}</Project>
+      <Name>Cumberland.Data.PostGIS</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax">
