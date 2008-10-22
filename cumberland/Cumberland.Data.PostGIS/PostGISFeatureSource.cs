@@ -36,10 +36,11 @@ namespace Cumberland.Data.PostGIS
 	{
 		None,
 		MultilineString,
-		MultiPolygon
+		MultiPolygon,
+		Point
 	}
 	
-	public class PostGIS : IFeatureSource
+	public class PostGISFeatureSource : IFeatureSource
 	{
 		string connectionString, tableName, geometryColumn;
 		int srid;
@@ -51,13 +52,50 @@ namespace Cumberland.Data.PostGIS
 				return featureType;
 			}
 		}
-		FeatureType featureType = FeatureType.None;
 
+		public Rectangle Extents {
+			get 
+			{
+				using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
+				{
+					string sql = string.Format("select extent({0}) from {1}",
+					                           geometryColumn, tableName);
+					
+					//System.Console.WriteLine(sql);
+					
+					using (NpgsqlCommand comm = new NpgsqlCommand(sql, conn))
+					{
+						conn.Open();
+						
+						using (NpgsqlDataReader dr = comm.ExecuteReader())
+						{
+							if (!dr.HasRows) return new Rectangle();
+							
+							dr.Read();
+							string boxTwoD = dr.GetString(0);
+							
+							string[] bits = boxTwoD.Split(new char[] {'(',',',')',' '});
+							
+							return new Rectangle(Convert.ToDouble(bits[1]),
+							                     Convert.ToDouble(bits[2]),
+							                     Convert.ToDouble(bits[3]),
+							                     Convert.ToDouble(bits[4]));
+							
+							
+						}
+					}
+				}
+			}
+		}
+		
+		
+		FeatureType featureType = FeatureType.None;
+		
 		GeometryType geometryType = GeometryType.None;
 		
 		ParseWKT parseWKTHandler;
 		
-		public PostGIS(string connection, string table)
+		public PostGISFeatureSource(string connection, string table)
 		{
 			connectionString = connection;
 			tableName = table;
@@ -100,6 +138,14 @@ namespace Cumberland.Data.PostGIS
 							featureType = FeatureType.Polygon;
 							geometryType = GeometryType.MultiPolygon;
 							//parseWKTHandler = WellKnownText.ParseMultiPolygon;
+							
+							break;
+							
+						case "POINT":
+							
+							featureType = FeatureType.Point;
+							geometryType = GeometryType.Point;
+							parseWKTHandler = WellKnownText.ParsePoint;
 							
 							break;
 							

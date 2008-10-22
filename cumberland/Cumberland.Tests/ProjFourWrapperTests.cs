@@ -35,11 +35,11 @@ namespace Cumberland.Tests
 	public class ProjFourWrapperTests
 	{
 		[Test]
-		public void TestConvertFromLatLong()
+		public void TestDeproject()
 		{
 			using (ProjFourWrapper proj = new ProjFourWrapper("+init=epsg:2236"))
 			{
-				Point pt = proj.ConvertFromLatLong(new Point(-81, 26));
+				Point pt = proj.Deproject(new Point(-81, 26));
 				pt.X = Math.Round(pt.X, 2);
 				pt.Y = Math.Round(pt.Y, 2);
 
@@ -49,11 +49,11 @@ namespace Cumberland.Tests
 		}
 		
 		[Test]
-		public void TestConvertToLatLong()
+		public void TestProject()
 		{
 			using (ProjFourWrapper proj = new ProjFourWrapper("+init=epsg:2236"))
 			{
-				Point pt = proj.ConvertToLatLong(new Point(656166.67, 605690.54));
+				Point pt = proj.Project(new Point(656166.67, 605690.54));
 				pt.X = Math.Round(pt.X, 2);
 				pt.Y = Math.Round(pt.Y, 2);
 				

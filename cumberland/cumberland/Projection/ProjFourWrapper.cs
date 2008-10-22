@@ -28,7 +28,7 @@ using System.Runtime.InteropServices;
 
 namespace Cumberland.Projection
 {
-    public class ProjFourWrapper : IDisposable
+    public class ProjFourWrapper : IDisposable, IProjector
     {
 		const double DegreesToRadians = Math.PI / 180;
 		
@@ -139,14 +139,14 @@ namespace Cumberland.Projection
 
 #region public methods
 		
-        public Point ConvertFromLatLong(Point point)
+        public Point Deproject(Point point)
         {
             UV uv = pj_fwd(new UV(point.X * DegreesToRadians, point.Y * DegreesToRadians), projPJ);
 			
 			return new Point(uv.U, uv.V);
         }
 
-        public Point ConvertToLatLong(Point point)
+        public Point Project(Point point)
         {
 			UV uv = pj_inv(new UV(point.X, point.Y), projPJ);
 			
