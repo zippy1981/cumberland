@@ -106,5 +106,18 @@ namespace Cumberland
 			return new Rectangle(minx, miny, maxx, maxy);
 		}
 		
+		public void Close()
+		{
+			if (points.Count > 2 && !IsClosed)
+			{
+				points.Add(points[points.Count-1].Clone());
+			}
+		}
+		
+		public bool Validate()
+		{
+			return points.Count > 2;
+		}
+		
     }
 }

@@ -44,6 +44,10 @@ namespace Cumberland
 		
 #region ctors
 		
+		public Polygon()
+		{
+		}
+		
         public Polygon(double xmin, double ymin, double xmax, double ymax)
         {
 			min = new Point(xmin, ymin);
