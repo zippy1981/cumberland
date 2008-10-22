@@ -23,6 +23,7 @@
 //
 
 using System;
+using System.Collections.Generic;
 
 using Cumberland;
 
@@ -85,6 +86,55 @@ namespace Cumberland
 			return pl;
 		}
 
+		public static List<Feature> ParseMultiPolygon(string wkt)
+		{
+			wkt = wkt.ToUpper();
+			
+			List<Feature> polys = new List<Feature>();
+			
+			if (!wkt.StartsWith("MULTIPOLYGON"))
+			{
+				throw new ArgumentException("Invalid WKT: must start with 'MULTIPOLYGON'", "wkt");
+			}
+
+			// chop off front and end
+			// then split by polygon
+			int idx = wkt.IndexOf('(');
+			string[] polywkts = wkt.Substring(idx+1, wkt.Length-idx-1).Split(new string[] {")),(("}, StringSplitOptions.None);
+			
+			foreach (string polywkt in polywkts)
+			{
+				Polygon p = new Polygon();
+				
+				// split by ring
+				string[] ringwkts = polywkt.Split(new string[] {"),("}, StringSplitOptions.None);
+				
+				for (int ii=0; ii<ringwkts.Length; ii++)
+				{
+					// trim off parens
+					string ringwkt =  ringwkts[ii].Trim(new char[] {'(',')'});
+					
+					Ring r = new Ring();
+					
+					// split by coordinate
+					string[] coords = ringwkt.Split(',');
+					
+					foreach (string coord in coords)
+					{
+						r.Points.Add(SplitPoint(coord));
+					}
+					
+					if (!r.IsClosed) r.Close();
+					
+					p.Rings.Add(r);
+				}
+				
+				polys.Add(p);
+			}
+			
+			return polys;
+			
+		}
 		
 		static Point SplitPoint(string wkt)
 		{

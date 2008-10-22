@@ -89,8 +89,8 @@ namespace Cumberland.TileViewerTest
 				
 //				Layer pgLayer = new Layer();
 //				pgLayer.Data = new PostGIS("Server=127.0.0.1;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;", 
-//				                           "fdot_roads");
-//				pgLayer.Projection = ProjFourWrapper.PrepareEPSGCode(2958);
+//				                           "counties");
+//				pgLayer.Projection = ProjFourWrapper.PrepareEPSGCode(3087);
 //				pgLayer.LineColor = Color.Orange;
 //				map.Layers.Add(pgLayer);
 	

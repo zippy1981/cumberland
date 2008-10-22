@@ -35,7 +35,8 @@ namespace Cumberland.Data.PostGIS
 	internal enum GeometryType
 	{
 		None,
-		MultilineString
+		MultilineString,
+		MultiPolygon
 	}
 	
 	public class PostGIS : IFeatureSource
@@ -91,6 +92,15 @@ namespace Cumberland.Data.PostGIS
 							featureType = FeatureType.Polyline;
 							geometryType = GeometryType.MultilineString;
 							parseWKTHandler = WellKnownText.ParseMultiLineString;
+							
+							break;
+							
+						case "MULTIPOLYGON":
+							
+							featureType = FeatureType.Polygon;
+							geometryType = GeometryType.MultiPolygon;
+							//parseWKTHandler = WellKnownText.ParseMultiPolygon;
+							
 							break;
 							
 						default:
@@ -129,7 +139,12 @@ namespace Cumberland.Data.PostGIS
 					{
 						while (dr.Read())
 						{
-							feats.Add(parseWKTHandler(dr.GetString(0)));
+							if (geometryType == GeometryType.MultiPolygon)
+							{
+								feats.AddRange(WellKnownText.ParseMultiPolygon(dr.GetString(0)));
+							}
+							else
+								feats.Add(parseWKTHandler(dr.GetString(0)));
 						}
 					}
 				}
