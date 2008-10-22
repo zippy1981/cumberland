@@ -1,5 +1,11 @@
 2008-10-22  Scott Ellington <scott.ellington@gmail.com> 
 
+	* Cumberland.TileViewerTest/TileProvider.aspx.cs,
+	  Cumberland.Data.PostGIS/PostGISFeatureSource.cs,
+	  Cumberland.Data.PostGIS/PostGIS.cs: add postgis point support
+
+2008-10-22  Scott Ellington <scott.ellington@gmail.com> 
+
 	* Cumberland.Data.PostGIS/PostGIS.cs: add multipolygon wkt support
 
 2008-10-20  Scott Ellington <scott.ellington@gmail.com> 

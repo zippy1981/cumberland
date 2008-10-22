@@ -72,7 +72,7 @@ namespace Cumberland.Data.Shapefile
 		
 		List<Feature> features = new List<Feature>();
 		
-		public Rectangle ListedExtents {
+		public Rectangle Extents {
 			get {
 				return listedExtents;
 			}

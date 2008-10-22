@@ -44,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="PostGIS.cs" />
+    <Compile Include="PostGISFeatureSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="lib\Npgsql.dll" />

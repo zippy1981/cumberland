@@ -88,12 +88,28 @@ namespace Cumberland.TileViewerTest
 				map.Layers.Add(pointLayer);
 				
 //				Layer pgLayer = new Layer();
-//				pgLayer.Data = new PostGIS("Server=127.0.0.1;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;", 
+//				pgLayer.Data = new PostGISFeatureSource("Server=127.0.0.1;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;", 
 //				                           "counties");
 //				pgLayer.Projection = ProjFourWrapper.PrepareEPSGCode(3087);
 //				pgLayer.LineColor = Color.Orange;
+//				pgLayer.FillColor = Color.FromArgb(100, Color.AntiqueWhite);
 //				map.Layers.Add(pgLayer);
-	
+//
+//				Layer pgRdLayer = new Layer();
+//				pgRdLayer.Data = new PostGISFeatureSource("Server=127.0.0.1;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;", 
+//				                           "fdot_roads");
+//				pgRdLayer.Projection = ProjFourWrapper.PrepareEPSGCode(2958);
+//				pgRdLayer.LineColor = Color.CadetBlue;
+//				map.Layers.Add(pgRdLayer);
+//				
+//				Layer pgPtLayer = new Layer();
+//				pgPtLayer.Data = new PostGISFeatureSource("Server=127.0.0.1;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;", 
+//				                           "springs_fdep_2000");
+//				pgPtLayer.Projection = ProjFourWrapper.PrepareEPSGCode(3087);
+//				pgPtLayer.FillColor = Color.Plum;
+//				pgPtLayer.PointSize = 3;
+//				map.Layers.Add(pgPtLayer);
+				
 				// acquire the tile index and zoom level
 				int x = Convert.ToInt32(Request.QueryString["x"]);
 				int y = Convert.ToInt32(Request.QueryString["y"]);

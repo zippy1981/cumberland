@@ -1,5 +1,11 @@
 2008-10-22  Scott Ellington <scott.ellington@gmail.com> 
 
+	* Data/Shapefile/Shapefile.cs, Data/IFeatureSource.cs: add Extents
+	  property
+	* Projection/ProjFourWrapper.cs: use IProjector
+
+2008-10-22  Scott Ellington <scott.ellington@gmail.com> 
+
 	* WellKnownText.cs: add multipolygon wkt support
 	* Polygon.cs: add default ctor
 	* Ring.cs: add Close() and Validate()
