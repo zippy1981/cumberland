@@ -30,17 +30,17 @@ namespace Cumberland.Drawing.OpenGL
 	{
 		const double ATR = .01745;
 		
-		public static float[] GetIdentity ()
+		public static double[] GetIdentity ()
 		{
-			return new float[] {1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1};
+			return new double[] {1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1};
 		}
 
-		public static float[] Inverse ( float[] m )
+		public static double[] Inverse ( double[] m )
 		{
 			int swap;
-			float t;
-			float[,] temp = new float[4,4];
-			float[] inv = GetIdentity();
+			double t;
+			double[,] temp = new double[4,4];
+			double[] inv = GetIdentity();
 
 			for (int i = 0; i < 4; i++)
 				for (int j = 0; j < 4; j++)
@@ -94,17 +94,17 @@ namespace Cumberland.Drawing.OpenGL
 			return inv;
 		}
 
-		public static float[] Transform (float rotX, float rotY, float rotZ, float transX, float transY, float transZ )
+		public static double[] Transform (double rotX, double rotY, double rotZ, double transX, double transY, double transZ )
 		{
-			float[] myMatrix = new float [16];
+			double[] myMatrix = new double [16];
 			
-			float A,B,C,D,E,F,AD,BD;
-			A = (float) Math.Cos ( rotX * ATR );
-			B = (float) Math.Sin ( rotX * ATR );
-			C = (float) Math.Cos ( rotY * ATR );
-			D = (float) Math.Sin ( rotY * ATR );
-			E = (float) Math.Cos ( rotZ * ATR );
-			F = (float) Math.Sin ( rotZ * ATR );
+			double A,B,C,D,E,F,AD,BD;
+			A = (double) Math.Cos ( rotX * ATR );
+			B = (double) Math.Sin ( rotX * ATR );
+			C = (double) Math.Cos ( rotY * ATR );
+			D = (double) Math.Sin ( rotY * ATR );
+			E = (double) Math.Cos ( rotZ * ATR );
+			F = (double) Math.Sin ( rotZ * ATR );
 
 			AD = A * D;
 			BD = B * D;
