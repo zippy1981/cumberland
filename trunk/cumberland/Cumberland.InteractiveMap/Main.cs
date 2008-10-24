@@ -46,9 +46,9 @@ namespace Cumberland.InteractiveMap
 		static Map map;
 		static OpenGlMapDrawer renderer;
 		
-		static float[] rot = new float[] {0,0,0}; /* Amount to rotate */
-		static float[] eye = new float[] {0,0,0}; /* Position of our eye or camera */
-		static float[] light = new float[] {200, 100, 40}; 
+		static double[] rot = new double[] {0,0,0}; /* Amount to rotate */
+		static double[] eye = new double[] {0,0,0}; /* Position of our eye or camera */
+		static double[] light = new double[] {200, 100, 40}; 
 
 		static bool[] keydown = new bool [256];
 		
@@ -56,6 +56,12 @@ namespace Cumberland.InteractiveMap
 		
 		static bool started = false;
 		static int lastX, lastY;
+		
+		// the field of view y angle:
+		// a small value will make the view fish-eyed, i.e. zoom in/out fast
+		// 45-90 is normal 
+		static double fovy = 90;
+		
 		
 		public static void Main(string[] args)
 		{
@@ -128,6 +134,20 @@ namespace Cumberland.InteractiveMap
 			eye[0] = Convert.ToSingle(c.X);
 			eye[1] = Convert.ToSingle(c.Y);
 			
+			// we need to expand our extents so that the aspect ratio is the same as the viewport
+			Cumberland.Rectangle rec = map.Extents.Clone();
+			rec.AspectRatioOfWidth = Convert.ToDouble(map.Width) / Convert.ToDouble(map.Height);
+			
+			// trigonometry to acquire z coordinate
+			// by using the right triangle created by:
+			// 1) the center point of the map, 
+			// 2) the top-center of the map
+			// 3) the eye
+			// there we can calculate the side (z-value) by
+			// b = a/Tan(A)
+			// FIXME: not quite right
+			eye[2] = (rec.Height/2) / Math.Tan(fovy/2); 
+			
 #endregion
 			
 #region init freeglut
@@ -143,8 +163,8 @@ namespace Cumberland.InteractiveMap
 
 #region init OpenGL
 			
-			// enable depth
-			Gl.glEnable ( Gl.GL_DEPTH_TEST );
+			// don't enable depth.  looks worse
+			//Gl.glEnable ( Gl.GL_DEPTH_TEST );
 			
 			// enable fill
 			Gl.glPolygonMode ( Gl.GL_FRONT_AND_BACK, Gl.GL_FILL );	
@@ -154,7 +174,7 @@ namespace Cumberland.InteractiveMap
 			Gl.glClearColor( 1.0f, 1.0f, 1.0f, 1.0f );
 			
 			// smooth shading
-			Gl.glShadeModel ( Gl.GL_SMOOTH );
+			//Gl.glShadeModel ( Gl.GL_SMOOTH );
 			
 			// enable culling (improves performance i think)
 			//Gl.glEnable(Gl.GL_CULL_FACE);
@@ -232,9 +252,9 @@ namespace Cumberland.InteractiveMap
 			//Gl.glDisable(Gl.GL_POLYGON_SMOOTH);
 
 			// create our view matrix and load into OpenGL
-			float[] matrix = MatrixHelper.Transform ( rot[0], rot[1], rot[2], eye[0], eye[1], eye[2] );
+			double[] matrix = MatrixHelper.Transform ( rot[0], rot[1], rot[2], eye[0], eye[1], eye[2] );
 			matrix = MatrixHelper.Inverse ( matrix );
-			Gl.glLoadMatrixf ( matrix );
+			Gl.glLoadMatrixd ( matrix );
 
 			// set the lighting
 			//Gl.glLightfv( Gl.GL_LIGHT0, Gl.GL_POSITION, light);
@@ -308,7 +328,7 @@ namespace Cumberland.InteractiveMap
 			Gl.glLoadIdentity();
 			//Glu.gluPerspective(30.0, (float) w / (float) h, 1.0, 20.0);
 			//Glu.gluPerspective (90, map.Width / map.Height, 1, 9999);
-			Glu.gluPerspective (45, map.Width / map.Height, 1, 9999);
+			Glu.gluPerspective (fovy, Convert.ToDouble(map.Width) / Convert.ToDouble(map.Height), 1, 9999);
 			Gl.glMatrixMode(Gl.GL_MODELVIEW);
 			Gl.glLoadIdentity();
 		}

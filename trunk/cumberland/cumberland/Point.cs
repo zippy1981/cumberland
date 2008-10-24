@@ -83,6 +83,8 @@ namespace Cumberland
 		
 #region ctors
 		
+		public Point() : this(0,0)  {}
+		
         public Point(double tx, double ty)
         {
             X = tx;
