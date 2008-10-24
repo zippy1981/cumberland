@@ -1,3 +1,8 @@
+2008-10-24  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.Drawing.OpenGL/OpenGlMapDrawer.cs: fix bug where glListed
+	  layer was returning instead of continuing to next layer
+
 2008-10-23  Scott Ellington <scott.ellington@gmail.com> 
 
 	* Cumberland.InteractiveMap/Main.cs: copy improvements from Appomattox

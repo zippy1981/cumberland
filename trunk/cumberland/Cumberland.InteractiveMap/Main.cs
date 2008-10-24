@@ -326,8 +326,6 @@ namespace Cumberland.InteractiveMap
 			Gl.glViewport(0, 0, w, h);
 			Gl.glMatrixMode(Gl.GL_PROJECTION);
 			Gl.glLoadIdentity();
-			//Glu.gluPerspective(30.0, (float) w / (float) h, 1.0, 20.0);
-			//Glu.gluPerspective (90, map.Width / map.Height, 1, 9999);
 			Glu.gluPerspective (fovy, Convert.ToDouble(map.Width) / Convert.ToDouble(map.Height), 1, 9999);
 			Gl.glMatrixMode(Gl.GL_MODELVIEW);
 			Gl.glLoadIdentity();
