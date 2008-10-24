@@ -243,12 +243,12 @@ namespace Cumberland.Drawing.OpenGL
 				foreach (Layer layer in map.Layers)
 				{
 					idx++;
-					
+
 					if (layer.Data == null)
 					{
 						continue;
 					}
-					
+									
 					// query our data
 					List<Feature> features = layer.Data.GetFeatures(map.Extents);
 					
@@ -267,7 +267,8 @@ namespace Cumberland.Drawing.OpenGL
 							// this layer has already been loaded
 							// so have openGL draw it
 							Gl.glCallList(glListNo);
-							return;
+							
+							continue;
 						}
 						
 						// generate a list number for reference and store it with the layer id						
@@ -617,6 +618,8 @@ namespace Cumberland.Drawing.OpenGL
 					dst.Dispose();
 				}
 			}
+			
+			System.Console.WriteLine("done");
 		}
 #endregion
 
