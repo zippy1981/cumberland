@@ -69,7 +69,6 @@ namespace Cumberland.Drawing.OpenGL
 			{
 				// hack to get an opengl context
 				int glutTime = Glut.glutGet(Glut.GLUT_ELAPSED_TIME);
-				//System.Console.WriteLine(glutTime);
 				if (glutTime == 0)
 				{		
 					Glut.glutInit();
@@ -618,8 +617,6 @@ namespace Cumberland.Drawing.OpenGL
 					dst.Dispose();
 				}
 			}
-			
-			System.Console.WriteLine("done");
 		}
 #endregion
 

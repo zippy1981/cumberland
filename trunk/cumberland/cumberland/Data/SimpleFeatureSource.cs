@@ -1,4 +1,4 @@
-// Feature.cs
+// SimpleFeatureSource.cs
 //
 // Copyright (c) 2008 Scott Ellington and Authors
 //
@@ -22,27 +22,63 @@
 //
 //
 
-using System.Xml.Serialization;
+using System;
+using System.Collections.Generic;
 
-namespace Cumberland
+using Cumberland;
+
+namespace Cumberland.Data
 {
-	[XmlInclude(typeof(Polygon)), XmlInclude(typeof(Point)), XmlInclude(typeof(PolyLine))]
-	public abstract class Feature
+	
+	
+	public class SimpleFeatureSource : IFeatureSource
 	{
-		private uint id;
-
-		public uint Id {
-
-			get
-			{
-				return id;
+#region properties
+		
+		public FeatureType SourceFeatureType {
+			get {
+				return featureType;
 			}
-			set
-			{
-				id = value;
+			set {
+				featureType = value;
+			}
+		}
+		FeatureType featureType = FeatureType.None;
+
+		public Cumberland.Rectangle Extents {
+			get {
+				
+				Rectangle r = new Rectangle();
+				
+				foreach (Feature f in Features)
+				{
+					r = Rectangle.Union(r, f.CalculateBounds());
+				}
+
+				return r;
+			}
+		}
+
+		public List<Feature> Features {
+			get {
+				return features;
+			}
+			set {
+				features = value;
 			}
 		}
 		
-		abstract public Rectangle CalculateBounds();
+		List<Feature> features = new List<Feature>();
+
+#endregion
+
+		public SimpleFeatureSource() {}
+		
+		public SimpleFeatureSource(FeatureType fType) { featureType = fType; }
+		
+		public System.Collections.Generic.List<Cumberland.Feature> GetFeatures (Cumberland.Rectangle rectangle)
+		{
+			return features;
+		}
 	}
 }

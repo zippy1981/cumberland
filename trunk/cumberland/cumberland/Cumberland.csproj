@@ -31,6 +31,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
@@ -51,6 +52,7 @@
     <Compile Include="Projection\SphericalMercatorProjector.cs" />
     <Compile Include="Projection\IProjector.cs" />
     <Compile Include="WellKnownText.cs" />
+    <Compile Include="Data\SimpleFeatureSource.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -1,3 +1,9 @@
+2008-10-25  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Feature.cs: add XmlIncludes for serialization
+	* Ring.cs: fix Close() bug
+	* Data/SimpleFeatureSource.cs: add
+
 2008-10-23  Scott Ellington <scott.ellington@gmail.com> 
 
 	* Point.cs: add default ctor
