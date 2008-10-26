@@ -110,12 +110,13 @@ namespace Cumberland
 		{
 			if (points.Count > 2 && !IsClosed)
 			{
-				points.Add(points[points.Count-1].Clone());
+				points.Add(points[0].Clone());
 			}
 		}
 		
 		public bool Validate()
 		{
+			//TODO: test for intersections? duplicate points?
 			return points.Count > 2;
 		}
 		
