@@ -1,4 +1,4 @@
-// SimpleFeatureSource.cs
+// AbstractFeatureSource.cs
 //
 // Copyright (c) 2008 Scott Ellington and Authors
 //
@@ -23,70 +23,22 @@
 //
 
 using System;
-using System.Collections.Generic;
-
-using Cumberland;
+using System.Xml.Serialization;
 
 namespace Cumberland.Data
 {
-	
-	
-	public class SimpleFeatureSource : AbstractFeatureSource
+	[XmlInclude(typeof(SimpleFeatureSource)), XmlInclude(typeof(Shapefile.Shapefile))]
+	public abstract class AbstractFeatureSource : IFeatureSource
 	{
-#region properties
 		
-		public override FeatureType SourceFeatureType {
-			get {
-				return featureType;
-			}
-		}
-		FeatureType featureType = FeatureType.None;
-
-		
-		
-		public override Cumberland.Rectangle Extents {
-			get {
-				
-				Rectangle r = new Rectangle();
-				
-				foreach (Feature f in Features)
-				{
-					r = Rectangle.Union(r, f.CalculateBounds());
-				}
-
-				return r;
-			}
+		public abstract FeatureType SourceFeatureType {
+			get;
 		}
 
-		public List<Feature> Features {
-			get {
-				return features;
-			}
-			set {
-				features = value;
-			}
+		public abstract Cumberland.Rectangle Extents {
+			get;
 		}
 
-		public FeatureType SimpleFeatureType {
-			get {
-				return featureType;
-			}
-			set {
-				featureType = value;
-			}
-		}
-		
-		List<Feature> features = new List<Feature>();
-
-#endregion
-		
-		public SimpleFeatureSource() {}
-		
-		public SimpleFeatureSource(FeatureType fType) { featureType = fType; }
-		
-		public override System.Collections.Generic.List<Cumberland.Feature> GetFeatures (Cumberland.Rectangle rectangle)
-		{
-			return features;
-		}
+		public abstract System.Collections.Generic.List<Cumberland.Feature> GetFeatures (Cumberland.Rectangle rectangle);
 	}
 }
