@@ -30,7 +30,6 @@ using System.Diagnostics;
 using Cumberland;
 using Cumberland.Data.Shapefile;
 using Cumberland.Drawing;
-using Cumberland.Drawing.OpenGL;
 using Cumberland.Projection;
 
 using NDesk.Options;
@@ -69,10 +68,7 @@ namespace Cumberland.DrawMap
 			options.Add("p|proj=",
 			            "the output projection. can be a quoted proj4 string or an epsg code",
 			            delegate (string v) { map.Projection = ParseProjection(v); });
-			options.Add("g|opengl",
-			            "set this switch to enable drawing with openGL",
-			            delegate (string v) { if (v != null) drawer = new OpenGlMapDrawer(); });
-			            
+		            
 		
 			List<string> rest = options.Parse(args);
 
