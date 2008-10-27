@@ -40,20 +40,20 @@ namespace Cumberland.Data.PostGIS
 		Point
 	}
 	
-	public class PostGISFeatureSource : IFeatureSource
+	public class PostGISFeatureSource : AbstractFeatureSource
 	{
 		string connectionString, tableName, geometryColumn;
 		int srid;
 		
 		delegate Feature ParseWKT(string wkt);
 		
-		public FeatureType SourceFeatureType {
+		public override FeatureType SourceFeatureType {
 			get {
 				return featureType;
 			}
 		}
 
-		public Rectangle Extents {
+		public override Rectangle Extents {
 			get 
 			{
 				using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
@@ -160,7 +160,7 @@ namespace Cumberland.Data.PostGIS
 			}
 		}
 
-		public List<Feature> GetFeatures (Rectangle rectangle)
+		public override List<Feature> GetFeatures (Rectangle rectangle)
 		{
 			List<Feature> feats = new List<Feature>();
 			

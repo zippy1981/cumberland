@@ -1,5 +1,9 @@
 2008-10-26  Scott Ellington <scott.ellington@gmail.com> 
 
+	
+
+2008-10-26  Scott Ellington <scott.ellington@gmail.com> 
+
 	* Rectangle.cs: add center setter
 
 2008-10-25  Scott Ellington <scott.ellington@gmail.com> 

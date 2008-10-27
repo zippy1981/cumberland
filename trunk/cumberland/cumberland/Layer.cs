@@ -76,7 +76,7 @@ namespace Cumberland
 			}
 		}
 
-		public IFeatureSource Data {
+		public AbstractFeatureSource Data {
 			get {
 				return data;
 			}
@@ -120,7 +120,7 @@ namespace Cumberland
 		
 		Color fillColor = Color.AliceBlue;
 		
-		IFeatureSource data;
+		AbstractFeatureSource data;
 		
 		LineStyle lineStyle = LineStyle.Solid;
 		

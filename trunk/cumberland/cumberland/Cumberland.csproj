@@ -53,6 +53,7 @@
     <Compile Include="Projection\IProjector.cs" />
     <Compile Include="WellKnownText.cs" />
     <Compile Include="Data\SimpleFeatureSource.cs" />
+    <Compile Include="Data\AbstractFeatureSource.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

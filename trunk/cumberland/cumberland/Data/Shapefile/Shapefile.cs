@@ -25,13 +25,16 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Xml.Serialization;
+
+using Cumberland;
 
 namespace Cumberland.Data.Shapefile
 {
 	//TODO: Because this specification does not forbid consecutive points with identical coordinates, 
 	// shapefile readers must handle such cases.
 
-    public class Shapefile : IFeatureSource
+    public class Shapefile : AbstractFeatureSource
 	{				
         public enum ShapeType
         {
@@ -60,57 +63,79 @@ namespace Cumberland.Data.Shapefile
 		
 #region Properties
 	
+		[XmlIgnore]
 		public ShapeType Shapetype {
 			get {
+				if (!isOpen) Open();
+				
 				return shapetype;
-			}
-			set {
-				shapetype = value;
 			}
 		}
 		ShapeType shapetype = ShapeType.Null;
 		
 		List<Feature> features = new List<Feature>();
 		
-		public Rectangle Extents {
+		[XmlIgnore]
+		public override Rectangle Extents {
 			get {
+				if (!isOpen) Open();
+				
 				return listedExtents;
 			}
 		}
 
+		[XmlIgnore]
 		public uint Version {
 			get {
 				return version;
 			}
 		}
 
-		public Cumberland.Data.FeatureType SourceFeatureType {
+		[XmlIgnore]
+		public override Cumberland.Data.FeatureType SourceFeatureType {
 			get {
+				if (!isOpen) Open();
+				
 				return featureType;
+			}
+		}
+
+		public string FileName {
+			get {
+				return fileName;
+			}
+			set {
+				fileName = value;
+			}
+		}
+
+		[XmlIgnore]
+		public bool IsOpen {
+			get {
+				return isOpen;
 			}
 		}
 		
 		FeatureType featureType;
 		
-		Rectangle listedExtents;
+		Rectangle listedExtents = new Cumberland.Rectangle();
 
+		string fileName;
+		
+		bool isOpen = false;
+		
 #endregion
 
 #region ctor
 		
+		public Shapefile()
+		{
+		}
+		
         public Shapefile(string fname)
         {
-	        FileStream file;
-
-			file = new FileStream(fname, FileMode.Open, FileAccess.Read); 
-           	
-			BinaryReader str = new BinaryReader(file);
-            str.BaseStream.Seek(0, SeekOrigin.Begin); 
-			
-            ReadFileHeader(str);
-			ReadShapeRecords(str);
-			
-            file.Close();
+			fileName = fname;
+			Open();
 		}
 
 		
@@ -118,6 +143,7 @@ namespace Cumberland.Data.Shapefile
 	
 #region Helper methods		
 		
+	
         uint FlipEndian(uint iin)
         {
             byte[] temp = BitConverter.GetBytes(iin);
@@ -327,10 +353,32 @@ namespace Cumberland.Data.Shapefile
 		
 #region IFeatureSource methods
 		
-		public List<Cumberland.Feature> GetFeatures (Cumberland.Rectangle rectangle)
+		public override List<Cumberland.Feature> GetFeatures (Cumberland.Rectangle rectangle)
 		{
+			if (!IsOpen) Open();
+			
 			// we've got no spatial index 
 			return features;
+		}
+		
+#endregion
+		
+#region public methods
+		
+		public void Open()
+		{
+			if (isOpen) return;
+			
+			using (FileStream file = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+			{
+           		BinaryReader str = new BinaryReader(file);
+	            str.BaseStream.Seek(0, SeekOrigin.Begin); 
+				
+	            ReadFileHeader(str);
+				ReadShapeRecords(str);
+			}
+			
+			isOpen = true;
 		}
 		
 #endregion
