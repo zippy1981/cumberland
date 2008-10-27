@@ -55,6 +55,15 @@ namespace Cumberland
 				return new Point(Width/2 + min.X, 
 				                 Height/2 + min.Y);
 			}
+			set {
+				double w = Width;
+				double h = Height;
+				
+				min.X = value.X - w/2;
+				min.Y = value.Y - h/2;
+				max.X = value.X + w/2;
+				max.Y = value.Y + h/2;
+			}
 		}
 		
 		public double Width {

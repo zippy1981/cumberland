@@ -85,5 +85,49 @@ namespace Cumberland.Tests
 			// simple math
 			Assert.AreEqual(2, r.AspectRatioOfWidth);
 		}
+		
+		[Test]
+		public void TestCenterSetter()
+		{
+			Rectangle r = new Rectangle(0,0,2,2); // center is 1,1
+			
+			r.Center = new Point(2,2);
+			
+			Assert.AreEqual(new Rectangle(1,1,3,3), r);
+		}
+		
+		[Test]
+		public void TestClone()
+		{
+			// ensure a deep copy
+			Rectangle r = new Rectangle(0,0,2,2);
+			
+			Rectangle r2 = r.Clone();
+			
+			r.Max.X = 4;
+			
+			Assert.IsFalse(r == r2);
+		}
+		
+		[Test]
+		public void TestWidthSetter()
+		{
+			Rectangle r = new Rectangle(1,1,3,3);
+			
+			r.Width = 4;
+			
+			Assert.AreEqual(new Rectangle(0,1,4,3), r);
+		}
+		
+		[Test]
+		public void TestHeightSetter()
+		{
+			Rectangle r = new Rectangle(1,1,3,3);
+			
+			r.Height = 4;
+			
+			Assert.AreEqual(new Rectangle(1,0,3,4), r);
+		}
+		
 	}
 }
