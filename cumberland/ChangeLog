@@ -1,5 +1,9 @@
 2008-10-27  Scott Ellington <scott.ellington@gmail.com> 
 
+	* Cumberland.DrawMap/Main.cs: remove opengl drawing
+
+2008-10-27  Scott Ellington <scott.ellington@gmail.com> 
+
 	* Cumberland.Drawing.OpenGL/OpenGlMapDrawer.cs: add DeleteGlList
 
 2008-10-26  Scott Ellington <scott.ellington@gmail.com> 

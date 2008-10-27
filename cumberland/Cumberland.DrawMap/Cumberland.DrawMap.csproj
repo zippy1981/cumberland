@@ -39,10 +39,6 @@
       <Project>{05A6F104-D839-4B9C-B704-91F9BB608D73}</Project>
       <Name>Cumberland</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Cumberland.Drawing.OpenGL\Cumberland.Drawing.OpenGL.csproj">
-      <Project>{05A6F104-D839-4B9C-B704-91F9BB608D73}</Project>
-      <Name>Cumberland.Drawing.OpenGL</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
