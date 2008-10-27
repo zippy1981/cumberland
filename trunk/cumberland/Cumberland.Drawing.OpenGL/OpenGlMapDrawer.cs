@@ -41,180 +41,170 @@ using Cumberland.Projection;
 
 namespace Cumberland.Drawing.OpenGL
 {
-	public class OpenGlMapDrawer : IMapDrawer
+	public class OpenGlMapDrawer //: IMapDrawer
 	{
 		Dictionary<string,int> glLists = new Dictionary<string,int>();
 		
 #region IMapDrawer Methods
 		
-		/// <summary>
-		/// Uses OpenGL's frame buffer object to draw a map offscreen and then convert to bitmap. 
-		/// Opens an openGL context via freeGLUT.
-		/// </summary>
-		/// <param name="map">
-		/// A <see cref="Map"/>
-		/// </param>
-		/// <returns>
-		/// A <see cref="Bitmap"/>
-		/// </returns>
-		public Bitmap Draw(Map map)
-		{
-			int[] temp = new int[1];
-			int fbo = -1;
-			int depthBuffer = -1;
-			int colorBuffer = -1;
-			Bitmap b = null;
-			
-			try
-			{
-				// hack to get an opengl context
-				int glutTime = Glut.glutGet(Glut.GLUT_ELAPSED_TIME);
-				if (glutTime == 0)
-				{		
-					Glut.glutInit();
-				}
-				
-				Glut.glutCreateWindow(string.Empty);
-				Glut.glutHideWindow();
-				
-				// test for fbo support
-				string glext = Gl.glGetString(Gl.GL_EXTENSIONS);
-				if (glext != null && !glext.Contains("GL_EXT_framebuffer_object"))
-				{
-					throw new NotSupportedException("Your video card does not support frame buffers");	
-				}
-				
-				// get frame buffer from openGL
-				Gl.glGenFramebuffersEXT(1, temp);
-				fbo = temp[0];
-				
-				// bind this so that rendering occurs on fbo
-				Gl.glBindFramebufferEXT(Gl.GL_FRAMEBUFFER_EXT, fbo);
-				
-				// create, bind, and associate our depth buffer to the frame buffer			
+//		public Bitmap Draw(Map map)
+//		{
+//			int[] temp = new int[1];
+//			int fbo = -1;
+//			int depthBuffer = -1;
+//			int colorBuffer = -1;
+//			Bitmap b = null;
+//			
+//			try
+//			{
+//				// hack to get an opengl context
+//				int glutTime = Glut.glutGet(Glut.GLUT_ELAPSED_TIME);
+//				if (glutTime == 0)
+//				{		
+//					Glut.glutInit();
+//				}
+//				
+//				Glut.glutCreateWindow(string.Empty);
+//				Glut.glutHideWindow();
+//				
+//				// test for fbo support
+//				string glext = Gl.glGetString(Gl.GL_EXTENSIONS);
+//				if (glext != null && !glext.Contains("GL_EXT_framebuffer_object"))
+//				{
+//					throw new NotSupportedException("Your video card does not support frame buffers");	
+//				}
+//				
+//				// get frame buffer from openGL
+//				Gl.glGenFramebuffersEXT(1, temp);
+//				fbo = temp[0];
+//				
+//				// bind this so that rendering occurs on fbo
+//				Gl.glBindFramebufferEXT(Gl.GL_FRAMEBUFFER_EXT, fbo);
+//				
+//				// create, bind, and associate our depth buffer to the frame buffer			
+////				Gl.glGenRenderbuffersEXT(1, temp);
+////				depthBuffer = temp[0];
+////				Gl.glBindRenderbufferEXT(Gl.GL_RENDERBUFFER_EXT, depthBuffer);
+////				Gl.glRenderbufferStorageEXT(Gl.GL_RENDERBUFFER_EXT, Gl.GL_DEPTH_COMPONENT, map.Width, map.Height);	
+////				Gl.glFramebufferRenderbufferEXT(Gl.GL_FRAMEBUFFER_EXT, Gl.GL_DEPTH_ATTACHMENT_EXT, Gl.GL_RENDERBUFFER_EXT, depthBuffer);
+//								
+//				//  get render buffer from opengl
 //				Gl.glGenRenderbuffersEXT(1, temp);
-//				depthBuffer = temp[0];
-//				Gl.glBindRenderbufferEXT(Gl.GL_RENDERBUFFER_EXT, depthBuffer);
-//				Gl.glRenderbufferStorageEXT(Gl.GL_RENDERBUFFER_EXT, Gl.GL_DEPTH_COMPONENT, map.Width, map.Height);	
-//				Gl.glFramebufferRenderbufferEXT(Gl.GL_FRAMEBUFFER_EXT, Gl.GL_DEPTH_ATTACHMENT_EXT, Gl.GL_RENDERBUFFER_EXT, depthBuffer);
-								
-				//  get render buffer from opengl
-				Gl.glGenRenderbuffersEXT(1, temp);
-				colorBuffer = temp[0];
-
-				// bind it
-				Gl.glBindRenderbufferEXT(Gl.GL_RENDERBUFFER_EXT, colorBuffer);
-				
-//				Gl.glGetIntegerv(Gl.GL_MAX_SAMPLES_EXT, temp);
-//				System.Console.WriteLine(temp[0]);
-				
-				// allocate memory
-				Gl.glRenderbufferStorageEXT(Gl.GL_RENDERBUFFER_EXT, Gl.GL_RGBA, map.Width, map.Height);
-				//Gl.glRenderbufferStorageMultisampleEXT(Gl.GL_RENDERBUFFER_EXT, 16, Gl.GL_RGBA, map.Width, map.Height);
-				//Gl.glRenderbufferStorageMultisampleCoverageNV(Gl.GL_RENDERBUFFER_EXT, 4, 16, Gl.GL_RGBA, map.Width, map.Height);
-				
-				// attach render buffer to fbo
-				Gl.glFramebufferRenderbufferEXT(Gl.GL_FRAMEBUFFER_EXT, Gl.GL_COLOR_ATTACHMENT0_EXT, Gl.GL_RENDERBUFFER_EXT, colorBuffer);
-
-				// check state
-				int fboState = Gl.glCheckFramebufferStatusEXT(Gl.GL_FRAMEBUFFER_EXT);
-				if (fboState != Gl.GL_FRAMEBUFFER_COMPLETE_EXT)
-				{
-					string fbErr = "Unknown Error";
-
-					switch (fboState)
-					{
-					    case Gl.GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT_EXT:
-					        fbErr = "Framebuffer has an incomplete attachment";
-					        break;
-					    case Gl.GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS_EXT:
-					        fbErr = "Framebuffer has wrong dimensions";
-					        break;
-					    case Gl.GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER_EXT:
-					        fbErr = "Framebuffer has incomplete draw buffer";
-					        break;
-					    case Gl.GL_FRAMEBUFFER_INCOMPLETE_FORMATS_EXT:
-					        fbErr = "Framebuffer has incomplete formats";
-					        break;
-					    case Gl.GL_FRAMEBUFFER_INCOMPLETE_LAYER_COUNT_EXT:
-					        fbErr = "Framebuffer has wrong layer count";
-					        break;
-					    case Gl.GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS_EXT:
-					        fbErr = "Framebuffer has wrong layer targets";
-					        break;
-					    case Gl.GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT_EXT:
-					        fbErr = "Framebuffer has missing attachment";
-					        break;
-					    case Gl.GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_EXT:
-					        fbErr = "Framebuffer has multisample error";
-					        break;
-					    case Gl.GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER_EXT:
-					        fbErr = "Framebuffer has incomplete readbuffer";
-					        break;
-					    case Gl.GL_FRAMEBUFFER_UNSUPPORTED_EXT:
-					        fbErr = "Framebuffer is unsupported";
-					        break;
-					}
-
-					throw new InvalidOperationException("Framebuffer Error: " + fbErr);
-				}
-				
-				// acquire the proper space
-				Gl.glViewport(0, 0, map.Width, map.Height);
-				
-				// clear out
-				Gl.glClearColor(1f, 1f, 1f, 0f);
-				Gl.glClear(Gl.GL_COLOR_BUFFER_BIT);
-				
-				// switch to projection matrix
-				Gl.glMatrixMode(Gl.GL_PROJECTION);
-				Gl.glLoadIdentity();
-				
-				Rectangle r = map.Extents.Clone();
-
-				// set aspect ratio to image to avoid distortion
-				r.AspectRatioOfWidth = map.Width / map.Height;
-
-				// set projection matrix to our extents				
-				Gl.glOrtho(r.Min.X, r.Max.X, r.Min.Y, r.Max.Y, 0, 1);
-				
-				// switch back to model view
-				Gl.glMatrixMode(Gl.GL_MODELVIEW);
-				
-				// 2d image
-				Gl.glDisable(Gl.GL_DEPTH_TEST);
-				
-				// render here
-				Render(map, false);
-						
-				// acquire the pixels from openGL and draw to bitmap
-				b = new Bitmap(map.Width, map.Height, PixelFormat.Format32bppArgb);
-				BitmapData bd = b.LockBits(new System.Drawing.Rectangle(0, 0, map.Width, map.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
-				Gl.glReadPixels(0, 0, map.Width, map.Height, Gl.GL_BGRA, Gl.GL_UNSIGNED_BYTE, bd.Scan0);
-				b.UnlockBits(bd);
-				b.RotateFlip(RotateFlipType.Rotate180FlipX);
-				
-				// check for openGL errors
-				int errorcode;
-				if ((errorcode = Gl.glGetError()) != Gl.GL_NO_ERROR)
-				{
-					throw new InvalidOperationException("OpenGL reports an error: " + GluMethods.gluErrorString(errorcode));
-				}
-			}
-			finally
-			{
-				// free memory
-				if (fbo >= 0) Gl.glDeleteFramebuffersEXT(1, new int[] { fbo });
-				if (depthBuffer >= 0) Gl.glDeleteRenderbuffersEXT(1, new int[] { depthBuffer });
-				if (colorBuffer >= 0) Gl.glDeleteRenderbuffersEXT(1, new int[] { colorBuffer });
-			}
-			
-			return b;
-		}
+//				colorBuffer = temp[0];
+//
+//				// bind it
+//				Gl.glBindRenderbufferEXT(Gl.GL_RENDERBUFFER_EXT, colorBuffer);
+//				
+////				Gl.glGetIntegerv(Gl.GL_MAX_SAMPLES_EXT, temp);
+////				System.Console.WriteLine(temp[0]);
+//				
+//				// allocate memory
+//				Gl.glRenderbufferStorageEXT(Gl.GL_RENDERBUFFER_EXT, Gl.GL_RGBA, map.Width, map.Height);
+//				//Gl.glRenderbufferStorageMultisampleEXT(Gl.GL_RENDERBUFFER_EXT, 16, Gl.GL_RGBA, map.Width, map.Height);
+//				//Gl.glRenderbufferStorageMultisampleCoverageNV(Gl.GL_RENDERBUFFER_EXT, 4, 16, Gl.GL_RGBA, map.Width, map.Height);
+//				
+//				// attach render buffer to fbo
+//				Gl.glFramebufferRenderbufferEXT(Gl.GL_FRAMEBUFFER_EXT, Gl.GL_COLOR_ATTACHMENT0_EXT, Gl.GL_RENDERBUFFER_EXT, colorBuffer);
+//
+//				// check state
+//				int fboState = Gl.glCheckFramebufferStatusEXT(Gl.GL_FRAMEBUFFER_EXT);
+//				if (fboState != Gl.GL_FRAMEBUFFER_COMPLETE_EXT)
+//				{
+//					string fbErr = "Unknown Error";
+//
+//					switch (fboState)
+//					{
+//					    case Gl.GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT_EXT:
+//					        fbErr = "Framebuffer has an incomplete attachment";
+//					        break;
+//					    case Gl.GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS_EXT:
+//					        fbErr = "Framebuffer has wrong dimensions";
+//					        break;
+//					    case Gl.GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER_EXT:
+//					        fbErr = "Framebuffer has incomplete draw buffer";
+//					        break;
+//					    case Gl.GL_FRAMEBUFFER_INCOMPLETE_FORMATS_EXT:
+//					        fbErr = "Framebuffer has incomplete formats";
+//					        break;
+//					    case Gl.GL_FRAMEBUFFER_INCOMPLETE_LAYER_COUNT_EXT:
+//					        fbErr = "Framebuffer has wrong layer count";
+//					        break;
+//					    case Gl.GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS_EXT:
+//					        fbErr = "Framebuffer has wrong layer targets";
+//					        break;
+//					    case Gl.GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT_EXT:
+//					        fbErr = "Framebuffer has missing attachment";
+//					        break;
+//					    case Gl.GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_EXT:
+//					        fbErr = "Framebuffer has multisample error";
+//					        break;
+//					    case Gl.GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER_EXT:
+//					        fbErr = "Framebuffer has incomplete readbuffer";
+//					        break;
+//					    case Gl.GL_FRAMEBUFFER_UNSUPPORTED_EXT:
+//					        fbErr = "Framebuffer is unsupported";
+//					        break;
+//					}
+//
+//					throw new InvalidOperationException("Framebuffer Error: " + fbErr);
+//				}
+//				
+//				// acquire the proper space
+//				Gl.glViewport(0, 0, map.Width, map.Height);
+//				
+//				// clear out
+//				Gl.glClearColor(1f, 1f, 1f, 0f);
+//				Gl.glClear(Gl.GL_COLOR_BUFFER_BIT);
+//				
+//				// switch to projection matrix
+//				Gl.glMatrixMode(Gl.GL_PROJECTION);
+//				Gl.glLoadIdentity();
+//				
+//				Rectangle r = map.Extents.Clone();
+//
+//				// set aspect ratio to image to avoid distortion
+//				r.AspectRatioOfWidth = map.Width / map.Height;
+//
+//				// set projection matrix to our extents				
+//				Gl.glOrtho(r.Min.X, r.Max.X, r.Min.Y, r.Max.Y, 0, 1);
+//				
+//				// switch back to model view
+//				Gl.glMatrixMode(Gl.GL_MODELVIEW);
+//				
+//				// 2d image
+//				Gl.glDisable(Gl.GL_DEPTH_TEST);
+//				
+//				// render here
+//				Render(map, false);
+//						
+//				// acquire the pixels from openGL and draw to bitmap
+//				b = new Bitmap(map.Width, map.Height, PixelFormat.Format32bppArgb);
+//				BitmapData bd = b.LockBits(new System.Drawing.Rectangle(0, 0, map.Width, map.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
+//				Gl.glReadPixels(0, 0, map.Width, map.Height, Gl.GL_BGRA, Gl.GL_UNSIGNED_BYTE, bd.Scan0);
+//				b.UnlockBits(bd);
+//				b.RotateFlip(RotateFlipType.Rotate180FlipX);
+//				
+//				// check for openGL errors
+//				int errorcode;
+//				if ((errorcode = Gl.glGetError()) != Gl.GL_NO_ERROR)
+//				{
+//					throw new InvalidOperationException("OpenGL reports an error: " + GluMethods.gluErrorString(errorcode));
+//				}
+//			}
+//			finally
+//			{
+//				// free memory
+//				if (fbo >= 0) Gl.glDeleteFramebuffersEXT(1, new int[] { fbo });
+//				if (depthBuffer >= 0) Gl.glDeleteRenderbuffersEXT(1, new int[] { depthBuffer });
+//				if (colorBuffer >= 0) Gl.glDeleteRenderbuffersEXT(1, new int[] { colorBuffer });
+//			}
+//			
+//			return b;
+//		}
 		
 #endregion
 		
-#region Methods
+#region public Methods
 		
 		/// <summary>
 		/// Renders the map to an openGL context.
@@ -618,6 +608,17 @@ namespace Cumberland.Drawing.OpenGL
 				}
 			}
 		}
+
+		public void DeleteGlList(string layerId)
+		{
+			int id;
+			if (glLists.TryGetValue(layerId, out id))
+			{
+				Gl.glDeleteLists(id, 1);
+				glLists.Remove(layerId);
+			}
+		}
+
 #endregion
 
 #region helper methods
