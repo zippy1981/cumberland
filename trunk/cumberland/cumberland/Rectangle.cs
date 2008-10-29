@@ -121,6 +121,14 @@ namespace Cumberland
 			}
 		}
 		
+		public double Area
+		{
+			get
+			{
+				return Width * Height;
+			}
+		}
+		
 #endregion
 		
 #region Constructors

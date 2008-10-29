@@ -45,6 +45,8 @@
     <Compile Include="RectangleTests.cs" />
     <Compile Include="WellKnownTextTests.cs" />
     <Compile Include="RingTests.cs" />
+    <Compile Include="MapTests.cs" />
+    <Compile Include="LineTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shape_eg_data\mexico\cities.dbf" />
