@@ -1,3 +1,8 @@
+2008-10-28  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Map.cs: add AddLayerByFeatureTypeAndExtents()
+	* Rectangle.cs: Add Area
+
 2008-10-26  Scott Ellington <scott.ellington@gmail.com> 
 
 	

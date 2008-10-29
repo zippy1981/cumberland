@@ -129,5 +129,22 @@ namespace Cumberland.Tests
 			Assert.AreEqual(new Rectangle(1,0,3,4), r);
 		}
 		
+		[Test] 
+		public void TestAreaGetter()
+		{
+			Rectangle r = new Rectangle(0,0,2,2);
+			
+			Assert.AreEqual(4, r.Area);
+		}
+		
+		[Test]
+		public void TestUnionWithEmpty()
+		{
+			Rectangle r = new Rectangle();
+			
+			Rectangle r2 = new Rectangle(0,0,10,10);
+			
+			Assert.AreEqual(r2, Rectangle.Union(r,r2));
+		}
 	}
 }
