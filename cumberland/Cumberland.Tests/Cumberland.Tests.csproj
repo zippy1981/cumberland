@@ -47,6 +47,7 @@
     <Compile Include="RingTests.cs" />
     <Compile Include="MapTests.cs" />
     <Compile Include="LineTests.cs" />
+    <Compile Include="MapSerializerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shape_eg_data\mexico\cities.dbf" />

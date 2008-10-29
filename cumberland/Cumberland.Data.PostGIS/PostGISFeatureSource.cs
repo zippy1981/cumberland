@@ -40,20 +40,52 @@ namespace Cumberland.Data.PostGIS
 		Point
 	}
 	
-	public class PostGISFeatureSource : AbstractFeatureSource
+	public class PostGISFeatureSource : IFeatureSource, IDBFeatureProvider
 	{
+#region vars
+		
 		string connectionString, tableName, geometryColumn;
 		int srid;
 		
+		bool isInitialized = false;
+		
+		FeatureType featureType = FeatureType.None;
+		
+		GeometryType geometryType = GeometryType.None;
+		
+		ParseWKT parseWKTHandler;
+		
 		delegate Feature ParseWKT(string wkt);
 		
-		public override FeatureType SourceFeatureType {
+#endregion
+
+#region Properties
+		
+		public FeatureType SourceFeatureType {
 			get {
 				return featureType;
 			}
 		}
+		
+		public string TableName {
+			get {
+				return tableName;
+			}
+			set {
+				tableName = value;
+			}
+		}
 
-		public override Rectangle Extents {
+		public string ConnectionString {
+			get {
+				return connectionString;
+			}
+			set {
+				connectionString = value;
+			}
+		}
+
+		public Rectangle Extents {
 			get 
 			{
 				using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
@@ -80,36 +112,57 @@ namespace Cumberland.Data.PostGIS
 							                     Convert.ToDouble(bits[2]),
 							                     Convert.ToDouble(bits[3]),
 							                     Convert.ToDouble(bits[4]));
-							
-							
+
 						}
 					}
 				}
 			}
 		}
+
+		public bool IsInitialized {
+			get {
+				return isInitialized;
+			}
+		}
+
+#endregion
+
+#region ctors
 		
-		
-		FeatureType featureType = FeatureType.None;
-		
-		GeometryType geometryType = GeometryType.None;
-		
-		ParseWKT parseWKTHandler;
-		
-		public PostGISFeatureSource(string connection, string table)
+		public PostGISFeatureSource()
 		{
-			connectionString = connection;
-			tableName = table;
+		}
+		
+		public PostGISFeatureSource(string connectionString, string tableName)
+		{
+			ConnectionString = connectionString;
+			TableName = tableName;
 			
+			InitializeFeatureProvider();
+		}
+
+#endregion
+		
+#region Public methods
+		
+		public void InitializeFeatureProvider()
+		{
+			if (string.IsNullOrEmpty(ConnectionString) || string.IsNullOrEmpty(TableName))
+			{
+				throw new InvalidOperationException("ConnectionString and TableName must be set to initialize");
+			}
+
 			using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
 			{
 				string sql = string.Format("select f_geometry_column, srid, type from geometry_columns where f_table_name = '{0}'",
 				                           tableName);
 				
 				//System.Console.WriteLine(sql);
+				conn.Open();
 				
 				using (NpgsqlCommand comm = new NpgsqlCommand(sql, conn))
 				{
-					conn.Open();
+
 					
 					using (NpgsqlDataReader dr = comm.ExecuteReader())
 					{
@@ -156,12 +209,18 @@ namespace Cumberland.Data.PostGIS
 						
 					}
 				}
-
-			}
+			}		
+			
+			isInitialized = true;
 		}
-
-		public override List<Feature> GetFeatures (Rectangle rectangle)
+		
+		public List<Feature> GetFeatures (Rectangle rectangle)
 		{
+			if (!IsInitialized)
+			{
+				throw new InvalidOperationException("Database feature provider not initialized.  Use 'InitializeFeatureProvider'");
+			}
+			
 			List<Feature> feats = new List<Feature>();
 			
 			using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
@@ -199,5 +258,7 @@ namespace Cumberland.Data.PostGIS
 			
 			return feats;
 		}
+		
+#endregion
 	}
 }

@@ -34,7 +34,7 @@ namespace Cumberland.Data.Shapefile
 	//TODO: Because this specification does not forbid consecutive points with identical coordinates, 
 	// shapefile readers must handle such cases.
 
-    public class Shapefile : AbstractFeatureSource
+    public class Shapefile : IFeatureSource, IFileFeatureProvider
 	{				
         public enum ShapeType
         {
@@ -76,7 +76,7 @@ namespace Cumberland.Data.Shapefile
 		List<Feature> features = new List<Feature>();
 		
 		[XmlIgnore]
-		public override Rectangle Extents {
+		public Rectangle Extents {
 			get {
 				if (!isOpen) Open();
 				
@@ -92,7 +92,7 @@ namespace Cumberland.Data.Shapefile
 		}
 
 		[XmlIgnore]
-		public override Cumberland.Data.FeatureType SourceFeatureType {
+		public Cumberland.Data.FeatureType SourceFeatureType {
 			get {
 				if (!isOpen) Open();
 				
@@ -100,7 +100,7 @@ namespace Cumberland.Data.Shapefile
 			}
 		}
 
-		public string FileName {
+		public string FilePath {
 			get {
 				return fileName;
 			}
@@ -353,7 +353,7 @@ namespace Cumberland.Data.Shapefile
 		
 #region IFeatureSource methods
 		
-		public override List<Cumberland.Feature> GetFeatures (Cumberland.Rectangle rectangle)
+		public List<Cumberland.Feature> GetFeatures (Cumberland.Rectangle rectangle)
 		{
 			if (!IsOpen) Open();
 			

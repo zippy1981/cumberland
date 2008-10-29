@@ -1,3 +1,7 @@
+2008-10-29  Scott Ellington <scott.ellington@gmail.com> 
+
+	
+
 2008-10-28  Scott Ellington <scott.ellington@gmail.com> 
 
 	* Map.cs: add AddLayerByFeatureTypeAndExtents()

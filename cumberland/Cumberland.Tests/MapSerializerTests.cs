@@ -1,4 +1,4 @@
-// SimpleFeatureSource.cs
+// MapSerializerTests.cs
 //
 // Copyright (c) 2008 Scott Ellington and Authors
 //
@@ -23,70 +23,27 @@
 //
 
 using System;
-using System.Collections.Generic;
+using NUnit.Framework;
 
 using Cumberland;
+using Cumberland.Xml.Serialization;
 
-namespace Cumberland.Data
+namespace Cumberland.Tests
 {
 	
 	
-	public class SimpleFeatureSource : IFeatureSource
+	[TestFixture()]
+	public class MapSerializerTests
 	{
-#region properties
 		
-		public FeatureType SourceFeatureType {
-			get {
-				return featureType;
-			}
-		}
-		FeatureType featureType = FeatureType.None;
-
-		
-		
-		public Cumberland.Rectangle Extents {
-			get {
-				
-				Rectangle r = new Rectangle();
-				
-				foreach (Feature f in Features)
-				{
-					r = Rectangle.Union(r, f.CalculateBounds());
-				}
-
-				return r;
-			}
-		}
-
-		public List<Feature> Features {
-			get {
-				return features;
-			}
-			set {
-				features = value;
-			}
-		}
-
-		public FeatureType SimpleFeatureType {
-			get {
-				return featureType;
-			}
-			set {
-				featureType = value;
-			}
-		}
-		
-		List<Feature> features = new List<Feature>();
-
-#endregion
-		
-		public SimpleFeatureSource() {}
-		
-		public SimpleFeatureSource(FeatureType fType) { featureType = fType; }
-		
-		public System.Collections.Generic.List<Cumberland.Feature> GetFeatures (Cumberland.Rectangle rectangle)
+		[Test()]
+		public void TestCase()
 		{
-			return features;
+			Map m = new Map();
+			
+			string s = MapSerializer.Serialize(m);
+			
+			Assert.AreEqual(string.Empty, s);
 		}
 	}
 }

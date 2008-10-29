@@ -1,4 +1,4 @@
-// AbstractFeatureSource.cs
+// IFileFeatureSource.cs
 //
 // Copyright (c) 2008 Scott Ellington and Authors
 //
@@ -23,22 +23,11 @@
 //
 
 using System;
-using System.Xml.Serialization;
 
-namespace Cumberland.Data
+namespace Cumberland
 {
-	[XmlInclude(typeof(SimpleFeatureSource)), XmlInclude(typeof(Shapefile.Shapefile))]
-	public abstract class AbstractFeatureSource : IFeatureSource
+	public interface IFileFeatureProvider
 	{
-		
-		public abstract FeatureType SourceFeatureType {
-			get;
-		}
-
-		public abstract Cumberland.Rectangle Extents {
-			get;
-		}
-
-		public abstract System.Collections.Generic.List<Cumberland.Feature> GetFeatures (Cumberland.Rectangle rectangle);
+		string FilePath { get; set; }
 	}
 }
