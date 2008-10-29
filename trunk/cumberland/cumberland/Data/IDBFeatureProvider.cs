@@ -1,4 +1,4 @@
-// SimpleFeatureSource.cs
+// IDBFeatureSource.cs
 //
 // Copyright (c) 2008 Scott Ellington and Authors
 //
@@ -23,70 +23,14 @@
 //
 
 using System;
-using System.Collections.Generic;
 
-using Cumberland;
-
-namespace Cumberland.Data
+namespace Cumberland
 {
-	
-	
-	public class SimpleFeatureSource : IFeatureSource
+	public interface IDBFeatureProvider
 	{
-#region properties
+		string ConnectionString { get; set; }
+		string TableName { get; set; }
 		
-		public FeatureType SourceFeatureType {
-			get {
-				return featureType;
-			}
-		}
-		FeatureType featureType = FeatureType.None;
-
-		
-		
-		public Cumberland.Rectangle Extents {
-			get {
-				
-				Rectangle r = new Rectangle();
-				
-				foreach (Feature f in Features)
-				{
-					r = Rectangle.Union(r, f.CalculateBounds());
-				}
-
-				return r;
-			}
-		}
-
-		public List<Feature> Features {
-			get {
-				return features;
-			}
-			set {
-				features = value;
-			}
-		}
-
-		public FeatureType SimpleFeatureType {
-			get {
-				return featureType;
-			}
-			set {
-				featureType = value;
-			}
-		}
-		
-		List<Feature> features = new List<Feature>();
-
-#endregion
-		
-		public SimpleFeatureSource() {}
-		
-		public SimpleFeatureSource(FeatureType fType) { featureType = fType; }
-		
-		public System.Collections.Generic.List<Cumberland.Feature> GetFeatures (Cumberland.Rectangle rectangle)
-		{
-			return features;
-		}
+		void InitializeFeatureProvider();
 	}
 }
