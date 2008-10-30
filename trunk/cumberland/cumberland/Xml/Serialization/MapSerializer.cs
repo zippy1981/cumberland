@@ -78,13 +78,16 @@ namespace Cumberland.Xml.Serialization
 		
 		public Map Deserialize(string path)
 		{
-			return Deserialize(new FileStream(path, FileMode.Open, FileAccess.Read));
+			using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read))
+			{
+				return Deserialize(fs);
+			}
 		}
 		
 		public Map Deserialize(Stream stream)
 		{
 			Map map = new Map();		
-			int layerIndex = 0;	
+			//int layerIndex = 0;	
 			XmlDocument doc = new XmlDocument();
 			doc.Load(stream);
 			
@@ -94,7 +97,7 @@ namespace Cumberland.Xml.Serialization
 				{
 					foreach (XmlNode lnode in node.ChildNodes)
 					{
-						DeserializeLayer(lnode, map, layerIndex++);
+						DeserializeLayer(lnode, map);
 					}
 				}
 				else if (node.Name == "Extents")
@@ -104,6 +107,14 @@ namespace Cumberland.Xml.Serialization
 				else if (node.Name == "Projection")
 				{
 					map.Projection = node.InnerText;
+				}
+				else if (node.Name == "Width")
+				{
+					map.Width = int.Parse(node.InnerText);
+				}
+				else if (node.Name == "Height")
+				{
+					map.Height = int.Parse(node.InnerText);
 				}
 			}
 			
@@ -151,7 +162,7 @@ namespace Cumberland.Xml.Serialization
 		
 #region private methods
 		
-		void DeserializeLayer(XmlNode node, Map m, int layerIndex)
+		void DeserializeLayer(XmlNode node, Map m)
 		{
 			Layer l = new Layer();
 			Type providerType = null;
@@ -178,16 +189,25 @@ namespace Cumberland.Xml.Serialization
 									instanceType = t;
 								}
 							}
+							
+							if (instanceType == null)
+							{
+								throw new FormatException(string.Format("Provider type '{0}' is not a supported file provider", instance));
+							}
 						}
 						else if (providerType == typeof(IFileFeatureProvider))
 						{
 							foreach (Type t in fileFeatureProviders)
 							{
-
 								if (instance == t.ToString())
 								{
 									instanceType = t;
 								}
+							}
+
+							if (instanceType == null)
+							{
+								throw new FormatException(string.Format("Provider type '{0}' is not a supported database provider", instance));
 							}
 						}
 						else return; // unknown type
@@ -258,7 +278,7 @@ namespace Cumberland.Xml.Serialization
 				}
 			}
 			
-			m.Layers.Insert(layerIndex, l);
+			m.Layers.Add(l);
 		}
 		
 #endregion
