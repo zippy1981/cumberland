@@ -1,5 +1,11 @@
 2008-10-30  Scott Ellington <scott.ellington@gmail.com> 
 
+	* Rectangle.cs: add Overlaps()
+	* Data/Shapefile/Shapefile.cs, Data/IFeatureSource.cs,
+	  Data/SimpleFeatureSource.cs: add GetFeatures() overload
+
+2008-10-30  Scott Ellington <scott.ellington@gmail.com> 
+
 	* Xml/Serialization/MapSerializer.cs: serialize fix
 
 2008-10-30  Scott Ellington <scott.ellington@gmail.com> 

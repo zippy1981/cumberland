@@ -146,5 +146,79 @@ namespace Cumberland.Tests
 			
 			Assert.AreEqual(r2, Rectangle.Union(r,r2));
 		}
+		
+		[Test]
+		public void TestOverlaps()
+		{
+			Rectangle r1 = new Rectangle(-4,-4,-2,-2);
+			Rectangle r2 = new Rectangle(0,0,2,2);
+			
+			// bottom-left
+			Assert.IsFalse(r1.Overlaps(r2));
+			
+			//left
+			r1.Min.Y = 0;
+			r1.Max.Y = 2;
+			Assert.IsFalse(r1.Overlaps(r2));
+			
+			// left overlapping
+			r1.Max.X = 1;
+			Assert.IsTrue(r1.Overlaps(r2));
+			
+			//top-left
+			r1.Max.X = -2;
+			r1.Min.Y = 3;
+			r1.Max.Y = 5;
+			Assert.IsFalse(r1.Overlaps(r2));
+			
+			//top
+			r1.Min.X = 0;
+			r1.Max.X = 2;
+			Assert.IsFalse(r1.Overlaps(r2));
+			
+			// top-overlaps
+			r1.Min.Y = 1;
+			Assert.IsTrue(r1.Overlaps(r2));
+			
+			// top right
+			r1.Min.Y = 3;
+			r1.Min.X = 3;
+			r1.Max.X = 5;
+			Assert.IsFalse(r1.Overlaps(r2));
+			
+			// right
+			r1.Min.Y = 0;
+			r1.Max.Y = 2;
+			Assert.IsFalse(r1.Overlaps(r2));
+			
+			// right-overlaps
+			r1.Min.X = 1;
+			Assert.IsTrue(r1.Overlaps(r2));
+			
+			//bottom-right
+			r1.Min.X = 3;
+			r1.Min.Y = -5;
+			r1.Max.Y = -1;
+			Assert.IsFalse(r1.Overlaps(r2));
+			
+			// bottom 
+			r1.Min.X = 0;
+			r1.Max.X = 2;
+			Assert.IsFalse(r1.Overlaps(r2));
+			
+			// bottom overlaps
+			r1.Max.Y = 1;
+			Assert.IsTrue(r1.Overlaps(r2));
+			
+			// equal
+			Assert.IsTrue(r2.Overlaps(r2.Clone()));
+			
+			// within
+			r1 = new Rectangle(.5, .5, 1.5, 1.5);
+			Assert.IsTrue(r1.Overlaps(r2));
+			
+			// overlaps empty
+			Assert.IsFalse(r1.Overlaps(new Rectangle()));
+		}
 	}
 }

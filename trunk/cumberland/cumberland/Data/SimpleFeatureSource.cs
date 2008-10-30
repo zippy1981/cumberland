@@ -84,9 +84,21 @@ namespace Cumberland.Data
 		
 		public SimpleFeatureSource(FeatureType fType) { featureType = fType; }
 		
-		public System.Collections.Generic.List<Cumberland.Feature> GetFeatures (Cumberland.Rectangle rectangle)
+		public List<Feature> GetFeatures()
 		{
 			return features;
+		}
+		
+		public System.Collections.Generic.List<Cumberland.Feature> GetFeatures (Cumberland.Rectangle rectangle)
+		{
+			List<Feature> result = new List<Feature>();
+			
+			foreach (Feature f in features)
+			{
+				if (f.CalculateBounds().Overlaps(rectangle)) result.Add(f);
+			}
+			
+			return result;
 		}
 	}
 }

@@ -278,7 +278,9 @@ namespace Cumberland.Drawing.OpenGL
 						}
 					
 						// query our data
-						List<Feature> features = layer.Data.GetFeatures(extents);
+						// we must grab all.
+						// TODO: fix it
+						List<Feature> features = layer.Data.GetFeatures();
 						
 						if (features.Count == 0)
 						{

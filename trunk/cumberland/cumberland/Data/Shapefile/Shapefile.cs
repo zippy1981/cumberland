@@ -353,6 +353,11 @@ namespace Cumberland.Data.Shapefile
 		
 #region IFeatureSource methods
 		
+		public List<Feature> GetFeatures()
+		{
+			return GetFeatures(null);
+		}
+		
 		public List<Cumberland.Feature> GetFeatures (Cumberland.Rectangle rectangle)
 		{
 			if (!IsOpen) Open();

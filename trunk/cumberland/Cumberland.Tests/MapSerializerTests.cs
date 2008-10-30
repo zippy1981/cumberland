@@ -67,6 +67,11 @@ namespace Cumberland.Tests
 				}
 			}
 			
+			public System.Collections.Generic.List<Feature> GetFeatures ()
+			{
+				return GetFeatures(null);
+			}
+			
 			public System.Collections.Generic.List<Feature> GetFeatures (Rectangle rectangle)
 			{
 				return new List<Feature>();
@@ -106,6 +111,12 @@ namespace Cumberland.Tests
 			{
 				return new List<Feature>();
 			}
+			
+			public System.Collections.Generic.List<Feature> GetFeatures ()
+			{
+				return GetFeatures(null);
+			}
+
 		}
 		
 #endregion
