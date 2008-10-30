@@ -1,3 +1,9 @@
+2008-10-30  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.InteractiveMap/Main.cs: swtich to map file
+	* Cumberland.Drawing.OpenGL/OpenGlMapDrawer.cs: reproject extents on
+	  GetFeatures
+
 2008-10-29  Scott Ellington <scott.ellington@gmail.com> 
 
 	* Cumberland.DrawMap/Cumberland.DrawMap.csproj: add postgis support

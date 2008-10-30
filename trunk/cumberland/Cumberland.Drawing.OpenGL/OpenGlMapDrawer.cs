@@ -237,15 +237,7 @@ namespace Cumberland.Drawing.OpenGL
 					{
 						continue;
 					}
-									
-					// query our data
-					List<Feature> features = layer.Data.GetFeatures(map.Extents);
-					
-					if (features.Count == 0)
-					{
-						continue;
-					}
-					
+
 					if (useGlList  && !string.IsNullOrEmpty(layer.Id))
 					{					
 						// use a GlList for performance
@@ -267,9 +259,10 @@ namespace Cumberland.Drawing.OpenGL
 						// create the glList
 						Gl.glNewList(glListNo, Gl.GL_COMPILE);
 					}
-					
+
 					ProjFourWrapper src = null;
-					
+					Rectangle extents = map.Extents.Clone();
+
 					try
 					{
 						// instantiate layer projection
@@ -278,8 +271,20 @@ namespace Cumberland.Drawing.OpenGL
 						{
 							src = new ProjFourWrapper(layer.Projection);
 							reproject = true;
+							
+							// reproject extents to our source for querying
+							extents = new Rectangle(dst.Transform(src, extents.Min),
+							                        dst.Transform(src, extents.Max));
 						}
 					
+						// query our data
+						List<Feature> features = layer.Data.GetFeatures(extents);
+						
+						if (features.Count == 0)
+						{
+							continue;
+						}
+																
 						if (layer.Data.SourceFeatureType == FeatureType.Point)
 					    {	
 		#region handle point rendering

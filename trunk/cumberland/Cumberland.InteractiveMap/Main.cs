@@ -26,9 +26,11 @@ using System.Collections.Generic;
 using System.Drawing;
 
 using Cumberland;
+using Cumberland.Data.PostGIS;
 using Cumberland.Data.Shapefile;
 using Cumberland.Drawing.OpenGL;
 using Cumberland.Projection;
+using Cumberland.Xml.Serialization;
 
 using NDesk.Options;
 
@@ -69,29 +71,24 @@ namespace Cumberland.InteractiveMap
 			
 #region initialize map configuration
 			
-			map = new Map();
-			map.Width = 400;
-			map.Height = 400;
-			map.Projection = ProjFourWrapper.WGS84;
-			
 			bool showHelp = false;
+			
+			Rectangle ext = new Rectangle();
+			int w = -1;
+			int h = -1;
 			
 			OptionSet options = new OptionSet();
 			options.Add("e|extents=", 
 			            "comma-delimited extents (e.g. -180,-90,180,90) ",
-			            delegate (string v) { map.Extents = ParseExtents(v); });
+			            delegate (string v) { ext = ParseExtents(v); });
 			options.Add("h|help",  "show this message and exit",
 			            delegate (string v) { showHelp = v!= null; });
 			options.Add("w|width=",
 			            "the width of the image in pixels",
-			            delegate (string v) { map.Width = int.Parse(v); });
+			            delegate (string v) { w = int.Parse(v); });
 			options.Add("t|height=",
 			            "the height of the image in pixels",
-			            delegate (string v) { map.Height = int.Parse(v); });
-			options.Add("p|proj=",
-			            "the output projection. can be a quoted proj4 string or an epsg code",
-			            delegate (string v) { map.Projection = ParseProjection(v); });
-			            
+			            delegate (string v) { h = int.Parse(v); });       
 		
 			List<string> rest = options.Parse(args);
 
@@ -101,33 +98,13 @@ namespace Cumberland.InteractiveMap
 				return;
 			}
 
-			Random r = new Random();
+			MapSerializer ms = new MapSerializer();
+			ms.AddDBFeatureProvider(typeof(PostGISFeatureSource));
 			
-			foreach (string arg in rest)
-			{
-				string[] layerArgs = arg.Split(',');
-
-				Layer l = new Layer();
-				l.Data = new Shapefile(layerArgs[0]);
-				l.PointSize = r.Next(5)+1;
-				l.FillColor =  Color.FromArgb(r.Next(255), r.Next(255), r.Next(255));
-				l.LineColor = Color.FromArgb(r.Next(155), r.Next(155), r.Next(155));
-				//l.FillColor = Color.Blue;
-				// l.LineColor = Color.RoyalBlue;
-				l.LineWidth = 1; //r.Next(3)+1;
-				
-				// set an id in order to have the renderer use a glList
-				l.Id = System.IO.Path.GetFileName(layerArgs[0]);
-				
-				if (layerArgs.Length > 1)
-				{
-					l.Projection = ParseProjection(layerArgs[1]);;
-				}
-				
-				//l.LineStyle = LineStyle.None;
-				
-				map.Layers.Add(l);
-			}
+			map = ms.Deserialize(rest[0]);
+			if (w>0) map.Width = w;
+			if (h>0) map.Height = h;
+			if (!ext.IsEmpty) map.Extents = ext;
 			
 			// set initial "eye" point in 3d space
 			Point c = map.Extents.Center;
@@ -223,15 +200,15 @@ namespace Cumberland.InteractiveMap
 			                     Convert.ToDouble(coords[3]));
 		}
 		
-		static string ParseProjection(string v)
-		{
-			int epsg;
-			if (int.TryParse(v, out epsg))
-			{
-				return "+init=epsg:" + v;
-			}
-			else return v;
-		}		
+//		static string ParseProjection(string v)
+//		{
+//			int epsg;
+//			if (int.TryParse(v, out epsg))
+//			{
+//				return "+init=epsg:" + v;
+//			}
+//			else return v;
+//		}		
 
 		static void Clamp ()
 		{
