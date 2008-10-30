@@ -112,7 +112,6 @@ namespace Cumberland.TileViewerTest
 	
 					for (int ii=0; ii < numLineBreaks; ii++)
 					{
-						System.Console.WriteLine(ii);
 						msg = msg.Insert(ii*numCharsPerRow, "\r\n");
 					}
 

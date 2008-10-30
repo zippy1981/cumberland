@@ -1,5 +1,9 @@
 2008-10-30  Scott Ellington <scott.ellington@gmail.com> 
 
+	* Cumberland.TileViewerTest/TileProvider.aspx.cs: clean up
+
+2008-10-30  Scott Ellington <scott.ellington@gmail.com> 
+
 	* Cumberland.DrawMap/Cumberland.DrawMap.csproj: add test map
 	* Cumberland.TileViewerTest/Default.aspx.cs,
 	  Cumberland.TileViewerTest/TileProvider.aspx.cs,

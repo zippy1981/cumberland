@@ -1,22 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Map>
-  <Width>400</Width>
-  <Height>400</Height>
-  <Extents>-110,20,-80,40</Extents>
-  <Projection>+init=epsg:4326</Projection>
-  <Layers>
-    <Layer>
-      <LineWidth>1</LineWidth>
-      <PointSize>1</PointSize>
-      <LineColor>255,65,105,225</LineColor>
-      <FillColor>255,240,248,255</FillColor>
-      <Projection>+init=epsg:4326</Projection>
-      <Id>states</Id>
-      <LineStyle>Solid</LineStyle>
-      <Data providerType="Cumberland.IFileFeatureProvider"
-      providerInstance="Cumberland.Data.Shapefile.Shapefile">
-        <FilePath>../shape_eg_data/mexico/states.shp</FilePath>
-      </Data>
-    </Layer>
-  </Layers>
+	<Width>400</Width>
+	<Height>400</Height>
+	<Extents>-110,20,-80,40</Extents>
+	<Projection>+init=epsg:4326</Projection>
+	<Layers>
+		<Layer>
+			<LineWidth>1</LineWidth>
+			<LineStyle>Solid</LineStyle>
+			<LineColor>255,65,105,225</LineColor>
+			<FillColor>255,240,248,255</FillColor>
+			<Projection>+init=epsg:4326</Projection>
+			<Id>states</Id>
+			<Data providerType="Cumberland.IFileFeatureProvider" providerInstance="Cumberland.Data.Shapefile.Shapefile">
+				<FilePath>../shape_eg_data/mexico/states.shp</FilePath>
+			</Data>
+		</Layer>
+		<Layer>
+			<LineWidth>1</LineWidth>
+			<LineColor>255,165,105,125</LineColor>
+			<Projection>+init=epsg:4326</Projection>
+			<Id>roads</Id>
+			<LineStyle>Solid</LineStyle>
+			<Data providerType="Cumberland.IFileFeatureProvider" providerInstance="Cumberland.Data.Shapefile.Shapefile">
+				<FilePath>../shape_eg_data/mexico/roads.shp</FilePath>
+			</Data>
+		</Layer>
+		<Layer>
+			<PointSize>5</PointSize>			
+			<FillColor>255,105,205,125</FillColor>
+			<Projection>+init=epsg:4326</Projection>
+			<Id>cities</Id>
+			<LineStyle>Solid</LineStyle>
+			<Data providerType="Cumberland.IFileFeatureProvider" providerInstance="Cumberland.Data.Shapefile.Shapefile">
+				<FilePath>../shape_eg_data/mexico/cities.shp</FilePath>
+			</Data>
+		</Layer>
+	</Layers>
 </Map>
