@@ -63,6 +63,8 @@ namespace Cumberland.Data.PostGIS
 		
 		public FeatureType SourceFeatureType {
 			get {
+				CheckIfInitialized();
+				
 				return featureType;
 			}
 		}
@@ -88,6 +90,8 @@ namespace Cumberland.Data.PostGIS
 		public Rectangle Extents {
 			get 
 			{
+				CheckIfInitialized();
+				
 				using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
 				{
 					string sql = string.Format("select extent({0}) from {1}",
@@ -137,15 +141,13 @@ namespace Cumberland.Data.PostGIS
 		{
 			ConnectionString = connectionString;
 			TableName = tableName;
-			
-			InitializeFeatureProvider();
 		}
 
 #endregion
 		
 #region Public methods
 		
-		public void InitializeFeatureProvider()
+		void InitializeFeatureProvider()
 		{
 			if (string.IsNullOrEmpty(ConnectionString) || string.IsNullOrEmpty(TableName))
 			{
@@ -216,10 +218,7 @@ namespace Cumberland.Data.PostGIS
 		
 		public List<Feature> GetFeatures (Rectangle rectangle)
 		{
-			if (!IsInitialized)
-			{
-				throw new InvalidOperationException("Database feature provider not initialized.  Use 'InitializeFeatureProvider'");
-			}
+			CheckIfInitialized();
 			
 			List<Feature> feats = new List<Feature>();
 			
@@ -260,5 +259,13 @@ namespace Cumberland.Data.PostGIS
 		}
 		
 #endregion
+		
+		void CheckIfInitialized()
+		{
+			if (!IsInitialized)
+			{
+				InitializeFeatureProvider();
+			}
+		}
 	}
 }
