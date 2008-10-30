@@ -256,6 +256,8 @@ namespace Cumberland.Tests
 		[Test]
 		public void TestLayerLineStyleSerialized()
 		{
+			Assert.AreEqual(LineStyle.Dashed, 
+			                m2.Layers[0].LineStyle);
 			Assert.AreEqual(m1.Layers[0].LineStyle,
 			                m2.Layers[0].LineStyle);
 		}

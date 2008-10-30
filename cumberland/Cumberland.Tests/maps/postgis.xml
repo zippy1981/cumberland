@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Map>
+  <Width>500</Width>
+  <Height>400</Height>
+  <Extents>-90,20,-80,40</Extents>
+  <Projection>+init=epsg:4326</Projection>
+  <Layers>
+    <Layer>
+      <LineWidth>2</LineWidth>
+      <PointSize>1</PointSize>
+      <LineColor>255,65,65,225</LineColor>
+      <FillColor>255,240,208,255</FillColor>
+      <Projection>+init=epsg:3087</Projection>
+      <Id>pg1</Id>
+      <LineStyle>Solid</LineStyle>
+      <Data providerType="Cumberland.IDBFeatureProvider"
+      providerInstance="Cumberland.Data.PostGIS.PostGISFeatureSource">
+        <ConnectionString>Server=127.0.0.1;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;</ConnectionString>
+        <TableName>counties</TableName>
+      </Data>
+    </Layer>
+  </Layers>
+</Map>
