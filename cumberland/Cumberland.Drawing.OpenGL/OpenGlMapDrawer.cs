@@ -32,7 +32,7 @@ using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 
 using Tao.OpenGl;
-using Tao.FreeGlut;
+//using Tao.FreeGlut;
 
 using Cumberland;
 using Cumberland.Data;
@@ -614,6 +614,16 @@ namespace Cumberland.Drawing.OpenGL
 			}
 		}
 
+		public void DeleteAllGlLists()
+		{
+			foreach (int id in glLists.Values)
+			{
+				Gl.glDeleteLists(id, 1);
+			}
+			
+			glLists.Clear();
+		}
+		
 		public void DeleteGlList(string layerId)
 		{
 			int id;
