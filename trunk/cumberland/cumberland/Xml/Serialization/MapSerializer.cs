@@ -24,7 +24,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
+using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -36,13 +38,23 @@ namespace Cumberland.Xml.Serialization
 {
 	public class MapSerializer
 	{
+#region vars
+		
 		List<Type> fileFeatureProviders = new List<Type>();
 		List<Type> dbFeatureProviders = new List<Type>();
+		
+#endregion
+		
+#region ctors
 		
 		public MapSerializer()
 		{
 			AddFileFeatureProvider(typeof(Shapefile));
 		}
+		
+#endregion
+		
+#region public methods
 		
 		public void AddFileFeatureProvider(Type type)
 		{
@@ -64,10 +76,52 @@ namespace Cumberland.Xml.Serialization
 			dbFeatureProviders.Add(type);
 		}
 		
+		public Map Deserialize(string path)
+		{
+			return Deserialize(new FileStream(path, FileMode.Open, FileAccess.Read));
+		}
+		
+		public Map Deserialize(Stream stream)
+		{
+			Map map = new Map();		
+			int layerIndex = 0;	
+			XmlDocument doc = new XmlDocument();
+			doc.Load(stream);
+			
+			foreach (XmlNode node  in doc.ChildNodes[1].ChildNodes)
+			{
+				if (node.Name == "Layers")
+				{
+					foreach (XmlNode lnode in node.ChildNodes)
+					{
+						DeserializeLayer(lnode, map, layerIndex++);
+					}
+				}
+				else if (node.Name == "Extents")
+				{
+					map.Extents = ParseRectangle(node.InnerText);
+				}
+				else if (node.Name == "Projection")
+				{
+					map.Projection = node.InnerText;
+				}
+			}
+			
+			return map;
+		}
+
+#endregion
+		
+#region public static methods
+		
 		public static string Serialize(Map map)
 		{
-			StringWriter sw = new StringWriter();
-			XmlWriter writer = XmlWriter.Create(sw);
+			MemoryStream ms = new MemoryStream();
+			//StringWriter sw = new StringWriter();
+			
+			XmlWriterSettings xws = new XmlWriterSettings();
+			xws.Encoding = Encoding.UTF8;
+			XmlWriter writer = XmlWriter.Create(ms, xws);
 			writer.WriteStartDocument();
 			writer.WriteStartElement("Map");
 			
@@ -88,53 +142,14 @@ namespace Cumberland.Xml.Serialization
 			writer.WriteEndElement(); // Map
 			writer.WriteEndDocument();
 			writer.Flush();
-			return sw.ToString();
-		}
-		
-		public Map Deserialize(string xml)
-		{
-			Map map = new Map();		
-			
-//			StringReader sr = new StringReader(xml);
-//			XmlTextReader reader = new XmlTextReader(sr);
-			int layerIndex = 0;		
-//			
-//			while (reader.Read())
-//			{
-//				if (!reader.IsStartElement()) continue;
-//				//System.Console.WriteLine(reader.Name);
-//				
-//				switch (reader.Name)
-//				{
-//				case "Width":
-//					
-//					map.Width =  reader.ReadElementContentAsInt();
-//					break;
-//					
-//				case "Layer":
-//					
-//					DeserializeLayer(reader, map, layerIndex++);
-//					break;
-//				}
-//			}
 
-			XmlDocument doc = new XmlDocument();
-			doc.LoadXml(xml);
-			
-			foreach (XmlNode node  in doc.ChildNodes[1].ChildNodes)
-			{
-				System.Console.WriteLine(node.Name);
-				if (node.Name == "Layers")
-				{
-					foreach (XmlNode lnode in node.ChildNodes)
-					{
-						DeserializeLayer(lnode, map, layerIndex++);
-					}
-				}
-			}
-			
-			return map;
+			//return sw.ToString();
+			return Encoding.UTF8.GetString(ms.GetBuffer());
 		}
+
+#endregion
+		
+#region private methods
 		
 		void DeserializeLayer(XmlNode node, Map m, int layerIndex)
 		{
@@ -144,9 +159,9 @@ namespace Cumberland.Xml.Serialization
 			
 			foreach (XmlNode child in node.ChildNodes)
 			{
-				System.Console.WriteLine(child.Name);
 				if (child.Name == "Data")
 				{
+#region parse data
 					string provider = child.Attributes.GetNamedItem("providerType").Value;
 					string instance = child.Attributes.GetNamedItem("providerInstance").Value;
 					
@@ -175,6 +190,7 @@ namespace Cumberland.Xml.Serialization
 								}
 							}
 						}
+						else return; // unknown type
 						
 						l.Data = Activator.CreateInstance(instanceType) as IFeatureSource;
 					}
@@ -183,7 +199,6 @@ namespace Cumberland.Xml.Serialization
 					{
 						switch (dnode.Name)
 						{
-							
 						case "FilePath":
 							
 							if (providerType == typeof(IFileFeatureProvider))
@@ -211,32 +226,57 @@ namespace Cumberland.Xml.Serialization
 						}
 						
 					}
+#endregion
+				}
+				else if (child.Name == "LineWidth")
+				{
+					l.LineWidth = Convert.ToInt32(child.InnerText);
+				}
+				else if (child.Name == "PointSize")
+				{
+					l.PointSize = Convert.ToInt32(child.InnerText);
+				}
+				else if (child.Name == "LineColor")
+				{
+					l.LineColor = ParseColor(child.InnerText);
+				}
+				else if (child.Name == "FillColor")
+				{
+					l.FillColor = ParseColor(child.InnerText);
+				}
+				else if (child.Name == "Projection")
+				{
+					l.Projection = child.InnerText;
+				}
+				else if (child.Name == "Id")
+				{
+					l.Id = child.InnerText;
+				}
+				else if (child.Name == "LineStyle")
+				{
+					l.LineStyle = (LineStyle) Enum.Parse(typeof(LineStyle), child.InnerText);
 				}
 			}
 			
-//			while (reader.Read())
-//			{
-//				System.Console.WriteLine(reader.Name + " " + reader.NodeType + " " + reader.Value);
-//				
-//				if (reader.NodeType == XmlNodeType.EndElement && reader.Name == "Layers") 
-//				{
-//					break;
-//				}
-//				
-
-//			}
-//			
 			m.Layers.Insert(layerIndex, l);
 		}
+		
+#endregion
+		
+#region private static methods
 		
 		static void SerializeLayer(XmlWriter writer, Layer layer)
 		{
 			if (layer.Data == null || layer.Data is SimpleFeatureSource) return;
 			
 			writer.WriteStartElement("Layer");
-			
 			writer.WriteElementString("LineWidth", layer.LineWidth.ToString());
-			
+			writer.WriteElementString("PointSize", layer.PointSize.ToString());
+			writer.WriteElementString("LineColor", PrepareColor(layer.LineColor));
+			writer.WriteElementString("FillColor", PrepareColor(layer.FillColor));
+			writer.WriteElementString("Projection", layer.Projection);
+			writer.WriteElementString("Id", layer.Id);
+			writer.WriteElementString("LineStyle", Enum.GetName(typeof(LineStyle), layer.LineStyle));
 			writer.WriteStartElement("Data");
 
 			IFileFeatureProvider ffp = layer.Data as IFileFeatureProvider;
@@ -261,7 +301,6 @@ namespace Cumberland.Xml.Serialization
 			}
 			
 			writer.WriteEndElement(); // Data
-			
 			writer.WriteEndElement(); // Layer
 		}
 		
@@ -269,5 +308,31 @@ namespace Cumberland.Xml.Serialization
 		{
 			return string.Format("{0},{1},{2},{3}", r.Min.X, r.Min.Y, r.Max.X, r.Max.Y);
 		}
+		
+		static Rectangle ParseRectangle(string s)
+		{
+			string[] parts = s.Split(',');
+			return new Rectangle(double.Parse(parts[0]),
+			                     double.Parse(parts[1]),
+			                     double.Parse(parts[2]),
+			                     double.Parse(parts[3]));
+		}
+
+		static string PrepareColor(Color c)
+		{
+			return string.Format("{0},{1},{2},{3}", c.A, c.R, c.G, c.B);
+		}
+		
+		static Color ParseColor(string s)
+		{
+			string[] p = s.Split(',');
+			
+			return Color.FromArgb(int.Parse(p[0]),
+			                      int.Parse(p[1]),
+			                      int.Parse(p[2]),
+			                      int.Parse(p[3]));
+		}
+		
+#endregion
 	}
 }

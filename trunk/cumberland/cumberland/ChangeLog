@@ -1,5 +1,10 @@
 2008-10-29  Scott Ellington <scott.ellington@gmail.com> 
 
+	* Xml/Serialization/MapSerializer.cs: improve
+	* Data/IDBFeatureProvider.cs: simplify
+
+2008-10-29  Scott Ellington <scott.ellington@gmail.com> 
+
 	
 
 2008-10-28  Scott Ellington <scott.ellington@gmail.com> 

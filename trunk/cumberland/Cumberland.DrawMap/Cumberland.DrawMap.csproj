@@ -39,6 +39,10 @@
       <Project>{05A6F104-D839-4B9C-B704-91F9BB608D73}</Project>
       <Name>Cumberland</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Cumberland.Data.PostGIS\Cumberland.Data.PostGIS.csproj">
+      <Project>{05A6F104-D839-4B9C-B704-91F9BB608D73}</Project>
+      <Name>Cumberland.Data.PostGIS</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />

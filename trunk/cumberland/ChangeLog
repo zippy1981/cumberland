@@ -1,5 +1,11 @@
 2008-10-29  Scott Ellington <scott.ellington@gmail.com> 
 
+	* Cumberland.DrawMap/Cumberland.DrawMap.csproj: add postgis support
+	* Cumberland.DrawMap/Main.cs: switch to serialized map
+	* Cumberland.Data.PostGIS/PostGISFeatureSource.cs: simplify
+
+2008-10-29  Scott Ellington <scott.ellington@gmail.com> 
+
 	
 
 2008-10-27  Scott Ellington <scott.ellington@gmail.com> 

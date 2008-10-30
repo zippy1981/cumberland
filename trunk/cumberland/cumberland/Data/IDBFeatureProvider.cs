@@ -30,7 +30,5 @@ namespace Cumberland
 	{
 		string ConnectionString { get; set; }
 		string TableName { get; set; }
-		
-		void InitializeFeatureProvider();
 	}
 }
