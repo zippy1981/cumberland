@@ -7,20 +7,21 @@
             type="text/javascript"></script>
     <script type="text/javascript">
 
+		var myTileLayer;
+		var map;
+
 		function CustomGetTileUrl(a,b) 
 		{
-			return "TileProvider.aspx?x=" + a.x + "&y=" + a.y + "&zl=" + b;
+			return "TileProvider.aspx?x=" + a.x + "&y=" + a.y + "&zl=" + b + "&map=" + document.getElementById("filed").value;
 		}			
 
-	    function initialize() 
-	    {
-	      if (GBrowserIsCompatible()) 
-	      {
-	        var map = new GMap2(document.getElementById("map_canvas"));
-	        map.setCenter(new GLatLng(29.5, -100.1419), 6);
-	        map.addControl(new GSmallMapControl());
-	        map.addControl(new GMapTypeControl());
-	        
+		function refreshTiles()
+		{
+			if (myTileLayer)
+			{
+				map.removeOverlay(myTileLayer);
+			}
+			
 			// Set up the copyright information
 			// Each image used should indicate its copyright permissions
 			var myCopyright = new GCopyrightCollection("©");
@@ -31,8 +32,20 @@
 			var tilelayers = new GTileLayer(myCopyright, 0, 19);
 			tilelayers.getTileUrl = CustomGetTileUrl;
 			
-			var myTileLayer = new GTileLayerOverlay(tilelayers);	
+			myTileLayer = new GTileLayerOverlay(tilelayers);	
 			map.addOverlay(myTileLayer);
+		}
+
+	    function initialize() 
+	    {
+	      if (GBrowserIsCompatible()) 
+	      {
+	        map = new GMap2(document.getElementById("map_canvas"));
+	        map.setCenter(new GLatLng(29.5, -100.1419), 6);
+	        map.addControl(new GSmallMapControl());
+	        map.addControl(new GMapTypeControl());
+	        
+			refreshTiles();
 	      }
 	    }
 	    
@@ -41,11 +54,11 @@
 </head>
 <body onload="initialize()" onunload="GUnload()">
 	<form id="form1" runat="server">
-		<asp:button id="button1" runat="server" Text="Click me!" OnClick="button1Clicked" />
 		
 		<div id="map_canvas" style="width: 500px; height: 300px"></div>
 
-		
+		<input type="text" id="filed" name="filed" size="50"  value="../Cumberland.Tests/maps/mexico.xml"/>
+		<input type="button" onclick="refreshTiles();" value="Refresh" />
 		
 	</form>
 </body>

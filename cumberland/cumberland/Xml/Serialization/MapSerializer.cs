@@ -76,15 +76,20 @@ namespace Cumberland.Xml.Serialization
 			dbFeatureProviders.Add(type);
 		}
 		
-		public Map Deserialize(string path)
+		public Map Deserialize(string mapPath)
 		{
-			using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read))
+			using (FileStream fs = new FileStream(mapPath, FileMode.Open, FileAccess.Read))
 			{
-				return Deserialize(fs);
+				return Deserialize(fs, mapPath);
 			}
 		}
 		
 		public Map Deserialize(Stream stream)
+		{
+			return Deserialize(stream, null);
+		}
+
+		Map Deserialize(Stream stream, string mapPath)
 		{
 			Map map = new Map();		
 			//int layerIndex = 0;	
@@ -97,7 +102,7 @@ namespace Cumberland.Xml.Serialization
 				{
 					foreach (XmlNode lnode in node.ChildNodes)
 					{
-						DeserializeLayer(lnode, map);
+						DeserializeLayer(lnode, map, mapPath);
 					}
 				}
 				else if (node.Name == "Extents")
@@ -167,7 +172,7 @@ namespace Cumberland.Xml.Serialization
 		
 #region private methods
 		
-		void DeserializeLayer(XmlNode node, Map m)
+		void DeserializeLayer(XmlNode node, Map m, string mapPath)
 		{
 			Layer l = new Layer();
 			Type providerType = null;
@@ -228,7 +233,15 @@ namespace Cumberland.Xml.Serialization
 							
 							if (providerType == typeof(IFileFeatureProvider))
 							{
-								(l.Data as IFileFeatureProvider).FilePath = dnode.InnerText;
+								
+								string path = dnode.InnerText;
+								if (mapPath != null && !Path.IsPathRooted(path))
+								{
+									// anchor this path to the map path
+									string root = Path.GetDirectoryName(Path.GetFullPath(mapPath));
+									path = Path.Combine(root, path);
+								}
+								(l.Data as IFileFeatureProvider).FilePath = path;
 							}
 							
 							break;

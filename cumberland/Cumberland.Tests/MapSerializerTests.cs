@@ -273,5 +273,14 @@ namespace Cumberland.Tests
 			Assert.AreEqual(m1.Layers[0].Projection,
 			                m2.Layers[0].Projection);
 		}
+		
+		[Test]
+		public void TestRelativeToAbsoluteFilePath()
+		{
+			MapSerializer ms = new MapSerializer();
+			Map m = ms.Deserialize("../../maps/mexico.xml");
+			
+			Assert.IsTrue(Path.IsPathRooted((m.Layers[0].Data as IFileFeatureProvider).FilePath));
+		}
 	}
 }

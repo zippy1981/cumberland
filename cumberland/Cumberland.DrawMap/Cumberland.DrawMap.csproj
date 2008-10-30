@@ -17,7 +17,7 @@
     <DefineConstants>DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Commandlineparameters>-e=-110,20,-90,35 ../../../Cumberland.Tests/shape_eg_data/mexico/states.shp</Commandlineparameters>
+    <Commandlineparameters>-e=-110,20,-90,35 ../../../Cumberland.Tests/maps/mexico.xml</Commandlineparameters>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
