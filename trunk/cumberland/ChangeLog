@@ -1,5 +1,17 @@
 2008-10-30  Scott Ellington <scott.ellington@gmail.com> 
 
+	* Cumberland.InteractiveMap/Cumberland.InteractiveMap.csproj,
+	  Cumberland.InteractiveMap/lib/Tao.FreeGlut.dll,
+	  Cumberland.InteractiveMap/lib/Tao.FreeGlut.dll.config,
+	  Cumberland.InteractiveMap/lib/Tao.FreeGlut.xml,
+	  Cumberland.Drawing.OpenGL/lib/Tao.FreeGlut.dll,
+	  Cumberland.Drawing.OpenGL/lib/Tao.FreeGlut.dll.config,
+	  Cumberland.Drawing.OpenGL/lib/Tao.FreeGlut.xml,
+	  Cumberland.Drawing.OpenGL/Cumberland.Drawing.OpenGL.csproj,
+	  Cumberland.Drawing.OpenGL/OpenGlMapDrawer.cs: move out freeglut
+
+2008-10-30  Scott Ellington <scott.ellington@gmail.com> 
+
 	* Cumberland.InteractiveMap/Main.cs: swtich to map file
 	* Cumberland.Drawing.OpenGL/OpenGlMapDrawer.cs: reproject extents on
 	  GetFeatures
