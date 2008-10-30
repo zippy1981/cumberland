@@ -83,6 +83,7 @@
     <None Include="shape_eg_data\mexico\states.sbn" />
     <None Include="shape_eg_data\mexico\states.sbx" />
     <None Include="shape_eg_data\mexico\states.shx" />
+    <None Include="maps\mexico.xml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="shape_eg_data\mexico\cities.shp">

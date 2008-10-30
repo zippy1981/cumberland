@@ -1,5 +1,12 @@
 2008-10-30  Scott Ellington <scott.ellington@gmail.com> 
 
+	* Cumberland.DrawMap/Cumberland.DrawMap.csproj: add test map
+	* Cumberland.TileViewerTest/Default.aspx.cs,
+	  Cumberland.TileViewerTest/TileProvider.aspx.cs,
+	  Cumberland.TileViewerTest/Default.aspx: switch to map file
+
+2008-10-30  Scott Ellington <scott.ellington@gmail.com> 
+
 	* Cumberland.Drawing.OpenGL/OpenGlMapDrawer.cs: need to use
 	  GetFeatures()
 	* Cumberland.Data.PostGIS/PostGISFeatureSource.cs: add GetFeatures()

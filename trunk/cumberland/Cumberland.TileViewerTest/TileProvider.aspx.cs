@@ -34,6 +34,7 @@ using Cumberland.Data.PostGIS;
 using Cumberland.Data.Shapefile;
 using Cumberland.Drawing;
 using Cumberland.Projection;
+using Cumberland.Xml.Serialization;
 
 
 namespace Cumberland.TileViewerTest
@@ -46,6 +47,9 @@ namespace Cumberland.TileViewerTest
 			base.OnLoad (e);
 			
 			Bitmap b = null;
+			
+			// Google tile size is 256
+			int tileSize = 256;
 
 			// clear out response
 			Response.Clear();
@@ -53,62 +57,16 @@ namespace Cumberland.TileViewerTest
 
 			try
 			{
-				// create our map renderer
-				Map map = new Map();
+				MapSerializer ms = new MapSerializer();
+				ms.AddDBFeatureProvider(typeof(PostGISFeatureSource));
+
+				Map map = ms.Deserialize(Request.QueryString["map"]);
 
 				// reproject to Google's spherical mercator
 				map.Projection = ProjFourWrapper.SphericalMercatorProjection;
-				
-				// Google tile size is 256
-				map.Width = map.Height = 256;
-				
-				// create our layers
-				
-				Layer polygonLayer = new Layer();
-				polygonLayer.Data = new Shapefile("../Cumberland.Tests/shape_eg_data/mexico/states.shp");
-				polygonLayer.Projection = ProjFourWrapper.WGS84; // data is in WGS84
-				polygonLayer.LineColor = Color.RoyalBlue;
-				polygonLayer.FillColor = Color.AliceBlue;
-				polygonLayer.LineWidth = 1;
-				//polygonLayer.LineStyle = LineStyle.Dotted;
-				map.Layers.Add(polygonLayer);
-				
-				Layer lineLayer = new Layer();
-				lineLayer.Data = new Shapefile("../Cumberland.Tests/shape_eg_data/mexico/roads.shp");
-				lineLayer.Projection = ProjFourWrapper.WGS84; // data is in WGS84
-				lineLayer.LineColor = Color.Green;
-				lineLayer.LineWidth = 2;
-				map.Layers.Add(lineLayer);
-				
-				Layer pointLayer = new Layer();
-				pointLayer.Data = new Shapefile("../Cumberland.Tests/shape_eg_data/mexico/cities.shp");
-				pointLayer.Projection = ProjFourWrapper.WGS84;
-				pointLayer.PointSize = 4;
-				pointLayer.FillColor = Color.Red;
-				map.Layers.Add(pointLayer);
-				
-//				Layer pgLayer = new Layer();
-//				pgLayer.Data = new PostGISFeatureSource("Server=127.0.0.1;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;", 
-//				                           "counties");
-//				pgLayer.Projection = ProjFourWrapper.PrepareEPSGCode(3087);
-//				pgLayer.LineColor = Color.Orange;
-//				pgLayer.FillColor = Color.FromArgb(100, Color.AntiqueWhite);
-//				map.Layers.Add(pgLayer);
-//
-//				Layer pgRdLayer = new Layer();
-//				pgRdLayer.Data = new PostGISFeatureSource("Server=127.0.0.1;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;", 
-//				                           "fdot_roads");
-//				pgRdLayer.Projection = ProjFourWrapper.PrepareEPSGCode(2958);
-//				pgRdLayer.LineColor = Color.CadetBlue;
-//				map.Layers.Add(pgRdLayer);
-//				
-//				Layer pgPtLayer = new Layer();
-//				pgPtLayer.Data = new PostGISFeatureSource("Server=127.0.0.1;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;", 
-//				                           "springs_fdep_2000");
-//				pgPtLayer.Projection = ProjFourWrapper.PrepareEPSGCode(3087);
-//				pgPtLayer.FillColor = Color.Plum;
-//				pgPtLayer.PointSize = 3;
-//				map.Layers.Add(pgPtLayer);
+			
+				// set to tile size
+				map.Width = map.Height = tileSize;
 				
 				// acquire the tile index and zoom level
 				int x = Convert.ToInt32(Request.QueryString["x"]);
@@ -122,16 +80,16 @@ namespace Cumberland.TileViewerTest
 				SphericalMercatorProjector prj = new SphericalMercatorProjector();
 				
 				// get meters/pixel resolution for zoomlevel
-				double resolution = (prj.Circumference / 256) / numTiles;
+				double resolution = (prj.Circumference / tileSize) / numTiles;
 				
 				// mercator origin
 				double origin = prj.Circumference/2;
 
 				// convert pixels to meters and translate to origin
-				map.Extents = new Rectangle((256*x) * resolution - origin,
-				                            (256*(numTiles-y-1)) * resolution - origin, // google tiles are top left
-				                            (256*(x+1)) * resolution - origin,
-				                            (256*(numTiles-y)) * resolution - origin);
+				map.Extents = new Rectangle((tileSize*x) * resolution - origin,
+				                            (tileSize*(numTiles-y-1)) * resolution - origin, // google tiles are top left
+				                            (tileSize*(x+1)) * resolution - origin,
+				                            (tileSize*(numTiles-y)) * resolution - origin);
 				
 				MapDrawer renderer = new MapDrawer();
 			
@@ -142,18 +100,24 @@ namespace Cumberland.TileViewerTest
 			{
 				System.Console.WriteLine(ex.Message);
 
-				b = new Bitmap(256, 256);
+				b = new Bitmap(tileSize, tileSize);
 				
 				// draw the exception on the tile
 				using (Graphics gr = Graphics.FromImage(b))
 				{
-					//string msg = ex.Message;
-					//if (msg.Length*10 > b.Width - 20) msg = msg.Insert(b.Width/10-2, "\r\n");
-					
-					//System.Console.Write(msg);
-					
-					gr.DrawString(ex.Message,
-					              new Font("Arial", 10),
+					string msg = ex.Message;
+					int numCharsPerRow = (tileSize) / 5;
+					int numLineBreaks = (int) Math.Ceiling(Convert.ToSingle(msg.Length) / 
+					                                       Convert.ToSingle(numCharsPerRow));
+	
+					for (int ii=0; ii < numLineBreaks; ii++)
+					{
+						System.Console.WriteLine(ii);
+						msg = msg.Insert(ii*numCharsPerRow, "\r\n");
+					}
+
+					gr.DrawString(msg,
+					              new Font("Arial", 10, GraphicsUnit.Pixel),
 					              Brushes.Red,
 					              10, 
 					              10);

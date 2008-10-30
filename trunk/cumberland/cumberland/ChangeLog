@@ -1,5 +1,10 @@
 2008-10-30  Scott Ellington <scott.ellington@gmail.com> 
 
+	* Xml/Serialization/MapSerializer.cs: convert relative file paths in
+	  map files to absolute
+
+2008-10-30  Scott Ellington <scott.ellington@gmail.com> 
+
 	* Rectangle.cs: add Overlaps()
 	* Data/Shapefile/Shapefile.cs, Data/IFeatureSource.cs,
 	  Data/SimpleFeatureSource.cs: add GetFeatures() overload
