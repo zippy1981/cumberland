@@ -138,9 +138,9 @@ namespace Cumberland.Xml.Serialization
 
 		public static void Serialize(Stream stream, Map map)
 		{
-			XmlWriterSettings xws = new XmlWriterSettings();
-			xws.Encoding = Encoding.UTF8;
-			XmlWriter writer = XmlWriter.Create(stream, xws);
+			//XmlWriterSettings xws = new XmlWriterSettings();
+			//xws.Encoding = Encoding.UTF8;
+			XmlTextWriter writer = new XmlTextWriter(stream, Encoding.UTF8);
 			writer.WriteStartDocument();
 			writer.WriteStartElement("Map");
 			

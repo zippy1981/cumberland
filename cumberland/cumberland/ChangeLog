@@ -1,5 +1,9 @@
 2008-10-30  Scott Ellington <scott.ellington@gmail.com> 
 
+	* Xml/Serialization/MapSerializer.cs: serialize fix
+
+2008-10-30  Scott Ellington <scott.ellington@gmail.com> 
+
 	* Xml/Serialization/MapSerializer.cs: add Serialize overload
 
 2008-10-30  Scott Ellington <scott.ellington@gmail.com> 
