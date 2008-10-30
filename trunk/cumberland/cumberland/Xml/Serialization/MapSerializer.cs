@@ -130,9 +130,17 @@ namespace Cumberland.Xml.Serialization
 			MemoryStream ms = new MemoryStream();
 			//StringWriter sw = new StringWriter();
 			
+			Serialize(ms, map);
+
+			//return sw.ToString();
+			return Encoding.UTF8.GetString(ms.GetBuffer());
+		}
+
+		public static void Serialize(Stream stream, Map map)
+		{
 			XmlWriterSettings xws = new XmlWriterSettings();
 			xws.Encoding = Encoding.UTF8;
-			XmlWriter writer = XmlWriter.Create(ms, xws);
+			XmlWriter writer = XmlWriter.Create(stream, xws);
 			writer.WriteStartDocument();
 			writer.WriteStartElement("Map");
 			
@@ -153,11 +161,8 @@ namespace Cumberland.Xml.Serialization
 			writer.WriteEndElement(); // Map
 			writer.WriteEndDocument();
 			writer.Flush();
-
-			//return sw.ToString();
-			return Encoding.UTF8.GetString(ms.GetBuffer());
 		}
-
+		
 #endregion
 		
 #region private methods
