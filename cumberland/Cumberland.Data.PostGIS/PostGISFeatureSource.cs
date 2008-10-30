@@ -216,6 +216,11 @@ namespace Cumberland.Data.PostGIS
 			isInitialized = true;
 		}
 		
+		public List<Feature> GetFeatures()
+		{
+			return GetFeatures(new Rectangle());
+		}
+
 		public List<Feature> GetFeatures (Rectangle rectangle)
 		{
 			CheckIfInitialized();
@@ -226,16 +231,21 @@ namespace Cumberland.Data.PostGIS
 			{
 				conn.Open();
 				
-				string sql = string.Format("select astext({0}) from {1} where {0} && SetSRID('BOX3D({2} {3}, {4} {5})'::box3d, {6})",
+				string sql = string.Format("select astext({0}) from {1}",
 				                           geometryColumn, 
+				                           tableName);
+
+				if (!rectangle.IsEmpty)
+				{
+					sql += string.Format(" where {0} && SetSRID('BOX3D({2} {3}, {4} {5})'::box3d, {6})",
+					                     geometryColumn, 
 				                           tableName,
 				                           rectangle.Min.X,
 				                           rectangle.Min.Y,
 				                           rectangle.Max.X,
 				                           rectangle.Max.Y,
 				                           srid);
-
-				//System.Console.WriteLine(sql);
+				}
 				
 				using (NpgsqlCommand comm = new NpgsqlCommand(sql, conn))
 				{

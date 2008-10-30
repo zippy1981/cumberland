@@ -225,6 +225,53 @@ namespace Cumberland
 			                     a.Max.Y > b.Max.Y ? a.Max.Y : b.Max.Y);
 		}
 		
+		public bool Overlaps(Rectangle r)
+		{
+			bool xoverlaps = false;
+			
+			if (Min.X >= r.Min.X && 
+			    Max.X <= r.Max.X)
+			{
+				// within or equal
+				xoverlaps = true;
+			}
+			else if (Min.X < r.Min.X && 
+			         Max.X >= r.Min.X)
+			{
+				// this.Min.X is less but this.Max.X overlaps r
+				xoverlaps = true;
+			}
+			else if (Max.X > r.Max.X && 
+			         Min.X <= r.Max.X)
+			{
+				// this.Max.X is more but this.Min.Y overlaps r
+				xoverlaps = true;
+			}
+			
+			// if false, failed on x-axis
+			if (!xoverlaps) return xoverlaps;
+			
+			bool yoverlaps = false;
+			
+			if (Min.Y >= r.Min.Y &&
+			    Max.Y <= r.Max.Y)
+			{
+				yoverlaps = true;
+			}
+			else if (Min.Y < r.Min.Y &&
+			         Max.Y >= r.Min.Y)
+			{
+				yoverlaps = true;
+			}
+			else if (Max.Y > r.Max.Y &&
+			         Min.Y <= r.Max.Y)
+			{
+				yoverlaps = true;
+			}
+			
+			return yoverlaps;
+		}
+		
 #endregion
 	}
 }

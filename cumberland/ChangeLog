@@ -1,5 +1,12 @@
 2008-10-30  Scott Ellington <scott.ellington@gmail.com> 
 
+	* Cumberland.Drawing.OpenGL/OpenGlMapDrawer.cs: need to use
+	  GetFeatures()
+	* Cumberland.Data.PostGIS/PostGISFeatureSource.cs: add GetFeatures()
+	  overload
+
+2008-10-30  Scott Ellington <scott.ellington@gmail.com> 
+
 	* Cumberland.InteractiveMap/Cumberland.InteractiveMap.csproj,
 	  Cumberland.InteractiveMap/lib/Tao.FreeGlut.dll,
 	  Cumberland.InteractiveMap/lib/Tao.FreeGlut.dll.config,
