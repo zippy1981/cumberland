@@ -23,27 +23,244 @@
 //
 
 using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Text;
+
 using NUnit.Framework;
 
 using Cumberland;
+using Cumberland.Data;
 using Cumberland.Xml.Serialization;
 
 namespace Cumberland.Tests
 {
-	
-	
 	[TestFixture()]
 	public class MapSerializerTests
 	{
+		Map m1, m2;
+		
+#region dummy providers
+		
+		class DummyFileProvider : IFileFeatureProvider, IFeatureSource
+		{
+			public string FilePath {
+				get {
+					return f;
+				}
+				set {
+					f = value;
+				}
+			}	
+			string f = "MyFile";
+
+			public FeatureType SourceFeatureType {
+				get {
+					return FeatureType.Polygon;
+				}
+			}
+	
+			public Rectangle Extents {
+				get {
+					return new Rectangle(0,0,20,20);
+				}
+			}
+			
+			public System.Collections.Generic.List<Feature> GetFeatures (Rectangle rectangle)
+			{
+				return new List<Feature>();
+			}
+		}
+		
+		class DummyDBProvider : IDBFeatureProvider, IFeatureSource
+		{
+			public string TableName
+			{
+				get { return tableName; }
+				set { tableName = value; }
+			}
+			
+			public string ConnectionString
+			{
+				get { return connectionString; }
+				set { connectionString = value; }
+			}
+			
+			string tableName = "MyTable";
+			string connectionString = "myConnectionString";
+			
+			public FeatureType SourceFeatureType {
+				get {
+					return FeatureType.Polyline;
+				}
+			}
+	
+			public Rectangle Extents {
+				get {
+					return new Rectangle(0,0,30,30);
+				}
+			}
+			
+			public System.Collections.Generic.List<Feature> GetFeatures (Rectangle rectangle)
+			{
+				return new List<Feature>();
+			}
+		}
+		
+#endregion
+		
+		[TestFixtureSetUp]
+		public void SetUp()
+		{
+			MapSerializer ms = new MapSerializer();
+			ms.AddDBFeatureProvider(typeof(DummyDBProvider));
+			ms.AddFileFeatureProvider(typeof(DummyFileProvider));
+			
+			m1 = new Map();
+			m1.Extents = new Rectangle(0,0,10,10);
+			m1.Height = 123;
+			m1.Width = 321;
+			m1.Projection = "+init=epsg:4326";
+			
+			Layer l1 = new Layer();
+			l1.Id = "l1";
+			l1.Data = new DummyDBProvider();
+			l1.LineColor = Color.FromArgb(255, 180, 34, 34);
+			l1.LineStyle = LineStyle.Dashed;
+			l1.LineWidth = 23;
+			l1.PointSize = 4;
+			l1.Projection = "+init=epsg:2236";
+			m1.Layers.Add(l1);
+			
+			Layer l2 = new Layer();
+			l2.Id = "l2";
+			l2.Data = new DummyFileProvider();
+			m1.Layers.Add(l2);
+			
+			string s = MapSerializer.Serialize(m1);
+			
+			m2 = ms.Deserialize(new MemoryStream(ASCIIEncoding.Default.GetBytes((s))));
+		}
 		
 		[Test()]
-		public void TestCase()
+		public void TestMapExtentsSerialized()
+		{	
+			Assert.AreEqual(m1.Extents, m2.Extents);
+		}
+		
+		[Test]
+		public void TestMapHeightSerialized()
+		{
+			Assert.AreEqual(m1.Height, m2.Height);
+		}
+		
+		[Test]
+		public void TestMapWidthSerialized()
+		{
+			Assert.AreEqual(m1.Width, m2.Width);
+		}
+		
+		[Test]
+		public void TestMapProjectionSerialized()
+		{
+			Assert.AreEqual(m1.Projection, m2.Projection);
+		}
+		
+		[Test, ExpectedException(typeof(FormatException))]
+		public void TestAddUnsupportedFileProvider()
 		{
 			Map m = new Map();
+			Layer l = new Layer();
+			l.Id = "l";
+			l.Data = new DummyFileProvider();
+			m.Layers.Add(l);
 			
-			string s = MapSerializer.Serialize(m);
+			string x = MapSerializer.Serialize(m);
 			
-			Assert.AreEqual(string.Empty, s);
+			MapSerializer ms = new MapSerializer();
+			
+			// should fail as this not a supported provider
+			m2 = ms.Deserialize(new MemoryStream(ASCIIEncoding.Default.GetBytes((x))));
+		}
+		
+		[Test, ExpectedException(typeof(FormatException))]
+		public void TestAddUnsupportedDBProvider()
+		{
+			Map m = new Map();
+			Layer l = new Layer();
+			l.Id = "l";
+			l.Data = new DummyDBProvider();
+			m.Layers.Add(l);
+			
+			string x = MapSerializer.Serialize(m);
+			
+			MapSerializer ms = new MapSerializer();
+			
+			// should fail as this not a supported provider
+			m2 = ms.Deserialize(new MemoryStream(ASCIIEncoding.Default.GetBytes((x))));
+		}
+
+		[Test]
+		public void TestLayerOrderSerializedCorrectlyAndId()
+		{
+			Assert.AreEqual(m1.Layers[0].Id, m2.Layers[0].Id);
+		}
+		
+		[Test]
+		public void TestFileProviderFilePathSerialized()
+		{
+			Assert.AreEqual((m1.Layers[1].Data as IFileFeatureProvider).FilePath,
+			                (m2.Layers[1].Data as IFileFeatureProvider).FilePath);
+		}
+
+		[Test]
+		public void TestDBProviderTableNameSerialized()
+		{
+			Assert.AreEqual((m1.Layers[0].Data as IDBFeatureProvider).TableName,
+			                (m2.Layers[0].Data as IDBFeatureProvider).TableName);
+		}
+
+		[Test]
+		public void TestDBProvideronnectionStringSerialized()
+		{
+			Assert.AreEqual((m1.Layers[0].Data as IDBFeatureProvider).ConnectionString,
+			                (m2.Layers[0].Data as IDBFeatureProvider).ConnectionString);
+		}
+
+		[Test]
+		public void TestLayerLineColorSerialized()
+		{
+			Assert.AreEqual(m1.Layers[0].LineColor,
+			                m2.Layers[0].LineColor);
+		}
+
+		[Test]
+		public void TestLayerLineWidthSerialized()
+		{
+			Assert.AreEqual(m1.Layers[0].LineWidth,
+			                m2.Layers[0].LineWidth);
+		}
+
+		[Test]
+		public void TestLayerLineStyleSerialized()
+		{
+			Assert.AreEqual(m1.Layers[0].LineStyle,
+			                m2.Layers[0].LineStyle);
+		}
+		
+		[Test]
+		public void TestLayerPointSizeSerialized()
+		{
+			Assert.AreEqual(m1.Layers[0].PointSize,
+			                m2.Layers[0].PointSize);
+		}
+		
+		[Test]
+		public void TestLayerProjectionSerialized()
+		{
+			Assert.AreEqual(m1.Layers[0].Projection,
+			                m2.Layers[0].Projection);
 		}
 	}
 }
