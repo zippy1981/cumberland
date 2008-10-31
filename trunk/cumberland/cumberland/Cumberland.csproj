@@ -54,8 +54,8 @@
     <Compile Include="WellKnownText.cs" />
     <Compile Include="Data\SimpleFeatureSource.cs" />
     <Compile Include="Xml\Serialization\MapSerializer.cs" />
-    <Compile Include="Data\IFileFeatureProvider.cs" />
-    <Compile Include="Data\IDBFeatureProvider.cs" />
+    <Compile Include="Data\IFileFeatureSource.cs" />
+    <Compile Include="Data\IDatabaseFeatureSource.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

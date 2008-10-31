@@ -58,7 +58,7 @@ namespace Cumberland.TileViewerTest
 			try
 			{
 				MapSerializer ms = new MapSerializer();
-				ms.AddDBFeatureProvider(typeof(PostGISFeatureSource));
+				ms.AddDatabaseFeatureSourceType(typeof(PostGISFeatureSource));
 
 				Map map = ms.Deserialize(Request.QueryString["map"]);
 

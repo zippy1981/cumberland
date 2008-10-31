@@ -24,9 +24,9 @@
 
 using System;
 
-namespace Cumberland
+namespace Cumberland.Data
 {
-	public interface IFileFeatureProvider
+	public interface IFileFeatureSource : IFeatureSource
 	{
 		string FilePath { get; set; }
 	}

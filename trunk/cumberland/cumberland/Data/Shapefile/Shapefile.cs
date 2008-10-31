@@ -34,7 +34,7 @@ namespace Cumberland.Data.Shapefile
 	//TODO: Because this specification does not forbid consecutive points with identical coordinates, 
 	// shapefile readers must handle such cases.
 
-    public class Shapefile : IFeatureSource, IFileFeatureProvider
+    public class Shapefile : IFeatureSource, IFileFeatureSource
 	{				
         public enum ShapeType
         {

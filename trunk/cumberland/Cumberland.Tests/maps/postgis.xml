@@ -13,8 +13,8 @@
       <Projection>+init=epsg:3087</Projection>
       <Id>pg1</Id>
       <LineStyle>Solid</LineStyle>
-      <Data providerType="Cumberland.IDBFeatureProvider"
-      providerInstance="Cumberland.Data.PostGIS.PostGISFeatureSource">
+      <Data sourceType="Cumberland.Data.IDatabaseFeatureSource"
+      	sourceInstance="Cumberland.Data.PostGIS.PostGISFeatureSource">
         <ConnectionString>Server=127.0.0.1;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;</ConnectionString>
         <TableName>counties</TableName>
       </Data>

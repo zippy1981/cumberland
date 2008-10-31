@@ -12,7 +12,7 @@
 			<FillColor>255,240,248,255</FillColor>
 			<Projection>+init=epsg:4326</Projection>
 			<Id>states</Id>
-			<Data providerType="Cumberland.IFileFeatureProvider" providerInstance="Cumberland.Data.Shapefile.Shapefile">
+			<Data sourceType="Cumberland.Data.IFileFeatureSource" sourceInstance="Cumberland.Data.Shapefile.Shapefile">
 				<FilePath>../shape_eg_data/mexico/states.shp</FilePath>
 			</Data>
 		</Layer>
@@ -22,7 +22,7 @@
 			<Projection>+init=epsg:4326</Projection>
 			<Id>roads</Id>
 			<LineStyle>Solid</LineStyle>
-			<Data providerType="Cumberland.IFileFeatureProvider" providerInstance="Cumberland.Data.Shapefile.Shapefile">
+			<Data sourceType="Cumberland.Data.IFileFeatureSource" sourceInstance="Cumberland.Data.Shapefile.Shapefile">
 				<FilePath>../shape_eg_data/mexico/roads.shp</FilePath>
 			</Data>
 		</Layer>
@@ -32,7 +32,7 @@
 			<Projection>+init=epsg:4326</Projection>
 			<Id>cities</Id>
 			<LineStyle>Solid</LineStyle>
-			<Data providerType="Cumberland.IFileFeatureProvider" providerInstance="Cumberland.Data.Shapefile.Shapefile">
+			<Data sourceType="Cumberland.Data.IFileFeatureSource" sourceInstance="Cumberland.Data.Shapefile.Shapefile">
 				<FilePath>../shape_eg_data/mexico/cities.shp</FilePath>
 			</Data>
 		</Layer>

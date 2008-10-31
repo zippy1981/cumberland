@@ -1,3 +1,10 @@
+2008-10-31  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.DrawMap/Main.cs, Cumberland.InteractiveMap/Main.cs,
+	  Cumberland.TileViewerTest/TileProvider.aspx.cs,
+	  Cumberland.Data.PostGIS/PostGISFeatureSource.cs: rename providers
+	  to sources
+
 2008-10-30  Scott Ellington <scott.ellington@gmail.com> 
 
 	* Cumberland.TileViewerTest/TileProvider.aspx.cs: clean up
