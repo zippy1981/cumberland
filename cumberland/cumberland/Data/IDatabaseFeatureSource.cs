@@ -24,9 +24,9 @@
 
 using System;
 
-namespace Cumberland
+namespace Cumberland.Data
 {
-	public interface IDBFeatureProvider
+	public interface IDatabaseFeatureSource : IFeatureSource
 	{
 		string ConnectionString { get; set; }
 		string TableName { get; set; }

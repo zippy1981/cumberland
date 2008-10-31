@@ -40,8 +40,8 @@ namespace Cumberland.Xml.Serialization
 	{
 #region vars
 		
-		List<Type> fileFeatureProviders = new List<Type>();
-		List<Type> dbFeatureProviders = new List<Type>();
+		List<Type> fileFeatureSourceTypes = new List<Type>();
+		List<Type> dbFeatureSourceTypes = new List<Type>();
 		
 #endregion
 		
@@ -49,31 +49,31 @@ namespace Cumberland.Xml.Serialization
 		
 		public MapSerializer()
 		{
-			AddFileFeatureProvider(typeof(Shapefile));
+			AddFileFeatureSourceType(typeof(Shapefile));
 		}
 		
 #endregion
 		
 #region public methods
 		
-		public void AddFileFeatureProvider(Type type)
+		public void AddFileFeatureSourceType(Type type)
 		{
-			if (type.GetInterface(typeof(IFileFeatureProvider).ToString()) == null)
+			if (type.GetInterface(typeof(IFileFeatureSource).ToString()) == null)
 			{
-				throw new ArgumentException("does not implement 'IFileFeatureProvider'", "type");
+				throw new ArgumentException("does not implement 'IFileFeatureSource'", "type");
 			}
 
-			fileFeatureProviders.Add(type);
+			fileFeatureSourceTypes.Add(type);
 		}
 		
-		public void AddDBFeatureProvider(Type type)
+		public void AddDatabaseFeatureSourceType(Type type)
 		{
-			if (type.GetInterface(typeof(IDBFeatureProvider).ToString()) == null)
+			if (type.GetInterface(typeof(IDatabaseFeatureSource).ToString()) == null)
 			{
-				throw new ArgumentException("does not implement 'IDBFeatureProvider'", "type");
+				throw new ArgumentException("does not implement 'IDatabaseFeatureSource'", "type");
 			}
 
-			dbFeatureProviders.Add(type);
+			dbFeatureSourceTypes.Add(type);
 		}
 		
 		public Map Deserialize(string mapPath)
@@ -175,7 +175,7 @@ namespace Cumberland.Xml.Serialization
 		void DeserializeLayer(XmlNode node, Map m, string mapPath)
 		{
 			Layer l = new Layer();
-			Type providerType = null;
+			Type sourceType = null;
 			Type instanceType = null;
 			
 			foreach (XmlNode child in node.ChildNodes)
@@ -183,16 +183,16 @@ namespace Cumberland.Xml.Serialization
 				if (child.Name == "Data")
 				{
 #region parse data
-					string provider = child.Attributes.GetNamedItem("providerType").Value;
-					string instance = child.Attributes.GetNamedItem("providerInstance").Value;
+					string source = child.Attributes.GetNamedItem("sourceType").Value;
+					string instance = child.Attributes.GetNamedItem("sourceInstance").Value;
 					
-					if (provider != null && instance != null)
+					if (source != null && instance != null)
 					{
-						providerType = Type.GetType(provider);	
+						sourceType = Type.GetType(source);	
 						
-						if (providerType == typeof(IDBFeatureProvider))
+						if (sourceType == typeof(IDatabaseFeatureSource))
 						{
-							foreach (Type t in dbFeatureProviders)
+							foreach (Type t in dbFeatureSourceTypes)
 							{
 								if (instance == t.ToString())
 								{
@@ -202,12 +202,12 @@ namespace Cumberland.Xml.Serialization
 							
 							if (instanceType == null)
 							{
-								throw new FormatException(string.Format("Provider type '{0}' is not a supported file provider", instance));
+								throw new FormatException(string.Format("Source type '{0}' is not a supported database source", instance));
 							}
 						}
-						else if (providerType == typeof(IFileFeatureProvider))
+						else if (sourceType == typeof(IFileFeatureSource))
 						{
-							foreach (Type t in fileFeatureProviders)
+							foreach (Type t in fileFeatureSourceTypes)
 							{
 								if (instance == t.ToString())
 								{
@@ -217,7 +217,7 @@ namespace Cumberland.Xml.Serialization
 
 							if (instanceType == null)
 							{
-								throw new FormatException(string.Format("Provider type '{0}' is not a supported database provider", instance));
+								throw new FormatException(string.Format("Source type '{0}' is not a supported file source", instance));
 							}
 						}
 						else return; // unknown type
@@ -231,7 +231,7 @@ namespace Cumberland.Xml.Serialization
 						{
 						case "FilePath":
 							
-							if (providerType == typeof(IFileFeatureProvider))
+							if (sourceType == typeof(IFileFeatureSource))
 							{
 								
 								string path = dnode.InnerText;
@@ -241,24 +241,24 @@ namespace Cumberland.Xml.Serialization
 									string root = Path.GetDirectoryName(Path.GetFullPath(mapPath));
 									path = Path.Combine(root, path);
 								}
-								(l.Data as IFileFeatureProvider).FilePath = path;
+								(l.Data as IFileFeatureSource).FilePath = path;
 							}
 							
 							break;
 							
 						case "ConnectionString":
 							
-							if (providerType == typeof(IDBFeatureProvider))
+							if (sourceType == typeof(IDatabaseFeatureSource))
 							{
-								(l.Data as IDBFeatureProvider).ConnectionString = dnode.InnerText;
+								(l.Data as IDatabaseFeatureSource).ConnectionString = dnode.InnerText;
 							}
 							break;
 							
 						case "TableName":
 							
-							if (providerType == typeof(IDBFeatureProvider))
+							if (sourceType == typeof(IDatabaseFeatureSource))
 							{
-								(l.Data as IDBFeatureProvider).TableName = dnode.InnerText;
+								(l.Data as IDatabaseFeatureSource).TableName = dnode.InnerText;
 							}
 							break;
 						}
@@ -317,22 +317,22 @@ namespace Cumberland.Xml.Serialization
 			writer.WriteElementString("LineStyle", Enum.GetName(typeof(LineStyle), layer.LineStyle));
 			writer.WriteStartElement("Data");
 
-			IFileFeatureProvider ffp = layer.Data as IFileFeatureProvider;
-			IDBFeatureProvider dfp = layer.Data as IDBFeatureProvider;
+			IFileFeatureSource ffp = layer.Data as IFileFeatureSource;
+			IDatabaseFeatureSource dfp = layer.Data as IDatabaseFeatureSource;
 			if (ffp != null)
 			{
-				// add providerType attribute to Data element
-				writer.WriteAttributeString("providerType", typeof(IFileFeatureProvider).ToString());
-				writer.WriteAttributeString("providerInstance", layer.Data.GetType().ToString());
+				// add sourceType attribute to Data element
+				writer.WriteAttributeString("sourceType", typeof(IFileFeatureSource).ToString());
+				writer.WriteAttributeString("sourceInstance", layer.Data.GetType().ToString());
 				
 				writer.WriteElementString("FilePath", ffp.FilePath);
 
 			}
 			else if (dfp != null)
 			{
-				// add providerType attribute to Data element
-				writer.WriteAttributeString("providerType", typeof(IDBFeatureProvider).ToString());
-				writer.WriteAttributeString("providerInstance", layer.Data.GetType().ToString());
+				// add sourceType attribute to Data element
+				writer.WriteAttributeString("sourceType", typeof(IDatabaseFeatureSource).ToString());
+				writer.WriteAttributeString("sourceInstance", layer.Data.GetType().ToString());
 				
 				writer.WriteElementString("ConnectionString", dfp.ConnectionString);
 				writer.WriteElementString("TableName", dfp.TableName);

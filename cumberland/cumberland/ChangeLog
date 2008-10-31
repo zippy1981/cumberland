@@ -1,3 +1,11 @@
+2008-10-31  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Layer.cs: add CreateFromData helper
+	* Xml/Serialization/MapSerializer.cs, Data/Shapefile/Shapefile.cs,
+	  Data/IFileFeatureProvider.cs, Data/IDBFeatureProvider.cs,
+	  Data/IFileFeatureSource.cs, Data/IDatabaseFeatureSource.cs,
+	  Cumberland.csproj: rename providers to sources
+
 2008-10-30  Scott Ellington <scott.ellington@gmail.com> 
 
 	* Xml/Serialization/MapSerializer.cs: convert relative file paths in

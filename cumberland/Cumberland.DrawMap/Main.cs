@@ -89,7 +89,7 @@ namespace Cumberland.DrawMap
 			sw.Start();
 
 			MapSerializer ms = new MapSerializer();
-			ms.AddDBFeatureProvider(typeof(PostGISFeatureSource));
+			ms.AddDatabaseFeatureSourceType(typeof(PostGISFeatureSource));
 			
 			Map map = ms.Deserialize(rest[0]);
 			if (w > 0) map.Width = w;

@@ -40,6 +40,8 @@ namespace Cumberland
 	
 	public class Layer
 	{
+#region properties
+		
 		public int LineWidth {
 			get {
 				return lineWidth;
@@ -127,5 +129,22 @@ namespace Cumberland
 		string projection = null;
 		
 		string id;
+		
+#endregion
+		
+		public static Layer CreateFromData(IFeatureSource data, string name)
+		{
+			Random r = new Random();
+
+			Layer l = new Layer();
+			l.Id = name;
+			l.Data = data;
+			l.PointSize = 5;
+			l.LineColor = Color.FromArgb(r.Next(75,150), r.Next(75,150), r.Next(75,150));
+			l.FillColor =  Color.FromArgb(l.LineColor.R+100, l.LineColor.G+100, l.LineColor.B+100);
+			l.LineWidth = 1;
+			
+			return l;
+		}
 	}
 }

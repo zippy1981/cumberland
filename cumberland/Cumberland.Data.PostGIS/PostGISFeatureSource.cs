@@ -40,7 +40,7 @@ namespace Cumberland.Data.PostGIS
 		Point
 	}
 	
-	public class PostGISFeatureSource : IFeatureSource, IDBFeatureProvider
+	public class PostGISFeatureSource : IFeatureSource, IDatabaseFeatureSource
 	{
 #region vars
 		

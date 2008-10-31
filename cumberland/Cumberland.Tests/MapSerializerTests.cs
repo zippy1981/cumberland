@@ -43,7 +43,7 @@ namespace Cumberland.Tests
 		
 #region dummy providers
 		
-		class DummyFileProvider : IFileFeatureProvider, IFeatureSource
+		class DummyFileProvider : IFileFeatureSource, IFeatureSource
 		{
 			public string FilePath {
 				get {
@@ -78,7 +78,7 @@ namespace Cumberland.Tests
 			}
 		}
 		
-		class DummyDBProvider : IDBFeatureProvider, IFeatureSource
+		class DummyDBProvider : IDatabaseFeatureSource, IFeatureSource
 		{
 			public string TableName
 			{
@@ -125,8 +125,8 @@ namespace Cumberland.Tests
 		public void SetUp()
 		{
 			MapSerializer ms = new MapSerializer();
-			ms.AddDBFeatureProvider(typeof(DummyDBProvider));
-			ms.AddFileFeatureProvider(typeof(DummyFileProvider));
+			ms.AddDatabaseFeatureSourceType(typeof(DummyDBProvider));
+			ms.AddFileFeatureSourceType(typeof(DummyFileProvider));
 			
 			m1 = new Map();
 			m1.Extents = new Rectangle(0,0,10,10);
@@ -179,7 +179,7 @@ namespace Cumberland.Tests
 		}
 		
 		[Test, ExpectedException(typeof(FormatException))]
-		public void TestAddUnsupportedFileProvider()
+		public void TestAddUnsupportedFileFeatureSource()
 		{
 			Map m = new Map();
 			Layer l = new Layer();
@@ -196,7 +196,7 @@ namespace Cumberland.Tests
 		}
 		
 		[Test, ExpectedException(typeof(FormatException))]
-		public void TestAddUnsupportedDBProvider()
+		public void TestAddUnsupportedDatabaseFeatureSource()
 		{
 			Map m = new Map();
 			Layer l = new Layer();
@@ -219,24 +219,24 @@ namespace Cumberland.Tests
 		}
 		
 		[Test]
-		public void TestFileProviderFilePathSerialized()
+		public void TestFileFeatureSourceFilePathSerialized()
 		{
-			Assert.AreEqual((m1.Layers[1].Data as IFileFeatureProvider).FilePath,
-			                (m2.Layers[1].Data as IFileFeatureProvider).FilePath);
+			Assert.AreEqual((m1.Layers[1].Data as IFileFeatureSource).FilePath,
+			                (m2.Layers[1].Data as IFileFeatureSource).FilePath);
 		}
 
 		[Test]
-		public void TestDBProviderTableNameSerialized()
+		public void TestDatabaseFeatureSourceTableNameSerialized()
 		{
-			Assert.AreEqual((m1.Layers[0].Data as IDBFeatureProvider).TableName,
-			                (m2.Layers[0].Data as IDBFeatureProvider).TableName);
+			Assert.AreEqual((m1.Layers[0].Data as IDatabaseFeatureSource).TableName,
+			                (m2.Layers[0].Data as IDatabaseFeatureSource).TableName);
 		}
 
 		[Test]
-		public void TestDBProvideronnectionStringSerialized()
+		public void TestDatabaseFeatureSourceConnectionStringSerialized()
 		{
-			Assert.AreEqual((m1.Layers[0].Data as IDBFeatureProvider).ConnectionString,
-			                (m2.Layers[0].Data as IDBFeatureProvider).ConnectionString);
+			Assert.AreEqual((m1.Layers[0].Data as IDatabaseFeatureSource).ConnectionString,
+			                (m2.Layers[0].Data as IDatabaseFeatureSource).ConnectionString);
 		}
 
 		[Test]
@@ -282,7 +282,7 @@ namespace Cumberland.Tests
 			MapSerializer ms = new MapSerializer();
 			Map m = ms.Deserialize("../../maps/mexico.xml");
 			
-			Assert.IsTrue(Path.IsPathRooted((m.Layers[0].Data as IFileFeatureProvider).FilePath));
+			Assert.IsTrue(Path.IsPathRooted((m.Layers[0].Data as IFileFeatureSource).FilePath));
 		}
 	}
 }

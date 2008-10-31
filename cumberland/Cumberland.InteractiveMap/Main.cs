@@ -99,7 +99,7 @@ namespace Cumberland.InteractiveMap
 			}
 
 			MapSerializer ms = new MapSerializer();
-			ms.AddDBFeatureProvider(typeof(PostGISFeatureSource));
+			ms.AddDatabaseFeatureSourceType(typeof(PostGISFeatureSource));
 			
 			map = ms.Deserialize(rest[0]);
 			if (w>0) map.Width = w;
