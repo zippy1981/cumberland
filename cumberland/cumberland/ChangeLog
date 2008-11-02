@@ -1,3 +1,8 @@
+2008-11-01  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Data/Shapefile/DBaseIIIFile.cs, Cumberland.csproj: add DBase III
+	  reader
+
 2008-10-31  Scott Ellington <scott.ellington@gmail.com> 
 
 	* Layer.cs: add CreateFromData helper
