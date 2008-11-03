@@ -22,6 +22,7 @@
 //
 //
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
@@ -30,67 +31,145 @@ using System.Text;
 using Cumberland;
 using Cumberland.Data.Shapefile;
 
+using NDesk.Options;
+
 namespace Cumberland.Data.SqlServer.Loader
 {
 	class MainClass
 	{
 		public static void Main(string[] args)
 		{
-			string connectionString = args[0];
+#region handle parameters and configuration
 			
-			string path = args[1];
+			// application variables
+			string connectionString = null;
+			int srid = -1;
+			string idColumn = "gid";
+			string geomColumn = "the_geom";
+			string tableName = null;
+			bool showHelp = false;
+			bool createIndex = false;
+			bool useGeography = false;
+			bool append = false;
+			
+			// set up parameters
+			OptionSet options = new OptionSet();
+			options.Add("s|srid=",
+			            "The Spatial Reference ID (SRID).  If not specified it defaults to -1.",
+			            delegate (string v) { srid = int.Parse(v); });
+			options.Add("g|geometry_column=",
+			            "The name of the geometry column",
+			            delegate (string v) { geomColumn = v; });
+			options.Add("t|table_name=",
+			            "The table name to use",
+			            delegate (string v) { tableName = v; });
+			options.Add("k|key_column=",
+			            "The name of the identity column to create for a primary key",
+			            delegate (string v) { idColumn = v; });
+			options.Add("i|index",
+			            "Create a spatial index",
+			            delegate (string v) { createIndex = v != null; });
+			options.Add("l|latlong",
+			            "Add spatial data as geography type",
+			            delegate (string v) { useGeography = v != null; });
+			options.Add("a|append",
+			            "Append data.  If not specified, table will be created",
+			            delegate (string v) { append = v != null; });
+			options.Add("h|help",  "show this message and exit",
+			            delegate (string v) { showHelp = v!= null; });
+			
+			// parse the command line args
+			List<string> rest = options.Parse(args);
+			
+			if (showHelp)
+			{
+				ShowHelp(options);
+				return;
+			}
+
+			if (rest.Count == 0)
+			{
+				System.Console.WriteLine("Error: A connection string is required");
+				ShowHelp(options);
+				return;
+			}
+			
+			if (rest.Count == 1)
+			{
+				System.Console.WriteLine("Error: No path to shapefile provided");
+				ShowHelp(options);
+				return;
+			}
+			
+			connectionString = rest[0];
+			string path = rest[1];
+			
+			if (string.IsNullOrEmpty(tableName))
+		    {
+				// use the shapefile name as table name if none provided
+				tableName = Path.GetFileNameWithoutExtension(path);
+			}
+			
+#endregion
+			
+#region load shp and dbf
 			
 			Shapefile.Shapefile shp = new Shapefile.Shapefile(path);
 			DBaseIIIFile dbf = new DBaseIIIFile(Path.GetDirectoryName(path) + 
 			                                    Path.DirectorySeparatorChar + 
 			                                    Path.GetFileNameWithoutExtension(path) + 
 			                                    ".dbf");
-			
-			int srid = 4326;
-			string idColumn = "gid";
-			string geomColumn = "the_geom";
-			string tableName = Path.GetFileNameWithoutExtension(path);
-			StringBuilder sql = new StringBuilder();
-			
-			sql.AppendFormat("create table {0} (", tableName);
-			sql.AppendFormat("{0} int identity(1,1) not null", idColumn);
-			
-			foreach (DataColumn dc in dbf.Records.Columns)
-			{
-				sql.Append(",");
-				
-				string dataType = "nvarchar(256)";
-				
-				if (dc.DataType == typeof(DateTime))
-			    {
-					dataType = "date";
-				}
-				else if (dc.DataType == typeof(double))
-				{
-					dataType = "real";
-				}
-			    else if (dc.DataType == typeof(bool))
-				{
-					dataType = "bit";
+#endregion		
 
-				}
-				
-				sql.AppendFormat("{0} {1}", dc.ColumnName, dataType);
-			}
-				
-			sql.AppendFormat(",{0} geometry,", geomColumn);
-			
-			sql.AppendFormat("CONSTRAINT PK_{0} PRIMARY KEY CLUSTERED ({1} ASC) ON [PRIMARY]", tableName, idColumn);
-			
-			sql.Append(")");
+#region create table
 
-			
 			using (SqlConnection connection = new SqlConnection(connectionString))
 			{
 				connection.Open();
+				StringBuilder sql = new StringBuilder();
+				SqlCommand command = null;
 				
-				SqlCommand command = new SqlCommand(sql.ToString(), connection);
-				command.ExecuteNonQuery();
+				if (!append)
+				{
+					sql.AppendFormat("create table {0} (", tableName);
+					sql.AppendFormat("{0} int identity(1,1) not null", idColumn);
+					
+					foreach (DataColumn dc in dbf.Records.Columns)
+					{
+						sql.Append(",");
+						
+						string dataType = "nvarchar(256)";
+						
+						if (dc.DataType == typeof(DateTime))
+					    {
+							dataType = "date";
+						}
+						else if (dc.DataType == typeof(double))
+						{
+							dataType = "real";
+						}
+					    else if (dc.DataType == typeof(bool))
+						{
+							dataType = "bit";
+		
+						}
+						
+						sql.AppendFormat("{0} {1}", dc.ColumnName, dataType);
+					}
+						
+					sql.AppendFormat(",{0} {1},", geomColumn, useGeography ? "geography" : "geometry");
+					
+					sql.AppendFormat("CONSTRAINT PK_{0} PRIMARY KEY CLUSTERED ({1} ASC) ON [PRIMARY]", tableName, idColumn);
+					
+					sql.Append(")");
+					
+					command = new SqlCommand(sql.ToString(), connection);
+					command.ExecuteNonQuery();
+				}
+
+#endregion
+				
+#region insert rows
 				
 				int idx = 0;
 				foreach (Feature f in shp.GetFeatures())
@@ -137,7 +216,10 @@ namespace Cumberland.Data.SqlServer.Loader
 						wkt = WellKnownText.CreateFromPolyLine(f as PolyLine);
 					}
 					
-					sql.AppendFormat("geometry::STGeomFromText('{0}', {1})", wkt, srid);
+					sql.AppendFormat("{2}::STGeomFromText('{0}', {1})", 
+					                 wkt, 
+					                 srid,
+					                 useGeography ? "geography" : "geometry");
 	
 					sql.Append(")");
 					
@@ -147,23 +229,45 @@ namespace Cumberland.Data.SqlServer.Loader
 					command.ExecuteNonQuery();
 				}
 				
-				System.Console.WriteLine("Creating spatial index...");
+#endregion
 				
-				// create spatial index
-				sql = new StringBuilder();
-				sql.AppendFormat("CREATE SPATIAL INDEX {0}_sidx", tableName);
-				sql.AppendFormat(" ON {0}({1})", tableName, geomColumn);
-				sql.Append(" USING GEOMETRY_GRID WITH ( ");
-				sql.AppendFormat("BOUNDING_BOX = (xmin={0}, ymin={1}, xmax={2}, ymax={3}),", 
-				                 shp.Extents.Min.X,
-				                 shp.Extents.Min.Y,
-				                 shp.Extents.Max.X,
-				                 shp.Extents.Max.Y);
-				sql.Append(" GRIDS = (LEVEL_1 = LOW, LEVEL_2 = LOW, LEVEL_3 = HIGH, LEVEL_4 = HIGH), CELLS_PER_OBJECT = 16)");
+#region create spatial index
 				
-				command = new SqlCommand(sql.ToString(), connection);
-				command.ExecuteNonQuery();
+				if (createIndex)
+				{
+					sql = new StringBuilder();
+					sql.AppendFormat("CREATE SPATIAL INDEX {0}_sidx", tableName);
+					sql.AppendFormat(" ON {0}({1})", tableName, geomColumn);
+					sql.AppendFormat(" USING {0}_GRID WITH ( ", useGeography ? "GEOGRAPHY" : "GEOMETRY");
+					
+					if (!useGeography)
+					{
+					sql.AppendFormat("BOUNDING_BOX = (xmin={0}, ymin={1}, xmax={2}, ymax={3}),", 
+					                 shp.Extents.Min.X,
+					                 shp.Extents.Min.Y,
+					                 shp.Extents.Max.X,
+					                 shp.Extents.Max.Y);
+					}
+					
+					sql.Append(" GRIDS = (LEVEL_1 = LOW, LEVEL_2 = LOW, LEVEL_3 = HIGH, LEVEL_4 = HIGH), CELLS_PER_OBJECT = 16)");
+					
+					command = new SqlCommand(sql.ToString(), connection);
+					command.ExecuteNonQuery();
+				}
+				
+#endregion
 			}
 		}
+		
+		static void ShowHelp (OptionSet p)
+	    {
+	        Console.WriteLine ("Usage: shp2sqlserver.exe [OPTIONS]+ \"connectionString\" \"path to shapefile\" ");
+	        Console.WriteLine ("Loads a shapefile into Microsoft SQL Server 2008");
+	        Console.WriteLine ();
+			Console.WriteLine ("example: shp2sqlserver.exe \"Data Source=.\\SQLExpress2008;Initial Catalog=spatialtest;Integrated Security=true\" myshape.shp");
+			Console.WriteLine ();
+	        Console.WriteLine ("Options:");
+	        p.WriteOptionDescriptions (Console.Out);
+	    }
 	}
 }
