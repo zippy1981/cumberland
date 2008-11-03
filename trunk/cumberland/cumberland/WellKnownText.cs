@@ -143,24 +143,53 @@ namespace Cumberland
 		{
 			StringBuilder sb = new StringBuilder();
 			
-			sb.Append("POLYGON(");
+			int idx = -1;
+			List<StringBuilder> polys = new List<StringBuilder>();
 			
-			foreach (Ring ring in polygon.Rings)
+			for (int ii=0; ii< polygon.Rings.Count; ii++)
 			{
-				sb.Append("(");
-				
-				for (int ii=0; ii <ring.Points.Count; ii++)
+				Ring ring = polygon.Rings[ii];	
+
+				if (ring.IsClockwise)
 				{
-					Point point = ring.Points[ii];
-					sb.AppendFormat("{0} {1}{2}", point.X, point.Y, ii <ring.Points.Count-1 ? "," : string.Empty);
+					// this is an exterior ring
+					// we need to create a new polygon for it
 					
+					polys.Add(new StringBuilder());
+					idx++;
+				}
+				else if (idx >= 0)
+				{
+					polys[idx].Append(",");
 				}
 				
+				polys[idx].Append("(");
+				
+				for (int jj=0; jj <ring.Points.Count; jj++)
+				{
+					Point point = ring.Points[jj];
+					polys[idx].AppendFormat("{0} {1}{2}", point.X, point.Y, jj < ring.Points.Count-1 ? "," : string.Empty);
+					
+				}
 
-				sb.Append(")");
+				polys[idx].Append(")");
 			}
 			
-			sb.Append(")");
+			if (polys.Count == 1)
+			{
+				sb.Append("POLYGON(");
+				sb.Append(polys[0].ToString());
+				sb.Append(")");
+			}
+			else
+			{
+				sb.Append("MULTIPOLYGON(");
+				for (int ii=0; ii<polys.Count; ii++)
+				{
+					sb.AppendFormat("({0}){1}", polys[ii].ToString(), ii < polys.Count-1 ? "," : string.Empty);
+				}
+				sb.Append(")");
+			}
 			
 			return sb.ToString();
 		}
@@ -171,17 +200,18 @@ namespace Cumberland
 			
 			sb.Append("MULTILINESTRING(");
 			
-			foreach (Line line in polyLine.Lines)
+			for (int ii=0; ii<polyLine.Lines.Count; ii++)
 			{
+				Line line = polyLine.Lines[ii];
 				sb.Append("(");
 				
-				for (int ii=0; ii <line.Points.Count; ii++)
+				for (int jj=0; jj <line.Points.Count; jj++)
 				{
-					Point point = line.Points[ii];
-					sb.AppendFormat("{0} {1}{2}", point.X, point.Y, ii <line.Points.Count-1 ? "," : string.Empty);
+					Point point = line.Points[jj];
+					sb.AppendFormat("{0} {1}{2}", point.X, point.Y, jj <line.Points.Count-1 ? "," : string.Empty);
 				}
 
-				sb.Append(")");
+				sb.AppendFormat("){0}", ii < polyLine.Lines.Count-1 ? "," : string.Empty);
 			}
 			
 			sb.Append(")");

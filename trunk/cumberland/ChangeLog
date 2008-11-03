@@ -1,3 +1,14 @@
+2008-11-03  Scott Ellington <scott.ellington@gmail.com> 
+
+	* cumberland.sln, Cumberland.Data.SqlServer.Loader,
+	  Cumberland.Data.SqlServer.Loader/AssemblyInfo.cs,
+	  Cumberland.Data.SqlServer.Loader/lib,
+	  Cumberland.Data.SqlServer.Loader/lib/NDesk,Options.COPYING,
+	  Cumberland.Data.SqlServer.Loader/lib/NDesk.Options.dll,
+	  Cumberland.Data.SqlServer.Loader/Main.cs,
+	  Cumberland.Data.SqlServer.Loader/Cumberland.Data.SqlServer.Loader.csproj:
+	  add sql server loader
+
 2008-10-31  Scott Ellington <scott.ellington@gmail.com> 
 
 	* Cumberland.DrawMap/Main.cs, Cumberland.InteractiveMap/Main.cs,
