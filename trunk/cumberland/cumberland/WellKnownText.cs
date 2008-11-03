@@ -24,15 +24,16 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 using Cumberland;
 
 namespace Cumberland
 {
-	
-	
 	public static class WellKnownText
 	{
+#region parse methods
+		
 		public static Point ParsePoint(string wkt)
 		{
 			wkt = wkt.ToUpper();
@@ -135,6 +136,66 @@ namespace Cumberland
 			return polys;
 			
 		}
+
+#endregion
+		
+		public static string CreateFromPolygon (Polygon polygon)
+		{
+			StringBuilder sb = new StringBuilder();
+			
+			sb.Append("POLYGON(");
+			
+			foreach (Ring ring in polygon.Rings)
+			{
+				sb.Append("(");
+				
+				for (int ii=0; ii <ring.Points.Count; ii++)
+				{
+					Point point = ring.Points[ii];
+					sb.AppendFormat("{0} {1}{2}", point.X, point.Y, ii <ring.Points.Count-1 ? "," : string.Empty);
+					
+				}
+				
+
+				sb.Append(")");
+			}
+			
+			sb.Append(")");
+			
+			return sb.ToString();
+		}
+		
+		public static string CreateFromPolyLine(PolyLine polyLine)
+		{
+			StringBuilder sb = new StringBuilder();
+			
+			sb.Append("MULTILINESTRING(");
+			
+			foreach (Line line in polyLine.Lines)
+			{
+				sb.Append("(");
+				
+				for (int ii=0; ii <line.Points.Count; ii++)
+				{
+					Point point = line.Points[ii];
+					sb.AppendFormat("{0} {1}{2}", point.X, point.Y, ii <line.Points.Count-1 ? "," : string.Empty);
+				}
+
+				sb.Append(")");
+			}
+			
+			sb.Append(")");
+			
+			return sb.ToString();
+		}
+		
+		public static string CreateFromPoint(Point point)
+		{
+			return string.Format("POINT({0} {1})", point.X, point.Y);
+		}
+			
+		
+#region private methods
 		
 		static Point SplitPoint(string wkt)
 		{
@@ -149,6 +210,8 @@ namespace Cumberland
 			return new Point(Convert.ToDouble(pieces[0]),
 			                 Convert.ToDouble(pieces[1]));
 		}
+		
+#endregion
 		
 	}
 }

@@ -86,8 +86,8 @@ namespace Cumberland.Data.Shapefile
 			lastUpdated = new DateTime(year + 1900, month, day);
 			recordCount = br.ReadInt32();
 			
-			short numberBytesHeader = br.ReadInt16();
-			short numberBytesRecord = br.ReadInt16();
+			br.ReadInt16(); // short numberBytesHeader = 
+			br.ReadInt16(); // short numberBytesRecord = 
 			
 			br.ReadBytes(3); // Reserved
 			br.ReadBytes(13); // Reserved for dBASE III PLUS on a LAN. 
@@ -124,7 +124,7 @@ namespace Cumberland.Data.Shapefile
 
 				br.ReadBytes(4); // Field data address
 				fd.Length = br.ReadByte();
-				byte fieldDecimalCount = br.ReadByte();
+				br.ReadByte(); // byte fieldDecimalCount = 
 				
 				br.ReadBytes(2); // Reserved for dBASE III PLUS on a LAN. 
 				br.ReadByte(); // Work area ID
