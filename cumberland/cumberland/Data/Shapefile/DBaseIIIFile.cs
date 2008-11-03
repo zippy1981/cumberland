@@ -169,10 +169,8 @@ namespace Cumberland.Data.Shapefile
 						
 					case 'D':
 						
-						short year = br.ReadInt16();
-						byte month = br.ReadByte();
-						byte day = br.ReadByte();
-						row[jj] = new DateTime(year, month, day);
+						row[jj] = DateTime.ParseExact(ASCIIEncoding.ASCII.GetString(br.ReadBytes(8)),
+						                                  "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
 						break;
 						
 					case 'N':
@@ -185,7 +183,6 @@ namespace Cumberland.Data.Shapefile
 
 						char logical = Convert.ToChar(br.ReadByte());
 						row[jj] = (logical == 'y' || logical == 'Y' || logical == 't' | logical == 'T');
-						
 						break;
 						
 					case 'M':

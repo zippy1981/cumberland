@@ -66,23 +66,36 @@ namespace Cumberland.Tests
 			Polygon p = new Polygon();
 			Ring r1 = new Ring();
 			r1.Points.Add(new Point(0,0));
-			r1.Points.Add(new Point(5,0));
+			r1.Points.Add(new Point(0, 5));
 			r1.Points.Add(new Point(5,6));
-			r1.Points.Add(new Point(0,5));
+			r1.Points.Add(new Point(5,0));
 			r1.Close();
 			p.Rings.Add(r1);
 			
-			Assert.AreEqual("POLYGON((0 0,5 0,5 6,0 5,0 0))", WellKnownText.CreateFromPolygon(p));
+			Assert.AreEqual("POLYGON((0 0,0 5,5 6,5 0,0 0))", WellKnownText.CreateFromPolygon(p));
 			
+			// add hole
 			Ring r2 = new Ring();
 			r2.Points.Add(new Point(1.1,1.1));
 			r2.Points.Add(new Point(1.6,1.1));
 			r2.Points.Add(new Point(1.4,1.4));
-			r2.Points.Add(new Point(1.6,1.1));
+			r2.Points.Add(new Point(1.1,1.6));
 			r2.Close();
 			p.Rings.Add(r2);
 			
-			Assert.AreEqual("POLYGON((0 0,5 0,5 6,0 5,0 0)(1.1 1.1,1.6 1.1,1.4 1.4,1.6 1.1,1.1 1.1))", 
+			Assert.AreEqual("POLYGON((0 0,0 5,5 6,5 0,0 0),(1.1 1.1,1.6 1.1,1.4 1.4,1.1 1.6,1.1 1.1))", 
+			                WellKnownText.CreateFromPolygon(p));
+			
+			// add another poly
+			Ring r3 = new Ring();
+			r3.Points.Add(new Point(10,10));
+			r3.Points.Add(new Point(10,15));
+			r3.Points.Add(new Point(15,15));
+			r3.Points.Add(new Point(15,10));
+			r3.Close();
+			p.Rings.Add(r3);
+			
+			Assert.AreEqual("MULTIPOLYGON(((0 0,0 5,5 6,5 0,0 0),(1.1 1.1,1.6 1.1,1.4 1.4,1.1 1.6,1.1 1.1)),((10 10,10 15,15 15,15 10,10 10)))", 
 			                WellKnownText.CreateFromPolygon(p));
 		}
 		
@@ -106,7 +119,7 @@ namespace Cumberland.Tests
 			l2.Points.Add(new Point(1.6,1.1));
 			p.Lines.Add(l2);
 			
-			Assert.AreEqual("MULTILINESTRING((0 0,5 0,5 6,0 5)(1.1 1.1,1.6 1.1,1.4 1.4,1.6 1.1))", 
+			Assert.AreEqual("MULTILINESTRING((0 0,5 0,5 6,0 5),(1.1 1.1,1.6 1.1,1.4 1.4,1.6 1.1))", 
 			                WellKnownText.CreateFromPolyLine(p));
 		}
 		
