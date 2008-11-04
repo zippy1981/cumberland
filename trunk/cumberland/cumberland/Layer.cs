@@ -30,6 +30,21 @@ using Cumberland.Data;
 
 namespace Cumberland
 {
+	
+	public enum PointSymbolType
+	{
+		None,
+		Shape,
+		Image
+	}
+	
+	public enum PointSymbolShapeType
+	{
+		None,
+		Circle,
+		Square
+	}
+	
 	public enum LineStyle
 	{
 		None = 0x0000,
@@ -113,6 +128,33 @@ namespace Cumberland
 				id = value;
 			}
 		}
+
+		public PointSymbolType PointSymbol {
+			get {
+				return pointSymbol;
+			}
+			set {
+				pointSymbol = value;
+			}
+		}
+
+		public PointSymbolShapeType PointSymbolShape {
+			get {
+				return pointShape;
+			}
+			set {
+				pointShape = value;
+			}
+		}
+
+		public string PointSymbolImagePath {
+			get {
+				return pointImagePath;
+			}
+			set {
+				pointImagePath = value;
+			}
+		}
 		
 		int lineWidth = 1;
 		
@@ -130,8 +172,14 @@ namespace Cumberland
 		
 		string id;
 		
-#endregion
+		PointSymbolType pointSymbol = PointSymbolType.Shape;
 		
+		PointSymbolShapeType pointShape = PointSymbolShapeType.Circle;
+		
+		string pointImagePath = null;
+		
+#endregion
+			
 		public static Layer CreateFromData(IFeatureSource data, string name)
 		{
 			Random r = new Random();

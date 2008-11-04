@@ -63,7 +63,7 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <None Include="lib\NDesk.Options.dll" />
-    <None Include="lib\NDesk,Options.COPYING" />
+    <None Include="lib\NDesk.Options.COPYING" />
     <None Include="lib\Tao.FreeGlut.dll" />
     <None Include="lib\Tao.FreeGlut.dll.config" />
     <None Include="lib\Tao.FreeGlut.xml" />

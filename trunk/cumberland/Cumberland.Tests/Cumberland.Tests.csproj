@@ -87,6 +87,7 @@
     <None Include="shape_eg_data\mexico\states.shx" />
     <None Include="maps\mexico.xml" />
     <None Include="maps\postgis.xml" />
+    <None Include="maps\images\city_icon.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="shape_eg_data\mexico\cities.shp">

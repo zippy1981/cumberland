@@ -142,6 +142,8 @@ namespace Cumberland.Tests
 			l1.LineWidth = 23;
 			l1.PointSize = 4;
 			l1.Projection = "+init=epsg:2236";
+			l1.PointSymbol = PointSymbolType.Image;
+			l1.PointSymbolShape = PointSymbolShapeType.Square;
 			m1.Layers.Add(l1);
 			
 			Layer l2 = new Layer();
@@ -277,12 +279,40 @@ namespace Cumberland.Tests
 		}
 		
 		[Test]
-		public void TestRelativeToAbsoluteFilePath()
+		public void TestRelativeToAbsoluteMapFilePath()
 		{
 			MapSerializer ms = new MapSerializer();
 			Map m = ms.Deserialize("../../maps/mexico.xml");
 			
 			Assert.IsTrue(Path.IsPathRooted((m.Layers[0].Data as IFileFeatureSource).FilePath));
 		}
+		
+		[Test]
+		public void TestLayerPointSymbolSerialized()
+		{
+			Assert.AreEqual(PointSymbolType.Image,
+			                m2.Layers[0].PointSymbol);
+			Assert.AreEqual(m1.Layers[0].PointSymbol,
+			                m2.Layers[0].PointSymbol);
+		}
+		
+		[Test]
+		public void TestLayerPointSymbolShapeSerialized()
+		{
+			Assert.AreEqual(PointSymbolShapeType.Square,
+			                m2.Layers[0].PointSymbolShape);
+			Assert.AreEqual(m1.Layers[0].PointSymbolShape,
+			                m2.Layers[0].PointSymbolShape);
+		}
+		
+		[Test]
+		public void TestRelativeToAbsolutePointSymbolImagePath()
+		{
+			MapSerializer ms = new MapSerializer();
+			Map m = ms.Deserialize("../../maps/mexico.xml");
+			
+			Assert.IsTrue(Path.IsPathRooted(m.Layers[2].PointSymbolImagePath));
+		}
+		
 	}
 }

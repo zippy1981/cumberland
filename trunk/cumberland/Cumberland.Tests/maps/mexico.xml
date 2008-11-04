@@ -32,6 +32,8 @@
 			<Projection>+init=epsg:4326</Projection>
 			<Id>cities</Id>
 			<LineStyle>Solid</LineStyle>
+			<PointSymbol>Image</PointSymbol>
+			<PointSymbolImagePath>images/city_icon.png</PointSymbolImagePath>
 			<Data sourceType="Cumberland.Data.IFileFeatureSource" sourceInstance="Cumberland.Data.Shapefile.Shapefile">
 				<FilePath>../shape_eg_data/mexico/cities.shp</FilePath>
 			</Data>
