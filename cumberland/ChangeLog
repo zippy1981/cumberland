@@ -1,3 +1,16 @@
+2008-11-04  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.DrawMap/Cumberland.DrawMap.csproj,
+	  Cumberland.DrawMap/lib/NDesk,Options.COPYING,
+	  Cumberland.DrawMap/lib/NDesk.Options.COPYING,
+	  Cumberland.InteractiveMap/Cumberland.InteractiveMap.csproj,
+	  Cumberland.InteractiveMap/lib/NDesk,Options.COPYING,
+	  Cumberland.InteractiveMap/lib/NDesk.Options.COPYING,
+	  Cumberland.Data.SqlServer.Loader/lib/NDesk,Options.COPYING,
+	  Cumberland.Data.SqlServer.Loader/lib/NDesk.Options.COPYING,
+	  Cumberland.Data.SqlServer.Loader/Cumberland.Data.SqlServer.Loader.csproj:
+	  rename file
+
 2008-11-03  Scott Ellington <scott.ellington@gmail.com> 
 
 	* Cumberland.Data.SqlServer.Loader/AssemblyInfo.cs: improvements

@@ -37,6 +37,8 @@ namespace Cumberland.Drawing
 	public class MapDrawer : IMapDrawer
 	{
 		
+		delegate void DrawPoint(Layer l, Graphics g, System.Drawing.Point p);
+		
 #region Properties
 		
 		SmoothingMode smoothing = SmoothingMode.HighQuality;
@@ -95,7 +97,7 @@ namespace Cumberland.Drawing
 					}
 					
 					ProjFourWrapper src = null;
-					
+									
 					try
 					{
 						Rectangle extents = map.Extents.Clone();
@@ -125,6 +127,31 @@ namespace Cumberland.Drawing
 
 		#region handle point rendering
 					
+							DrawPoint drawPoint = null;
+					
+							if (layer.PointSymbol == PointSymbolType.Shape)
+							{
+								if (layer.PointSymbolShape == PointSymbolShapeType.Square)
+								{
+									drawPoint = DrawSquarePoint;
+								}
+								else if (layer.PointSymbolShape == PointSymbolShapeType.Circle)
+								{
+									drawPoint = DrawCirclePoint;
+								}
+								else continue;
+							}
+							else if (layer.PointSymbol == PointSymbolType.Image)
+							{
+								if (string.IsNullOrEmpty(layer.PointSymbolImagePath))
+								{
+									throw new MapConfigurationException("PointSymbolImagePath cannot be empty for PointSymbolType.Image");
+								}
+								    
+								drawPoint = DrawImageOnPoint;
+							}
+							else continue;
+							
 							for (int ii=0; ii < features.Count; ii++)
 							{
 								Point p = features[ii] as Point;
@@ -138,11 +165,7 @@ namespace Cumberland.Drawing
 								// convert our map projected point to a pixel point
 								System.Drawing.Point pp = ConvertMapToPixel(envelope, scale, p);
 
-								g.FillRectangle(new SolidBrush(layer.FillColor), 
-								                pp.X - (layer.PointSize/2),
-								                pp.Y - (layer.PointSize/2),
-								                layer.PointSize,
-								                layer.PointSize);		
+								drawPoint(layer, g, pp);
 							}
 
 	
@@ -254,6 +277,30 @@ namespace Cumberland.Drawing
 #endregion
 
 #region helper methods
+		
+		void DrawSquarePoint(Layer layer, Graphics g, System.Drawing.Point pp)
+		{
+			g.FillRectangle(new SolidBrush(layer.FillColor), 
+			                pp.X - (layer.PointSize/2),
+			                pp.Y - (layer.PointSize/2),
+			                layer.PointSize,
+			                layer.PointSize);	
+		}
+		
+		void DrawCirclePoint(Layer layer, Graphics g, System.Drawing.Point pp)
+		{
+			g.FillEllipse(new SolidBrush(layer.FillColor),
+			                pp.X - (layer.PointSize/2),
+			                pp.Y - (layer.PointSize/2),
+			                layer.PointSize,
+			                layer.PointSize);	
+		}
+		
+		void DrawImageOnPoint(Layer layer, Graphics g, System.Drawing.Point pp)
+		{
+			g.DrawImageUnscaled(new Bitmap(layer.PointSymbolImagePath),
+			                    pp);
+		}
 		
 		System.Drawing.Point ConvertMapToPixel(Rectangle r, double scale, Point p)
 		{

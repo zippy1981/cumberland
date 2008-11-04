@@ -58,6 +58,7 @@
     <Compile Include="Data\IFileFeatureSource.cs" />
     <Compile Include="Data\IDatabaseFeatureSource.cs" />
     <Compile Include="Data\Shapefile\DBaseIIIFile.cs" />
+    <Compile Include="MapConfigurationException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -1,3 +1,9 @@
+2008-11-04  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Layer.cs, MapConfigurationException.cs, Drawing/MapDrawer.cs,
+	  Xml/Serialization/MapSerializer.cs, Cumberland.csproj: add point
+	  image and shape symbol functionality
+
 2008-11-03  Scott Ellington <scott.ellington@gmail.com> 
 
 	* WellKnownText.cs: fixes

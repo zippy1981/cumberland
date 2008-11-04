@@ -233,15 +233,7 @@ namespace Cumberland.Xml.Serialization
 							
 							if (sourceType == typeof(IFileFeatureSource))
 							{
-								
-								string path = dnode.InnerText;
-								if (mapPath != null && !Path.IsPathRooted(path))
-								{
-									// anchor this path to the map path
-									string root = Path.GetDirectoryName(Path.GetFullPath(mapPath));
-									path = Path.Combine(root, path);
-								}
-								(l.Data as IFileFeatureSource).FilePath = path;
+								(l.Data as IFileFeatureSource).FilePath = ProcessPath(mapPath, dnode.InnerText);
 							}
 							
 							break;
@@ -294,6 +286,19 @@ namespace Cumberland.Xml.Serialization
 				{
 					l.LineStyle = (LineStyle) Enum.Parse(typeof(LineStyle), child.InnerText);
 				}
+				else if (child.Name == "PointSymbol")
+				{
+					l.PointSymbol = (PointSymbolType) Enum.Parse(typeof(PointSymbolType), child.InnerText);
+				}
+				else if (child.Name == "PointSymbolShape")
+				{
+					l.PointSymbolShape = (PointSymbolShapeType) Enum.Parse(typeof(PointSymbolShapeType),
+					                                                       child.InnerText);
+				}
+				else if (child.Name == "PointSymbolImagePath")
+				{
+					l.PointSymbolImagePath = ProcessPath(mapPath, child.InnerText);
+				}
 			}
 			
 			m.Layers.Add(l);
@@ -315,6 +320,10 @@ namespace Cumberland.Xml.Serialization
 			writer.WriteElementString("Projection", layer.Projection);
 			writer.WriteElementString("Id", layer.Id);
 			writer.WriteElementString("LineStyle", Enum.GetName(typeof(LineStyle), layer.LineStyle));
+			writer.WriteElementString("PointSymbol", Enum.GetName(typeof(PointSymbolType), layer.PointSymbol));
+			writer.WriteElementString("PointSymbolShape", Enum.GetName(typeof(PointSymbolShapeType), layer.PointSymbolShape));
+			writer.WriteElementString("PointSymbolImagePath", layer.PointSymbolImagePath);
+			
 			writer.WriteStartElement("Data");
 
 			IFileFeatureSource ffp = layer.Data as IFileFeatureSource;
@@ -369,6 +378,18 @@ namespace Cumberland.Xml.Serialization
 			                      int.Parse(p[1]),
 			                      int.Parse(p[2]),
 			                      int.Parse(p[3]));
+		}
+		
+		string ProcessPath(string mapPath, string filePath)
+		{
+			if (mapPath != null && !Path.IsPathRooted(filePath))
+			{
+				// anchor this path to the map path
+				string root = Path.GetDirectoryName(Path.GetFullPath(mapPath));
+				filePath = Path.Combine(root, filePath);
+			}
+			
+			return filePath;
 		}
 		
 #endregion
