@@ -137,13 +137,17 @@ namespace Cumberland.Tests
 			Layer l1 = new Layer();
 			l1.Id = "l1";
 			l1.Data = new DummyDBProvider();
-			l1.LineColor = Color.FromArgb(255, 180, 34, 34);
-			l1.LineStyle = LineStyle.Dashed;
-			l1.LineWidth = 23;
-			l1.PointSize = 4;
 			l1.Projection = "+init=epsg:2236";
-			l1.PointSymbol = PointSymbolType.Image;
-			l1.PointSymbolShape = PointSymbolShapeType.Square;
+			
+			Style s1 = new Style();
+			s1.LineColor = Color.FromArgb(255, 180, 34, 34);
+			s1.LineStyle = LineStyle.Dashed;
+			s1.LineWidth = 23;
+			s1.PointSize = 4;
+			s1.PointSymbol = PointSymbolType.Image;
+			s1.PointSymbolShape = PointSymbolShapeType.Square;
+			l1.Styles.Add(s1);
+			
 			m1.Layers.Add(l1);
 			
 			Layer l2 = new Layer();
@@ -244,31 +248,31 @@ namespace Cumberland.Tests
 		[Test]
 		public void TestLayerLineColorSerialized()
 		{
-			Assert.AreEqual(m1.Layers[0].LineColor,
-			                m2.Layers[0].LineColor);
+			Assert.AreEqual(m1.Layers[0].Styles[0].LineColor,
+			                m2.Layers[0].Styles[0].LineColor);
 		}
 
 		[Test]
 		public void TestLayerLineWidthSerialized()
 		{
-			Assert.AreEqual(m1.Layers[0].LineWidth,
-			                m2.Layers[0].LineWidth);
+			Assert.AreEqual(m1.Layers[0].Styles[0].LineWidth,
+			                m2.Layers[0].Styles[0].LineWidth);
 		}
 
 		[Test]
 		public void TestLayerLineStyleSerialized()
 		{
 			Assert.AreEqual(LineStyle.Dashed, 
-			                m2.Layers[0].LineStyle);
-			Assert.AreEqual(m1.Layers[0].LineStyle,
-			                m2.Layers[0].LineStyle);
+			                m2.Layers[0].Styles[0].LineStyle);
+			Assert.AreEqual(m1.Layers[0].Styles[0].LineStyle,
+			                m2.Layers[0].Styles[0].LineStyle);
 		}
 		
 		[Test]
 		public void TestLayerPointSizeSerialized()
 		{
-			Assert.AreEqual(m1.Layers[0].PointSize,
-			                m2.Layers[0].PointSize);
+			Assert.AreEqual(m1.Layers[0].Styles[0].PointSize,
+			                m2.Layers[0].Styles[0].PointSize);
 		}
 		
 		[Test]
@@ -291,18 +295,18 @@ namespace Cumberland.Tests
 		public void TestLayerPointSymbolSerialized()
 		{
 			Assert.AreEqual(PointSymbolType.Image,
-			                m2.Layers[0].PointSymbol);
-			Assert.AreEqual(m1.Layers[0].PointSymbol,
-			                m2.Layers[0].PointSymbol);
+			                m2.Layers[0].Styles[0].PointSymbol);
+			Assert.AreEqual(m1.Layers[0].Styles[0].PointSymbol,
+			                m2.Layers[0].Styles[0].PointSymbol);
 		}
 		
 		[Test]
 		public void TestLayerPointSymbolShapeSerialized()
 		{
 			Assert.AreEqual(PointSymbolShapeType.Square,
-			                m2.Layers[0].PointSymbolShape);
-			Assert.AreEqual(m1.Layers[0].PointSymbolShape,
-			                m2.Layers[0].PointSymbolShape);
+			                m2.Layers[0].Styles[0].PointSymbolShape);
+			Assert.AreEqual(m1.Layers[0].Styles[0].PointSymbolShape,
+			                m2.Layers[0].Styles[0].PointSymbolShape);
 		}
 		
 		[Test]
@@ -311,7 +315,7 @@ namespace Cumberland.Tests
 			MapSerializer ms = new MapSerializer();
 			Map m = ms.Deserialize("../../maps/mexico.xml");
 			
-			Assert.IsTrue(Path.IsPathRooted(m.Layers[2].PointSymbolImagePath));
+			Assert.IsTrue(Path.IsPathRooted(m.Layers[2].Styles[0].PointSymbolImagePath));
 		}
 		
 	}

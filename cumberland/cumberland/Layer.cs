@@ -30,84 +30,16 @@ using Cumberland.Data;
 
 namespace Cumberland
 {
-	
-	public enum PointSymbolType
-	{
-		None,
-		Shape,
-		Image
-	}
-	
-	public enum PointSymbolShapeType
-	{
-		None,
-		Circle,
-		Square
-	}
-	
-	public enum LineStyle
-	{
-		None = 0x0000,
-		Solid = 0x1111,
-		Dashed = 0x0011,
-		Dotted = 0x0101
-	}
-	
 	public class Layer
 	{
 #region properties
 		
-		public int LineWidth {
-			get {
-				return lineWidth;
-			}
-			set {
-				lineWidth = value;
-			}
-		}
-
-		public int PointSize {
-			get {
-				return pointSize;
-			}
-			set {
-				pointSize = value;
-			}
-		}
-
-		public Color LineColor {
-			get {
-				return lineColor;
-			}
-			set {
-				lineColor = value;
-			}
-		}
-
-		public Color FillColor {
-			get {
-				return fillColor;
-			}
-			set {
-				fillColor = value;
-			}
-		}
-
 		public IFeatureSource Data {
 			get {
 				return data;
 			}
 			set {
 				data = value;
-			}
-		}
-
-		public LineStyle LineStyle {
-			get {
-				return lineStyle;
-			}
-			set {
-				lineStyle = value;
 			}
 		}
 
@@ -129,54 +61,20 @@ namespace Cumberland
 			}
 		}
 
-		public PointSymbolType PointSymbol {
+		public List<Style> Styles {
 			get {
-				return pointSymbol;
-			}
-			set {
-				pointSymbol = value;
+				return styles;
 			}
 		}
 
-		public PointSymbolShapeType PointSymbolShape {
-			get {
-				return pointShape;
-			}
-			set {
-				pointShape = value;
-			}
-		}
-
-		public string PointSymbolImagePath {
-			get {
-				return pointImagePath;
-			}
-			set {
-				pointImagePath = value;
-			}
-		}
-		
-		int lineWidth = 1;
-		
-		int pointSize = 1;
-		
-		Color lineColor = Color.RoyalBlue;
-		
-		Color fillColor = Color.AliceBlue;
-		
 		IFeatureSource data;
-		
-		LineStyle lineStyle = LineStyle.Solid;
 		
 		string projection = null;
 		
 		string id;
 		
-		PointSymbolType pointSymbol = PointSymbolType.Shape;
-		
-		PointSymbolShapeType pointShape = PointSymbolShapeType.Circle;
-		
-		string pointImagePath = null;
+		List<Style> styles = new List<Style>();
+
 		
 #endregion
 			
@@ -187,10 +85,14 @@ namespace Cumberland
 			Layer l = new Layer();
 			l.Id = name;
 			l.Data = data;
-			l.PointSize = 5;
-			l.LineColor = Color.FromArgb(r.Next(75,150), r.Next(75,150), r.Next(75,150));
-			l.FillColor =  Color.FromArgb(l.LineColor.R+100, l.LineColor.G+100, l.LineColor.B+100);
-			l.LineWidth = 1;
+			
+			Style s = new Style();
+			s.PointSize = 5;
+			s.LineColor = Color.FromArgb(r.Next(75,150), r.Next(75,150), r.Next(75,150));
+			s.FillColor =  Color.FromArgb(s.LineColor.R+100, s.LineColor.G+100, s.LineColor.B+100);
+			s.LineWidth = 1;
+
+			l.Styles.Add(s);
 			
 			return l;
 		}

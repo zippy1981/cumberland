@@ -2,14 +2,18 @@
 <Map>
 	<Width>400</Width>
 	<Height>400</Height>
-	<Extents>-110,20,-80,40</Extents>
+	<Extents>-117,13,-85,33</Extents>
 	<Projection>+init=epsg:4326</Projection>
 	<Layers>
 		<Layer>
-			<LineWidth>1</LineWidth>
-			<LineStyle>Solid</LineStyle>
-			<LineColor>255,65,105,225</LineColor>
-			<FillColor>255,240,248,255</FillColor>
+			<Styles>
+				<Style>
+					<LineWidth>1</LineWidth>
+					<LineStyle>Solid</LineStyle>
+					<LineColor>255,65,105,225</LineColor>
+					<FillColor>255,240,248,255</FillColor>
+				</Style>
+			</Styles>
 			<Projection>+init=epsg:4326</Projection>
 			<Id>states</Id>
 			<Data sourceType="Cumberland.Data.IFileFeatureSource" sourceInstance="Cumberland.Data.Shapefile.Shapefile">
@@ -17,23 +21,28 @@
 			</Data>
 		</Layer>
 		<Layer>
-			<LineWidth>1</LineWidth>
-			<LineColor>255,165,105,125</LineColor>
+			<Styles>
+				<Style>
+					<LineWidth>1</LineWidth>
+					<LineColor>255,165,105,125</LineColor>
+					<LineStyle>Solid</LineStyle>					
+				</Style>
+			</Styles>
 			<Projection>+init=epsg:4326</Projection>
 			<Id>roads</Id>
-			<LineStyle>Solid</LineStyle>
 			<Data sourceType="Cumberland.Data.IFileFeatureSource" sourceInstance="Cumberland.Data.Shapefile.Shapefile">
 				<FilePath>../shape_eg_data/mexico/roads.shp</FilePath>
 			</Data>
 		</Layer>
 		<Layer>
-			<PointSize>5</PointSize>			
-			<FillColor>255,105,205,125</FillColor>
 			<Projection>+init=epsg:4326</Projection>
 			<Id>cities</Id>
-			<LineStyle>Solid</LineStyle>
-			<PointSymbol>Image</PointSymbol>
-			<PointSymbolImagePath>images/city_icon.png</PointSymbolImagePath>
+			<Styles>
+				<Style>
+					<PointSymbol>Image</PointSymbol>
+					<PointSymbolImagePath>images/city_icon.png</PointSymbolImagePath>
+				</Style>
+			</Styles>
 			<Data sourceType="Cumberland.Data.IFileFeatureSource" sourceInstance="Cumberland.Data.Shapefile.Shapefile">
 				<FilePath>../shape_eg_data/mexico/cities.shp</FilePath>
 			</Data>

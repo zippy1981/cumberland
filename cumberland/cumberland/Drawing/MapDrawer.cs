@@ -37,7 +37,7 @@ namespace Cumberland.Drawing
 	public class MapDrawer : IMapDrawer
 	{
 		
-		delegate void DrawPoint(Layer l, Graphics g, System.Drawing.Point p);
+		delegate void DrawPoint(Style s, Graphics g, System.Drawing.Point p);
 		
 #region Properties
 		
@@ -122,6 +122,13 @@ namespace Cumberland.Drawing
 							continue;
 						}
 					
+						if (layer.Styles.Count == 0)
+						{
+							throw new MapConfigurationException("Layer lacks a Style");
+						}
+					
+						Style style = layer.Styles[0];
+						
 						if (layer.Data.SourceFeatureType == FeatureType.Point)
 					    {	
 
@@ -129,21 +136,21 @@ namespace Cumberland.Drawing
 					
 							DrawPoint drawPoint = null;
 					
-							if (layer.PointSymbol == PointSymbolType.Shape)
+							if (style.PointSymbol == PointSymbolType.Shape)
 							{
-								if (layer.PointSymbolShape == PointSymbolShapeType.Square)
+								if (style.PointSymbolShape == PointSymbolShapeType.Square)
 								{
 									drawPoint = DrawSquarePoint;
 								}
-								else if (layer.PointSymbolShape == PointSymbolShapeType.Circle)
+								else if (style.PointSymbolShape == PointSymbolShapeType.Circle)
 								{
 									drawPoint = DrawCirclePoint;
 								}
 								else continue;
 							}
-							else if (layer.PointSymbol == PointSymbolType.Image)
+							else if (style.PointSymbol == PointSymbolType.Image)
 							{
-								if (string.IsNullOrEmpty(layer.PointSymbolImagePath))
+								if (string.IsNullOrEmpty(style.PointSymbolImagePath))
 								{
 									throw new MapConfigurationException("PointSymbolImagePath cannot be empty for PointSymbolType.Image");
 								}
@@ -165,7 +172,7 @@ namespace Cumberland.Drawing
 								// convert our map projected point to a pixel point
 								System.Drawing.Point pp = ConvertMapToPixel(envelope, scale, p);
 
-								drawPoint(layer, g, pp);
+								drawPoint(style, g, pp);
 							}
 
 	
@@ -175,7 +182,7 @@ namespace Cumberland.Drawing
 						{
 		#region Handle line rendering
 							
-							if (layer.LineStyle == LineStyle.None)
+							if (style.LineStyle == LineStyle.None)
 							{
 								continue;
 							}
@@ -201,7 +208,7 @@ namespace Cumberland.Drawing
 										ppts[kk] = ConvertMapToPixel(envelope, scale, p);
 									}
 								
-									g.DrawLines(ConvertLayerToPen(layer), ppts);
+									g.DrawLines(ConvertLayerToPen(style), ppts);
 
 								}
 							}
@@ -235,11 +242,11 @@ namespace Cumberland.Drawing
 
 									}	
 									
-									g.FillPolygon(new SolidBrush(layer.FillColor), ppts);
+									g.FillPolygon(new SolidBrush(style.FillColor), ppts);
 									
-									if (layer.LineStyle != LineStyle.None)
+									if (style.LineStyle != LineStyle.None)
 									{
-										g.DrawPolygon(ConvertLayerToPen(layer), ppts);
+										g.DrawPolygon(ConvertLayerToPen(style), ppts);
 									}
 								}
 							}
@@ -278,27 +285,27 @@ namespace Cumberland.Drawing
 
 #region helper methods
 		
-		void DrawSquarePoint(Layer layer, Graphics g, System.Drawing.Point pp)
+		void DrawSquarePoint(Style style, Graphics g, System.Drawing.Point pp)
 		{
-			g.FillRectangle(new SolidBrush(layer.FillColor), 
-			                pp.X - (layer.PointSize/2),
-			                pp.Y - (layer.PointSize/2),
-			                layer.PointSize,
-			                layer.PointSize);	
+			g.FillRectangle(new SolidBrush(style.FillColor), 
+			                pp.X - (style.PointSize/2),
+			                pp.Y - (style.PointSize/2),
+			                style.PointSize,
+			                style.PointSize);	
 		}
 		
-		void DrawCirclePoint(Layer layer, Graphics g, System.Drawing.Point pp)
+		void DrawCirclePoint(Style style, Graphics g, System.Drawing.Point pp)
 		{
-			g.FillEllipse(new SolidBrush(layer.FillColor),
-			                pp.X - (layer.PointSize/2),
-			                pp.Y - (layer.PointSize/2),
-			                layer.PointSize,
-			                layer.PointSize);	
+			g.FillEllipse(new SolidBrush(style.FillColor),
+			                pp.X - (style.PointSize/2),
+			                pp.Y - (style.PointSize/2),
+			                style.PointSize,
+			                style.PointSize);	
 		}
 		
-		void DrawImageOnPoint(Layer layer, Graphics g, System.Drawing.Point pp)
+		void DrawImageOnPoint(Style style, Graphics g, System.Drawing.Point pp)
 		{
-			Bitmap b = new Bitmap(layer.PointSymbolImagePath);
+			Bitmap b = new Bitmap(style.PointSymbolImagePath);
 			
 			g.DrawImageUnscaled(b,
 			                    pp.X - b.Width/2,
@@ -311,15 +318,15 @@ namespace Cumberland.Drawing
 			                                Convert.ToInt32((r.Max.Y - p.Y) / scale)); // image origin is top left	
 		}
 		
-		Pen ConvertLayerToPen(Layer l)
+		Pen ConvertLayerToPen(Style style)
 		{
-			Pen p = new Pen(l.LineColor, l.LineWidth);
+			Pen p = new Pen(style.LineColor, style.LineWidth);
 			
-			if (l.LineStyle == LineStyle.Dashed)
+			if (style.LineStyle == LineStyle.Dashed)
 			{
 				p.DashStyle = DashStyle.Dash;
 			}
-			else if (l.LineStyle == LineStyle.Dotted)
+			else if (style.LineStyle == LineStyle.Dotted)
 			{
 				p.DashStyle = DashStyle.Dot;
 			}

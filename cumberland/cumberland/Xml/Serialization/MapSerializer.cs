@@ -233,7 +233,7 @@ namespace Cumberland.Xml.Serialization
 							
 							if (sourceType == typeof(IFileFeatureSource))
 							{
-								(l.Data as IFileFeatureSource).FilePath = ProcessPath(mapPath, dnode.InnerText);
+								(l.Data as IFileFeatureSource).FilePath = AnchorPath(mapPath, dnode.InnerText);
 							}
 							
 							break;
@@ -258,22 +258,6 @@ namespace Cumberland.Xml.Serialization
 					}
 #endregion
 				}
-				else if (child.Name == "LineWidth")
-				{
-					l.LineWidth = Convert.ToInt32(child.InnerText);
-				}
-				else if (child.Name == "PointSize")
-				{
-					l.PointSize = Convert.ToInt32(child.InnerText);
-				}
-				else if (child.Name == "LineColor")
-				{
-					l.LineColor = ParseColor(child.InnerText);
-				}
-				else if (child.Name == "FillColor")
-				{
-					l.FillColor = ParseColor(child.InnerText);
-				}
 				else if (child.Name == "Projection")
 				{
 					l.Projection = child.InnerText;
@@ -282,26 +266,60 @@ namespace Cumberland.Xml.Serialization
 				{
 					l.Id = child.InnerText;
 				}
-				else if (child.Name == "LineStyle")
+				else if (child.Name == "Styles")
 				{
-					l.LineStyle = (LineStyle) Enum.Parse(typeof(LineStyle), child.InnerText);
-				}
-				else if (child.Name == "PointSymbol")
-				{
-					l.PointSymbol = (PointSymbolType) Enum.Parse(typeof(PointSymbolType), child.InnerText);
-				}
-				else if (child.Name == "PointSymbolShape")
-				{
-					l.PointSymbolShape = (PointSymbolShapeType) Enum.Parse(typeof(PointSymbolShapeType),
-					                                                       child.InnerText);
-				}
-				else if (child.Name == "PointSymbolImagePath")
-				{
-					l.PointSymbolImagePath = ProcessPath(mapPath, child.InnerText);
+					foreach (XmlNode lnode in child.ChildNodes)
+					{
+						DeserializeStyle(lnode, l, mapPath);
+					}
 				}
 			}
 			
 			m.Layers.Add(l);
+		}
+		
+		void DeserializeStyle(XmlNode node, Layer layer, string mapPath)
+		{
+			Style style = new Style();
+			
+			foreach (XmlNode child in node.ChildNodes)
+			{
+				if (child.Name == "LineWidth")
+				{
+					style.LineWidth = Convert.ToInt32(child.InnerText);
+				}
+				else if (child.Name == "PointSize")
+				{
+					style.PointSize = Convert.ToInt32(child.InnerText);
+				}
+				else if (child.Name == "LineColor")
+				{
+					style.LineColor = ParseColor(child.InnerText);
+				}
+				else if (child.Name == "FillColor")
+				{
+					style.FillColor = ParseColor(child.InnerText);
+				}
+				else if (child.Name == "LineStyle")
+				{
+					style.LineStyle = (LineStyle) Enum.Parse(typeof(LineStyle), child.InnerText);
+				}
+				else if (child.Name == "PointSymbol")
+				{
+					style.PointSymbol = (PointSymbolType) Enum.Parse(typeof(PointSymbolType), child.InnerText);
+				}
+				else if (child.Name == "PointSymbolShape")
+				{
+					style.PointSymbolShape = (PointSymbolShapeType) Enum.Parse(typeof(PointSymbolShapeType),
+					                                                       child.InnerText);
+				}
+				else if (child.Name == "PointSymbolImagePath")
+				{
+					style.PointSymbolImagePath = AnchorPath(mapPath, child.InnerText);
+				}
+			}
+			
+			layer.Styles.Add(style);
 		}
 		
 #endregion
@@ -313,19 +331,14 @@ namespace Cumberland.Xml.Serialization
 			if (layer.Data == null || layer.Data is SimpleFeatureSource) return;
 			
 			writer.WriteStartElement("Layer");
-			writer.WriteElementString("LineWidth", layer.LineWidth.ToString());
-			writer.WriteElementString("PointSize", layer.PointSize.ToString());
-			writer.WriteElementString("LineColor", PrepareColor(layer.LineColor));
-			writer.WriteElementString("FillColor", PrepareColor(layer.FillColor));
+
+			// Layer properties
 			writer.WriteElementString("Projection", layer.Projection);
 			writer.WriteElementString("Id", layer.Id);
-			writer.WriteElementString("LineStyle", Enum.GetName(typeof(LineStyle), layer.LineStyle));
-			writer.WriteElementString("PointSymbol", Enum.GetName(typeof(PointSymbolType), layer.PointSymbol));
-			writer.WriteElementString("PointSymbolShape", Enum.GetName(typeof(PointSymbolShapeType), layer.PointSymbolShape));
-			writer.WriteElementString("PointSymbolImagePath", layer.PointSymbolImagePath);
-			
-			writer.WriteStartElement("Data");
 
+			
+			// handle Data Element
+			writer.WriteStartElement("Data");
 			IFileFeatureSource ffp = layer.Data as IFileFeatureSource;
 			IDatabaseFeatureSource dfp = layer.Data as IDatabaseFeatureSource;
 			if (ffp != null)
@@ -333,7 +346,7 @@ namespace Cumberland.Xml.Serialization
 				// add sourceType attribute to Data element
 				writer.WriteAttributeString("sourceType", typeof(IFileFeatureSource).ToString());
 				writer.WriteAttributeString("sourceInstance", layer.Data.GetType().ToString());
-				
+			
 				writer.WriteElementString("FilePath", ffp.FilePath);
 
 			}
@@ -346,9 +359,33 @@ namespace Cumberland.Xml.Serialization
 				writer.WriteElementString("ConnectionString", dfp.ConnectionString);
 				writer.WriteElementString("TableName", dfp.TableName);
 			}
-			
 			writer.WriteEndElement(); // Data
+			
+			// handles Styles
+			writer.WriteStartElement("Styles");
+			foreach (Style style in layer.Styles)
+			{
+				SerializeStyle(writer, style);
+			}
+			writer.WriteEndElement(); // Styles
+			
 			writer.WriteEndElement(); // Layer
+		}
+		
+		static void SerializeStyle(XmlWriter writer, Style style)
+		{
+			writer.WriteStartElement("Style");
+			
+			writer.WriteElementString("LineStyle", Enum.GetName(typeof(LineStyle), style.LineStyle));
+			writer.WriteElementString("PointSymbol", Enum.GetName(typeof(PointSymbolType), style.PointSymbol));
+			writer.WriteElementString("PointSymbolShape", Enum.GetName(typeof(PointSymbolShapeType), style.PointSymbolShape));
+			writer.WriteElementString("PointSymbolImagePath", style.PointSymbolImagePath);
+			writer.WriteElementString("LineWidth", style.LineWidth.ToString());
+			writer.WriteElementString("PointSize", style.PointSize.ToString());
+			writer.WriteElementString("LineColor", PrepareColor(style.LineColor));
+			writer.WriteElementString("FillColor", PrepareColor(style.FillColor));
+			
+			writer.WriteEndElement(); // Style
 		}
 		
 		static string PrepareRectangle(Rectangle r)
@@ -380,9 +417,9 @@ namespace Cumberland.Xml.Serialization
 			                      int.Parse(p[3]));
 		}
 		
-		string ProcessPath(string mapPath, string filePath)
+		string AnchorPath(string mapPath, string filePath)
 		{
-			if (mapPath != null && !Path.IsPathRooted(filePath))
+			if (filePath != null && mapPath != null && !Path.IsPathRooted(filePath))
 			{
 				// anchor this path to the map path
 				string root = Path.GetDirectoryName(Path.GetFullPath(mapPath));
