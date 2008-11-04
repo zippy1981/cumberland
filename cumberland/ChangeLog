@@ -1,5 +1,9 @@
 2008-11-04  Scott Ellington <scott.ellington@gmail.com> 
 
+	* Cumberland.Data.PostGIS/PostGISFeatureSource.cs: hook up shapefile
+
+2008-11-04  Scott Ellington <scott.ellington@gmail.com> 
+
 	* Cumberland.Drawing.OpenGL/OpenGlMapDrawer.cs: move layer style stuff
 	  to separate class
 

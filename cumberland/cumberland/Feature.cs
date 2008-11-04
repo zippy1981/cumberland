@@ -29,7 +29,8 @@ namespace Cumberland
 	[XmlInclude(typeof(Polygon)), XmlInclude(typeof(Point)), XmlInclude(typeof(PolyLine))]
 	public abstract class Feature
 	{
-		private uint id;
+		uint id;
+		string themeFieldValue = null;
 
 		public uint Id {
 
@@ -42,7 +43,16 @@ namespace Cumberland
 				id = value;
 			}
 		}
-		
+
+		public string ThemeFieldValue {
+			get {
+				return themeFieldValue;
+			}
+			set {
+				themeFieldValue = value;
+			}
+		}
+	
 		abstract public Rectangle CalculateBounds();
 	}
 }

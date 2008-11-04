@@ -100,5 +100,15 @@ namespace Cumberland.Data
 			
 			return result;
 		}
+
+		public List<Feature> GetFeatures (string themeField)
+		{
+			return features;
+		}
+
+		public List<Feature> GetFeatures (Rectangle rectangle, string themeField)
+		{
+			return GetFeatures(rectangle);
+		}
 	}
 }

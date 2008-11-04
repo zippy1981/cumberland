@@ -53,6 +53,9 @@
     <Compile Include="DBaseIIITests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="shape_eg_data\mexico\cities.shp" />
+    <None Include="shape_eg_data\mexico\roads.shp" />
+    <None Include="shape_eg_data\mexico\states.shp" />
     <None Include="shape_eg_data\mexico\cities.dbf" />
     <None Include="shape_eg_data\mexico\cities.sbn" />
     <None Include="shape_eg_data\mexico\cities.sbx" />
@@ -88,17 +91,6 @@
     <None Include="maps\mexico.xml" />
     <None Include="maps\postgis.xml" />
     <None Include="maps\images\city_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="shape_eg_data\mexico\cities.shp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="shape_eg_data\mexico\roads.shp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="shape_eg_data\mexico\states.shp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

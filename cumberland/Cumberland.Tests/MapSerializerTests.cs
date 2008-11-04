@@ -43,7 +43,7 @@ namespace Cumberland.Tests
 		
 #region dummy providers
 		
-		class DummyFileProvider : IFileFeatureSource, IFeatureSource
+		class DummyFileProvider : IFileFeatureSource
 		{
 			public string FilePath {
 				get {
@@ -69,16 +69,27 @@ namespace Cumberland.Tests
 			
 			public System.Collections.Generic.List<Feature> GetFeatures ()
 			{
-				return GetFeatures(null);
+				return new List<Feature>();
 			}
 			
 			public System.Collections.Generic.List<Feature> GetFeatures (Rectangle rectangle)
 			{
-				return new List<Feature>();
+				return GetFeatures();				
 			}
+			
+			public List<Feature> GetFeatures(string themeField)
+			{
+				return GetFeatures();
+			}
+			
+			public List<Feature> GetFeatures(Cumberland.Rectangle rectangle, string themeField)
+			{
+				return GetFeatures();
+			}
+		
 		}
 		
-		class DummyDBProvider : IDatabaseFeatureSource, IFeatureSource
+		class DummyDBProvider : IDatabaseFeatureSource
 		{
 			public string TableName
 			{
@@ -107,14 +118,24 @@ namespace Cumberland.Tests
 				}
 			}
 			
-			public System.Collections.Generic.List<Feature> GetFeatures (Rectangle rectangle)
+			public System.Collections.Generic.List<Feature> GetFeatures ()
 			{
 				return new List<Feature>();
 			}
 			
-			public System.Collections.Generic.List<Feature> GetFeatures ()
+			public System.Collections.Generic.List<Feature> GetFeatures (Rectangle rectangle)
 			{
-				return GetFeatures(null);
+				return GetFeatures();				
+			}
+			
+			public List<Feature> GetFeatures(string themeField)
+			{
+				return GetFeatures();
+			}
+			
+			public List<Feature> GetFeatures(Cumberland.Rectangle rectangle, string themeField)
+			{
+				return GetFeatures();
 			}
 
 		}

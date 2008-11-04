@@ -46,5 +46,9 @@ namespace Cumberland.Data
 		List<Feature> GetFeatures();
 		
 		List<Feature> GetFeatures(Rectangle rectangle);
+		
+		List<Feature> GetFeatures(string themeField);
+		
+		List<Feature> GetFeatures(Rectangle rectangle, string themeField);
 	}
 }
