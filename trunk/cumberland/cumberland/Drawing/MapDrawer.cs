@@ -37,7 +37,7 @@ namespace Cumberland.Drawing
 	public class MapDrawer : IMapDrawer
 	{
 		
-		delegate void DrawPoint(Layer l, Graphics g, System.Drawing.Point p);
+		delegate void DrawPoint(Layer l, Graphics g, System.Drawing.Point p, double scale);
 		
 #region Properties
 		
@@ -165,7 +165,7 @@ namespace Cumberland.Drawing
 								// convert our map projected point to a pixel point
 								System.Drawing.Point pp = ConvertMapToPixel(envelope, scale, p);
 
-								drawPoint(layer, g, pp);
+								drawPoint(layer, g, pp, scale);
 							}
 
 	
@@ -278,7 +278,7 @@ namespace Cumberland.Drawing
 
 #region helper methods
 		
-		void DrawSquarePoint(Layer layer, Graphics g, System.Drawing.Point pp)
+		void DrawSquarePoint(Layer layer, Graphics g, System.Drawing.Point pp, double scale)
 		{
 			g.FillRectangle(new SolidBrush(layer.FillColor), 
 			                pp.X - (layer.PointSize/2),
@@ -287,7 +287,7 @@ namespace Cumberland.Drawing
 			                layer.PointSize);	
 		}
 		
-		void DrawCirclePoint(Layer layer, Graphics g, System.Drawing.Point pp)
+		void DrawCirclePoint(Layer layer, Graphics g, System.Drawing.Point pp, double scale)
 		{
 			g.FillEllipse(new SolidBrush(layer.FillColor),
 			                pp.X - (layer.PointSize/2),
@@ -296,10 +296,13 @@ namespace Cumberland.Drawing
 			                layer.PointSize);	
 		}
 		
-		void DrawImageOnPoint(Layer layer, Graphics g, System.Drawing.Point pp)
+		void DrawImageOnPoint(Layer layer, Graphics g, System.Drawing.Point pp, double scale)
 		{
-			g.DrawImageUnscaled(new Bitmap(layer.PointSymbolImagePath),
-			                    pp);
+			Bitmap b = new Bitmap(layer.PointSymbolImagePath);
+			
+			g.DrawImageUnscaled(b,
+			                    pp.X - b.Width/2,
+			                    pp.Y - b.Height/2);
 		}
 		
 		System.Drawing.Point ConvertMapToPixel(Rectangle r, double scale, Point p)
