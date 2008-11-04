@@ -286,15 +286,22 @@ namespace Cumberland.Drawing.OpenGL
 						{
 							continue;
 						}
+						
+						if (layer.Styles.Count == 0)
+						{
+							throw new MapConfigurationException("Layer lacks a Style");
+						}
+					
+						Style style = layer.Styles[0];
 																
 						if (layer.Data.SourceFeatureType == FeatureType.Point)
 					    {	
 		#region handle point rendering
 							
-							Gl.glPointSize(layer.PointSize);
+							Gl.glPointSize(style.PointSize);
 						    Gl.glBegin(Gl.GL_POINTS);
 							
-							Gl.glColor4ub(layer.FillColor.R, layer.FillColor.G, layer.FillColor.B, layer.FillColor.A);
+							Gl.glColor4ub(style.FillColor.R, style.FillColor.G, style.FillColor.B, style.FillColor.A);
 						
 							for (int ii=0; ii < features.Count; ii++)
 							{
@@ -316,7 +323,7 @@ namespace Cumberland.Drawing.OpenGL
 						{
 		#region Handle line rendering
 							
-							if (layer.LineStyle == LineStyle.None)
+							if (style.LineStyle == LineStyle.None)
 							{
 								continue;
 							}
@@ -325,10 +332,10 @@ namespace Cumberland.Drawing.OpenGL
 						    Gl.glEnable(Gl.GL_LINE_SMOOTH);
 							Gl.glEnable(Gl.GL_BLEND);
 							
-							if (layer.LineStyle != LineStyle.Solid)
+							if (style.LineStyle != LineStyle.Solid)
 							{
 								Gl.glEnable(Gl.GL_LINE_STIPPLE);
-								Gl.glLineStipple(1, (short) layer.LineStyle);
+								Gl.glLineStipple(1, (short) style.LineStyle);
 							}
 							
 							// to get the anti-aliased line to properly blend with the background color,
@@ -343,7 +350,7 @@ namespace Cumberland.Drawing.OpenGL
 							// http://glprogramming.com/red/chapter06.html#name1
 							Gl.glBlendFuncSeparate(Gl.GL_SRC_ALPHA, Gl.GL_ONE_MINUS_SRC_ALPHA, Gl.GL_ONE, Gl.GL_ONE);
 							
-							Gl.glLineWidth(layer.LineWidth);
+							Gl.glLineWidth(style.LineWidth);
 						
 						    for (int ii=0; ii < features.Count; ii++)
 							{
@@ -354,7 +361,7 @@ namespace Cumberland.Drawing.OpenGL
 								
 								    Gl.glBegin(Gl.GL_LINE_STRIP);
 
-									Gl.glColor4ub(layer.LineColor.R, layer.LineColor.G, layer.LineColor.B, layer.LineColor.A);
+									Gl.glColor4ub(style.LineColor.R, style.LineColor.G, style.LineColor.B, style.LineColor.A);
 									
 								    for (int kk = 0; kk < r.Points.Count; kk++)
 									{	
@@ -375,7 +382,7 @@ namespace Cumberland.Drawing.OpenGL
 							Gl.glDisable(Gl.GL_BLEND);
 						    Gl.glDisable(Gl.GL_LINE_SMOOTH);
 							
-							if (layer.LineStyle != LineStyle.Solid)
+							if (style.LineStyle != LineStyle.Solid)
 							{
 								Gl.glDisable(Gl.GL_LINE_STIPPLE);
 							}
@@ -470,7 +477,7 @@ namespace Cumberland.Drawing.OpenGL
 										}          
 										
 										// FIXME: not working.  maybe need to use multisampling
-//										if (layer.LineStyle == LineStyle.None)
+//										if (style.LineStyle == LineStyle.None)
 //										{
 //											Gl.glEnable(Gl.GL_POLYGON_SMOOTH);
 //											Gl.glEnable(Gl.GL_BLEND);
@@ -480,7 +487,7 @@ namespace Cumberland.Drawing.OpenGL
 										// TODO: use display lists for interactive viewer
 										//int tl = Gl.glGenLists(1);
 									    
-									    Gl.glColor4ub(layer.FillColor.R, layer.FillColor.G, layer.FillColor.B, layer.FillColor.A);
+									    Gl.glColor4ub(style.FillColor.R, style.FillColor.G, style.FillColor.B, style.FillColor.A);
 									
 										//Gl.glNewList(tl, Gl.GL_COMPILE);
 										
@@ -507,7 +514,7 @@ namespace Cumberland.Drawing.OpenGL
 										
 										GluMethods.gluTessEndContour(tess);
 
-//										if (layer.LineStyle == LineStyle.None)
+//										if (style.LineStyle == LineStyle.None)
 //										{
 //											Gl.glDisable(Gl.GL_BLEND);
 //											Gl.glDisable(Gl.GL_POLYGON_SMOOTH);
@@ -524,17 +531,17 @@ namespace Cumberland.Drawing.OpenGL
 									FreeAndClearHandles(handles);
 #region draw polygon outline
 			
-									if (layer.LineStyle != LineStyle.None)
+									if (style.LineStyle != LineStyle.None)
 									{
 									
 										for (int jj = 0; jj < po.Rings.Count; jj++)
 									    {
 											Ring r = po.Rings[jj];
 									
-											if (layer.LineStyle != LineStyle.Solid)
+											if (style.LineStyle != LineStyle.Solid)
 											{
 												Gl.glEnable(Gl.GL_LINE_STIPPLE);
-												Gl.glLineStipple(1, (short) layer.LineStyle);
+												Gl.glLineStipple(1, (short) style.LineStyle);
 											}
 											
 											Gl.glEnable(Gl.GL_LINE_SMOOTH);
@@ -544,11 +551,11 @@ namespace Cumberland.Drawing.OpenGL
 											//Gl.glBlendFunc(Gl.GL_SRC_ALPHA_SATURATE, Gl.GL_ONE_MINUS_SRC_ALPHA);
 											Gl.glBlendFuncSeparate(Gl.GL_SRC_ALPHA, Gl.GL_ONE_MINUS_SRC_ALPHA, Gl.GL_ONE, Gl.GL_ONE);
 											
-											Gl.glLineWidth(layer.LineWidth);
+											Gl.glLineWidth(style.LineWidth);
 											
 										    Gl.glBegin(Gl.GL_LINE_STRIP);
 											
-										    Gl.glColor4ub(layer.LineColor.R, layer.LineColor.G, layer.LineColor.B, layer.LineColor.A);
+										    Gl.glColor4ub(style.LineColor.R, style.LineColor.G, style.LineColor.B, style.LineColor.A);
 												
 											for (int kk = 0; kk < r.Points.Count; kk++)
 											{	
@@ -566,7 +573,7 @@ namespace Cumberland.Drawing.OpenGL
 											Gl.glDisable(Gl.GL_BLEND);
 											Gl.glDisable(Gl.GL_LINE_SMOOTH);
 											
-											if (layer.LineStyle != LineStyle.Solid)
+											if (style.LineStyle != LineStyle.Solid)
 											{
 												Gl.glDisable(Gl.GL_LINE_STIPPLE);
 											}								
