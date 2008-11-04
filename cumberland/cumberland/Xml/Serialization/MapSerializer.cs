@@ -273,6 +273,14 @@ namespace Cumberland.Xml.Serialization
 						DeserializeStyle(lnode, l, mapPath);
 					}
 				}
+				else if (child.Name == "Theme")
+				{
+					l.Theme = (ThemeType) Enum.Parse(typeof(ThemeType), child.InnerText);
+				}
+				else if (child.Name == "ThemeField")
+				{
+					l.ThemeField = child.InnerText;
+				}
 			}
 			
 			m.Layers.Add(l);
@@ -317,6 +325,18 @@ namespace Cumberland.Xml.Serialization
 				{
 					style.PointSymbolImagePath = AnchorPath(mapPath, child.InnerText);
 				}
+				else if (child.Name == "MaxRangeThemeValue")
+				{
+					style.MaxRangeThemeValue = double.Parse(child.InnerText);
+				}
+				else if (child.Name == "MinRangeThemeValue")
+				{
+					style.MinRangeThemeValue = double.Parse(child.InnerText);
+				}
+				else if (child.Name == "UniqueThemeValue")
+				{
+					style.UniqueThemeValue = child.InnerText;
+				}
 			}
 			
 			layer.Styles.Add(style);
@@ -335,7 +355,8 @@ namespace Cumberland.Xml.Serialization
 			// Layer properties
 			writer.WriteElementString("Projection", layer.Projection);
 			writer.WriteElementString("Id", layer.Id);
-
+			writer.WriteElementString("Theme", Enum.GetName(typeof(ThemeType), layer.Theme));
+			writer.WriteElementString("ThemeField", layer.ThemeField);
 			
 			// handle Data Element
 			writer.WriteStartElement("Data");
@@ -384,6 +405,10 @@ namespace Cumberland.Xml.Serialization
 			writer.WriteElementString("PointSize", style.PointSize.ToString());
 			writer.WriteElementString("LineColor", PrepareColor(style.LineColor));
 			writer.WriteElementString("FillColor", PrepareColor(style.FillColor));
+			
+			writer.WriteElementString("UniqueThemeValue", style.UniqueThemeValue);
+			writer.WriteElementString("MaxRangeThemeValue", style.MaxRangeThemeValue.ToString());
+			writer.WriteElementString("MinRangeThemeValue", style.MinRangeThemeValue.ToString());
 			
 			writer.WriteEndElement(); // Style
 		}

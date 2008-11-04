@@ -61,6 +61,10 @@ namespace Cumberland
 		Color fillColor = Color.AliceBlue;
 		LineStyle lineStyle = LineStyle.Solid;
 		
+		string uniqueThemeValue = null;
+		double maxRangeThemeValue = 1;
+		double minRangeThemeValue = 0;
+		
 		public int LineWidth {
 			get {
 				return lineWidth;
@@ -130,6 +134,33 @@ namespace Cumberland
 			}
 			set {
 				pointImagePath = value;
+			}
+		}
+
+		public string UniqueThemeValue {
+			get {
+				return uniqueThemeValue;
+			}
+			set {
+				uniqueThemeValue = value;
+			}
+		}
+
+		public double MinRangeThemeValue {
+			get {
+				return minRangeThemeValue;
+			}
+			set {
+				minRangeThemeValue = value;
+			}
+		}
+
+		public double MaxRangeThemeValue {
+			get {
+				return maxRangeThemeValue;
+			}
+			set {
+				maxRangeThemeValue = value;
 			}
 		}
 		

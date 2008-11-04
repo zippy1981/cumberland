@@ -138,6 +138,8 @@ namespace Cumberland.Tests
 			l1.Id = "l1";
 			l1.Data = new DummyDBProvider();
 			l1.Projection = "+init=epsg:2236";
+			l1.Theme = ThemeType.NumericRange;
+			l1.ThemeField = "MyField";
 			
 			Style s1 = new Style();
 			s1.LineColor = Color.FromArgb(255, 180, 34, 34);
@@ -146,6 +148,9 @@ namespace Cumberland.Tests
 			s1.PointSize = 4;
 			s1.PointSymbol = PointSymbolType.Image;
 			s1.PointSymbolShape = PointSymbolShapeType.Square;
+			s1.UniqueThemeValue = "MyValue";
+			s1.MaxRangeThemeValue = 30000;
+			s1.MinRangeThemeValue = 4;
 			l1.Styles.Add(s1);
 			
 			m1.Layers.Add(l1);
@@ -318,5 +323,40 @@ namespace Cumberland.Tests
 			Assert.IsTrue(Path.IsPathRooted(m.Layers[2].Styles[0].PointSymbolImagePath));
 		}
 		
+		[Test]
+		public void TestLayerThemeSerialized()
+		{
+			Assert.AreEqual(ThemeType.NumericRange,
+			                m2.Layers[0].Theme);
+		}
+		
+		[Test]
+		public void TestLayerThemeFieldSerialized()
+		{
+			Assert.AreEqual("MyField",
+			                m2.Layers[0].ThemeField);
+		}
+		
+		[Test]
+		public void TestLayerStyleUniqueThemeValueSerialized()
+		{
+			Assert.AreEqual("MyValue",
+			                m2.Layers[0].Styles[0].UniqueThemeValue);
+		}
+		
+		[Test]
+		public void TestLayerMaxRangeThemeValueSerialized()
+		{
+			Assert.AreEqual(30000,
+			                m2.Layers[0].Styles[0].MaxRangeThemeValue);
+		}
+		
+		[Test]
+		public void TestLayerMinRangeThemeValueSerialized()
+		{
+			Assert.AreEqual(4,
+			                m2.Layers[0].Styles[0].MinRangeThemeValue);
+		}
+
 	}
 }

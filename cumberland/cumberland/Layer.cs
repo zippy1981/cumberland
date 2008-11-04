@@ -30,6 +30,13 @@ using Cumberland.Data;
 
 namespace Cumberland
 {
+	public enum ThemeType
+	{
+		None,
+		Unique,
+		NumericRange
+	}
+	
 	public class Layer
 	{
 #region properties
@@ -67,6 +74,24 @@ namespace Cumberland
 			}
 		}
 
+		public ThemeType Theme {
+			get {
+				return themeType;
+			}
+			set {
+				themeType = value;
+			}
+		}
+
+		public string ThemeField {
+			get {
+				return themeField;
+			}
+			set {
+				themeField = value;
+			}
+		}
+
 		IFeatureSource data;
 		
 		string projection = null;
@@ -75,6 +100,9 @@ namespace Cumberland
 		
 		List<Style> styles = new List<Style>();
 
+		ThemeType themeType = ThemeType.None;
+		
+		string themeField = null;
 		
 #endregion
 			
