@@ -23,6 +23,8 @@
 //
 
 using System;
+using System.Collections.Generic;
+
 using NUnit.Framework;
 using Cumberland;
 using Cumberland.Data.Shapefile;
@@ -35,25 +37,38 @@ namespace Cumberland.Tests
 		[Test]
 		public void LoadPointShapefile()
 		{
-			Shapefile shp = new Shapefile("cities.shp");
+			Shapefile shp = new Shapefile("../../shape_eg_data/mexico/cities.shp");
 			
-			Assert.AreEqual(Shapefile.ShapeType.Point, shp.Shapetype);
+			Assert.AreEqual(ShapeType.Point, shp.Shapetype);
 		}
 		
 		[Test]
 		public void LoadLineShapefile()
 		{
-			Shapefile shp = new Shapefile("roads.shp");
+			Shapefile shp = new Shapefile("../../shape_eg_data/mexico/roads.shp");
 			
-			Assert.AreEqual(Shapefile.ShapeType.PolyLine, shp.Shapetype);
+			Assert.AreEqual(ShapeType.PolyLine, shp.Shapetype);
 		}
 		
 		[Test]
 		public void LoadPolygonShapefile()
 		{
-			Shapefile shp = new Shapefile("states.shp");
+			Shapefile shp = new Shapefile("../../shape_eg_data/mexico/states.shp");
 			
-			Assert.AreEqual(Shapefile.ShapeType.Polygon, shp.Shapetype);
+			Assert.AreEqual(ShapeType.Polygon, shp.Shapetype);
 		}
+		
+		[Test]
+		public void TestQueryFeaturesWithDBF()
+		{
+			Shapefile shp = new Shapefile("../../shape_eg_data/mexico/states.shp");
+			
+			string f = "CODE";
+			
+			List<Feature> v = shp.GetFeatures(f);
+			
+			Assert.AreEqual("MX02", v[0].ThemeFieldValue);
+		}
+
 	}
 }

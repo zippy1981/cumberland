@@ -23,6 +23,7 @@
 //
 
 using System;
+using System.Data;
 using System.IO;
 using System.Collections.Generic;
 using System.Xml.Serialization;
@@ -34,30 +35,36 @@ namespace Cumberland.Data.Shapefile
 	//TODO: Because this specification does not forbid consecutive points with identical coordinates, 
 	// shapefile readers must handle such cases.
 
+    public enum ShapeType
+    {
+        Null        = 0,
+        Point       = 1,
+        PolyLine    = 3,
+        Polygon     = 5,
+        MultiPoint  = 8,
+        PointZ      = 11,
+        PolyLineZ   = 13,
+        PolygonZ    = 15,
+        MultiPointZ = 18,
+        PointM      = 21,
+        PolyLineM   = 23,
+        PolygonM    = 25,
+        MultiPointM = 28,
+        MultiPatch  = 31
+    }
+		
+	
     public class Shapefile : IFeatureSource, IFileFeatureSource
 	{				
-        public enum ShapeType
-        {
-            Null        = 0,
-            Point       = 1,
-            PolyLine    = 3,
-            Polygon     = 5,
-            MultiPoint  = 8,
-            PointZ      = 11,
-            PolyLineZ   = 13,
-            PolygonZ    = 15,
-            MultiPointZ = 18,
-            PointM      = 21,
-            PolyLineM   = 23,
-            PolygonM    = 25,
-            MultiPointM = 28,
-            MultiPatch  = 31
-        }
-		
+
 #region Vars
 
 		uint filelength;
-		uint version;
+		uint version;		
+		bool isShapefileLoaded = false;
+		bool isDbfLoaded = false;
+		string currentField = null;
+		DBaseIIIFile dbfFile = null;
 		
 #endregion
 		
@@ -66,7 +73,7 @@ namespace Cumberland.Data.Shapefile
 		[XmlIgnore]
 		public ShapeType Shapetype {
 			get {
-				if (!isOpen) Open();
+				if (!isShapefileLoaded) LoadShapefile();
 				
 				return shapetype;
 			}
@@ -78,7 +85,7 @@ namespace Cumberland.Data.Shapefile
 		[XmlIgnore]
 		public Rectangle Extents {
 			get {
-				if (!isOpen) Open();
+				if (!isShapefileLoaded) LoadShapefile();
 				
 				return listedExtents;
 			}
@@ -94,7 +101,7 @@ namespace Cumberland.Data.Shapefile
 		[XmlIgnore]
 		public Cumberland.Data.FeatureType SourceFeatureType {
 			get {
-				if (!isOpen) Open();
+				if (!isShapefileLoaded) LoadShapefile();
 				
 				return featureType;
 			}
@@ -106,13 +113,8 @@ namespace Cumberland.Data.Shapefile
 			}
 			set {
 				fileName = value;
-			}
-		}
-
-		[XmlIgnore]
-		public bool IsOpen {
-			get {
-				return isOpen;
+				
+				// TODO: open?
 			}
 		}
 		
@@ -121,8 +123,6 @@ namespace Cumberland.Data.Shapefile
 		Rectangle listedExtents = new Cumberland.Rectangle();
 
 		string fileName;
-		
-		bool isOpen = false;
 		
 #endregion
 
@@ -135,7 +135,7 @@ namespace Cumberland.Data.Shapefile
         public Shapefile(string fname)
         {
 			fileName = fname;
-			Open();
+			LoadShapefile();
 		}
 
 		
@@ -349,30 +349,9 @@ namespace Cumberland.Data.Shapefile
 			return po;
 		}
 
-#endregion
-		
-#region IFeatureSource methods
-		
-		public List<Feature> GetFeatures()
+		void LoadShapefile()
 		{
-			return GetFeatures(null);
-		}
-		
-		public List<Cumberland.Feature> GetFeatures (Cumberland.Rectangle rectangle)
-		{
-			if (!IsOpen) Open();
-			
-			// we've got no spatial index 
-			return features;
-		}
-		
-#endregion
-		
-#region public methods
-		
-		public void Open()
-		{
-			if (isOpen) return;
+			if (isShapefileLoaded) return;
 			
 			using (FileStream file = new FileStream(fileName, FileMode.Open, FileAccess.Read))
 			{
@@ -383,11 +362,81 @@ namespace Cumberland.Data.Shapefile
 				ReadShapeRecords(str);
 			}
 			
-			isOpen = true;
+			isShapefileLoaded = true;
+		}
+		
+		void LoadDbf()
+		{
+			if (isDbfLoaded) return;
+			
+			dbfFile = new DBaseIIIFile(Path.GetDirectoryName(fileName) + 
+			                                    Path.DirectorySeparatorChar + 
+			                                    Path.GetFileNameWithoutExtension(fileName) + 
+			                                    ".dbf");
+			
+			isDbfLoaded = true;
 		}
 		
 #endregion
 		
+#region IFeatureSource methods
+		
+		public List<Feature> GetFeatures(string themeField)
+		{
+			return GetFeatures(new Rectangle(), themeField);
+		}
+		
+		public List<Feature> GetFeatures()
+		{
+			return GetFeatures(new Rectangle());
+		}
+		
+		public List<Cumberland.Feature> GetFeatures (Cumberland.Rectangle rectangle)
+		{
+			return GetFeatures(rectangle, null);
+		}
+		
+		public List<Feature> GetFeatures(Cumberland.Rectangle rectangle, string themeField)
+		{
+			if (!isShapefileLoaded) LoadShapefile();
+			
+			if (themeField != null && 
+			    !isDbfLoaded && 
+			    themeField != currentField)
+			{
+				LoadDbf();
+				
+				// find our theme field in the dbf
+				int fieldIndex = -1;
+				for (int ii=0; ii<dbfFile.Records.Columns.Count; ii++)
+				{
+					if (dbfFile.Records.Columns[ii].ColumnName == themeField)
+					{
+						fieldIndex = ii;
+						break;
+					}
+				}
+				
+				if (fieldIndex == -1)
+				{
+					throw new ArgumentException("Theme field not found in dbf", "themeField");
+				}
+				
+				// updates the features
+				for (int ii=0; ii < features.Count; ii++)
+				{
+					features[ii].ThemeFieldValue = dbfFile.Records.Rows[ii][fieldIndex].ToString();
+				}
+				
+				currentField = themeField;
+			}
+			
+			// we've got no spatial index 
+			return features;
+		}
+		
+#endregion
+						
     }
 }
 

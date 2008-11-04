@@ -215,13 +215,24 @@ namespace Cumberland.Data.PostGIS
 			
 			isInitialized = true;
 		}
+
+		public List<Feature> GetFeatures(string themeField)
+		{
+			return GetFeatures(new Rectangle(), themeField);
+		}
+		
+
+		public List<Feature> GetFeatures (Rectangle rectangle)
+		{
+			return GetFeatures(rectangle, null);
+		}
 		
 		public List<Feature> GetFeatures()
 		{
 			return GetFeatures(new Rectangle());
 		}
 
-		public List<Feature> GetFeatures (Rectangle rectangle)
+		public List<Feature> GetFeatures(Rectangle rectangle, string themeField)
 		{
 			CheckIfInitialized();
 			
