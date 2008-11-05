@@ -164,7 +164,7 @@ namespace Cumberland.Data.Shapefile
 						
 					case 'C':
 						
-						row[jj] = ASCIIEncoding.ASCII.GetString(br.ReadBytes(fd.Length));
+						row[jj] = ASCIIEncoding.ASCII.GetString(br.ReadBytes(fd.Length)).Trim();
 						break;
 						
 					case 'D':

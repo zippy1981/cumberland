@@ -39,6 +39,8 @@ namespace Cumberland.Drawing
 		
 		delegate void DrawPoint(Style s, Graphics g, System.Drawing.Point p);
 		
+		delegate Style GetStyleForFeature(Layer l, string fieldValue);
+		
 #region Properties
 		
 		SmoothingMode smoothing = SmoothingMode.HighQuality;
@@ -59,8 +61,6 @@ namespace Cumberland.Drawing
 		public Bitmap Draw (Map map)
 		{
 			ProjFourWrapper dst = null;
-			
-			
 			Graphics g = null;
 			
 			try
@@ -114,55 +114,88 @@ namespace Cumberland.Drawing
 							                        dst.Transform(src, extents.Max));
 						}
 
+						string themeField = null;
+						
 						// query our data
-						List<Feature> features = layer.Data.GetFeatures(extents);
+						List<Feature> features = null;
+						if (layer.Theme == ThemeType.None)
+						{
+							features = layer.Data.GetFeatures(extents);
+						}
+						else
+						{
+							// check for valid field
+							themeField = layer.ThemeField;
+							if (string.IsNullOrEmpty(themeField))
+							{
+								throw new MapConfigurationException("Layer has been set for theming, but no ThemeField was provided");
+							}
+							
+							features = layer.Data.GetFeatures(extents, themeField);
+						}
 						
 						if (features.Count == 0)
 						{
 							continue;
 						}
-					
+
 						if (layer.Styles.Count == 0)
 						{
 							throw new MapConfigurationException("Layer lacks a Style");
 						}
-					
-						Style style = layer.Styles[0];
+
+						// set up a delegate for getting style based on theme type
+						GetStyleForFeature getStyle = GetBasicStyleForFeature;
+						if (layer.Theme == ThemeType.Unique)
+						{
+							getStyle = GetUniqueStyleForFeature;
+						}
+						else if (layer.Theme == ThemeType.NumericRange)
+						{
+							getStyle = GetRangeStyleForFeature;
+						}
 						
 						if (layer.Data.SourceFeatureType == FeatureType.Point)
 					    {	
 
 		#region handle point rendering
 					
-							DrawPoint drawPoint = null;
-					
-							if (style.PointSymbol == PointSymbolType.Shape)
-							{
-								if (style.PointSymbolShape == PointSymbolShapeType.Square)
-								{
-									drawPoint = DrawSquarePoint;
-								}
-								else if (style.PointSymbolShape == PointSymbolShapeType.Circle)
-								{
-									drawPoint = DrawCirclePoint;
-								}
-								else continue;
-							}
-							else if (style.PointSymbol == PointSymbolType.Image)
-							{
-								if (string.IsNullOrEmpty(style.PointSymbolImagePath))
-								{
-									throw new MapConfigurationException("PointSymbolImagePath cannot be empty for PointSymbolType.Image");
-								}
-								    
-								drawPoint = DrawImageOnPoint;
-							}
-							else continue;
-							
 							for (int ii=0; ii < features.Count; ii++)
 							{
 								Point p = features[ii] as Point;
-									
+								
+								Style style = getStyle(layer, p.ThemeFieldValue);
+								
+								if (style == null)
+								{
+									continue;
+								}
+								
+								DrawPoint drawPoint = null;
+						
+								if (style.PointSymbol == PointSymbolType.Shape)
+								{
+									if (style.PointSymbolShape == PointSymbolShapeType.Square)
+									{
+										drawPoint = DrawSquarePoint;
+									}
+									else if (style.PointSymbolShape == PointSymbolShapeType.Circle)
+									{
+										drawPoint = DrawCirclePoint;
+									}
+									else continue;
+								}
+								else if (style.PointSymbol == PointSymbolType.Image)
+								{
+									if (string.IsNullOrEmpty(style.PointSymbolImagePath))
+									{
+										throw new MapConfigurationException("PointSymbolImagePath cannot be empty for PointSymbolType.Image");
+									}
+									    
+									drawPoint = DrawImageOnPoint;
+								}
+								else continue;	
+								
 								if (reproject)
 								{
 									// convert our data point to the map projection
@@ -175,21 +208,30 @@ namespace Cumberland.Drawing
 								drawPoint(style, g, pp);
 							}
 
-	
 		#endregion
 						}
 						else if (layer.Data.SourceFeatureType == FeatureType.Polyline)
 						{
 		#region Handle line rendering
 							
-							if (style.LineStyle == LineStyle.None)
+							if (layer.Theme == ThemeType.None &&
+							    getStyle(layer, null).LineStyle == LineStyle.None)
 							{
+								// skip the layer
 								continue;
 							}
 							
 						    for (int ii=0; ii < features.Count; ii++)
 							{
 								PolyLine pol = (PolyLine) features[ii];
+								
+								Style style = getStyle(layer, pol.ThemeFieldValue);
+								
+								if (style == null || style.LineStyle == LineStyle.None)
+								{
+									continue;
+								}
+								
 								for (int jj=0; jj < pol.Lines.Count; jj++)
 								{
 									Line r = pol.Lines[jj] as Line;
@@ -219,7 +261,14 @@ namespace Cumberland.Drawing
 #region polygon rendering
 							for (int ii=0; ii < features.Count; ii++)
 							{
-								Polygon po = features[ii] as Polygon;		
+								Polygon po = features[ii] as Polygon;	
+								
+								Style style = getStyle(layer, po.ThemeFieldValue);								
+								
+								if (style == null)
+								{
+									continue;
+								}
 									
 								for (int jj = 0; jj < po.Rings.Count; jj++)
 							    {
@@ -285,22 +334,68 @@ namespace Cumberland.Drawing
 
 #region helper methods
 		
+		Style GetBasicStyleForFeature(Layer l, string fieldValue)
+		{
+			return l.Styles[0];
+		}
+		
+		Style GetUniqueStyleForFeature(Layer l, string fieldValue)
+		{
+			foreach (Style s in l.Styles)
+			{
+				if (s.UniqueThemeValue == fieldValue)
+				{
+					return s;
+				}
+			}
+			
+			return null;
+		}
+		
+		Style GetRangeStyleForFeature(Layer l, string fieldValue)
+		{
+			double val = double.Parse(fieldValue);
+			foreach (Style s in l.Styles)
+			{
+				if (val <= s.MaxRangeThemeValue &&
+				    val >= s.MinRangeThemeValue)
+				{
+					return s;
+				}
+			}
+			
+			return null;
+		}
+				
 		void DrawSquarePoint(Style style, Graphics g, System.Drawing.Point pp)
 		{
-			g.FillRectangle(new SolidBrush(style.FillColor), 
+			System.Drawing.Rectangle r = new System.Drawing.Rectangle(
 			                pp.X - (style.PointSize/2),
 			                pp.Y - (style.PointSize/2),
 			                style.PointSize,
-			                style.PointSize);	
+			                style.PointSize);
+			
+			g.FillRectangle(new SolidBrush(style.FillColor), r);
+			
+			if (style.LineStyle != LineStyle.None)
+			{
+				g.DrawRectangle(ConvertLayerToPen(style), r);
+			}
 		}
 		
 		void DrawCirclePoint(Style style, Graphics g, System.Drawing.Point pp)
 		{
-			g.FillEllipse(new SolidBrush(style.FillColor),
-			                pp.X - (style.PointSize/2),
+			System.Drawing.Rectangle r = new System.Drawing.Rectangle(pp.X - (style.PointSize/2),
 			                pp.Y - (style.PointSize/2),
 			                style.PointSize,
-			                style.PointSize);	
+			                style.PointSize);
+			
+			g.FillEllipse(new SolidBrush(style.FillColor), r);
+			
+			if (style.LineStyle != LineStyle.None)
+			{
+				g.DrawEllipse(ConvertLayerToPen(style),r);	
+			}
 		}
 		
 		void DrawImageOnPoint(Style style, Graphics g, System.Drawing.Point pp)
