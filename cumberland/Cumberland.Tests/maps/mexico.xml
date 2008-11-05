@@ -2,17 +2,37 @@
 <Map>
 	<Width>400</Width>
 	<Height>400</Height>
-	<Extents>-117,13,-85,33</Extents>
+	<Extents>-107,18,-95,28</Extents>
 	<Projection>+init=epsg:4326</Projection>
 	<Layers>
 		<Layer>
+			<Theme>NumericRange</Theme>
+			<ThemeField>AREA</ThemeField>
 			<Styles>
 				<Style>
 					<LineWidth>1</LineWidth>
 					<LineStyle>Solid</LineStyle>
-					<LineColor>255,65,105,225</LineColor>
-					<FillColor>255,240,248,255</FillColor>
+					<LineColor>255,165,165,165</LineColor>
+					<FillColor>255,255,228,100</FillColor>
+					<MinRangeThemeValue>0</MinRangeThemeValue>
+					<MaxRangeThemeValue>30000</MaxRangeThemeValue>
 				</Style>
+				<Style>
+					<LineWidth>1</LineWidth>
+					<LineStyle>Solid</LineStyle>
+					<LineColor>255,165,165,165</LineColor>
+					<FillColor>255,255,156,100</FillColor>
+					<MinRangeThemeValue>30001</MinRangeThemeValue>
+					<MaxRangeThemeValue>50000</MaxRangeThemeValue>
+				</Style>				
+				<Style>
+					<LineWidth>1</LineWidth>
+					<LineStyle>Solid</LineStyle>
+					<LineColor>255,165,165,165</LineColor>
+					<FillColor>255,255,0,100</FillColor>
+					<MinRangeThemeValue>50001</MinRangeThemeValue>
+					<MaxRangeThemeValue>10000000</MaxRangeThemeValue>
+				</Style>	
 			</Styles>
 			<Projection>+init=epsg:4326</Projection>
 			<Id>states</Id>
@@ -20,7 +40,7 @@
 				<FilePath>../shape_eg_data/mexico/states.shp</FilePath>
 			</Data>
 		</Layer>
-		<Layer>
+		<Layer><!--Test a non-themed layer-->
 			<Styles>
 				<Style>
 					<LineWidth>1</LineWidth>
@@ -34,11 +54,66 @@
 				<FilePath>../shape_eg_data/mexico/roads.shp</FilePath>
 			</Data>
 		</Layer>
+		<Layer><!--Test a non-themed layer-->
+			<Styles>
+				<Style>
+					<LineWidth>1</LineWidth>
+					<LineColor>255,105,105,105</LineColor>
+					<LineStyle>Solid</LineStyle>					
+				</Style>
+			</Styles>
+			<Projection>+init=epsg:4326</Projection>
+			<Id>roads</Id>
+			<Data sourceType="Cumberland.Data.IFileFeatureSource" sourceInstance="Cumberland.Data.Shapefile.Shapefile">
+				<FilePath>../shape_eg_data/mexico/roads.shp</FilePath>
+			</Data>
+		</Layer>		
+		<Layer><!--Test a unique themed layer-->
+			<Theme>Unique</Theme>
+			<ThemeField>SYSTEM</ThemeField>		
+			<Styles>
+				<Style>
+					<UniqueThemeValue>Rio Grande de Santiago</UniqueThemeValue>
+					<LineWidth>3</LineWidth>
+					<LineColor>255,105,105,225</LineColor>
+					<LineStyle>Solid</LineStyle>					
+				</Style>
+			</Styles>
+			<Projection>+init=epsg:4326</Projection>
+			<Id>rivers</Id>
+			<Data sourceType="Cumberland.Data.IFileFeatureSource" sourceInstance="Cumberland.Data.Shapefile.Shapefile">
+				<FilePath>../shape_eg_data/mexico/rivers.shp</FilePath>
+			</Data>
+		</Layer>	
 		<Layer>
+			<Theme>NumericRange</Theme>
+			<ThemeField>POPULATION</ThemeField>
 			<Projection>+init=epsg:4326</Projection>
 			<Id>cities</Id>
 			<Styles>
 				<Style>
+					<FillColor>255,100,255,100</FillColor>
+					<LineColor>255,0,155,0</LineColor>
+					<LineSize>1</LineSize>
+					<PointSize>5</PointSize>
+					<MinRangeThemeValue>0</MinRangeThemeValue>
+					<MaxRangeThemeValue>500000</MaxRangeThemeValue>
+					<PointSymbol>Shape</PointSymbol>
+					<PointSymbolShape>Square</PointSymbolShape>
+				</Style>
+				<Style>
+					<FillColor>255,100,100,255</FillColor>
+					<LineColor>255,0,0,155</LineColor>
+					<LineSize>1</LineSize>					
+					<PointSize>8</PointSize>
+					<MinRangeThemeValue>500001</MinRangeThemeValue>
+					<MaxRangeThemeValue>2000000</MaxRangeThemeValue>
+					<PointSymbol>Shape</PointSymbol>
+					<PointSymbolShape>Circle</PointSymbolShape>
+				</Style>
+				<Style>
+					<MinRangeThemeValue>2000001</MinRangeThemeValue>
+					<MaxRangeThemeValue>100000000</MaxRangeThemeValue>				
 					<PointSymbol>Image</PointSymbol>
 					<PointSymbolImagePath>images/city_icon.png</PointSymbolImagePath>
 				</Style>
