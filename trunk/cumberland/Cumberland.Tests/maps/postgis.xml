@@ -25,7 +25,7 @@
 			<Styles>
 				<Style>
 					<LineWidth>1</LineWidth>
-					<LineColor>255,100,100,100</LineColor>					
+					<LineColor>255,145,145,145</LineColor>					
 					<LineStyle>Solid</LineStyle>
 				</Style>
 			</Styles>
