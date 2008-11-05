@@ -242,9 +242,10 @@ namespace Cumberland.Data.PostGIS
 			{
 				conn.Open();
 				
-				string sql = string.Format("select astext({0}) from {1}",
+				string sql = string.Format("select astext({0}){2} from {1}",
 				                           geometryColumn, 
-				                           tableName);
+				                           tableName,
+				                           (themeField != null ? ", " + themeField : string.Empty));
 
 				if (!rectangle.IsEmpty)
 				{
@@ -266,10 +267,26 @@ namespace Cumberland.Data.PostGIS
 						{
 							if (geometryType == GeometryType.MultiPolygon)
 							{
-								feats.AddRange(WellKnownText.ParseMultiPolygon(dr.GetString(0)));
+								// FIXME: we treate multipolygons differently than shapefiles
+								// here we create multiple
+								foreach (Feature f in WellKnownText.ParseMultiPolygon(dr.GetString(0)))
+								{
+									if (themeField != null)
+									{
+										f.ThemeFieldValue = dr[1].ToString();
+									}
+									feats.Add(f);
+								}
 							}
 							else
-								feats.Add(parseWKTHandler(dr.GetString(0)));
+							{
+								Feature f = parseWKTHandler(dr.GetString(0));
+								if (themeField != null)
+								{
+									f.ThemeFieldValue = dr[1].ToString();
+								}
+								feats.Add(f);
+							}
 						}
 					}
 				}

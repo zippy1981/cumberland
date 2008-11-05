@@ -1,5 +1,9 @@
 2008-11-04  Scott Ellington <scott.ellington@gmail.com> 
 
+	* Drawing/MapDrawer.cs: break and fix
+
+2008-11-04  Scott Ellington <scott.ellington@gmail.com> 
+
 	* Drawing/MapDrawer.cs: draw theming
 	* Data/Shapefile/DBaseIIIFile.cs: trim extra spaces from character
 	  field values

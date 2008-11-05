@@ -1,23 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Map>
-  <Width>500</Width>
-  <Height>400</Height>
-  <Extents>-90,20,-80,40</Extents>
-  <Projection>+init=epsg:4326</Projection>
-  <Layers>
-    <Layer>
-      <LineWidth>2</LineWidth>
-      <PointSize>1</PointSize>
-      <LineColor>255,65,65,225</LineColor>
-      <FillColor>255,240,208,255</FillColor>
-      <Projection>+init=epsg:3087</Projection>
-      <Id>pg1</Id>
-      <LineStyle>Solid</LineStyle>
-      <Data sourceType="Cumberland.Data.IDatabaseFeatureSource"
-      	sourceInstance="Cumberland.Data.PostGIS.PostGISFeatureSource">
-        <ConnectionString>Server=127.0.0.1;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;</ConnectionString>
-        <TableName>counties</TableName>
-      </Data>
-    </Layer>
-  </Layers>
+	<Width>500</Width>
+	<Height>400</Height>
+	<Extents>-89,22,-79,32</Extents>
+	<Projection>+init=epsg:4326</Projection>
+	<Layers>
+		<Layer>
+			<Styles>
+				<Style>
+					<LineWidth>1</LineWidth>
+					<LineColor>255,65,65,225</LineColor>
+					<FillColor>255,240,208,255</FillColor>
+					<LineStyle>Solid</LineStyle>
+				</Style>
+			</Styles>
+			<Projection>+init=epsg:3087</Projection>
+			<Id>pg1</Id>
+			<Data sourceType="Cumberland.Data.IDatabaseFeatureSource" sourceInstance="Cumberland.Data.PostGIS.PostGISFeatureSource">
+				<ConnectionString>Server=127.0.0.1;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;</ConnectionString>
+				<TableName>counties</TableName>
+			</Data>
+		</Layer>
+		<Layer>
+			<Styles>
+				<Style>
+					<LineWidth>1</LineWidth>
+					<LineColor>255,100,100,100</LineColor>					
+					<LineStyle>Solid</LineStyle>
+				</Style>
+			</Styles>
+			<Projection>+init=epsg:3086</Projection>
+			<Id>major roads</Id>
+			<Data sourceType="Cumberland.Data.IDatabaseFeatureSource" sourceInstance="Cumberland.Data.PostGIS.PostGISFeatureSource">
+				<ConnectionString>Server=127.0.0.1;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;</ConnectionString>
+				<TableName>fdot_majroads</TableName>
+			</Data>
+		</Layer>	
+		<Layer>
+			<Theme>Unique</Theme>
+			<ThemeField>magnitude</ThemeField>					
+			<Styles>
+				<Style>
+					<UniqueThemeValue>0</UniqueThemeValue>
+					<LineWidth>1</LineWidth>
+					<FillColor>255,100,100,255</FillColor>
+					<LineColor>255,0,0,155</LineColor>			
+					<PointSize>2</PointSize>
+					<LineStyle>Solid</LineStyle>
+				</Style>
+				<Style>
+					<UniqueThemeValue>1</UniqueThemeValue>
+					<LineWidth>1</LineWidth>
+					<FillColor>255,100,100,255</FillColor>
+					<LineColor>255,0,0,155</LineColor>			
+					<PointSize>4</PointSize>
+					<LineStyle>Solid</LineStyle>
+				</Style>
+				<Style>
+					<UniqueThemeValue>2</UniqueThemeValue>
+					<LineWidth>1</LineWidth>
+					<FillColor>255,100,100,255</FillColor>
+					<LineColor>255,0,0,155</LineColor>			
+					<PointSize>6</PointSize>
+					<LineStyle>Solid</LineStyle>
+				</Style>
+				<Style>
+					<UniqueThemeValue>3</UniqueThemeValue>
+					<LineWidth>1</LineWidth>
+					<FillColor>255,100,100,255</FillColor>
+					<LineColor>255,0,0,155</LineColor>			
+					<PointSize>8</PointSize>
+					<LineStyle>Solid</LineStyle>
+				</Style>
+				<Style>
+					<UniqueThemeValue>4</UniqueThemeValue>
+					<LineWidth>1</LineWidth>
+					<FillColor>255,100,100,255</FillColor>
+					<LineColor>255,0,0,155</LineColor>			
+					<PointSize>10</PointSize>
+					<LineStyle>Solid</LineStyle>
+				</Style>
+				<Style>
+					<UniqueThemeValue>5</UniqueThemeValue>
+					<LineWidth>1</LineWidth>
+					<FillColor>255,100,100,255</FillColor>
+					<LineColor>255,0,0,155</LineColor>			
+					<PointSize>12</PointSize>
+					<LineStyle>Solid</LineStyle>
+				</Style>
+			</Styles>
+			<Projection>+init=epsg:3086</Projection>
+			<Id>springs</Id>
+			<Data sourceType="Cumberland.Data.IDatabaseFeatureSource" sourceInstance="Cumberland.Data.PostGIS.PostGISFeatureSource">
+				<ConnectionString>Server=127.0.0.1;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;</ConnectionString>
+				<TableName>springs_fdep_2000</TableName>
+			</Data>
+		</Layer>					
+	</Layers>
 </Map>

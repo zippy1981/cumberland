@@ -100,7 +100,7 @@ namespace Cumberland.Drawing
 									
 					try
 					{
-						Rectangle extents = map.Extents.Clone();
+						Rectangle layerEnvelope = envelope.Clone();
 						
 						// instantiate layer projection
 						bool reproject = false;
@@ -108,10 +108,10 @@ namespace Cumberland.Drawing
 						{
 							src = new ProjFourWrapper(layer.Projection);
 							reproject = true;
-							
+														
 							// reproject extents to our source for querying
-							extents = new Rectangle(dst.Transform(src, extents.Min),
-							                        dst.Transform(src, extents.Max));
+							layerEnvelope = new Rectangle(dst.Transform(src, layerEnvelope.Min),
+							                        dst.Transform(src, layerEnvelope.Max));
 						}
 
 						string themeField = null;
@@ -120,7 +120,7 @@ namespace Cumberland.Drawing
 						List<Feature> features = null;
 						if (layer.Theme == ThemeType.None)
 						{
-							features = layer.Data.GetFeatures(extents);
+							features = layer.Data.GetFeatures(layerEnvelope);
 						}
 						else
 						{
@@ -131,7 +131,7 @@ namespace Cumberland.Drawing
 								throw new MapConfigurationException("Layer has been set for theming, but no ThemeField was provided");
 							}
 							
-							features = layer.Data.GetFeatures(extents, themeField);
+							features = layer.Data.GetFeatures(layerEnvelope, themeField);
 						}
 						
 						if (features.Count == 0)
@@ -269,7 +269,7 @@ namespace Cumberland.Drawing
 								{
 									continue;
 								}
-									
+							
 								for (int jj = 0; jj < po.Rings.Count; jj++)
 							    {
 									Ring r = po.Rings[jj];
