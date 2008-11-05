@@ -11,7 +11,7 @@
 					<LineWidth>1</LineWidth>
 					<LineColor>255,65,145,65</LineColor>
 					<FillColor>255,240,255,208</FillColor>
-					<LineStyle>Dashed</LineStyle>
+					<LineStyle>Solid</LineStyle>
 				</Style>
 			</Styles>
 			<Projection>+proj=aea +lat_1=24 +lat_2=31.5 +lat_0=24 +lon_0=-84 +x_0=400000 +y_0=0 +ellps=GRS80 +units=m +no_defs</Projection>
