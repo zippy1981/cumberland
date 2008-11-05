@@ -1,4 +1,4 @@
-// IFeatureSource.cs
+// FeatureType.cs
 //
 // Copyright (c) 2008 Scott Ellington and Authors
 //
@@ -23,24 +23,14 @@
 //
 
 using System;
-using System.Collections.Generic;
-
-using Cumberland;
 
 namespace Cumberland.Data
 {
-	public interface IFeatureSource
+	public enum FeatureType
 	{
-		FeatureType SourceFeatureType { get; }
-		
-		Rectangle Extents { get; }
-		
-		List<Feature> GetFeatures();
-		
-		List<Feature> GetFeatures(Rectangle rectangle);
-		
-		List<Feature> GetFeatures(string themeField);
-		
-		List<Feature> GetFeatures(Rectangle rectangle, string themeField);
+		None,
+		Point,
+		Polygon,
+		Polyline
 	}
 }

@@ -5,9 +5,9 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{05A6F104-D839-4B9C-B704-91F9BB608D73}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <AssemblyName>Cumberland.DrawMap</AssemblyName>
+    <ProjectGuid>{E67F34B9-0BB0-462B-B935-135093833A77}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>Cumberland.Data</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -17,7 +17,8 @@
     <DefineConstants>DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Commandlineparameters>-e=-110,20,-90,35 ../../../Cumberland.Tests/maps/mexico.xml</Commandlineparameters>
+    <ConsolePause>false</ConsolePause>
+    <AssemblyName>Cumberland.Data.SqlServer</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -25,36 +26,22 @@
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <AssemblyName>Cumberland.Data</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="NDesk.Options, Version=0.2.0.0, Culture=neutral, PublicKeyToken=null">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\NDesk.Options.dll</HintPath>
-    </Reference>
+    <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\cumberland\Cumberland.csproj">
-      <Project>{05A6F104-D839-4B9C-B704-91F9BB608D73}</Project>
+      <Project>{E67F34B9-0BB0-462B-B935-135093833A77}</Project>
       <Name>Cumberland</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Cumberland.Data.PostGIS\Cumberland.Data.PostGIS.csproj">
-      <Project>{05A6F104-D839-4B9C-B704-91F9BB608D73}</Project>
-      <Name>Cumberland.Data.PostGIS</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Cumberland.Data.SqlServer\Cumberland.Data.SqlServer.csproj">
-      <Project>{05A6F104-D839-4B9C-B704-91F9BB608D73}</Project>
-      <Name>Cumberland.Data.SqlServer</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Main.cs" />
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="SqlServerFeatureSource.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <None Include="lib\NDesk.Options.dll" />
-    <None Include="lib\NDesk.Options.COPYING" />
-  </ItemGroup>
 </Project>

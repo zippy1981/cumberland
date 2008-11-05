@@ -341,7 +341,7 @@ namespace Cumberland.Tests
 			MapSerializer ms = new MapSerializer();
 			Map m = ms.Deserialize("../../maps/mexico.xml");
 			
-			Assert.IsTrue(Path.IsPathRooted(m.Layers[2].Styles[0].PointSymbolImagePath));
+			Assert.IsTrue(Path.IsPathRooted(m.Layers[4].Styles[2].PointSymbolImagePath));
 		}
 		
 		[Test]

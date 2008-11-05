@@ -33,32 +33,66 @@ namespace Cumberland.Tests
 	[TestFixture]
 	public class WellKnownTextTests
 	{
+		string pointWkt = "POINT(0 0)";
+		string multiLineStringWkt = "MULTILINESTRING((0 0 0,1 1 0,1 2 1),(2 3 1,3 2 1,5 4 1))";		
+		string multiPolygonWkt = "MULTIPOLYGON(((0 0 0,4 0 0,4 4 0,0 4 0,0 0 0),(1 1 0,2 1 0,2 2 0,1 2 0,1 1 0)),((-1 -1 0,-1 -2 0,-2 -2 0,-2 -1 0,-1 -1 0)))";
+		string polygonWkt = "POLYGON((0 0,0 5,5 6,5 0,0 0),(1.1 1.1,1.6 1.1,1.4 1.4,1.1 1.6,1.1 1.1))";
+		string lineStringWkt = "LINESTRING(0 0 0,1 1 0,1 2 1)";
+		
 		[Test]
-		public void TestWKTToPoint()
+		public void TestParsePoint()
 		{
-			string wkt = "POINT(0 0)";
-			
-			Point p = WellKnownText.ParsePoint(wkt);
+			Point p = WellKnownText.ParsePoint(pointWkt);
 			Assert.AreEqual(new Point(0,0), p);
 		}
 		
 		[Test]
-		public void TestWKTToPolyLine()
+		public void TestParseMultiLineString()
 		{
-			string wkt = "MULTILINESTRING((0 0 0,1 1 0,1 2 1),(2 3 1,3 2 1,5 4 1))";
-			
-			PolyLine l = WellKnownText.ParseMultiLineString(wkt);
+			PolyLine l = WellKnownText.ParseMultiLineString(multiLineStringWkt);
 			Assert.AreEqual(2, l.Lines.Count);
 		}
 		
 		[Test]
-		public void TestWKTPolygons()
+		public void TestParseMultiPolygon()
 		{
-			string wkt = "MULTIPOLYGON(((0 0 0,4 0 0,4 4 0,0 4 0,0 0 0),(1 1 0,2 1 0,2 2 0,1 2 0,1 1 0)),((-1 -1 0,-1 -2 0,-2 -2 0,-2 -1 0,-1 -1 0)))";
-			
-			List<Feature> l = WellKnownText.ParseMultiPolygon(wkt);
-			Assert.AreEqual(2, l.Count);
+			Polygon p = WellKnownText.ParseMultiPolygon(multiPolygonWkt);
+			Assert.AreEqual(3, p.Rings.Count);
 		}
+		
+		[Test]
+		public void TestParsePolygon()
+		{
+			Polygon p = WellKnownText.ParsePolygon(polygonWkt);
+			Assert.AreEqual(2, p.Rings.Count);
+		}
+		
+		[Test]
+		public void TestParseLineString()
+		{
+			PolyLine l = WellKnownText.ParseLineString(lineStringWkt);
+			Assert.AreEqual(3, l.Lines[0].Points.Count);
+		}
+		
+		[Test]
+		public void TestParse()
+		{
+			Assert.AreEqual(typeof(Point), 
+			                WellKnownText.Parse(pointWkt).GetType());
+			
+			Assert.AreEqual(typeof(Polygon),
+			                WellKnownText.Parse(polygonWkt).GetType());
+			
+			Assert.AreEqual(typeof(Polygon),
+			                WellKnownText.Parse(multiPolygonWkt).GetType());
+			
+			Assert.AreEqual(typeof(PolyLine),
+			                WellKnownText.Parse(lineStringWkt).GetType());
+			
+			Assert.AreEqual(typeof(PolyLine),
+			                WellKnownText.Parse(multiLineStringWkt).GetType());
+		}
+		
 		
 		[Test]
 		public void TestPolygonToWKT()
@@ -123,10 +157,20 @@ namespace Cumberland.Tests
 			                WellKnownText.CreateFromPolyLine(p));
 		}
 		
+		[Test]
 		public void TestPointToWKT()
 		{
 			Point p = new Point(3,4);
 			Assert.AreEqual("POINT(3 4)", WellKnownText.CreateFromPoint(p));
+		}
+		
+		[Test]
+		public void TestRectangleToWKT()
+		{
+			Rectangle r = new Rectangle(0,0,15,15);
+			
+			Assert.AreEqual("POLYGON((0 0,0 15,15 15,15 0,0 0))",
+			                WellKnownText.CreateFromRectangle(r));
 		}
 	}
 }

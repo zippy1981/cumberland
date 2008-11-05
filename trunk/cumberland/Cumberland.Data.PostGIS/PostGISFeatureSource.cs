@@ -147,74 +147,6 @@ namespace Cumberland.Data.PostGIS
 		
 #region Public methods
 		
-		void InitializeFeatureProvider()
-		{
-			if (string.IsNullOrEmpty(ConnectionString) || string.IsNullOrEmpty(TableName))
-			{
-				throw new InvalidOperationException("ConnectionString and TableName must be set to initialize");
-			}
-
-			using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
-			{
-				string sql = string.Format("select f_geometry_column, srid, type from geometry_columns where f_table_name = '{0}'",
-				                           tableName);
-				
-				//System.Console.WriteLine(sql);
-				conn.Open();
-				
-				using (NpgsqlCommand comm = new NpgsqlCommand(sql, conn))
-				{
-
-					
-					using (NpgsqlDataReader dr = comm.ExecuteReader())
-					{
-						if (!dr.HasRows)
-						{
-							throw new ArgumentException(string.Format("row in geometry_columns for table '{0}' not found", tableName), "table");
-						}
-						
-						dr.Read();
-						geometryColumn = dr.GetString(0);
-						srid = dr.GetInt32(1);
-						
-						switch (dr.GetString(2).ToUpper())
-						{
-							
-						case "MULTILINESTRING":
-							
-							featureType = FeatureType.Polyline;
-							geometryType = GeometryType.MultilineString;
-							parseWKTHandler = WellKnownText.ParseMultiLineString;
-							
-							break;
-							
-						case "MULTIPOLYGON":
-							
-							featureType = FeatureType.Polygon;
-							geometryType = GeometryType.MultiPolygon;
-							//parseWKTHandler = WellKnownText.ParseMultiPolygon;
-							
-							break;
-							
-						case "POINT":
-							
-							featureType = FeatureType.Point;
-							geometryType = GeometryType.Point;
-							parseWKTHandler = WellKnownText.ParsePoint;
-							
-							break;
-							
-						default:
-							throw new NotSupportedException(string.Format("'{0}' is not a supported geometry type", dr.GetString(2)));
-							
-						}
-						
-					}
-				}
-			}		
-			
-			isInitialized = true;
-		}
 
 		public List<Feature> GetFeatures(string themeField)
 		{
@@ -265,28 +197,12 @@ namespace Cumberland.Data.PostGIS
 					{
 						while (dr.Read())
 						{
-							if (geometryType == GeometryType.MultiPolygon)
+							Feature f = parseWKTHandler(dr.GetString(0));
+							if (themeField != null)
 							{
-								// FIXME: we treate multipolygons differently than shapefiles
-								// here we create multiple
-								foreach (Feature f in WellKnownText.ParseMultiPolygon(dr.GetString(0)))
-								{
-									if (themeField != null)
-									{
-										f.ThemeFieldValue = dr[1].ToString();
-									}
-									feats.Add(f);
-								}
+								f.ThemeFieldValue = dr[1].ToString();
 							}
-							else
-							{
-								Feature f = parseWKTHandler(dr.GetString(0));
-								if (themeField != null)
-								{
-									f.ThemeFieldValue = dr[1].ToString();
-								}
-								feats.Add(f);
-							}
+							feats.Add(f);
 						}
 					}
 				}
@@ -297,13 +213,87 @@ namespace Cumberland.Data.PostGIS
 		}
 		
 #endregion
+
+#region private methods
 		
 		void CheckIfInitialized()
 		{
 			if (!IsInitialized)
 			{
-				InitializeFeatureProvider();
+				InitializeFeatureSource();
 			}
 		}
+		
+		void InitializeFeatureSource()
+		{
+			if (string.IsNullOrEmpty(ConnectionString) || string.IsNullOrEmpty(TableName))
+			{
+				throw new InvalidOperationException("ConnectionString and TableName must be set to initialize");
+			}
+
+			using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
+			{
+				string sql = string.Format("select f_geometry_column, srid, type from geometry_columns where f_table_name = '{0}'",
+				                           tableName);
+				
+				//System.Console.WriteLine(sql);
+				conn.Open();
+				
+				using (NpgsqlCommand comm = new NpgsqlCommand(sql, conn))
+				{
+
+					
+					using (NpgsqlDataReader dr = comm.ExecuteReader())
+					{
+						if (!dr.HasRows)
+						{
+							throw new ArgumentException(string.Format("row in geometry_columns for table '{0}' not found", tableName), "table");
+						}
+						
+						dr.Read();
+						geometryColumn = dr.GetString(0);
+						srid = dr.GetInt32(1);
+						
+						switch (dr.GetString(2).ToUpper())
+						{
+							
+						case "MULTILINESTRING":
+							
+							featureType = FeatureType.Polyline;
+							geometryType = GeometryType.MultilineString;
+							parseWKTHandler = WellKnownText.ParseMultiLineString;
+							
+							break;
+							
+						case "MULTIPOLYGON":
+							
+							featureType = FeatureType.Polygon;
+							geometryType = GeometryType.MultiPolygon;
+							parseWKTHandler = WellKnownText.ParseMultiPolygon;
+							
+							break;
+							
+						case "POINT":
+							
+							featureType = FeatureType.Point;
+							geometryType = GeometryType.Point;
+							parseWKTHandler = WellKnownText.ParsePoint;
+							
+							break;
+							
+						default:
+							throw new NotSupportedException(string.Format("'{0}' is not a supported geometry type", dr.GetString(2)));
+							
+						}
+						
+					}
+				}
+			}		
+			
+			isInitialized = true;
+		}
+		
+#endregion
+		
 	}
 }
