@@ -1,3 +1,14 @@
+2008-11-05  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.DrawMap/Cumberland.DrawMap.csproj,
+	  Cumberland.DrawMap/Main.cs, cumberland.sln,
+	  Cumberland.Data.SqlServer,
+	  Cumberland.Data.SqlServer/AssemblyInfo.cs,
+	  Cumberland.Data.SqlServer/SqlServerFeatureSource.cs,
+	  Cumberland.Data.SqlServer/Cumberland.Data.SqlServer.csproj: add sql
+	  server 2008 feature source
+	* Cumberland.Data.PostGIS/PostGISFeatureSource.cs: clean up
+
 2008-11-04  Scott Ellington <scott.ellington@gmail.com> 
 
 	* Cumberland.Data.PostGIS/PostGISFeatureSource.cs: add theming

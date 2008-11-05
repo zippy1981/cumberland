@@ -91,6 +91,7 @@
     <None Include="maps\mexico.xml" />
     <None Include="maps\postgis.xml" />
     <None Include="maps\images\city_icon.png" />
+    <None Include="maps\sqlserver.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

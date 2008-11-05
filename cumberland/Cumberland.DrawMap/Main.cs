@@ -31,6 +31,7 @@ using System.IO;
 using Cumberland;
 using Cumberland.Data.Shapefile;
 using Cumberland.Data.PostGIS;
+using Cumberland.Data.SqlServer;
 
 using Cumberland.Drawing;
 using Cumberland.Projection;
@@ -90,6 +91,7 @@ namespace Cumberland.DrawMap
 
 			MapSerializer ms = new MapSerializer();
 			ms.AddDatabaseFeatureSourceType(typeof(PostGISFeatureSource));
+			ms.AddDatabaseFeatureSourceType(typeof(SqlServerFeatureSource));
 			
 			Map map = ms.Deserialize(rest[0]);
 			if (w > 0) map.Width = w;
