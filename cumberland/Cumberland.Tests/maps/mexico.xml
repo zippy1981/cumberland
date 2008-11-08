@@ -2,7 +2,7 @@
 <Map>
 	<Width>400</Width>
 	<Height>400</Height>
-	<Extents>-107,18,-95,28</Extents>
+	<Extents>-120,12,-82,34</Extents>
 	<Projection>+init=epsg:4326</Projection>
 	<Layers>
 		<Layer>
