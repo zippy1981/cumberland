@@ -1,3 +1,14 @@
+2008-11-07  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.TilePyramidGenerator,
+	  Cumberland.TilePyramidGenerator/AssemblyInfo.cs,
+	  Cumberland.TilePyramidGenerator/Cumberland.TilePyramidGenerator.csproj,
+	  Cumberland.TilePyramidGenerator/lib,
+	  Cumberland.TilePyramidGenerator/lib/NDesk.Options.COPYING,
+	  Cumberland.TilePyramidGenerator/lib/NDesk.Options.dll,
+	  Cumberland.TilePyramidGenerator/Main.cs, cumberland.sln: add tile
+	  pyramid generator
+
 2008-11-05  Scott Ellington <scott.ellington@gmail.com> 
 
 	* cumberland.sln, Cumberland.TileViewerTest/TileProvider.aspx.cs:
