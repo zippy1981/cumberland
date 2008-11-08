@@ -183,7 +183,7 @@ namespace Cumberland.Tests
 			
 			string s = MapSerializer.Serialize(m1);
 			
-			m2 = ms.Deserialize(new MemoryStream(ASCIIEncoding.Default.GetBytes((s))));
+			m2 = ms.Deserialize(new MemoryStream(UTF8Encoding.UTF8.GetBytes((s))));
 		}
 		
 		[Test()]
@@ -224,7 +224,7 @@ namespace Cumberland.Tests
 			MapSerializer ms = new MapSerializer();
 			
 			// should fail as this not a supported provider
-			m2 = ms.Deserialize(new MemoryStream(ASCIIEncoding.Default.GetBytes((x))));
+			m2 = ms.Deserialize(new MemoryStream(UTF8Encoding.UTF8.GetBytes((x))));
 		}
 		
 		[Test, ExpectedException(typeof(FormatException))]
@@ -241,7 +241,7 @@ namespace Cumberland.Tests
 			MapSerializer ms = new MapSerializer();
 			
 			// should fail as this not a supported provider
-			m2 = ms.Deserialize(new MemoryStream(ASCIIEncoding.Default.GetBytes((x))));
+			m2 = ms.Deserialize(new MemoryStream(UTF8Encoding.UTF8.GetBytes((x))));
 		}
 
 		[Test]
