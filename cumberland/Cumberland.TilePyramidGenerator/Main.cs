@@ -51,7 +51,7 @@ namespace Cumberland.TilePyramidGenerator
 			
 			OptionSet options = new OptionSet();
 			options.Add("e|extents=", 
-			            "comma-delimited extents for clipping tile generation (e.g. -180,-90,180,90).  Overrides the map file ",
+			            "comma-delimited extents for clipping tile generation (e.g. -180,-90,180,90).  Overrides the map file.  (Must be in map's coordinate system)",
 			            delegate (string v) { extents = ParseExtents(v); });
 			options.Add("h|help",  "show this message and exit",
 			            delegate (string v) { showHelp = v!= null; });
@@ -159,7 +159,7 @@ namespace Cumberland.TilePyramidGenerator
 			for (int ii = minZoomLevel; ii <= maxZoomLevel; ii++)
 			{
 				string tilepath = Path.Combine(path, ii.ToString());
-				
+
 				Directory.CreateDirectory(tilepath);
 				
 				System.Drawing.Rectangle r;

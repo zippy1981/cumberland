@@ -1,3 +1,11 @@
+2008-11-08  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.TilePyramidGenerator/Main.cs: cleanup language
+	* Cumberland.Data.SqlServer/Cumberland.Data.SqlServer.csproj,
+	  Cumberland.Data.PostGIS/Cumberland.Data.PostGIS.csproj,
+	  Cumberland.Data.SqlServer.Loader/Cumberland.Data.SqlServer.Loader.csproj:
+	  explicitly add refs
+
 2008-11-07  Scott Ellington <scott.ellington@gmail.com> 
 
 	* Cumberland.TilePyramidGenerator,

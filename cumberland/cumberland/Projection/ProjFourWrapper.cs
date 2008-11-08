@@ -179,28 +179,28 @@ namespace Cumberland.Projection
 			return new Point(x[0], y[0]);
 		}
 		
-		public void Transform(ProjFourWrapper destinationProj, Polygon polygon)
-		{
-			
-			foreach (Ring r in polygon.Rings)
-			{
-				for (int ii=0; ii<r.Points.Count; ii++)
-				{
-					r.Points[ii] = this.Transform(destinationProj, r.Points[ii]);
-				}
-			}		
-		}
-		
-		public void Transform(ProjFourWrapper destinationProj, PolyLine polyline)
-		{
-			foreach (Line line in polyline.Lines)
-			{
-				for (int ii=0; ii<line.Points.Count; ii++)
-				{
-					line.Points[ii] = this.Transform(destinationProj, line.Points[ii]);
-				}
-			}
-		}
+//		public void Transform(ProjFourWrapper destinationProj, Polygon polygon)
+//		{
+//			
+//			foreach (Ring r in polygon.Rings)
+//			{
+//				for (int ii=0; ii<r.Points.Count; ii++)
+//				{
+//					r.Points[ii] = this.Transform(destinationProj, r.Points[ii]);
+//				}
+//			}		
+//		}
+//		
+//		public void Transform(ProjFourWrapper destinationProj, PolyLine polyline)
+//		{
+//			foreach (Line line in polyline.Lines)
+//			{
+//				for (int ii=0; ii<line.Points.Count; ii++)
+//				{
+//					line.Points[ii] = this.Transform(destinationProj, line.Points[ii]);
+//				}
+//			}
+//		}
 
 		public static string GetError()
 		{
