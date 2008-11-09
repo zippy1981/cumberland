@@ -7,7 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{05A6F104-D839-4B9C-B704-91F9BB608D73}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <AssemblyName>Cumberland.DrawMap</AssemblyName>
+    <AssemblyName>drawmap</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

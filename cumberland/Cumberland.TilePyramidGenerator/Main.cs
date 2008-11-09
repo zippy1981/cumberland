@@ -48,6 +48,7 @@ namespace Cumberland.TilePyramidGenerator
 			bool showHelp = false;
 			int maxZoomLevel = 19;
 			int minZoomLevel = 0;
+			bool onlyCount = false;
 			
 			OptionSet options = new OptionSet();
 			options.Add("e|extents=", 
@@ -64,6 +65,9 @@ namespace Cumberland.TilePyramidGenerator
 			options.Add("n|minzoom=",
 			            "the minimum zoom level",
 			            delegate (string v) { minZoomLevel = int.Parse(v); });
+			options.Add("t|test",
+			            "Test - only calculate the total and return",
+			            delegate (string v) { onlyCount = v != null; });
 			
 			List<string> rest = options.Parse(args);
 			
@@ -150,6 +154,11 @@ namespace Cumberland.TilePyramidGenerator
 			
 			string info = string.Format("0{0} of {1}", new string(' ', totalCount.ToString().Length-1),totalCount);
 			System.Console.Write(info);
+			
+			if (onlyCount)
+			{
+				return;
+			}
 
 #endregion
 			

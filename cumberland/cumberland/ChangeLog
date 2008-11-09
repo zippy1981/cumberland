@@ -1,3 +1,9 @@
+2008-11-09  Scott Ellington <scott.ellington@gmail.com> 
+
+	* proj.README.TXT, docs, docs/proj.README.TXT, docs/README.txt,
+	  Cumberland.csproj: move stuff around
+	* AssemblyInfo.cs: set version
+
 2008-11-08  Scott Ellington <scott.ellington@gmail.com> 
 
 	

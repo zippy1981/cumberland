@@ -7,7 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{12B8F35A-A939-4177-9392-5B89B29C195A}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <AssemblyName>Cumberland</AssemblyName>
+    <AssemblyName>tilepyramider</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <RootNamespace>Cumberland.TilePyramidGenerator</RootNamespace>
   </PropertyGroup>
@@ -19,7 +19,6 @@
     <DefineConstants>DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AssemblyName>Cumberland.TilePyramidGenerator</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -27,7 +26,6 @@
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AssemblyName>Cumberland</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
