@@ -1,5 +1,10 @@
 2008-11-09  Scott Ellington <scott.ellington@gmail.com> 
 
+	* Drawing/MapDrawer.cs: clean up
+	* Xml/Serialization/MapSerializer.cs: add map version property
+
+2008-11-09  Scott Ellington <scott.ellington@gmail.com> 
+
 	* Drawing/MapDrawer.cs: switch to graphicspath for polygons
 	* Xml/Serialization/MapSerializer.cs: allow saving simple features in
 	  maps

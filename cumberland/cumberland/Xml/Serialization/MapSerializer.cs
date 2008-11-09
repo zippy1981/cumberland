@@ -42,6 +42,7 @@ namespace Cumberland.Xml.Serialization
 		
 		List<Type> fileFeatureSourceTypes = new List<Type>();
 		List<Type> dbFeatureSourceTypes = new List<Type>();
+		static readonly string currentVersion = "0.1";
 		
 #endregion
 		
@@ -96,7 +97,36 @@ namespace Cumberland.Xml.Serialization
 			XmlDocument doc = new XmlDocument();
 			doc.Load(stream);
 			
-			foreach (XmlNode node  in doc.ChildNodes[1].ChildNodes)
+			XmlNode mapNode = null;
+			foreach(XmlNode node in doc.ChildNodes)
+			{
+				if (node.Name == "Map")
+				{
+					mapNode = node;
+					break;
+				}
+			}
+			
+			if (mapNode == null)
+			{
+				throw new FormatException("'Map' node not found.  Must be at root level of xml");
+			}
+			
+			// check for version attribute.  if none just try
+			XmlNode versionNode = mapNode.Attributes.GetNamedItem("version");
+			if (versionNode != null)
+			{
+				string version = versionNode.Value;
+				
+				if (version != currentVersion)
+				{
+					throw new NotSupportedException(string.Format("Version '{0}' is not supported.  Only '{1}'", 
+					                                              version,
+					                                              currentVersion));
+				}
+			}
+			
+			foreach (XmlNode node  in mapNode.ChildNodes)
 			{
 				if (node.Name == "Layers")
 				{
@@ -148,6 +178,7 @@ namespace Cumberland.Xml.Serialization
 			XmlTextWriter writer = new XmlTextWriter(stream, Encoding.UTF8);
 			writer.WriteStartDocument();
 			writer.WriteStartElement("Map");
+			writer.WriteAttributeString("version", currentVersion);
 			
 			writer.WriteElementString("Width", map.Width.ToString());
 			writer.WriteElementString("Height", map.Height.ToString());
