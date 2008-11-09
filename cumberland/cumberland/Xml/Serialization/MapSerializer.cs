@@ -190,7 +190,18 @@ namespace Cumberland.Xml.Serialization
 					{
 						sourceType = Type.GetType(source);	
 						
-						if (sourceType == typeof(IDatabaseFeatureSource))
+						if (sourceType == typeof(SimpleFeatureSource))
+						{
+							if (child.ChildNodes.Count < 1)
+							{
+								throw new FormatException("SimpleFeatureSource data type must have one child node");
+							}
+							
+							XmlSerializer xs = new XmlSerializer(typeof(SimpleFeatureSource));
+							l.Data = (SimpleFeatureSource) xs.Deserialize(new MemoryStream(UTF8Encoding.UTF8.GetBytes(child.InnerXml)));
+							continue;
+						}
+						else if (sourceType == typeof(IDatabaseFeatureSource))
 						{
 							foreach (Type t in dbFeatureSourceTypes)
 							{
@@ -348,7 +359,7 @@ namespace Cumberland.Xml.Serialization
 		
 		static void SerializeLayer(XmlWriter writer, Layer layer)
 		{
-			if (layer.Data == null || layer.Data is SimpleFeatureSource) return;
+			if (layer.Data == null) return;
 			
 			writer.WriteStartElement("Layer");
 
@@ -362,6 +373,17 @@ namespace Cumberland.Xml.Serialization
 			writer.WriteStartElement("Data");
 			IFileFeatureSource ffp = layer.Data as IFileFeatureSource;
 			IDatabaseFeatureSource dfp = layer.Data as IDatabaseFeatureSource;
+			SimpleFeatureSource sfs = layer.Data as SimpleFeatureSource;
+			
+			if (sfs != null)
+			{
+				// add sourceType attribute to Data element
+				writer.WriteAttributeString("sourceType", typeof(SimpleFeatureSource).ToString());
+				writer.WriteAttributeString("sourceInstance", typeof(SimpleFeatureSource).ToString());
+				
+				XmlSerializer xs =  new XmlSerializer(typeof(SimpleFeatureSource));
+				xs.Serialize(writer, sfs);
+			}
 			if (ffp != null)
 			{
 				// add sourceType attribute to Data element

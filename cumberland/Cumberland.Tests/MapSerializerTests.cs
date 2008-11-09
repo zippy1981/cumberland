@@ -379,5 +379,44 @@ namespace Cumberland.Tests
 			                m2.Layers[0].Styles[0].MinRangeThemeValue);
 		}
 
+		[Test]
+		public void TestSimpleFeatureSourceSerialization()
+		{
+			Map m = new Map();
+			Layer l = new Layer();
+			
+			SimpleFeatureSource sfs = new SimpleFeatureSource(FeatureType.Polygon);
+			Polygon p = new Polygon();
+			
+			Ring r = new Ring();
+			r.Points.Add(new Point(0,0));
+			r.Points.Add(new Point(0,5));
+			r.Points.Add(new Point(5,5));
+			r.Points.Add(new Point(5,0));
+			r.Close();
+			p.Rings.Add(r);
+			
+			Ring hole = new Ring();
+			hole.Points.Add(new Point(1,1));
+			hole.Points.Add(new Point(2,1));
+			hole.Points.Add(new Point(2,2));
+			hole.Points.Add(new Point(2,1));
+			hole.Close();
+			p.Rings.Add(hole);
+			
+			sfs.Features.Add(p);
+			
+			l.Data = sfs;
+			m.Layers.Add(l);
+			
+			MapSerializer ms = new MapSerializer();
+			string s = MapSerializer.Serialize(m);
+			
+			Map m2 = ms.Deserialize(new MemoryStream(UTF8Encoding.UTF8.GetBytes((s))));	
+			
+			Assert.AreEqual(1, m2.Layers.Count);
+			Assert.AreEqual(1, (m2.Layers[0].Data as SimpleFeatureSource).Features.Count);
+			Assert.AreEqual(2, ((m2.Layers[0].Data as SimpleFeatureSource).Features[0] as Polygon).Rings.Count);
+		}
 	}
 }
