@@ -418,5 +418,14 @@ namespace Cumberland.Tests
 			Assert.AreEqual(1, (m2.Layers[0].Data as SimpleFeatureSource).Features.Count);
 			Assert.AreEqual(2, ((m2.Layers[0].Data as SimpleFeatureSource).Features[0] as Polygon).Rings.Count);
 		}
+		
+		[Test, ExpectedException(typeof(NotSupportedException))]
+		public void TestMapVersionFails()
+		{
+			string xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><Map version=\"bad\">	<Width>500</Width>	<Height>400</Height>	<Extents>-1,-4,10,10</Extents>	<Projection>+init=epsg:4326</Projection>	<Layers /></Map>";
+			
+			MapSerializer ms = new MapSerializer();
+			ms.Deserialize(new MemoryStream(ASCIIEncoding.ASCII.GetBytes(xml)));
+		}
 	}
 }

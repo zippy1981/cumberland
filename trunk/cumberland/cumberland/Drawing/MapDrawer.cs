@@ -292,13 +292,6 @@ namespace Cumberland.Drawing
 									}	
 
 									gp.AddPolygon(ppts);
-									
-//									g.FillPolygon(new SolidBrush(style.FillColor), ppts);
-//									
-//									if (style.LineStyle != LineStyle.None)
-//									{
-//										g.DrawPolygon(ConvertLayerToPen(style), ppts);
-//									}
 								}
 								
 								g.FillPath(new SolidBrush(style.FillColor), gp);
