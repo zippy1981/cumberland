@@ -98,6 +98,7 @@
     <None Include="maps\images\city_icon.png" />
     <None Include="maps\sqlserver.xml" />
     <None Include="lib\nunit.framework.dll" />
+    <None Include="maps\simplefeatures.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

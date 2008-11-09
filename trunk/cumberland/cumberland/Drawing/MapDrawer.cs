@@ -269,14 +269,14 @@ namespace Cumberland.Drawing
 								{
 									continue;
 								}
+								
+								GraphicsPath gp = new GraphicsPath(FillMode.Alternate);
 							
 								for (int jj = 0; jj < po.Rings.Count; jj++)
 							    {
 									Ring r = po.Rings[jj];
 									
 									System.Drawing.Point[] ppts = new System.Drawing.Point[r.Points.Count];
-									
-									//TODO: Support holes!
 									
 									for (int kk = 0; kk < r.Points.Count; kk++)
 									{
@@ -290,14 +290,19 @@ namespace Cumberland.Drawing
 										ppts[kk] = ConvertMapToPixel(envelope, scale, p);
 
 									}	
+
+									gp.AddPolygon(ppts);
 									
-									g.FillPolygon(new SolidBrush(style.FillColor), ppts);
-									
-									if (style.LineStyle != LineStyle.None)
-									{
-										g.DrawPolygon(ConvertLayerToPen(style), ppts);
-									}
+//									g.FillPolygon(new SolidBrush(style.FillColor), ppts);
+//									
+//									if (style.LineStyle != LineStyle.None)
+//									{
+//										g.DrawPolygon(ConvertLayerToPen(style), ppts);
+//									}
 								}
+								
+								g.FillPath(new SolidBrush(style.FillColor), gp);
+								g.DrawPath(ConvertLayerToPen(style), gp);
 							}
 #endregion
 						}
