@@ -241,6 +241,9 @@ namespace Cumberland.Data.SqlServer
 							case "POINT":
 								featureType = FeatureType.Point;
 								break;
+							default:
+								throw new NotSupportedException(string.Format("Unsupported geometry type: {0}",
+								                                                  geometryType));
 							}
 						}
 					}
