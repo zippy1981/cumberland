@@ -295,7 +295,11 @@ namespace Cumberland.Drawing
 								}
 								
 								g.FillPath(new SolidBrush(style.FillColor), gp);
-								g.DrawPath(ConvertLayerToPen(style), gp);
+								
+								if (style.LineStyle != LineStyle.None)
+								{
+									g.DrawPath(ConvertLayerToPen(style), gp);
+								}
 							}
 #endregion
 						}
