@@ -28,7 +28,7 @@ using System.Text;
 
 using Cumberland;
 
-namespace Cumberland
+namespace Cumberland.Data
 {
 	public static class WellKnownText
 	{

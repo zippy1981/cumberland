@@ -25,6 +25,7 @@
 using System;
 using System.Collections.Generic;
 using Cumberland;
+using Cumberland.Data;
 
 using NUnit.Framework;
 
