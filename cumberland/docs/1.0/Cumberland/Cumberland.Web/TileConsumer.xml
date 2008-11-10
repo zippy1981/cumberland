@@ -1,0 +1,29 @@
+<Type Name="TileConsumer" FullName="Cumberland.Web.TileConsumer">
+  <TypeSignature Language="C#" Value="public enum TileConsumer" />
+  <AssemblyInfo>
+    <AssemblyName>Cumberland</AssemblyName>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Enum</BaseTypeName>
+  </Base>
+  <Docs>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="Google">
+      <MemberSignature Language="C#" Value="Google" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Cumberland.Web.TileConsumer</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+      </Docs>
+    </Member>
+  </Members>
+</Type>
