@@ -1,5 +1,9 @@
 2008-11-10  Scott Ellington <scott.ellington@gmail.com> 
 
+	* Cumberland.Data.SqlServer.Loader/Main.cs: bool field is binary
+
+2008-11-10  Scott Ellington <scott.ellington@gmail.com> 
+
 	* Cumberland.Data.SqlServer.Loader/Main.cs: allow null values in dbf
 
 2008-11-10  Scott Ellington <scott.ellington@gmail.com> 

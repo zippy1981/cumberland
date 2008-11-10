@@ -210,7 +210,7 @@ namespace Cumberland.Data.SqlServer.Loader
 						{
                             if (field is DBNull)
                             {
-                                sql.Append(SqlBoolean.Null);
+                                sql.Append(SqlBinary.Null);
                             }
                             else
                             {
