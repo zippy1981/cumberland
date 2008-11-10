@@ -164,19 +164,53 @@ namespace Cumberland.Data.Shapefile
 						
 					case 'C':
 						
-						row[jj] = ASCIIEncoding.ASCII.GetString(br.ReadBytes(fd.Length)).Trim();
+						string cValue = ASCIIEncoding.ASCII.GetString(br.ReadBytes(fd.Length)).Trim();
+
+                        if (string.IsNullOrEmpty(cValue))
+                        {
+                            row[jj] = DBNull.Value;
+                        }
+                        else
+                        {
+                            row[jj] = cValue;
+                        }
+
 						break;
 						
 					case 'D':
 						
-						row[jj] = DateTime.ParseExact(ASCIIEncoding.ASCII.GetString(br.ReadBytes(8)),
-						                                  "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                        string dtValue = ASCIIEncoding.ASCII.GetString(br.ReadBytes(8));
+                        DateTime date;
+
+                        if (!DateTime.TryParseExact(dtValue, 
+                            "yyyyMMdd",
+                            null,
+                            System.Globalization.DateTimeStyles.None,
+                            out date))
+                        {
+                            row[jj] = DBNull.Value;
+                        }
+                        else
+                        {
+                            row[jj] = date;
+						}
+
 						break;
 						
 					case 'N':
 
-						string num = ASCIIEncoding.ASCII.GetString(br.ReadBytes(fd.Length));
-						row[jj] = double.Parse(num);
+						string numValue = ASCIIEncoding.ASCII.GetString(br.ReadBytes(fd.Length));
+                        double num;
+
+                        if (!double.TryParse(numValue, out num))
+                        {
+                            row[jj] = DBNull.Value;
+                        }
+                        else
+                        {
+                            row[jj] = num;
+                        }
+
 						break;
 						
 					case 'L':

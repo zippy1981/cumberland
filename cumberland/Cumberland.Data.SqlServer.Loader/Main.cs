@@ -25,6 +25,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Data.SqlTypes;
 using System.IO;
 using System.Text;
 
@@ -180,23 +181,52 @@ namespace Cumberland.Data.SqlServer.Loader
 					for (int ii=0; ii < dbf.Records.Columns.Count; ii++)
 					{
 						DataColumn dc = dbf.Records.Columns[ii];
-						object row = dbf.Records.Rows[idx][ii];
+						object field = dbf.Records.Rows[idx][ii];
 						
 						if (dc.DataType == typeof(DateTime))
 					    {
-							sql.AppendFormat("CAST('{0}' AS date)", ((DateTime)row).ToShortDateString());
+                            if (field is DBNull)
+                            {
+                                sql.Append(SqlDateTime.Null);
+                            }
+                            else
+                            {
+                                sql.AppendFormat("CAST('{0}' AS date)",
+                                    ((DateTime)field).ToShortDateString());
+                            }
 						}
 						else if (dc.DataType == typeof(double))
 						{
-							sql.Append(row.ToString());
+                            if (field is DBNull)
+                            {
+                                sql.Append(SqlDouble.Null);
+                            }
+                            else
+                            {
+                                sql.Append(field.ToString());
+                            }
 						}
 					    else if (dc.DataType == typeof(bool))
 						{
-							sql.AppendFormat("{0}", ((bool)row) ? 1 : 0);
+                            if (field is DBNull)
+                            {
+                                sql.Append(SqlBoolean.Null);
+                            }
+                            else
+                            {
+                                sql.AppendFormat("{0}", ((bool)field) ? 1 : 0);
+                            }
 						}
 						else
 						{
-							sql.AppendFormat("'{0}'", row.ToString().Replace("'", "''"));
+                            if (field is DBNull)
+                            {
+                                sql.Append(SqlString.Null);
+                            }
+                            else
+                            {
+                                sql.AppendFormat("'{0}'", field.ToString().Replace("'", "''"));
+                            }
 						}
 						
 						sql.Append(", ");

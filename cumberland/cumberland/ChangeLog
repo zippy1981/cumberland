@@ -1,5 +1,9 @@
 2008-11-10  Scott Ellington <scott.ellington@gmail.com> 
 
+	* Data/Shapefile/DBaseIIIFile.cs: allow null values in dbf
+
+2008-11-10  Scott Ellington <scott.ellington@gmail.com> 
+
 	* Layer.cs, Map.cs, Line.cs, Point.cs, AssemblyInfo.cs, Ring.cs,
 	  Style.cs, Data/IFeatureSource.cs, Cumberland.csproj,
 	  Projection/SphericalMercatorProjector.cs: cleanup
