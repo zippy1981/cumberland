@@ -60,12 +60,6 @@ namespace Cumberland.Data.SqlServer
 			}
 		}
 
-		public Rectangle Extents {
-			get {
-				throw new NotImplementedException();
-			}
-		}
-
 		public string ConnectionString {
 			get {
 				return connectionString;

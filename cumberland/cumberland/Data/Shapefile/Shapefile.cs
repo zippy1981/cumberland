@@ -270,10 +270,10 @@ namespace Cumberland.Data.Shapefile
 			
 			// The order of rings in the points array is not significant.
 			
-			double xmin = stream.ReadDouble();
-			double ymin = stream.ReadDouble();
-			double xmax = stream.ReadDouble();
-			double ymax = stream.ReadDouble();
+			stream.ReadDouble(); // double xmin = 
+			stream.ReadDouble(); // double ymin = 
+			stream.ReadDouble(); // double xmax = 
+			stream.ReadDouble(); // double ymax = 
 
 			uint numParts = stream.ReadUInt32();
 			uint numPoints = stream.ReadUInt32();
@@ -287,7 +287,8 @@ namespace Cumberland.Data.Shapefile
 			for (ii=0; ii < rings.Length; ii++)
 			   	rings[ii] = new Ring();
 			
-			Polygon po = new Polygon(xmin, ymin, xmax, ymax);
+			//Polygon po = new Polygon(xmin, ymin, xmax, ymax);
+			Polygon po = new Polygon();
 			
 			ii=0;
 			for (int jj=0; jj < numPoints; jj++)
@@ -313,10 +314,10 @@ namespace Cumberland.Data.Shapefile
 		
 		PolyLine GetPolyLine(BinaryReader stream, uint dlen)
 		{
-			double xmin = stream.ReadDouble();
-			double ymin = stream.ReadDouble();
-			double xmax = stream.ReadDouble();
-			double ymax = stream.ReadDouble();
+			stream.ReadDouble(); // double xmin = 
+			stream.ReadDouble(); // double ymin = 
+			stream.ReadDouble(); // double xmax = 
+			stream.ReadDouble(); // double ymax = 
 
 			uint numParts = stream.ReadUInt32();
 			uint numPoints = stream.ReadUInt32();
@@ -330,7 +331,8 @@ namespace Cumberland.Data.Shapefile
 			for (ii=0; ii < lines.Length; ii++)
 			   	lines[ii] = new Line();
 			
-			PolyLine po = new PolyLine(xmin, ymin, xmax, ymax);
+			//PolyLine po = new PolyLine(xmin, ymin, xmax, ymax);
+			PolyLine po = new PolyLine();
 
 			ii=0;
 			for (int jj=0; jj < numPoints; jj++)

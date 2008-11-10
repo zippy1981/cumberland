@@ -31,30 +31,17 @@ using Cumberland.Data;
 using Npgsql;
 
 namespace Cumberland.Data.PostGIS
-{
-	internal enum GeometryType
-	{
-		None,
-		MultilineString,
-		MultiPolygon,
-		Point
-	}
-	
+{	
 	public class PostGISFeatureSource : IDatabaseFeatureSource
 	{
 #region vars
 		
 		string connectionString, tableName, geometryColumn;
 		int srid;
-		
 		bool isInitialized = false;
-		
 		FeatureType featureType = FeatureType.None;
-		GeometryType geometryType = GeometryType.None;
-		
 		int forcedSrid = -1;
 		FeatureType forcedFeatureType = FeatureType.None;
-		
 		string forcedGeometryColumn;
 		
 #endregion
@@ -84,48 +71,6 @@ namespace Cumberland.Data.PostGIS
 			}
 			set {
 				connectionString = value;
-			}
-		}
-
-		public Rectangle Extents {
-			get 
-			{
-				CheckIfInitialized();
-				
-				using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
-				{
-					string sql = string.Format("select extent({0}) from {1}",
-					                           geometryColumn, tableName);
-					
-					//System.Console.WriteLine(sql);
-					
-					using (NpgsqlCommand comm = new NpgsqlCommand(sql, conn))
-					{
-						conn.Open();
-						
-						using (NpgsqlDataReader dr = comm.ExecuteReader())
-						{
-							if (!dr.HasRows) return new Rectangle();
-							
-							dr.Read();
-							string boxTwoD = dr.GetString(0);
-							
-							string[] bits = boxTwoD.Split(new char[] {'(',',',')',' '});
-							
-							return new Rectangle(Convert.ToDouble(bits[1]),
-							                     Convert.ToDouble(bits[2]),
-							                     Convert.ToDouble(bits[3]),
-							                     Convert.ToDouble(bits[4]));
-
-						}
-					}
-				}
-			}
-		}
-
-		public bool IsInitialized {
-			get {
-				return isInitialized;
 			}
 		}
 
@@ -182,14 +127,12 @@ namespace Cumberland.Data.PostGIS
 #endregion
 		
 #region Public methods
-		
 
 		public List<Feature> GetFeatures(string themeField)
 		{
 			return GetFeatures(new Rectangle(), themeField);
 		}
 		
-
 		public List<Feature> GetFeatures (Rectangle rectangle)
 		{
 			return GetFeatures(rectangle, null);
@@ -254,7 +197,7 @@ namespace Cumberland.Data.PostGIS
 		
 		void CheckIfInitialized()
 		{
-			if (!IsInitialized)
+			if (!isInitialized)
 			{
 				InitializeFeatureSource();
 			}
@@ -307,21 +250,18 @@ namespace Cumberland.Data.PostGIS
 						case "MULTILINESTRING":
 							
 							featureType = FeatureType.Polyline;
-							geometryType = GeometryType.MultilineString;
 							
 							break;
 							
 						case "MULTIPOLYGON":
 							
 							featureType = FeatureType.Polygon;
-							geometryType = GeometryType.MultiPolygon;
 							
 							break;
 							
 						case "POINT":
 							
 							featureType = FeatureType.Point;
-							geometryType = GeometryType.Point;
 							
 							break;
 							

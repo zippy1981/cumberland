@@ -1,5 +1,10 @@
 2008-11-09  Scott Ellington <scott.ellington@gmail.com> 
 
+	* Cumberland.Data.SqlServer/SqlServerFeatureSource.cs,
+	  Cumberland.Data.PostGIS/PostGISFeatureSource.cs: api clean up
+
+2008-11-09  Scott Ellington <scott.ellington@gmail.com> 
+
 	* Cumberland.InteractiveMap/Cumberland.InteractiveMap.csproj,
 	  cumberland.sln: remove opengl projects
 

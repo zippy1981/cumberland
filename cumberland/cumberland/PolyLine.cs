@@ -28,8 +28,6 @@ namespace Cumberland
 {
     public class PolyLine : Feature
     {
-		Point min, max;
-		
 #region properties
 		
 		public List<Line> Lines {
@@ -45,12 +43,6 @@ namespace Cumberland
 		
 		public PolyLine()
 		{
-		}
-		
-        public PolyLine(double xmin, double ymin, double xmax, double ymax)
-        {
-			min = new Point(xmin, ymin);
-			max = new Point(xmax, ymax);
 		}
 
 #endregion
