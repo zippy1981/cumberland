@@ -105,6 +105,10 @@ namespace Cumberland.Tests
 			
 			string tableName = "MyTable";
 			string connectionString = "myConnectionString";
+			int forcedSrid = 4326;
+			FeatureType forcedFeatureType = FeatureType.Polygon;
+			SpatialType forcedSpatialType = SpatialType.None;
+			string forcedGeometryColumn;
 			
 			public FeatureType SourceFeatureType {
 				get {
@@ -112,9 +116,45 @@ namespace Cumberland.Tests
 				}
 			}
 	
+			public string ForcedGeometryColumn {
+				get {
+					return forcedGeometryColumn;
+				}
+				set {
+					forcedGeometryColumn = value;
+				}
+			}
+			
 			public Rectangle Extents {
 				get {
 					return new Rectangle(0,0,30,30);
+				}
+			}
+			
+			public int ForcedSrid {
+				get {
+					return forcedSrid;
+				}
+				set {
+					forcedSrid = value;
+				}
+			}
+	
+			public FeatureType ForcedFeatureType {
+				get {
+					return forcedFeatureType;
+				}
+				set {
+					forcedFeatureType = value;
+				}
+			}
+			
+			public SpatialType ForcedSpatialType {
+				get {
+					return forcedSpatialType;
+				}
+				set {
+					forcedSpatialType = value;
 				}
 			}
 			
@@ -157,10 +197,17 @@ namespace Cumberland.Tests
 			
 			Layer l1 = new Layer();
 			l1.Id = "l1";
-			l1.Data = new DummyDBProvider();
+			DummyDBProvider db = new DummyDBProvider();
+			l1.Data = db;
 			l1.Projection = "+init=epsg:2236";
 			l1.Theme = ThemeType.NumericRange;
 			l1.ThemeField = "MyField";
+			db.ConnectionString = "MyConnString";
+			db.ForcedFeatureType = FeatureType.Polyline;
+			db.ForcedSpatialType = SpatialType.Geographic;
+			db.ForcedSrid = 1234;
+			db.TableName = "MyTable";
+			db.ForcedGeometryColumn = "MyGeoColumn";
 			
 			Style s1 = new Style();
 			s1.LineColor = Color.FromArgb(255, 180, 34, 34);
@@ -186,6 +233,8 @@ namespace Cumberland.Tests
 			m2 = ms.Deserialize(new MemoryStream(UTF8Encoding.UTF8.GetBytes((s))));
 		}
 		
+#region test map properties serialized
+		
 		[Test()]
 		public void TestMapExtentsSerialized()
 		{	
@@ -209,6 +258,19 @@ namespace Cumberland.Tests
 		{
 			Assert.AreEqual(m1.Projection, m2.Projection);
 		}
+		
+		[Test, ExpectedException(typeof(NotSupportedException))]
+		public void TestMapVersionFails()
+		{
+			string xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><Map version=\"bad\">	<Width>500</Width>	<Height>400</Height>	<Extents>-1,-4,10,10</Extents>	<Projection>+init=epsg:4326</Projection>	<Layers /></Map>";
+			
+			MapSerializer ms = new MapSerializer();
+			ms.Deserialize(new MemoryStream(ASCIIEncoding.ASCII.GetBytes(xml)));
+		}
+		
+#endregion
+		
+#region test add unsuppored feature sources
 		
 		[Test, ExpectedException(typeof(FormatException))]
 		public void TestAddUnsupportedFileFeatureSource()
@@ -244,6 +306,10 @@ namespace Cumberland.Tests
 			m2 = ms.Deserialize(new MemoryStream(UTF8Encoding.UTF8.GetBytes((x))));
 		}
 
+#endregion
+		
+#region test layer properties serialized
+		
 		[Test]
 		public void TestLayerOrderSerializedCorrectlyAndId()
 		{
@@ -251,97 +317,10 @@ namespace Cumberland.Tests
 		}
 		
 		[Test]
-		public void TestFileFeatureSourceFilePathSerialized()
-		{
-			Assert.AreEqual((m1.Layers[1].Data as IFileFeatureSource).FilePath,
-			                (m2.Layers[1].Data as IFileFeatureSource).FilePath);
-		}
-
-		[Test]
-		public void TestDatabaseFeatureSourceTableNameSerialized()
-		{
-			Assert.AreEqual((m1.Layers[0].Data as IDatabaseFeatureSource).TableName,
-			                (m2.Layers[0].Data as IDatabaseFeatureSource).TableName);
-		}
-
-		[Test]
-		public void TestDatabaseFeatureSourceConnectionStringSerialized()
-		{
-			Assert.AreEqual((m1.Layers[0].Data as IDatabaseFeatureSource).ConnectionString,
-			                (m2.Layers[0].Data as IDatabaseFeatureSource).ConnectionString);
-		}
-
-		[Test]
-		public void TestLayerLineColorSerialized()
-		{
-			Assert.AreEqual(m1.Layers[0].Styles[0].LineColor,
-			                m2.Layers[0].Styles[0].LineColor);
-		}
-
-		[Test]
-		public void TestLayerLineWidthSerialized()
-		{
-			Assert.AreEqual(m1.Layers[0].Styles[0].LineWidth,
-			                m2.Layers[0].Styles[0].LineWidth);
-		}
-
-		[Test]
-		public void TestLayerLineStyleSerialized()
-		{
-			Assert.AreEqual(LineStyle.Dashed, 
-			                m2.Layers[0].Styles[0].LineStyle);
-			Assert.AreEqual(m1.Layers[0].Styles[0].LineStyle,
-			                m2.Layers[0].Styles[0].LineStyle);
-		}
-		
-		[Test]
-		public void TestLayerPointSizeSerialized()
-		{
-			Assert.AreEqual(m1.Layers[0].Styles[0].PointSize,
-			                m2.Layers[0].Styles[0].PointSize);
-		}
-		
-		[Test]
 		public void TestLayerProjectionSerialized()
 		{
 			Assert.AreEqual(m1.Layers[0].Projection,
 			                m2.Layers[0].Projection);
-		}
-		
-		[Test]
-		public void TestRelativeToAbsoluteMapFilePath()
-		{
-			MapSerializer ms = new MapSerializer();
-			Map m = ms.Deserialize("../../maps/mexico.xml");
-			
-			Assert.IsTrue(Path.IsPathRooted((m.Layers[0].Data as IFileFeatureSource).FilePath));
-		}
-		
-		[Test]
-		public void TestLayerPointSymbolSerialized()
-		{
-			Assert.AreEqual(PointSymbolType.Image,
-			                m2.Layers[0].Styles[0].PointSymbol);
-			Assert.AreEqual(m1.Layers[0].Styles[0].PointSymbol,
-			                m2.Layers[0].Styles[0].PointSymbol);
-		}
-		
-		[Test]
-		public void TestLayerPointSymbolShapeSerialized()
-		{
-			Assert.AreEqual(PointSymbolShapeType.Square,
-			                m2.Layers[0].Styles[0].PointSymbolShape);
-			Assert.AreEqual(m1.Layers[0].Styles[0].PointSymbolShape,
-			                m2.Layers[0].Styles[0].PointSymbolShape);
-		}
-		
-		[Test]
-		public void TestRelativeToAbsolutePointSymbolImagePath()
-		{
-			MapSerializer ms = new MapSerializer();
-			Map m = ms.Deserialize("../../maps/mexico.xml");
-			
-			Assert.IsTrue(Path.IsPathRooted(m.Layers[4].Styles[2].PointSymbolImagePath));
 		}
 		
 		[Test]
@@ -357,28 +336,20 @@ namespace Cumberland.Tests
 			Assert.AreEqual("MyField",
 			                m2.Layers[0].ThemeField);
 		}
+				
+#endregion
 		
-		[Test]
-		public void TestLayerStyleUniqueThemeValueSerialized()
-		{
-			Assert.AreEqual("MyValue",
-			                m2.Layers[0].Styles[0].UniqueThemeValue);
-		}
-		
-		[Test]
-		public void TestLayerMaxRangeThemeValueSerialized()
-		{
-			Assert.AreEqual(30000,
-			                m2.Layers[0].Styles[0].MaxRangeThemeValue);
-		}
-		
-		[Test]
-		public void TestLayerMinRangeThemeValueSerialized()
-		{
-			Assert.AreEqual(4,
-			                m2.Layers[0].Styles[0].MinRangeThemeValue);
-		}
+#region test data source serialized
 
+		[Test]
+		public void TestRelativeToAbsoluteMapFilePath()
+		{
+			MapSerializer ms = new MapSerializer();
+			Map m = ms.Deserialize("../../maps/mexico.xml");
+			
+			Assert.IsTrue(Path.IsPathRooted((m.Layers[0].Data as IFileFeatureSource).FilePath));
+		}
+		
 		[Test]
 		public void TestSimpleFeatureSourceSerialization()
 		{
@@ -419,13 +390,139 @@ namespace Cumberland.Tests
 			Assert.AreEqual(2, ((m2.Layers[0].Data as SimpleFeatureSource).Features[0] as Polygon).Rings.Count);
 		}
 		
-		[Test, ExpectedException(typeof(NotSupportedException))]
-		public void TestMapVersionFails()
+		[Test]
+		public void TestFileFeatureSourceFilePathSerialized()
 		{
-			string xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><Map version=\"bad\">	<Width>500</Width>	<Height>400</Height>	<Extents>-1,-4,10,10</Extents>	<Projection>+init=epsg:4326</Projection>	<Layers /></Map>";
-			
-			MapSerializer ms = new MapSerializer();
-			ms.Deserialize(new MemoryStream(ASCIIEncoding.ASCII.GetBytes(xml)));
+			Assert.AreEqual((m1.Layers[1].Data as IFileFeatureSource).FilePath,
+			                (m2.Layers[1].Data as IFileFeatureSource).FilePath);
 		}
+
+		[Test]
+		public void TestDatabaseFeatureSourceTableNameSerialized()
+		{
+			Assert.AreEqual((m1.Layers[0].Data as IDatabaseFeatureSource).TableName,
+			                (m2.Layers[0].Data as IDatabaseFeatureSource).TableName);
+		}
+
+		[Test]
+		public void TestDatabaseFeatureSourceConnectionStringSerialized()
+		{
+			Assert.AreEqual((m1.Layers[0].Data as IDatabaseFeatureSource).ConnectionString,
+			                (m2.Layers[0].Data as IDatabaseFeatureSource).ConnectionString);
+		}
+		
+		[Test]
+		public void TestDatabaseFeatureSourceForcedSridSerialized()
+		{
+			Assert.AreEqual((m1.Layers[0].Data as IDatabaseFeatureSource).ForcedSrid,
+			                (m2.Layers[0].Data as IDatabaseFeatureSource).ForcedSrid);
+		}
+
+		[Test]
+		public void TestDatabaseFeatureSourceForcedFeatureTypeSerialized()
+		{
+			Assert.AreEqual((m1.Layers[0].Data as IDatabaseFeatureSource).ForcedFeatureType,
+			                (m2.Layers[0].Data as IDatabaseFeatureSource).ForcedFeatureType);
+		}
+
+		[Test]
+		public void TestDatabaseFeatureSourceForcedSpatialTypeSerialized()
+		{
+			Assert.AreEqual((m1.Layers[0].Data as IDatabaseFeatureSource).ForcedSpatialType,
+			                (m2.Layers[0].Data as IDatabaseFeatureSource).ForcedSpatialType);
+		}
+
+		[Test]
+		public void TestDatabaseFeatureSourceForcedGeometryColumnSerialized()
+		{
+			Assert.AreEqual((m1.Layers[0].Data as IDatabaseFeatureSource).ForcedGeometryColumn,
+			                (m2.Layers[0].Data as IDatabaseFeatureSource).ForcedGeometryColumn);
+		}
+		
+#endregion
+				
+#region test style serialized
+		
+		[Test]
+		public void TestLayerLineColorSerialized()
+		{
+			Assert.AreEqual(m1.Layers[0].Styles[0].LineColor,
+			                m2.Layers[0].Styles[0].LineColor);
+		}
+
+		[Test]
+		public void TestLayerLineWidthSerialized()
+		{
+			Assert.AreEqual(m1.Layers[0].Styles[0].LineWidth,
+			                m2.Layers[0].Styles[0].LineWidth);
+		}
+
+		[Test]
+		public void TestLayerLineStyleSerialized()
+		{
+			Assert.AreEqual(LineStyle.Dashed, 
+			                m2.Layers[0].Styles[0].LineStyle);
+			Assert.AreEqual(m1.Layers[0].Styles[0].LineStyle,
+			                m2.Layers[0].Styles[0].LineStyle);
+		}
+		
+		[Test]
+		public void TestLayerPointSizeSerialized()
+		{
+			Assert.AreEqual(m1.Layers[0].Styles[0].PointSize,
+			                m2.Layers[0].Styles[0].PointSize);
+		}
+		
+		[Test]
+		public void TestLayerStyleUniqueThemeValueSerialized()
+		{
+			Assert.AreEqual("MyValue",
+			                m2.Layers[0].Styles[0].UniqueThemeValue);
+		}
+		
+		[Test]
+		public void TestLayerMaxRangeThemeValueSerialized()
+		{
+			Assert.AreEqual(30000,
+			                m2.Layers[0].Styles[0].MaxRangeThemeValue);
+		}
+		
+		[Test]
+		public void TestLayerMinRangeThemeValueSerialized()
+		{
+			Assert.AreEqual(4,
+			                m2.Layers[0].Styles[0].MinRangeThemeValue);
+		}
+
+		
+		[Test]
+		public void TestLayerPointSymbolSerialized()
+		{
+			Assert.AreEqual(PointSymbolType.Image,
+			                m2.Layers[0].Styles[0].PointSymbol);
+			Assert.AreEqual(m1.Layers[0].Styles[0].PointSymbol,
+			                m2.Layers[0].Styles[0].PointSymbol);
+		}
+		
+		[Test]
+		public void TestLayerPointSymbolShapeSerialized()
+		{
+			Assert.AreEqual(PointSymbolShapeType.Square,
+			                m2.Layers[0].Styles[0].PointSymbolShape);
+			Assert.AreEqual(m1.Layers[0].Styles[0].PointSymbolShape,
+			                m2.Layers[0].Styles[0].PointSymbolShape);
+		}
+		
+		[Test]
+		public void TestRelativeToAbsolutePointSymbolImagePath()
+		{
+			MapSerializer ms = new MapSerializer();
+			Map m = ms.Deserialize("../../maps/mexico.xml");
+			
+			Assert.IsTrue(Path.IsPathRooted(m.Layers[4].Styles[2].PointSymbolImagePath));
+		}
+
+#endregion
+		
 	}
 }

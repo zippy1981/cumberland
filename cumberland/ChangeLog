@@ -1,5 +1,11 @@
 2008-11-09  Scott Ellington <scott.ellington@gmail.com> 
 
+	* Cumberland.Data.SqlServer/SqlServerFeatureSource.cs,
+	  Cumberland.Data.PostGIS/PostGISFeatureSource.cs: add ability to use
+	  subqueries
+
+2008-11-09  Scott Ellington <scott.ellington@gmail.com> 
+
 	* Cumberland.TilePyramidGenerator/Main.cs: again
 
 2008-11-09  Scott Ellington <scott.ellington@gmail.com> 

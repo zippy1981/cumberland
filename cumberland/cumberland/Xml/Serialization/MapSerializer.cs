@@ -246,6 +246,47 @@ namespace Cumberland.Xml.Serialization
 							{
 								throw new FormatException(string.Format("Source type '{0}' is not a supported database source", instance));
 							}
+
+							l.Data = Activator.CreateInstance(instanceType) as IFeatureSource;
+							
+							foreach (XmlNode dnode in child.ChildNodes)
+							{
+								IDatabaseFeatureSource dfs = (l.Data as IDatabaseFeatureSource);
+								switch (dnode.Name)
+								{
+							
+								case "ConnectionString":
+									
+									dfs.ConnectionString = dnode.InnerText;
+									break;
+									
+								case "TableName":
+									
+									dfs.TableName = dnode.InnerText;
+									break;
+									
+								case "ForcedSrid":
+									
+									dfs.ForcedSrid = int.Parse(dnode.InnerText);
+									break;
+									
+								case "ForcedFeatureType":
+									
+									dfs.ForcedFeatureType = (FeatureType) Enum.Parse(typeof(FeatureType), dnode.InnerText);
+									break;
+									
+								case "ForcedSpatialType":
+									
+									dfs.ForcedSpatialType = (SpatialType) Enum.Parse(typeof(SpatialType), dnode.InnerText);
+									break;
+									
+								case "ForcedGeometryColumn":
+									
+									dfs.ForcedGeometryColumn = dnode.InnerText;
+									break;
+									
+								}	
+							}
 						}
 						else if (sourceType == typeof(IFileFeatureSource))
 						{
@@ -261,42 +302,19 @@ namespace Cumberland.Xml.Serialization
 							{
 								throw new FormatException(string.Format("Source type '{0}' is not a supported file source", instance));
 							}
+							
+							l.Data = Activator.CreateInstance(instanceType) as IFeatureSource;
+							
+							foreach (XmlNode dnode in child.ChildNodes)
+							{
+								if (dnode.Name == "FilePath")
+								{	
+									(l.Data as IFileFeatureSource).FilePath = AnchorPath(mapPath, dnode.InnerText);
+								
+								}
+							}
 						}
 						else return; // unknown type
-						
-						l.Data = Activator.CreateInstance(instanceType) as IFeatureSource;
-					}
-					
-					foreach (XmlNode dnode in child.ChildNodes)
-					{
-						switch (dnode.Name)
-						{
-						case "FilePath":
-							
-							if (sourceType == typeof(IFileFeatureSource))
-							{
-								(l.Data as IFileFeatureSource).FilePath = AnchorPath(mapPath, dnode.InnerText);
-							}
-							
-							break;
-							
-						case "ConnectionString":
-							
-							if (sourceType == typeof(IDatabaseFeatureSource))
-							{
-								(l.Data as IDatabaseFeatureSource).ConnectionString = dnode.InnerText;
-							}
-							break;
-							
-						case "TableName":
-							
-							if (sourceType == typeof(IDatabaseFeatureSource))
-							{
-								(l.Data as IDatabaseFeatureSource).TableName = dnode.InnerText;
-							}
-							break;
-						}
-						
 					}
 #endregion
 				}
@@ -432,6 +450,26 @@ namespace Cumberland.Xml.Serialization
 				
 				writer.WriteElementString("ConnectionString", dfp.ConnectionString);
 				writer.WriteElementString("TableName", dfp.TableName);
+				
+				if (dfp.ForcedSrid >= 0)
+				{
+					writer.WriteElementString("ForcedSrid", dfp.ForcedSrid.ToString());
+				}
+				
+				if (dfp.ForcedSpatialType != SpatialType.None)
+				{
+					writer.WriteElementString("ForcedSpatialType", Enum.GetName(typeof(SpatialType), dfp.ForcedSpatialType));
+				}
+				
+				if (dfp.ForcedFeatureType != FeatureType.None)
+				{
+					writer.WriteElementString("ForcedFeatureType", Enum.GetName(typeof(FeatureType), dfp.ForcedFeatureType));
+				}
+				
+				if (!string.IsNullOrEmpty(dfp.ForcedGeometryColumn))
+				{
+					writer.WriteElementString("ForcedGeometryColumn", dfp.ForcedGeometryColumn);
+				}
 			}
 			writer.WriteEndElement(); // Data
 			

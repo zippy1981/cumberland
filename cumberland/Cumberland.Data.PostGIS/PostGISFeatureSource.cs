@@ -40,7 +40,7 @@ namespace Cumberland.Data.PostGIS
 		Point
 	}
 	
-	public class PostGISFeatureSource : IFeatureSource, IDatabaseFeatureSource
+	public class PostGISFeatureSource : IDatabaseFeatureSource
 	{
 #region vars
 		
@@ -50,12 +50,12 @@ namespace Cumberland.Data.PostGIS
 		bool isInitialized = false;
 		
 		FeatureType featureType = FeatureType.None;
-		
 		GeometryType geometryType = GeometryType.None;
 		
-		ParseWKT parseWKTHandler;
+		int forcedSrid = -1;
+		FeatureType forcedFeatureType = FeatureType.None;
 		
-		delegate Feature ParseWKT(string wkt);
+		string forcedGeometryColumn;
 		
 #endregion
 
@@ -129,6 +129,42 @@ namespace Cumberland.Data.PostGIS
 			}
 		}
 
+		public int ForcedSrid {
+			get {
+				return forcedSrid;
+			}
+			set {
+				forcedSrid = value;
+			}
+		}
+
+		public FeatureType ForcedFeatureType {
+			get {
+				return forcedFeatureType;
+			}
+			set {
+				forcedFeatureType = value;
+			}
+		}
+
+		public SpatialType ForcedSpatialType {
+			get {
+				return SpatialType.None;
+			}
+			set {
+				throw new NotSupportedException("PostGIS only provides a geometric data type");
+			}
+		}
+
+		public string ForcedGeometryColumn {
+			get {
+				return forcedGeometryColumn;
+			}
+			set {
+				forcedGeometryColumn = value;
+			}
+		}
+
 #endregion
 
 #region ctors
@@ -174,7 +210,7 @@ namespace Cumberland.Data.PostGIS
 			{
 				conn.Open();
 				
-				string sql = string.Format("select astext({0}){2} from {1}",
+				string sql = string.Format("select astext({0}) as {0} {2} from {1}",
 				                           geometryColumn, 
 				                           tableName,
 				                           (themeField != null ? ", " + themeField : string.Empty));
@@ -197,7 +233,7 @@ namespace Cumberland.Data.PostGIS
 					{
 						while (dr.Read())
 						{
-							Feature f = parseWKTHandler(dr.GetString(0));
+							Feature f = WellKnownText.Parse(dr.GetString(0));
 							if (themeField != null)
 							{
 								f.ThemeFieldValue = dr[1].ToString();
@@ -230,19 +266,30 @@ namespace Cumberland.Data.PostGIS
 			{
 				throw new InvalidOperationException("ConnectionString and TableName must be set to initialize");
 			}
+			
+			if (ForcedSrid >= 0 && 
+			    ForcedFeatureType != FeatureType.None &&
+			    !string.IsNullOrEmpty(ForcedGeometryColumn))
+			{
+				// parameters have been provided
+				
+				featureType = ForcedFeatureType;
+				srid = ForcedSrid;
+				geometryColumn = ForcedGeometryColumn;
+
+				isInitialized = true;
+				return;
+			}
 
 			using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
 			{
 				string sql = string.Format("select f_geometry_column, srid, type from geometry_columns where f_table_name = '{0}'",
 				                           tableName);
 				
-				//System.Console.WriteLine(sql);
 				conn.Open();
 				
 				using (NpgsqlCommand comm = new NpgsqlCommand(sql, conn))
 				{
-
-					
 					using (NpgsqlDataReader dr = comm.ExecuteReader())
 					{
 						if (!dr.HasRows)
@@ -261,7 +308,6 @@ namespace Cumberland.Data.PostGIS
 							
 							featureType = FeatureType.Polyline;
 							geometryType = GeometryType.MultilineString;
-							parseWKTHandler = WellKnownText.ParseMultiLineString;
 							
 							break;
 							
@@ -269,7 +315,6 @@ namespace Cumberland.Data.PostGIS
 							
 							featureType = FeatureType.Polygon;
 							geometryType = GeometryType.MultiPolygon;
-							parseWKTHandler = WellKnownText.ParseMultiPolygon;
 							
 							break;
 							
@@ -277,7 +322,6 @@ namespace Cumberland.Data.PostGIS
 							
 							featureType = FeatureType.Point;
 							geometryType = GeometryType.Point;
-							parseWKTHandler = WellKnownText.ParsePoint;
 							
 							break;
 							
