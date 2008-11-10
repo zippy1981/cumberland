@@ -1,5 +1,9 @@
 2008-11-09  Scott Ellington <scott.ellington@gmail.com> 
 
+	* Polygon.cs, PolyLine.cs, Data/Shapefile/Shapefile.cs: api clean up
+
+2008-11-09  Scott Ellington <scott.ellington@gmail.com> 
+
 	* Map.cs, Data/IFeatureSource.cs: remove Extents from interface
 	* Xml/Serialization/MapSerializer.cs, Data/IDatabaseFeatureSource.cs:
 	  add ability to use subqueries

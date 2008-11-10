@@ -27,10 +27,7 @@ using System.Collections.Generic;
 namespace Cumberland
 {
     public class Polygon : Feature
-    {
-		// TODO: expose extents
-		Point min, max;
-		
+    {		
 #region Properties
 		
 		public List<Ring> Rings {
@@ -47,13 +44,7 @@ namespace Cumberland
 		public Polygon()
 		{
 		}
-		
-        public Polygon(double xmin, double ymin, double xmax, double ymax)
-        {
-			min = new Point(xmin, ymin);
-			max = new Point(xmax, ymax);
-		}
-		
+				
 #endregion
 
 #region Methods
