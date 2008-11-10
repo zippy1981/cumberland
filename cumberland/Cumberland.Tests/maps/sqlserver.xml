@@ -33,7 +33,10 @@
 			<Id>pg1</Id>
 			<Data sourceType="Cumberland.Data.IDatabaseFeatureSource" sourceInstance="Cumberland.Data.SqlServer.SqlServerFeatureSource">
 				<ConnectionString>Data Source=.\SQLExpress2008;Initial Catalog=spatialtest;Integrated Security=true</ConnectionString>
-				<TableName>majrds_apr08</TableName>
+				<TableName>(select * from majrds_apr08 where usroute = 'I    10 ') as interstates </TableName>
+				<ForcedSrid>3087</ForcedSrid>
+				<ForcedFeatureType>Polyline</ForcedFeatureType>
+				<ForcedGeometryColumn>the_geom</ForcedGeometryColumn>
 			</Data>
 		</Layer>
 		<Layer>
