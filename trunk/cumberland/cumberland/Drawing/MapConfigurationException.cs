@@ -24,10 +24,8 @@
 
 using System;
 
-namespace Cumberland
+namespace Cumberland.Drawing
 {
-	
-	
 	public class MapConfigurationException : Exception
 	{
 		public MapConfigurationException(string message) : base(message)

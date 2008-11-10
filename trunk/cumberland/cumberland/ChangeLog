@@ -1,5 +1,11 @@
 2008-11-10  Scott Ellington <scott.ellington@gmail.com> 
 
+	* MapConfigurationException.cs, Drawing/MapConfigurationException.cs,
+	  Cumberland.csproj: move exception class
+	* Point.cs: remove z/m coordinates
+
+2008-11-10  Scott Ellington <scott.ellington@gmail.com> 
+
 	* Drawing/MapDrawer.cs: adhere to LineStyle.None for polygons
 
 2008-11-10  Scott Ellington <scott.ellington@gmail.com> 
