@@ -1,5 +1,10 @@
 2008-11-10  Scott Ellington <scott.ellington@gmail.com> 
 
+	* WellKnownText.cs, Data/WellKnownText.cs, Cumberland.csproj: move WKT
+	  int Data ns
+
+2008-11-10  Scott Ellington <scott.ellington@gmail.com> 
+
 	* Data/Shapefile/DBaseIIIFile.cs: properly handle logical booleans
 
 2008-11-10  Scott Ellington <scott.ellington@gmail.com> 
