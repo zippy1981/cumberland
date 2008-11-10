@@ -211,7 +211,7 @@ namespace Cumberland.Data.Shapefile
 		   
 			while (loc < filelength)
 			{
-				uint recordNum = FlipEndian(stream.ReadUInt32());
+				FlipEndian(stream.ReadUInt32()); // uint recordNum = 
 				uint recordLen = FlipEndian(stream.ReadUInt32());
 				uint recordShp = stream.ReadUInt32();
 				
@@ -226,19 +226,16 @@ namespace Cumberland.Data.Shapefile
 					case 1:
 						// Read in Point object
 						Point p = new Point(stream.ReadDouble(), stream.ReadDouble());
-						p.Id = recordNum;
 						features.Add(p);
 						break;
 					case 3:
 						// Read in PolyLine object
 					   	PolyLine po = GetPolyLine(stream, dataleft);
-						po.Id = recordNum;
 						features.Add(po);						
 						break;
 					case 5:
 						// Read in Polygon object
 					   	Polygon pol = GetPolygon(stream, dataleft);
-						pol.Id = recordNum;
 						features.Add(pol);						
 						break;
 					default:
