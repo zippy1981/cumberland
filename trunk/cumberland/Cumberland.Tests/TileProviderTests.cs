@@ -30,11 +30,9 @@ using NUnit.Framework;
 
 namespace Cumberland.Tests
 {
-	
 	[TestFixture()]
 	public class TileProviderTests
 	{
-		
 		[Test, ExpectedException(typeof(ArgumentOutOfRangeException))]
 		public void TestMinZoomLevel()
 		{

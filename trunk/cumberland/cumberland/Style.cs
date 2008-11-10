@@ -27,6 +27,8 @@ using System.Drawing;
 
 namespace Cumberland
 {
+#region public enums
+	
 	public enum PointSymbolType
 	{
 		None,
@@ -49,9 +51,12 @@ namespace Cumberland
 		Dotted = 0x0101
 	}
 	
+#endregion
 	
 	public class Style
 	{
+#region vars
+		
 		PointSymbolType pointSymbol = PointSymbolType.Shape;
 		PointSymbolShapeType pointShape = PointSymbolShapeType.Circle;
 		string pointImagePath = null;
@@ -60,10 +65,13 @@ namespace Cumberland
 		Color lineColor = Color.RoyalBlue;
 		Color fillColor = Color.AliceBlue;
 		LineStyle lineStyle = LineStyle.Solid;
-		
 		string uniqueThemeValue = null;
 		double maxRangeThemeValue = 1;
 		double minRangeThemeValue = 0;
+		
+#endregion
+
+#region properties
 		
 		public int LineWidth {
 			get {
@@ -164,5 +172,6 @@ namespace Cumberland
 			}
 		}
 		
+#endregion
 	}
 }

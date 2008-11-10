@@ -44,7 +44,6 @@ namespace Cumberland.Tests
 			
 			Assert.IsTrue(r.IsClosed);
 		}
-
 		
 		[Test()]
 		public void TestNotIsClosed()
@@ -57,7 +56,6 @@ namespace Cumberland.Tests
 			          
 			Assert.IsFalse(r.IsClosed);
 		}
-
 		
 		[Test()]
 		public void TestIsClockwise()
@@ -71,7 +69,6 @@ namespace Cumberland.Tests
 			          
 			Assert.IsTrue(r.IsClockwise);
 		}
-
 
 		[Test()]
 		public void TestNotIsClockwise()
@@ -128,7 +125,7 @@ namespace Cumberland.Tests
 			Assert.IsTrue(r.IsClosed);
 		}
 		
-				[Test()]
+		[Test()]
 		public void TestValidate()
 		{
 			Ring r = new Ring();

@@ -32,9 +32,6 @@ namespace Cumberland
         	get {
         		return points;
         	}
-        	set {
-        		points = value;
-        	}
         }
 		List<Point> points = new List<Point>();
 		

@@ -31,8 +31,6 @@ using Cumberland.Data.Shapefile;
 
 namespace Cumberland.Tests
 {
-	
-	
 	[TestFixture()]
 	public class DBaseIIITests
 	{
@@ -76,6 +74,5 @@ namespace Cumberland.Tests
 
 			Assert.AreEqual(36, db.Records.Rows.Count);
 		}
-		
 	}
 }

@@ -32,8 +32,6 @@ using Cumberland.Data;
 
 namespace Cumberland.Data.SqlServer
 {
-	
-	
 	public class SqlServerFeatureSource : IDatabaseFeatureSource
 	{
 #region vars

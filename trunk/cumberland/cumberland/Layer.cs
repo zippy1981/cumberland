@@ -105,24 +105,5 @@ namespace Cumberland
 		string themeField = null;
 		
 #endregion
-			
-		public static Layer CreateFromData(IFeatureSource data, string name)
-		{
-			Random r = new Random();
-
-			Layer l = new Layer();
-			l.Id = name;
-			l.Data = data;
-			
-			Style s = new Style();
-			s.PointSize = 5;
-			s.LineColor = Color.FromArgb(r.Next(75,150), r.Next(75,150), r.Next(75,150));
-			s.FillColor =  Color.FromArgb(s.LineColor.R+100, s.LineColor.G+100, s.LineColor.B+100);
-			s.LineWidth = 1;
-
-			l.Styles.Add(s);
-			
-			return l;
-		}
 	}
 }

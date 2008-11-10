@@ -7,12 +7,12 @@ using System.Runtime.CompilerServices;
 // change them to the information which is associated with the assembly
 // you compile.
 
-[assembly: AssemblyTitle("")]
+[assembly: AssemblyTitle("Cumberland")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("")]
+[assembly: AssemblyCompany("http://code.google.com/p/cumberland/")]
+[assembly: AssemblyProduct("Cumberland")]
+[assembly: AssemblyCopyright("Scott Ellington and authors")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

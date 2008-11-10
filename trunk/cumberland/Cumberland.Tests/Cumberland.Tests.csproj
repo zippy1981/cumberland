@@ -51,7 +51,6 @@
     <Compile Include="RectangleTests.cs" />
     <Compile Include="WellKnownTextTests.cs" />
     <Compile Include="RingTests.cs" />
-    <Compile Include="MapTests.cs" />
     <Compile Include="LineTests.cs" />
     <Compile Include="MapSerializerTests.cs" />
     <Compile Include="DBaseIIITests.cs" />

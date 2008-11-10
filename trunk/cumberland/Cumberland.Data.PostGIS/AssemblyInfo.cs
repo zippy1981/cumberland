@@ -30,9 +30,9 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyTitle("Cumberland.Data.PostGIS")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("")]
+[assembly: AssemblyCompany("http://code.google.com/p/cumberland/")]
+[assembly: AssemblyProduct("Cumberland")]
+[assembly: AssemblyCopyright("Scott Ellington and authors")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

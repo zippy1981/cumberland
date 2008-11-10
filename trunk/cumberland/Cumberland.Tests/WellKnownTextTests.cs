@@ -33,11 +33,17 @@ namespace Cumberland.Tests
 	[TestFixture]
 	public class WellKnownTextTests
 	{
+#region vars
+		
 		string pointWkt = "POINT(0 0)";
 		string multiLineStringWkt = "MULTILINESTRING((0 0 0,1 1 0,1 2 1),(2 3 1,3 2 1,5 4 1))";		
 		string multiPolygonWkt = "MULTIPOLYGON(((0 0 0,4 0 0,4 4 0,0 4 0,0 0 0),(1 1 0,2 1 0,2 2 0,1 2 0,1 1 0)),((-1 -1 0,-1 -2 0,-2 -2 0,-2 -1 0,-1 -1 0)))";
 		string polygonWkt = "POLYGON((0 0,0 5,5 6,5 0,0 0),(1.1 1.1,1.6 1.1,1.4 1.4,1.1 1.6,1.1 1.1))";
 		string lineStringWkt = "LINESTRING(0 0 0,1 1 0,1 2 1)";
+		
+#endregion
+		
+#region parse tests
 		
 		[Test]
 		public void TestParsePoint()
@@ -93,9 +99,12 @@ namespace Cumberland.Tests
 			                WellKnownText.Parse(multiLineStringWkt).GetType());
 		}
 		
+#endregion
+		
+#region create tests
 		
 		[Test]
-		public void TestPolygonToWKT()
+		public void TestCreateFromPolygon()
 		{
 			Polygon p = new Polygon();
 			Ring r1 = new Ring();
@@ -134,7 +143,7 @@ namespace Cumberland.Tests
 		}
 		
 		[Test]
-		public void TestPolyLineToWKT()
+		public void TestCreateFromPolyLine()
 		{
 			PolyLine p = new PolyLine();
 			Line l1 = new Line();
@@ -158,19 +167,21 @@ namespace Cumberland.Tests
 		}
 		
 		[Test]
-		public void TestPointToWKT()
+		public void TestCreateFromPoint()
 		{
 			Point p = new Point(3,4);
 			Assert.AreEqual("POINT(3 4)", WellKnownText.CreateFromPoint(p));
 		}
 		
 		[Test]
-		public void TestRectangleToWKT()
+		public void TestCreateFromRectangle()
 		{
 			Rectangle r = new Rectangle(0,0,15,15);
 			
 			Assert.AreEqual("POLYGON((0 0,0 15,15 15,15 0,0 0))",
 			                WellKnownText.CreateFromRectangle(r));
 		}
+
+#endregion
 	}
 }
