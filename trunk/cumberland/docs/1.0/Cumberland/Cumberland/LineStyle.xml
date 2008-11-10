@@ -12,57 +12,41 @@
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
+    
+    
+    
     <Member MemberName="Dashed">
       <MemberSignature Language="C#" Value="Dashed" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>Cumberland.LineStyle</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>To be added.</summary>
-      </Docs>
-    </Member>
-    <Member MemberName="Dotted">
+      <ReturnValue><ReturnType>Cumberland.LineStyle</ReturnType></ReturnValue>
+      <Docs><summary>To be added.</summary></Docs>
+    </Member><Member MemberName="Dotted">
       <MemberSignature Language="C#" Value="Dotted" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>Cumberland.LineStyle</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>To be added.</summary>
-      </Docs>
-    </Member>
-    <Member MemberName="None">
+      <ReturnValue><ReturnType>Cumberland.LineStyle</ReturnType></ReturnValue>
+      <Docs><summary>To be added.</summary></Docs>
+    </Member><Member MemberName="None">
       <MemberSignature Language="C#" Value="None" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>Cumberland.LineStyle</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>To be added.</summary>
-      </Docs>
-    </Member>
-    <Member MemberName="Solid">
+      <ReturnValue><ReturnType>Cumberland.LineStyle</ReturnType></ReturnValue>
+      <Docs><summary>To be added.</summary></Docs>
+    </Member><Member MemberName="Solid">
       <MemberSignature Language="C#" Value="Solid" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>Cumberland.LineStyle</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>To be added.</summary>
-      </Docs>
+      <ReturnValue><ReturnType>Cumberland.LineStyle</ReturnType></ReturnValue>
+      <Docs><summary>To be added.</summary></Docs>
     </Member>
   </Members>
 </Type>

@@ -1,6 +1,6 @@
 <Namespace Name="Cumberland.Drawing">
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary></summary>
+    <remarks>Contains the classes responsible for rendering a <see cref="T:Cumberland.Map" /> object onto a <see cref="T:System.Drawing.Bitmap" />.</remarks>
   </Docs>
 </Namespace>

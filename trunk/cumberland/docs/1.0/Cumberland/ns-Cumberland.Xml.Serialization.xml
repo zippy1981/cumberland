@@ -1,6 +1,6 @@
 <Namespace Name="Cumberland.Xml.Serialization">
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary></summary>
+    <remarks>Provides tools for storing and retreiving a <see cref="T:Cumberland.Map" />.</remarks>
   </Docs>
 </Namespace>

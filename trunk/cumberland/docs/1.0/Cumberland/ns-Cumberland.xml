@@ -1,6 +1,6 @@
 <Namespace Name="Cumberland">
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary></summary>
+    <remarks>Contains the core classes of the Cumberland project, including shape/geometry types.</remarks>
   </Docs>
 </Namespace>

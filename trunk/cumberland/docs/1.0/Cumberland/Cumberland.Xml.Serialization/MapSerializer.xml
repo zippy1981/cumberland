@@ -13,6 +13,12 @@
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
+    
+    
+    
+    
+    
+    
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public MapSerializer ();" />
       <MemberType>Constructor</MemberType>
@@ -20,123 +26,61 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
-      <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="AddDatabaseFeatureSourceType">
+      <Docs><summary>To be added.</summary><remarks>To be added.</remarks></Docs>
+    </Member><Member MemberName="AddDatabaseFeatureSourceType">
       <MemberSignature Language="C#" Value="public void AddDatabaseFeatureSourceType (Type type);" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Void</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="type" Type="System.Type" />
-      </Parameters>
-      <Docs>
-        <param name="type">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="AddFileFeatureSourceType">
+      <ReturnValue><ReturnType>System.Void</ReturnType></ReturnValue>
+      <Parameters><Parameter Name="type" Type="System.Type" /></Parameters>
+      <Docs><param name="type">To be added.</param><summary>To be added.</summary><remarks>To be added.</remarks></Docs>
+    </Member><Member MemberName="AddFileFeatureSourceType">
       <MemberSignature Language="C#" Value="public void AddFileFeatureSourceType (Type type);" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Void</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="type" Type="System.Type" />
-      </Parameters>
-      <Docs>
-        <param name="type">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="Deserialize">
+      <ReturnValue><ReturnType>System.Void</ReturnType></ReturnValue>
+      <Parameters><Parameter Name="type" Type="System.Type" /></Parameters>
+      <Docs><param name="type">To be added.</param><summary>To be added.</summary><remarks>To be added.</remarks></Docs>
+    </Member><Member MemberName="Deserialize">
       <MemberSignature Language="C#" Value="public Cumberland.Map Deserialize (System.IO.Stream stream);" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>Cumberland.Map</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="stream" Type="System.IO.Stream" />
-      </Parameters>
-      <Docs>
-        <param name="stream">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="Deserialize">
+      <ReturnValue><ReturnType>Cumberland.Map</ReturnType></ReturnValue>
+      <Parameters><Parameter Name="stream" Type="System.IO.Stream" /></Parameters>
+      <Docs><param name="stream">To be added.</param><summary>To be added.</summary><returns>To be added.</returns><remarks>To be added.</remarks></Docs>
+    </Member><Member MemberName="Deserialize">
       <MemberSignature Language="C#" Value="public Cumberland.Map Deserialize (string mapPath);" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>Cumberland.Map</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="mapPath" Type="System.String" />
-      </Parameters>
-      <Docs>
-        <param name="mapPath">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="Serialize">
+      <ReturnValue><ReturnType>Cumberland.Map</ReturnType></ReturnValue>
+      <Parameters><Parameter Name="mapPath" Type="System.String" /></Parameters>
+      <Docs><param name="mapPath">To be added.</param><summary>To be added.</summary><returns>To be added.</returns><remarks>To be added.</remarks></Docs>
+    </Member><Member MemberName="Serialize">
       <MemberSignature Language="C#" Value="public static string Serialize (Cumberland.Map map);" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.String</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="map" Type="Cumberland.Map" />
-      </Parameters>
-      <Docs>
-        <param name="map">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="Serialize">
+      <ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
+      <Parameters><Parameter Name="map" Type="Cumberland.Map" /></Parameters>
+      <Docs><param name="map">To be added.</param><summary>To be added.</summary><returns>To be added.</returns><remarks>To be added.</remarks></Docs>
+    </Member><Member MemberName="Serialize">
       <MemberSignature Language="C#" Value="public static void Serialize (System.IO.Stream stream, Cumberland.Map map);" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Void</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="stream" Type="System.IO.Stream" />
-        <Parameter Name="map" Type="Cumberland.Map" />
-      </Parameters>
-      <Docs>
-        <param name="stream">To be added.</param>
-        <param name="map">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
-      </Docs>
+      <ReturnValue><ReturnType>System.Void</ReturnType></ReturnValue>
+      <Parameters><Parameter Name="stream" Type="System.IO.Stream" /><Parameter Name="map" Type="Cumberland.Map" /></Parameters>
+      <Docs><param name="stream">To be added.</param><param name="map">To be added.</param><summary>To be added.</summary><remarks>To be added.</remarks></Docs>
     </Member>
   </Members>
 </Type>

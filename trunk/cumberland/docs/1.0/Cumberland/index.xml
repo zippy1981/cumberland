@@ -29,8 +29,9 @@
       </Attributes>
     </Assembly>
   </Assemblies>
-  <Remarks>To be added.</Remarks>
-  <Copyright>To be added.</Copyright>
+  <Remarks>The main assembly of the Cumberland project.</Remarks>
+  <Copyright>
+  </Copyright>
   <Types>
     <Namespace Name="Cumberland">
       <Type Name="Feature" Kind="Class" />

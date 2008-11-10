@@ -14,95 +14,59 @@
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
+    
+    
+    
+    
+    
     <Member MemberName="ConnectionString">
       <MemberSignature Language="C#" Value="public string ConnectionString { set; get; }" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.String</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="ForcedFeatureType">
+      <ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
+      <Docs><summary>To be added.</summary><value>To be added.</value><remarks>To be added.</remarks></Docs>
+    </Member><Member MemberName="ForcedFeatureType">
       <MemberSignature Language="C#" Value="public Cumberland.Data.FeatureType ForcedFeatureType { set; get; }" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>Cumberland.Data.FeatureType</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="ForcedGeometryColumn">
+      <ReturnValue><ReturnType>Cumberland.Data.FeatureType</ReturnType></ReturnValue>
+      <Docs><summary>To be added.</summary><value>To be added.</value><remarks>To be added.</remarks></Docs>
+    </Member><Member MemberName="ForcedGeometryColumn">
       <MemberSignature Language="C#" Value="public string ForcedGeometryColumn { set; get; }" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.String</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="ForcedSpatialType">
+      <ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
+      <Docs><summary>To be added.</summary><value>To be added.</value><remarks>To be added.</remarks></Docs>
+    </Member><Member MemberName="ForcedSpatialType">
       <MemberSignature Language="C#" Value="public Cumberland.Data.SpatialType ForcedSpatialType { set; get; }" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>Cumberland.Data.SpatialType</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="ForcedSrid">
+      <ReturnValue><ReturnType>Cumberland.Data.SpatialType</ReturnType></ReturnValue>
+      <Docs><summary>To be added.</summary><value>To be added.</value><remarks>To be added.</remarks></Docs>
+    </Member><Member MemberName="ForcedSrid">
       <MemberSignature Language="C#" Value="public int ForcedSrid { set; get; }" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Int32</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="TableName">
+      <ReturnValue><ReturnType>System.Int32</ReturnType></ReturnValue>
+      <Docs><summary>To be added.</summary><value>To be added.</value><remarks>To be added.</remarks></Docs>
+    </Member><Member MemberName="TableName">
       <MemberSignature Language="C#" Value="public string TableName { set; get; }" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.String</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
-      </Docs>
+      <ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
+      <Docs><summary>To be added.</summary><value>To be added.</value><remarks>To be added.</remarks></Docs>
     </Member>
   </Members>
 </Type>
