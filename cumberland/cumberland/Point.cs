@@ -26,7 +26,7 @@ namespace Cumberland
 {
     public class Point : Feature
     {
-        private double x, y, z, m;
+        private double x, y;
         
 #region properties
 		
@@ -54,31 +54,7 @@ namespace Cumberland
 				y = value;
 			}
 		}
-		
-		public double Z	{
-
-			get
-			{
-				return z;
-			}
-			set
-			{
-				z = value;
-			}
-		}
-		
-		public double M	{
-
-			get
-			{
-				return m;
-			}
-			set
-			{
-				m = value;
-			}
-		}
-		
+				
 #endregion
 		
 #region ctors
@@ -89,21 +65,6 @@ namespace Cumberland
         {
             X = tx;
             Y = ty;
-        }
-        
-        public Point(double tx, double ty, double tz)
-        {
-            X = tx;
-            Y = ty;
-            Z = tz;
-        }
-        
-        public Point(double tx, double ty, double tz, double tm)
-        {
-            X = tx;
-            Y = ty;
-            Z = tz;
-            M = tm;
         }
 
 #endregion
@@ -152,7 +113,7 @@ namespace Cumberland
 
 		public override string ToString ()
 		{
-			return string.Format("{{x:{0} y:{1} z:{2} m:{3}}}", x, y, z, m);
+			return string.Format("{{x:{0} y:{1}}}", x, y);
 		}
 		
 		public override Rectangle CalculateBounds ()
@@ -173,7 +134,7 @@ namespace Cumberland
 		/// </returns>
 		public Point Clone()
 		{
-			return new Point(x, y, z, m);
+			return new Point(x, y);
 		}
 		
 #endregion
