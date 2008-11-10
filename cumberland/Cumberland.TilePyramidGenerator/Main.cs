@@ -225,10 +225,10 @@ namespace Cumberland.TilePyramidGenerator
 		
 		static void ShowHelp (OptionSet p)
 	    {
-	        Console.WriteLine ("Usage: [mono] Cumberland.TilePyramidGenerator.exe [OPTIONS]+ \"path to map file\" ");
+	        Console.WriteLine ("Usage: [mono] tilepyramider [OPTIONS]+ \"path to map file\" ");
 	        Console.WriteLine ("Generates a pyramid of tile images for use for popular web mapping interfaces");
 	        Console.WriteLine ();
-			Console.WriteLine ("example: mono Cumberland.TilePyramidGenerator.exe  /path/to/map ");
+			Console.WriteLine ("example: mono tilepyramider  /path/to/map ");
 			Console.WriteLine ();
 	        Console.WriteLine ("Options:");
 	        p.WriteOptionDescriptions (Console.Out);
