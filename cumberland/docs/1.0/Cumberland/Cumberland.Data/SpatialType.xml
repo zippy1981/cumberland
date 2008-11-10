@@ -12,44 +12,32 @@
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
+    
+    
     <Member MemberName="Geographic">
       <MemberSignature Language="C#" Value="Geographic" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>Cumberland.Data.SpatialType</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>To be added.</summary>
-      </Docs>
-    </Member>
-    <Member MemberName="Geometric">
+      <ReturnValue><ReturnType>Cumberland.Data.SpatialType</ReturnType></ReturnValue>
+      <Docs><summary>To be added.</summary></Docs>
+    </Member><Member MemberName="Geometric">
       <MemberSignature Language="C#" Value="Geometric" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>Cumberland.Data.SpatialType</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>To be added.</summary>
-      </Docs>
-    </Member>
-    <Member MemberName="None">
+      <ReturnValue><ReturnType>Cumberland.Data.SpatialType</ReturnType></ReturnValue>
+      <Docs><summary>To be added.</summary></Docs>
+    </Member><Member MemberName="None">
       <MemberSignature Language="C#" Value="None" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>Cumberland.Data.SpatialType</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>To be added.</summary>
-      </Docs>
+      <ReturnValue><ReturnType>Cumberland.Data.SpatialType</ReturnType></ReturnValue>
+      <Docs><summary>To be added.</summary></Docs>
     </Member>
   </Members>
 </Type>

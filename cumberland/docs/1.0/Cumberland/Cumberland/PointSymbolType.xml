@@ -12,44 +12,32 @@
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
+    
+    
     <Member MemberName="Image">
       <MemberSignature Language="C#" Value="Image" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>Cumberland.PointSymbolType</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>To be added.</summary>
-      </Docs>
-    </Member>
-    <Member MemberName="None">
+      <ReturnValue><ReturnType>Cumberland.PointSymbolType</ReturnType></ReturnValue>
+      <Docs><summary>To be added.</summary></Docs>
+    </Member><Member MemberName="None">
       <MemberSignature Language="C#" Value="None" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>Cumberland.PointSymbolType</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>To be added.</summary>
-      </Docs>
-    </Member>
-    <Member MemberName="Shape">
+      <ReturnValue><ReturnType>Cumberland.PointSymbolType</ReturnType></ReturnValue>
+      <Docs><summary>To be added.</summary></Docs>
+    </Member><Member MemberName="Shape">
       <MemberSignature Language="C#" Value="Shape" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>Cumberland.PointSymbolType</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>To be added.</summary>
-      </Docs>
+      <ReturnValue><ReturnType>Cumberland.PointSymbolType</ReturnType></ReturnValue>
+      <Docs><summary>To be added.</summary></Docs>
     </Member>
   </Members>
 </Type>

@@ -16,18 +16,9 @@
       <AssemblyInfo>
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Drawing.Bitmap</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="map" Type="Cumberland.Map" />
-      </Parameters>
-      <Docs>
-        <param name="map">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
-      </Docs>
+      <ReturnValue><ReturnType>System.Drawing.Bitmap</ReturnType></ReturnValue>
+      <Parameters><Parameter Name="map" Type="Cumberland.Map" /></Parameters>
+      <Docs><param name="map">To be added.</param><summary>To be added.</summary><returns>To be added.</returns><remarks>To be added.</remarks></Docs>
     </Member>
   </Members>
 </Type>

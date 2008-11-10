@@ -1,6 +1,6 @@
 <Namespace Name="Cumberland.Projection">
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary></summary>
+    <remarks>Contains the classes responsible for transforming spatial data from one coordinate system to another.</remarks>
   </Docs>
 </Namespace>

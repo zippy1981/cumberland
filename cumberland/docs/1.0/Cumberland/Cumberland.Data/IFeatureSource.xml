@@ -10,95 +10,54 @@
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
+    
+    
+    
+    
     <Member MemberName="GetFeatures">
       <MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Cumberland.Feature&gt; GetFeatures ();" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType>
-      </ReturnValue>
+      <ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType></ReturnValue>
       <Parameters />
-      <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="GetFeatures">
+      <Docs><summary>To be added.</summary><returns>To be added.</returns><remarks>To be added.</remarks></Docs>
+    </Member><Member MemberName="GetFeatures">
       <MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Cumberland.Feature&gt; GetFeatures (Cumberland.Rectangle rectangle);" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="rectangle" Type="Cumberland.Rectangle" />
-      </Parameters>
-      <Docs>
-        <param name="rectangle">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="GetFeatures">
+      <ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType></ReturnValue>
+      <Parameters><Parameter Name="rectangle" Type="Cumberland.Rectangle" /></Parameters>
+      <Docs><param name="rectangle">To be added.</param><summary>To be added.</summary><returns>To be added.</returns><remarks>To be added.</remarks></Docs>
+    </Member><Member MemberName="GetFeatures">
       <MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Cumberland.Feature&gt; GetFeatures (string themeField);" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="themeField" Type="System.String" />
-      </Parameters>
-      <Docs>
-        <param name="themeField">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="GetFeatures">
+      <ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType></ReturnValue>
+      <Parameters><Parameter Name="themeField" Type="System.String" /></Parameters>
+      <Docs><param name="themeField">To be added.</param><summary>To be added.</summary><returns>To be added.</returns><remarks>To be added.</remarks></Docs>
+    </Member><Member MemberName="GetFeatures">
       <MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Cumberland.Feature&gt; GetFeatures (Cumberland.Rectangle rectangle, string themeField);" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="rectangle" Type="Cumberland.Rectangle" />
-        <Parameter Name="themeField" Type="System.String" />
-      </Parameters>
-      <Docs>
-        <param name="rectangle">To be added.</param>
-        <param name="themeField">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="SourceFeatureType">
+      <ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType></ReturnValue>
+      <Parameters><Parameter Name="rectangle" Type="Cumberland.Rectangle" /><Parameter Name="themeField" Type="System.String" /></Parameters>
+      <Docs><param name="rectangle">To be added.</param><param name="themeField">To be added.</param><summary>To be added.</summary><returns>To be added.</returns><remarks>To be added.</remarks></Docs>
+    </Member><Member MemberName="SourceFeatureType">
       <MemberSignature Language="C#" Value="public Cumberland.Data.FeatureType SourceFeatureType { get; }" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>Cumberland.Data.FeatureType</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
-      </Docs>
+      <ReturnValue><ReturnType>Cumberland.Data.FeatureType</ReturnType></ReturnValue>
+      <Docs><summary>To be added.</summary><value>To be added.</value><remarks>To be added.</remarks></Docs>
     </Member>
   </Members>
 </Type>

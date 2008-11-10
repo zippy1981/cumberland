@@ -20,10 +20,13 @@
     </Attribute>
   </Attributes>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>A feature is consider a single entity within a map.</summary>
+    <remarks>This is the absract base class from which all features (polygons, points, etc.) inherit.</remarks>
   </Docs>
   <Members>
+    
+    
+    
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="protected Feature ();" />
       <MemberType>Constructor</MemberType>
@@ -31,55 +34,26 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
-      <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="CalculateBounds">
+      <Docs><summary></summary><remarks></remarks></Docs>
+    </Member><Member MemberName="CalculateBounds">
       <MemberSignature Language="C#" Value="public abstract Cumberland.Rectangle CalculateBounds ();" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>Cumberland.Rectangle</ReturnType>
-      </ReturnValue>
+      <ReturnValue><ReturnType>Cumberland.Rectangle</ReturnType></ReturnValue>
       <Parameters />
-      <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="Id">
-      <MemberSignature Language="C#" Value="public uint Id { set; get; }" />
-      <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.UInt32</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="ThemeFieldValue">
+      <Docs><summary>Calculates the bounds of the feature</summary><returns>The feature extents</returns><remarks></remarks></Docs>
+    </Member><Member MemberName="ThemeFieldValue">
       <MemberSignature Language="C#" Value="public string ThemeFieldValue { set; get; }" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.String</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+      <ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
+      <Docs><summary>The value to use when drawing the feature based on the <see cref="P:Cumberland.Layer.ThemeField" /> </summary>
+      <value></value>
+      <remarks></remarks>
       </Docs>
     </Member>
   </Members>

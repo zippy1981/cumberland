@@ -12,44 +12,32 @@
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
+    
+    
     <Member MemberName="Circle">
       <MemberSignature Language="C#" Value="Circle" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>Cumberland.PointSymbolShapeType</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>To be added.</summary>
-      </Docs>
-    </Member>
-    <Member MemberName="None">
+      <ReturnValue><ReturnType>Cumberland.PointSymbolShapeType</ReturnType></ReturnValue>
+      <Docs><summary>To be added.</summary></Docs>
+    </Member><Member MemberName="None">
       <MemberSignature Language="C#" Value="None" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>Cumberland.PointSymbolShapeType</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>To be added.</summary>
-      </Docs>
-    </Member>
-    <Member MemberName="Square">
+      <ReturnValue><ReturnType>Cumberland.PointSymbolShapeType</ReturnType></ReturnValue>
+      <Docs><summary>To be added.</summary></Docs>
+    </Member><Member MemberName="Square">
       <MemberSignature Language="C#" Value="Square" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>Cumberland.PointSymbolShapeType</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>To be added.</summary>
-      </Docs>
+      <ReturnValue><ReturnType>Cumberland.PointSymbolShapeType</ReturnType></ReturnValue>
+      <Docs><summary>To be added.</summary></Docs>
     </Member>
   </Members>
 </Type>
