@@ -27,12 +27,12 @@ using System.Runtime.CompilerServices;
 // Information about this assembly is defined by the following attributes. 
 // Change them to the values specific to your project.
 
-[assembly: AssemblyTitle("Cumberland.TilePyramidGenerator")]
+[assembly: AssemblyTitle("tilepyramider.exe")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("")]
+[assembly: AssemblyCompany("http://code.google.com/p/cumberland/")]
+[assembly: AssemblyProduct("Cumberland")]
+[assembly: AssemblyCopyright("Scott Ellington and Authors")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

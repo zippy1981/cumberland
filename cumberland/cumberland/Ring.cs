@@ -32,6 +32,8 @@ namespace Cumberland
 	/// </summary>
     public class Ring
     {
+#region properties
+		
         List<Point> points = new List<Point>();
         
 		public bool IsClockwise
@@ -56,9 +58,17 @@ namespace Cumberland
         	}
         }
 		
+#endregion
+		
+#region ctor
+		
         public Ring()
 		{
 		}
+		
+#endregion
+		
+#region public methods
 		
 		public double CalculateArea()
 		{
@@ -120,5 +130,6 @@ namespace Cumberland
 			return points.Count > 2;
 		}
 		
+#endregion
     }
 }

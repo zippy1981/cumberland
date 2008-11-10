@@ -30,7 +30,6 @@ using Cumberland.Projection;
 
 namespace Cumberland.Tests
 {
-	
 	[TestFixture]
 	public class ProjFourWrapperTests
 	{

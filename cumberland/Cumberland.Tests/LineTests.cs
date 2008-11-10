@@ -27,19 +27,15 @@ using NUnit.Framework;
 
 namespace Cumberland.Tests
 {
-	
-	
 	[TestFixture()]
 	public class LineTests
 	{
-		
 		[Test()]
 		public void TestCalculateBounds()
 		{
 			Line l = new Line();
 			l.Points.Add(new Point(0,0));
 			l.Points.Add(new Point(10,10));
-
 
 			Assert.AreEqual(new Rectangle(0,0,10,10), l.CalculateBounds());
 		}

@@ -176,11 +176,6 @@ namespace Cumberland
 			return new Point(x, y, z, m);
 		}
 		
-//		public bool Intersects(Point p)
-//		{
-//			return this == p;
-//		}
-		
 #endregion
 		
     }

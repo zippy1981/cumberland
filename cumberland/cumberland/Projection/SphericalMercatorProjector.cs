@@ -28,9 +28,7 @@ using Cumberland;
 
 namespace Cumberland.Projection
 {
-	
-	
-	public class SphericalMercatorProjector
+	internal class SphericalMercatorProjector
 	{
 		int radius = 6378137;
 		

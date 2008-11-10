@@ -181,6 +181,8 @@ namespace Cumberland.Tests
 		}
 		
 #endregion
+	
+#region test fixture set up
 		
 		[TestFixtureSetUp]
 		public void SetUp()
@@ -232,6 +234,8 @@ namespace Cumberland.Tests
 			
 			m2 = ms.Deserialize(new MemoryStream(UTF8Encoding.UTF8.GetBytes((s))));
 		}
+		
+#endregion
 		
 #region test map properties serialized
 		
@@ -444,21 +448,21 @@ namespace Cumberland.Tests
 #region test style serialized
 		
 		[Test]
-		public void TestLayerLineColorSerialized()
+		public void TestStyleLineColorSerialized()
 		{
 			Assert.AreEqual(m1.Layers[0].Styles[0].LineColor,
 			                m2.Layers[0].Styles[0].LineColor);
 		}
 
 		[Test]
-		public void TestLayerLineWidthSerialized()
+		public void TestStyleLineWidthSerialized()
 		{
 			Assert.AreEqual(m1.Layers[0].Styles[0].LineWidth,
 			                m2.Layers[0].Styles[0].LineWidth);
 		}
 
 		[Test]
-		public void TestLayerLineStyleSerialized()
+		public void TestStyleLineStyleSerialized()
 		{
 			Assert.AreEqual(LineStyle.Dashed, 
 			                m2.Layers[0].Styles[0].LineStyle);
@@ -467,28 +471,28 @@ namespace Cumberland.Tests
 		}
 		
 		[Test]
-		public void TestLayerPointSizeSerialized()
+		public void TestStylePointSizeSerialized()
 		{
 			Assert.AreEqual(m1.Layers[0].Styles[0].PointSize,
 			                m2.Layers[0].Styles[0].PointSize);
 		}
 		
 		[Test]
-		public void TestLayerStyleUniqueThemeValueSerialized()
+		public void TestStyleUniqueThemeValueSerialized()
 		{
 			Assert.AreEqual("MyValue",
 			                m2.Layers[0].Styles[0].UniqueThemeValue);
 		}
 		
 		[Test]
-		public void TestLayerMaxRangeThemeValueSerialized()
+		public void TestStyleMaxRangeThemeValueSerialized()
 		{
 			Assert.AreEqual(30000,
 			                m2.Layers[0].Styles[0].MaxRangeThemeValue);
 		}
 		
 		[Test]
-		public void TestLayerMinRangeThemeValueSerialized()
+		public void TestStyleMinRangeThemeValueSerialized()
 		{
 			Assert.AreEqual(4,
 			                m2.Layers[0].Styles[0].MinRangeThemeValue);
@@ -496,7 +500,7 @@ namespace Cumberland.Tests
 
 		
 		[Test]
-		public void TestLayerPointSymbolSerialized()
+		public void TestStylePointSymbolSerialized()
 		{
 			Assert.AreEqual(PointSymbolType.Image,
 			                m2.Layers[0].Styles[0].PointSymbol);
@@ -505,7 +509,7 @@ namespace Cumberland.Tests
 		}
 		
 		[Test]
-		public void TestLayerPointSymbolShapeSerialized()
+		public void TestStylePointSymbolShapeSerialized()
 		{
 			Assert.AreEqual(PointSymbolShapeType.Square,
 			                m2.Layers[0].Styles[0].PointSymbolShape);
@@ -514,7 +518,7 @@ namespace Cumberland.Tests
 		}
 		
 		[Test]
-		public void TestRelativeToAbsolutePointSymbolImagePath()
+		public void TestRelativeToAbsoluteStylePointSymbolImagePath()
 		{
 			MapSerializer ms = new MapSerializer();
 			Map m = ms.Deserialize("../../maps/mexico.xml");

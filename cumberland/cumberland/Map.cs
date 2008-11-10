@@ -46,9 +46,6 @@ namespace Cumberland
 			get {
 				return layers;
 			}
-			set {
-				layers = value;
-			}
 		}
 
 		public int Width {
@@ -93,82 +90,6 @@ namespace Cumberland
 
 		string projection = null;
 		
-#endregion
-		
-#region public methods
-		
-//		public int AddLayerByFeatureTypeAndExtents(Layer layer)
-//		{
-//			if (layer == null)
-//			{
-//				throw new ArgumentNullException("layer");
-//			}
-//			
-//			if (layer.Data == null)
-//			{
-//				Layers.Add(layer);
-//				return Layers.Count-1;
-//			}
-//			
-//			FeatureType ft = layer.Data.SourceFeatureType;
-//			
-//			//default is top
-//			int idx_to_add = Layers.Count;
-//
-//			for (int ii = Layers.Count - 1; ii >= 0; ii--)
-//			{
-//				Layer next = Layers[ii];
-//
-//				// if the next layer is of a type that we want to be 
-//				// in front of, insert here
-//				// else, keep checking...
-//				if (InsertAheadOf(ft, next.Data.SourceFeatureType))
-//				{
-//					break;
-//				}
-//				else if (ft == next.Data.SourceFeatureType)
-//				{
-//					// the two layers are the same type
-//					// so place our layer here if it has smaller area
-//					// else, keep going...
-//					if (layer.Data.Extents.Area <= next.Data.Extents.Area)
-//					{
-//						break;
-//					}
-//				}
-//				
-//				// we are at least going to insert here
-//				idx_to_add = ii;
-//			}
-//		
-//			this.Layers.Insert (idx_to_add, layer);
-//			
-//			return idx_to_add;
-//		}
-		
-#endregion
-		
-#region private methods
-		
-//		static bool InsertAheadOf(FeatureType current, FeatureType next)
-//		{
-//			if (current == FeatureType.None) 
-//			{
-//				return true;
-//			}
-//			else if (current == FeatureType.Point && 
-//			         next != FeatureType.None) 
-//			{
-//				return true;
-//			}
-//			else if (current == FeatureType.Polyline && 
-//			         next == FeatureType.Polygon)
-//			{
-//				return true;
-//			}
-//			
-//			return false;
-//		}
 #endregion
 	}
 }

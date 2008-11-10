@@ -94,7 +94,7 @@ namespace Cumberland.Data.PostGIS
 
 		public SpatialType ForcedSpatialType {
 			get {
-				return SpatialType.None;
+				return SpatialType.Geometric;
 			}
 			set {
 				throw new NotSupportedException("PostGIS only provides a geometric data type");

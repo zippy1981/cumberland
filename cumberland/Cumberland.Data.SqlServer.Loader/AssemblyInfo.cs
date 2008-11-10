@@ -27,12 +27,12 @@ using System.Runtime.CompilerServices;
 // Information about this assembly is defined by the following attributes. 
 // Change them to the values specific to your project.
 
-[assembly: AssemblyTitle("Cumberland.Data.SqlServer.Loader")]
+[assembly: AssemblyTitle("shp2sqlserver.exe")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("")]
+[assembly: AssemblyCompany("http://code.google.com/p/cumberland/")]
+[assembly: AssemblyProduct("Cumberland")]
+[assembly: AssemblyCopyright("Scott Ellington and authors")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
