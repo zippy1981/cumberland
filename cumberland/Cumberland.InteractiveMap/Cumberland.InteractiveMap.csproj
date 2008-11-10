@@ -47,10 +47,6 @@
       <Project>{9C7EB468-F7C6-440D-9CE5-6EF81223BDC3}</Project>
       <Name>Cumberland</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Cumberland.Drawing.OpenGL\Cumberland.Drawing.OpenGL.csproj">
-      <Project>{9C7EB468-F7C6-440D-9CE5-6EF81223BDC3}</Project>
-      <Name>Cumberland.Drawing.OpenGL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Cumberland.Data.PostGIS\Cumberland.Data.PostGIS.csproj">
       <Project>{9C7EB468-F7C6-440D-9CE5-6EF81223BDC3}</Project>
       <Name>Cumberland.Data.PostGIS</Name>
