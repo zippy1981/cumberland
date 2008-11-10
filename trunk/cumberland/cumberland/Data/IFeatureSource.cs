@@ -33,7 +33,7 @@ namespace Cumberland.Data
 	{
 		FeatureType SourceFeatureType { get; }
 		
-		Rectangle Extents { get; }
+//		Rectangle Extents { get; }
 		
 		List<Feature> GetFeatures();
 		

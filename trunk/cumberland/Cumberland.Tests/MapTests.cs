@@ -34,76 +34,76 @@ namespace Cumberland.Tests
 	public class MapTests
 	{
 		
-		[Test()]
-		public void TestAddLayerByFeatureTypeAndExtentsWithPointBeforePolygon()
-		{
-			Map m = new Map();
-			m.Layers.Add(CreateLayer(FeatureType.Polygon));
-			
-			Assert.AreEqual(1,m.AddLayerByFeatureTypeAndExtents(CreateLayer(FeatureType.Point)));
-		}
-
-		[Test()]
-		public void TestAddLayerByFeatureTypeAndExtentsWithPointBeforePolyline()
-		{
-			Map m = new Map();
-			m.Layers.Add(CreateLayer(FeatureType.Polyline));
-			
-			Assert.AreEqual(1,m.AddLayerByFeatureTypeAndExtents(CreateLayer(FeatureType.Point)));
-		}
-		
-		[Test()]
-		public void TestAddLayerByFeatureTypeAndExtentsWithPolylineAfterPointAndBeforePolygon()
-		{
-			Map m = new Map();
-			m.Layers.Add(CreateLayer(FeatureType.Polygon));
-			m.AddLayerByFeatureTypeAndExtents(CreateLayer(FeatureType.Point));
-			
-			Assert.AreEqual(1, m.AddLayerByFeatureTypeAndExtents(CreateLayer(FeatureType.Polyline)));
-		}
-
-		[Test()]
-		public void TestAddLayerByFeatureTypeAndExtentsWithPolygonAfterPointAndPolyline()
-		{
-			Map m = new Map();
-			m.AddLayerByFeatureTypeAndExtents(CreateLayer(FeatureType.Polyline));
-			m.AddLayerByFeatureTypeAndExtents(CreateLayer(FeatureType.Point));
-			
-			Assert.AreEqual(0, m.AddLayerByFeatureTypeAndExtents(CreateLayer(FeatureType.Polygon)));
-		}
-		
-		[Test()]
-		public void TestAddLayerByFeatureTypeAndExtentsWithFeatureExtents()
-		{
-			Layer bigger = CreateLayer(FeatureType.Polyline);
-			PolyLine pl = new PolyLine();
-			Line l = new Line();
-			l.Points.Add(new Point(0,0));
-			l.Points.Add(new Point(10,10));
-			pl.Lines.Add(l);
-			(bigger.Data as SimpleFeatureSource).Features.Add(pl);
-			
-			Layer smaller = CreateLayer(FeatureType.Polyline);
-			PolyLine pl2 = new PolyLine();
-			Line l2 = new Line();
-			l2.Points.Add(new Point(0,0));
-			l2.Points.Add(new Point(10,10));
-			pl2.Lines.Add(l2);
-			(smaller.Data as SimpleFeatureSource).Features.Add(pl2);
-			
-			Map m = new Map();
-			
-			m.AddLayerByFeatureTypeAndExtents(bigger);
-			
-			Assert.AreEqual(1, m.AddLayerByFeatureTypeAndExtents(smaller));
-		}
-			
-		
-		Layer CreateLayer(FeatureType ft)
-		{
-			Layer l = new Layer();
-			l.Data = new SimpleFeatureSource(ft);
-			return l;
-		}
+//		[Test()]
+//		public void TestAddLayerByFeatureTypeAndExtentsWithPointBeforePolygon()
+//		{
+//			Map m = new Map();
+//			m.Layers.Add(CreateLayer(FeatureType.Polygon));
+//			
+//			Assert.AreEqual(1,m.AddLayerByFeatureTypeAndExtents(CreateLayer(FeatureType.Point)));
+//		}
+//
+//		[Test()]
+//		public void TestAddLayerByFeatureTypeAndExtentsWithPointBeforePolyline()
+//		{
+//			Map m = new Map();
+//			m.Layers.Add(CreateLayer(FeatureType.Polyline));
+//			
+//			Assert.AreEqual(1,m.AddLayerByFeatureTypeAndExtents(CreateLayer(FeatureType.Point)));
+//		}
+//		
+//		[Test()]
+//		public void TestAddLayerByFeatureTypeAndExtentsWithPolylineAfterPointAndBeforePolygon()
+//		{
+//			Map m = new Map();
+//			m.Layers.Add(CreateLayer(FeatureType.Polygon));
+//			m.AddLayerByFeatureTypeAndExtents(CreateLayer(FeatureType.Point));
+//			
+//			Assert.AreEqual(1, m.AddLayerByFeatureTypeAndExtents(CreateLayer(FeatureType.Polyline)));
+//		}
+//
+//		[Test()]
+//		public void TestAddLayerByFeatureTypeAndExtentsWithPolygonAfterPointAndPolyline()
+//		{
+//			Map m = new Map();
+//			m.AddLayerByFeatureTypeAndExtents(CreateLayer(FeatureType.Polyline));
+//			m.AddLayerByFeatureTypeAndExtents(CreateLayer(FeatureType.Point));
+//			
+//			Assert.AreEqual(0, m.AddLayerByFeatureTypeAndExtents(CreateLayer(FeatureType.Polygon)));
+//		}
+//		
+//		[Test()]
+//		public void TestAddLayerByFeatureTypeAndExtentsWithFeatureExtents()
+//		{
+//			Layer bigger = CreateLayer(FeatureType.Polyline);
+//			PolyLine pl = new PolyLine();
+//			Line l = new Line();
+//			l.Points.Add(new Point(0,0));
+//			l.Points.Add(new Point(10,10));
+//			pl.Lines.Add(l);
+//			(bigger.Data as SimpleFeatureSource).Features.Add(pl);
+//			
+//			Layer smaller = CreateLayer(FeatureType.Polyline);
+//			PolyLine pl2 = new PolyLine();
+//			Line l2 = new Line();
+//			l2.Points.Add(new Point(0,0));
+//			l2.Points.Add(new Point(10,10));
+//			pl2.Lines.Add(l2);
+//			(smaller.Data as SimpleFeatureSource).Features.Add(pl2);
+//			
+//			Map m = new Map();
+//			
+//			m.AddLayerByFeatureTypeAndExtents(bigger);
+//			
+//			Assert.AreEqual(1, m.AddLayerByFeatureTypeAndExtents(smaller));
+//		}
+//			
+//		
+//		Layer CreateLayer(FeatureType ft)
+//		{
+//			Layer l = new Layer();
+//			l.Data = new SimpleFeatureSource(ft);
+//			return l;
+//		}
 	}
 }

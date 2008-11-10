@@ -26,9 +26,20 @@ using System;
 
 namespace Cumberland.Data
 {
+	public enum SpatialType
+	{
+		None,
+		Geometric,
+		Geographic
+	}
+	
 	public interface IDatabaseFeatureSource : IFeatureSource
 	{
 		string ConnectionString { get; set; }
 		string TableName { get; set; }
+		int ForcedSrid { get; set; }
+		FeatureType ForcedFeatureType { get; set; }
+		SpatialType ForcedSpatialType { get; set; }
+		string ForcedGeometryColumn { get; set; }
 	}
 }

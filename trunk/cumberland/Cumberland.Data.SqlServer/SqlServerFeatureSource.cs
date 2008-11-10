@@ -45,6 +45,10 @@ namespace Cumberland.Data.SqlServer
 		string tableName;
 		FeatureType featureType = FeatureType.None;
 		int srid = 0;
+		int forcedSrid = -1;
+		FeatureType forcedFeatureType = FeatureType.None;
+		SpatialType forcedSpatialType = SpatialType.Geometric;
+		string forcedGeometryColumn;
 
 #endregion
 		
@@ -77,6 +81,42 @@ namespace Cumberland.Data.SqlServer
 			}
 			set {
 				tableName = value;
+			}
+		}
+
+		public int ForcedSrid {
+			get {
+				return forcedSrid;
+			}
+			set {
+				forcedSrid = value;
+			}
+		}
+
+		public FeatureType ForcedFeatureType {
+			get {
+				return forcedFeatureType;
+			}
+			set {
+				forcedFeatureType = value;
+			}
+		}
+
+		public SpatialType ForcedSpatialType {
+			get {
+				return forcedSpatialType;
+			}
+			set {
+				forcedSpatialType = value;
+			}
+		}
+
+		public string ForcedGeometryColumn {
+			get {
+				return forcedGeometryColumn;
+			}
+			set {
+				forcedGeometryColumn = value;
 			}
 		}
 
@@ -187,6 +227,25 @@ namespace Cumberland.Data.SqlServer
 				throw new InvalidOperationException("ConnectionString and TableName must be set to initialize");
 			}
 
+			if (ForcedSrid >= 0 && 
+			    ForcedFeatureType != FeatureType.None &&
+			    !string.IsNullOrEmpty(ForcedGeometryColumn))
+			{
+				// parameters have been provided
+				
+				featureType = ForcedFeatureType;
+				srid = ForcedSrid;
+				geometryColumn = ForcedGeometryColumn;
+				
+				if (ForcedSpatialType != SpatialType.None)
+				{
+					spatialType = ForcedSpatialType == SpatialType.Geographic ? "geography" : "geometry";
+				}
+				
+				isInitialized = true;
+				return;
+			}
+			
 			using (SqlConnection conn = new SqlConnection(connectionString))
 			{
 				conn.Open();
