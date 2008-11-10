@@ -1,5 +1,9 @@
 2008-11-10  Scott Ellington <scott.ellington@gmail.com> 
 
+	* Drawing/MapDrawer.cs: adhere to LineStyle.None for polygons
+
+2008-11-10  Scott Ellington <scott.ellington@gmail.com> 
+
 	* Feature.cs, Data/Shapefile/Shapefile.cs: remove Feature.Id
 
 2008-11-10  Scott Ellington <scott.ellington@gmail.com> 

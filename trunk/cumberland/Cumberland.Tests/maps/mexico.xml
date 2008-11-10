@@ -11,7 +11,7 @@
 			<Styles>
 				<Style>
 					<LineWidth>1</LineWidth>
-					<LineStyle>Solid</LineStyle>
+					<LineStyle>None</LineStyle>
 					<LineColor>255,165,165,165</LineColor>
 					<FillColor>255,255,228,100</FillColor>
 					<MinRangeThemeValue>0</MinRangeThemeValue>
@@ -19,7 +19,7 @@
 				</Style>
 				<Style>
 					<LineWidth>1</LineWidth>
-					<LineStyle>Solid</LineStyle>
+					<LineStyle>None</LineStyle>
 					<LineColor>255,165,165,165</LineColor>
 					<FillColor>255,255,156,100</FillColor>
 					<MinRangeThemeValue>30001</MinRangeThemeValue>
@@ -27,7 +27,7 @@
 				</Style>				
 				<Style>
 					<LineWidth>1</LineWidth>
-					<LineStyle>Solid</LineStyle>
+					<LineStyle>None</LineStyle>
 					<LineColor>255,165,165,165</LineColor>
 					<FillColor>255,255,0,100</FillColor>
 					<MinRangeThemeValue>50001</MinRangeThemeValue>

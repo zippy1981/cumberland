@@ -20,7 +20,7 @@
     </Attribute>
   </Attributes>
   <Docs>
-    <summary>A feature is consider a single entity within a map.</summary>
+    <summary>A feature is considered a single entity within a map.</summary>
     <remarks>This is the absract base class from which all features (polygons, points, etc.) inherit.</remarks>
   </Docs>
   <Members>
