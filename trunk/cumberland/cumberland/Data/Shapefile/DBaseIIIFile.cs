@@ -216,7 +216,19 @@ namespace Cumberland.Data.Shapefile
 					case 'L':
 
 						char logical = Convert.ToChar(br.ReadByte());
-						row[jj] = (logical == 'y' || logical == 'Y' || logical == 't' | logical == 'T');
+						if (logical == 'y' || logical == 'Y' || logical == 't' | logical == 'T')
+						{
+							row[jj] = true;
+						}
+						else if (logical == 'n' || logical == 'N' || logical == 'f' || logical == 'F')
+						{
+							row[jj] = false;
+						}
+						else
+						{
+							row[jj] = DBNull.Value;
+						}
+						
 						break;
 						
 					case 'M':
