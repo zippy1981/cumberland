@@ -1,0 +1,33 @@
+<Type Name="IMapDrawer" FullName="Cumberland.Drawing.IMapDrawer">
+  <TypeSignature Language="C#" Value="public interface IMapDrawer" />
+  <AssemblyInfo>
+    <AssemblyName>Cumberland</AssemblyName>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Interfaces />
+  <Docs>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="Draw">
+      <MemberSignature Language="C#" Value="public System.Drawing.Bitmap Draw (Cumberland.Map map);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Drawing.Bitmap</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="map" Type="Cumberland.Map" />
+      </Parameters>
+      <Docs>
+        <param name="map">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>
