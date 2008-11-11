@@ -10,15 +10,24 @@
     </Interface>
   </Interfaces>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Defines a set of properties for interacting with a database to access spatial data</summary>
+    <remarks>This interface defines a set of Forced* properties.  These are optional but must be used
+    when performing a subquery:
+    
+    <example>
+    	<code lang="C#">
+    	IDatabaseFeatureSource dfs = ...
+    	dfs.ConnectionString = ...
+    	dfs.TableName = "(select * from mytable where name = 'MyTown') as mytown ";
+    	dfs.ForcedSrid = 4326;
+    	dfs.ForcedGeometryColumn = "MyColumn";
+    	dfs.ForcedFeatureType = FeatureType.Polygon;
+    	</code>
+    </example>
+    
+    </remarks>
   </Docs>
   <Members>
-    
-    
-    
-    
-    
     <Member MemberName="ConnectionString">
       <MemberSignature Language="C#" Value="public string ConnectionString { set; get; }" />
       <MemberType>Property</MemberType>
@@ -26,7 +35,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary><value>To be added.</value><remarks>To be added.</remarks></Docs>
+      <Docs><summary>The connection string</summary><value></value><remarks></remarks></Docs>
     </Member><Member MemberName="ForcedFeatureType">
       <MemberSignature Language="C#" Value="public Cumberland.Data.FeatureType ForcedFeatureType { set; get; }" />
       <MemberType>Property</MemberType>
@@ -34,7 +43,9 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Data.FeatureType</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary><value>To be added.</value><remarks>To be added.</remarks></Docs>
+      <Docs><summary>The forced feature type</summary><value></value>
+      <remarks>Forces the feature type instead of relying on the implementor
+      to discover it.  This is optional and can be used for subqueries.</remarks></Docs>
     </Member><Member MemberName="ForcedGeometryColumn">
       <MemberSignature Language="C#" Value="public string ForcedGeometryColumn { set; get; }" />
       <MemberType>Property</MemberType>
@@ -42,7 +53,10 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary><value>To be added.</value><remarks>To be added.</remarks></Docs>
+      <Docs><summary>The forced geometry column</summary>
+      <value></value>
+      <remarks>Forces the geometry column instead of relying on the implementor
+      to discover it.  This is optional and can be used for subqueries.</remarks></Docs>
     </Member><Member MemberName="ForcedSpatialType">
       <MemberSignature Language="C#" Value="public Cumberland.Data.SpatialType ForcedSpatialType { set; get; }" />
       <MemberType>Property</MemberType>
@@ -50,7 +64,11 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Data.SpatialType</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary><value>To be added.</value><remarks>To be added.</remarks></Docs>
+      <Docs><summary>The forced spatial type</summary>
+      <value></value>
+      <remarks>Some spatial databases support both a geometric and geographic data type.  This forces the spatial type 
+      instead of relying on the implementor
+      to discover it.  This is optional and can be used for subqueries.</remarks></Docs>
     </Member><Member MemberName="ForcedSrid">
       <MemberSignature Language="C#" Value="public int ForcedSrid { set; get; }" />
       <MemberType>Property</MemberType>
@@ -58,7 +76,9 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>System.Int32</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary><value>To be added.</value><remarks>To be added.</remarks></Docs>
+      <Docs><summary>The forced spatial reference ID</summary>
+      <value></value><remarks>Forces the srid instead of relying on the implementor
+      to discover it.  This is optional and can be used for subqueries.</remarks></Docs>
     </Member><Member MemberName="TableName">
       <MemberSignature Language="C#" Value="public string TableName { set; get; }" />
       <MemberType>Property</MemberType>
@@ -66,7 +86,8 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary><value>To be added.</value><remarks>To be added.</remarks></Docs>
+      <Docs><summary>The table name to query</summary><value></value>
+      <remarks>Can also be a subquery.  Given that the Forced* properties are set.</remarks></Docs>
     </Member>
   </Members>
 </Type>

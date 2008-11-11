@@ -26,7 +26,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
-      <Docs><summary>Default</summary><remarks></remarks></Docs>
+      <Docs><summary></summary><remarks></remarks></Docs>
     </Member><Member MemberName="Data">
       <MemberSignature Language="C#" Value="public Cumberland.Data.IFeatureSource Data { set; get; }" />
       <MemberType>Property</MemberType>

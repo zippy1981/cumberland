@@ -10,7 +10,8 @@
   <Interfaces />
   <Docs>
     <summary>A feature comprised of one to many <see cref="T:Cumberland.Line" /></summary>
-    <remarks></remarks>
+    <remarks>
+    </remarks>
   </Docs>
   <Members>
     

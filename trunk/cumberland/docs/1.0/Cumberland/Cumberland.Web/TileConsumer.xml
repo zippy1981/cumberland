@@ -12,14 +12,6 @@
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
-    <Member MemberName="Google">
-      <MemberSignature Language="C#" Value="Google" />
-      <MemberType>Field</MemberType>
-      <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue><ReturnType>Cumberland.Web.TileConsumer</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary></Docs>
-    </Member>
-  </Members>
+    
+  <Member MemberName="GoogleMaps"><MemberSignature Language="C#" Value="GoogleMaps" /><MemberType>Field</MemberType><AssemblyInfo><AssemblyVersion>0.1.0.0</AssemblyVersion></AssemblyInfo><ReturnValue><ReturnType>Cumberland.Web.TileConsumer</ReturnType></ReturnValue><Docs><summary>To be added.</summary></Docs></Member></Members>
 </Type>
