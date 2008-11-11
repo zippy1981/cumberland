@@ -6,8 +6,8 @@
   </AssemblyInfo>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Describes methods for project/deprojecting a <see cref="T:Cumberland.Point" /></summary>
+    <remarks>The type of projection depends on the implementation.</remarks>
   </Docs>
   <Members>
     
@@ -19,7 +19,8 @@
       </AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Point</ReturnType></ReturnValue>
       <Parameters><Parameter Name="p" Type="Cumberland.Point" /></Parameters>
-      <Docs><param name="p">To be added.</param><summary>To be added.</summary><returns>To be added.</returns><remarks>To be added.</remarks></Docs>
+      <Docs><param name="p">The point to be deprojected</param><summary>Deprojects the given point</summary><returns>The deprojected point</returns><remarks>Transforms the point from a cartesian coordinate system to a geographic coordinate system.  The details
+      of which are defined by the implementor.</remarks></Docs>
     </Member><Member MemberName="Project">
       <MemberSignature Language="C#" Value="public Cumberland.Point Project (Cumberland.Point p);" />
       <MemberType>Method</MemberType>
@@ -28,7 +29,8 @@
       </AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Point</ReturnType></ReturnValue>
       <Parameters><Parameter Name="p" Type="Cumberland.Point" /></Parameters>
-      <Docs><param name="p">To be added.</param><summary>To be added.</summary><returns>To be added.</returns><remarks>To be added.</remarks></Docs>
+      <Docs><param name="p">The point to project</param><summary>Projects the given point</summary><returns>The projected point</returns><remarks>Transforms the point from a geographic coordinate system to a cartesian coordinate system.  The details
+      of which are defined by the implementor</remarks></Docs>
     </Member>
   </Members>
 </Type>

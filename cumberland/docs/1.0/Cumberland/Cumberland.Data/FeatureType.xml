@@ -9,7 +9,8 @@
   </Base>
   <Docs>
     <summary>Defines the type of feature found in a <see cref="T:Cumberland.Data.IFeatureSource" /></summary>
-    <remarks></remarks>
+    <remarks>
+    </remarks>
   </Docs>
   <Members>
     

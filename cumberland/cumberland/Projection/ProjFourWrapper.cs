@@ -32,9 +32,21 @@ namespace Cumberland.Projection
     {
 		const double DegreesToRadians = Math.PI / 180;
 		
-		public static readonly string SphericalMercatorProjection  = "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs";
+		public static string SphericalMercatorProjection  
+		{
+			get
+			{
+				return "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs";
+			}
+		}
 		
-		public static readonly string WGS84 = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs";
+		public static string WGS84 
+		{
+			get
+			{
+				return  "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs";
+			}
+		}
 		
         IntPtr projPJ;
 		
