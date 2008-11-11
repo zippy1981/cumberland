@@ -8,7 +8,8 @@
   <Docs>
     <summary>Describes a methods that can draw a <see cref="T:Cumberland.Map" /> 
     onto a <see cref="T:System.Drawing.Bitmap" /></summary>
-    <remarks></remarks>
+    <remarks>
+    </remarks>
   </Docs>
   <Members>
     <Member MemberName="Draw">
@@ -19,10 +20,7 @@
       </AssemblyInfo>
       <ReturnValue><ReturnType>System.Drawing.Bitmap</ReturnType></ReturnValue>
       <Parameters><Parameter Name="map" Type="Cumberland.Map" /></Parameters>
-      <Docs><param name="map">The map to draw</param>
-      <summary>Draws a map</summary>
-      <returns>The rendered bitmap</returns>
-      <remarks></remarks></Docs>
+      <Docs><param name="map">The map to draw</param><summary>Draws a map</summary><returns>The rendered bitmap</returns><remarks></remarks></Docs>
     </Member>
   </Members>
 </Type>

@@ -14,7 +14,8 @@
   </Interfaces>
   <Docs>
     <summary>Draws a map via the System.Drawing API</summary>
-    <remarks></remarks>
+    <remarks>
+    </remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -33,10 +34,7 @@
       </AssemblyInfo>
       <ReturnValue><ReturnType>System.Drawing.Bitmap</ReturnType></ReturnValue>
       <Parameters><Parameter Name="map" Type="Cumberland.Map" /></Parameters>
-      <Docs><param name="map">The map to draw</param>
-      <summary>Draws the given map</summary>
-      <returns>A rendered bitmap</returns>
-      <remarks></remarks></Docs>
+      <Docs><param name="map">The map to draw</param><summary>Draws the given map</summary><returns>A rendered bitmap</returns><remarks></remarks></Docs>
     </Member><Member MemberName="Smoothing">
       <MemberSignature Language="C#" Value="public System.Drawing.Drawing2D.SmoothingMode Smoothing { set; get; }" />
       <MemberType>Property</MemberType>
@@ -44,9 +42,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>System.Drawing.Drawing2D.SmoothingMode</ReturnType></ReturnValue>
-      <Docs><summary>Gets or sets the smoothing mode for drawing maps</summary>
-      <value></value>
-      <remarks>This can be changed to enable/disable anti-aliasing.</remarks></Docs>
+      <Docs><summary>Gets or sets the smoothing mode for drawing maps</summary><value></value><remarks>This can be changed to enable/disable anti-aliasing.</remarks></Docs>
     </Member>
   </Members>
 </Type>
