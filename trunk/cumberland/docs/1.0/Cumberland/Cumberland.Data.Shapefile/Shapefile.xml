@@ -13,20 +13,10 @@
     </Interface>
   </Interfaces>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Provides access to a shapefile</summary>
+    <remarks>The shapefile format is a standard file-based method for providing spatial data.</remarks>
   </Docs>
   <Members>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public Shapefile ();" />
       <MemberType>Constructor</MemberType>
@@ -34,7 +24,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
-      <Docs><summary>To be added.</summary><remarks>To be added.</remarks></Docs>
+      <Docs><summary></summary><remarks></remarks></Docs>
     </Member><Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public Shapefile (string fname);" />
       <MemberType>Constructor</MemberType>
@@ -42,7 +32,8 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters><Parameter Name="fname" Type="System.String" /></Parameters>
-      <Docs><param name="fname">To be added.</param><summary>To be added.</summary><remarks>To be added.</remarks></Docs>
+      <Docs><param name="fname">The path to the shapefile</param>
+      <summary>Loads the given shapefile</summary><remarks></remarks></Docs>
     </Member><Member MemberName="Extents">
       <MemberSignature Language="C#" Value="public Cumberland.Rectangle Extents { get; }" />
       <MemberType>Property</MemberType>
@@ -51,7 +42,8 @@
       </AssemblyInfo>
       <Attributes><Attribute><AttributeName>System.Xml.Serialization.XmlIgnore</AttributeName></Attribute></Attributes>
       <ReturnValue><ReturnType>Cumberland.Rectangle</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary><value>To be added.</value><remarks>To be added.</remarks></Docs>
+      <Docs><summary>Gets the extents of the data</summary><value></value>
+      <remarks>As defined in the shapefile.  This may not be correct.</remarks></Docs>
     </Member><Member MemberName="FilePath">
       <MemberSignature Language="C#" Value="public string FilePath { set; get; }" />
       <MemberType>Property</MemberType>
@@ -59,7 +51,9 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary><value>To be added.</value><remarks>To be added.</remarks></Docs>
+      <Docs><summary>Gets or set the path to the shapefile</summary><value></value>
+      <remarks>Only one path can be loaded per object.  If you need access to another shapefile, create
+      a new object, don't re-set this.</remarks></Docs>
     </Member><Member MemberName="GetFeatures">
       <MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Cumberland.Feature&gt; GetFeatures ();" />
       <MemberType>Method</MemberType>
@@ -68,7 +62,7 @@
       </AssemblyInfo>
       <ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType></ReturnValue>
       <Parameters />
-      <Docs><summary>To be added.</summary><returns>To be added.</returns><remarks>To be added.</remarks></Docs>
+      <Docs><summary>Gets all features</summary><returns></returns><remarks></remarks></Docs>
     </Member><Member MemberName="GetFeatures">
       <MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Cumberland.Feature&gt; GetFeatures (Cumberland.Rectangle rectangle);" />
       <MemberType>Method</MemberType>
@@ -77,7 +71,9 @@
       </AssemblyInfo>
       <ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType></ReturnValue>
       <Parameters><Parameter Name="rectangle" Type="Cumberland.Rectangle" /></Parameters>
-      <Docs><param name="rectangle">To be added.</param><summary>To be added.</summary><returns>To be added.</returns><remarks>To be added.</remarks></Docs>
+      <Docs><param name="rectangle">The requested rectangle to filter (ignored)</param>
+      <summary>Gets all features</summary><returns></returns>
+      <remarks>Currently there is no spatial index support for shapefiles, so the rectangle parameter is ignored</remarks></Docs>
     </Member><Member MemberName="GetFeatures">
       <MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Cumberland.Feature&gt; GetFeatures (string themeField);" />
       <MemberType>Method</MemberType>
@@ -86,7 +82,12 @@
       </AssemblyInfo>
       <ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType></ReturnValue>
       <Parameters><Parameter Name="themeField" Type="System.String" /></Parameters>
-      <Docs><param name="themeField">To be added.</param><summary>To be added.</summary><returns>To be added.</returns><remarks>To be added.</remarks></Docs>
+      <Docs>
+      <param name="themeField">The theme field</param>
+      <summary>Gets all features and sets their theme field value</summary>
+      <returns></returns><remarks>The corresponding dbf file must be loaded to get the non-spatial data.  This file is
+      located by removing the 'shp' extension from the shapefile and appending 'dbf'.  (As defined in the shapefile specification)
+      </remarks></Docs>
     </Member><Member MemberName="GetFeatures">
       <MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Cumberland.Feature&gt; GetFeatures (Cumberland.Rectangle rectangle, string themeField);" />
       <MemberType>Method</MemberType>
@@ -95,7 +96,13 @@
       </AssemblyInfo>
       <ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType></ReturnValue>
       <Parameters><Parameter Name="rectangle" Type="Cumberland.Rectangle" /><Parameter Name="themeField" Type="System.String" /></Parameters>
-      <Docs><param name="rectangle">To be added.</param><param name="themeField">To be added.</param><summary>To be added.</summary><returns>To be added.</returns><remarks>To be added.</remarks></Docs>
+      <Docs><param name="rectangle">The request extents to filter on (ignored)</param>
+      <param name="themeField">The theme field</param>
+      <summary>Gets all features and sets their theme field value</summary>
+      <returns></returns><remarks>Currently there is no spatial index support for shapefiles, so the rectangle parameter is ignored.
+		The corresponding dbf file must be loaded to get the non-spatial data.  This file is
+     	 located by removing the 'shp' extension from the shapefile and appending 'dbf'.  (As defined in the shapefile specification)
+      </remarks></Docs>
     </Member><Member MemberName="Shapetype">
       <MemberSignature Language="C#" Value="public Cumberland.Data.Shapefile.ShapeType Shapetype { get; }" />
       <MemberType>Property</MemberType>
@@ -104,7 +111,7 @@
       </AssemblyInfo>
       <Attributes><Attribute><AttributeName>System.Xml.Serialization.XmlIgnore</AttributeName></Attribute></Attributes>
       <ReturnValue><ReturnType>Cumberland.Data.Shapefile.ShapeType</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary><value>To be added.</value><remarks>To be added.</remarks></Docs>
+      <Docs><summary>Gets the shapefile's shape type</summary><value></value><remarks>As defined in the shapefile specification</remarks></Docs>
     </Member><Member MemberName="SourceFeatureType">
       <MemberSignature Language="C#" Value="public Cumberland.Data.FeatureType SourceFeatureType { get; }" />
       <MemberType>Property</MemberType>
@@ -113,7 +120,7 @@
       </AssemblyInfo>
       <Attributes><Attribute><AttributeName>System.Xml.Serialization.XmlIgnore</AttributeName></Attribute></Attributes>
       <ReturnValue><ReturnType>Cumberland.Data.FeatureType</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary><value>To be added.</value><remarks>To be added.</remarks></Docs>
+      <Docs><summary>The feature type</summary><value></value><remarks></remarks></Docs>
     </Member><Member MemberName="Version">
       <MemberSignature Language="C#" Value="public uint Version { get; }" />
       <MemberType>Property</MemberType>
@@ -122,7 +129,7 @@
       </AssemblyInfo>
       <Attributes><Attribute><AttributeName>System.Xml.Serialization.XmlIgnore</AttributeName></Attribute></Attributes>
       <ReturnValue><ReturnType>System.UInt32</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary><value>To be added.</value><remarks>To be added.</remarks></Docs>
+      <Docs><summary>Gets the version of the shapefile</summary><value></value><remarks></remarks></Docs>
     </Member>
   </Members>
 </Type>
