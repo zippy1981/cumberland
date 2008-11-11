@@ -8,23 +8,11 @@
     <BaseTypeName>System.Enum</BaseTypeName>
   </Base>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>The shapefile shape types</summary>
+    <remarks>As defined in the shapefile specification.  Note: Only polygon, point, and polyline are currently supported.</remarks>
   </Docs>
   <Members>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     <Member MemberName="MultiPatch">
       <MemberSignature Language="C#" Value="MultiPatch" />
       <MemberType>Field</MemberType>
@@ -32,7 +20,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Data.Shapefile.ShapeType</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary></Docs>
+      <Docs><summary></summary></Docs>
     </Member><Member MemberName="MultiPoint">
       <MemberSignature Language="C#" Value="MultiPoint" />
       <MemberType>Field</MemberType>
@@ -40,7 +28,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Data.Shapefile.ShapeType</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary></Docs>
+      <Docs><summary></summary></Docs>
     </Member><Member MemberName="MultiPointM">
       <MemberSignature Language="C#" Value="MultiPointM" />
       <MemberType>Field</MemberType>
@@ -48,7 +36,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Data.Shapefile.ShapeType</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary></Docs>
+      <Docs><summary></summary></Docs>
     </Member><Member MemberName="MultiPointZ">
       <MemberSignature Language="C#" Value="MultiPointZ" />
       <MemberType>Field</MemberType>
@@ -56,7 +44,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Data.Shapefile.ShapeType</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary></Docs>
+      <Docs><summary></summary></Docs>
     </Member><Member MemberName="Null">
       <MemberSignature Language="C#" Value="Null" />
       <MemberType>Field</MemberType>
@@ -64,7 +52,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Data.Shapefile.ShapeType</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary></Docs>
+      <Docs><summary></summary></Docs>
     </Member><Member MemberName="Point">
       <MemberSignature Language="C#" Value="Point" />
       <MemberType>Field</MemberType>
@@ -72,7 +60,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Data.Shapefile.ShapeType</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary></Docs>
+      <Docs><summary></summary></Docs>
     </Member><Member MemberName="PointM">
       <MemberSignature Language="C#" Value="PointM" />
       <MemberType>Field</MemberType>
@@ -80,7 +68,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Data.Shapefile.ShapeType</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary></Docs>
+      <Docs><summary></summary></Docs>
     </Member><Member MemberName="PointZ">
       <MemberSignature Language="C#" Value="PointZ" />
       <MemberType>Field</MemberType>
@@ -88,7 +76,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Data.Shapefile.ShapeType</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary></Docs>
+      <Docs><summary></summary></Docs>
     </Member><Member MemberName="Polygon">
       <MemberSignature Language="C#" Value="Polygon" />
       <MemberType>Field</MemberType>
@@ -96,7 +84,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Data.Shapefile.ShapeType</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary></Docs>
+      <Docs><summary></summary></Docs>
     </Member><Member MemberName="PolygonM">
       <MemberSignature Language="C#" Value="PolygonM" />
       <MemberType>Field</MemberType>
@@ -104,7 +92,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Data.Shapefile.ShapeType</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary></Docs>
+      <Docs><summary></summary></Docs>
     </Member><Member MemberName="PolygonZ">
       <MemberSignature Language="C#" Value="PolygonZ" />
       <MemberType>Field</MemberType>
@@ -112,7 +100,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Data.Shapefile.ShapeType</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary></Docs>
+      <Docs><summary></summary></Docs>
     </Member><Member MemberName="PolyLine">
       <MemberSignature Language="C#" Value="PolyLine" />
       <MemberType>Field</MemberType>
@@ -120,7 +108,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Data.Shapefile.ShapeType</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary></Docs>
+      <Docs><summary></summary></Docs>
     </Member><Member MemberName="PolyLineM">
       <MemberSignature Language="C#" Value="PolyLineM" />
       <MemberType>Field</MemberType>
@@ -128,7 +116,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Data.Shapefile.ShapeType</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary></Docs>
+      <Docs><summary></summary></Docs>
     </Member><Member MemberName="PolyLineZ">
       <MemberSignature Language="C#" Value="PolyLineZ" />
       <MemberType>Field</MemberType>
@@ -136,7 +124,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Data.Shapefile.ShapeType</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary></Docs>
+      <Docs><summary></summary></Docs>
     </Member>
   </Members>
 </Type>
