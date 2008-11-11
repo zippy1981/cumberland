@@ -19,7 +19,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.PointSymbolShapeType</ReturnType></ReturnValue>
-      <Docs><summary>a circle will drawn</summary></Docs>
+      <Docs><summary>A circle will drawn</summary></Docs>
     </Member><Member MemberName="None">
       <MemberSignature Language="C#" Value="None" />
       <MemberType>Field</MemberType>
@@ -27,7 +27,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.PointSymbolShapeType</ReturnType></ReturnValue>
-      <Docs><summary>nothing will be drawn</summary></Docs>
+      <Docs><summary>Nothing will be drawn</summary></Docs>
     </Member><Member MemberName="Square">
       <MemberSignature Language="C#" Value="Square" />
       <MemberType>Field</MemberType>
@@ -35,7 +35,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.PointSymbolShapeType</ReturnType></ReturnValue>
-      <Docs><summary>a square will be drawn</summary></Docs>
+      <Docs><summary>A square will be drawn</summary></Docs>
     </Member>
   </Members>
 </Type>

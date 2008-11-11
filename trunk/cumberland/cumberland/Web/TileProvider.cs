@@ -33,12 +33,12 @@ namespace Cumberland.Web
 {
 	public enum TileConsumer
 	{
-		Google
+		GoogleMaps
 	}
 	
 	public class TileProvider
 	{
-		TileConsumer consumer = TileConsumer.Google;
+		TileConsumer consumer = TileConsumer.GoogleMaps;
 		int tileSize = 256;
 		bool drawExceptionsOnTile = true;
 		
