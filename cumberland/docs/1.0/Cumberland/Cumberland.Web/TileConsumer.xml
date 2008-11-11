@@ -8,10 +8,15 @@
     <BaseTypeName>System.Enum</BaseTypeName>
   </Base>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Lists the supported consumers of <see cref="T:Cumberland.Web.TileProvider" /></summary>
+    <remarks>The Tile consumer defines the behavior of the Tile provider.</remarks>
   </Docs>
   <Members>
     
-  <Member MemberName="GoogleMaps"><MemberSignature Language="C#" Value="GoogleMaps" /><MemberType>Field</MemberType><AssemblyInfo><AssemblyVersion>0.1.0.0</AssemblyVersion></AssemblyInfo><ReturnValue><ReturnType>Cumberland.Web.TileConsumer</ReturnType></ReturnValue><Docs><summary>To be added.</summary></Docs></Member></Members>
+  <Member MemberName="GoogleMaps">
+  <MemberSignature Language="C#" Value="GoogleMaps" />
+  <MemberType>Field</MemberType><AssemblyInfo>
+  <AssemblyVersion>0.1.0.0</AssemblyVersion></AssemblyInfo>
+  <ReturnValue><ReturnType>Cumberland.Web.TileConsumer</ReturnType></ReturnValue>
+  <Docs><summary>The Google Maps web interface</summary></Docs></Member></Members>
 </Type>
