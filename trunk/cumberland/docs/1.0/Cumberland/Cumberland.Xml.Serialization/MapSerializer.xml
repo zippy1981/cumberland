@@ -13,12 +13,6 @@
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
-    
-    
-    
-    
-    
-    
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public MapSerializer ();" />
       <MemberType>Constructor</MemberType>
