@@ -9,7 +9,7 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>A Line is comprised of a set of points which are conceptually connected to create line segments</summary>
+    <summary>A Line is comprised of a set of points which are connected to create line segments</summary>
     <remarks>
     </remarks>
   </Docs>

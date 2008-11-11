@@ -8,12 +8,12 @@
     <BaseTypeName>System.Enum</BaseTypeName>
   </Base>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Specifies the spatial type of the <see cref="T:Cumberland.Data.IDatabaseFeatureSource" /></summary>
+    <remarks>Some databases support both a geometric and geographic type for spatial data because
+    of the differences in handling the data.  This enumeration specifies those types.  Specifying 'None'
+    will force the feature source to look up the type.</remarks>
   </Docs>
   <Members>
-    
-    
     <Member MemberName="Geographic">
       <MemberSignature Language="C#" Value="Geographic" />
       <MemberType>Field</MemberType>
@@ -21,7 +21,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Data.SpatialType</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary></Docs>
+      <Docs><summary>Geographic spatial type (latitude/longitude).</summary></Docs>
     </Member><Member MemberName="Geometric">
       <MemberSignature Language="C#" Value="Geometric" />
       <MemberType>Field</MemberType>
@@ -29,7 +29,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Data.SpatialType</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary></Docs>
+      <Docs><summary>Geometric spatial type (x/y)</summary></Docs>
     </Member><Member MemberName="None">
       <MemberSignature Language="C#" Value="None" />
       <MemberType>Field</MemberType>
@@ -37,7 +37,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Data.SpatialType</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary></Docs>
+      <Docs><summary>None/unknown spatial type</summary></Docs>
     </Member>
   </Members>
 </Type>

@@ -20,7 +20,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.PointSymbolType</ReturnType></ReturnValue>
-      <Docs><summary>draws an external image</summary></Docs>
+      <Docs><summary>Draws an external image</summary></Docs>
     </Member><Member MemberName="None">
       <MemberSignature Language="C#" Value="None" />
       <MemberType>Field</MemberType>
@@ -28,7 +28,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.PointSymbolType</ReturnType></ReturnValue>
-      <Docs><summary>does not draw the point</summary></Docs>
+      <Docs><summary>Does not draw the point</summary></Docs>
     </Member><Member MemberName="Shape">
       <MemberSignature Language="C#" Value="Shape" />
       <MemberType>Field</MemberType>
@@ -36,7 +36,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.PointSymbolType</ReturnType></ReturnValue>
-      <Docs><summary>draws a shape</summary></Docs>
+      <Docs><summary>Draws a shape</summary></Docs>
     </Member>
   </Members>
 </Type>

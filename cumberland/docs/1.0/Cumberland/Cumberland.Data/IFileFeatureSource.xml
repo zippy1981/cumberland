@@ -10,8 +10,9 @@
     </Interface>
   </Interfaces>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Describes a file based feature source</summary>
+    <remarks>This interface can be implemented to allow access to any file based source of 
+    spatial data.</remarks>
   </Docs>
   <Members>
     <Member MemberName="FilePath">
@@ -21,7 +22,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary><value>To be added.</value><remarks>To be added.</remarks></Docs>
+      <Docs><summary>The path to the file</summary><value></value><remarks></remarks></Docs>
     </Member>
   </Members>
 </Type>

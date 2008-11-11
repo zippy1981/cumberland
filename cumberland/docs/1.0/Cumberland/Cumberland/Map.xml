@@ -34,7 +34,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Rectangle</ReturnType></ReturnValue>
-      <Docs><summary>The extents of the map</summary><value></value><remarks>These must be in the coordinate system of <see cref="P:Cumberland.Map.Projection" /></remarks></Docs>
+      <Docs><summary>The extents of the map</summary><value></value><remarks>These must be in the coordinate system of the layer data, or <see cref="P:Cumberland.Map.Projection" />, if set.</remarks></Docs>
     </Member><Member MemberName="Height">
       <MemberSignature Language="C#" Value="public int Height { set; get; }" />
       <MemberType>Property</MemberType>
@@ -50,7 +50,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Layer&gt;</ReturnType></ReturnValue>
-      <Docs><summary>The layers in the map</summary><value></value><remarks>The list of <see cref="T:Cumberland.Layer" /></remarks></Docs>
+      <Docs><summary>The layers in the map</summary><value></value><remarks>A list of <see cref="T:Cumberland.Layer" /></remarks></Docs>
     </Member><Member MemberName="Projection">
       <MemberSignature Language="C#" Value="public string Projection { set; get; }" />
       <MemberType>Property</MemberType>

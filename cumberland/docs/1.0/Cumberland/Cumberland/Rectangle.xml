@@ -10,7 +10,8 @@
   <Interfaces />
   <Docs>
     <summary>Represents a set of boundary coordinates on a <see cref="T:Cumberland.Map" /></summary>
-    <remarks></remarks>
+    <remarks>
+    </remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -28,9 +29,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters><Parameter Name="minPoint" Type="Cumberland.Point" /><Parameter Name="maxPoint" Type="Cumberland.Point" /></Parameters>
-      <Docs><param name="minPoint">The Point which represents the minimum boundary of the Rectangle</param>
-      <param name="maxPoint">The Point which represents the maximum boundary of the Rectangle</param>
-      <summary></summary><remarks></remarks></Docs>
+      <Docs><param name="minPoint">The Point which represents the minimum boundary of the Rectangle</param><param name="maxPoint">The Point which represents the maximum boundary of the Rectangle</param><summary></summary><remarks></remarks></Docs>
     </Member><Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public Rectangle (double minx, double miny, double maxx, double maxy);" />
       <MemberType>Constructor</MemberType>
@@ -38,9 +37,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters><Parameter Name="minx" Type="System.Double" /><Parameter Name="miny" Type="System.Double" /><Parameter Name="maxx" Type="System.Double" /><Parameter Name="maxy" Type="System.Double" /></Parameters>
-      <Docs><param name="minx">The minimum X coordinate</param>
-      <param name="miny">The minimum Y coordinate</param><param name="maxx">The maximum X coordinate</param>
-      <param name="maxy">The maximum Y coordinate</param><summary></summary><remarks></remarks></Docs>
+      <Docs><param name="minx">The minimum X coordinate</param><param name="miny">The minimum Y coordinate</param><param name="maxx">The maximum X coordinate</param><param name="maxy">The maximum Y coordinate</param><summary></summary><remarks></remarks></Docs>
     </Member><Member MemberName="Area">
       <MemberSignature Language="C#" Value="public double Area { get; }" />
       <MemberType>Property</MemberType>
@@ -118,8 +115,7 @@
       </AssemblyInfo>
       <ReturnValue><ReturnType>System.Boolean</ReturnType></ReturnValue>
       <Parameters><Parameter Name="r1" Type="Cumberland.Rectangle" /><Parameter Name="r2" Type="Cumberland.Rectangle" /></Parameters>
-      <Docs><param name="r1">Rectangle #1</param><param name="r2">Rectangle #2</param><summary>Determines if the rectangles coordinates are the same</summary>
-      <returns></returns><remarks></remarks></Docs>
+      <Docs><param name="r1">Rectangle #1</param><param name="r2">Rectangle #2</param><summary>Determines if the rectangles coordinates are the same</summary><returns></returns><remarks></remarks></Docs>
     </Member><Member MemberName="op_Inequality">
       <MemberSignature Language="C#" Value="public static bool op_Inequality (Cumberland.Rectangle r1, Cumberland.Rectangle r2);" />
       <MemberType>Method</MemberType>
@@ -128,9 +124,7 @@
       </AssemblyInfo>
       <ReturnValue><ReturnType>System.Boolean</ReturnType></ReturnValue>
       <Parameters><Parameter Name="r1" Type="Cumberland.Rectangle" /><Parameter Name="r2" Type="Cumberland.Rectangle" /></Parameters>
-      <Docs><param name="r1">Rectangle #1</param><param name="r2">Rectangle #2</param>
-      <summary>Determines if two rectangles are different</summary>
-      <returns></returns><remarks></remarks></Docs>
+      <Docs><param name="r1">Rectangle #1</param><param name="r2">Rectangle #2</param><summary>Determines if two rectangles are different</summary><returns></returns><remarks></remarks></Docs>
     </Member><Member MemberName="Overlaps">
       <MemberSignature Language="C#" Value="public bool Overlaps (Cumberland.Rectangle r);" />
       <MemberType>Method</MemberType>
@@ -139,9 +133,7 @@
       </AssemblyInfo>
       <ReturnValue><ReturnType>System.Boolean</ReturnType></ReturnValue>
       <Parameters><Parameter Name="r" Type="Cumberland.Rectangle" /></Parameters>
-      <Docs><param name="r">The rectangle for which to determine it overlaps</param>
-      <summary>Determine if the rectangle overlaps the provide rectangle</summary>
-      <returns></returns><remarks></remarks></Docs>
+      <Docs><param name="r">The rectangle for which to determine it overlaps</param><summary>Determine if the rectangle overlaps the provided rectangle</summary><returns></returns><remarks></remarks></Docs>
     </Member><Member MemberName="Union">
       <MemberSignature Language="C#" Value="public static Cumberland.Rectangle Union (Cumberland.Rectangle a, Cumberland.Rectangle b);" />
       <MemberType>Method</MemberType>
@@ -150,9 +142,7 @@
       </AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Rectangle</ReturnType></ReturnValue>
       <Parameters><Parameter Name="a" Type="Cumberland.Rectangle" /><Parameter Name="b" Type="Cumberland.Rectangle" /></Parameters>
-      <Docs><param name="a">Rectangle #1</param><param name="b">Rectangle #2</param>
-      <summary>Creates a new Rectangle that reflects the union of the provided rectangles</summary>
-      <returns></returns><remarks></remarks></Docs>
+      <Docs><param name="a">Rectangle #1</param><param name="b">Rectangle #2</param><summary>Creates a new Rectangle that reflects the union of the provided rectangles</summary><returns></returns><remarks></remarks></Docs>
     </Member><Member MemberName="Width">
       <MemberSignature Language="C#" Value="public double Width { set; get; }" />
       <MemberType>Property</MemberType>
