@@ -50,9 +50,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
-      <Docs><summary>A Proj.4 projection string describing the coordinate system of the Layer</summary>
-      <value></value>
-      <remarks>Not setting this will cause the data in your layer not to be transformed.  
+      <Docs><summary>A Proj.4 projection string describing the coordinate system of the Layer</summary><value></value><remarks>Not setting this will cause the data in your layer not to be transformed.  
       The <see cref="P:Cumberland.Map.Projection" /> must also be set for the data to be transformed.</remarks></Docs>
     </Member><Member MemberName="Styles">
       <MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Cumberland.Style&gt; Styles { get; }" />
@@ -61,8 +59,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Style&gt;</ReturnType></ReturnValue>
-      <Docs><summary>A list of <see cref="T:Cumberland.Style" /> objects for use in rendering the Layer</summary>
-      <value></value><remarks>A Layer needs at least one Style to be rendered.  Multiple styles can be used for theming.</remarks></Docs>
+      <Docs><summary>A list of <see cref="T:Cumberland.Style" /> objects for use in rendering the Layer</summary><value></value><remarks>A Layer needs at least one Style to be rendered.  Multiple styles can be used for theming.</remarks></Docs>
     </Member><Member MemberName="Theme">
       <MemberSignature Language="C#" Value="public Cumberland.ThemeType Theme { set; get; }" />
       <MemberType>Property</MemberType>
@@ -79,8 +76,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
-      <Docs><summary>The field in the underlying data source to do theming on</summary><value></value>
-      <remarks>The <see cref="P:Cumberland.Layer.Theme" /> must be set to something besides 'None' for this to work.</remarks></Docs>
+      <Docs><summary>The field in the underlying data source to do theming on</summary><value></value><remarks>The <see cref="P:Cumberland.Layer.Theme" /> must be set to something besides 'None' for this to work.</remarks></Docs>
     </Member>
   </Members>
 </Type>

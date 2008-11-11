@@ -39,7 +39,6 @@
       <Type Name="Line" Kind="Class" />
       <Type Name="LineStyle" Kind="Enumeration" />
       <Type Name="Map" Kind="Class" />
-      <Type Name="MapConfigurationException" Kind="Class" />
       <Type Name="Point" Kind="Class" />
       <Type Name="PointSymbolShapeType" Kind="Enumeration" />
       <Type Name="PointSymbolType" Kind="Enumeration" />
@@ -66,6 +65,7 @@
     </Namespace>
     <Namespace Name="Cumberland.Drawing">
       <Type Name="IMapDrawer" Kind="Interface" />
+      <Type Name="MapConfigurationException" Kind="Class" />
       <Type Name="MapDrawer" Kind="Class" />
     </Namespace>
     <Namespace Name="Cumberland.Projection">
