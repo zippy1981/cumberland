@@ -9,24 +9,11 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>A single point feature</summary>
+    <remarks>
+    </remarks>
   </Docs>
   <Members>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public Point ();" />
       <MemberType>Constructor</MemberType>
@@ -34,7 +21,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
-      <Docs><summary>To be added.</summary><remarks>To be added.</remarks></Docs>
+      <Docs><summary></summary><remarks>Creates a point at (0,0)</remarks></Docs>
     </Member><Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public Point (double tx, double ty);" />
       <MemberType>Constructor</MemberType>
@@ -42,23 +29,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters><Parameter Name="tx" Type="System.Double" /><Parameter Name="ty" Type="System.Double" /></Parameters>
-      <Docs><param name="tx">To be added.</param><param name="ty">To be added.</param><summary>To be added.</summary><remarks>To be added.</remarks></Docs>
-    </Member><Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Point (double tx, double ty, double tz);" />
-      <MemberType>Constructor</MemberType>
-      <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <Parameters><Parameter Name="tx" Type="System.Double" /><Parameter Name="ty" Type="System.Double" /><Parameter Name="tz" Type="System.Double" /></Parameters>
-      <Docs><param name="tx">To be added.</param><param name="ty">To be added.</param><param name="tz">To be added.</param><summary>To be added.</summary><remarks>To be added.</remarks></Docs>
-    </Member><Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Point (double tx, double ty, double tz, double tm);" />
-      <MemberType>Constructor</MemberType>
-      <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <Parameters><Parameter Name="tx" Type="System.Double" /><Parameter Name="ty" Type="System.Double" /><Parameter Name="tz" Type="System.Double" /><Parameter Name="tm" Type="System.Double" /></Parameters>
-      <Docs><param name="tx">To be added.</param><param name="ty">To be added.</param><param name="tz">To be added.</param><param name="tm">To be added.</param><summary>To be added.</summary><remarks>To be added.</remarks></Docs>
+      <Docs><param name="tx">the X coordinate</param><param name="ty">the Y coordinate</param><summary></summary><remarks></remarks></Docs>
     </Member><Member MemberName="Clone">
       <MemberSignature Language="C#" Value="public Cumberland.Point Clone ();" />
       <MemberType>Method</MemberType>
@@ -67,15 +38,7 @@
       </AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Point</ReturnType></ReturnValue>
       <Parameters />
-      <Docs><summary>To be added.</summary><returns>To be added.</returns><remarks>To be added.</remarks></Docs>
-    </Member><Member MemberName="M">
-      <MemberSignature Language="C#" Value="public double M { set; get; }" />
-      <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue><ReturnType>System.Double</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary><value>To be added.</value><remarks>To be added.</remarks></Docs>
+      <Docs><summary>Creates a deep copy</summary><returns></returns><remarks></remarks></Docs>
     </Member><Member MemberName="op_Equality">
       <MemberSignature Language="C#" Value="public static bool op_Equality (Cumberland.Point p1, Cumberland.Point p2);" />
       <MemberType>Method</MemberType>
@@ -84,7 +47,7 @@
       </AssemblyInfo>
       <ReturnValue><ReturnType>System.Boolean</ReturnType></ReturnValue>
       <Parameters><Parameter Name="p1" Type="Cumberland.Point" /><Parameter Name="p2" Type="Cumberland.Point" /></Parameters>
-      <Docs><param name="p1">To be added.</param><param name="p2">To be added.</param><summary>To be added.</summary><returns>To be added.</returns><remarks>To be added.</remarks></Docs>
+      <Docs><param name="p1">Point #1</param><param name="p2">Point #2</param><summary>Compare if these two points are the same</summary><returns></returns><remarks></remarks></Docs>
     </Member><Member MemberName="op_Inequality">
       <MemberSignature Language="C#" Value="public static bool op_Inequality (Cumberland.Point p1, Cumberland.Point p2);" />
       <MemberType>Method</MemberType>
@@ -93,7 +56,7 @@
       </AssemblyInfo>
       <ReturnValue><ReturnType>System.Boolean</ReturnType></ReturnValue>
       <Parameters><Parameter Name="p1" Type="Cumberland.Point" /><Parameter Name="p2" Type="Cumberland.Point" /></Parameters>
-      <Docs><param name="p1">To be added.</param><param name="p2">To be added.</param><summary>To be added.</summary><returns>To be added.</returns><remarks>To be added.</remarks></Docs>
+      <Docs><param name="p1">Point #1.</param><param name="p2">Point #2</param><summary>Compares if these two points are different</summary><returns></returns><remarks></remarks></Docs>
     </Member><Member MemberName="X">
       <MemberSignature Language="C#" Value="public double X { set; get; }" />
       <MemberType>Property</MemberType>
@@ -101,7 +64,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>System.Double</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary><value>To be added.</value><remarks>To be added.</remarks></Docs>
+      <Docs><summary>The X Coordinate</summary><value></value><remarks></remarks></Docs>
     </Member><Member MemberName="Y">
       <MemberSignature Language="C#" Value="public double Y { set; get; }" />
       <MemberType>Property</MemberType>
@@ -109,15 +72,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>System.Double</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary><value>To be added.</value><remarks>To be added.</remarks></Docs>
-    </Member><Member MemberName="Z">
-      <MemberSignature Language="C#" Value="public double Z { set; get; }" />
-      <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue><ReturnType>System.Double</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary><value>To be added.</value><remarks>To be added.</remarks></Docs>
+      <Docs><summary>The Y Coordinate</summary><value></value><remarks></remarks></Docs>
     </Member>
   </Members>
 </Type>

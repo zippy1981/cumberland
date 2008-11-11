@@ -8,12 +8,10 @@
     <BaseTypeName>System.Enum</BaseTypeName>
   </Base>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Describes how a <see cref="T:Cumberland.Point" /> feature will be drawn if <see cref="P:Cumberland.Style.PointSymbol" /> is set to 'Shape'</summary>
+    <remarks>The fill and line properties of the shape are defined by the other properties of <see cref="T:Cumberland.Style" /></remarks>
   </Docs>
   <Members>
-    
-    
     <Member MemberName="Circle">
       <MemberSignature Language="C#" Value="Circle" />
       <MemberType>Field</MemberType>
@@ -21,7 +19,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.PointSymbolShapeType</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary></Docs>
+      <Docs><summary>a circle will drawn</summary></Docs>
     </Member><Member MemberName="None">
       <MemberSignature Language="C#" Value="None" />
       <MemberType>Field</MemberType>
@@ -29,7 +27,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.PointSymbolShapeType</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary></Docs>
+      <Docs><summary>nothing will be drawn</summary></Docs>
     </Member><Member MemberName="Square">
       <MemberSignature Language="C#" Value="Square" />
       <MemberType>Field</MemberType>
@@ -37,7 +35,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.PointSymbolShapeType</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary></Docs>
+      <Docs><summary>a square will be drawn</summary></Docs>
     </Member>
   </Members>
 </Type>

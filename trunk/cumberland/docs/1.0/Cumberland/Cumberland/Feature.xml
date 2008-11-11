@@ -51,10 +51,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
-      <Docs><summary>The value to use when drawing the feature based on the <see cref="P:Cumberland.Layer.ThemeField" /> </summary>
-      <value></value>
-      <remarks></remarks>
-      </Docs>
+      <Docs><summary>The value to use when drawing the feature based on the <see cref="P:Cumberland.Layer.ThemeField" /> </summary><value></value><remarks></remarks></Docs>
     </Member>
   </Members>
 </Type>

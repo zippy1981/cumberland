@@ -9,8 +9,9 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Provides all necessary information for the <see cref="T:Cumberland.Drawing.IMapDrawer" /> to render a map.</summary>
+    <remarks>
+    </remarks>
   </Docs>
   <Members>
     
@@ -25,7 +26,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
-      <Docs><summary>To be added.</summary><remarks>To be added.</remarks></Docs>
+      <Docs><summary></summary><remarks></remarks></Docs>
     </Member><Member MemberName="Extents">
       <MemberSignature Language="C#" Value="public Cumberland.Rectangle Extents { set; get; }" />
       <MemberType>Property</MemberType>
@@ -33,7 +34,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Rectangle</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary><value>To be added.</value><remarks>To be added.</remarks></Docs>
+      <Docs><summary>The extents of the map</summary><value></value><remarks>These must be in the coordinate system of <see cref="P:Cumberland.Map.Projection" /></remarks></Docs>
     </Member><Member MemberName="Height">
       <MemberSignature Language="C#" Value="public int Height { set; get; }" />
       <MemberType>Property</MemberType>
@@ -41,7 +42,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>System.Int32</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary><value>To be added.</value><remarks>To be added.</remarks></Docs>
+      <Docs><summary>The height of the map image to render (in pixels)</summary><value></value><remarks></remarks></Docs>
     </Member><Member MemberName="Layers">
       <MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Cumberland.Layer&gt; Layers { get; }" />
       <MemberType>Property</MemberType>
@@ -49,7 +50,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Layer&gt;</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary><value>To be added.</value><remarks>To be added.</remarks></Docs>
+      <Docs><summary>The layers in the map</summary><value></value><remarks>The list of <see cref="T:Cumberland.Layer" /></remarks></Docs>
     </Member><Member MemberName="Projection">
       <MemberSignature Language="C#" Value="public string Projection { set; get; }" />
       <MemberType>Property</MemberType>
@@ -57,7 +58,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary><value>To be added.</value><remarks>To be added.</remarks></Docs>
+      <Docs><summary>A Proj.4 projection string which reflects the coordinate system for which to render the map</summary><value></value><remarks>The Layer's <see cref="P:Cumberland.Layer.Projection" /> property must also be set in order to transform a layer's data</remarks></Docs>
     </Member><Member MemberName="Width">
       <MemberSignature Language="C#" Value="public int Width { set; get; }" />
       <MemberType>Property</MemberType>
@@ -65,7 +66,7 @@
         <AssemblyVersion>0.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue><ReturnType>System.Int32</ReturnType></ReturnValue>
-      <Docs><summary>To be added.</summary><value>To be added.</value><remarks>To be added.</remarks></Docs>
+      <Docs><summary>The width of the map to be rendered (in pixels)</summary><value></value><remarks></remarks></Docs>
     </Member>
   </Members>
 </Type>
