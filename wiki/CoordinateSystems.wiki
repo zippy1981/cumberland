@@ -48,8 +48,24 @@ That's my SRID at the beginning and the proj.4 string after that.
 
 The ProjFourWrapper class in the Cumberland.Projection namespace provides all coordinate transformation functionality in Cumberland.  You can use this class directly to transform a Point programatically:
 
+{{{
+using (ProjFourWrapper source = new ProjFourWrapper(ProjFourWrapper.WGS84))
+{
+    using (ProjFourWrapper destination = new ProjFourWrapper(3087))
+    {
+        Point ll = new Point(-82,32);
+        Point p = source.Transform(destination, ll);
+    }
+}
+}}}
+
+This code will transform the geographic point into the Florida Albers projection mentioned above.  A couple of notes:
+
+  * A ProjFourWrapper must be disposed of as it maintains a reference into the Proj.4 c library
+  * ProjFourWrapper.WGS84 is a convenience property that holds the proj.4 coordinate system for WGS84.  There is another, 'SphericalMercatorProjection', which holds projection used in many popular web mapping applications (Google Maps, Microsoft Virtual Earth)
+
 = Coordinate Systems in maps =
 
-The [http://code.google.com/p/cumberland/wiki/mapXmlFormat map format] provides the ability to set the projection string in both the map and the layers.  This provides the ability to transform your data as the map is rendered.  Thus you could have multiple layers whose data sources have different coordinate systems rendered on one map.
+The [http://code.google.com/p/cumberland/wiki/mapXmlFormat map format] provides properties to set the projection string in both the map and the layers.  This provides the ability to transform your data when the map is rendered.  Thus you could have multiple layers whose data sources have different coordinate systems rendered on one map.
 
 If no projection is specified in the map, then no coordinate transformations occur.  If the map has a projection, but a layer does not, then that layer will not be transformed.
