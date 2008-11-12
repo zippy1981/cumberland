@@ -16,6 +16,34 @@ Additionally, the Earth is not a sphere.  It is more of an ellipsoid.  When deal
 
 Now, with all the cartographers in all the world projecting their data in their own local way, shouldn't there be a way to coordinate this so data can be transferred with ease?  Well there is, actually there are multiple, but we'll refer to the [http://www.epsg.org/ EPSG] which provides a set of spatial reference ids (SRIDs) that can we can use to lookup via Proj.4 to acquire our coordinate system.
 
+= Finding our SRID = 
+
+If you are not sure what coordinate system your data is, you should check with your data provider.  If your data is in a Shapefile, most times it will come with file with extension 'prj'.  This is its projection in [http://en.wikipedia.org/wiki/Well-known_text Well-Known Text] format.
+
+For example, here is one from some data I have:
+
+{{{
+PROJCS["Albers Conical Equal Area (Florida Geographic Data Library)",
+GEOGCS["GCS_North_American_1983_HARN",DATUM["D_North_American_1983_HARN",
+SPHEROID["GRS_1980",6378137.0,298.257222101]],PRIMEM["Greenwich",0.0],
+UNIT["Degree",0.0174532925199433]],PROJECTION["Albers"],
+PARAMETER["False_Easting",400000.0],PARAMETER["False_Northing",0.0],
+PARAMETER["Central_Meridian",-84.0],PARAMETER["Standard_Parallel_1",24.0],
+PARAMETER["Standard_Parallel_2",31.5],PARAMETER["Central_Parallel",24.0],
+UNIT["Meter",1.0]]
+}}}
+
+For your curiosity, the 'PROJCS' section provides detail about the projection, and 'GEOGCS' provides details about the datum.  Now, we could actually take the above information and construct a proj.4 string, but it is likely that a SRID already exists for this projection.
+
+One way to do this is pick out a few keywords from the PROJCS definition.  From the above, I select 'Florida', and 'Albers', and 'HARN'.  I can then look it up in the 'epsg' file that gets included with proj.4.  I find:
+
+{{{
+# NAD83(HARN) / Florida GDL Albers
+<3087> +proj=aea +lat_1=24 +lat_2=31.5 +lat_0=24 +lon_0=-84 +x_0=400000 +y_0=0 +ellps=GRS80 +units=m +no_defs  <>
+}}}
+
+That's my SRID at the beginning and the proj.4 string after that. 
+
 = Coordinate systems in the API =
 
 The ProjFourWrapper class in the Cumberland.Projection namespace provides all coordinate transformation functionality in Cumberland.  You can use this class directly to transform a Point programatically:
