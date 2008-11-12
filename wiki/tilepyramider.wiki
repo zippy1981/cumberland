@@ -19,7 +19,7 @@ example: mono tilepyramider.exe  /path/to/map
 Options:
   -e, --extents=VALUE        comma-delimited extents for clipping tile generation 
 				(e.g. -180,-90,180,90).  Overrides the map file.  
-				(Must be in map's coordinate system)
+				(Must be in maps coordinate system)
   -h, --help                 show this message and exit
   -o, --output=VALUE         the path of the where to create.  
 				Defaults to current directory
