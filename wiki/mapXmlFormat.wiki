@@ -69,6 +69,8 @@ The inner content within this element is dependent on it's sourceType attribute.
 </Data>
 }}}
 
+Note the relative path to the shapefile.  If a relative path is used, it is expected to be relative to the map xml file path.  This can be used for bundling up resources without having to worry about mangled file paths.
+
 A database data element looks like this:
 
 {{{
@@ -79,3 +81,27 @@ A database data element looks like this:
 }}}
 
 _Note: there are other optional parameters for database feature sources that can be used for doing subqueries.  There is an example [http://code.google.com/p/cumberland/source/browse/trunk/cumberland/Cumberland.Tests/maps/postgis.xml here]._
+
+Additionally, you can use the SimpleFeatureSource to class create an inline feature source ([http://code.google.com/p/cumberland/source/browse/trunk/cumberland/Cumberland.Tests/maps/simplefeatures.xml example here]).
+
+== Style elements ==
+
+The 'Styles' element, within the 'Layer' element can have zero to many 'Style' elements.  These affect how the features in the feature source are drawn.  If there is no Layer.Theme element or it is set to 'None', then the first Style element is used.  If theming is enabled, then the style element that is used depends on if the feature matches parameters specified within the style.  If there is no matching style for the feature, the feature is not drawn.
+
+The possible child elements for 'Style' are:
+
+{{{
+<Style>
+    <FillColor>255,100,255,100</FillColor>
+    <LineColor>255,0,155,0</LineColor>
+    <LineSize>1</LineSize>
+    <LineStyle>Solid</LineStyle>
+    <PointSize>5</PointSize>
+    <PointSymbol>Shape</PointSymbol>
+    <PointSymbolShape>Square</PointSymbolShape>
+    <MinRangeThemeValue>0</MinRangeThemeValue>
+    <MaxRangeThemeValue>500000</MaxRangeThemeValue>
+    <UniqueThemeValue>Rio Grande de Santiago</UniqueThemeValue>
+    <PointSymbolImagePath>images/city_icon.png</PointSymbolImagePath>
+</Style>
+}}}
