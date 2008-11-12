@@ -41,6 +41,15 @@
 
   <xsl:template name="create-default-style">
     <style>
+    
+	hr.cleaner {
+	      clear:both;
+	      height:1px;
+	      margin: -1px 0 0 0; padding:0;
+	      border:none;
+	      visibility: hidden;
+	}
+    
       a { text-decoration: none }
 
       div.SideBar {
@@ -50,6 +59,8 @@
         float: right;
         border: thin solid black;
         background-color: #f2f2f2;
+        margin-bottom: 10px;
+        margin-left: 10px;
       }
     
       .CollectionTitle { font-weight: bold }
@@ -308,6 +319,7 @@
   </xsl:template>
 
   <xsl:template name="create-default-signature">
+    <hr class="cleaner" />
     <div>
       <xsl:if test="count(Signature/@id) &gt; 0">
         <xsl:attribute name="id">
