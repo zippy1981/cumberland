@@ -56,12 +56,14 @@
       <Type Name="IFileFeatureSource" Kind="Interface" />
       <Type Name="SimpleFeatureSource" Kind="Class" />
       <Type Name="SpatialType" Kind="Enumeration" />
-      <Type Name="WellKnownText" Kind="Class" />
     </Namespace>
     <Namespace Name="Cumberland.Data.Shapefile">
       <Type Name="DBaseIIIFile" Kind="Class" />
       <Type Name="Shapefile" Kind="Class" />
       <Type Name="ShapeType" Kind="Enumeration" />
+    </Namespace>
+    <Namespace Name="Cumberland.Data.WellKnownText">
+      <Type Name="SimpleFeatureAccess" Kind="Class" />
     </Namespace>
     <Namespace Name="Cumberland.Drawing">
       <Type Name="IMapDrawer" Kind="Interface" />

@@ -1,5 +1,5 @@
-<Type Name="WellKnownText" FullName="Cumberland.Data.WellKnownText">
-  <TypeSignature Language="C#" Value="public static class WellKnownText" />
+<Type Name="SimpleFeatureAccess" FullName="Cumberland.Data.WellKnownText.SimpleFeatureAccess">
+  <TypeSignature Language="C#" Value="public static class SimpleFeatureAccess" />
   <AssemblyInfo>
     <AssemblyName>Cumberland</AssemblyName>
     <AssemblyVersion>0.1.0.0</AssemblyVersion>
@@ -9,7 +9,7 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>Provides a set of utility methods for working with Well-Known Text</summary>
+    <summary>Provides a set of utility methods for working with Well-Known Text Simple Feature Access Objects</summary>
     <remarks>Well-Known Text (WKT) is a standard provided by the Open Geospatial Consortium (OGC).</remarks>
   </Docs>
   <Members>
