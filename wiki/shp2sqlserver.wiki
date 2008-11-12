@@ -3,9 +3,11 @@
 
 = Introduction =
 
-shp2sqlserver is a command line tool for loading shapefiles into Microsoft SQL Server 2008.  It is modeled after [http://postgis.refractions.net/ PostGIS']s shp2pgsql, except that it loads directly into the db instead of writing sql to stdout. Here is the usage:
+shp2sqlserver is a command line tool for loading shapefiles into Microsoft SQL Server 2008.  It is modeled after [http://postgis.refractions.net/ PostGIS']s shp2pgsql, except that it loads directly into the database instead of writing sql to stdout. 
 
 = Details =
+
+Here is the usage:
 
 {{{
 shp2sqlserver.exe -h
