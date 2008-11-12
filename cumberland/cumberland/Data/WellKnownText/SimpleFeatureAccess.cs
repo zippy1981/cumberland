@@ -28,9 +28,9 @@ using System.Text;
 
 using Cumberland;
 
-namespace Cumberland.Data
+namespace Cumberland.Data.WellKnownText
 {
-	public static class WellKnownText
+	public static class SimpleFeatureAccess
 	{
 #region parse methods
 		

@@ -60,8 +60,8 @@
     <Compile Include="Style.cs" />
     <Compile Include="Data\FeatureType.cs" />
     <Compile Include="Web\TileProvider.cs" />
-    <Compile Include="Data\WellKnownText.cs" />
     <Compile Include="Drawing\MapConfigurationException.cs" />
+    <Compile Include="Data\WellKnownText\SimpleFeatureAccess.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
