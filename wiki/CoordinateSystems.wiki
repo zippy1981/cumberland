@@ -9,8 +9,10 @@ Internally, cumberland uses the [http://trac.osgeo.org/proj/ Proj.4] C Library f
 
 = A Coordinate System Primer =
 
-The earth is not flat, but your computer screen is.  Therefore, it is necessary to project the earth onto a flat surface.  Note that any sort of projection will cause some distortion (as Wikipedia says "You cannot flatten an orange peel without tearing or warping it"^[http://en.wikipedia.org/wiki/Map_projection 1]^)
+The earth is not flat, but your computer screen is.  Therefore, it is necessary to project the earth onto a flat surface.  Note that any sort of projection will cause some distortion (as Wikipedia [http://en.wikipedia.org/wiki/Map_projection says] "You cannot flatten an orange peel without tearing or warping it"), so cartographers attempt to find 
+a projection that causes the least distortion in the area they want to map.
 
+Additionally, the Earth is not a sphere.  It is more of an ellipsoid.  When dealing with coordinate systems, it's shape must be taken into account or there is more distortion.  So, we need a coordinate frame, or datum, that describes the Earth as accurately as possible.  The latest of these is WGS84 (World Geodetic System).  It is used by the Global Positioning System (GPS) and many others.
 
 = Coordinate systems in the API =
 
