@@ -99,9 +99,17 @@ The possible child elements for 'Style' are:
     <PointSize>5</PointSize>
     <PointSymbol>Shape</PointSymbol>
     <PointSymbolShape>Square</PointSymbolShape>
+    <PointSymbolImagePath>images/city_icon.png</PointSymbolImagePath>
     <MinRangeThemeValue>0</MinRangeThemeValue>
     <MaxRangeThemeValue>500000</MaxRangeThemeValue>
     <UniqueThemeValue>Rio Grande de Santiago</UniqueThemeValue>
-    <PointSymbolImagePath>images/city_icon.png</PointSymbolImagePath>
 </Style>
 }}}
+
+Most of these are obvious.  They describe how a feature should be drawn given it's type (point, polygon, polyline).  The format for colors is 'A,R,G,B'.  The *ThemeValue properties are used in conjunction with the Layer.Theme and Layer.ThemeField to determine whether a style applies to a feature.  
+
+= Examples =
+
+That's the basics of the map xml format.  Several example maps are stored in the source:
+
+[http://code.google.com/p/cumberland/source/browse/#svn/trunk/cumberland/Cumberland.Tests/maps]
