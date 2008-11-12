@@ -17,9 +17,12 @@ Generates a pyramid of tile images for use for popular web mapping interfaces
 example: mono tilepyramider.exe  /path/to/map
 
 Options:
-  -e, --extents=VALUE        comma-delimited extents for clipping tile generation (e.g. -180,-90,180,90).  Overrides the map file.  (Must be in map's coordinate system)
+  -e, --extents=VALUE        comma-delimited extents for clipping tile generation 
+				(e.g. -180,-90,180,90).  Overrides the map file.  
+				(Must be in map's coordinate system)
   -h, --help                 show this message and exit
-  -o, --output=VALUE         the path of the where to create.  Defaults to current directory
+  -o, --output=VALUE         the path of the where to create.  
+				Defaults to current directory
   -x, --maxzoom=VALUE        the maximum zoom level
   -n, --minzoom=VALUE        the minimum zoom level
   -t, --test                 Test - only calculate the total and return
@@ -80,3 +83,7 @@ Finally, handle loading/unloading in the html body element:
 {{{
 <body onload="initialize();" onunload="GUnload();">
 }}}
+
+= Example =
+
+You can see a basic demo [http://www.salmonsalvo.net/Cumberland:GoogleMapsTest here].
