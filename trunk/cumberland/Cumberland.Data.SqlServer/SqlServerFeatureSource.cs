@@ -28,6 +28,7 @@ using System.Data.SqlClient;
 
 using Cumberland;
 using Cumberland.Data;
+using Cumberland.Data.WellKnownText;
 
 
 namespace Cumberland.Data.SqlServer
@@ -165,7 +166,7 @@ namespace Cumberland.Data.SqlServer
 				{
 					sql += string.Format(" where {0}::STGeomFromText('{1}',{2}).STIntersects({3}) = 1",
 					                     spatialType,
-					                     WellKnownText.CreateFromRectangle(rectangle),
+					                     SimpleFeatureAccess.CreateFromRectangle(rectangle),
 					                     srid,
 					                     geometryColumn);
 				}
@@ -177,7 +178,7 @@ namespace Cumberland.Data.SqlServer
 						while (dr.Read())
 						{
 							string wkt = dr.GetString(0);
-							Feature f = WellKnownText.Parse(wkt);
+							Feature f = SimpleFeatureAccess.Parse(wkt);
 
 							if (f == null)
 							{

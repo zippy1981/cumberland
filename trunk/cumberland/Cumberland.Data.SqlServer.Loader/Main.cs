@@ -31,6 +31,7 @@ using System.Text;
 
 using Cumberland;
 using Cumberland.Data.Shapefile;
+using Cumberland.Data.WellKnownText;
 
 using NDesk.Options;
 
@@ -235,15 +236,15 @@ namespace Cumberland.Data.SqlServer.Loader
 					string wkt = string.Empty;
 					if (shp.SourceFeatureType == FeatureType.Polygon)
 					{
-						wkt = WellKnownText.CreateFromPolygon(f as Polygon);
+						wkt = SimpleFeatureAccess.CreateFromPolygon(f as Polygon);
 					}
 					else if (shp.SourceFeatureType == FeatureType.Point)
 					{
-						wkt = WellKnownText.CreateFromPoint(f as Point);
+						wkt = SimpleFeatureAccess.CreateFromPoint(f as Point);
 					}
 					else
 					{
-						wkt = WellKnownText.CreateFromPolyLine(f as PolyLine);
+						wkt = SimpleFeatureAccess.CreateFromPolyLine(f as PolyLine);
 					}
 					
 					sql.AppendFormat("{2}::STGeomFromText('{0}', {1})", 

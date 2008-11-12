@@ -1,3 +1,10 @@
+2008-11-12  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.Data.SqlServer/SqlServerFeatureSource.cs,
+	  Cumberland.Data.PostGIS/PostGISFeatureSource.cs,
+	  Cumberland.Data.SqlServer.Loader/Main.cs: rename WellKnownText to
+	  SimpleFeatureAccess
+
 2008-11-10  Scott Ellington <scott.ellington@gmail.com> 
 
 	* docs/1.0/Cumberland/Cumberland/PointSymbolShapeType.xml: switch to

@@ -27,6 +27,7 @@ using System.Collections.Generic;
 
 using Cumberland;
 using Cumberland.Data;
+using Cumberland.Data.WellKnownText;
 
 using Npgsql;
 
@@ -176,7 +177,7 @@ namespace Cumberland.Data.PostGIS
 					{
 						while (dr.Read())
 						{
-							Feature f = WellKnownText.Parse(dr.GetString(0));
+							Feature f = SimpleFeatureAccess.Parse(dr.GetString(0));
 							if (themeField != null)
 							{
 								f.ThemeFieldValue = dr[1].ToString();
