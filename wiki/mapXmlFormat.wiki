@@ -106,7 +106,7 @@ The possible child elements for 'Style' are:
 </Style>
 }}}
 
-Most of these are obvious.  They describe how a feature should be drawn given it's type (point, polygon, polyline).  The format for colors is 'A,R,G,B'.  The *ThemeValue properties are used in conjunction with the Layer.Theme and Layer.ThemeField to determine whether a style applies to a feature.  
+Most of these are obvious.  They describe how a feature should be drawn given it's type (point, polygon, polyline).  The format for colors is 'A,R,G,B'.  The ThemeValue properties are used in conjunction with the Layer.Theme and Layer.ThemeField to determine whether a style applies to a feature.  
 
 = Examples =
 
