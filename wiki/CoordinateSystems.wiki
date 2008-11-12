@@ -1,0 +1,7 @@
+#summary Understanding coordinate systems in cumberland
+
+= Introduction =
+
+Cumberland provides the ability to do coordinate transformations.  Commonly, this means projecting from a spherical earth onto a flat map, but could include transforming between datums as well (datums are just estimations of the earth's shape --it's not a perfect sphere).
+
+Internally, cumberland uses the [http://trac.osgeo.org/proj/ Proj.4] C Library to do coordinate transformations, and so it uses their format for describing projections: a proj4 string.  It is recommended that you review this site for information about proj.4 strings and about coordinate systems in general.
