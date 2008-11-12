@@ -1,7 +1,23 @@
 #summary Understanding coordinate systems in cumberland
+#labels Featured
 
 = Introduction =
 
-Cumberland provides the ability to do coordinate transformations.  Commonly, this means projecting from a spherical earth onto a flat map, but could include transforming between datums as well (datums are just estimations of the earth's shape --it's not a perfect sphere).
+Cumberland provides the ability to do coordinate transformations. 
 
-Internally, cumberland uses the [http://trac.osgeo.org/proj/ Proj.4] C Library to do coordinate transformations, and so it uses their format for describing projections: a proj4 string.  It is recommended that you review this site for information about proj.4 strings and about coordinate systems in general.
+Internally, cumberland uses the [http://trac.osgeo.org/proj/ Proj.4] C Library for this, and so it uses their format for describing projections: a proj4 string.  It is recommended that you review this site for information about proj.4 strings and about coordinate systems in general.
+
+= A Coordinate System Primer =
+
+The earth is not flat, but your computer screen is.  Therefore, it is necessary to project the earth onto a flat surface.  Note that any sort of projection will cause some distortion (as Wikipedia says "You cannot flatten an orange peel without tearing or warping it"^[http://en.wikipedia.org/wiki/Map_projection 1]^)
+
+
+= Coordinate systems in the API =
+
+The ProjFourWrapper class in the Cumberland.Projection namespace provides all coordinate transformation functionality in Cumberland.  You can use this class directly to transform a Point programatically:
+
+= Coordinate Systems in maps =
+
+The [http://code.google.com/p/cumberland/wiki/mapXmlFormat map format] provides the ability to set the projection string in both the map and the layers.  This provides the ability to transform your data as the map is rendered.  Thus you could have multiple layers whose data sources have different coordinate systems rendered on one map.
+
+If no projection is specified in the map, then no coordinate transformations occur.  If the map has a projection, but a layer does not, then that layer will not be transformed.
