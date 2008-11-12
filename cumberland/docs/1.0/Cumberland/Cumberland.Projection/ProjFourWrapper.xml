@@ -27,7 +27,9 @@
   </Docs>
   <Members>
     
-  <Member MemberName=".ctor">
+  
+    
+    <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public ProjFourWrapper (int epsg);" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
@@ -122,9 +124,7 @@
     <MemberSignature Language="C#" Value="public static string SphericalMercatorProjection { get; }" />
     <MemberType>Property</MemberType><AssemblyInfo><AssemblyVersion>0.1.0.0</AssemblyVersion></AssemblyInfo>
     <ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
-    <Docs><summary>Gets the projection string for a spherical mercator projection used by several popular web applications</summary>
-    <value></value><remarks>Provided for convenience</remarks></Docs></Member>
-    <Member MemberName="Transform">
+    <Docs><summary>Gets the projection string for a spherical mercator projection used by several popular web applications</summary><value></value><remarks>Provided for convenience</remarks></Docs></Member><Member MemberName="Transform">
       <MemberSignature Language="C#" Value="public Cumberland.Point Transform (Cumberland.Projection.ProjFourWrapper destinationProj, Cumberland.Point point);" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -132,10 +132,7 @@
       </AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Point</ReturnType></ReturnValue>
       <Parameters><Parameter Name="destinationProj" Type="Cumberland.Projection.ProjFourWrapper" /><Parameter Name="point" Type="Cumberland.Point" /></Parameters>
-      <Docs><param name="destinationProj">The destination coordinate system</param><param name="point">The point to be transformed</param>
-      <summary>Transforms the given point from the current coordinate system to the given destination coordinate system</summary>
-      <returns>The transformed point</returns>
-      <remarks></remarks></Docs>
+      <Docs><param name="destinationProj">The destination coordinate system</param><param name="point">The point to be transformed</param><summary>Transforms the given point from the current coordinate system to the given destination coordinate system</summary><returns>The transformed point</returns><remarks></remarks></Docs>
     </Member><Member MemberName="Version">
       <MemberSignature Language="C#" Value="public static string Version { get; }" />
       <MemberType>Property</MemberType>
@@ -144,12 +141,10 @@
       </AssemblyInfo>
       <ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
       <Docs><summary>Gets the Proj.4 version</summary><value></value><remarks></remarks></Docs>
-    </Member>
-    <Member MemberName="WGS84">
+    </Member><Member MemberName="WGS84">
     <MemberSignature Language="C#" Value="public static string WGS84 { get; }" />
     <MemberType>Property</MemberType><AssemblyInfo><AssemblyVersion>0.1.0.0</AssemblyVersion></AssemblyInfo>
     <ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
-    <Docs><summary>Gets the projection string for the ubiquitous WGS84 coordinate system</summary>
-    <value>the Proj.4 projection string</value><remarks>WGS84 is a common datum used for spatial data.</remarks></Docs></Member>
+    <Docs><summary>Gets the projection string for the ubiquitous WGS84 coordinate system</summary><value>the Proj.4 projection string</value><remarks>WGS84 is a common datum used for spatial data.</remarks></Docs></Member>
     </Members>
 </Type>
