@@ -13,20 +13,19 @@
         <title>
           <xsl:value-of select="Title" />
         </title>
-        <meta http-equiv="Content-Type" content="text/html;charset=utf8" />
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
         <xsl:call-template name="create-default-style" />
         <xsl:call-template name="create-default-script" />
       </head>
       <body>
         <!-- HEADER -->
         <xsl:call-template name="create-default-collection-title" />
-        <xsl:call-template name="create-index" />
+        <!--<xsl:call-template name="create-index" />-->
         <xsl:call-template name="create-default-title" />
         <xsl:call-template name="create-default-summary" />
         <xsl:call-template name="create-default-signature" />
         <xsl:call-template name="create-default-remarks" />
         <xsl:call-template name="create-default-members" />
-        <hr size="1" />
         <xsl:call-template name="create-default-copyright" />
       </body>
     </html>
