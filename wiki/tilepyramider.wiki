@@ -1,4 +1,4 @@
-#summary a tile pyramider generator for popular web mapping applications
+#summary a tile pyramid generator for popular web mapping applications
 #labels Featured
 
 = Introduction =
