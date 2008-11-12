@@ -12,7 +12,9 @@ Internally, cumberland uses the [http://trac.osgeo.org/proj/ Proj.4] C Library f
 The earth is not flat, but your computer screen is.  Therefore, it is necessary to project the earth onto a flat surface.  Note that any sort of projection will cause some distortion (as Wikipedia [http://en.wikipedia.org/wiki/Map_projection says] "You cannot flatten an orange peel without tearing or warping it"), so cartographers attempt to find 
 a projection that causes the least distortion in the area they want to map.
 
-Additionally, the Earth is not a sphere.  It is more of an ellipsoid.  When dealing with coordinate systems, it's shape must be taken into account or there is more distortion.  So, we need a coordinate frame, or datum, that describes the Earth as accurately as possible.  The latest of these is WGS84 (World Geodetic System).  It is used by the Global Positioning System (GPS) and many others.
+Additionally, the Earth is not a sphere.  It is more of an ellipsoid.  When dealing with coordinate systems, it's shape must be taken into account or there is more distortion.  So, we need a coordinate frame, or datum, that describes the Earth as accurately as possible.  The latest of these is WGS84 (World Geodetic System).  It is used by the Global Positioning System (GPS) and many others.  Data may or may not be projected, but it should always have a datum.
+
+Now, with all the cartographers in all the world projecting their data in their own local way, shouldn't there be a way to coordinate this so data can be transferred with ease?  Well there is, actually there are multiple, but we'll refer to the [http://www.epsg.org/ EPSG] which provides a set of spatial reference ids (SRIDs) that can we can use to lookup via Proj.4 to acquire our coordinate system.
 
 = Coordinate systems in the API =
 
