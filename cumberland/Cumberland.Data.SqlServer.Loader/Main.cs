@@ -45,7 +45,7 @@ namespace Cumberland.Data.SqlServer.Loader
 			
 			// application variables
 			string connectionString = null;
-			int srid = -1;
+			int srid = 0;
 			string idColumn = "gid";
 			string geomColumn = "the_geom";
 			string tableName = null;
