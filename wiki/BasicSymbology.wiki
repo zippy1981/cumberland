@@ -54,3 +54,7 @@ The point size is the width/height of the square or the diameter of the circle. 
 Note the relative path, this is interpreted as relative to the map xml file.  This allows the images to be bundled with the map.
 
 An example of point symbols is found below.
+
+= Thematic mapping =
+
+Thematic mapping allows using particular styles based on a feature's properties.  For example, drawing states based on their population.  This must be configured in the Layer (see [mapXmlFormat#Layer_Elements])
