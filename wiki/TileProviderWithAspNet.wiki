@@ -68,6 +68,8 @@ At this point, if we wanted to store cached tiles in a database, we could check 
 		Cumberland.Web.TileProvider tp = new Cumberland.Web.TileProvider(map);
 }}}
 
+_Note: We could also store the TileProvider object in session for fast access._
+
 Finally, we render our map, and flush it into the response output stream:
 
 {{{
