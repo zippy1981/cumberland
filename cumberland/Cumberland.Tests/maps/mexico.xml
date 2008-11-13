@@ -44,20 +44,6 @@
 			<Styles>
 				<Style>
 					<LineWidth>1</LineWidth>
-					<LineColor>255,165,105,125</LineColor>
-					<LineStyle>Solid</LineStyle>					
-				</Style>
-			</Styles>
-			<Projection>+init=epsg:4326</Projection>
-			<Id>roads</Id>
-			<Data sourceType="Cumberland.Data.IFileFeatureSource" sourceInstance="Cumberland.Data.Shapefile.Shapefile">
-				<FilePath>../shape_eg_data/mexico/roads.shp</FilePath>
-			</Data>
-		</Layer>
-		<Layer><!--Test a non-themed layer-->
-			<Styles>
-				<Style>
-					<LineWidth>1</LineWidth>
 					<LineColor>255,105,105,105</LineColor>
 					<LineStyle>Solid</LineStyle>					
 				</Style>
@@ -76,7 +62,7 @@
 					<UniqueThemeValue>Rio Grande de Santiago</UniqueThemeValue>
 					<LineWidth>3</LineWidth>
 					<LineColor>255,105,105,225</LineColor>
-					<LineStyle>Solid</LineStyle>					
+					<LineStyle>Solid</LineStyle>
 				</Style>
 			</Styles>
 			<Projection>+init=epsg:4326</Projection>

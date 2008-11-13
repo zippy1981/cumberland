@@ -171,3 +171,18 @@ h3 a
 	color: black;
 }
 
+.CodeExampleTable 
+{ 
+	background-color: #eeeeee; 
+	border: 1px dashed #cccccc; 
+	padding: .5em; 
+	width: 100%;
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+#cumberlandhead
+{
+	text-align: right;
+	font-style:italic; 
+}
