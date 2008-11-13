@@ -98,6 +98,7 @@
     <None Include="maps\sqlserver.xml" />
     <None Include="lib\nunit.framework.dll" />
     <None Include="maps\simplefeatures.xml" />
+    <None Include="docs\cumberland_release_test_plan.doc" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

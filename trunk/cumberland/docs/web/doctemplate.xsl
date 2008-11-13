@@ -19,6 +19,7 @@
       </head>
       <body>
         <!-- HEADER -->
+        <xsl:call-template name="create-cumberland-header" />        
         <xsl:call-template name="create-default-collection-title" />
         <!--<xsl:call-template name="create-index" />-->
         <xsl:call-template name="create-default-title" />
@@ -287,6 +288,12 @@
         </p>
       </div>
     </xsl:if>
+  </xsl:template>
+
+  <xsl:template name="create-cumberland-header">
+    <div id="cumberlandhead">
+      Cumberland Documentation - <a href="http://code.google.com/p/cumberland/">project home</a>
+    </div>
   </xsl:template>
 
   <xsl:template name="create-default-collection-title">
