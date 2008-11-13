@@ -54,18 +54,26 @@ The point size is the width/height of the square or the diameter of the circle. 
 
 Note the relative path, this is interpreted as relative to the map xml file.  This allows the images to be bundled with the map.
 
-An example of point symbols is found below.
+A example of point symbols is found below.
 
 = Thematic mapping =
 
 Thematic mapping allows using particular styles based on a feature's properties.  For example, drawing states based on their population.  This must be configured in the [mapXmlFormat#Layer_Elements Layer element].  The field that we test in the feature is specified by Layer->ThemeField.  The type of thematic mapping is specified in Layer->Theme.  Currently, there are two supported types of themes:
 
-  # Unique - the features value must equal the value specified in the style:
+  # Unique - the field value must equal the value specified in the style:
     {{{
     <UniqueThemeValue>Rio Grande de Santiago</UniqueThemeValue>
     }}}
-  # NumericRange - the features (numeric) value must fall within the numeric range specified in the style:
+  # NumericRange - the (numeric) field value must fall within the numeric range specified in the style:
     {{{
     <MinRangeThemeValue>2000001</MinRangeThemeValue>
     <MaxRangeThemeValue>100000000</MaxRangeThemeValue>			
     }}}
+
+If a feature's field value does not match any of the provided styles, it will not be drawn.  Also, Layer->Theme.None disables theming and is the same as not providing the element.
+
+= Example =
+
+Below is a rendered map which demonstrates the symbology described above.  The map for this is available in the source [http://code.google.com/p/cumberland/source/browse/trunk/cumberland/Cumberland.Tests/maps/mexico.xml here].
+
+[http://cumberland.googlecode.com/files/theming.png]
