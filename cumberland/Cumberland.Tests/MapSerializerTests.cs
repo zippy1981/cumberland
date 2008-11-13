@@ -523,7 +523,7 @@ namespace Cumberland.Tests
 			MapSerializer ms = new MapSerializer();
 			Map m = ms.Deserialize("../../maps/mexico.xml");
 			
-			Assert.IsTrue(Path.IsPathRooted(m.Layers[4].Styles[2].PointSymbolImagePath));
+			Assert.IsTrue(Path.IsPathRooted(m.Layers[3].Styles[2].PointSymbolImagePath));
 		}
 
 #endregion
