@@ -19,3 +19,5 @@ Lines in cumberland are styles with the following properties:
 }}}
 
 LineWidth is the width of the line in pixels, LineColor is the color of the line in format (Alpha,Red,Green,Blue).  LineStyle is the style of line.  It can be Solid, Dashed, Dotted, or None. 
+
+[http://cumberland.googlecode.com/files/Cumberland.LineStyle.png]
