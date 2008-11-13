@@ -1,0 +1,21 @@
+#summary an overview of symbology supported in cumberland
+
+= Introduction =
+
+Symbology in this context mean the study of the symbols that represent cartographic features.  Cumberland currently provides a standard set of style option for creating beautiful maps.
+
+All styling is done in the Style element which is a property of the Layer element.
+
+= Line styles =
+
+Lines in cumberland are styles with the following properties:
+
+{{{
+<Style>
+	<LineWidth>1</LineWidth>
+	<LineStyle>Solid</LineStyle>
+	<LineColor>255,165,165,165</LineColor>
+</Style>
+}}}
+
+LineWidth is the width of the line in pixels, LineColor is the color of the line in format (Alpha,Red,Green,Blue).  LineStyle is the style of line.  It can be Solid, Dashed, Dotted, or None. 
