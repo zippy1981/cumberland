@@ -39,6 +39,7 @@ The FillColor defines the interior color of the polygon.  The format is the same
 Currently, cumberland supports a limited set of symbology for points.  There are shapes, currently squares and rectangles, or external images.  To use shapes, set the following properties:
 
 {{{
+...
 <PointSize>5</PointSize>
 <PointSymbol>Shape</PointSymbol>
 <PointSymbolShape>Square</PointSymbolShape>
@@ -57,4 +58,14 @@ An example of point symbols is found below.
 
 = Thematic mapping =
 
-Thematic mapping allows using particular styles based on a feature's properties.  For example, drawing states based on their population.  This must be configured in the Layer (see [mapXmlFormat#Layer_Elements])
+Thematic mapping allows using particular styles based on a feature's properties.  For example, drawing states based on their population.  This must be configured in the [mapXmlFormat#Layer_Elements Layer element].  The field that we test in the feature is specified by Layer->ThemeField.  The type of thematic mapping is specified in Layer->Theme.  Currently, there are two supported types of themes:
+
+  # Unique - the features value must equal the value specified in the style:
+    {{{
+    <UniqueThemeValue>Rio Grande de Santiago</UniqueThemeValue>
+    }}}
+  # NumericRange - the features (numeric) value must fall within the numeric range specified in the style:
+    {{{
+    <MinRangeThemeValue>2000001</MinRangeThemeValue>
+    <MaxRangeThemeValue>100000000</MaxRangeThemeValue>			
+    }}}
