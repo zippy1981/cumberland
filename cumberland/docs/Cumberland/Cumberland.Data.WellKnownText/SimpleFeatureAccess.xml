@@ -30,7 +30,11 @@
       </AssemblyInfo>
       <ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
       <Parameters><Parameter Name="polygon" Type="Cumberland.Polygon" /></Parameters>
-      <Docs><param name="polygon">The polygon to convert</param><summary>Converts the given polygon to WKT</summary><returns>Well-Known Text</returns><remarks>If the polygon contains multiple exterior rings, a 'MULTIPOLYGON' WKT will be created.</remarks></Docs>
+      <Docs><param name="polygon">The polygon to convert</param><summary>Converts the given polygon to WKT</summary>
+      <returns>Well-Known Text</returns>
+      <remarks>If the polygon contains multiple exterior rings, a 'MULTIPOLYGON' WKT will be created.  Currently, an exterior ring
+      is defined as a ring in which the points move in a clockwise direction.  A hole is defined as a ring in which
+      the points move in a counter-clockwise direction.</remarks></Docs>
     </Member><Member MemberName="CreateFromPolyLine">
       <MemberSignature Language="C#" Value="public static string CreateFromPolyLine (Cumberland.PolyLine polyLine);" />
       <MemberType>Method</MemberType>
