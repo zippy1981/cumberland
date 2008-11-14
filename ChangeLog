@@ -1,0 +1,421 @@
+2008-11-13  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.Data.SqlServer/Cumberland.Data.SqlServer.csproj: wrong
+	  assembly name
+
+2008-11-13  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.Data.SqlServer.Loader/Main.cs: set default srid to 0
+
+2008-11-12  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.Data.SqlServer/SqlServerFeatureSource.cs,
+	  Cumberland.Data.PostGIS/PostGISFeatureSource.cs,
+	  Cumberland.Data.SqlServer.Loader/Main.cs: rename WellKnownText to
+	  SimpleFeatureAccess
+
+2008-11-10  Scott Ellington <scott.ellington@gmail.com> 
+
+	* docs/1.0/Cumberland/Cumberland/PointSymbolShapeType.xml: switch to
+	  TileConsumer.GoogleMaps
+
+2008-11-10  Scott Ellington <scott.ellington@gmail.com> 
+
+	
+
+2008-11-10  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.Data.SqlServer.Loader/Main.cs: bool field is binary
+
+2008-11-10  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.Data.SqlServer.Loader/Main.cs: allow null values in dbf
+
+2008-11-10  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.TilePyramidGenerator/AssemblyInfo.cs,
+	  Cumberland.DrawMap/AssemblyInfo.cs,
+	  Cumberland.Data.SqlServer/AssemblyInfo.cs,
+	  Cumberland.Data.SqlServer/SqlServerFeatureSource.cs,
+	  Cumberland.Data.PostGIS/AssemblyInfo.cs,
+	  Cumberland.Data.PostGIS/PostGISFeatureSource.cs,
+	  Cumberland.Data.SqlServer.Loader/AssemblyInfo.cs: cleanup
+
+2008-11-09  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.Data.SqlServer/SqlServerFeatureSource.cs,
+	  Cumberland.Data.PostGIS/PostGISFeatureSource.cs: api clean up
+
+2008-11-09  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.InteractiveMap/Cumberland.InteractiveMap.csproj,
+	  cumberland.sln: remove opengl projects
+
+2008-11-09  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.Data.SqlServer/SqlServerFeatureSource.cs,
+	  Cumberland.Data.PostGIS/PostGISFeatureSource.cs: add ability to use
+	  subqueries
+
+2008-11-09  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.TilePyramidGenerator/Main.cs: again
+
+2008-11-09  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.TilePyramidGenerator/Main.cs: fix help
+
+2008-11-09  Scott Ellington <scott.ellington@gmail.com> 
+
+	* cumberland.sln: remove website
+
+2008-11-09  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.TilePyramidGenerator/Cumberland.TilePyramidGenerator.csproj,
+	  Cumberland.TilePyramidGenerator/Main.cs,
+	  Cumberland.DrawMap/Cumberland.DrawMap.csproj,
+	  Cumberland.TileViewerTest/Cumberland.TileViewerTest.csproj: move
+	  stuff around
+	* Cumberland.DrawMap/AssemblyInfo.cs,
+	  Cumberland.Drawing.OpenGL/AssemblyInfo.cs,
+	  Cumberland.Data.SqlServer/AssemblyInfo.cs,
+	  Cumberland.Data.PostGIS/AssemblyInfo.cs: set version
+	* Cumberland.InteractiveMap/AssemblyInfo.cs: bump version
+	* cumberland.sln: move stuff
+	* Cumberland.Data.SqlServer/SqlServerFeatureSource.cs: throw exception
+	  on unsupported geom type
+
+2008-11-08  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.TileViewerTest/Cumberland.TileViewerTest.csproj: switch
+	  output type
+
+2008-11-08  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.TilePyramidGenerator/Main.cs: cleanup language
+	* Cumberland.Data.SqlServer/Cumberland.Data.SqlServer.csproj,
+	  Cumberland.Data.PostGIS/Cumberland.Data.PostGIS.csproj,
+	  Cumberland.Data.SqlServer.Loader/Cumberland.Data.SqlServer.Loader.csproj:
+	  explicitly add refs
+
+2008-11-07  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.TilePyramidGenerator,
+	  Cumberland.TilePyramidGenerator/AssemblyInfo.cs,
+	  Cumberland.TilePyramidGenerator/Cumberland.TilePyramidGenerator.csproj,
+	  Cumberland.TilePyramidGenerator/lib,
+	  Cumberland.TilePyramidGenerator/lib/NDesk.Options.COPYING,
+	  Cumberland.TilePyramidGenerator/lib/NDesk.Options.dll,
+	  Cumberland.TilePyramidGenerator/Main.cs, cumberland.sln: add tile
+	  pyramid generator
+
+2008-11-05  Scott Ellington <scott.ellington@gmail.com> 
+
+	* cumberland.sln, Cumberland.TileViewerTest/TileProvider.aspx.cs:
+	  extract tile generating code into separate class
+
+2008-11-05  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.DrawMap/Cumberland.DrawMap.csproj,
+	  Cumberland.DrawMap/Main.cs, cumberland.sln,
+	  Cumberland.Data.SqlServer,
+	  Cumberland.Data.SqlServer/AssemblyInfo.cs,
+	  Cumberland.Data.SqlServer/SqlServerFeatureSource.cs,
+	  Cumberland.Data.SqlServer/Cumberland.Data.SqlServer.csproj: add sql
+	  server 2008 feature source
+	* Cumberland.Data.PostGIS/PostGISFeatureSource.cs: clean up
+
+2008-11-04  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.Data.PostGIS/PostGISFeatureSource.cs: add theming
+
+2008-11-04  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.Data.PostGIS/PostGISFeatureSource.cs: hook up shapefile
+
+2008-11-04  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.Drawing.OpenGL/OpenGlMapDrawer.cs: move layer style stuff
+	  to separate class
+
+2008-11-04  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.DrawMap/Cumberland.DrawMap.csproj,
+	  Cumberland.DrawMap/lib/NDesk,Options.COPYING,
+	  Cumberland.DrawMap/lib/NDesk.Options.COPYING,
+	  Cumberland.InteractiveMap/Cumberland.InteractiveMap.csproj,
+	  Cumberland.InteractiveMap/lib/NDesk,Options.COPYING,
+	  Cumberland.InteractiveMap/lib/NDesk.Options.COPYING,
+	  Cumberland.Data.SqlServer.Loader/lib/NDesk,Options.COPYING,
+	  Cumberland.Data.SqlServer.Loader/lib/NDesk.Options.COPYING,
+	  Cumberland.Data.SqlServer.Loader/Cumberland.Data.SqlServer.Loader.csproj:
+	  rename file
+
+2008-11-03  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.Data.SqlServer.Loader/AssemblyInfo.cs: improvements
+	* Cumberland.Data.SqlServer.Loader/Main.cs: improve
+
+2008-11-03  Scott Ellington <scott.ellington@gmail.com> 
+
+	* cumberland.sln, Cumberland.Data.SqlServer.Loader,
+	  Cumberland.Data.SqlServer.Loader/AssemblyInfo.cs,
+	  Cumberland.Data.SqlServer.Loader/lib,
+	  Cumberland.Data.SqlServer.Loader/lib/NDesk,Options.COPYING,
+	  Cumberland.Data.SqlServer.Loader/lib/NDesk.Options.dll,
+	  Cumberland.Data.SqlServer.Loader/Main.cs,
+	  Cumberland.Data.SqlServer.Loader/Cumberland.Data.SqlServer.Loader.csproj:
+	  add sql server loader
+
+2008-10-31  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.DrawMap/Main.cs, Cumberland.InteractiveMap/Main.cs,
+	  Cumberland.TileViewerTest/TileProvider.aspx.cs,
+	  Cumberland.Data.PostGIS/PostGISFeatureSource.cs: rename providers
+	  to sources
+
+2008-10-30  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.TileViewerTest/TileProvider.aspx.cs: clean up
+
+2008-10-30  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.DrawMap/Cumberland.DrawMap.csproj: add test map
+	* Cumberland.TileViewerTest/Default.aspx.cs,
+	  Cumberland.TileViewerTest/TileProvider.aspx.cs,
+	  Cumberland.TileViewerTest/Default.aspx: switch to map file
+
+2008-10-30  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.Drawing.OpenGL/OpenGlMapDrawer.cs: need to use
+	  GetFeatures()
+	* Cumberland.Data.PostGIS/PostGISFeatureSource.cs: add GetFeatures()
+	  overload
+
+2008-10-30  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.InteractiveMap/Cumberland.InteractiveMap.csproj,
+	  Cumberland.InteractiveMap/lib/Tao.FreeGlut.dll,
+	  Cumberland.InteractiveMap/lib/Tao.FreeGlut.dll.config,
+	  Cumberland.InteractiveMap/lib/Tao.FreeGlut.xml,
+	  Cumberland.Drawing.OpenGL/lib/Tao.FreeGlut.dll,
+	  Cumberland.Drawing.OpenGL/lib/Tao.FreeGlut.dll.config,
+	  Cumberland.Drawing.OpenGL/lib/Tao.FreeGlut.xml,
+	  Cumberland.Drawing.OpenGL/Cumberland.Drawing.OpenGL.csproj,
+	  Cumberland.Drawing.OpenGL/OpenGlMapDrawer.cs: move out freeglut
+
+2008-10-30  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.InteractiveMap/Main.cs: swtich to map file
+	* Cumberland.Drawing.OpenGL/OpenGlMapDrawer.cs: reproject extents on
+	  GetFeatures
+
+2008-10-29  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.DrawMap/Cumberland.DrawMap.csproj: add postgis support
+	* Cumberland.DrawMap/Main.cs: switch to serialized map
+	* Cumberland.Data.PostGIS/PostGISFeatureSource.cs: simplify
+
+2008-10-29  Scott Ellington <scott.ellington@gmail.com> 
+
+	
+
+2008-10-27  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.DrawMap/Main.cs: remove opengl drawing
+
+2008-10-27  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.Drawing.OpenGL/OpenGlMapDrawer.cs: add DeleteGlList
+
+2008-10-26  Scott Ellington <scott.ellington@gmail.com> 
+
+	
+
+2008-10-25  Scott Ellington <scott.ellington@gmail.com> 
+
+	
+
+2008-10-24  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.Drawing.OpenGL/OpenGlMapDrawer.cs: fix bug where glListed
+	  layer was returning instead of continuing to next layer
+
+2008-10-23  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.InteractiveMap/Main.cs: copy improvements from Appomattox
+	* Cumberland.Drawing.OpenGL/MatrixHelper.cs: switch to doubles
+
+2008-10-22  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.TileViewerTest/TileProvider.aspx.cs,
+	  Cumberland.Data.PostGIS/PostGISFeatureSource.cs,
+	  Cumberland.Data.PostGIS/PostGIS.cs: add postgis point support
+
+2008-10-22  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.Data.PostGIS/PostGIS.cs: add multipolygon wkt support
+
+2008-10-20  Scott Ellington <scott.ellington@gmail.com> 
+
+	
+
+2008-10-20  Scott Ellington <scott.ellington@gmail.com> 
+
+	
+
+2008-10-17  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.TileViewerTest/TileProvider.aspx.cs: add more layers
+
+2008-10-17  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.DrawMap/Main.cs,
+	  Cumberland.TileViewerTest/TileProvider.aspx.cs: add stub for GDI+
+	  drawer
+	* cumberland.sln, Cumberland.Drawing.OpenGL/GluMethods.cs,
+	  Cumberland.Drawing.OpenGL/app.config,
+	  Cumberland.Drawing.OpenGL/Cumberland.Drawing.OpenGL.csproj,
+	  Cumberland.Drawing.OpenGL/OpenGlMapDrawer.cs, Cumberland.GluWrap,
+	  Cumberland.GluWrap/AssemblyInfo.cs,
+	  Cumberland.GluWrap/GluMethods.cs, Cumberland.GluWrap/app.config,
+	  Cumberland.GluWrap/Cumberland.GluWrap.csproj: move GluMethods into
+	  Drawing.OpenGL
+
+2008-10-17  Scott Ellington <scott.ellington@gmail.com> 
+
+	
+
+2008-10-17  Scott Ellington <scott.ellington@gmail.com> 
+
+	
+
+2008-10-17  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.InteractiveMap/Main.cs: track changes
+	* Cumberland.Drawing.OpenGL/OpenGlMapDrawer.cs: use a dictionary to
+	  store refs to glLists
+
+2008-10-17  Scott Ellington <scott.ellington@gmail.com> 
+
+	
+
+2008-10-17  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.DrawMap/Main.cs,
+	  Cumberland.InteractiveMap/Cumberland.InteractiveMap.csproj,
+	  Cumberland.InteractiveMap/Main.cs: track changes
+	* Cumberland.Drawing.OpenGL/OpenGLMap.cs,
+	  Cumberland.Drawing.OpenGL/OpenGLMatrixHelper.cs: renamed
+	* Cumberland.Drawing.OpenGL/OpenGlMapDrawer: rename, use IMapDrawer
+	  interface
+	* Cumberland.Drawing.OpenGL/MatrixHelper.cs: rename
+
+2008-10-17  Scott Ellington <scott.ellington@gmail.com> 
+
+	
+
+2008-10-16  Scott Ellington <scott.ellington@gmail.com> 
+
+	
+
+2008-10-16  Scott Ellington <scott.ellington@gmail.com> 
+
+	
+
+2008-10-16  Scott Ellington <scott.ellington@gmail.com> 
+
+	
+
+2008-10-16  Scott Ellington <scott.ellington@gmail.com> 
+
+	
+
+2008-10-16  Scott Ellington <scott.ellington@gmail.com> 
+
+	
+
+2008-10-16  Scott Ellington <scott.ellington@gmail.com> 
+
+	
+
+2008-10-14  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.InteractiveMap/Main.cs: itneractive viewer
+
+2008-10-10  Scott Ellington <scott.ellington@gmail.com> 
+
+	
+
+2008-10-10  Scott Ellington <scott.ellington@gmail.com> 
+
+	
+
+2008-10-09  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.GluWrap/GluMethods.cs: add gluTessProperty
+
+2008-10-09  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.DrawMap/Main.cs: parameterize
+
+2008-10-08  Scott Ellington <scott.ellington@gmail.com> 
+
+	
+
+2008-10-08  Scott Ellington <scott.ellington@gmail.com> 
+
+	
+
+2008-10-08  Scott Ellington <scott.ellington@gmail.com> 
+
+	
+
+2008-10-08  Scott Ellington <scott.ellington@gmail.com> 
+
+	
+
+2008-10-08  Scott Ellington <scott.ellington@gmail.com> 
+
+	
+
+2008-10-06  Scott Ellington <scott.ellington@gmail.com> 
+
+	
+
+2008-09-30  Scott Ellington <scott.ellington@gmail.com> 
+
+	
+
+2008-09-30  Scott Ellington <scott.ellington@gmail.com> 
+
+	
+
+2008-09-19  Scott Ellington <scott.ellington@gmail.com> 
+
+	
+
+2008-09-16  Scott Ellington <scott.ellington@gmail.com> 
+
+	
+
+2008-09-15  Scott Ellington <scott.ellington@gmail.com> 
+
+	
+
+2008-09-11  Scott Ellington <scott.ellington@gmail.com> 
+
+	
+
+2008-09-11  Scott Ellington <scott.ellington@gmail.com> 
+
+	
+
+2008-09-10  Scott Ellington <scott.ellington@gmail.com> 
+
+	
+
+2008-09-10  Scott Ellington <scott.ellington@gmail.com> 
+
+	* cumberland.sln: whoops Monodevelop!
+
