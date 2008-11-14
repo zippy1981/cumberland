@@ -1,0 +1,112 @@
+<Type Name="SimpleFeatureSource" FullName="Cumberland.Data.SimpleFeatureSource">
+  <TypeSignature Language="C#" Value="public class SimpleFeatureSource : Cumberland.Data.IFeatureSource" />
+  <AssemblyInfo>
+    <AssemblyName>Cumberland</AssemblyName>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>Cumberland.Data.IFeatureSource</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Docs>
+    <summary>A feature source that can be created programmatically</summary>
+    <remarks>
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public SimpleFeatureSource ();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs><summary></summary><remarks></remarks></Docs>
+    </Member><Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public SimpleFeatureSource (Cumberland.Data.FeatureType fType);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters><Parameter Name="fType" Type="Cumberland.Data.FeatureType" /></Parameters>
+      <Docs><param name="fType">The feature type</param><summary>Creates the object with the given feature type</summary><remarks></remarks></Docs>
+    </Member><Member MemberName="Extents">
+      <MemberSignature Language="C#" Value="public Cumberland.Rectangle Extents { get; }" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue><ReturnType>Cumberland.Rectangle</ReturnType></ReturnValue>
+      <Docs><summary>Gets the extents of the feature source</summary><value></value><remarks>Can be expensive as this must be calculated</remarks></Docs>
+    </Member><Member MemberName="Features">
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Cumberland.Feature&gt; Features { set; get; }" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType></ReturnValue>
+      <Docs><summary>The features</summary><value></value><remarks>Add/remove feature to this list to create your feature source</remarks></Docs>
+    </Member><Member MemberName="GetFeatures">
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Cumberland.Feature&gt; GetFeatures ();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType></ReturnValue>
+      <Parameters />
+      <Docs><summary>Gets all features</summary><returns></returns><remarks></remarks></Docs>
+    </Member><Member MemberName="GetFeatures">
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Cumberland.Feature&gt; GetFeatures (Cumberland.Rectangle rectangle);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType></ReturnValue>
+      <Parameters><Parameter Name="rectangle" Type="Cumberland.Rectangle" /></Parameters>
+      <Docs><param name="rectangle">The extents to get features from</param><summary>Gets all features within the given extents</summary><returns></returns><remarks>This class has no spatial index, so filtering on extents can be expensive.</remarks></Docs>
+    </Member><Member MemberName="GetFeatures">
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Cumberland.Feature&gt; GetFeatures (string themeField);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType></ReturnValue>
+      <Parameters><Parameter Name="themeField" Type="System.String" /></Parameters>
+      <Docs><param name="themeField">The theme field (ignored)</param><summary>Gets all features</summary><returns></returns><remarks>A SimpleFeatureSource has no metadata associated with the feature, 
+      so the <see cref="P:Cumberland.Feature.ThemeFieldValue" /> cannot be set based on the parameter.</remarks></Docs>
+    </Member><Member MemberName="GetFeatures">
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Cumberland.Feature&gt; GetFeatures (Cumberland.Rectangle rectangle, string themeField);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType></ReturnValue>
+      <Parameters><Parameter Name="rectangle" Type="Cumberland.Rectangle" /><Parameter Name="themeField" Type="System.String" /></Parameters>
+      <Docs><param name="rectangle">The extents to get features from</param><param name="themeField">The theme field (ignored)</param><summary>Gets all features from within the given extents</summary><returns></returns><remarks>This class has no spatial index, so filtering on extents can be expensive.  
+		A SimpleFeatureSource has no metadata associated with the feature, 
+      so the <see cref="P:Cumberland.Feature.ThemeFieldValue" /> cannot be set based on the theme field parameter.      
+      </remarks></Docs>
+    </Member><Member MemberName="SimpleFeatureType">
+      <MemberSignature Language="C#" Value="public Cumberland.Data.FeatureType SimpleFeatureType { set; get; }" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue><ReturnType>Cumberland.Data.FeatureType</ReturnType></ReturnValue>
+      <Docs><summary>Get or sets the feature type</summary><value></value><remarks><see cref="P:Cumberland.Data.SimpleFeatureSource.SourceFeatureType" /> is read-only,
+      so set this to change the feature type.</remarks></Docs>
+    </Member><Member MemberName="SourceFeatureType">
+      <MemberSignature Language="C#" Value="public Cumberland.Data.FeatureType SourceFeatureType { get; }" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue><ReturnType>Cumberland.Data.FeatureType</ReturnType></ReturnValue>
+      <Docs><summary>Gets the feature type</summary><value></value><remarks></remarks></Docs>
+    </Member>
+  </Members>
+</Type>

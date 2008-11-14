@@ -1,0 +1,36 @@
+<Type Name="MapConfigurationException" FullName="Cumberland.Drawing.MapConfigurationException">
+  <TypeSignature Language="C#" Value="public class MapConfigurationException : Exception" />
+  <AssemblyInfo>
+    <AssemblyName>Cumberland</AssemblyName>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Exception</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>An exception that specifies an invalid configuration in a <see cref="T:Cumberland.Map" /></summary>
+    <remarks>
+    </remarks>
+  </Docs>
+  <Members>
+    
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public MapConfigurationException (string message);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters><Parameter Name="message" Type="System.String" /></Parameters>
+      <Docs><param name="message"></param><summary></summary><remarks></remarks></Docs>
+    </Member><Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public MapConfigurationException (string message, Exception inner);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters><Parameter Name="message" Type="System.String" /><Parameter Name="inner" Type="System.Exception" /></Parameters>
+      <Docs><param name="message"></param><param name="inner"></param><summary></summary><remarks></remarks></Docs>
+    </Member>
+  </Members>
+</Type>

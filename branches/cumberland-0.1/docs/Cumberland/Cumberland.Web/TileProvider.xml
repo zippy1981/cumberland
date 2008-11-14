@@ -1,0 +1,70 @@
+<Type Name="TileProvider" FullName="Cumberland.Web.TileProvider">
+  <TypeSignature Language="C#" Value="public class TileProvider" />
+  <AssemblyInfo>
+    <AssemblyName>Cumberland</AssemblyName>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Generates map tiles for popular web applications</summary>
+    <remarks>The tiles provided are defined by the <see cref="T:Cumberland.Data.TileConsumer" />.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public TileProvider (Cumberland.Map map);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters><Parameter Name="map" Type="Cumberland.Map" /></Parameters>
+      <Docs><param name="map">The map to render tiles with</param><summary></summary><remarks></remarks></Docs>
+    </Member><Member MemberName="CalculateNumberOfTilesAcross">
+      <MemberSignature Language="C#" Value="public int CalculateNumberOfTilesAcross (int zoomLevel);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue><ReturnType>System.Int32</ReturnType></ReturnValue>
+      <Parameters><Parameter Name="zoomLevel" Type="System.Int32" /></Parameters>
+      <Docs><param name="zoomLevel">The zoom level</param><summary>Calculates the number of tiles across for the given zoom level</summary><returns>The number of tiles across</returns><remarks></remarks></Docs>
+    </Member><Member MemberName="ClipRectangleAtZoomLevel">
+      <MemberSignature Language="C#" Value="public System.Drawing.Rectangle ClipRectangleAtZoomLevel (Cumberland.Rectangle rectangle, int zoomLevel);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue><ReturnType>System.Drawing.Rectangle</ReturnType></ReturnValue>
+      <Parameters><Parameter Name="rectangle" Type="Cumberland.Rectangle" /><Parameter Name="zoomLevel" Type="System.Int32" /></Parameters>
+      <Docs><param name="rectangle">The rectangle to clip tiles to (must be in the coordinate system of the tile consumer)</param><param name="zoomLevel">The zoom level</param><summary>Clips the tiles to the given extents</summary><returns>A rectangle with the top/left and the width/height of tiles to render</returns><remarks>Useful for only rendering a subset of tiles.</remarks></Docs>
+    </Member><Member MemberName="Consumer">
+      <MemberSignature Language="C#" Value="public Cumberland.Web.TileConsumer Consumer { get; }" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue><ReturnType>Cumberland.Web.TileConsumer</ReturnType></ReturnValue>
+      <Docs><summary>Gets the tile consumer</summary><value></value><remarks></remarks></Docs>
+    </Member><Member MemberName="DrawExceptionsOnTile">
+      <MemberSignature Language="C#" Value="public bool DrawExceptionsOnTile { set; get; }" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue><ReturnType>System.Boolean</ReturnType></ReturnValue>
+      <Docs><summary>Gets or set whether to draw exceptions on the tile</summary><value>true to draw, false to throw the exception</value><remarks>Writes the exception that occured while rendering onto the tile.
+      </remarks></Docs>
+    </Member><Member MemberName="DrawTile">
+      <MemberSignature Language="C#" Value="public System.Drawing.Bitmap DrawTile (int x, int y, int zoomLevel);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue><ReturnType>System.Drawing.Bitmap</ReturnType></ReturnValue>
+      <Parameters><Parameter Name="x" Type="System.Int32" /><Parameter Name="y" Type="System.Int32" /><Parameter Name="zoomLevel" Type="System.Int32" /></Parameters>
+      <Docs><param name="x">The x coordinate of the tile</param><param name="y">The y coordinate of the tile</param><param name="zoomLevel">The zoom level</param><summary>Draws a map onto the requested tile</summary><returns>A rendered tile</returns><remarks></remarks></Docs>
+    </Member>
+  </Members>
+</Type>

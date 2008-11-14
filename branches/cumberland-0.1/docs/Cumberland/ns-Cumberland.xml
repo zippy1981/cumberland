@@ -1,0 +1,6 @@
+<Namespace Name="Cumberland">
+  <Docs>
+    <summary></summary>
+    <remarks>Contains the core classes of the Cumberland project, including shape/geometry types.</remarks>
+  </Docs>
+</Namespace>

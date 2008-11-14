@@ -1,0 +1,61 @@
+<Type Name="IFeatureSource" FullName="Cumberland.Data.IFeatureSource">
+  <TypeSignature Language="C#" Value="public interface IFeatureSource" />
+  <AssemblyInfo>
+    <AssemblyName>Cumberland</AssemblyName>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Interfaces />
+  <Docs>
+    <summary>Describes an object that can provide features</summary>
+    <remarks>
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="GetFeatures">
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Cumberland.Feature&gt; GetFeatures ();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType></ReturnValue>
+      <Parameters />
+      <Docs><summary>Gets all features</summary><returns>A List of <see cref="T:Cumberland.Feature" /></returns><remarks></remarks></Docs>
+    </Member><Member MemberName="GetFeatures">
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Cumberland.Feature&gt; GetFeatures (Cumberland.Rectangle rectangle);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType></ReturnValue>
+      <Parameters><Parameter Name="rectangle" Type="Cumberland.Rectangle" /></Parameters>
+      <Docs><param name="rectangle">The extents to get features from</param><summary>Gets all features within the given extents</summary><returns>A List of <see cref="T:Cumberland.Feature" /></returns><remarks></remarks></Docs>
+    </Member><Member MemberName="GetFeatures">
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Cumberland.Feature&gt; GetFeatures (string themeField);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType></ReturnValue>
+      <Parameters><Parameter Name="themeField" Type="System.String" /></Parameters>
+      <Docs><param name="themeField">The theme field</param><summary>Gets all features and sets <see cref="P:Cumberland.Feature.ThemeFieldValue" /> based on the given field</summary><returns>A List of <see cref="T:Cumberland.Feature" /></returns><remarks></remarks></Docs>
+    </Member><Member MemberName="GetFeatures">
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Cumberland.Feature&gt; GetFeatures (Cumberland.Rectangle rectangle, string themeField);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType></ReturnValue>
+      <Parameters><Parameter Name="rectangle" Type="Cumberland.Rectangle" /><Parameter Name="themeField" Type="System.String" /></Parameters>
+      <Docs><param name="rectangle">The extents to get features from</param><param name="themeField">The theme field</param><summary>Gets all features within the given extents and sets <see cref="P:Cumberland.Feature.ThemeFieldValue" /> 
+      based on the given field</summary><returns>A List of <see cref="T:Cumberland.Feature" /></returns><remarks></remarks></Docs>
+    </Member><Member MemberName="SourceFeatureType">
+      <MemberSignature Language="C#" Value="public Cumberland.Data.FeatureType SourceFeatureType { get; }" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue><ReturnType>Cumberland.Data.FeatureType</ReturnType></ReturnValue>
+      <Docs><summary>The feature type of the source data</summary><value></value><remarks></remarks></Docs>
+    </Member>
+  </Members>
+</Type>
