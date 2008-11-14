@@ -7,6 +7,12 @@ Cumberland provides the ability to do coordinate transformations.
 
 Internally, cumberland uses the [http://trac.osgeo.org/proj/ Proj.4] C Library for this, and so it uses their format for describing projections: a proj4 string.  It is recommended that you review this site for information about proj.4 strings and about coordinate systems in general.
 
+= Configuration =
+
+Mac and Linux users will need to install the proj.4 library.  Most Linux distributions provide this directly.  For Mac, you can use [http://www.finkproject.org/ Fink].  Cumberland has been configured to run the Fink installation.
+
+For Windows users, cumberland comes with a build of proj.4.  However if you want to use SRID lookups (details below), you'll need to download proj.4 for windows and install.  (The default install location is c:\proj) 
+
 = A Coordinate System Primer =
 
 The earth is not flat, but your computer screen is.  Therefore, it is necessary to project the earth onto a flat surface.  Note that any sort of projection will cause some distortion (as Wikipedia [http://en.wikipedia.org/wiki/Map_projection says] "You cannot flatten an orange peel without tearing or warping it"), so cartographers attempt to find 
