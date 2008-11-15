@@ -1,5 +1,7 @@
 #summary an overview of symbology supported in cumberland
 
+<wiki:toc max_depth="1" />
+
 = Introduction =
 
 Symbology in this context means the study of the symbols that represent cartographic features.  Cumberland currently provides a standard set of style options for creating effective maps.
