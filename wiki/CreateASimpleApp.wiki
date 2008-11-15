@@ -72,3 +72,7 @@ For this example, I have grabbed some data from the state of Massachusettes.  Le
             m.Extents = shp.Extents;
         }
 }}}
+
+Which, when run, produces:
+
+[http://cumberland.googlecode.com/files/CreateASimpleApp-fig1.PNG]
