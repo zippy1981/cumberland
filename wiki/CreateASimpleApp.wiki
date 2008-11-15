@@ -1,5 +1,7 @@
 #summary Creating a simple application with Cumberland
 
+<wiki:toc max_depth="1" />
+
 = Introduction =
 
 This tutorial will go over a simple application built with cumberland.  This example will be a Windows Forms application which displays a map.
@@ -27,7 +29,7 @@ First, we add a class variable for the map:
         ...
 }}}
 
-Next, we handle the button click to draw the map:
+Next, we handle the button click to draw the map and set the picture box image to it:
 
 {{{
         private void button1_Click(object sender, EventArgs e)
@@ -37,5 +39,36 @@ Next, we handle the button click to draw the map:
 
             MapDrawer drawer = new MapDrawer();
             pictureBox1.Image = drawer.Draw(m);
+        }
+}}}
+
+At this point, we can run our app and click the button, but nothing happens as there is nothing in the map to draw.  We need some data.
+
+= Adding Data =
+
+For this example, I have grabbed some data from the state of Massachusettes.  Let's start with the [http://www.mass.gov/mgis/counties.htm counties].  Download this, execute, and it contains multiple files.  We want the 'COUNTIES_POLY.shp'.  Now, we can add it to our map as so:
+
+{{{
+        public Form1()
+        {
+            InitializeComponent();
+
+            // load the shapefile
+            Shapefile shp = new Shapefile(@"C:\Documents and Settings\Scott\My Documents\mass\counties\COUNTIES_POLY.shp");
+
+            // create our layer
+            Layer l = new Layer();
+
+            // set its data source to our shapefile
+            l.Data = shp;
+
+            // provide a default style
+            l.Styles.Add(new Style());
+
+            // add our layer to the map so it will get rendered            
+            m.Layers.Add(l);
+
+            // set the map extents to the layer extents so it is in view
+            m.Extents = shp.Extents;
         }
 }}}
