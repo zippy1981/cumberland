@@ -1,0 +1,12 @@
+#summary Future plans / goals
+
+=0.2=
+
+  * basic label support
+    * point - location: (right, upper-right, etc.)
+    * polygon - centroid
+    * polyline - trickier. need some sort of algorithm (maybe slope of longest line segment?)
+ 
+=Later=
+
+  * Raster support
