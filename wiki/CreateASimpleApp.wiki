@@ -1,0 +1,41 @@
+#summary Creating a simple application with Cumberland
+
+= Introduction =
+
+This tutorial will go over a simple application built with cumberland.  This example will be a Windows Forms application which displays a map.
+
+= Set up =
+
+  # Create a 'Windows Application' project in Visual Studio
+  # Download the cumberland library ([http://code.google.com/p/cumberland/downloads/list here])
+  # Unzip
+  # Add a reference to 'Cumberland.dll' (and optionally 'Cumberland.Data.PostGIS.dll' or 'Cumberland.Data.SqlServer' if needed)
+  # copy proj.dll into your project and set 'Copy To Output Directory' to 'Copy if newer'
+
+= Create the interface = 
+
+Let's keep it simple for now and just drag a PictureBox and Button onto our window.  I name the button "Draw Map", and double-click it to create the event.
+
+= The code-behind =
+
+First, we add a class variable for the map:
+
+{{{
+    public partial class Form1 : Form
+    {
+        Map m = new Map();
+        ...
+}}}
+
+Next, we handle the button click to draw the map:
+
+{{{
+        private void button1_Click(object sender, EventArgs e)
+        {
+            m.Width = pictureBox1.Width;
+            m.Height = pictureBox1.Height;
+
+            MapDrawer drawer = new MapDrawer();
+            pictureBox1.Image = drawer.Draw(m);
+        }
+}}}
