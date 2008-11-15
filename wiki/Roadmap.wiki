@@ -6,7 +6,10 @@
     * point - location: (right, upper-right, etc.)
     * polygon - centroid
     * polyline - trickier. need some sort of algorithm (maybe slope of longest line segment?)
- 
+  * New supported tile consumers:
+    * Virtual Earth
+    * OpenLayers 
+
 =Later=
 
   * Raster support
