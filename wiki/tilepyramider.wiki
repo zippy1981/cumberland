@@ -1,6 +1,8 @@
 #summary a tile pyramid generator for popular web mapping applications
 #labels Featured
 
+<wiki:toc max_depth="1" />
+
 = Introduction =
 
 Most modern web mapping interfaces use tiles.  This has the advantage of allowing the tiles to be pre-generated instead of per-user.  Tilepyramider generates a pyramid of tile images into a directory structure that you can use with these interfaces.
