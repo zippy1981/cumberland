@@ -1,6 +1,8 @@
 #summary understanding the map xml format
 #labels Featured
 
+<wiki:toc max_depth="2" />
+
 = Introduction =
 
 Cumberland provides an xml format that you can use to store and load maps.  It details such information as projection, layer data sources, symbology, and so forth.  Users may find it simpler to create their maps through xml, instead of through the API.
@@ -8,6 +10,8 @@ Cumberland provides an xml format that you can use to store and load maps.  It d
 The map xml format is not a strict schema, in that any missing or out of place element will not cause it to fail.  It just looks for certain elements and ignores the rest.
 
 = Xml Document structure =
+
+== The Map Element ==
 
 The xml document should be prefaced as usual and have a 'Map' element at the root level:
 
