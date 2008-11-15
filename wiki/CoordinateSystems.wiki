@@ -1,6 +1,8 @@
 #summary Understanding coordinate systems in cumberland
 #labels Featured
 
+<wiki:toc max_depth="1" />
+
 = Introduction =
 
 Cumberland provides the ability to do coordinate transformations. 
