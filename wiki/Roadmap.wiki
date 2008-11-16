@@ -2,6 +2,7 @@
 
 =0.2=
 
+  * bump to .Net 3.5 / Visual Studio 2008
   * basic label support
     * point - location: (right, upper-right, etc.)
     * polygon - centroid
