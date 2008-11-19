@@ -1,3 +1,8 @@
+2008-11-18  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Cumberland.TilePyramidGenerator/Cumberland.TilePyramidGenerator.csproj,
+	  Cumberland.TilePyramidGenerator/Main.cs: support tms/openLayers
+
 2008-11-13  Scott Ellington <scott.ellington@gmail.com> 
 
 	* Cumberland.Data.SqlServer/Cumberland.Data.SqlServer.csproj: wrong

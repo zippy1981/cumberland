@@ -142,7 +142,7 @@ namespace Cumberland.Projection
 			}
         }
 		
-		public ProjFourWrapper(int epsg) : this(PrepareEPSGCode(epsg))
+		public ProjFourWrapper(int epsg) : this(PrepareEpsgCode(epsg))
 		{
 		}
 		
@@ -223,9 +223,32 @@ namespace Cumberland.Projection
 		
 #region public static methods
 		
-		public static string PrepareEPSGCode(int epsg)
+		public static string PrepareEpsgCode(int epsg)
 		{
 			return "+init=epsg:" + epsg;
+		}
+		
+		public static bool TryParseEpsg(string projection, out int epsg)
+		{
+			epsg = -1;
+			
+			if (projection == null)
+			{
+				return false;
+			}
+			
+			int idx = projection.IndexOf("+init=epsg:");
+			
+			if (idx < 0)
+			{
+				return false;
+			}
+			
+			idx += 11;
+			
+			string code = projection.Substring(11, projection.Length-idx);
+			
+			return int.TryParse(code, out epsg);
 		}
 		
 #endregion
