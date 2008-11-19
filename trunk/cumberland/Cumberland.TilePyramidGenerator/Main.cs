@@ -27,6 +27,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Text;
+using System.Xml;
 
 using Cumberland;
 using Cumberland.Projection;
@@ -49,6 +51,7 @@ namespace Cumberland.TilePyramidGenerator
 			int maxZoomLevel = 19;
 			int minZoomLevel = 0;
 			bool onlyCount = false;
+			TileConsumer consumer = TileConsumer.GoogleMaps;
 			
 			OptionSet options = new OptionSet();
 			options.Add("e|extents=", 
@@ -68,6 +71,24 @@ namespace Cumberland.TilePyramidGenerator
 			options.Add("t|test",
 			            "Test - only calculate the total and return",
 			            delegate (string v) { onlyCount = v != null; });
+			options.Add("c|consumer=",
+			            "The consumer.  Valid values are 'googlemaps', 'tms'.",
+			            delegate (string v) 
+			            {
+				if (v == "googlemaps")
+				{
+					consumer = TileConsumer.GoogleMaps;
+				}
+				else if (v == "tms")
+				{
+					consumer = TileConsumer.TileMapService;
+				}
+				else
+				{
+					System.Console.WriteLine("Warning: Unknown consumer, ignoring...");
+				}
+			});
+			            
 			
 			List<string> rest = options.Parse(args);
 			
@@ -102,13 +123,17 @@ namespace Cumberland.TilePyramidGenerator
 			Map map = ms.Deserialize(rest[0]);
 			
 			// use map extents as clipping range if not provided
-			if (extents.IsEmpty && !map.Extents.IsEmpty)
+			if (consumer == TileConsumer.GoogleMaps && extents.IsEmpty && !map.Extents.IsEmpty)
 			{
 				extents = map.Extents;
 			}
+			else if (!extents.IsEmpty)
+			{
+				map.Extents = extents;
+			}
 			
 			// if map has a projection, reproject clipping area
-			if (!extents.IsEmpty)
+			if (consumer == TileConsumer.GoogleMaps && !extents.IsEmpty)
 			{
 				if (!string.IsNullOrEmpty(map.Projection))
 				{
@@ -133,13 +158,14 @@ namespace Cumberland.TilePyramidGenerator
 
 #region calculate total # of tiles
 			
-			TileProvider tp = new TileProvider(map);
+			TileProvider tp = new TileProvider(map, consumer);
 			tp.DrawExceptionsOnTile = false;
 			
 			// calculate total number of tiles
 			long totalCount = 0;
 			for (int ii = minZoomLevel; ii <= maxZoomLevel; ii++)
 			{
+				System.Console.WriteLine(tp.ClipRectangleAtZoomLevel(extents, ii).ToString());
 				if (extents.IsEmpty)
 				{
 					int across = tp.CalculateNumberOfTilesAcross(ii);
@@ -164,11 +190,62 @@ namespace Cumberland.TilePyramidGenerator
 			
 #region render tiles
 			
+			Directory.CreateDirectory(path);
+			
+			XmlWriter writer = null;
+			
+			if (consumer == TileConsumer.TileMapService)
+			{
+				writer = new XmlTextWriter(Path.Combine(path, "tilemapresource.xml"),
+			                                     Encoding.UTF8);
+				writer.WriteStartDocument();
+				
+				writer.WriteStartElement("TileMap");
+				writer.WriteAttributeString("version", "1.0.0");
+				writer.WriteAttributeString("tilemapservice", "http://tms.osgeo.org/1.0.0");
+				
+				writer.WriteElementString("Title", string.Empty);
+				writer.WriteElementString("Abstract", string.Empty);
+				
+				int epsg;
+				if (ProjFourWrapper.TryParseEpsg(map.Projection, out epsg))
+				{
+					writer.WriteElementString("SRS", "EPSG:" + epsg.ToString());
+				}
+				else
+				{
+					writer.WriteElementString("SRS", string.Empty);
+					
+					System.Console.WriteLine("Warning: could not parse epsg code from map projection.  SRS element not set");
+				}
+				
+				writer.WriteStartElement("BoundingBox");
+				writer.WriteAttributeString("minx", extents.Min.X.ToString());
+				writer.WriteAttributeString("miny", extents.Min.Y.ToString());
+				writer.WriteAttributeString("maxx", extents.Max.X.ToString());
+				writer.WriteAttributeString("maxy", extents.Max.Y.ToString());
+				writer.WriteEndElement(); // BoundingBox
+				
+				writer.WriteStartElement("Origin");
+				writer.WriteAttributeString("x", extents.Center.X.ToString());
+				writer.WriteAttributeString("y", extents.Center.Y.ToString());
+				writer.WriteEndElement(); // Origin
+				                          
+				writer.WriteStartElement("TileFormat");
+				writer.WriteAttributeString("width", "256");
+				writer.WriteAttributeString("height", "256");
+				writer.WriteAttributeString("mime-type", "image/png");
+				writer.WriteAttributeString("extension", "png");
+				writer.WriteEndElement(); // TileFormat
+				
+				writer.WriteStartElement("TileSets");
+				writer.WriteAttributeString("profile", "local");
+			}                     
+			
 			long current = 0;
 			for (int ii = minZoomLevel; ii <= maxZoomLevel; ii++)
 			{
 				string tilepath = Path.Combine(path, ii.ToString());
-
 				Directory.CreateDirectory(tilepath);
 				
 				System.Drawing.Rectangle r;
@@ -182,18 +259,29 @@ namespace Cumberland.TilePyramidGenerator
 					r = tp.ClipRectangleAtZoomLevel(extents, ii);
 				}
 				
+				if (consumer == TileConsumer.TileMapService)
+				{
+					writer.WriteStartElement("TileSet");
+					writer.WriteAttributeString("href", tilepath);
+					writer.WriteAttributeString("units-per-pixel", tp.CalculateMapUnitsPerPixel(ii).ToString());
+					writer.WriteAttributeString("order", ii.ToString());
+					writer.WriteEndElement(); // TileSet
+				}   
+				
 				for (int x = r.Left; x <= (r.Left+r.Width); x++)
 				{
+					string xtilepath = Path.Combine(tilepath, x.ToString());
+					Directory.CreateDirectory(xtilepath);
+					
 					for (int y = r.Top; y <= (r.Top+r.Height); y++)
 					{
 						current++;
 						
 						// render tile and save to file
 						Bitmap b = tp.DrawTile(x, y, ii);
-						string tileFile = string.Format("{0}{1}{2}_{3}.png",
-						              tilepath,
+						string tileFile = string.Format("{0}{1}{2}.png",
+						              xtilepath,
 						              Path.DirectorySeparatorChar,
-						              x,
 						              y);
 						b.Save(tileFile ,ImageFormat.Png);
 						
@@ -203,8 +291,13 @@ namespace Cumberland.TilePyramidGenerator
 						Console.SetCursorPosition(info.Length+1, Console.CursorTop);
 					}
 				}
-				
-				
+			}
+			
+			if (consumer == TileConsumer.TileMapService)
+			{
+				writer.WriteEndElement(); // TileSets
+				writer.WriteEndElement(); // TileMap
+				writer.Close();
 			}
 			
 #endregion

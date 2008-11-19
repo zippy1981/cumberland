@@ -33,22 +33,27 @@ namespace Cumberland.Web
 {
 	public enum TileConsumer
 	{
-		GoogleMaps
+		None,
+		GoogleMaps,
+		TileMapService
 	}
 	
 	public class TileProvider
 	{
+		
+#region vars
+		
 		TileConsumer consumer = TileConsumer.GoogleMaps;
 		int tileSize = 256;
 		bool drawExceptionsOnTile = true;
-		
-		double circumference = 0;
-		double origin;
-		
 		int maxZoomLevel = 19;
 		int minZoomLevel = 0;
-		
+		Rectangle extents = new Rectangle();
 		Map map;
+		
+#endregion
+		
+#region properties
 		
 		public TileConsumer Consumer {
 			get {
@@ -64,23 +69,88 @@ namespace Cumberland.Web
 				drawExceptionsOnTile = value;
 			}
 		}
+
+		public int MinZoomLevel {
+			get {
+				return minZoomLevel;
+			}
+			set {
+				
+				if (consumer != TileConsumer.TileMapService)
+				{
+					throw new InvalidOperationException("Changing the minimum zoom level is not permitted for this tile consumer");
+				}
+				
+				minZoomLevel = value;
+			}
+		}
+
+		public int MaxZoomLevel {
+			get {
+				return maxZoomLevel;
+			}
+			set {
+				
+				if (consumer != TileConsumer.TileMapService)
+				{
+					throw new InvalidOperationException("Changing the minimum zoom level is not permitted for this tile consumer");
+				}
+
+				maxZoomLevel = value;
+			}
+		}
+
+#endregion
 		
-		public TileProvider(Map map)
+#region ctors
+		
+		public TileProvider(Map map) : this(map, TileConsumer.GoogleMaps)
 		{
+		}
+		
+		public TileProvider(Map map, TileConsumer consumer)
+		{
+			if (consumer == TileConsumer.None)
+			{
+				throw new ArgumentException("'None' is not a valid consumer.", "consumer");
+			}
+			
+			this.consumer = consumer;
 			this.map = map;
-			
-			// reproject to Google's spherical mercator
-			map.Projection = ProjFourWrapper.SphericalMercatorProjection;
-			
+							
 			// set to tile size
 			map.Width = map.Height = tileSize;
 			
-			// get projection to grab circumference
-			SphericalMercatorProjector prj = new SphericalMercatorProjector();
-			circumference = prj.Circumference;
+			if (consumer == TileConsumer.GoogleMaps)
+			{
+				// reproject to Google's spherical mercator
+				map.Projection = ProjFourWrapper.SphericalMercatorProjection;
+				
+				// get projection to grab circumference
+				SphericalMercatorProjector prj = new SphericalMercatorProjector();
+				
+				// set mercator origin (center of the map (0,0))
+				double origin = prj.Circumference/2;
+				
+				extents = new Rectangle(-origin, -origin, origin, origin);
+			}
+			else if (consumer == TileConsumer.TileMapService)
+			{
+				extents = map.Extents.Clone();
+			}
+		}
+		
+#endregion
+		
+		public double CalculateMapUnitsPerPixel(int zoomLevel)
+		{
+			CheckZoomLevel(zoomLevel);
 			
-			// set mercator origin (center of the map (0,0))
-			origin = prj.Circumference/2;
+			// calculate number of tiles across
+			int numTiles = CalculateNumberOfTilesAcross(zoomLevel);
+			
+			// get meters/pixel resolution for zoomlevel
+			return (extents.Width / tileSize) / numTiles;
 		}
 		
 		public System.Drawing.Rectangle ClipRectangleAtZoomLevel(Rectangle rectangle, int zoomLevel)
@@ -91,19 +161,37 @@ namespace Cumberland.Web
 			int numTiles = CalculateNumberOfTilesAcross(zoomLevel);
 			
 			// get meters/pixel resolution for zoomlevel
-			double resolution = (circumference / tileSize) / numTiles;
+			double resolution = CalculateMapUnitsPerPixel(zoomLevel);
 			
 			// - first translate merc points to origin so they will all be positive
 			// - then convert to pixel coordinates 
-			//   (Y pixel value must be reversed b/c google's origin is top-left, ours is bottom-right
+			//   (for google, Y pixel value must be reversed b/c google's origin is top-left, ours is bottom-right
 			// - divide by tile size to figure out which tile we're in
+
+			int minx = Convert.ToInt32(Math.Floor((rectangle.Min.X - extents.Min.X) / (resolution * tileSize)));
+			int miny, maxy;
 			
-			int minx = Convert.ToInt32(Math.Floor((rectangle.Min.X + origin) / (resolution * tileSize)));
-			int miny = Convert.ToInt32(Math.Floor((tileSize*numTiles - 
-			                                       ((rectangle.Max.Y + origin) / resolution)) / tileSize));
-			int maxx = Convert.ToInt32(Math.Floor((rectangle.Max.X + origin) / (resolution * tileSize)));
-			int maxy = Convert.ToInt32(Math.Floor((tileSize*numTiles - 
-			                                       ((rectangle.Min.Y + origin) / resolution)) / tileSize));
+			if (consumer == TileConsumer.GoogleMaps)
+			{
+				miny = Convert.ToInt32(Math.Floor((tileSize*numTiles - 
+				                                       ((rectangle.Max.Y - extents.Min.Y) / resolution)) / tileSize));
+			}
+			else
+			{
+				miny = Convert.ToInt32(Math.Floor((rectangle.Min.Y - extents.Min.Y) / (resolution * tileSize)));
+			}
+			
+			int maxx = Convert.ToInt32(Math.Floor((rectangle.Max.X - extents.Min.X) / (resolution * tileSize)));
+			
+			if (consumer == TileConsumer.GoogleMaps)
+			{
+				maxy = Convert.ToInt32(Math.Floor((tileSize*numTiles - 
+				                                       ((rectangle.Min.Y - extents.Min.Y) / resolution)) / tileSize));
+			}
+			else
+			{
+				maxy = Convert.ToInt32(Math.Floor((rectangle.Max.Y - extents.Min.Y) / (resolution * tileSize)));
+			}
 			
 			return new System.Drawing.Rectangle(minx, miny, (maxx-minx), (maxy-miny));
 		}
@@ -127,13 +215,26 @@ namespace Cumberland.Web
 				int numTiles = CalculateNumberOfTilesAcross(zoomLevel);
 				
 				// get meters/pixel resolution for zoomlevel
-				double resolution = (circumference / tileSize) / numTiles;
+				double resolution = CalculateMapUnitsPerPixel(zoomLevel);
+
+				// google tiles origin is top left
+				int tileymin, tileymax;
+				if (consumer == TileConsumer.GoogleMaps)
+				{
+					tileymin = numTiles - y - 1;
+					tileymax = numTiles - y;
+				}
+				else
+				{
+					tileymin = y;
+					tileymax = y + 1;
+				}	
 				
 				// convert pixels to meters and translate to origin
-				map.Extents = new Rectangle((tileSize*x) * resolution - origin,
-				                            (tileSize*(numTiles-y-1)) * resolution - origin, // google tiles are top left
-				                            (tileSize*(x+1)) * resolution - origin,
-				                            (tileSize*(numTiles-y)) * resolution - origin);
+				map.Extents = new Rectangle((tileSize*x) * resolution + extents.Min.X,
+				                            (tileSize*tileymin) * resolution + extents.Min.Y, 
+				                            (tileSize*(x+1)) * resolution + extents.Min.X,
+				                            (tileSize*tileymax) * resolution + extents.Min.Y);
 				
 				MapDrawer renderer = new MapDrawer();
 			
@@ -172,11 +273,11 @@ namespace Cumberland.Web
 		
 		void CheckZoomLevel(int zoomLevel)
 		{
-			if (zoomLevel > maxZoomLevel || zoomLevel < minZoomLevel)
+			if (zoomLevel > maxZoomLevel || zoomLevel < MinZoomLevel)
 			{
 				throw new ArgumentOutOfRangeException("zoomLevel", 
 				                                      string.Format("Zoom level must within {0} and {1} (got {2})",
-				                                                    minZoomLevel,
+				                                                    MinZoomLevel,
 				                                                    maxZoomLevel,
 				                                                    zoomLevel));
 			}

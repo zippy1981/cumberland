@@ -134,5 +134,21 @@ namespace Cumberland.Tests
 				}
 			}
 		}
+		
+		[Test]
+		public void TestTryParseEpsg()
+		{
+			int epsg;
+			
+			Assert.IsFalse(ProjFourWrapper.TryParseEpsg(null, out epsg));
+			
+			Assert.IsFalse(ProjFourWrapper.TryParseEpsg("nope", out epsg));
+			
+			Assert.IsFalse(ProjFourWrapper.TryParseEpsg("+init=epsg:nope", out epsg));
+			
+			Assert.IsTrue(ProjFourWrapper.TryParseEpsg("+init=epsg:4326", out epsg));
+			
+			Assert.AreEqual(4326, epsg);
+		}
 	}
 }
