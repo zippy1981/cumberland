@@ -65,5 +65,14 @@ namespace Cumberland.Tests
 			
 			Assert.AreEqual(new Rectangle(p.X,p.Y,p.X,p.Y), p.CalculateBounds());
 		}
+		
+		[Test]
+		public void TestOpEqualityWithNull()
+		{
+			Point p1 = new Point(10,10);
+			
+			Assert.IsFalse(p1 == null);
+			Assert.IsFalse(null == p1);
+		}
 	}
 }

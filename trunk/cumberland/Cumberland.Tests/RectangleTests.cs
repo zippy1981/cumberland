@@ -220,5 +220,14 @@ namespace Cumberland.Tests
 			// overlaps empty
 			Assert.IsFalse(r1.Overlaps(new Rectangle()));
 		}
+		
+		[Test]
+		public void TestOpEqualityWithNull()
+		{
+			Rectangle r1 = new Rectangle(0,0,10,10);
+			
+			Assert.IsFalse(r1 == null);
+			Assert.IsFalse(null == r1);
+		}
 	}
 }
