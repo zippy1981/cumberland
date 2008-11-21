@@ -26,6 +26,15 @@ namespace Cumberland
 {
 	public class Rectangle
 	{
+#region static properties
+		
+		public static Rectangle GeographicWorldExtents
+		{
+			get { return new Rectangle(-180,-90,180,90); }
+		}
+		
+#endregion
+		
 #region properties
 		
 		Point min;
@@ -161,6 +170,15 @@ namespace Cumberland
 		
 		public static bool operator == (Rectangle r1, Rectangle r2)
 		{
+			if ((object) r1 == null || (object) r2 == null)
+			{
+				if ((object) r1 == null && (object) r2 == null)
+				{
+					return true;
+				}
+				else return false;
+			}
+			
 			if (r1.Min == r2.Min && r1.Max == r2.Max) 
 			{
 				return true;

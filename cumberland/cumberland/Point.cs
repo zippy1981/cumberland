@@ -73,6 +73,15 @@ namespace Cumberland
 		
 		public static bool operator == (Point p1, Point p2)
 		{
+			if ((object) p1 == null || (object) p2 == null)
+			{
+				if ((object) p1 == null && (object) p2 == null)
+				{
+					return true;
+				}
+				else return false;
+			}
+			
 			if (p1.X == p2.X && p1.Y == p2.Y) 
 			{
 				return true;

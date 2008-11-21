@@ -45,6 +45,7 @@ namespace Cumberland.TilePyramidGenerator
 		{
 #region check arguments
 			
+			Rectangle worldExtents = null;
 			Rectangle extents = new Rectangle();
 			string path = ".";
 			bool showHelp = false;
@@ -85,10 +86,14 @@ namespace Cumberland.TilePyramidGenerator
 				}
 				else
 				{
-					System.Console.WriteLine("Warning: Unknown consumer, ignoring...");
+					System.Console.WriteLine("Error: Unknown consumer.");
+					ShowHelp(options);
+					return;
 				}
 			});
-			            
+			options.Add("w|worldextents=",
+			            "comma-delimited extents for defining world (e.g. -180,-90,180,90). Valid only for TMS",
+			            delegate (string v) { worldExtents = ParseExtents(v); } );
 			
 			List<string> rest = options.Parse(args);
 			
@@ -111,6 +116,13 @@ namespace Cumberland.TilePyramidGenerator
 				ShowHelp(options);
 				return;
 			}
+			
+			if (consumer == TileConsumer.GoogleMaps && worldExtents != null)
+			{
+				System.Console.WriteLine("Error: cannot set world extents for Google Maps");
+				ShowHelp(options);
+				return;
+			}
 
 #endregion
 			
@@ -123,13 +135,9 @@ namespace Cumberland.TilePyramidGenerator
 			Map map = ms.Deserialize(rest[0]);
 			
 			// use map extents as clipping range if not provided
-			if (consumer == TileConsumer.GoogleMaps && extents.IsEmpty && !map.Extents.IsEmpty)
+			if (extents.IsEmpty && !map.Extents.IsEmpty)
 			{
 				extents = map.Extents;
-			}
-			else if (!extents.IsEmpty)
-			{
-				map.Extents = extents;
 			}
 			
 			// if map has a projection, reproject clipping area
@@ -158,7 +166,15 @@ namespace Cumberland.TilePyramidGenerator
 
 #region calculate total # of tiles
 			
-			TileProvider tp = new TileProvider(map, consumer);
+			TileProvider tp;
+			if (worldExtents == null)
+			{
+				tp = new TileProvider(consumer);
+			}
+			else
+			{
+				tp = new TileProvider(consumer, worldExtents);
+			}
 			tp.DrawExceptionsOnTile = false;
 			
 			// calculate total number of tiles
@@ -278,7 +294,7 @@ namespace Cumberland.TilePyramidGenerator
 						current++;
 						
 						// render tile and save to file
-						Bitmap b = tp.DrawTile(x, y, ii);
+						Bitmap b = tp.DrawTile(map, x, y, ii);
 						string tileFile = string.Format("{0}{1}{2}.png",
 						              xtilepath,
 						              Path.DirectorySeparatorChar,

@@ -1,3 +1,8 @@
+2008-11-21  Scott Ellington <scott.ellington@gmail.com> 
+
+	* Point.cs, Rectangle.cs: operator overrides should check for nulls
+	* Web/TileProvider.cs: refactor
+
 2008-11-18  Scott Ellington <scott.ellington@gmail.com> 
 
 	* Projection/ProjFourWrapper.cs: add TryParseEpsg
