@@ -3,10 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.50727</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{C7A608A4-54EE-44E3-B100-3E95C555BAC9}</ProjectGuid>
     <OutputType>Exe</OutputType>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,7 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\cumberland\Cumberland.csproj">
-      <Project>{C7A608A4-54EE-44E3-B100-3E95C555BAC9}</Project>
+      <Project>{0F516D1A-446C-46E6-8AD0-7C6573C338D8}</Project>
       <Name>Cumberland</Name>
     </ProjectReference>
   </ItemGroup>
