@@ -38,15 +38,15 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\cumberland\Cumberland.csproj">
-      <Project>{12B8F35A-A939-4177-9392-5B89B29C195A}</Project>
+      <Project>{0F516D1A-446C-46E6-8AD0-7C6573C338D8}</Project>
       <Name>Cumberland</Name>
     </ProjectReference>
     <ProjectReference Include="..\Cumberland.Data.PostGIS\Cumberland.Data.PostGIS.csproj">
-      <Project>{12B8F35A-A939-4177-9392-5B89B29C195A}</Project>
+      <Project>{6F5ECB63-A48C-42B8-B4E2-CD613C8CAFD2}</Project>
       <Name>Cumberland.Data.PostGIS</Name>
     </ProjectReference>
     <ProjectReference Include="..\Cumberland.Data.SqlServer\Cumberland.Data.SqlServer.csproj">
-      <Project>{12B8F35A-A939-4177-9392-5B89B29C195A}</Project>
+      <Project>{E67F34B9-0BB0-462B-B935-135093833A77}</Project>
       <Name>Cumberland.Data.SqlServer</Name>
     </ProjectReference>
   </ItemGroup>

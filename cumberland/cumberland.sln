@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual Studio 2005
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cumberland", "cumberland\Cumberland.csproj", "{0F516D1A-446C-46E6-8AD0-7C6573C338D8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cumberland.Tests", "Cumberland.Tests\Cumberland.Tests.csproj", "{102E6FF6-201B-4366-BE2B-6304EF756F2B}"
