@@ -2,14 +2,14 @@
 
 =0.2=
 
-  * bump to .Net 3.5 / Visual Studio 2008
+  * bump to .Net 3.5 / Visual Studio 2008 *done*
   * basic label support
     * point - location: (right, upper-right, etc.)
     * polygon - centroid
     * polyline - trickier. need some sort of algorithm (maybe slope of longest line segment?)
   * New supported tile consumers:
     * Virtual Earth
-    * OpenLayers 
+    * OpenLayers *done*
   * KML
 
 =Later=
