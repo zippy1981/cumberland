@@ -28,16 +28,44 @@ using System.Linq;
 using System.Xml.Linq;
 
 using Cumberland;
+using Cumberland.Projection;
 
 namespace Cumberland.Data
 {
 	public static class KeyholeMarkupLanguage
 	{
+		static List<Point> Transform(this List<Point> pts, ProjFourWrapper source, ProjFourWrapper destination)
+		{
+			if (source != null && destination != null)
+			{
+				for (int ii=0; ii<pts.Count; ii++)
+				{
+					pts[ii] = source.Transform(destination, pts[ii]);
+				}
+			}
+			
+			return pts;
+		}
+		
 		public static string CreateFromMap(Map map)
 		{
 			if (map == null)
 			{
 				throw new ArgumentNullException("map");			
+			}
+
+			Rectangle extents = map.Extents.Clone();
+			
+			if (!string.IsNullOrEmpty(map.Projection))
+			{
+				using (ProjFourWrapper src = new ProjFourWrapper(map.Projection))
+				{
+					using (ProjFourWrapper dst = new ProjFourWrapper(ProjFourWrapper.WGS84))
+					{
+						extents = new Rectangle(src.Transform(dst, extents.Min),
+							                        src.Transform(dst, extents.Max));
+					}
+				}
 			}
 			
 			//XNamespace ns = XNamespace.Get("http://www.opengis.net/kml/2.2");
@@ -46,27 +74,60 @@ namespace Cumberland.Data
 			                                           new XElement("Document",					                              
 			                                                        from l in map.Layers
 			                                                        where l.Data != null			                                                       
-			                                                        select CreateFromLayer(l))));
+			                                                        select CreateFromLayer(l, extents))));
 
 			return doc.ToString(SaveOptions.DisableFormatting);
 			
 		}
 
-		static XElement CreateFromLayer(Layer layer)
+		static XElement CreateFromLayer(Layer layer, Rectangle extents)
 		{
-			return new XElement("Folder",
-			                     new XElement("name", layer.Id),
-			                     from f in layer.Data.GetFeatures()
-			                     select CreateFromFeature(f));
+			ProjFourWrapper src = null;
+			ProjFourWrapper dst = null;
+			Rectangle queryExtents = extents.Clone();
+
+			try
+			{
+			
+				if (!string.IsNullOrEmpty(layer.Projection) &&
+				    layer.Projection != ProjFourWrapper.WGS84)
+				{
+					src = new ProjFourWrapper(layer.Projection);
+					dst = new ProjFourWrapper(ProjFourWrapper.WGS84);
+
+					queryExtents = new Rectangle(dst.Transform(src, queryExtents.Min),
+							                        dst.Transform(src, queryExtents.Max));
+				}
+				
+				return new XElement("Folder",
+				                     new XElement("name", layer.Id),
+				                     from f in layer.Data.GetFeatures(queryExtents)
+				                     select CreateFromFeature(f, src, dst));
+			}
+			finally
+			{
+				if (src != null) 
+				{
+					src.Dispose();
+					dst.Dispose();
+				}
+			}
 		}
 
-		static List<XElement> CreateFromFeature(Feature feature)
+		static List<XElement> CreateFromFeature(Feature feature, 
+		                                        ProjFourWrapper source, 
+		                                        ProjFourWrapper destination)
 		{
 			List<XElement> xe = new List<XElement>();
 
 			if (feature is Point)
 			{
 				Point pt = feature as Point;
+
+				if (destination != null)
+				{
+					pt = source.Transform(destination, pt);
+				}
 				
 				xe.Add(new XElement("Placemark", 
 				                  new XElement("Point",
@@ -82,7 +143,7 @@ namespace Cumberland.Data
 					xe.Add(new XElement("Placemark", 
 				                  new XElement("LineString",
 				                               new XElement("coordinates",
-					                                              from pt in l.Points
+					                                              from pt in l.Points.Transform(source, destination)
 					                                              select string.Format("{0},{1} ", pt.X, pt.Y)))));
 				}
 			}
@@ -106,7 +167,7 @@ namespace Cumberland.Data
 						                                 new XElement("outerBoundaryIs",
 						                                              new XElement("LinearRing",
 						                                                            new XElement("coordinates",
-						                                                                        from pt in r.Points
+						                                                                        from pt in r.Points.Transform(source, destination)
 						                                                                        select string.Format("{0},{1} ", pt.X, pt.Y) )))));
 					}
 					else
@@ -114,7 +175,7 @@ namespace Cumberland.Data
 						node.Element("Polygon").Add(new XElement("innerBoundaryIs",
 						                                          new XElement("LinearRing",
 						                                                            new XElement("coordinates",
-						                                                                        from pt in r.Points
+						                                                                        from pt in r.Points.Transform(source, destination)
 						                                                                        select string.Format("{0},{1} ", pt.X, pt.Y) ))));
 					}
 				}

@@ -28,6 +28,7 @@ using NDesk.Options;
 
 using Cumberland;
 using Cumberland.Data;
+using Cumberland.Data.PostGIS;
 using Cumberland.Xml.Serialization;
 
 namespace Cumberland.MapToKml
@@ -37,10 +38,10 @@ namespace Cumberland.MapToKml
 		public static void Main(string[] args)
 		{
 			MapSerializer ms = new MapSerializer();
-
-			Map map = ms.Deserialize(args[0]);
-			ms.AddDatabaseFeatureSourceType(typeof(Cumberland.Data.PostGIS.PostGISFeatureSource));
+			ms.AddDatabaseFeatureSourceType(typeof(PostGISFeatureSource));
 			ms.AddDatabaseFeatureSourceType(typeof(Cumberland.Data.SqlServer.SqlServerFeatureSource));
+			
+			Map map = ms.Deserialize(args[0]);
 
 			Console.WriteLine(KeyholeMarkupLanguage.CreateFromMap(map));
 		}
