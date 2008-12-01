@@ -212,6 +212,7 @@ namespace Cumberland.Tests
 			db.ForcedGeometryColumn = "MyGeoColumn";
 			
 			Style s1 = new Style();
+			s1.Id = "MyStyle";
 			s1.LineColor = Color.FromArgb(255, 180, 34, 34);
 			s1.LineStyle = LineStyle.Dashed;
 			s1.LineWidth = 23;
@@ -526,6 +527,12 @@ namespace Cumberland.Tests
 			Assert.IsTrue(Path.IsPathRooted(m.Layers[3].Styles[2].PointSymbolImagePath));
 		}
 
+		[Test]
+		public void TestStyleIdSerialized()
+		{
+			Assert.AreEqual("MyStyle", m2.Layers[0].Styles[0].Id);
+		}
+		
 #endregion
 		
 	}

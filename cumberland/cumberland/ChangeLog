@@ -1,3 +1,13 @@
+2008-12-01  Scott Ellington  <scott.ellington@gmail.com>
+
+	* Data/KeyholeMarkupLanguage.cs: support styles in kml
+
+	* Layer.cs:
+	* Drawing/MapDrawer.cs: move get style methods to Layer
+
+	* Style.cs:
+	* Xml/Serialization/MapSerializer.cs: add Style.Id
+
 2008-11-24  Scott Ellington  <scott.ellington@gmail.com>
 
 	* Data/KeyholeMarkupLanguage.cs: support transform

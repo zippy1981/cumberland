@@ -39,7 +39,7 @@ namespace Cumberland
 	
 	public class Layer
 	{
-#region properties
+		#region properties
 		
 		public IFeatureSource Data {
 			get {
@@ -104,6 +104,61 @@ namespace Cumberland
 		
 		string themeField = null;
 		
-#endregion
+		#endregion
+
+		#region public methods
+		
+		public Style GetRangeStyleForFeature(string fieldValue)
+		{
+			double val;
+			if (!double.TryParse(fieldValue, out val))
+		    {
+				return null;
+			}
+			
+			foreach (Style s in Styles)
+			{
+				if (val <= s.MaxRangeThemeValue &&
+				    val >= s.MinRangeThemeValue)
+				{
+					return s;
+				}
+			}
+			
+			return null;
+		}
+
+		public Style GetUniqueStyleForFeature(string fieldValue)
+		{
+			foreach (Style s in Styles)
+			{
+				if (s.UniqueThemeValue == fieldValue)
+				{
+					return s;
+				}
+			}
+			
+			return null;
+		}
+
+		public Style GetStyleForFeature(string fieldValue)
+		{
+			if (Styles.Count == 0) return null;
+			
+			if (Theme == ThemeType.NumericRange)
+			{
+				return GetRangeStyleForFeature(fieldValue);
+			}
+			else if (Theme == ThemeType.Unique)
+			{
+				return GetUniqueStyleForFeature(fieldValue);
+			}
+			else
+			{
+				return Styles[0];
+			}
+		}
+
+		#endregion
 	}
 }
