@@ -129,7 +129,7 @@ namespace Cumberland.Data
 				return new XElement("Style",
 				                    new XAttribute("id", style.Id),
 				                    new XElement("LineStyle",
-				                                 new XElement("width", style.LineWidth),
+				                                 new XElement("width", (style.LineStyle == LineStyle.None ? 0 : style.LineWidth)),
 				                                 new XElement("color", ConvertToKmlColor(style.LineColor))),
 				                    new XElement("PolyStyle",
 				                                 new XElement("color", ConvertToKmlColor(style.FillColor))));
@@ -140,7 +140,7 @@ namespace Cumberland.Data
 				return new XElement("Style",
 				                    new XAttribute("id", style.Id),
 				                    new XElement("LineStyle",
-				                                 new XElement("width", style.LineWidth),
+				                                 new XElement("width", (style.LineStyle == LineStyle.None ? 0 : style.LineWidth)),
 				                                 new XElement("color", ConvertToKmlColor(style.LineColor))));
 			}
 			else
@@ -148,7 +148,8 @@ namespace Cumberland.Data
 				return new XElement("Style",
 				                    new XAttribute("id", style.Id),
 				                    new XElement("IconStyle",
-				                                 new XElement("color", ConvertToKmlColor(style.LineColor))));				
+				                                 (style.PointSymbol == PointSymbolType.Image ? new XElement("Icon", new XElement("href", style.PointSymbolImagePath)) : null),
+				                                 (style.PointSymbol == PointSymbolType.Shape ? new XElement("color", ConvertToKmlColor(style.LineColor)) : null)));				
 			}
 		}
 
@@ -197,6 +198,7 @@ namespace Cumberland.Data
 					                    (style != null && !string.IsNullOrEmpty(style.Id) ? new XElement("styleUrl", "#" + style.Id) : null),
 					                    (!string.IsNullOrEmpty(feature.ThemeFieldValue) ? new XElement("name", feature.ThemeFieldValue) : null),
 					                    new XElement("LineString",
+					                                 new XElement("tessellate", "1"),
 					                                 new XElement("coordinates",
 					                                              from pt in l.Points.Transform(source, destination)
 					                                              select string.Format("{0},{1} ", pt.X, pt.Y)))));
@@ -223,17 +225,19 @@ namespace Cumberland.Data
 						                    new XElement("Polygon",
 						                                 new XElement("outerBoundaryIs",
 						                                              new XElement("LinearRing",
-						                                                            new XElement("coordinates",
+						                                                           new XElement("tessellate", "1"),
+						                                                           new XElement("coordinates",
 						                                                                        from pt in r.Points.Transform(source, destination)
 						                                                                        select string.Format("{0},{1} ", pt.X, pt.Y) )))));
 					}
 					else
 					{
 						node.Element("Polygon").Add(new XElement("innerBoundaryIs",
-						                                          new XElement("LinearRing",
-						                                                            new XElement("coordinates",
-						                                                                        from pt in r.Points.Transform(source, destination)
-						                                                                        select string.Format("{0},{1} ", pt.X, pt.Y) ))));
+						                                          new XElement("LinearRing",				                                 
+						                                                      new XElement("tessellate", "1"),
+						                                                      new XElement("coordinates",
+						                                                                   from pt in r.Points.Transform(source, destination)
+						                                                                   select string.Format("{0},{1} ", pt.X, pt.Y) ))));
 					}
 				}
 
