@@ -61,6 +61,7 @@
     <Compile Include="MapSerializerTests.cs" />
     <Compile Include="DBaseIIITests.cs" />
     <Compile Include="TileProviderTests.cs" />
+    <Compile Include="LayerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shape_eg_data\mexico\cities.shp" />

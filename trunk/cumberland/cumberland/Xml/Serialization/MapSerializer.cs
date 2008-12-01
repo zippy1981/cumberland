@@ -397,6 +397,10 @@ namespace Cumberland.Xml.Serialization
 				{
 					style.UniqueThemeValue = child.InnerText;
 				}
+				else if (child.Name == "Id")
+				{
+					style.Id = child.InnerText;
+				}
 			}
 			
 			layer.Styles.Add(style);
@@ -500,6 +504,7 @@ namespace Cumberland.Xml.Serialization
 			writer.WriteElementString("UniqueThemeValue", style.UniqueThemeValue);
 			writer.WriteElementString("MaxRangeThemeValue", style.MaxRangeThemeValue.ToString());
 			writer.WriteElementString("MinRangeThemeValue", style.MinRangeThemeValue.ToString());
+			writer.WriteElementString("Id", style.Id);
 			
 			writer.WriteEndElement(); // Style
 		}

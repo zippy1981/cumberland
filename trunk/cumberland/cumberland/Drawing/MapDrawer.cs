@@ -71,7 +71,7 @@ namespace Cumberland.Drawing
 				// set antialiasing mode
 				g.SmoothingMode = Smoothing;
 				
-				// we need to convet map points to pixel points 
+				// we need to convert map points to pixel points 
 				// so let's do as much of this at once:
 				// calculate map rectangle based on image width/height
 				Rectangle envelope = map.Extents.Clone();
@@ -146,6 +146,7 @@ namespace Cumberland.Drawing
 
 						// set up a delegate for getting style based on theme type
 						GetStyleForFeature getStyle = GetBasicStyleForFeature;
+						
 						if (layer.Theme == ThemeType.Unique)
 						{
 							getStyle = GetUniqueStyleForFeature;
@@ -335,6 +336,8 @@ namespace Cumberland.Drawing
 #endregion
 
 #region helper methods
+
+		#region get style methods
 		
 		Style GetBasicStyleForFeature(Layer l, string fieldValue)
 		{
@@ -343,32 +346,18 @@ namespace Cumberland.Drawing
 		
 		Style GetUniqueStyleForFeature(Layer l, string fieldValue)
 		{
-			foreach (Style s in l.Styles)
-			{
-				if (s.UniqueThemeValue == fieldValue)
-				{
-					return s;
-				}
-			}
-			
-			return null;
+			return l.GetUniqueStyleForFeature(fieldValue);
 		}
 		
 		Style GetRangeStyleForFeature(Layer l, string fieldValue)
 		{
-			double val = double.Parse(fieldValue);
-			foreach (Style s in l.Styles)
-			{
-				if (val <= s.MaxRangeThemeValue &&
-				    val >= s.MinRangeThemeValue)
-				{
-					return s;
-				}
-			}
-			
-			return null;
+			return l.GetRangeStyleForFeature(fieldValue);
 		}
-				
+
+		#endregion
+
+		#region Draw Point methods
+		
 		void DrawSquarePoint(Style style, Graphics g, System.Drawing.Point pp)
 		{
 			System.Drawing.Rectangle r = new System.Drawing.Rectangle(
@@ -408,6 +397,8 @@ namespace Cumberland.Drawing
 			                    pp.X - b.Width/2,
 			                    pp.Y - b.Height/2);
 		}
+
+		#endregion
 		
 		System.Drawing.Point ConvertMapToPixel(Rectangle r, double scale, Point p)
 		{

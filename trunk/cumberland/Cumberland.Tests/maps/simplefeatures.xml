@@ -8,6 +8,7 @@
 		<Layer>
 			<Styles>
 				<Style>
+					<Id>MyStyle</Id>
 					<LineWidth>2</LineWidth>
 					<LineColor>255,65,145,65</LineColor>
 					<FillColor>255,240,255,208</FillColor>

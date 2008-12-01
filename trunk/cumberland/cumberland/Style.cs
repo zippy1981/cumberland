@@ -45,10 +45,10 @@ namespace Cumberland
 	
 	public enum LineStyle
 	{
-		None = 0x0000,
-		Solid = 0x1111,
-		Dashed = 0x0011,
-		Dotted = 0x0101
+		None,
+		Solid,
+		Dashed,
+		Dotted
 	}
 	
 #endregion
@@ -68,6 +68,7 @@ namespace Cumberland
 		string uniqueThemeValue = null;
 		double maxRangeThemeValue = 1;
 		double minRangeThemeValue = 0;
+		string id;
 		
 #endregion
 
@@ -169,6 +170,15 @@ namespace Cumberland
 			}
 			set {
 				maxRangeThemeValue = value;
+			}
+		}
+
+		public string Id {
+			get {
+				return id;
+			}
+			set {
+				id = value;
 			}
 		}
 		

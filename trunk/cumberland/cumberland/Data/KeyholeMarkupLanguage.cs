@@ -24,6 +24,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -71,9 +72,14 @@ namespace Cumberland.Data
 			//XNamespace ns = XNamespace.Get("http://www.opengis.net/kml/2.2");
 			
 			XDocument doc = new XDocument(new XElement("kml",
-			                                           new XElement("Document",					                              
+			                                           new XElement("Document",
 			                                                        from l in map.Layers
-			                                                        where l.Data != null			                                                       
+			                                                        where l.Data != null
+			                                                        from s in l.Styles
+			                                                        where !string.IsNullOrEmpty(s.Id)
+			                                                        select CreateFromStyle(s, l.Data.SourceFeatureType),
+			                                                        from l in map.Layers
+			                                                        where l.Data != null
 			                                                        select CreateFromLayer(l, extents))));
 
 			return doc.ToString(SaveOptions.DisableFormatting);
@@ -101,8 +107,8 @@ namespace Cumberland.Data
 				
 				return new XElement("Folder",
 				                     new XElement("name", layer.Id),
-				                     from f in layer.Data.GetFeatures(queryExtents)
-				                     select CreateFromFeature(f, src, dst));
+				                     from f in layer.Data.GetFeatures(queryExtents, layer.ThemeField)
+				                     select CreateFromFeature(layer, f, src, dst));
 			}
 			finally
 			{
@@ -114,11 +120,56 @@ namespace Cumberland.Data
 			}
 		}
 
-		static List<XElement> CreateFromFeature(Feature feature, 
+		static XElement CreateFromStyle(Style style, FeatureType featureType)
+		{
+			if (string.IsNullOrEmpty(style.Id)) return null;
+			
+			if (featureType == FeatureType.Polygon)
+			{
+				return new XElement("Style",
+				                    new XAttribute("id", style.Id),
+				                    new XElement("LineStyle",
+				                                 new XElement("width", style.LineWidth),
+				                                 new XElement("color", ConvertToKmlColor(style.LineColor))),
+				                    new XElement("PolyStyle",
+				                                 new XElement("color", ConvertToKmlColor(style.FillColor))));
+				                                              
+			}
+			else if (featureType == FeatureType.Polyline)
+			{
+				return new XElement("Style",
+				                    new XAttribute("id", style.Id),
+				                    new XElement("LineStyle",
+				                                 new XElement("width", style.LineWidth),
+				                                 new XElement("color", ConvertToKmlColor(style.LineColor))));
+			}
+			else
+			{
+				return new XElement("Style",
+				                    new XAttribute("id", style.Id),
+				                    new XElement("IconStyle",
+				                                 new XElement("color", ConvertToKmlColor(style.LineColor))));				
+			}
+		}
+
+		static string ConvertToKmlColor(Color color)
+		{
+			return (String.Format("{0:X2}", color.A) +
+					String.Format("{0:X2}", color.B) +
+					String.Format("{0:X2}", color.G) +
+					String.Format("{0:X2}", color.R)).ToLower();
+		}
+		
+		static List<XElement> CreateFromFeature(Layer layer,
+		                                        Feature feature,
 		                                        ProjFourWrapper source, 
 		                                        ProjFourWrapper destination)
 		{
 			List<XElement> xe = new List<XElement>();
+
+			Style style = layer.GetStyleForFeature(feature.ThemeFieldValue);
+
+			if (style == null) return null;
 
 			if (feature is Point)
 			{
@@ -130,9 +181,11 @@ namespace Cumberland.Data
 				}
 				
 				xe.Add(new XElement("Placemark", 
-				                  new XElement("Point",
-				                               new XElement("coordinates",
-				                                            string.Format("{0},{1}", pt.X, pt.Y)))));
+				                    (style != null && !string.IsNullOrEmpty(style.Id) ? new XElement("styleUrl", "#" + style.Id) : null),
+				                    (!string.IsNullOrEmpty(feature.ThemeFieldValue) ? new XElement("name", feature.ThemeFieldValue) : null),
+				                    new XElement("Point",
+				                                 new XElement("coordinates",
+				                                              string.Format("{0},{1}", pt.X, pt.Y)))));
 			}
 			else if (feature is PolyLine)
 			{
@@ -140,9 +193,11 @@ namespace Cumberland.Data
 
               	foreach (Line l in pl.Lines)
 				{
-					xe.Add(new XElement("Placemark", 
-				                  new XElement("LineString",
-				                               new XElement("coordinates",
+					xe.Add(new XElement("Placemark",
+					                    (style != null && !string.IsNullOrEmpty(style.Id) ? new XElement("styleUrl", "#" + style.Id) : null),
+					                    (!string.IsNullOrEmpty(feature.ThemeFieldValue) ? new XElement("name", feature.ThemeFieldValue) : null),
+					                    new XElement("LineString",
+					                                 new XElement("coordinates",
 					                                              from pt in l.Points.Transform(source, destination)
 					                                              select string.Format("{0},{1} ", pt.X, pt.Y)))));
 				}
@@ -163,6 +218,8 @@ namespace Cumberland.Data
 						}
 						
 						node = new XElement("Placemark",
+						                    (style != null && !string.IsNullOrEmpty(style.Id) ? new XElement("styleUrl", "#" + style.Id) : null),
+						                    (!string.IsNullOrEmpty(feature.ThemeFieldValue) ? new XElement("name", feature.ThemeFieldValue) : null),
 						                    new XElement("Polygon",
 						                                 new XElement("outerBoundaryIs",
 						                                              new XElement("LinearRing",
