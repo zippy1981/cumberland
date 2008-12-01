@@ -1,5 +1,9 @@
 2008-12-01  Scott Ellington  <scott.ellington@gmail.com>
 
+	* Data/KeyholeMarkupLanguage.cs: icons and tessellate
+
+2008-12-01  Scott Ellington  <scott.ellington@gmail.com>
+
 	* Data/KeyholeMarkupLanguage.cs: support styles in kml
 
 	* Layer.cs:
