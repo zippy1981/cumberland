@@ -86,7 +86,7 @@ A database data element looks like this:
 
 _Note: there are other optional parameters for database feature sources that can be used for doing subqueries.  There is an example [http://code.google.com/p/cumberland/source/browse/trunk/cumberland/Cumberland.Tests/maps/postgis.xml here]._
 
-Additionally, you can use the SimpleFeatureSource to class create an inline feature source ([http://code.google.com/p/cumberland/source/browse/trunk/cumberland/Cumberland.Tests/maps/simplefeatures.xml example here]).
+Additionally, you can use the SimpleFeatureSource class to create an inline feature source ([http://code.google.com/p/cumberland/source/browse/trunk/cumberland/Cumberland.Tests/maps/simplefeatures.xml example here]).
 
 == Style elements ==
 
