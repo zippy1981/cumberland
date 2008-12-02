@@ -31,6 +31,8 @@ Options:
   -t, --test                 Test - only calculate the total and return
 }}}
 
+The "map file" is defined by the [mapXmlFormat map xml format] which holds data sources and style information.
+
 This generates a set of folders, named by their zoom level, in the output folder specified.  If no output folder is specified, the tile folders are generated in the current directory.  Inside of each folder are the generated tiles.  They are named X_Y.png.  Where the 'X' and 'Y' are their tile coordinates.
 
 = Deployment =
