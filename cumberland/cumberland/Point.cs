@@ -73,23 +73,12 @@ namespace Cumberland
 		
 		public static bool operator == (Point p1, Point p2)
 		{
-			if ((object) p1 == null || (object) p2 == null)
+			if (object.ReferenceEquals(p1, null))
 			{
-				if ((object) p1 == null && (object) p2 == null)
-				{
-					return true;
-				}
-				else return false;
+				return object.ReferenceEquals(p2, null);
 			}
 			
-			if (p1.X == p2.X && p1.Y == p2.Y) 
-			{
-				return true;
-			}
-			else 
-			{
-				return false;
-			}
+			return !object.ReferenceEquals(p2, null) && p1.X == p2.X && p1.Y == p2.Y;
 		}
 		   
 		public static bool operator != (Point p1, Point p2)

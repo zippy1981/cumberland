@@ -1,3 +1,8 @@
+2008-12-02  Scott Ellington  <scott.ellington@gmail.com>
+
+	* Point.cs:
+	* Rectangle.cs: cleanup op overrides
+
 2008-12-01  Scott Ellington  <scott.ellington@gmail.com>
 
 	* Data/KeyholeMarkupLanguage.cs: icons and tessellate
