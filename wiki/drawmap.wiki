@@ -20,6 +20,8 @@ Options:
   -t, --height=VALUE         the height of the image in pixels
 }}}
 
+The "map file" is defined by the [mapXmlFormat map xml format] which holds data sources and style information.
+
 = Examples = 
 
 [http://cumberland.googlecode.com/files/theming.png]
