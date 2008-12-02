@@ -170,23 +170,12 @@ namespace Cumberland
 		
 		public static bool operator == (Rectangle r1, Rectangle r2)
 		{
-			if ((object) r1 == null || (object) r2 == null)
-			{
-				if ((object) r1 == null && (object) r2 == null)
-				{
-					return true;
-				}
-				else return false;
+			if (object.ReferenceEquals(r1, null))
+			{	
+				return object.ReferenceEquals(r2, null);
 			}
 			
-			if (r1.Min == r2.Min && r1.Max == r2.Max) 
-			{
-				return true;
-			}
-			else 
-			{
-				return false;
-			}
+			return !object.ReferenceEquals(r2, null) && r1.Min == r2.Min && r1.Max == r2.Max; 
 		}
 		   
 		public static bool operator != (Rectangle r1, Rectangle r2)
