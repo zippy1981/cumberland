@@ -10,7 +10,7 @@
   * New supported tile consumers:
     * Virtual Earth
     * OpenLayers *(done)*
-  * KML
+  * KML *(done)*
 
 =Later=
 
