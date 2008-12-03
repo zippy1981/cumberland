@@ -195,13 +195,9 @@ namespace Cumberland
 
 		public override bool Equals(object ob)
 		{
-			if (ob is Rectangle)
-			{
-				Rectangle r = (Rectangle) ob;
-				
-				return this == r;
-			}
-			else return false;
+			Rectangle r = ob as Rectangle;
+			
+			return this == r;
 		}
 		
 		public override string ToString ()
