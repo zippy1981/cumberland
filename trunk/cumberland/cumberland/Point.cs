@@ -98,15 +98,9 @@ namespace Cumberland
 
 		public override bool Equals(object ob)
 		{
-			if (ob is Point)
-			{
-				Point p = (Point) ob;
-				return this == p;
-			}
-			else
-			{
-				return false;
-			}
+			Point p = ob as Point;
+			
+			return this == p;
 		}
 
 		public override string ToString ()
