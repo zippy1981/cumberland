@@ -92,6 +92,15 @@ namespace Cumberland
 			}
 		}
 
+		public string LabelField {
+			get {
+				return labelField;
+			}
+			set {
+				labelField = value;
+			}
+		}
+
 		IFeatureSource data;
 		
 		string projection = null;
@@ -103,6 +112,8 @@ namespace Cumberland
 		ThemeType themeType = ThemeType.None;
 		
 		string themeField = null;
+
+		string labelField = null;
 		
 		#endregion
 

@@ -29,7 +29,7 @@ namespace Cumberland
 	[XmlInclude(typeof(Polygon)), XmlInclude(typeof(Point)), XmlInclude(typeof(PolyLine))]
 	public abstract class Feature
 	{
-
+		string labelFieldValue = null;
 		string themeFieldValue = null;
 
 		public string ThemeFieldValue {
@@ -38,6 +38,15 @@ namespace Cumberland
 			}
 			set {
 				themeFieldValue = value;
+			}
+		}
+
+		public string LabelFieldValue {
+			get {
+				return labelFieldValue;
+			}
+			set {
+				labelFieldValue = value;
 			}
 		}
 	
