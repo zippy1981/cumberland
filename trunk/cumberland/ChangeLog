@@ -1,5 +1,11 @@
 2008-12-04  Scott Ellington  <scott.ellington@gmail.com>
 
+	* Cumberland.Data.PostGIS/PostGISFeatureSource.cs:
+	* Cumberland.Data.SqlServer/SqlServerFeatureSource.cs: add GetFeatures
+	overloads for labels
+
+2008-12-04  Scott Ellington  <scott.ellington@gmail.com>
+
 	* Cumberland.TilePyramidGenerator/Main.cs: add virtualearth support
 
 2008-11-24  Scott Ellington  <scott.ellington@gmail.com>

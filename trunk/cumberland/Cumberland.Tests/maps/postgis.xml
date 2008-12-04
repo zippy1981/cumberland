@@ -6,6 +6,7 @@
 	<Projection>+init=epsg:4326</Projection>
 	<Layers>
 		<Layer>
+			<LabelField>name</LabelField>
 			<Styles>
 				<Style>
 					<LineWidth>1</LineWidth>
@@ -17,7 +18,7 @@
 			<Projection>+init=epsg:3087</Projection>
 			<Id>pg1</Id>
 			<Data sourceType="Cumberland.Data.IDatabaseFeatureSource" sourceInstance="Cumberland.Data.PostGIS.PostGISFeatureSource">
-				<ConnectionString>Server=192.168.1.102;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;</ConnectionString>
+				<ConnectionString>Server=localhost;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;</ConnectionString>
 				<TableName>counties</TableName>
 			</Data>
 		</Layer>
@@ -32,7 +33,7 @@
 			<Projection>+init=epsg:3086</Projection>
 			<Id>major roads</Id>
 			<Data sourceType="Cumberland.Data.IDatabaseFeatureSource" sourceInstance="Cumberland.Data.PostGIS.PostGISFeatureSource">
-				<ConnectionString>Server=192.168.1.102;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;</ConnectionString>
+				<ConnectionString>Server=localhost;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;</ConnectionString>
 				<TableName>(select * from fdot_majroads where usroute = 'I    10') as interstates </TableName>
 				<ForcedSrid>3086</ForcedSrid>
 				<ForcedFeatureType>Polyline</ForcedFeatureType>
@@ -40,6 +41,7 @@
 			</Data>
 		</Layer>	
 		<Layer>
+			<LabelField>name</LabelField>
 			<Theme>Unique</Theme>
 			<ThemeField>magnitude</ThemeField>					
 			<Styles>
@@ -95,7 +97,7 @@
 			<Projection>+init=epsg:3086</Projection>
 			<Id>springs</Id>
 			<Data sourceType="Cumberland.Data.IDatabaseFeatureSource" sourceInstance="Cumberland.Data.PostGIS.PostGISFeatureSource">
-				<ConnectionString>Server=192.168.1.102;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;</ConnectionString>
+				<ConnectionString>Server=localhost;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;</ConnectionString>
 				<TableName>springs_fdep_2000</TableName>
 			</Data>
 		</Layer>					

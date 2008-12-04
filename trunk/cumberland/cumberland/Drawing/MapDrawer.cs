@@ -120,7 +120,7 @@ namespace Cumberland.Drawing
 						List<Feature> features = null;
 						if (layer.Theme == ThemeType.None)
 						{
-							features = layer.Data.GetFeatures(layerEnvelope);
+							features = layer.Data.GetFeatures(layerEnvelope, null, layer.LabelField);
 						}
 						else
 						{
@@ -131,7 +131,7 @@ namespace Cumberland.Drawing
 								throw new MapConfigurationException("Layer has been set for theming, but no ThemeField was provided");
 							}
 							
-							features = layer.Data.GetFeatures(layerEnvelope, themeField);
+							features = layer.Data.GetFeatures(layerEnvelope, themeField, layer.LabelField);
 						}
 						
 						if (features.Count == 0)

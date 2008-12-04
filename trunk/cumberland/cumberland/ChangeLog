@@ -1,5 +1,12 @@
 2008-12-04  Scott Ellington  <scott.ellington@gmail.com>
 
+	* Drawing/MapDrawer.cs:
+	* Data/IFeatureSource.cs:
+	* Data/SimpleFeatureSource.cs:
+	* Data/Shapefile/Shapefile.cs: add GetFeatures overloads for labels
+
+2008-12-04  Scott Ellington  <scott.ellington@gmail.com>
+
 	* Layer.cs:
 	* Feature.cs:
 	* Xml/Serialization/MapSerializer.cs: add Layer.LabelField and
