@@ -1,5 +1,12 @@
 2008-12-04  Scott Ellington  <scott.ellington@gmail.com>
 
+	* Style.cs:
+	* Drawing/MapDrawer.cs:
+	* Data/KeyholeMarkupLanguage.cs:
+	* Xml/Serialization/MapSerializer.cs: add FillStyle
+
+2008-12-04  Scott Ellington  <scott.ellington@gmail.com>
+
 	* Web/TileProvider.cs: add virtualearth support
 
 2008-12-02  Scott Ellington  <scott.ellington@gmail.com>

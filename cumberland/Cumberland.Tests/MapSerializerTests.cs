@@ -222,6 +222,7 @@ namespace Cumberland.Tests
 			s1.UniqueThemeValue = "MyValue";
 			s1.MaxRangeThemeValue = 30000;
 			s1.MinRangeThemeValue = 4;
+			s1.FillStyle = FillStyle.None;
 			l1.Styles.Add(s1);
 			
 			m1.Layers.Add(l1);
@@ -531,6 +532,12 @@ namespace Cumberland.Tests
 		public void TestStyleIdSerialized()
 		{
 			Assert.AreEqual("MyStyle", m2.Layers[0].Styles[0].Id);
+		}
+
+		[Test]
+		public void TestStyleFillStyle()
+		{
+			Assert.AreEqual(FillStyle.None, m2.Layers[0].Styles[0].FillStyle);
 		}
 		
 #endregion

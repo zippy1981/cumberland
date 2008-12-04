@@ -294,8 +294,12 @@ namespace Cumberland.Drawing
 
 									gp.AddPolygon(ppts);
 								}
+
 								
-								g.FillPath(new SolidBrush(style.FillColor), gp);
+								if (style.FillStyle != FillStyle.None)
+								{
+									g.FillPath(new SolidBrush(style.FillColor), gp);
+								}
 								
 								if (style.LineStyle != LineStyle.None)
 								{
