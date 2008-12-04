@@ -8,6 +8,7 @@
 		<Layer>
 			<Theme>NumericRange</Theme>
 			<ThemeField>AREA</ThemeField>
+			<LabelField>NAME</LabelField>
 			<Styles>
 				<Style>
 					<Id>0-30000</Id>
@@ -76,7 +77,8 @@
 				<FilePath>../shape_eg_data/mexico/rivers.shp</FilePath>
 			</Data>
 		</Layer>	
-		<Layer> 
+		<Layer>
+			<LabelField>NAME</LabelField>
 			<Styles>
 				<Style>
 				    <Id>LakesStyle</Id>

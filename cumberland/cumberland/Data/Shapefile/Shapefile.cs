@@ -54,7 +54,7 @@ namespace Cumberland.Data.Shapefile
     }
 		
 	
-    public class Shapefile : IFeatureSource, IFileFeatureSource
+    public class Shapefile : IFileFeatureSource
 	{				
 
 #region Vars
@@ -63,7 +63,8 @@ namespace Cumberland.Data.Shapefile
 		uint version;		
 		bool isShapefileLoaded = false;
 		bool isDbfLoaded = false;
-		string currentField = null;
+		string currentThemeField = null;
+		string currentLabelField = null;
 		DBaseIIIFile dbfFile = null;
 		
 #endregion
@@ -394,46 +395,74 @@ namespace Cumberland.Data.Shapefile
 		{
 			return GetFeatures(rectangle, null);
 		}
-		
+
+		public List<Feature> GetFeatures (string themeField, string labelField)
+		{
+			return GetFeatures(new Rectangle(), themeField, labelField);
+		}
 		public List<Feature> GetFeatures(Cumberland.Rectangle rectangle, string themeField)
+		{		
+			return GetFeatures(rectangle, null, null);
+		}
+		
+		public List<Feature> GetFeatures (Rectangle rectangle, string themeField, string labelField)
 		{
 			if (!isShapefileLoaded) LoadShapefile();
-			
-			if (themeField != null && 
-			    !isDbfLoaded && 
-			    themeField != currentField)
+
+			// either or both of the fields have been required and are not already loaded
+			if (((themeField != null && themeField != currentThemeField) || 
+			     (labelField != null && labelField != currentLabelField) &&
+			    !isDbfLoaded))
 			{
 				LoadDbf();
 				
 				// find our theme field in the dbf
-				int fieldIndex = -1;
+				int themeFieldIndex = -1;
+				int labelFieldIndex = -1;
+				
 				for (int ii=0; ii<dbfFile.Records.Columns.Count; ii++)
 				{
-					if (dbfFile.Records.Columns[ii].ColumnName == themeField)
+					if (themeField != null && dbfFile.Records.Columns[ii].ColumnName == themeField)
 					{
-						fieldIndex = ii;
-						break;
+						themeFieldIndex = ii;
+					}
+
+					if (labelField != null && dbfFile.Records.Columns[ii].ColumnName == labelField)
+					{
+						labelFieldIndex = ii;
 					}
 				}
 				
-				if (fieldIndex == -1)
+				if (themeField != null && themeFieldIndex == -1)
 				{
 					throw new ArgumentException("Theme field not found in dbf", "themeField");
 				}
+
+				if (labelField != null && labelFieldIndex == -1)
+				{
+					throw new ArgumentException("Label field not found in dbf", "labelField");
+				}
+
+
 				
 				// updates the features
 				for (int ii=0; ii < features.Count; ii++)
 				{
-					features[ii].ThemeFieldValue = dbfFile.Records.Rows[ii][fieldIndex].ToString();
+					DataRow row = dbfFile.Records.Rows[ii];
+					
+					if (themeField != null) features[ii].ThemeFieldValue = row[themeFieldIndex].ToString();
+					
+					if (labelField != null) features[ii].LabelFieldValue = row[labelFieldIndex].ToString();
 				}
 				
-				currentField = themeField;
+				currentThemeField = themeField;
+				currentLabelField = labelField;
 			}
 			
 			// we've got no spatial index 
 			return features;
 		}
-		
+
 #endregion
 						
     }

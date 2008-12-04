@@ -147,7 +147,17 @@ namespace Cumberland.Data.SqlServer
 			return GetFeatures(new Rectangle());
 		}
 
-		public System.Collections.Generic.List<Feature> GetFeatures (Rectangle rectangle, string themeField)
+		public List<Feature> GetFeatures (string themeField, string labelField)
+		{
+			return GetFeatures(new Rectangle(), themeField, labelField);
+		}
+		
+		public List<Feature> GetFeatures(Rectangle rectangle, string themeField)
+		{
+			return GetFeatures(rectangle, themeField, null);
+		}	
+		
+		public List<Feature> GetFeatures (Rectangle rectangle, string themeField, string labelField)
 		{
 			CheckIfInitialized();
 			
@@ -157,10 +167,11 @@ namespace Cumberland.Data.SqlServer
 			{
 				conn.Open();
 				
-				string sql = string.Format("select {0}.STAsText() {2} from {1}",
+				string sql = string.Format("select {0}.STAsText() {2} {3} from {1}",
 				                           geometryColumn, 
 				                           tableName,
-				                           (themeField != null ? ", " + themeField : string.Empty));
+				                           (themeField != null ? ", " + themeField : string.Empty),
+				                           (labelField != null ? ", " + labelField : string.Empty));
 
 				if (!rectangle.IsEmpty)
 				{
@@ -189,6 +200,11 @@ namespace Cumberland.Data.SqlServer
 							if (themeField != null)
 							{
 								f.ThemeFieldValue = dr[1].ToString();
+							}
+
+							if (labelField != null)
+							{
+								f.LabelFieldValue = dr[themeField != null ? 2 : 1].ToString();
 							}
 							
 							feats.Add(f);
@@ -304,6 +320,7 @@ namespace Cumberland.Data.SqlServer
 				isInitialized = true;
 			}
 		}
+
 #endregion
 	}
 }

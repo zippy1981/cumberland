@@ -86,7 +86,16 @@ namespace Cumberland.Tests
 			{
 				return GetFeatures();
 			}
-		
+
+			public List<Feature> GetFeatures (string themeField, string labelField)
+			{
+				throw new System.NotImplementedException();
+			}
+			
+			public List<Feature> GetFeatures (Rectangle rectangle, string themeField, string labelField)
+			{
+				throw new System.NotImplementedException();
+			}			
 		}
 		
 		class DummyDBProvider : IDatabaseFeatureSource
@@ -176,6 +185,16 @@ namespace Cumberland.Tests
 			public List<Feature> GetFeatures(Cumberland.Rectangle rectangle, string themeField)
 			{
 				return GetFeatures();
+			}
+
+			public List<Feature> GetFeatures (string themeField, string labelField)
+			{
+				throw new System.NotImplementedException();
+			}
+			
+			public List<Feature> GetFeatures (Rectangle rectangle, string themeField, string labelField)
+			{
+				throw new System.NotImplementedException();
 			}
 
 		}
@@ -547,7 +566,7 @@ namespace Cumberland.Tests
 		{
 			Assert.AreEqual(FillStyle.None, m2.Layers[0].Styles[0].FillStyle);
 		}
-		
+				
 #endregion
 		
 	}

@@ -144,7 +144,17 @@ namespace Cumberland.Data.PostGIS
 			return GetFeatures(new Rectangle());
 		}
 
+		public List<Feature> GetFeatures (string themeField, string labelField)
+		{
+			return GetFeatures(new Rectangle(), themeField, labelField);
+		}
+		
 		public List<Feature> GetFeatures(Rectangle rectangle, string themeField)
+		{
+			return GetFeatures(rectangle, themeField, null);
+		}	
+
+		public List<Feature> GetFeatures (Rectangle rectangle, string themeField, string labelField)
 		{
 			CheckIfInitialized();
 			
@@ -154,10 +164,11 @@ namespace Cumberland.Data.PostGIS
 			{
 				conn.Open();
 				
-				string sql = string.Format("select astext({0}) as {0} {2} from {1}",
+				string sql = string.Format("select astext({0}) as {0} {2} {3} from {1}",
 				                           geometryColumn, 
 				                           tableName,
-				                           (themeField != null ? ", " + themeField : string.Empty));
+				                           (themeField != null ? ", " + themeField : string.Empty),
+				                           (labelField != null ? ", " + labelField : string.Empty));
 
 				if (!rectangle.IsEmpty)
 				{
@@ -170,7 +181,7 @@ namespace Cumberland.Data.PostGIS
 				                           rectangle.Max.Y,
 				                           srid);
 				}
-				
+
 				using (NpgsqlCommand comm = new NpgsqlCommand(sql, conn))
 				{
 					using (NpgsqlDataReader dr = comm.ExecuteReader())
@@ -178,10 +189,17 @@ namespace Cumberland.Data.PostGIS
 						while (dr.Read())
 						{
 							Feature f = SimpleFeatureAccess.Parse(dr.GetString(0));
+							
 							if (themeField != null)
 							{
 								f.ThemeFieldValue = dr[1].ToString();
 							}
+
+							if (labelField != null)
+							{
+								f.LabelFieldValue = dr[themeField != null ? 2 : 1].ToString();
+							}
+							
 							feats.Add(f);
 						}
 					}
