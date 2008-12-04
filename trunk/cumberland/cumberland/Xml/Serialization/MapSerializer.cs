@@ -401,6 +401,10 @@ namespace Cumberland.Xml.Serialization
 				{
 					style.Id = child.InnerText;
 				}
+				else if (child.Name == "FillStyle")
+				{
+					style.FillStyle = (FillStyle) Enum.Parse(typeof(FillStyle), child.InnerText);
+				}
 			}
 			
 			layer.Styles.Add(style);
@@ -505,6 +509,7 @@ namespace Cumberland.Xml.Serialization
 			writer.WriteElementString("MaxRangeThemeValue", style.MaxRangeThemeValue.ToString());
 			writer.WriteElementString("MinRangeThemeValue", style.MinRangeThemeValue.ToString());
 			writer.WriteElementString("Id", style.Id);
+			writer.WriteElementString("FillStyle", Enum.GetName(typeof(FillStyle), style.FillStyle));
 			
 			writer.WriteEndElement(); // Style
 		}

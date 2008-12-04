@@ -132,7 +132,7 @@ namespace Cumberland.Data
 				                                 new XElement("width", (style.LineStyle == LineStyle.None ? 0 : style.LineWidth)),
 				                                 new XElement("color", ConvertToKmlColor(style.LineColor))),
 				                    new XElement("PolyStyle",
-				                                 new XElement("color", ConvertToKmlColor(style.FillColor))));
+				                                 new XElement("color", (style.FillStyle == FillStyle.None ? "00ffffff" : ConvertToKmlColor(style.FillColor)))));
 				                                              
 			}
 			else if (featureType == FeatureType.Polyline)

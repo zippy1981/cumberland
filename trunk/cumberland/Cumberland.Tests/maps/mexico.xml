@@ -76,6 +76,22 @@
 				<FilePath>../shape_eg_data/mexico/rivers.shp</FilePath>
 			</Data>
 		</Layer>	
+		<Layer> 
+			<Styles>
+				<Style>
+				    <Id>LakesStyle</Id>
+					<LineWidth>3</LineWidth>
+					<LineColor>155,105,105,255</LineColor>
+					<LineStyle>Dotted</LineStyle>
+					<FillStyle>None</FillStyle>
+				</Style>
+			</Styles>
+			<Projection>+init=epsg:4326</Projection>
+			<Id>lakes</Id>
+			<Data sourceType="Cumberland.Data.IFileFeatureSource" sourceInstance="Cumberland.Data.Shapefile.Shapefile">
+				<FilePath>../shape_eg_data/mexico/lakes.shp</FilePath>
+			</Data>
+		</Layer>
 		<Layer>
 			<Theme>NumericRange</Theme>
 			<ThemeField>POPULATION</ThemeField>

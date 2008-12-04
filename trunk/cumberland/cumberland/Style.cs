@@ -50,6 +50,12 @@ namespace Cumberland
 		Dashed,
 		Dotted
 	}
+
+	public enum FillStyle
+	{
+		None,
+		Solid
+	}
 	
 #endregion
 	
@@ -69,6 +75,7 @@ namespace Cumberland
 		double maxRangeThemeValue = 1;
 		double minRangeThemeValue = 0;
 		string id;
+		FillStyle fillStyle = FillStyle.Solid;
 		
 #endregion
 
@@ -179,6 +186,15 @@ namespace Cumberland
 			}
 			set {
 				id = value;
+			}
+		}
+
+		public FillStyle FillStyle {
+			get {
+				return fillStyle;
+			}
+			set {
+				fillStyle = value;
 			}
 		}
 		
