@@ -24,6 +24,7 @@
 
 using System;
 using System.Drawing;
+using System.Text;
 
 using Cumberland;
 using Cumberland.Drawing;
@@ -35,7 +36,8 @@ namespace Cumberland.Web
 	{
 		None,
 		GoogleMaps,
-		TileMapService
+		TileMapService,
+		VirtualEarth
 	}
 	
 	public class TileProvider
@@ -93,7 +95,7 @@ namespace Cumberland.Web
 				
 				if (consumer != TileConsumer.TileMapService)
 				{
-					throw new InvalidOperationException("Changing the minimum zoom level is not permitted for this tile consumer");
+					throw new InvalidOperationException("Changing the maximum zoom level is not permitted for this tile consumer");
 				}
 
 				maxZoomLevel = value;
@@ -104,12 +106,13 @@ namespace Cumberland.Web
 		
 #region ctors
 		
-		[Obsolete("A map is no longer accepted in the constructor")]
+		[Obsolete("A map is no longer accepted in the constructor", true)]
 		public TileProvider(Map map) : this(TileConsumer.GoogleMaps)
 		{
 		}
 
-		public TileProvider(TileConsumer consumer) : this(consumer, (consumer == TileConsumer.TileMapService ? Rectangle.GeographicWorldExtents : null))
+		public TileProvider(TileConsumer consumer) : this(consumer, 
+		                                                  (consumer == TileConsumer.TileMapService ? Rectangle.GeographicWorldExtents : null))
 		{
 		}
 		
@@ -122,11 +125,17 @@ namespace Cumberland.Web
 			
 			this.consumer = consumer;
 			
-			if (consumer == TileConsumer.GoogleMaps)
+			if (consumer == TileConsumer.GoogleMaps || consumer == TileConsumer.VirtualEarth)
 			{
 				if (worldExtents != null)
 				{
-					throw new ArgumentException("World extents for Google maps is fixed and cannot be set (must be null)", "worldExtents");
+					throw new ArgumentException("World extents for this tile consumer is fixed and cannot be set (must be null)", "worldExtents");
+				}
+
+				if (consumer == TileConsumer.VirtualEarth)
+				{
+					minZoomLevel = 1;
+					maxZoomLevel = 23;
 				}
 				
 				// get projection to grab circumference
@@ -144,6 +153,8 @@ namespace Cumberland.Web
 		}
 		
 #endregion
+
+		#region public methods
 		
 		public double CalculateMapUnitsPerPixel(int zoomLevel)
 		{
@@ -174,7 +185,7 @@ namespace Cumberland.Web
 			int minx = Convert.ToInt32(Math.Floor((rectangle.Min.X - worldExtents.Min.X) / (resolution * tileSize)));
 			int miny, maxy;
 			
-			if (consumer == TileConsumer.GoogleMaps)
+			if (consumer == TileConsumer.GoogleMaps || consumer == TileConsumer.VirtualEarth)
 			{
 				miny = Convert.ToInt32(Math.Floor((tileSize*numTiles - 
 				                                       ((rectangle.Max.Y - worldExtents.Min.Y) / resolution)) / tileSize));
@@ -186,7 +197,7 @@ namespace Cumberland.Web
 			
 			int maxx = Convert.ToInt32(Math.Floor((rectangle.Max.X - worldExtents.Min.X) / (resolution * tileSize)));
 			
-			if (consumer == TileConsumer.GoogleMaps)
+			if (consumer == TileConsumer.GoogleMaps || consumer == TileConsumer.VirtualEarth)
 			{
 				maxy = Convert.ToInt32(Math.Floor((tileSize*numTiles - 
 				                                       ((rectangle.Min.Y - worldExtents.Min.Y) / resolution)) / tileSize));
@@ -206,7 +217,7 @@ namespace Cumberland.Web
 			return Convert.ToInt32(Math.Pow(2, zoomLevel));
 		}
 
-		[Obsolete("Drawing a tile now requires a map")]
+		[Obsolete("Drawing a tile now requires a map", true)]
 		public Bitmap DrawTile(int x, int y, int zoomLevel)
 		{
 			throw new InvalidOperationException("drawing a tile now requires a map");
@@ -219,9 +230,9 @@ namespace Cumberland.Web
 			// set to tile size
 			map.Width = map.Height = tileSize;
 			
-			if (consumer == TileConsumer.GoogleMaps)
+			if (consumer == TileConsumer.GoogleMaps || consumer == TileConsumer.VirtualEarth)
 			{
-				// reproject to Google's spherical mercator
+				// reproject to spherical mercator
 				map.Projection = ProjFourWrapper.SphericalMercatorProjection;
 			}
 			
@@ -237,7 +248,7 @@ namespace Cumberland.Web
 
 				// google tiles origin is top left
 				int tileymin, tileymax;
-				if (consumer == TileConsumer.GoogleMaps)
+				if (consumer == TileConsumer.GoogleMaps || consumer == TileConsumer.VirtualEarth)
 				{
 					tileymin = numTiles - y - 1;
 					tileymax = numTiles - y;
@@ -288,6 +299,37 @@ namespace Cumberland.Web
 
 			return b;
 		}
+
+		public string ConvertTileToQuadKey(int x, int y, int zoomLevel)
+		{
+			CheckZoomLevel(zoomLevel);
+			
+            StringBuilder quadKey = new StringBuilder();
+			
+            for (int i = zoomLevel; i >= minZoomLevel; i--)
+            {
+                char digit = '0';
+				
+                int mask = 1 << (i - 1);
+				
+                if ((x & mask) != 0)
+                {
+                    digit++;
+                }
+                if ((y & mask) != 0)
+                {
+                    digit++;
+                    digit++;
+                }
+                quadKey.Append(digit);
+            }
+			
+            return quadKey.ToString();
+		}
+		
+		#endregion
+
+		#region helper methods
 		
 		void CheckZoomLevel(int zoomLevel)
 		{
@@ -300,5 +342,7 @@ namespace Cumberland.Web
 				                                                    zoomLevel));
 			}
 		}
+
+		#endregion
 	}
 }

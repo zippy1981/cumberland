@@ -53,6 +53,8 @@ namespace Cumberland.TilePyramidGenerator
 			int minZoomLevel = 0;
 			bool onlyCount = false;
 			TileConsumer consumer = TileConsumer.GoogleMaps;
+			bool mxzlChanged = false;
+			bool mnzlChanged = false;
 			
 			OptionSet options = new OptionSet();
 			options.Add("e|extents=", 
@@ -65,10 +67,10 @@ namespace Cumberland.TilePyramidGenerator
 			            delegate (string v) { path = v; });
 			options.Add("x|maxzoom=",
 			            "the maximum zoom level",
-			            delegate (string v) { maxZoomLevel = int.Parse(v); });
+			            delegate (string v) { maxZoomLevel = int.Parse(v); mxzlChanged = true; });
 			options.Add("n|minzoom=",
 			            "the minimum zoom level",
-			            delegate (string v) { minZoomLevel = int.Parse(v); });
+			            delegate (string v) { minZoomLevel = int.Parse(v); mnzlChanged = true; });
 			options.Add("t|test",
 			            "Test - only calculate the total and return",
 			            delegate (string v) { onlyCount = v != null; });
@@ -83,6 +85,10 @@ namespace Cumberland.TilePyramidGenerator
 				else if (v == "tms")
 				{
 					consumer = TileConsumer.TileMapService;
+				}
+				else if (v == "ve")
+				{
+					consumer = TileConsumer.VirtualEarth;
 				}
 				else
 				{
@@ -117,9 +123,10 @@ namespace Cumberland.TilePyramidGenerator
 				return;
 			}
 			
-			if (consumer == TileConsumer.GoogleMaps && worldExtents != null)
+			if ((consumer == TileConsumer.GoogleMaps || consumer == TileConsumer.VirtualEarth) && 
+			    worldExtents != null)
 			{
-				System.Console.WriteLine("Error: cannot set world extents for Google Maps");
+				System.Console.WriteLine("Error: cannot set world extents for this consumer");
 				ShowHelp(options);
 				return;
 			}
@@ -141,7 +148,8 @@ namespace Cumberland.TilePyramidGenerator
 			}
 			
 			// if map has a projection, reproject clipping area
-			if (consumer == TileConsumer.GoogleMaps && !extents.IsEmpty)
+			if ((consumer == TileConsumer.GoogleMaps || consumer == TileConsumer.VirtualEarth) && 
+			    !extents.IsEmpty)
 			{
 				if (!string.IsNullOrEmpty(map.Projection))
 				{
@@ -160,6 +168,12 @@ namespace Cumberland.TilePyramidGenerator
 											Unless your data is in spherical mercator,  
 											you will not get correct tiles");
 				}
+			}
+
+			if (consumer == TileConsumer.VirtualEarth)
+			{
+				if (!mnzlChanged) minZoomLevel = 1;
+				if (!mxzlChanged) maxZoomLevel = 23;
 			}
 			
 #endregion
@@ -207,6 +221,8 @@ namespace Cumberland.TilePyramidGenerator
 #region render tiles
 			
 			Directory.CreateDirectory(path);
+
+			#region Handle TMS xml file
 			
 			XmlWriter writer = null;
 			
@@ -257,11 +273,19 @@ namespace Cumberland.TilePyramidGenerator
 				writer.WriteStartElement("TileSets");
 				writer.WriteAttributeString("profile", "local");
 			}                     
+
+			#endregion
 			
 			long current = 0;
 			for (int ii = minZoomLevel; ii <= maxZoomLevel; ii++)
 			{
 				string tilepath = Path.Combine(path, ii.ToString());
+
+				if (consumer == TileConsumer.VirtualEarth)
+				{
+					tilepath = path;
+				}
+				
 				Directory.CreateDirectory(tilepath);
 				
 				System.Drawing.Rectangle r;
@@ -287,6 +311,12 @@ namespace Cumberland.TilePyramidGenerator
 				for (int x = r.Left; x <= (r.Left+r.Width); x++)
 				{
 					string xtilepath = Path.Combine(tilepath, x.ToString());
+
+					if (consumer == TileConsumer.VirtualEarth)
+					{
+						xtilepath = path;
+					}
+					
 					Directory.CreateDirectory(xtilepath);
 					
 					for (int y = r.Top; y <= (r.Top+r.Height); y++)
@@ -298,7 +328,7 @@ namespace Cumberland.TilePyramidGenerator
 						string tileFile = string.Format("{0}{1}{2}.png",
 						              xtilepath,
 						              Path.DirectorySeparatorChar,
-						              y);
+						              (consumer == TileConsumer.VirtualEarth ? tp.ConvertTileToQuadKey(x,y,ii) : y.ToString()));
 						b.Save(tileFile ,ImageFormat.Png);
 						
 						// update count in console

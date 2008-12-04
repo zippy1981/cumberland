@@ -36,7 +36,7 @@ namespace Cumberland.Tests
 		[Test, ExpectedException(typeof(ArgumentOutOfRangeException))]
 		public void TestMinZoomLevel()
 		{
-			TileProvider t = new TileProvider(new Map());
+			TileProvider t = new TileProvider(TileConsumer.GoogleMaps);
 			
 			t.CalculateNumberOfTilesAcross(-1);
 		}
@@ -44,9 +44,16 @@ namespace Cumberland.Tests
 		[Test, ExpectedException(typeof(ArgumentOutOfRangeException))]
 		public void TestMaxZoomLevel()
 		{
-			TileProvider t = new TileProvider(new Map());
+			TileProvider t = new TileProvider(TileConsumer.GoogleMaps);
 			
 			t.CalculateNumberOfTilesAcross(20);
+		}
+
+		[Test]
+		public void TestConvertTileToQuadKey()
+		{
+			TileProvider t = new TileProvider(TileConsumer.VirtualEarth);
+			Assert.AreEqual("213", t.ConvertTileToQuadKey(3, 5, 3));
 		}
 	}
 }

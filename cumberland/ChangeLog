@@ -1,3 +1,7 @@
+2008-12-04  Scott Ellington  <scott.ellington@gmail.com>
+
+	* Cumberland.TilePyramidGenerator/Main.cs: add virtualearth support
+
 2008-11-24  Scott Ellington  <scott.ellington@gmail.com>
 
 	* Cumberland.MapToKml/Main.cs: support transform
