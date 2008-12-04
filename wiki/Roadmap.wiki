@@ -10,9 +10,10 @@
   * New supported tile consumers:
     * Virtual Earth *(done)* ([http://salmonsalvo.net/Cumberland:_VirtualEarth_Test demo])
     * OpenLayers *(done)* ([http://salmonsalvo.net/Cumberland:_OpenLayers_Test demo])
-    * Yahoo
   * KML *(done)*
 
 =Later=
 
   * Raster support
+  * New supported tile consumers:
+    * Yahoo (is this even possible?)
