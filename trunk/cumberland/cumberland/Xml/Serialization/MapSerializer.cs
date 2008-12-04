@@ -341,6 +341,10 @@ namespace Cumberland.Xml.Serialization
 				{
 					l.ThemeField = child.InnerText;
 				}
+				else if (child.Name == "LabelField")
+				{
+					l.LabelField = child.InnerText;
+				}
 			}
 			
 			m.Layers.Add(l);
@@ -425,6 +429,7 @@ namespace Cumberland.Xml.Serialization
 			writer.WriteElementString("Id", layer.Id);
 			writer.WriteElementString("Theme", Enum.GetName(typeof(ThemeType), layer.Theme));
 			writer.WriteElementString("ThemeField", layer.ThemeField);
+			writer.WriteElementString("LabelField", layer.LabelField);
 			
 			// handle Data Element
 			writer.WriteStartElement("Data");

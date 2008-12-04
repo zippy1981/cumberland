@@ -204,6 +204,7 @@ namespace Cumberland.Tests
 			l1.Projection = "+init=epsg:2236";
 			l1.Theme = ThemeType.NumericRange;
 			l1.ThemeField = "MyField";
+			l1.LabelField = "MyLabelField";
 			db.ConnectionString = "MyConnString";
 			db.ForcedFeatureType = FeatureType.Polyline;
 			db.ForcedSpatialType = SpatialType.Geographic;
@@ -341,6 +342,13 @@ namespace Cumberland.Tests
 		{
 			Assert.AreEqual("MyField",
 			                m2.Layers[0].ThemeField);
+		}
+
+		[Test]
+		public void TestLayerLabelFieldSerialized()
+		{
+			Assert.AreEqual("MyLabelField",
+			                m2.Layers[0].LabelField);
 		}
 				
 #endregion
@@ -525,7 +533,7 @@ namespace Cumberland.Tests
 			MapSerializer ms = new MapSerializer();
 			Map m = ms.Deserialize("../../maps/mexico.xml");
 			
-			Assert.IsTrue(Path.IsPathRooted(m.Layers[3].Styles[2].PointSymbolImagePath));
+			Assert.IsTrue(Path.IsPathRooted(m.Layers[4].Styles[2].PointSymbolImagePath));
 		}
 
 		[Test]
