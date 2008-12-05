@@ -482,7 +482,7 @@ namespace Cumberland.Drawing
 				ff = FontFamily.GenericMonospace;
 			}
 
-			Font font = new Font(ff, 10);
+			Font font = new Font(ff, s.LabelFontEmSize);
 
 			// shift point to center of label
 			SizeF size = g.MeasureString(label, font);
