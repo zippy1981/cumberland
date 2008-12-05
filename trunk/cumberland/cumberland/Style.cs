@@ -78,6 +78,12 @@ namespace Cumberland
 		Top,
 		TopRight
 	}
+
+	public enum LabelDecoration
+	{
+		None,
+		Outline
+	}
 	
 #endregion
 	
@@ -105,6 +111,9 @@ namespace Cumberland
 		float labelFontEmSize = 10;
 		LabelPosition labelPosition = LabelPosition.Center;
 		int labelPixelOffset = 5;
+		LabelDecoration labelDecoration = LabelDecoration.None;
+		Color labelOutlineColor = Color.White;
+		float labelOutlineWidth = 1f;
 		
 #endregion
 
@@ -278,6 +287,33 @@ namespace Cumberland
 			}
 			set {
 				labelPixelOffset = value;
+			}
+		}
+
+		public float LabelOutlineWidth {
+			get {
+				return labelOutlineWidth;
+			}
+			set {
+				labelOutlineWidth = value;
+			}
+		}
+
+		public Color LabelOutlineColor {
+			get {
+				return labelOutlineColor;
+			}
+			set {
+				labelOutlineColor = value;
+			}
+		}
+
+		public LabelDecoration LabelDecoration {
+			get {
+				return labelDecoration;
+			}
+			set {
+				labelDecoration = value;
 			}
 		}
 		

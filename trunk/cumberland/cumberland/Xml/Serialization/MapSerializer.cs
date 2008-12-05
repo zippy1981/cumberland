@@ -433,6 +433,18 @@ namespace Cumberland.Xml.Serialization
 				{
 					style.LabelPixelOffset = int.Parse(child.InnerText);
 				}
+				else if (child.Name == "LabelDecoration")
+				{
+					style.LabelDecoration = (LabelDecoration) Enum.Parse(typeof(LabelDecoration), child.InnerText);
+				}
+				else if (child.Name == "LabelOutlineColor")
+				{
+					style.LabelOutlineColor = ParseColor(child.InnerText);
+				}
+				else if (child.Name == "LabelOutlineWidth")
+				{
+					style.LabelOutlineWidth = float.Parse(child.InnerText);
+				}
 			}
 			
 			layer.Styles.Add(style);
@@ -546,6 +558,9 @@ namespace Cumberland.Xml.Serialization
 			writer.WriteElementString("LabelFontEmSize", style.LabelFontEmSize.ToString());
 			writer.WriteElementString("LabelPosition", Enum.GetName(typeof(LabelPosition), style.LabelPosition));
 			writer.WriteElementString("LabelPixelOffset", style.LabelPixelOffset.ToString());
+			writer.WriteElementString("LabelDecoration", Enum.GetName(typeof(LabelDecoration), style.LabelDecoration));
+			writer.WriteElementString("LabelOutlineColor", PrepareColor(style.LabelOutlineColor));
+			writer.WriteElementString("LabelOutlineWidth", style.LabelOutlineWidth.ToString());			                         
 			
 			writer.WriteEndElement(); // Style
 		}

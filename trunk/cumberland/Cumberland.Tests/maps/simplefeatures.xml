@@ -146,6 +146,10 @@
 					<LineColor>255,65,145,65</LineColor>
 					<FillColor>255,240,255,208</FillColor>
 					<LineStyle>Solid</LineStyle>
+					<LabelFontEmSize>24</LabelFontEmSize>
+					<LabelDecoration>Outline</LabelDecoration>
+					<LabelOutlineWidth>1</LabelOutlineWidth>
+					<LabelFont>Monospace</LabelFont>
 				</Style>
 			</Styles>
 			<Projection></Projection>
