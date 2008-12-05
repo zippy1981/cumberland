@@ -1,5 +1,12 @@
 2008-12-05  Scott Ellington  <scott.ellington@gmail.com>
 
+	* Data/Shapefile/Shapefile.cs: fix bug in overload call
+
+	* Data/KeyholeMarkupLanguage.cs: use label field for placemark names if
+	available
+
+2008-12-05  Scott Ellington  <scott.ellington@gmail.com>
+
 	* Map.cs:
 	* Drawing/MapDrawer.cs:
 	* Xml/Serialization/MapSerializer.cs: add Map.BackgroundColor
