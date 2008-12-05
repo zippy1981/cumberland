@@ -495,67 +495,83 @@ namespace Cumberland.Drawing
 
 			Font font = new Font(ff, s.LabelFontEmSize);
 
+			System.Drawing.Point labelPt = new System.Drawing.Point(0, 0);
+			
 			SizeF size = g.MeasureString(label, font);
 			switch (s.LabelPosition)
 			{
 				case LabelPosition.None:
 					return;
 				case LabelPosition.Center:
-					p.X = p.X - Convert.ToInt32(size.Width/2);
-					p.Y = p.Y - Convert.ToInt32(size.Height/2);
+					labelPt.X -= Convert.ToInt32(size.Width/2);
+					labelPt.Y -= Convert.ToInt32(size.Height/2);
 					break;
 				case LabelPosition.BottomLeft:
-					p.X = p.X - Convert.ToInt32(size.Width) - s.LabelPixelOffset;
-					p.Y += s.LabelPixelOffset;
+					labelPt.X -= Convert.ToInt32(size.Width) + s.LabelPixelOffset;
+					labelPt.Y += s.LabelPixelOffset;
 					break;					
 				case LabelPosition.Bottom:
-					p.X = p.X - Convert.ToInt32(size.Width/2);
-					p.Y += s.LabelPixelOffset;
+					labelPt.X -= Convert.ToInt32(size.Width/2);
+					labelPt.Y += s.LabelPixelOffset;
 					break;
 				case LabelPosition.BottomRight:  // default
-					p.Y += s.LabelPixelOffset;					
-					p.X += s.LabelPixelOffset;
+					labelPt.Y += s.LabelPixelOffset;					
+					labelPt.X += s.LabelPixelOffset;
 					break;
 				case LabelPosition.Right:
-					p.X += s.LabelPixelOffset;
-					p.Y = p.Y - Convert.ToInt32(size.Height/2);
+					labelPt.X += s.LabelPixelOffset;
+					labelPt.Y -= Convert.ToInt32(size.Height/2);
 					break;
 				case LabelPosition.TopRight:
-					p.X += s.LabelPixelOffset;
-					p.Y = p.Y - Convert.ToInt32(size.Height) - s.LabelPixelOffset;
+					labelPt.X += s.LabelPixelOffset;
+					labelPt.Y -= Convert.ToInt32(size.Height) + s.LabelPixelOffset;
 					break;
 				case LabelPosition.Top:
-					p.X = p.X - Convert.ToInt32(size.Width/2);
-					p.Y = p.Y - Convert.ToInt32(size.Height) - s.LabelPixelOffset;
+					labelPt.X -= Convert.ToInt32(size.Width/2);
+					labelPt.Y -= Convert.ToInt32(size.Height) + s.LabelPixelOffset;
 					break;
 				case LabelPosition.TopLeft:
-					p.X = p.X - Convert.ToInt32(size.Width) - s.LabelPixelOffset;
-					p.Y = p.Y - Convert.ToInt32(size.Height) - s.LabelPixelOffset;
+					labelPt.X -= Convert.ToInt32(size.Width) + s.LabelPixelOffset;
+					labelPt.Y -= Convert.ToInt32(size.Height) + s.LabelPixelOffset;
 					break;
 				case LabelPosition.Left:
-					p.X = p.X - Convert.ToInt32(size.Width) - s.LabelPixelOffset;
-					p.Y = p.Y - Convert.ToInt32(size.Height/2);
+					labelPt.X -= Convert.ToInt32(size.Width) + s.LabelPixelOffset;
+					labelPt.Y -= Convert.ToInt32(size.Height/2);
 					break;
 			}
 
-			StringFormat sf = new StringFormat();
-			sf.Alignment = StringAlignment.Center;
-			sf.LineAlignment = StringAlignment.Center;// draw the text to a path
+			Console.WriteLine(s.LabelPosition + " " + labelPt + " " + s.LabelPixelOffset);
 
+			g.TranslateTransform(p.X, p.Y);
+			g.RotateTransform(s.LabelAngle);
 			
 			if (s.LabelDecoration == LabelDecoration.Outline)
 			{
-				g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
-				g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+				StringFormat sf = new StringFormat();
+				sf.Alignment = StringAlignment.Center;
+				sf.LineAlignment = StringAlignment.Center;// draw the text to a path
+				
+				//g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
+				//g.InterpolationMode = InterpolationMode.HighQualityBicubic;
 				GraphicsPath gp = new GraphicsPath();
-				gp.AddString(label, ff, (int)FontStyle.Bold, s.LabelFontEmSize, p, sf);
+				gp.AddString(label, 
+				             ff, 
+				             (int)FontStyle.Bold, 
+				             s.LabelFontEmSize, 
+				             new RectangleF(new PointF(labelPt.X, labelPt.Y), size), 
+				             sf);
+				
 				g.FillPath(new SolidBrush(s.LabelColor), gp);
 				g.DrawPath(new Pen(s.LabelOutlineColor, s.LabelOutlineWidth), gp);
+				
+				//g.DrawRectangle(new Pen(Color.Red), labelPt.X, labelPt.Y, size.Width, size.Height);
 			}
 			else
 			{
-				g.DrawString(label, font, new SolidBrush(s.LabelColor), p);
+				g.DrawString(label, font, new SolidBrush(s.LabelColor), labelPt);
 			}
+
+			g.ResetTransform();
 		}
 		
 #endregion

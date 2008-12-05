@@ -252,6 +252,7 @@ namespace Cumberland.Tests
 			s1.LabelDecoration = LabelDecoration.Outline;
 			s1.LabelOutlineColor = Color.FromArgb(9,9,9,9);
 			s1.LabelOutlineWidth = 99f;
+			s1.LabelAngle = 45f;
 			l1.Styles.Add(s1);
 			
 			m1.Layers.Add(l1);
@@ -629,7 +630,13 @@ namespace Cumberland.Tests
 		{
 			Assert.AreEqual(99f, m2.Layers[0].Styles[0].LabelOutlineWidth);
 		}
-				
+
+		[Test]
+		public void TestStyleLabelAngleSerialized()
+		{
+			Assert.AreEqual(45f, m2.Layers[0].Styles[0].LabelAngle);
+		}
+
 #endregion
 		
 	}

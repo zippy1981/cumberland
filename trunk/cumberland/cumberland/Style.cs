@@ -114,6 +114,7 @@ namespace Cumberland
 		LabelDecoration labelDecoration = LabelDecoration.None;
 		Color labelOutlineColor = Color.White;
 		float labelOutlineWidth = 1f;
+		float labelAngle = 0f;
 		
 #endregion
 
@@ -314,6 +315,15 @@ namespace Cumberland
 			}
 			set {
 				labelDecoration = value;
+			}
+		}
+
+		public float LabelAngle {
+			get {
+				return labelAngle;
+			}
+			set {
+				labelAngle = value;
 			}
 		}
 		

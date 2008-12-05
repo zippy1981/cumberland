@@ -445,6 +445,10 @@ namespace Cumberland.Xml.Serialization
 				{
 					style.LabelOutlineWidth = float.Parse(child.InnerText);
 				}
+				else if (child.Name == "LabelAngle")
+				{
+					style.LabelAngle = float.Parse(child.InnerText);
+				}
 			}
 			
 			layer.Styles.Add(style);
@@ -560,7 +564,8 @@ namespace Cumberland.Xml.Serialization
 			writer.WriteElementString("LabelPixelOffset", style.LabelPixelOffset.ToString());
 			writer.WriteElementString("LabelDecoration", Enum.GetName(typeof(LabelDecoration), style.LabelDecoration));
 			writer.WriteElementString("LabelOutlineColor", PrepareColor(style.LabelOutlineColor));
-			writer.WriteElementString("LabelOutlineWidth", style.LabelOutlineWidth.ToString());			                         
+			writer.WriteElementString("LabelOutlineWidth", style.LabelOutlineWidth.ToString());
+			writer.WriteElementString("LabelAngle", style.LabelAngle.ToString());
 			
 			writer.WriteEndElement(); // Style
 		}
