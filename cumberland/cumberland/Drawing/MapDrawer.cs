@@ -62,11 +62,16 @@ namespace Cumberland.Drawing
 		{
 			ProjFourWrapper dst = null;
 			Graphics g = null;
+
+			Graphics labelGraphics = null;
 			
 			try
 			{
 				Bitmap b = new Bitmap(map.Width, map.Height);
 				g = Graphics.FromImage(b);
+
+				Bitmap labelBitmap = new Bitmap(map.Width, map.Height);
+				labelGraphics = Graphics.FromImage(labelBitmap);
 				
 				// set antialiasing mode
 				g.SmoothingMode = Smoothing;
@@ -85,7 +90,7 @@ namespace Cumberland.Drawing
 				{
 					dst = new ProjFourWrapper(map.Projection);
 				}
-								
+							
 				int idx = -1;
 				foreach (Layer layer in map.Layers)
 				{
@@ -207,6 +212,11 @@ namespace Cumberland.Drawing
 								System.Drawing.Point pp = ConvertMapToPixel(envelope, scale, p);
 
 								drawPoint(style, g, pp);
+
+								if (style.ShowLabels)
+								{
+									DrawLabel(labelGraphics, style, pp, p.LabelFieldValue);
+								}
 							}
 
 		#endregion
@@ -252,7 +262,16 @@ namespace Cumberland.Drawing
 									}
 								
 									g.DrawLines(ConvertLayerToPen(style), ppts);
+								}
 
+								if (style.ShowLabels && pol.LabelFieldValue != null)
+								{							
+									DrawLabel(labelGraphics, 
+									          style,
+									          ConvertMapToPixel(envelope,
+									                            scale,
+									                            src.Transform(dst, pol.CalculateBounds().Center)), 
+									          pol.LabelFieldValue);
 								}
 							}
 		#endregion
@@ -305,6 +324,14 @@ namespace Cumberland.Drawing
 								{
 									g.DrawPath(ConvertLayerToPen(style), gp);
 								}
+
+								if (style.ShowLabels && po.LabelFieldValue != null)
+								{
+									DrawLabel(labelGraphics, style, ConvertMapToPixel(envelope, 
+									                                      scale, 
+									                                      src.Transform(dst, po.CalculateBounds().Center)), 
+									          po.LabelFieldValue);
+								}
 							}
 #endregion
 						}
@@ -317,8 +344,10 @@ namespace Cumberland.Drawing
 							src.Dispose();
 						}
 					}
-					
+
 				}
+
+				g.DrawImageUnscaled(labelBitmap, 0, 0);
 				
 				return b;
 			}
@@ -333,6 +362,11 @@ namespace Cumberland.Drawing
 				if (g != null)
 				{
 					g.Dispose();
+				}
+
+				if (labelGraphics != null)
+				{
+					labelGraphics.Dispose();
 				}
 			}
 		}
@@ -369,8 +403,11 @@ namespace Cumberland.Drawing
 			                pp.Y - (style.PointSize/2),
 			                style.PointSize,
 			                style.PointSize);
-			
-			g.FillRectangle(new SolidBrush(style.FillColor), r);
+
+			if (style.FillStyle != FillStyle.None)
+			{
+				g.FillRectangle(new SolidBrush(style.FillColor), r);
+			}
 			
 			if (style.LineStyle != LineStyle.None)
 			{
@@ -384,8 +421,11 @@ namespace Cumberland.Drawing
 			                pp.Y - (style.PointSize/2),
 			                style.PointSize,
 			                style.PointSize);
-			
-			g.FillEllipse(new SolidBrush(style.FillColor), r);
+
+			if (style.FillStyle != FillStyle.None)
+			{
+				g.FillEllipse(new SolidBrush(style.FillColor), r);
+			}
 			
 			if (style.LineStyle != LineStyle.None)
 			{
@@ -426,6 +466,26 @@ namespace Cumberland.Drawing
 			return p;
 		}
 
+		void DrawLabel(Graphics g, Style s, System.Drawing.Point p, string label)
+		{
+			FontFamily ff = FontFamily.GenericSansSerif;
+
+			if (s.LabelFont == LabelFont.None)
+			{
+				return;
+			}
+			if (s.LabelFont == LabelFont.Serif)
+			{
+				ff = FontFamily.GenericSerif;
+			}
+			else if (s.LabelFont == LabelFont.Monospace)
+			{
+				ff = FontFamily.GenericMonospace;
+			}
+			
+			g.DrawString(label, new Font(ff, 10), new SolidBrush(s.LabelColor), p);
+		}
+		
 #endregion
 	}
 }

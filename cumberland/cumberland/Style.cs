@@ -56,6 +56,14 @@ namespace Cumberland
 		None,
 		Solid
 	}
+
+	public enum LabelFont
+	{
+		None,
+		Serif,
+		SansSerif,
+		Monospace
+	}
 	
 #endregion
 	
@@ -76,6 +84,10 @@ namespace Cumberland
 		double minRangeThemeValue = 0;
 		string id;
 		FillStyle fillStyle = FillStyle.Solid;
+		
+		LabelFont labelFont = LabelFont.Serif;
+		bool showLabels = false;
+		Color labelColor = Color.Black;
 		
 #endregion
 
@@ -195,6 +207,33 @@ namespace Cumberland
 			}
 			set {
 				fillStyle = value;
+			}
+		}
+
+		public bool ShowLabels {
+			get {
+				return showLabels;
+			}
+			set {
+				showLabels = value;
+			}
+		}
+
+		public LabelFont LabelFont {
+			get {
+				return labelFont;
+			}
+			set {
+				labelFont = value;
+			}
+		}
+
+		public Color LabelColor {
+			get {
+				return labelColor;
+			}
+			set {
+				labelColor = value;
 			}
 		}
 		

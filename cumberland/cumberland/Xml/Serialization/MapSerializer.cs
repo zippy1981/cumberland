@@ -409,6 +409,18 @@ namespace Cumberland.Xml.Serialization
 				{
 					style.FillStyle = (FillStyle) Enum.Parse(typeof(FillStyle), child.InnerText);
 				}
+				else if (child.Name == "LabelFont")
+				{
+					style.LabelFont = (LabelFont) Enum.Parse(typeof(LabelFont), child.InnerText);
+				}
+				else if (child.Name == "ShowLabels")
+				{
+					style.ShowLabels = bool.Parse(child.InnerText);
+				}
+				else if (child.Name == "LabelColor")
+				{
+					style.LabelColor = ParseColor(child.InnerText);
+				}
 			}
 			
 			layer.Styles.Add(style);
@@ -513,8 +525,12 @@ namespace Cumberland.Xml.Serialization
 			writer.WriteElementString("UniqueThemeValue", style.UniqueThemeValue);
 			writer.WriteElementString("MaxRangeThemeValue", style.MaxRangeThemeValue.ToString());
 			writer.WriteElementString("MinRangeThemeValue", style.MinRangeThemeValue.ToString());
-			writer.WriteElementString("Id", style.Id);
+			if (!string.IsNullOrEmpty(style.Id)) writer.WriteElementString("Id", style.Id);
 			writer.WriteElementString("FillStyle", Enum.GetName(typeof(FillStyle), style.FillStyle));
+
+			writer.WriteElementString("LabelFont", Enum.GetName(typeof(LabelFont), style.LabelFont));
+			writer.WriteElementString("ShowLabels", style.ShowLabels.ToString());
+			writer.WriteElementString("LabelColor", PrepareColor(style.LabelColor));
 			
 			writer.WriteEndElement(); // Style
 		}

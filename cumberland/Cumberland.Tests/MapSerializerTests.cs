@@ -243,6 +243,9 @@ namespace Cumberland.Tests
 			s1.MaxRangeThemeValue = 30000;
 			s1.MinRangeThemeValue = 4;
 			s1.FillStyle = FillStyle.None;
+			s1.ShowLabels = true;
+			s1.LabelColor = Color.FromArgb(0,1,2,3);
+			s1.LabelFont = LabelFont.SansSerif;
 			l1.Styles.Add(s1);
 			
 			m1.Layers.Add(l1);
@@ -565,6 +568,24 @@ namespace Cumberland.Tests
 		public void TestStyleFillStyle()
 		{
 			Assert.AreEqual(FillStyle.None, m2.Layers[0].Styles[0].FillStyle);
+		}
+
+		[Test]
+		public void TestStyleShowLabels()
+		{
+			Assert.AreEqual(true, m2.Layers[0].Styles[0].ShowLabels);
+		}
+
+		[Test]
+		public void TestStyleLabelFont()
+		{
+			Assert.AreEqual(LabelFont.SansSerif, m2.Layers[0].Styles[0].LabelFont);
+		}
+
+		[Test]
+		public void TestStyleLabelColor()
+		{
+			Assert.AreEqual(Color.FromArgb(0,1,2,3), m2.Layers[0].Styles[0].LabelColor);
 		}
 				
 #endregion
