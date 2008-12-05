@@ -540,8 +540,6 @@ namespace Cumberland.Drawing
 					break;
 			}
 
-			Console.WriteLine(s.LabelPosition + " " + labelPt + " " + s.LabelPixelOffset);
-
 			g.TranslateTransform(p.X, p.Y);
 			g.RotateTransform(s.LabelAngle);
 			
