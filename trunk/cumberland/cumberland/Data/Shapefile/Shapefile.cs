@@ -402,7 +402,7 @@ namespace Cumberland.Data.Shapefile
 		}
 		public List<Feature> GetFeatures(Cumberland.Rectangle rectangle, string themeField)
 		{		
-			return GetFeatures(rectangle, null, null);
+			return GetFeatures(rectangle, themeField, null);
 		}
 		
 		public List<Feature> GetFeatures (Rectangle rectangle, string themeField, string labelField)

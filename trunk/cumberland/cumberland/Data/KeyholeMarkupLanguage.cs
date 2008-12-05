@@ -35,18 +35,6 @@ namespace Cumberland.Data
 {
 	public static class KeyholeMarkupLanguage
 	{
-		static List<Point> Transform(this List<Point> pts, ProjFourWrapper source, ProjFourWrapper destination)
-		{
-			if (source != null && destination != null)
-			{
-				for (int ii=0; ii<pts.Count; ii++)
-				{
-					pts[ii] = source.Transform(destination, pts[ii]);
-				}
-			}
-			
-			return pts;
-		}
 		
 		public static string CreateFromMap(Map map)
 		{
@@ -86,6 +74,25 @@ namespace Cumberland.Data
 			
 		}
 
+		#region extension methods
+
+		static List<Point> Transform(this List<Point> pts, ProjFourWrapper source, ProjFourWrapper destination)
+		{
+			if (source != null && destination != null)
+			{
+				for (int ii=0; ii<pts.Count; ii++)
+				{
+					pts[ii] = source.Transform(destination, pts[ii]);
+				}
+			}
+			
+			return pts;
+		}
+
+		#endregion
+
+		#region helper methods
+		
 		static XElement CreateFromLayer(Layer layer, Rectangle extents)
 		{
 			ProjFourWrapper src = null;
@@ -107,7 +114,7 @@ namespace Cumberland.Data
 				
 				return new XElement("Folder",
 				                     new XElement("name", layer.Id),
-				                     from f in layer.Data.GetFeatures(queryExtents, layer.ThemeField)
+				                     from f in layer.Data.GetFeatures(queryExtents, layer.ThemeField, layer.LabelField)
 				                     select CreateFromFeature(layer, f, src, dst));
 			}
 			finally
@@ -172,6 +179,11 @@ namespace Cumberland.Data
 
 			if (style == null) return null;
 
+			string name = !string.IsNullOrEmpty(feature.LabelFieldValue) ? 
+				feature.LabelFieldValue : 
+					!string.IsNullOrEmpty(feature.ThemeFieldValue) ?
+					feature.ThemeFieldValue : null;
+
 			if (feature is Point)
 			{
 				Point pt = feature as Point;
@@ -183,7 +195,7 @@ namespace Cumberland.Data
 				
 				xe.Add(new XElement("Placemark", 
 				                    (style != null && !string.IsNullOrEmpty(style.Id) ? new XElement("styleUrl", "#" + style.Id) : null),
-				                    (!string.IsNullOrEmpty(feature.ThemeFieldValue) ? new XElement("name", feature.ThemeFieldValue) : null),
+				                    (name != null ? new XElement("name", name) : null),
 				                    new XElement("Point",
 				                                 new XElement("coordinates",
 				                                              string.Format("{0},{1}", pt.X, pt.Y)))));
@@ -196,7 +208,7 @@ namespace Cumberland.Data
 				{
 					xe.Add(new XElement("Placemark",
 					                    (style != null && !string.IsNullOrEmpty(style.Id) ? new XElement("styleUrl", "#" + style.Id) : null),
-					                    (!string.IsNullOrEmpty(feature.ThemeFieldValue) ? new XElement("name", feature.ThemeFieldValue) : null),
+					                    (name != null ? new XElement("name", name) : null),
 					                    new XElement("LineString",
 					                                 new XElement("tessellate", "1"),
 					                                 new XElement("coordinates",
@@ -221,7 +233,7 @@ namespace Cumberland.Data
 						
 						node = new XElement("Placemark",
 						                    (style != null && !string.IsNullOrEmpty(style.Id) ? new XElement("styleUrl", "#" + style.Id) : null),
-						                    (!string.IsNullOrEmpty(feature.ThemeFieldValue) ? new XElement("name", feature.ThemeFieldValue) : null),
+						                    (name != null ? new XElement("name", name) : null),
 						                    new XElement("Polygon",
 						                                 new XElement("outerBoundaryIs",
 						                                              new XElement("LinearRing",
@@ -246,5 +258,7 @@ namespace Cumberland.Data
 
 			return xe;
 		}
+	
+		#endregion
 	}
 }

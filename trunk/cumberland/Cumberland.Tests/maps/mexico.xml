@@ -48,6 +48,7 @@
 			</Data>
 		</Layer>
 		<Layer><!--Test a non-themed layer-->
+			<LabelField>ROUTE</LabelField>
 			<Styles>
 				<Style>
 				    <Id>RoadsStyle</Id>
@@ -64,7 +65,8 @@
 		</Layer>		
 		<Layer><!--Test a unique themed layer-->
 			<Theme>Unique</Theme>
-			<ThemeField>SYSTEM</ThemeField>		
+			<ThemeField>SYSTEM</ThemeField>
+			<LabelField>NAME</LabelField>
 			<Styles>
 				<Style>
 					<Id>RioGrandeDeSantiago</Id>
@@ -102,6 +104,7 @@
 		<Layer>
 			<Theme>NumericRange</Theme>
 			<ThemeField>POPULATION</ThemeField>
+			<LabelField>NAME</LabelField>
 			<Projection>+init=epsg:4326</Projection>
 			<Id>cities</Id>
 			<Styles>
