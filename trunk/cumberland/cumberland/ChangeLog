@@ -1,5 +1,9 @@
 2008-12-04  Scott Ellington  <scott.ellington@gmail.com>
 
+	* Drawing/MapDrawer.cs: center label
+
+2008-12-04  Scott Ellington  <scott.ellington@gmail.com>
+
 	* Style.cs:
 	* Drawing/MapDrawer.cs:
 	* Xml/Serialization/MapSerializer.cs: add Label properties to Style
