@@ -1,5 +1,11 @@
 2008-12-05  Scott Ellington  <scott.ellington@gmail.com>
 
+	* Map.cs:
+	* Drawing/MapDrawer.cs:
+	* Xml/Serialization/MapSerializer.cs: add Map.BackgroundColor
+
+2008-12-05  Scott Ellington  <scott.ellington@gmail.com>
+
 	* Drawing/MapDrawer.cs: remove console write
 
 2008-12-05  Scott Ellington  <scott.ellington@gmail.com>

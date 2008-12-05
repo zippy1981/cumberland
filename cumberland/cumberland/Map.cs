@@ -83,12 +83,23 @@ namespace Cumberland
 				projection = value;
 			}
 		}
+
+		public Color BackgroundColor {
+			get {
+				return backgroundColor;
+			}
+			set {
+				backgroundColor = value;
+			}
+		}
 		
 		List<Layer> layers = new List<Layer>();
 		
 		Rectangle extents = new Rectangle(-180, -90, 180, 90);
 
 		string projection = null;
+
+		Color backgroundColor = Color.Empty;
 		
 #endregion
 	}
