@@ -247,6 +247,8 @@ namespace Cumberland.Tests
 			s1.LabelColor = Color.FromArgb(0,1,2,3);
 			s1.LabelFont = LabelFont.SansSerif;
 			s1.LabelFontEmSize = 1234;
+			s1.LabelPosition = LabelPosition.BottomLeft;
+			s1.LabelPixelOffset = 42;
 			l1.Styles.Add(s1);
 			
 			m1.Layers.Add(l1);
@@ -593,6 +595,18 @@ namespace Cumberland.Tests
 		public void TestStyleLabelFontEmSize()
 		{
 			Assert.AreEqual(1234, m2.Layers[0].Styles[0].LabelFontEmSize);
+		}
+
+		[Test]
+		public void TestStyleLabelPosition()
+		{
+			Assert.AreEqual(LabelPosition.BottomLeft, m2.Layers[0].Styles[0].LabelPosition);
+		}
+
+		[Test]
+		public void TestStyleLabelPixelOffset()
+		{
+			Assert.AreEqual(42, m2.Layers[0].Styles[0].LabelPixelOffset);
 		}
 				
 #endregion

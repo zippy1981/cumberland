@@ -265,12 +265,13 @@ namespace Cumberland.Drawing
 								}
 
 								if (style.ShowLabels && pol.LabelFieldValue != null)
-								{							
+								{
+									Point polyCenter = pol.CalculateBounds().Center;
 									DrawLabel(labelGraphics, 
 									          style,
 									          ConvertMapToPixel(envelope,
 									                            scale,
-									                            src.Transform(dst, pol.CalculateBounds().Center)), 
+									                            (reproject ? src.Transform(dst, polyCenter) : polyCenter)), 
 									          pol.LabelFieldValue);
 								}
 							}
@@ -327,9 +328,10 @@ namespace Cumberland.Drawing
 
 								if (style.ShowLabels && po.LabelFieldValue != null)
 								{
+									Point polyCenter = po.CalculateBounds().Center;
 									DrawLabel(labelGraphics, style, ConvertMapToPixel(envelope, 
 									                                      scale, 
-									                                      src.Transform(dst, po.CalculateBounds().Center)), 
+									                                      (reproject ? src.Transform(dst, polyCenter): polyCenter)), 
 									          po.LabelFieldValue);
 								}
 							}
@@ -467,7 +469,7 @@ namespace Cumberland.Drawing
 		}
 
 		void DrawLabel(Graphics g, Style s, System.Drawing.Point p, string label)
-		{
+		{		
 			FontFamily ff = FontFamily.GenericSansSerif;
 			if (s.LabelFont == LabelFont.None)
 			{
@@ -484,10 +486,48 @@ namespace Cumberland.Drawing
 
 			Font font = new Font(ff, s.LabelFontEmSize);
 
-			// shift point to center of label
 			SizeF size = g.MeasureString(label, font);
-			p.X = p.X - Convert.ToInt32(size.Width/2);
-			p.Y = p.Y - Convert.ToInt32(size.Height/2);
+			switch (s.LabelPosition)
+			{
+				case LabelPosition.None:
+					return;
+				case LabelPosition.Center:
+					p.X = p.X - Convert.ToInt32(size.Width/2);
+					p.Y = p.Y - Convert.ToInt32(size.Height/2);
+					break;
+				case LabelPosition.BottomLeft:
+					p.X = p.X - Convert.ToInt32(size.Width) - s.LabelPixelOffset;
+					p.Y += s.LabelPixelOffset;
+					break;					
+				case LabelPosition.Bottom:
+					p.X = p.X - Convert.ToInt32(size.Width/2);
+					p.Y += s.LabelPixelOffset;
+					break;
+				case LabelPosition.BottomRight:  // default
+					p.Y += s.LabelPixelOffset;					
+					p.X += s.LabelPixelOffset;
+					break;
+				case LabelPosition.Right:
+					p.X += s.LabelPixelOffset;
+					p.Y = p.Y - Convert.ToInt32(size.Height/2);
+					break;
+				case LabelPosition.TopRight:
+					p.X += s.LabelPixelOffset;
+					p.Y = p.Y - Convert.ToInt32(size.Height) - s.LabelPixelOffset;
+					break;
+				case LabelPosition.Top:
+					p.X = p.X - Convert.ToInt32(size.Width/2);
+					p.Y = p.Y - Convert.ToInt32(size.Height) - s.LabelPixelOffset;
+					break;
+				case LabelPosition.TopLeft:
+					p.X = p.X - Convert.ToInt32(size.Width) - s.LabelPixelOffset;
+					p.Y = p.Y - Convert.ToInt32(size.Height) - s.LabelPixelOffset;
+					break;
+				case LabelPosition.Left:
+					p.X = p.X - Convert.ToInt32(size.Width) - s.LabelPixelOffset;
+					p.Y = p.Y - Convert.ToInt32(size.Height/2);
+					break;
+			}
 			
 			g.DrawString(label, font, new SolidBrush(s.LabelColor), p);
 		}

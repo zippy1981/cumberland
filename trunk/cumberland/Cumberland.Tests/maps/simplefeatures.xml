@@ -6,9 +6,142 @@
 	<Projection>+init=epsg:4326</Projection>
 	<Layers>
 		<Layer>
+			<Theme>Unique</Theme>
+			<ThemeField>Dummy</ThemeField>
+			<Styles>
+				<Style>
+					<Id>RightPointStyle</Id>
+					<ShowLabels>true</ShowLabels>
+					<PointSize>5</PointSize>
+					<LabelPosition>Right</LabelPosition>
+					<UniqueThemeValue>R</UniqueThemeValue>
+				</Style>
+				<Style>
+					<Id>BottomRightPointStyle</Id>
+					<ShowLabels>true</ShowLabels>
+					<PointSize>5</PointSize>
+					<LabelPosition>BottomRight</LabelPosition>
+					<UniqueThemeValue>BR</UniqueThemeValue>
+				</Style>
+				<Style>
+					<Id>BottomPointStyle</Id>
+					<ShowLabels>true</ShowLabels>
+					<PointSize>5</PointSize>
+					<LabelPosition>Bottom</LabelPosition>
+					<UniqueThemeValue>B</UniqueThemeValue>
+				</Style>
+				<Style>
+					<Id>BottomLeftPointStyle</Id>
+					<ShowLabels>true</ShowLabels>
+					<PointSize>5</PointSize>
+					<LabelPosition>BottomLeft</LabelPosition>
+					<UniqueThemeValue>BL</UniqueThemeValue>
+				</Style>
+				<Style>
+					<Id>LeftPointStyle</Id>
+					<ShowLabels>true</ShowLabels>
+					<PointSize>5</PointSize>
+					<LabelPosition>Left</LabelPosition>
+					<UniqueThemeValue>L</UniqueThemeValue>
+				</Style>
+				<Style>
+					<Id>TopLeftPointStyle</Id>
+					<ShowLabels>true</ShowLabels>
+					<PointSize>5</PointSize>
+					<LabelPosition>TopLeft</LabelPosition>
+					<UniqueThemeValue>TL</UniqueThemeValue>
+				</Style>
+				<Style>
+					<Id>TopPointStyle</Id>
+					<ShowLabels>true</ShowLabels>
+					<PointSize>5</PointSize>
+					<LabelPosition>Top</LabelPosition>
+					<UniqueThemeValue>T</UniqueThemeValue>
+				</Style>					
+				<Style>
+					<Id>TopRightPointStyle</Id>
+					<ShowLabels>true</ShowLabels>
+					<PointSize>5</PointSize>
+					<LabelPosition>TopRight</LabelPosition>
+					<UniqueThemeValue>TR</UniqueThemeValue>
+				</Style>	
+				<Style>
+					<Id>CenterPointStyle</Id>
+					<ShowLabels>true</ShowLabels>
+					<PointSize>5</PointSize>
+					<LabelPosition>Center</LabelPosition>
+					<UniqueThemeValue>C</UniqueThemeValue>
+				</Style>	
+			</Styles>
+			<Projection></Projection>
+			<Id>PointLayer</Id>
+			<Data sourceType="Cumberland.Data.SimpleFeatureSource" sourceInstance="Cumberland.Data.SimpleFeatureSource">
+				<SimpleFeatureSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<Features>
+						<Feature xsi:type="Point">
+							<X>4</X>
+							<Y>7</Y>
+							<LabelFieldValue>Right</LabelFieldValue>
+							<ThemeFieldValue>R</ThemeFieldValue>
+						</Feature>
+						<Feature xsi:type="Point">
+							<X>4</X>
+							<Y>6</Y>
+							<LabelFieldValue>Bottom Right</LabelFieldValue>
+							<ThemeFieldValue>BR</ThemeFieldValue>
+						</Feature>
+						<Feature xsi:type="Point">
+							<X>3</X>
+							<Y>6</Y>
+							<LabelFieldValue>Bottom</LabelFieldValue>
+							<ThemeFieldValue>B</ThemeFieldValue>
+						</Feature>
+						<Feature xsi:type="Point">
+							<X>2</X>
+							<Y>6</Y>
+							<LabelFieldValue>Bottom Left</LabelFieldValue>
+							<ThemeFieldValue>BL</ThemeFieldValue>
+						</Feature>
+						<Feature xsi:type="Point">
+							<X>2</X>
+							<Y>7</Y>
+							<LabelFieldValue>Left</LabelFieldValue>
+							<ThemeFieldValue>L</ThemeFieldValue>
+						</Feature>
+						<Feature xsi:type="Point">
+							<X>2</X>
+							<Y>8</Y>
+							<LabelFieldValue>Top Left</LabelFieldValue>
+							<ThemeFieldValue>TL</ThemeFieldValue>
+						</Feature>
+						<Feature xsi:type="Point">
+							<X>3</X>
+							<Y>8</Y>
+							<LabelFieldValue>Top</LabelFieldValue>
+							<ThemeFieldValue>T</ThemeFieldValue>
+						</Feature>
+						<Feature xsi:type="Point">
+							<X>4</X>
+							<Y>8</Y>
+							<LabelFieldValue>Top Right</LabelFieldValue>
+							<ThemeFieldValue>TR</ThemeFieldValue>
+						</Feature>
+						<Feature xsi:type="Point">
+							<X>3</X>
+							<Y>7</Y>
+							<LabelFieldValue>Center</LabelFieldValue>
+							<ThemeFieldValue>C</ThemeFieldValue>
+						</Feature>
+					</Features>
+					<SimpleFeatureType>Point</SimpleFeatureType>
+				</SimpleFeatureSource>
+			</Data>
+		</Layer>
+		<Layer>
 			<Styles>
 				<Style>
 					<Id>MyStyle</Id>
+					<ShowLabels>true</ShowLabels>
 					<LineWidth>2</LineWidth>
 					<LineColor>255,65,145,65</LineColor>
 					<FillColor>255,240,255,208</FillColor>
@@ -16,11 +149,12 @@
 				</Style>
 			</Styles>
 			<Projection></Projection>
-			<Id>pg1</Id>
+			<Id>Polygon Test</Id>
 			<Data sourceType="Cumberland.Data.SimpleFeatureSource" sourceInstance="Cumberland.Data.SimpleFeatureSource">
 				<SimpleFeatureSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 					<Features>
 						<Feature xsi:type="Polygon">
+							<LabelFieldValue>Polygon Label</LabelFieldValue>
 							<Id>0</Id>
 							<Rings>
 								<Ring>
@@ -108,5 +242,55 @@
 				</SimpleFeatureSource>
 			</Data>
 		</Layer>
+		<Layer>
+			<Styles>
+				<Style>
+					<Id>MyLineStyle</Id>
+					<ShowLabels>true</ShowLabels>
+					<LineWidth>4</LineWidth>
+					<LineColor>255,65,145,65</LineColor>
+					<FillColor>255,240,255,208</FillColor>
+					<LineStyle>Solid</LineStyle>
+				</Style>
+			</Styles>
+			<Projection></Projection>
+			<Id>Polygon Test</Id>
+			<Data sourceType="Cumberland.Data.SimpleFeatureSource" sourceInstance="Cumberland.Data.SimpleFeatureSource">
+				<SimpleFeatureSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+					<Features>
+						<Feature xsi:type="PolyLine">
+							<LabelFieldValue>Polyline Label</LabelFieldValue>
+							<Lines>
+								<Line>
+									<Points>
+										<Point>
+											<X>7</X>
+											<Y>2</Y>
+										</Point>
+										<Point>
+											<X>9</X>
+											<Y>4</Y>
+										</Point>
+										<Point>
+											<X>7</X>
+											<Y>6</Y>
+										</Point>
+										<Point>
+											<X>9</X>
+											<Y>8</Y>
+										</Point>
+										<Point>
+											<X>7</X>
+											<Y>10</Y>
+										</Point>
+									</Points>
+								</Line>
+							</Lines>
+						</Feature>
+					</Features>
+					<SimpleFeatureType>Polyline</SimpleFeatureType>
+				</SimpleFeatureSource>
+			</Data>
+		</Layer>		
 	</Layers>
 </Map>
