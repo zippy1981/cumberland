@@ -469,7 +469,6 @@ namespace Cumberland.Drawing
 		void DrawLabel(Graphics g, Style s, System.Drawing.Point p, string label)
 		{
 			FontFamily ff = FontFamily.GenericSansSerif;
-
 			if (s.LabelFont == LabelFont.None)
 			{
 				return;
@@ -482,8 +481,15 @@ namespace Cumberland.Drawing
 			{
 				ff = FontFamily.GenericMonospace;
 			}
+
+			Font font = new Font(ff, 10);
+
+			// shift point to center of label
+			SizeF size = g.MeasureString(label, font);
+			p.X = p.X - Convert.ToInt32(size.Width/2);
+			p.Y = p.Y - Convert.ToInt32(size.Height/2);
 			
-			g.DrawString(label, new Font(ff, 10), new SolidBrush(s.LabelColor), p);
+			g.DrawString(label, font, new SolidBrush(s.LabelColor), p);
 		}
 		
 #endregion
