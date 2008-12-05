@@ -9,6 +9,8 @@
 			<LabelField>name</LabelField>
 			<Styles>
 				<Style>
+					<ShowLabels>false</ShowLabels>
+					<LabelColor>255,65,145,65</LabelColor>
 					<LineWidth>1</LineWidth>
 					<LineColor>255,65,145,65</LineColor>
 					<FillColor>255,240,255,208</FillColor>
@@ -23,8 +25,10 @@
 			</Data>
 		</Layer>
 		<Layer>
+			<LabelField>name</LabelField>
 			<Styles>
 				<Style>
+					<ShowLabels>true</ShowLabels>
 					<LineWidth>1</LineWidth>
 					<LineColor>255,145,145,145</LineColor>					
 					<LineStyle>Solid</LineStyle>
@@ -86,6 +90,7 @@
 					<LineStyle>Solid</LineStyle>
 				</Style>
 				<Style>
+					<ShowLabels>true</ShowLabels>
 					<UniqueThemeValue>5</UniqueThemeValue>
 					<LineWidth>1</LineWidth>
 					<FillColor>155,100,100,255</FillColor>

@@ -188,7 +188,11 @@ namespace Cumberland.Projection
 				y[0] = y[0] / DegreesToRadians;
 			}
 			
-			return new Point(x[0], y[0]);
+			Point p = new Point(x[0], y[0]);
+			p.LabelFieldValue = point.LabelFieldValue;
+			p.ThemeFieldValue = point.ThemeFieldValue;
+
+			return p;
 		}
 		
 //		public void Transform(ProjFourWrapper destinationProj, Polygon polygon)

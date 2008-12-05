@@ -29,6 +29,8 @@
 					<MaxRangeThemeValue>50000</MaxRangeThemeValue>
 				</Style>				
 				<Style>
+					<ShowLabels>true</ShowLabels>
+					<LabelFont>Monospace</LabelFont>
 					<Id>500001+</Id>
 					<LineWidth>1</LineWidth>
 					<LineStyle>None</LineStyle>
@@ -81,6 +83,8 @@
 			<LabelField>NAME</LabelField>
 			<Styles>
 				<Style>
+					<ShowLabels>true</ShowLabels>
+					<LabelColor>155,105,105,255</LabelColor>
 				    <Id>LakesStyle</Id>
 					<LineWidth>3</LineWidth>
 					<LineColor>155,105,105,255</LineColor>
