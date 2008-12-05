@@ -64,6 +64,20 @@ namespace Cumberland
 		SansSerif,
 		Monospace
 	}
+
+	public enum LabelPosition
+	{
+		None,
+		Center,
+		Right,
+		BottomRight,
+		Bottom,
+		BottomLeft,
+		Left,
+		TopLeft,
+		Top,
+		TopRight
+	}
 	
 #endregion
 	
@@ -89,6 +103,8 @@ namespace Cumberland
 		bool showLabels = false;
 		Color labelColor = Color.Black;
 		float labelFontEmSize = 10;
+		LabelPosition labelPosition = LabelPosition.Center;
+		int labelPixelOffset = 5;
 		
 #endregion
 
@@ -244,6 +260,24 @@ namespace Cumberland
 			}
 			set {
 				labelFontEmSize = value;
+			}
+		}
+
+		public LabelPosition LabelPosition {
+			get {
+				return labelPosition;
+			}
+			set {
+				labelPosition = value;
+			}
+		}
+
+		public int LabelPixelOffset {
+			get {
+				return labelPixelOffset;
+			}
+			set {
+				labelPixelOffset = value;
 			}
 		}
 		
