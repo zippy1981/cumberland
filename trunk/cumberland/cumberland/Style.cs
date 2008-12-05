@@ -88,6 +88,7 @@ namespace Cumberland
 		LabelFont labelFont = LabelFont.Serif;
 		bool showLabels = false;
 		Color labelColor = Color.Black;
+		float labelFontEmSize = 10;
 		
 #endregion
 
@@ -234,6 +235,15 @@ namespace Cumberland
 			}
 			set {
 				labelColor = value;
+			}
+		}
+
+		public float LabelFontEmSize {
+			get {
+				return labelFontEmSize;
+			}
+			set {
+				labelFontEmSize = value;
 			}
 		}
 		

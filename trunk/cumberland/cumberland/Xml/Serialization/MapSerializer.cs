@@ -421,6 +421,10 @@ namespace Cumberland.Xml.Serialization
 				{
 					style.LabelColor = ParseColor(child.InnerText);
 				}
+				else if (child.Name == "LabelFontEmSize")
+				{
+					style.LabelFontEmSize = float.Parse(child.InnerText);
+				}
 			}
 			
 			layer.Styles.Add(style);
@@ -531,6 +535,7 @@ namespace Cumberland.Xml.Serialization
 			writer.WriteElementString("LabelFont", Enum.GetName(typeof(LabelFont), style.LabelFont));
 			writer.WriteElementString("ShowLabels", style.ShowLabels.ToString());
 			writer.WriteElementString("LabelColor", PrepareColor(style.LabelColor));
+			writer.WriteElementString("LabelFontEmSize", style.LabelFontEmSize.ToString());
 			
 			writer.WriteEndElement(); // Style
 		}
