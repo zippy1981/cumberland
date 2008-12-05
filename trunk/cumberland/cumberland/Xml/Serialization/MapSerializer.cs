@@ -151,6 +151,10 @@ namespace Cumberland.Xml.Serialization
 				{
 					map.Height = int.Parse(node.InnerText);
 				}
+				else if (node.Name == "BackgroundColor")
+				{
+					map.BackgroundColor = ParseColor(node.InnerText);
+				}
 			}
 			
 			return map;
@@ -184,6 +188,7 @@ namespace Cumberland.Xml.Serialization
 			writer.WriteElementString("Height", map.Height.ToString());
 			writer.WriteElementString("Extents", PrepareRectangle(map.Extents));
 			writer.WriteElementString("Projection", map.Projection);
+			if (map.BackgroundColor != Color.Empty) writer.WriteElementString("BackgroundColor", PrepareColor(map.BackgroundColor));
 
 			writer.WriteStartElement("Layers");
 			

@@ -215,6 +215,7 @@ namespace Cumberland.Tests
 			m1.Height = 123;
 			m1.Width = 321;
 			m1.Projection = "+init=epsg:4326";
+			m1.BackgroundColor = Color.FromArgb(4,3,2,1);
 			
 			Layer l1 = new Layer();
 			l1.Id = "l1";
@@ -302,6 +303,12 @@ namespace Cumberland.Tests
 			
 			MapSerializer ms = new MapSerializer();
 			ms.Deserialize(new MemoryStream(ASCIIEncoding.ASCII.GetBytes(xml)));
+		}
+
+		[Test]
+		public void TestMapBackgroundColor()
+		{
+			Assert.AreEqual(Color.FromArgb(4,3,2,1), m2.BackgroundColor);
 		}
 		
 #endregion

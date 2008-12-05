@@ -82,6 +82,11 @@ namespace Cumberland.Drawing
 			{
 				Bitmap b = new Bitmap(map.Width, map.Height);
 				g = Graphics.FromImage(b);
+
+				if (map.BackgroundColor.A > 0)
+				{
+					g.Clear(map.BackgroundColor);
+				}
 				
 				// set antialiasing mode
 				g.SmoothingMode = Smoothing;
