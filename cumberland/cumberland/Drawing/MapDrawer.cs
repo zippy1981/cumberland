@@ -36,6 +36,21 @@ namespace Cumberland.Drawing
 {
 	public class MapDrawer : IMapDrawer
 	{
+		class LabelRequest
+		{
+			public Style Style;
+			public string Label;
+			public System.Drawing.Point Coord;
+
+			public LabelRequest(Style s, string l, System.Drawing.Point c)
+			{
+				Style = s;
+				Label = l;
+				Coord = c;
+			}
+		}
+
+		List<LabelRequest> labels = new List<LabelRequest>();
 		
 		delegate void DrawPoint(Style s, Graphics g, System.Drawing.Point p);
 		
@@ -63,15 +78,10 @@ namespace Cumberland.Drawing
 			ProjFourWrapper dst = null;
 			Graphics g = null;
 
-			Graphics labelGraphics = null;
-			
 			try
 			{
 				Bitmap b = new Bitmap(map.Width, map.Height);
 				g = Graphics.FromImage(b);
-
-				Bitmap labelBitmap = new Bitmap(map.Width, map.Height);
-				labelGraphics = Graphics.FromImage(labelBitmap);
 				
 				// set antialiasing mode
 				g.SmoothingMode = Smoothing;
@@ -215,7 +225,7 @@ namespace Cumberland.Drawing
 
 								if (style.ShowLabels)
 								{
-									DrawLabel(labelGraphics, style, pp, p.LabelFieldValue);
+									labels.Add(new LabelRequest(style, p.LabelFieldValue, pp));
 								}
 							}
 
@@ -267,12 +277,12 @@ namespace Cumberland.Drawing
 								if (style.ShowLabels && pol.LabelFieldValue != null)
 								{
 									Point polyCenter = pol.CalculateBounds().Center;
-									DrawLabel(labelGraphics, 
-									          style,
-									          ConvertMapToPixel(envelope,
-									                            scale,
-									                            (reproject ? src.Transform(dst, polyCenter) : polyCenter)), 
-									          pol.LabelFieldValue);
+									
+									labels.Add(new LabelRequest(style,
+									                            pol.LabelFieldValue,
+									                            ConvertMapToPixel(envelope,
+									                                              scale,
+									                                              (reproject ? src.Transform(dst, polyCenter) : polyCenter))));
 								}
 							}
 		#endregion
@@ -329,10 +339,11 @@ namespace Cumberland.Drawing
 								if (style.ShowLabels && po.LabelFieldValue != null)
 								{
 									Point polyCenter = po.CalculateBounds().Center;
-									DrawLabel(labelGraphics, style, ConvertMapToPixel(envelope, 
-									                                      scale, 
-									                                      (reproject ? src.Transform(dst, polyCenter): polyCenter)), 
-									          po.LabelFieldValue);
+									labels.Add(new LabelRequest(style,
+									                            po.LabelFieldValue,
+									                            ConvertMapToPixel(envelope,
+									                                              scale,
+									                                              (reproject ? src.Transform(dst, polyCenter): polyCenter))));
 								}
 							}
 #endregion
@@ -349,7 +360,10 @@ namespace Cumberland.Drawing
 
 				}
 
-				g.DrawImageUnscaled(labelBitmap, 0, 0);
+				foreach (LabelRequest lr in labels)
+				{
+					DrawLabel(g, lr.Style, lr.Coord, lr.Label);
+				}
 				
 				return b;
 			}
@@ -364,11 +378,6 @@ namespace Cumberland.Drawing
 				if (g != null)
 				{
 					g.Dispose();
-				}
-
-				if (labelGraphics != null)
-				{
-					labelGraphics.Dispose();
 				}
 			}
 		}
@@ -528,8 +537,25 @@ namespace Cumberland.Drawing
 					p.Y = p.Y - Convert.ToInt32(size.Height/2);
 					break;
 			}
+
+			StringFormat sf = new StringFormat();
+			sf.Alignment = StringAlignment.Center;
+			sf.LineAlignment = StringAlignment.Center;// draw the text to a path
+
 			
-			g.DrawString(label, font, new SolidBrush(s.LabelColor), p);
+			if (s.LabelDecoration == LabelDecoration.Outline)
+			{
+				g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
+				g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+				GraphicsPath gp = new GraphicsPath();
+				gp.AddString(label, ff, (int)FontStyle.Bold, s.LabelFontEmSize, p, sf);
+				g.FillPath(new SolidBrush(s.LabelColor), gp);
+				g.DrawPath(new Pen(s.LabelOutlineColor, s.LabelOutlineWidth), gp);
+			}
+			else
+			{
+				g.DrawString(label, font, new SolidBrush(s.LabelColor), p);
+			}
 		}
 		
 #endregion
