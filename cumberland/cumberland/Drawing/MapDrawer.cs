@@ -41,12 +41,19 @@ namespace Cumberland.Drawing
 			public Style Style;
 			public string Label;
 			public System.Drawing.Point Coord;
+			public float ForcedLabelAngle;
 
 			public LabelRequest(Style s, string l, System.Drawing.Point c)
 			{
 				Style = s;
 				Label = l;
 				Coord = c;
+				ForcedLabelAngle = s.LabelAngle;
+			}
+
+			public LabelRequest(Style s, string l, System.Drawing.Point c, float a) : this(s,l,c)
+			{
+				ForcedLabelAngle = a;
 			}
 		}
 
@@ -178,8 +185,7 @@ namespace Cumberland.Drawing
 						
 						if (layer.Data.SourceFeatureType == FeatureType.Point)
 					    {	
-
-		#region handle point rendering
+							#region handle point rendering
 					
 							for (int ii=0; ii < features.Count; ii++)
 							{
@@ -234,11 +240,11 @@ namespace Cumberland.Drawing
 								}
 							}
 
-		#endregion
+							#endregion
 						}
 						else if (layer.Data.SourceFeatureType == FeatureType.Polyline)
 						{
-		#region Handle line rendering
+							#region Handle line rendering
 							
 							if (layer.Theme == ThemeType.None &&
 							    getStyle(layer, null).LineStyle == LineStyle.None)
@@ -263,6 +269,9 @@ namespace Cumberland.Drawing
 									Line r = pol.Lines[jj] as Line;
 								
 									System.Drawing.Point[] ppts = new System.Drawing.Point[r.Points.Count];
+
+									int segmentIdx = 1;
+									double maxSegment = 0;
 									
 								    for (int kk = 0; kk < r.Points.Count; kk++)
 									{	
@@ -274,27 +283,51 @@ namespace Cumberland.Drawing
 										}
 										
 										ppts[kk] = ConvertMapToPixel(envelope, scale, p);
+
+										if (style.ShowLabels && kk > 0)
+										{
+											// find the segment with the longest length to pin a label to
+											
+											double seg = CalculateSegmentLength(r.Points[kk-1], r.Points[kk]);
+											
+											if (seg > maxSegment)
+											{
+												maxSegment = seg;
+												segmentIdx = kk;
+											}
+										}
 									}
 								
 									g.DrawLines(ConvertLayerToPen(style), ppts);
-								}
 
-								if (style.ShowLabels && pol.LabelFieldValue != null)
-								{
-									Point polyCenter = pol.CalculateBounds().Center;
-									
-									labels.Add(new LabelRequest(style,
-									                            pol.LabelFieldValue,
-									                            ConvertMapToPixel(envelope,
-									                                              scale,
-									                                              (reproject ? src.Transform(dst, polyCenter) : polyCenter))));
+									if (style.ShowLabels && pol.LabelFieldValue != null)
+									{
+										Point start = r.Points[segmentIdx-1];
+										Point end = r.Points[segmentIdx];
+										
+										// pin our label to the center point of the line
+										Point polyCenter = new Point((start.X+end.X)/2, (start.Y+end.Y)/2);
+										//Point polyCenter = r.CalculateBounds().Center;
+
+										// calculate the slope of this line and use as our label angle
+										float angle = CalculateSegmentAngle(start, end);
+										
+										labels.Add(new LabelRequest(style,
+										                            pol.LabelFieldValue,
+										                            ConvertMapToPixel(envelope,
+										                                              scale,
+										                                              (reproject ? src.Transform(dst, polyCenter) : polyCenter)),
+										                            angle));
+									}
 								}
 							}
-		#endregion
+							
+							#endregion
 						}	
 						else if (layer.Data.SourceFeatureType == FeatureType.Polygon)
 						{
-#region polygon rendering
+							#region polygon rendering
+							
 							for (int ii=0; ii < features.Count; ii++)
 							{
 								Polygon po = features[ii] as Polygon;	
@@ -351,7 +384,8 @@ namespace Cumberland.Drawing
 									                                              (reproject ? src.Transform(dst, polyCenter): polyCenter))));
 								}
 							}
-#endregion
+							
+							#endregion
 						}
 					}
 					finally
@@ -367,7 +401,7 @@ namespace Cumberland.Drawing
 
 				foreach (LabelRequest lr in labels)
 				{
-					DrawLabel(g, lr.Style, lr.Coord, lr.Label);
+					DrawLabel(g, lr.Style, lr.Coord, lr.Label, lr.ForcedLabelAngle);
 				}
 				
 				return b;
@@ -481,8 +515,8 @@ namespace Cumberland.Drawing
 				
 			return p;
 		}
-
-		void DrawLabel(Graphics g, Style s, System.Drawing.Point p, string label)
+		
+		void DrawLabel(Graphics g, Style s, System.Drawing.Point p, string label, float forcedLabelAngle)
 		{		
 			FontFamily ff = FontFamily.GenericSansSerif;
 			if (s.LabelFont == LabelFont.None)
@@ -546,7 +580,7 @@ namespace Cumberland.Drawing
 			}
 
 			g.TranslateTransform(p.X, p.Y);
-			g.RotateTransform(s.LabelAngle);
+			g.RotateTransform(forcedLabelAngle);
 			
 			if (s.LabelDecoration == LabelDecoration.Outline)
 			{
@@ -575,6 +609,21 @@ namespace Cumberland.Drawing
 			}
 
 			g.ResetTransform();
+		}
+
+		double CalculateSegmentLength(Point p1, Point p2)
+		{
+			return Math.Sqrt(Math.Pow(p2.X-p1.X, 2) + Math.Pow(p2.Y-p1.Y, 2));
+		}
+
+		float CalculateSegmentAngle(Point p1, Point p2)
+		{
+			// - calculate the slope of the line
+			// - calculate the arctangent of the slope to get angle
+			// - convert the angle from radians to degrees
+			// - flip the sign
+			return -Convert.ToSingle(Math.Atan((Convert.ToSingle(p2.Y)-Convert.ToSingle(p1.Y))/
+			                 (Convert.ToSingle(p2.X)-Convert.ToSingle(p1.X))) * (180/Math.PI) );
 		}
 		
 #endregion

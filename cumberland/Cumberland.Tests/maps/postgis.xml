@@ -32,6 +32,8 @@
 					<LineWidth>1</LineWidth>
 					<LineColor>255,145,145,145</LineColor>					
 					<LineStyle>Solid</LineStyle>
+					<LabelPosition>Top</LabelPosition>
+					<LabelPixelOffset>1</LabelPixelOffset>					
 				</Style>
 			</Styles>
 			<Projection>+init=epsg:3086</Projection>
