@@ -312,6 +312,8 @@
 					<LineColor>255,65,145,65</LineColor>
 					<FillColor>255,240,255,208</FillColor>
 					<LineStyle>Solid</LineStyle>
+					<LabelPosition>Top</LabelPosition>
+					<LabelPixelOffset>1</LabelPixelOffset>
 				</Style>
 			</Styles>
 			<Projection></Projection>
