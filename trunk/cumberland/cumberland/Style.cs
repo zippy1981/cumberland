@@ -62,7 +62,8 @@ namespace Cumberland
 		None,
 		Serif,
 		SansSerif,
-		Monospace
+		Monospace,
+		Custom
 	}
 
 	public enum LabelPosition
@@ -115,6 +116,7 @@ namespace Cumberland
 		Color labelOutlineColor = Color.White;
 		float labelOutlineWidth = 1f;
 		float labelAngle = 0f;
+		string labelCustomFont = null;
 
 		double minScale = double.MinValue;
 		double maxScale = double.MaxValue;
@@ -365,6 +367,15 @@ namespace Cumberland
 			}
 			set {
 				labelMaxScale = value;
+			}
+		}
+
+		public string LabelCustomFont {
+			get {
+				return labelCustomFont;
+			}
+			set {
+				labelCustomFont = value;
 			}
 		}
 		
