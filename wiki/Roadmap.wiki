@@ -11,7 +11,7 @@
     * Virtual Earth *(done)* ([http://salmonsalvo.net/Cumberland:_VirtualEarth_Test demo])
     * OpenLayers *(done)* ([http://salmonsalvo.net/Cumberland:_OpenLayers_Test demo])
   * KML *(done)*
-  * TileProvider - add BleedInPixels property to render features on the edge of tile boundaries
+  * TileProvider - add BleedInPixels property to render features on the edge of tile boundaries *(done)*
 
 =Later=
 
@@ -22,3 +22,4 @@
     * Collision detection
     * wrap text onto polylines
     * force onto visible extents
+    * remove duplicates
