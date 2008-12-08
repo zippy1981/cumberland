@@ -43,7 +43,7 @@ namespace Cumberland.Web
 	public class TileProvider
 	{
 		
-#region vars
+		#region vars
 		
 		TileConsumer consumer = TileConsumer.GoogleMaps;
 		int tileSize = 256;
@@ -52,10 +52,11 @@ namespace Cumberland.Web
 		int minZoomLevel = 0;
 		Rectangle worldExtents = new Rectangle();
 //		Map map;
+		int bleedInPixels = 0;
 		
-#endregion
+		#endregion
 		
-#region properties
+		#region properties
 		
 		public TileConsumer Consumer {
 			get {
@@ -102,15 +103,24 @@ namespace Cumberland.Web
 			}
 		}
 
-#endregion
-		
-#region ctors
-		
-		[Obsolete("A map is no longer accepted in the constructor", true)]
-		public TileProvider(Map map) : this(TileConsumer.GoogleMaps)
-		{
+		public int BleedInPixels {
+			get {
+				return bleedInPixels;
+			}
+			set {
+				if (value < 0)
+				{
+					throw new ArgumentException("BleedInPixels cannot be less than zero");
+				}
+				
+				bleedInPixels = value;
+			}
 		}
 
+		#endregion
+		
+		#region ctors
+		
 		public TileProvider(TileConsumer consumer) : this(consumer, 
 		                                                  (consumer == TileConsumer.TileMapService ? Rectangle.GeographicWorldExtents : null))
 		{
@@ -152,7 +162,7 @@ namespace Cumberland.Web
 			}
 		}
 		
-#endregion
+		#endregion
 
 		#region public methods
 		
@@ -217,23 +227,15 @@ namespace Cumberland.Web
 			return Convert.ToInt32(Math.Pow(2, zoomLevel));
 		}
 
-		[Obsolete("Drawing a tile now requires a map", true)]
-		public Bitmap DrawTile(int x, int y, int zoomLevel)
-		{
-			throw new InvalidOperationException("drawing a tile now requires a map");
-		}
-		
 		public Bitmap DrawTile(Map map, int x, int y, int zoomLevel)
 		{
 			Bitmap b;
+			string prj = null;
 										
-			// set to tile size
-			map.Width = map.Height = tileSize;
-			
 			if (consumer == TileConsumer.GoogleMaps || consumer == TileConsumer.VirtualEarth)
 			{
 				// reproject to spherical mercator
-				map.Projection = ProjFourWrapper.SphericalMercatorProjection;
+				prj = ProjFourWrapper.SphericalMercatorProjection;
 			}
 			
 			try
@@ -243,8 +245,11 @@ namespace Cumberland.Web
 				// calculate number of tiles across
 				int numTiles = CalculateNumberOfTilesAcross(zoomLevel);
 				
-				// get meters/pixel resolution for zoomlevel
+				// get map units/pixel resolution for zoomlevel
 				double resolution = CalculateMapUnitsPerPixel(zoomLevel);
+
+				// set to tile size
+				int adjTileSize = tileSize + (bleedInPixels * 2);
 
 				// google tiles origin is top left
 				int tileymin, tileymax;
@@ -258,17 +263,39 @@ namespace Cumberland.Web
 					tileymin = y;
 					tileymax = y + 1;
 				}	
+
+				double mapUnitsOffset = bleedInPixels * resolution;
 				
-				// convert pixels to meters and translate to origin
-				map.Extents = new Rectangle((tileSize*x) * resolution + worldExtents.Min.X,
-				                            (tileSize*tileymin) * resolution + worldExtents.Min.Y, 
-				                            (tileSize*(x+1)) * resolution + worldExtents.Min.X,
-				                            (tileSize*tileymax) * resolution + worldExtents.Min.Y);
+				// - convert pixels to map units 
+				// - translate to origin
+				// - offset if we need to draw a bleed
+				Rectangle extents = new Rectangle((tileSize*x) * resolution + worldExtents.Min.X - (mapUnitsOffset),
+				                            (tileSize*tileymin) * resolution + worldExtents.Min.Y - (mapUnitsOffset), 
+				                            (tileSize*(x+1)) * resolution + worldExtents.Min.X + (mapUnitsOffset),
+				                            (tileSize*tileymax) * resolution + worldExtents.Min.Y + (mapUnitsOffset));
 				
 				MapDrawer renderer = new MapDrawer();
 			
 				// draw our map
-				b = renderer.Draw(map);
+				b = renderer.Draw(map,
+				                  extents,
+				                  prj,
+				                  adjTileSize,
+				                  adjTileSize);
+
+				if (bleedInPixels > 0)
+				{
+					// crop to get our tile
+					using (Bitmap old = b)
+					{
+						b = old.Clone(new System.Drawing.Rectangle(bleedInPixels, 
+						                      bleedInPixels, 
+						                      tileSize,
+						                      tileSize),
+						        System.Drawing.Imaging.PixelFormat.DontCare);
+					}
+				}
+				
 			}
 			catch (Exception ex)
 			{

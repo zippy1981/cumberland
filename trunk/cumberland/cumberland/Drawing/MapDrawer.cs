@@ -79,15 +79,20 @@ namespace Cumberland.Drawing
 #endregion		
 
 #region IMapDrawer methods
-		
+
 		public Bitmap Draw (Map map)
 		{
+			return Draw(map, map.Extents, map.Projection, map.Width, map.Height);
+		}
+		
+		public Bitmap Draw (Map map, Cumberland.Rectangle extents, string projection, int width, int height)
+		{			
 			ProjFourWrapper dst = null;
 			Graphics g = null;
 
 			try
 			{
-				Bitmap b = new Bitmap(map.Width, map.Height);
+				Bitmap b = new Bitmap(width, height);
 				g = Graphics.FromImage(b);
 
 				if (map.BackgroundColor.A > 0)
@@ -101,17 +106,36 @@ namespace Cumberland.Drawing
 				// we need to convert map points to pixel points 
 				// so let's do as much of this at once:
 				// calculate map rectangle based on image width/height
-				Rectangle envelope = map.Extents.Clone();
+				Rectangle envelope = extents.Clone();
 				// set aspect ratio to image
-				envelope.AspectRatioOfWidth = map.Width / map.Height;
+				envelope.AspectRatioOfWidth = width / height;
 				// get the scale
-				double scale = envelope.Width / map.Width;
+				double scale = envelope.Width / width;
+				double displayScale = scale;
 			
-				// instantiate map projection
-				if (!string.IsNullOrEmpty(map.Projection))
+				// instantiate output projection
+				if (!string.IsNullOrEmpty(projection))
+				{
+					dst = new ProjFourWrapper(projection);
+
+					if (!string.IsNullOrEmpty(map.Projection) &&
+					    projection != map.Projection)
+					{
+						// we want to use the map projection for min/max scale on layers/styles/etc.
+						using (ProjFourWrapper orig = new ProjFourWrapper(map.Projection))
+						{
+							Point p1 = dst.Transform(orig, extents.Min);
+							Point p2 = dst.Transform(orig, extents.Max);
+							
+							displayScale = Math.Abs(p1.X-p2.X) / width;
+						}
+					}
+				}
+				else if (!string.IsNullOrEmpty(map.Projection))
 				{
 					dst = new ProjFourWrapper(map.Projection);
 				}
+				
 							
 				int idx = -1;
 				foreach (Layer layer in map.Layers)
@@ -120,8 +144,8 @@ namespace Cumberland.Drawing
 
 					if (!layer.Visible || 
 					    layer.Data == null ||
-					    scale > layer.MaxScale ||
-					    scale < layer.MinScale)
+					    displayScale > layer.MaxScale ||
+					    displayScale < layer.MinScale)
 					{
 						continue;
 					}
@@ -197,8 +221,8 @@ namespace Cumberland.Drawing
 								Style style = getStyle(layer, p.ThemeFieldValue);
 								
 								if (style == null ||
-								    scale > style.MaxScale ||
-								    scale < style.MinScale)
+								    displayScale > style.MaxScale ||
+								    displayScale < style.MinScale)
 								{
 									continue;
 								}
@@ -240,8 +264,8 @@ namespace Cumberland.Drawing
 								drawPoint(style, g, pp);
 
 								if (style.ShowLabels && 
-								    scale <= style.LabelMaxScale &&
-								    scale >= style.LabelMinScale)
+								    displayScale <= style.LabelMaxScale &&
+								    displayScale >= style.LabelMinScale)
 								{
 									labels.Add(new LabelRequest(style, p.LabelFieldValue, pp));
 								}
@@ -268,8 +292,8 @@ namespace Cumberland.Drawing
 								
 								if (style == null || 
 								    style.LineStyle == LineStyle.None ||
-								    scale > style.MaxScale ||
-								    scale < style.MinScale)
+								    displayScale > style.MaxScale ||
+								    displayScale < style.MinScale)
 								{
 									continue;
 								}
@@ -315,8 +339,8 @@ namespace Cumberland.Drawing
 
 									if (style.ShowLabels && 
 									    pol.LabelFieldValue != null &&
-									    scale <= style.LabelMaxScale &&
-									    scale >= style.LabelMinScale)
+									    displayScale <= style.LabelMaxScale &&
+									    displayScale >= style.LabelMinScale)
 									{
 										Point start = r.Points[segmentIdx-1];
 										Point end = r.Points[segmentIdx];
@@ -351,8 +375,8 @@ namespace Cumberland.Drawing
 								Style style = getStyle(layer, po.ThemeFieldValue);								
 								
 								if (style == null ||
-								    scale > style.MaxScale ||
-								    scale < style.MinScale)
+								    displayScale > style.MaxScale ||
+								    displayScale < style.MinScale)
 								{
 									continue;
 								}
@@ -386,7 +410,7 @@ namespace Cumberland.Drawing
 								{
 									g.FillPath(new SolidBrush(style.FillColor), gp);
 								}
-								
+
 								if (style.LineStyle != LineStyle.None)
 								{
 									g.DrawPath(ConvertLayerToPen(style), gp);
@@ -394,8 +418,8 @@ namespace Cumberland.Drawing
 
 								if (style.ShowLabels && 
 								    po.LabelFieldValue != null && 
-								    scale <= style.LabelMaxScale &&
-								    scale >= style.LabelMinScale)
+								    displayScale <= style.LabelMaxScale &&
+								    displayScale >= style.LabelMinScale)
 								{
 									Point polyCenter = po.CalculateBounds().Center;
 									

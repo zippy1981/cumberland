@@ -26,6 +26,8 @@ using Cumberland;
 using Cumberland.Web;
 
 using System;
+using System.Drawing;
+
 using NUnit.Framework;
 
 namespace Cumberland.Tests
@@ -54,6 +56,18 @@ namespace Cumberland.Tests
 		{
 			TileProvider t = new TileProvider(TileConsumer.VirtualEarth);
 			Assert.AreEqual("213", t.ConvertTileToQuadKey(3, 5, 3));
+		}
+
+		[Test]
+		public void TestBleedInPixelsPreservesTileSize()
+		{
+			TileProvider t = new TileProvider(TileConsumer.TileMapService);
+			t.BleedInPixels = 100;
+			using (Bitmap b = t.DrawTile(new Map(), 0,0,0))
+			{
+				Assert.AreEqual(256, b.Width);
+			}
+			       
 		}
 	}
 }
