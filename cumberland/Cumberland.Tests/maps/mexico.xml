@@ -15,7 +15,7 @@
 					<LineWidth>1</LineWidth>
 					<LineStyle>None</LineStyle>
 					<LineColor>255,165,165,165</LineColor>
-					<FillColor>255,255,228,100</FillColor>
+					<FillColor>155,255,228,100</FillColor>
 					<MinRangeThemeValue>0</MinRangeThemeValue>
 					<MaxRangeThemeValue>30000</MaxRangeThemeValue>
 				</Style>
@@ -24,7 +24,7 @@
 					<LineWidth>1</LineWidth>
 					<LineStyle>None</LineStyle>
 					<LineColor>255,165,165,165</LineColor>
-					<FillColor>255,255,156,100</FillColor>
+					<FillColor>155,255,156,100</FillColor>
 					<MinRangeThemeValue>30001</MinRangeThemeValue>
 					<MaxRangeThemeValue>50000</MaxRangeThemeValue>
 				</Style>				
@@ -37,7 +37,7 @@
 					<LineWidth>1</LineWidth>
 					<LineStyle>None</LineStyle>
 					<LineColor>255,165,165,165</LineColor>
-					<FillColor>255,255,0,100</FillColor>
+					<FillColor>155,255,0,100</FillColor>
 					<MinRangeThemeValue>50001</MinRangeThemeValue>
 					<MaxRangeThemeValue>10000000</MaxRangeThemeValue>
 				</Style>	
@@ -56,7 +56,11 @@
 				    <Id>RoadsStyle</Id>
 					<LineWidth>1</LineWidth>
 					<LineColor>255,105,105,105</LineColor>
-					<LineStyle>Solid</LineStyle>					
+					<LineStyle>Solid</LineStyle>
+					<ShowLabels>true</ShowLabels>
+					<LabelPosition>Top</LabelPosition>
+					<LabelFont>SansSerif</LabelFont>
+					<LabelMaxScale>.008</LabelMaxScale>
 				</Style>
 			</Styles>
 			<Projection>+init=epsg:4326</Projection>

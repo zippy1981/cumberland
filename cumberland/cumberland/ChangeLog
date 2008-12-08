@@ -1,5 +1,10 @@
 2008-12-08  Scott Ellington  <scott.ellington@gmail.com>
 
+	* Web/TileProvider.cs:
+	* Drawing/MapDrawer.cs: add TileProvider.BleedInPixels
+
+2008-12-08  Scott Ellington  <scott.ellington@gmail.com>
+
 	* Style.cs:
 	* Drawing/MapDrawer.cs:
 	* Xml/Serialization/MapSerializer.cs: add Style.LabelCustomFont

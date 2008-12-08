@@ -55,6 +55,7 @@ namespace Cumberland.TilePyramidGenerator
 			TileConsumer consumer = TileConsumer.GoogleMaps;
 			bool mxzlChanged = false;
 			bool mnzlChanged = false;
+			int bleedInPixels = 0;
 			
 			OptionSet options = new OptionSet();
 			options.Add("e|extents=", 
@@ -100,6 +101,9 @@ namespace Cumberland.TilePyramidGenerator
 			options.Add("w|worldextents=",
 			            "comma-delimited extents for defining world (e.g. -180,-90,180,90). Valid only for TMS",
 			            delegate (string v) { worldExtents = ParseExtents(v); } );
+			options.Add("b|bleed=",
+			            "the bleed in pixels for tiles (useful for catching overrunning symbols/labels from other tiles",
+			            delegate (string v) { bleedInPixels = int.Parse(v); });
 			
 			List<string> rest = options.Parse(args);
 			
@@ -190,6 +194,7 @@ namespace Cumberland.TilePyramidGenerator
 				tp = new TileProvider(consumer, worldExtents);
 			}
 			tp.DrawExceptionsOnTile = false;
+			tp.BleedInPixels = bleedInPixels;
 			
 			// calculate total number of tiles
 			long totalCount = 0;
