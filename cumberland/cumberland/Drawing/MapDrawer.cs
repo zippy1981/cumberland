@@ -553,6 +553,10 @@ namespace Cumberland.Drawing
 			{
 				ff = FontFamily.GenericMonospace;
 			}
+			else if (s.LabelFont == LabelFont.Custom)
+			{
+				ff = new FontFamily(s.LabelCustomFont);
+			}
 
 			Font font = new Font(ff, s.LabelFontEmSize);
 

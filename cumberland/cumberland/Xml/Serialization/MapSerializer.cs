@@ -482,7 +482,10 @@ namespace Cumberland.Xml.Serialization
 				{
 					style.LabelMaxScale = double.Parse(child.InnerText);
 				}
-				
+				else if (child.Name == "LabelCustomFont")
+				{
+					style.LabelCustomFont = child.InnerText;
+				}
 			}
 			
 			layer.Styles.Add(style);
@@ -603,6 +606,7 @@ namespace Cumberland.Xml.Serialization
 			writer.WriteElementString("LabelOutlineColor", PrepareColor(style.LabelOutlineColor));
 			writer.WriteElementString("LabelOutlineWidth", style.LabelOutlineWidth.ToString());
 			writer.WriteElementString("LabelAngle", style.LabelAngle.ToString());
+			if (!string.IsNullOrEmpty(style.LabelCustomFont)) writer.WriteElementString("LabelCustomFont", style.LabelCustomFont);
 
 			if (style.MinScale > double.MinValue) writer.WriteElementString("MinScale", style.MinScale.ToString());
 			if (style.MaxScale < double.MaxValue) writer.WriteElementString("MaxScale", style.MaxScale.ToString());

@@ -258,6 +258,7 @@ namespace Cumberland.Tests
 			s1.LabelOutlineColor = Color.FromArgb(9,9,9,9);
 			s1.LabelOutlineWidth = 99f;
 			s1.LabelAngle = 45f;
+			s1.LabelCustomFont = "font";
 
 			s1.MinScale = 0;
 			s1.MaxScale = 1;
@@ -695,6 +696,12 @@ namespace Cumberland.Tests
 			Assert.AreEqual(100, m2.Layers[0].Styles[0].LabelMaxScale);
 		}
 
+		[Test]
+		public void TestStyleLabelCustomFont()
+		{
+			Assert.AreEqual("font", m2.Layers[0].Styles[0].LabelCustomFont);
+		}
+		
 #endregion
 		
 	}

@@ -195,6 +195,8 @@
 			</Data>
 		</Layer>
 		<Layer>
+			<Theme>Unique</Theme>
+			<ThemeField>Dummy</ThemeField>		
 			<Styles>
 				<Style>
 					<Id>MyStyle</Id>
@@ -207,16 +209,77 @@
 					<LabelDecoration>Outline</LabelDecoration>
 					<LabelOutlineWidth>1</LabelOutlineWidth>
 					<LabelFont>Monospace</LabelFont>
+					<UniqueThemeValue>0</UniqueThemeValue>
+				</Style>
+				<Style>
+					<Id>Blah</Id>
+					<ShowLabels>true</ShowLabels>
+					<LineWidth>2</LineWidth>
+					<LineColor>255,65,145,65</LineColor>
+					<FillColor>255,240,255,208</FillColor>
+					<LineStyle>Solid</LineStyle>
+					<LabelFontEmSize>12</LabelFontEmSize>
+					<LabelOutlineWidth>1</LabelOutlineWidth>
+					<LabelFont>Custom</LabelFont>
+					<LabelCustomFont>Arial</LabelCustomFont>
+					<UniqueThemeValue>1</UniqueThemeValue>					
 				</Style>
 			</Styles>
 			<Projection></Projection>
 			<Id>Polygon Test</Id>
 			<Data sourceType="Cumberland.Data.SimpleFeatureSource" sourceInstance="Cumberland.Data.SimpleFeatureSource">
 				<SimpleFeatureSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-					<Features>
+					<Features>						
+						<Feature xsi:type="Polygon">
+							<LabelFieldValue>Custom Font</LabelFieldValue>
+							<Id>1</Id>
+							<ThemeFieldValue>1</ThemeFieldValue>
+							<Rings>
+								<Ring>
+									<Points>
+										<Point>
+											<Id>0</Id>
+											<X>6</X>
+											<Y>0</Y>
+											<Z>0</Z>
+											<M>0</M>
+										</Point>
+										<Point>
+											<Id>0</Id>
+											<X>6</X>
+											<Y>1</Y>
+											<Z>0</Z>
+											<M>0</M>
+										</Point>
+										<Point>
+											<Id>0</Id>
+											<X>10</X>
+											<Y>1</Y>
+											<Z>0</Z>
+											<M>0</M>
+										</Point>
+										<Point>
+											<Id>0</Id>
+											<X>10</X>
+											<Y>0</Y>
+											<Z>0</Z>
+											<M>0</M>
+										</Point>
+										<Point>
+											<Id>0</Id>
+											<X>6</X>
+											<Y>0</Y>
+											<Z>0</Z>
+											<M>0</M>
+										</Point>
+									</Points>
+								</Ring>
+							</Rings>
+						</Feature>
 						<Feature xsi:type="Polygon">
 							<LabelFieldValue>Polygon Label</LabelFieldValue>
 							<Id>0</Id>
+							<ThemeFieldValue>0</ThemeFieldValue>
 							<Rings>
 								<Ring>
 									<Points>
@@ -317,7 +380,7 @@
 				</Style>
 			</Styles>
 			<Projection></Projection>
-			<Id>Polygon Test</Id>
+			<Id>Polyline Test</Id>
 			<Data sourceType="Cumberland.Data.SimpleFeatureSource" sourceInstance="Cumberland.Data.SimpleFeatureSource">
 				<SimpleFeatureSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 					<Features>
