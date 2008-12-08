@@ -225,6 +225,8 @@ namespace Cumberland.Tests
 			l1.Theme = ThemeType.NumericRange;
 			l1.ThemeField = "MyField";
 			l1.LabelField = "MyLabelField";
+			l1.Visible = false;
+			
 			db.ConnectionString = "MyConnString";
 			db.ForcedFeatureType = FeatureType.Polyline;
 			db.ForcedSpatialType = SpatialType.Geographic;
@@ -385,6 +387,12 @@ namespace Cumberland.Tests
 		{
 			Assert.AreEqual("MyLabelField",
 			                m2.Layers[0].LabelField);
+		}
+
+		[Test]
+		public void TestLayerVisible()
+		{
+			Assert.AreEqual(false, m2.Layers[0].Visible);
 		}
 				
 #endregion

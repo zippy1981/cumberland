@@ -117,8 +117,8 @@ namespace Cumberland.Drawing
 				foreach (Layer layer in map.Layers)
 				{
 					idx++;
-					
-					if (layer.Data == null)
+
+					if (!layer.Visible || layer.Data == null)
 					{
 						continue;
 					}

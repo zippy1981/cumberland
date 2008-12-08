@@ -84,6 +84,7 @@
 		</Layer>	
 		<Layer>
 			<LabelField>NAME</LabelField>
+			<Visible>false</Visible>
 			<Styles>
 				<Style>
 					<ShowLabels>true</ShowLabels>

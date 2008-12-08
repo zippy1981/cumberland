@@ -350,6 +350,10 @@ namespace Cumberland.Xml.Serialization
 				{
 					l.LabelField = child.InnerText;
 				}
+				else if (child.Name == "Visible")
+				{
+					l.Visible = bool.Parse(child.InnerText);
+				}
 			}
 			
 			m.Layers.Add(l);
@@ -475,6 +479,7 @@ namespace Cumberland.Xml.Serialization
 			writer.WriteElementString("Theme", Enum.GetName(typeof(ThemeType), layer.Theme));
 			writer.WriteElementString("ThemeField", layer.ThemeField);
 			writer.WriteElementString("LabelField", layer.LabelField);
+			writer.WriteElementString("Visible", layer.Visible.ToString());
 			
 			// handle Data Element
 			writer.WriteStartElement("Data");

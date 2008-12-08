@@ -101,6 +101,15 @@ namespace Cumberland
 			}
 		}
 
+		public bool Visible {
+			get {
+				return visible;
+			}
+			set {
+				visible = value;
+			}
+		}
+
 		IFeatureSource data;
 		
 		string projection = null;
@@ -114,6 +123,8 @@ namespace Cumberland
 		string themeField = null;
 
 		string labelField = null;
+
+		bool visible = true;
 		
 		#endregion
 
@@ -146,7 +157,8 @@ namespace Cumberland
 				if (s.UniqueThemeValue == fieldValue)
 				{
 					return s;
-				}
+				}		
+
 			}
 			
 			return null;
