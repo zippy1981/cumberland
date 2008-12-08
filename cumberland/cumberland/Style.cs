@@ -115,6 +115,11 @@ namespace Cumberland
 		Color labelOutlineColor = Color.White;
 		float labelOutlineWidth = 1f;
 		float labelAngle = 0f;
+
+		double minScale = double.MinValue;
+		double maxScale = double.MaxValue;
+		double labelMinScale = double.MinValue;
+		double labelMaxScale = double.MaxValue;
 		
 #endregion
 
@@ -324,6 +329,42 @@ namespace Cumberland
 			}
 			set {
 				labelAngle = value;
+			}
+		}
+
+		public double MinScale {
+			get {
+				return minScale;
+			}
+			set {
+				minScale = value;
+			}
+		}
+
+		public double MaxScale {
+			get {
+				return maxScale;
+			}
+			set {
+				maxScale = value;
+			}
+		}
+
+		public double LabelMinScale {
+			get {
+				return labelMinScale;
+			}
+			set {
+				labelMinScale = value;
+			}
+		}
+
+		public double LabelMaxScale {
+			get {
+				return labelMaxScale;
+			}
+			set {
+				labelMaxScale = value;
 			}
 		}
 		

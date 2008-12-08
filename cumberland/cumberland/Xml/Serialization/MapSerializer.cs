@@ -354,6 +354,14 @@ namespace Cumberland.Xml.Serialization
 				{
 					l.Visible = bool.Parse(child.InnerText);
 				}
+				else if (child.Name == "MaxScale")
+				{
+					l.MaxScale = double.Parse(child.InnerText);
+				}
+				else if (child.Name == "MinScale")
+				{
+					l.MinScale = double.Parse(child.InnerText);
+				}
 			}
 			
 			m.Layers.Add(l);
@@ -458,6 +466,23 @@ namespace Cumberland.Xml.Serialization
 				{
 					style.LabelAngle = float.Parse(child.InnerText);
 				}
+				else if (child.Name == "MinScale")
+				{
+					style.MinScale = double.Parse(child.InnerText);
+				}
+				else if (child.Name == "MaxScale")
+				{
+					style.MaxScale = double.Parse(child.InnerText);
+				}
+				else if (child.Name == "LabelMinScale")
+				{
+					style.LabelMinScale = double.Parse(child.InnerText);
+				}
+				else if (child.Name == "LabelMaxScale")
+				{
+					style.LabelMaxScale = double.Parse(child.InnerText);
+				}
+				
 			}
 			
 			layer.Styles.Add(style);
@@ -480,6 +505,8 @@ namespace Cumberland.Xml.Serialization
 			writer.WriteElementString("ThemeField", layer.ThemeField);
 			writer.WriteElementString("LabelField", layer.LabelField);
 			writer.WriteElementString("Visible", layer.Visible.ToString());
+			if (layer.MinScale > double.MinValue) writer.WriteElementString("MinScale", layer.MinScale.ToString());
+			if (layer.MaxScale < double.MaxValue) writer.WriteElementString("MaxScale", layer.MaxScale.ToString());
 			
 			// handle Data Element
 			writer.WriteStartElement("Data");
@@ -576,6 +603,14 @@ namespace Cumberland.Xml.Serialization
 			writer.WriteElementString("LabelOutlineColor", PrepareColor(style.LabelOutlineColor));
 			writer.WriteElementString("LabelOutlineWidth", style.LabelOutlineWidth.ToString());
 			writer.WriteElementString("LabelAngle", style.LabelAngle.ToString());
+
+			if (style.MinScale > double.MinValue) writer.WriteElementString("MinScale", style.MinScale.ToString());
+			if (style.MaxScale < double.MaxValue) writer.WriteElementString("MaxScale", style.MaxScale.ToString());
+
+			if (style.LabelMinScale > double.MinValue) writer.WriteElementString("LabelMinScale", 
+			                                                                     style.LabelMinScale.ToString());
+			if (style.LabelMaxScale < double.MaxValue) writer.WriteElementString("LabelMaxScale",
+			                                                                     style.LabelMaxScale.ToString());
 			
 			writer.WriteEndElement(); // Style
 		}

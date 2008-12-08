@@ -110,6 +110,24 @@ namespace Cumberland
 			}
 		}
 
+		public double MinScale {
+			get {
+				return minScale;
+			}
+			set {
+				minScale = value;
+			}
+		}
+
+		public double MaxScale {
+			get {
+				return maxScale;
+			}
+			set {
+				maxScale = value;
+			}
+		}
+
 		IFeatureSource data;
 		
 		string projection = null;
@@ -125,6 +143,9 @@ namespace Cumberland
 		string labelField = null;
 
 		bool visible = true;
+
+		double minScale = double.MinValue;
+		double maxScale = double.MaxValue;
 		
 		#endregion
 

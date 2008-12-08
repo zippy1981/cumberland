@@ -118,7 +118,10 @@ namespace Cumberland.Drawing
 				{
 					idx++;
 
-					if (!layer.Visible || layer.Data == null)
+					if (!layer.Visible || 
+					    layer.Data == null ||
+					    scale > layer.MaxScale ||
+					    scale < layer.MinScale)
 					{
 						continue;
 					}
@@ -193,7 +196,9 @@ namespace Cumberland.Drawing
 								
 								Style style = getStyle(layer, p.ThemeFieldValue);
 								
-								if (style == null)
+								if (style == null ||
+								    scale > style.MaxScale ||
+								    scale < style.MinScale)
 								{
 									continue;
 								}
@@ -234,7 +239,9 @@ namespace Cumberland.Drawing
 
 								drawPoint(style, g, pp);
 
-								if (style.ShowLabels)
+								if (style.ShowLabels && 
+								    scale <= style.LabelMaxScale &&
+								    scale >= style.LabelMinScale)
 								{
 									labels.Add(new LabelRequest(style, p.LabelFieldValue, pp));
 								}
@@ -259,7 +266,10 @@ namespace Cumberland.Drawing
 								
 								Style style = getStyle(layer, pol.ThemeFieldValue);
 								
-								if (style == null || style.LineStyle == LineStyle.None)
+								if (style == null || 
+								    style.LineStyle == LineStyle.None ||
+								    scale > style.MaxScale ||
+								    scale < style.MinScale)
 								{
 									continue;
 								}
@@ -284,7 +294,10 @@ namespace Cumberland.Drawing
 										
 										ppts[kk] = ConvertMapToPixel(envelope, scale, p);
 
-										if (style.ShowLabels && kk > 0)
+										if (style.ShowLabels && 
+										    kk > 0 && 
+										    scale <= style.LabelMaxScale &&
+										    scale >= style.LabelMinScale)
 										{
 											// find the segment with the longest length to pin a label to
 											
@@ -300,7 +313,10 @@ namespace Cumberland.Drawing
 								
 									g.DrawLines(ConvertLayerToPen(style), ppts);
 
-									if (style.ShowLabels && pol.LabelFieldValue != null)
+									if (style.ShowLabels && 
+									    pol.LabelFieldValue != null &&
+									    scale <= style.LabelMaxScale &&
+									    scale >= style.LabelMinScale)
 									{
 										Point start = r.Points[segmentIdx-1];
 										Point end = r.Points[segmentIdx];
@@ -334,7 +350,9 @@ namespace Cumberland.Drawing
 								
 								Style style = getStyle(layer, po.ThemeFieldValue);								
 								
-								if (style == null)
+								if (style == null ||
+								    scale > style.MaxScale ||
+								    scale < style.MinScale)
 								{
 									continue;
 								}
@@ -374,9 +392,13 @@ namespace Cumberland.Drawing
 									g.DrawPath(ConvertLayerToPen(style), gp);
 								}
 
-								if (style.ShowLabels && po.LabelFieldValue != null)
+								if (style.ShowLabels && 
+								    po.LabelFieldValue != null && 
+								    scale <= style.LabelMaxScale &&
+								    scale >= style.LabelMinScale)
 								{
 									Point polyCenter = po.CalculateBounds().Center;
+									
 									labels.Add(new LabelRequest(style,
 									                            po.LabelFieldValue,
 									                            ConvertMapToPixel(envelope,
