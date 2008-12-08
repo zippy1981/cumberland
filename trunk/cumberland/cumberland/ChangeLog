@@ -1,5 +1,13 @@
 2008-12-08  Scott Ellington  <scott.ellington@gmail.com>
 
+	* Style.cs:
+	* Layer.cs:
+	* Drawing/MapDrawer.cs:
+	* Xml/Serialization/MapSerializer.cs: add minscale/maxscale for
+	layer,style, and labels
+
+2008-12-08  Scott Ellington  <scott.ellington@gmail.com>
+
 	* Layer.cs:
 	* Drawing/MapDrawer.cs:
 	* Xml/Serialization/MapSerializer.cs: add layer.Visible

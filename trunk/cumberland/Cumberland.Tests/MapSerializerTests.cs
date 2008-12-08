@@ -226,6 +226,8 @@ namespace Cumberland.Tests
 			l1.ThemeField = "MyField";
 			l1.LabelField = "MyLabelField";
 			l1.Visible = false;
+			l1.MinScale = 99;
+			l1.MaxScale = 88;
 			
 			db.ConnectionString = "MyConnString";
 			db.ForcedFeatureType = FeatureType.Polyline;
@@ -256,6 +258,11 @@ namespace Cumberland.Tests
 			s1.LabelOutlineColor = Color.FromArgb(9,9,9,9);
 			s1.LabelOutlineWidth = 99f;
 			s1.LabelAngle = 45f;
+
+			s1.MinScale = 0;
+			s1.MaxScale = 1;
+			s1.LabelMinScale = 10;
+			s1.LabelMaxScale = 100;
 			l1.Styles.Add(s1);
 			
 			m1.Layers.Add(l1);
@@ -393,6 +400,18 @@ namespace Cumberland.Tests
 		public void TestLayerVisible()
 		{
 			Assert.AreEqual(false, m2.Layers[0].Visible);
+		}
+
+		[Test]
+		public void TestLayerMinScale()
+		{
+			Assert.AreEqual(99, m2.Layers[0].MinScale);
+		}
+
+		[Test]
+		public void TestLayerMaxScale()
+		{
+			Assert.AreEqual(88, m2.Layers[0].MaxScale);
 		}
 				
 #endregion
@@ -650,6 +669,30 @@ namespace Cumberland.Tests
 		public void TestStyleLabelAngleSerialized()
 		{
 			Assert.AreEqual(45f, m2.Layers[0].Styles[0].LabelAngle);
+		}
+
+		[Test]
+		public void TestStyleMinScale()
+		{
+			Assert.AreEqual(0, m2.Layers[0].Styles[0].MinScale);
+		}
+
+		[Test]
+		public void TestStyleMaxScale()
+		{
+			Assert.AreEqual(1, m2.Layers[0].Styles[0].MaxScale);
+		}
+
+		[Test]
+		public void TestStyleLabelMinScale()
+		{
+			Assert.AreEqual(10, m2.Layers[0].Styles[0].LabelMinScale);
+		}
+
+		[Test]
+		public void TestStyleLabelMaxScale()
+		{
+			Assert.AreEqual(100, m2.Layers[0].Styles[0].LabelMaxScale);
 		}
 
 #endregion

@@ -32,6 +32,7 @@
 					<ShowLabels>true</ShowLabels>
 					<LabelFont>Monospace</LabelFont>
 					<LabelFontEmSize>8</LabelFontEmSize>
+					<LabelMaxScale>.03</LabelMaxScale>
 					<Id>500001+</Id>
 					<LineWidth>1</LineWidth>
 					<LineStyle>None</LineStyle>
@@ -49,6 +50,7 @@
 		</Layer>
 		<Layer><!--Test a non-themed layer-->
 			<LabelField>ROUTE</LabelField>
+			<MaxScale>.013</MaxScale>
 			<Styles>
 				<Style>
 				    <Id>RoadsStyle</Id>
@@ -111,6 +113,7 @@
 			<Styles>
 				<Style>
 					<Id>SmallTowns</Id>
+					<MaxScale>.013</MaxScale>
 					<FillColor>255,100,255,100</FillColor>
 					<LineColor>255,0,155,0</LineColor>
 					<LineSize>1</LineSize>
@@ -122,6 +125,7 @@
 				</Style>
 				<Style>
 					<Id>MidSizedCities</Id>
+					<MaxScale>.05</MaxScale>
 					<FillColor>255,100,100,255</FillColor>
 					<LineColor>255,0,0,155</LineColor>
 					<LineSize>1</LineSize>					
