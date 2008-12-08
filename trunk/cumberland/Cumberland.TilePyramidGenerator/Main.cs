@@ -195,7 +195,7 @@ namespace Cumberland.TilePyramidGenerator
 			long totalCount = 0;
 			for (int ii = minZoomLevel; ii <= maxZoomLevel; ii++)
 			{
-				System.Console.WriteLine(tp.ClipRectangleAtZoomLevel(extents, ii).ToString());
+				//System.Console.WriteLine(tp.ClipRectangleAtZoomLevel(extents, ii).ToString());
 				if (extents.IsEmpty)
 				{
 					int across = tp.CalculateNumberOfTilesAcross(ii);

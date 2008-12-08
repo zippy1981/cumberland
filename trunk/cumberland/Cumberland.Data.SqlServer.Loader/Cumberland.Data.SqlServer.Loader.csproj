@@ -59,9 +59,6 @@
     <Content Include="lib\NDesk.Options.COPYING">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="README.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ProjectExtensions>
     <MonoDevelop>

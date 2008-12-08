@@ -1,3 +1,10 @@
+2008-12-08  Scott Ellington  <scott.ellington@gmail.com>
+
+	* Cumberland.TilePyramidGenerator/Main.cs:
+	* Cumberland.Data.SqlServer.Loader/README.txt:
+	* Cumberland.Data.SqlServer.Loader/Cumberland.Data.SqlServer.Loader.csproj:
+	misc
+
 2008-12-04  Scott Ellington  <scott.ellington@gmail.com>
 
 	* Cumberland.Data.PostGIS/PostGISFeatureSource.cs:
