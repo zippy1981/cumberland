@@ -1,5 +1,9 @@
 2008-12-09  Scott Ellington  <scott.ellington@gmail.com>
 
+	* Cumberland.MapToKml/Main.cs: do arg check
+
+2008-12-09  Scott Ellington  <scott.ellington@gmail.com>
+
 	* Cumberland.DrawMap/AssemblyInfo.cs:
 	* Cumberland.MapToKml/AssemblyInfo.cs:
 	* Cumberland.Data.PostGIS/AssemblyInfo.cs:

@@ -40,6 +40,12 @@ namespace Cumberland.MapToKml
 			MapSerializer ms = new MapSerializer();
 			ms.AddDatabaseFeatureSourceType(typeof(PostGISFeatureSource));
 			ms.AddDatabaseFeatureSourceType(typeof(Cumberland.Data.SqlServer.SqlServerFeatureSource));
+
+			if (args.Length == 0)
+			{
+				Console.WriteLine("No Map file specified");
+				return;
+			}
 			
 			Map map = ms.Deserialize(args[0]);
 
