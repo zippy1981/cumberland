@@ -5,13 +5,13 @@
 
 = Introduction =
 
-Most modern web mapping interfaces use tiles.  This has the advantage of allowing the tiles to be pre-generated instead of per-user.  Tilepyramider generates a pyramid of tile images into a directory structure that you can use with these interfaces.
+Most modern web mapping interfaces use tiles.  This has the advantage of allowing the tiles to be pre-generated instead of per-user.  Tilepyramider generates a pyramid of tile images into a directory structure that you can use with these interfaces.  The output can be copied to your web server.  
 
 Supported tile consumers:
 
   * Google Maps ([http://www.salmonsalvo.net/Cumberland:GoogleMapsTest demo])
   * TileMapService (TMS) - can be used in OpenLayers (new to 0.2)
-  * Microsoft VirtualEarth (new to 0.2)
+  * Microsoft VirtualEarth (new to 0.2) ([http://salmonsalvo.net/Cumberland:_VirtualEarth_Test demo])
 
 = Usage = 
 
@@ -43,7 +43,7 @@ The bleed option provides the ability to have the tool render a larger map and c
 
 = Deployment: Google Maps =
 
-The directory can be copied to your web server.  In order to use Google Maps on your website, you will need a key ([http://code.google.com/apis/maps/signup.html sign up here]).  Finally, you will need to add the html and script to your web page:
+In order to use Google Maps on your website, you will need a key ([http://code.google.com/apis/maps/signup.html sign up here]).  Finally, you will need to add the html and script to your web page:
 
 Add a div element for the map:
 
@@ -155,3 +155,46 @@ function CustomGetTileUrl(point,zoom)
 }}}
 
 Basically, it shows a blank image tile whenever the map is out of scale or the tile requested is not within our bounds.  You'll need to edit this to fit your scale/bounds requirements.
+
+= Deployment: VirtualEarth = 
+
+Your page will need to reference the VE script:
+
+{{{
+<script charset="UTF-8" type="text/javascript" src="http://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2"></script>
+}}}
+
+Add a method for adding your tile overlay:
+
+{{{
+function init()
+{
+    var map = new VEMap('myMap');
+    map.LoadMap(new VELatLong(21,-100), 3, null, null, null, null, null, null);
+
+    var bounds = [
+        new VELatLongRectangle(new VELatLong(34,-120),
+                new VELatLong(12,-82))];
+    var layerID = "test";
+    var tileSource =
+        "ve/%4.png";
+    var tileSourceSpec =
+        new VETileSourceSpecification(layerID, tileSource);
+    tileSourceSpec.NumServers = 1;
+    tileSourceSpec.Bounds     = bounds;
+    tileSourceSpec.MinZoom    = 1;
+    tileSourceSpec.MaxZoom    = 5;
+    tileSourceSpec.Opacity    = 1;
+    tileSourceSpec.ZIndex     = 110;
+
+    map.AddTileLayer(tileSourceSpec, true);
+}
+}}}
+
+tileSource should point to the directory that tilepyramider created.  Finally, call that method and create the map div:
+
+{{{
+<body onload="init();">
+<div id='myMap' style="position:absolute; width:400px; height:400px;"></div>
+...
+}}}
