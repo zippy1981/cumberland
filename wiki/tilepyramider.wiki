@@ -156,7 +156,7 @@ function CustomGetTileUrl(point,zoom)
 
 Basically, it shows a blank image tile whenever the map is out of scale or the tile requested is not within our bounds.  You'll need to edit this to fit your scale/bounds requirements.
 
-= Deployment: VirtualEarth = 
+= Deployment: Virtual Earth = 
 
 Your page will need to reference the VE script:
 
