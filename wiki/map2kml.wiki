@@ -1,0 +1,18 @@
+#summary create a kml document from a cumberland map
+
+= Introduction =
+
+map2kml is a command line tool that takes a [mapXmlFormat map xml document] and converts it into a Keyhole Markup Language (KML) document that can be loaded into Google Earth or Google Maps.  The usage is simple: it takes a single argument which is the path to your map file.
+
+The kml document will preserve symbology (including thematic mapping) and export data from your feature source.  Each layer in your map will be a folder in the kml Document.
+
+= Notes = 
+
+  * All styles used in the map must have a unique Id property or they will be ignored.
+
+= Screenshot =
+
+In Google Earth:
+
+[http://cumberland.googlecode.com/files/screenshot-google-earth.jpg]
+
