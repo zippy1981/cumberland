@@ -10,7 +10,7 @@ Most modern web mapping interfaces use tiles.  This has the advantage of allowin
 Supported tile consumers:
 
   * Google Maps ([http://www.salmonsalvo.net/Cumberland:GoogleMapsTest demo])
-  * TileMapService (TMS) - can be used in OpenLayers (new to 0.2)
+  * TileMapService (TMS) - can be used in OpenLayers (new to 0.2) ([http://salmonsalvo.net/Cumberland:_OpenLayers_Test demo])
   * Microsoft VirtualEarth (new to 0.2) ([http://salmonsalvo.net/Cumberland:_VirtualEarth_Test demo])
 
 = Usage = 
@@ -35,7 +35,7 @@ Options:
   -b, --bleed=VALUE          the bleed in pixels for tiles (useful for catching overrunning symbols/labels from other tiles
 }}}
 
-The "map file" is defined by the [mapXmlFormat map xml format] which holds data sources and style information.  This generates a set of images in the output folder specified.  If no output folder is specified, the tiles are generated in the current directory.  
+The "map file" is defined by the [mapXmlFormat map xml format] which holds data sources and style information.  This generates a set of images in the output folder specified.  If no output folder is specified, the tiles are generated in the current directory.  The worldextents, maxzoom, and minzoom options are only for customizing TMS output.
 
 == Setting a bleed ==
 
@@ -198,3 +198,48 @@ tileSource should point to the directory that tilepyramider created.  Finally, c
 <div id='myMap' style="position:absolute; width:400px; height:400px;"></div>
 ...
 }}}
+
+= Deployment: TMS to Open Layers =
+
+TMS is an OSGeo specification, but our use is mainly for OpenLayers.  Currently, a TMS has to have an EPSG of 4326 and worldwide extents to work in OpenLayers ([http://openlayers.org/pipermail/users/2008-April/005449.html source]). This means you can't clip to a certain region.  So, your map must be outputting geographic data (lat/longs), and then you could call the tool as so:
+
+{{{
+tilepyramider.exe -e=-180,-90,180,90 -o=/home/scottell/Desktop/tms -c=tms -x=6 ../../../Cumberland.Tests/maps/mexico.xml
+}}}
+
+Then you'll deploy the resulting 'tms' directory to your website and wire up a page with the following script:
+
+{{{
+function initialize()
+{
+    var options = {
+        maxExtent: new OpenLayers.Bounds(-180, -90, 180, 90),
+            numZoomLevels: 6,
+    };
+
+    var map = new OpenLayers.Map('map', options);
+    var layer = new OpenLayers.Layer.TMS( "Mexico", ["http://localhost/~scottell/"],
+    {
+        layername: 'tms',
+        serviceVersion: '',
+        type:'png',
+    } );
+   
+    map.addLayer(layer);
+    map.setCenter(new OpenLayers.LonLat(-105, 24), 4);
+}
+}}}
+
+Add a script reference to OpenLayers:
+
+{{{
+<script src="http://www.openlayers.org/api/OpenLayers.js" type="text/javascript"></script>
+}}}
+
+Finally, call initialize() on load and add your map div:
+
+{{{
+<body onload="initialize()">
+    <div id="map" style="width: 500px; height: 300px"></div>
+}}}
+
