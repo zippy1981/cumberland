@@ -109,6 +109,29 @@ If LabelFont is set to 'Custom', you can set the LabelCustomFont property to poi
 <LabelCustomFont>Arial</LabelCustomFont>
 }}}
 
+You can also add an outline to your label:
+
+{{{
+<LabelDecoration>Outline</LabelDecoration>
+<LabelOutlineWidth>1</LabelOutlineWidth>
+<LabelOutlineColor>255,255,0,0</LabelOutlineColor>
+}}}
+
+Finally, you have some control over the position of labels.  The point in polygons is the centroid. Polylines are a little trickier. Ideally, you’d want to the label to flow with the line, but for now it just looks for the longest segment and sets the angle to its slope and uses its midpoint as the point.
+
+From here, you have the ability to control where the location of the label in relation to the point of origin and how far away from the point it is:
+
+{{{
+<LabelPosition>Top</LabelPosition>
+<LabelPixelOffset>1</LabelPixelOffset>
+}}}
+
+== Example == 
+
+The following provides some examples of what is possible:
+
+[http://cumberland.googlecode.com/files/labelling-samples.png]
+
 = Thematic mapping =
 
 Thematic mapping allows using particular styles based on a feature's properties.  For example, drawing states based on their population.  This must be configured in the [mapXmlFormat#Layer_Elements Layer element].  The field that we test in the feature is specified by Layer->ThemeField.  The type of thematic mapping is specified in Layer->Theme.  Currently, there are two supported types of themes:
