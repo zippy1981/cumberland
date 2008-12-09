@@ -1,5 +1,9 @@
 2008-12-09  Scott Ellington  <scott.ellington@gmail.com>
 
+	* Drawing/MapDrawer.cs: add TextRenderingHint 
+
+2008-12-09  Scott Ellington  <scott.ellington@gmail.com>
+
 	* Projection/ProjFourWrapper.cs: fix p/invoke
 
 2008-12-09  Scott Ellington  <scott.ellington@gmail.com>
