@@ -84,7 +84,7 @@ namespace Cumberland.Projection
 //        [DllImport("proj.dll")]
 //        static extern IntPtr pj_init(int argc, string[] args);
 
-		[DllImport("proj.dll", CharSet = CharSet.Auto)]
+		[DllImport("proj.dll", CharSet = CharSet.Ansi)]
 		static extern IntPtr pj_init_plus(string args);
 		
         [DllImport("proj.dll")]
