@@ -1,0 +1,33 @@
+<Type Name="KeyholeMarkupLanguage" FullName="Cumberland.Data.KeyholeMarkupLanguage">
+  <TypeSignature Language="C#" Value="public static class KeyholeMarkupLanguage" />
+  <AssemblyInfo>
+    <AssemblyName>Cumberland</AssemblyName>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.Runtime.CompilerServices.Extension</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>Provide support for Google's Keyhole Markup Language (KML)</summary>
+    <remarks>
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="CreateFromMap">
+      <MemberSignature Language="C#" Value="public static string CreateFromMap (Cumberland.Map map);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.2.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
+      <Parameters><Parameter Name="map" Type="Cumberland.Map" /></Parameters>
+      <Docs><param name="map">The map to export</param><summary>Creates a KML document from a map</summary><returns>A KML document</returns><remarks>As much symbology as supported by KML is preserved</remarks></Docs>
+    </Member>
+  </Members>
+</Type>

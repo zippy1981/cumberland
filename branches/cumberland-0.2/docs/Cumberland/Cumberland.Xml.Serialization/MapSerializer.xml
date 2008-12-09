@@ -1,0 +1,86 @@
+<Type Name="MapSerializer" FullName="Cumberland.Xml.Serialization.MapSerializer">
+  <TypeSignature Language="C#" Value="public class MapSerializer" />
+  <AssemblyInfo>
+    <AssemblyName>Cumberland</AssemblyName>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Provides xml serialization support for <see cref="T:Cumberland.Map" />.</summary>
+    <remarks>This class provides a way to store and load maps.  It can handle feature sources not included in this assembly
+    as well, provided their types are loaded before deserialization (see below).</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public MapSerializer ();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
+      <Parameters />
+      <Docs><summary></summary><remarks></remarks></Docs>
+    </Member><Member MemberName="AddDatabaseFeatureSourceType">
+      <MemberSignature Language="C#" Value="public void AddDatabaseFeatureSourceType (Type type);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>System.Void</ReturnType></ReturnValue>
+      <Parameters><Parameter Name="type" Type="System.Type" /></Parameters>
+      <Docs><param name="type">The object type (must implement <see cref="T:Cumberland.Data.IDatabaseFeatureSource" />)</param><summary>Adds a database feature source type for deserialization</summary><remarks>This method registers a class that implements <see cref="T:Cumberland.Data.IDatabaseFeatureSource" /> so that an
+      instance of it can be created when a map is deserialized.  If the type does not implement this interface, 
+      an exception will occur.</remarks></Docs>
+    </Member><Member MemberName="AddFileFeatureSourceType">
+      <MemberSignature Language="C#" Value="public void AddFileFeatureSourceType (Type type);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>System.Void</ReturnType></ReturnValue>
+      <Parameters><Parameter Name="type" Type="System.Type" /></Parameters>
+      <Docs><param name="type">The object type (must implement <see cref="T:Cumberland.Data.IFileFeatureSource" />))</param><summary>Adds a file feature source type for deserialization</summary><remarks>TThis method registers a class that implements <see cref="T:Cumberland.Data.IFileFeatureSource" /> so that an
+      instance of it can be created when a map is deserialized.  If the type does not implement this interface, 
+      an exception will occur.</remarks></Docs>
+    </Member><Member MemberName="Deserialize">
+      <MemberSignature Language="C#" Value="public Cumberland.Map Deserialize (System.IO.Stream stream);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>Cumberland.Map</ReturnType></ReturnValue>
+      <Parameters><Parameter Name="stream" Type="System.IO.Stream" /></Parameters>
+      <Docs><param name="stream">The stream containing the Xml</param><summary>Creates an instance of <see cref="T:Cumberland.Map" /> by deserializing the xml from the stream</summary><returns>The deserialized map</returns><remarks></remarks></Docs>
+    </Member><Member MemberName="Deserialize">
+      <MemberSignature Language="C#" Value="public Cumberland.Map Deserialize (string mapPath);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>Cumberland.Map</ReturnType></ReturnValue>
+      <Parameters><Parameter Name="mapPath" Type="System.String" /></Parameters>
+      <Docs><param name="mapPath">the path to the map xml file</param><summary>Creates an instance of <see cref="T:Cumberland.Map" /> by deserializing the xml from the given file</summary><returns>The deserialized map</returns><remarks></remarks></Docs>
+    </Member><Member MemberName="Serialize">
+      <MemberSignature Language="C#" Value="public static string Serialize (Cumberland.Map map);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
+      <Parameters><Parameter Name="map" Type="Cumberland.Map" /></Parameters>
+      <Docs><param name="map">The map to serialize</param><summary>Serializes the given map</summary><returns>The serialized Xml</returns><remarks></remarks></Docs>
+    </Member><Member MemberName="Serialize">
+      <MemberSignature Language="C#" Value="public static void Serialize (System.IO.Stream stream, Cumberland.Map map);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>System.Void</ReturnType></ReturnValue>
+      <Parameters><Parameter Name="stream" Type="System.IO.Stream" /><Parameter Name="map" Type="Cumberland.Map" /></Parameters>
+      <Docs><param name="stream">The stream to pipe the serialized map Xml to</param><param name="map">The map to serialize</param><summary>Serializes the given map to the provided stream</summary><remarks></remarks></Docs>
+    </Member>
+  </Members>
+</Type>

@@ -1,0 +1,38 @@
+<Type Name="Polygon" FullName="Cumberland.Polygon">
+  <TypeSignature Language="C#" Value="public class Polygon : Cumberland.Feature" />
+  <AssemblyInfo>
+    <AssemblyName>Cumberland</AssemblyName>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Cumberland.Feature</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>A polygon feature</summary>
+    <remarks>A Polygon can be comprised of multiple exterior rings and multiple holes per exterior ring.
+    Currently their is no differentiation between exterior rings and holes and their order in <see cref="P:Cumberland.Polygon.Rings" /></remarks>
+  </Docs>
+  <Members>
+    
+    
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public Polygon ();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
+      <Parameters />
+      <Docs><summary></summary><remarks></remarks></Docs>
+    </Member><Member MemberName="Rings">
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Cumberland.Ring&gt; Rings { get; }" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Ring&gt;</ReturnType></ReturnValue>
+      <Docs><summary>The rings of the polygon feature</summary><value>A list of <see cref="T:Cumberland.Ring" /></value><remarks></remarks></Docs>
+    </Member>
+  </Members>
+</Type>

@@ -1,0 +1,6 @@
+<Namespace Name="Cumberland.Data.WellKnownText">
+  <Docs>
+    <summary></summary>
+    <remarks>Provides classes for working with data in OGC's 'Well-Known Text' specifications</remarks>
+  </Docs>
+</Namespace>

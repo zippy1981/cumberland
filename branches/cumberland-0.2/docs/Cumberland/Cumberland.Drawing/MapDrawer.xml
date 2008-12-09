@@ -1,0 +1,120 @@
+<Type Name="MapDrawer" FullName="Cumberland.Drawing.MapDrawer">
+	<TypeSignature Language="C#" Value="public class MapDrawer : Cumberland.Drawing.IMapDrawer" />
+	<AssemblyInfo>
+		<AssemblyName>Cumberland</AssemblyName>
+		<AssemblyVersion>0.1.0.0</AssemblyVersion>
+		<AssemblyVersion>0.2.0.0</AssemblyVersion>
+	</AssemblyInfo>
+	<Base>
+		<BaseTypeName>System.Object</BaseTypeName>
+	</Base>
+	<Interfaces>
+		<Interface>
+			<InterfaceName>Cumberland.Drawing.IMapDrawer</InterfaceName>
+		</Interface>
+	</Interfaces>
+	<Docs>
+		<summary>Draws a map via the System.Drawing API</summary>
+		<remarks>
+		</remarks>
+	</Docs>
+	<Members>
+		<Member MemberName=".ctor">
+			<MemberSignature Language="C#" Value="public MapDrawer ();" />
+			<MemberType>Constructor</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.1.0.0</AssemblyVersion>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<Parameters />
+			<Docs>
+				<summary>
+				</summary>
+				<remarks>
+				</remarks>
+			</Docs>
+		</Member>
+		<Member MemberName="Draw">
+			<MemberSignature Language="C#" Value="public System.Drawing.Bitmap Draw (Cumberland.Map map);" />
+			<MemberType>Method</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.1.0.0</AssemblyVersion>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<ReturnValue>
+				<ReturnType>System.Drawing.Bitmap</ReturnType>
+			</ReturnValue>
+			<Parameters>
+				<Parameter Name="map" Type="Cumberland.Map" />
+			</Parameters>
+			<Docs>
+				<param name="map">The map to draw</param>
+				<summary>Draws the given map</summary>
+				<returns>A rendered bitmap</returns>
+				<remarks>
+				</remarks>
+			</Docs>
+		</Member>
+		<Member MemberName="Draw">
+			<MemberSignature Language="C#" Value="public System.Drawing.Bitmap Draw (Cumberland.Map map, Cumberland.Rectangle extents, string projection, int width, int height);" />
+			<MemberType>Method</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<ReturnValue>
+				<ReturnType>System.Drawing.Bitmap</ReturnType>
+			</ReturnValue>
+			<Parameters>
+				<Parameter Name="map" Type="Cumberland.Map" />
+				<Parameter Name="extents" Type="Cumberland.Rectangle" />
+				<Parameter Name="projection" Type="System.String" />
+				<Parameter Name="width" Type="System.Int32" />
+				<Parameter Name="height" Type="System.Int32" />
+			</Parameters>
+			<Docs>
+				<param name="map">The map</param>
+				<param name="extents">The extents</param>
+				<param name="projection">The projection</param>
+				<param name="width">The output image width in pixels</param>
+				<param name="height">The output image height in pixels</param>
+				<summary>Draws a map overriden with the additional parameters</summary>
+				<returns>A rendered map</returns>
+				<remarks>
+				</remarks>
+				<since version="0.2" />
+			</Docs>
+		</Member>
+		<Member MemberName="Smoothing">
+			<MemberSignature Language="C#" Value="public System.Drawing.Drawing2D.SmoothingMode Smoothing { set; get; }" />
+			<MemberType>Property</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.1.0.0</AssemblyVersion>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<ReturnValue>
+				<ReturnType>System.Drawing.Drawing2D.SmoothingMode</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>Gets or sets the smoothing mode for drawing maps</summary>
+				<value>
+				</value>
+				<remarks>This can be changed to enable/disable anti-aliasing.</remarks>
+			</Docs>
+		</Member>
+		<Member MemberName="TextRenderingHint">
+			<MemberSignature Language="C#" Value="public System.Drawing.Text.TextRenderingHint TextRenderingHint { set; get; }" />
+			<MemberType>Property</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<ReturnValue>
+				<ReturnType>System.Drawing.Text.TextRenderingHint</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>Gets/sets a text rendering hint</summary>
+				<value>Default is Antialias</value>
+				<remarks>You can change this to turn off antialiasing of labels on MS .Net</remarks>
+			</Docs>
+		</Member>
+	</Members>
+</Type>

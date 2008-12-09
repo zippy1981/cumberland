@@ -1,0 +1,87 @@
+<Type Name="Ring" FullName="Cumberland.Ring">
+  <TypeSignature Language="C#" Value="public class Ring" />
+  <AssemblyInfo>
+    <AssemblyName>Cumberland</AssemblyName>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>A polygon (the geometry not the feature) that is not self-intersecting</summary>
+    <remarks>self-intersection is not enforced, but if it does, things will mess up</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public Ring ();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
+      <Parameters />
+      <Docs><summary></summary><remarks></remarks></Docs>
+    </Member><Member MemberName="CalculateArea">
+      <MemberSignature Language="C#" Value="public double CalculateArea ();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>System.Double</ReturnType></ReturnValue>
+      <Parameters />
+      <Docs><summary>Calculates the area of the ring</summary><returns></returns><remarks>Can be expensive as it must traverse all the points in the ring</remarks></Docs>
+    </Member><Member MemberName="CalculateBounds">
+      <MemberSignature Language="C#" Value="public Cumberland.Rectangle CalculateBounds ();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>Cumberland.Rectangle</ReturnType></ReturnValue>
+      <Parameters />
+      <Docs><summary>Calculates the bounds of this ring</summary><returns></returns><remarks>Can be expensive as it must traverse all the points in the ring</remarks></Docs>
+    </Member><Member MemberName="Close">
+      <MemberSignature Language="C#" Value="public void Close ();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>System.Void</ReturnType></ReturnValue>
+      <Parameters />
+      <Docs><summary>Closes the ring</summary><remarks>If not already closed, adds the first point in the ring to the end</remarks></Docs>
+    </Member><Member MemberName="IsClockwise">
+      <MemberSignature Language="C#" Value="public bool IsClockwise { get; }" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>System.Boolean</ReturnType></ReturnValue>
+      <Docs><summary>Determines the order of points in the ring</summary><value></value><remarks>Can be expensive as it must traverse all the points in the ring</remarks></Docs>
+    </Member><Member MemberName="IsClosed">
+      <MemberSignature Language="C#" Value="public bool IsClosed { get; }" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>System.Boolean</ReturnType></ReturnValue>
+      <Docs><summary>Determines if the ring is closed</summary><value></value><remarks></remarks></Docs>
+    </Member><Member MemberName="Points">
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Cumberland.Point&gt; Points { get; }" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Point&gt;</ReturnType></ReturnValue>
+      <Docs><summary>The points in the ring</summary><value>A list of <see cref="T:Cumberland.Point" /></value><remarks></remarks></Docs>
+    </Member><Member MemberName="Validate">
+      <MemberSignature Language="C#" Value="public bool Validate ();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>System.Boolean</ReturnType></ReturnValue>
+      <Parameters />
+      <Docs><summary>Determines if the ring is valid</summary><returns></returns><remarks>Currently, only checks if there are enough points to at least create a triangle</remarks></Docs>
+    </Member>
+  </Members>
+</Type>

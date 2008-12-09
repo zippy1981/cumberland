@@ -1,0 +1,94 @@
+<Overview>
+  <Assemblies>
+    <Assembly Name="Cumberland" Version="0.2.0.0">
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Runtime.CompilerServices.RuntimeCompatibility(WrapNonExceptionThrows=true)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Runtime.CompilerServices.Extension</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Reflection.AssemblyTrademark("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Reflection.AssemblyCopyright("Scott Ellington and authors")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Reflection.AssemblyProduct("Cumberland")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Reflection.AssemblyCompany("http://code.google.com/p/cumberland/")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Reflection.AssemblyConfiguration("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Reflection.AssemblyDescription("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Reflection.AssemblyTitle("Cumberland")</AttributeName>
+        </Attribute>
+      </Attributes>
+    </Assembly>
+  </Assemblies>
+  <Remarks>The main assembly of the Cumberland project.</Remarks>
+  <Copyright>
+  </Copyright>
+  <Types>
+    <Namespace Name="Cumberland">
+      <Type Name="Feature" Kind="Class" />
+      <Type Name="FillStyle" Kind="Enumeration" />
+      <Type Name="LabelDecoration" Kind="Enumeration" />
+      <Type Name="LabelFont" Kind="Enumeration" />
+      <Type Name="LabelPosition" Kind="Enumeration" />
+      <Type Name="Layer" Kind="Class" />
+      <Type Name="Line" Kind="Class" />
+      <Type Name="LineStyle" Kind="Enumeration" />
+      <Type Name="Map" Kind="Class" />
+      <Type Name="Point" Kind="Class" />
+      <Type Name="PointSymbolShapeType" Kind="Enumeration" />
+      <Type Name="PointSymbolType" Kind="Enumeration" />
+      <Type Name="Polygon" Kind="Class" />
+      <Type Name="PolyLine" Kind="Class" />
+      <Type Name="Rectangle" Kind="Class" />
+      <Type Name="Ring" Kind="Class" />
+      <Type Name="Style" Kind="Class" />
+      <Type Name="ThemeType" Kind="Enumeration" />
+    </Namespace>
+    <Namespace Name="Cumberland.Data">
+      <Type Name="FeatureType" Kind="Enumeration" />
+      <Type Name="IDatabaseFeatureSource" Kind="Interface" />
+      <Type Name="IFeatureSource" Kind="Interface" />
+      <Type Name="IFileFeatureSource" Kind="Interface" />
+      <Type Name="KeyholeMarkupLanguage" Kind="Class" />
+      <Type Name="SimpleFeatureSource" Kind="Class" />
+      <Type Name="SpatialType" Kind="Enumeration" />
+    </Namespace>
+    <Namespace Name="Cumberland.Data.Shapefile">
+      <Type Name="DBaseIIIFile" Kind="Class" />
+      <Type Name="Shapefile" Kind="Class" />
+      <Type Name="ShapeType" Kind="Enumeration" />
+    </Namespace>
+    <Namespace Name="Cumberland.Data.WellKnownText">
+      <Type Name="SimpleFeatureAccess" Kind="Class" />
+    </Namespace>
+    <Namespace Name="Cumberland.Drawing">
+      <Type Name="IMapDrawer" Kind="Interface" />
+      <Type Name="MapConfigurationException" Kind="Class" />
+      <Type Name="MapDrawer" Kind="Class" />
+    </Namespace>
+    <Namespace Name="Cumberland.Projection">
+      <Type Name="IProjector" Kind="Interface" />
+      <Type Name="ProjFourWrapper" Kind="Class" />
+    </Namespace>
+    <Namespace Name="Cumberland.Web">
+      <Type Name="TileConsumer" Kind="Enumeration" />
+      <Type Name="TileProvider" Kind="Class" />
+    </Namespace>
+    <Namespace Name="Cumberland.Xml.Serialization">
+      <Type Name="MapSerializer" Kind="Class" />
+    </Namespace>
+  </Types>
+  <Title>Cumberland</Title>
+</Overview>
