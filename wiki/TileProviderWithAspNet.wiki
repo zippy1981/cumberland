@@ -2,6 +2,8 @@
 
 = Introduction =
 
+_Note: This article uses Google Maps as the tile consumer, but it could easily be translated to Virtual Earth (or likely even Open Layers)_
+
 The TileProvider class provides the ability to generate image tiles for use in Google Maps.  You can overlay these tiles to add your own spatial data on top of Google's base data.  The [tilepyramider] tools provides the ability to pre-generate the tiles, but this tutorial will show how to use this class directly within Asp.Net to create tiles on-the-fly.
 
 = Step 1: Our map page =
@@ -65,7 +67,7 @@ At this point, if we wanted to store cached tiles in a database, we could check 
 		MapSerializer ms = new MapSerializer();
 		ms.AddDatabaseFeatureSourceType(typeof(PostGISFeatureSource));
 		Map map = ms.Deserialize("/path/to/map.xml");
-		Cumberland.Web.TileProvider tp = new Cumberland.Web.TileProvider(map);
+		Cumberland.Web.TileProvider tp = new Cumberland.Web.TileProvider();
 }}}
 
 _Note: We could also store the TileProvider object in session for fast access._
@@ -73,7 +75,7 @@ _Note: We could also store the TileProvider object in session for fast access._
 Finally, we render our map, and flush it into the response output stream:
 
 {{{
-		using (Bitmap b = tp.DrawTile(x, y, zoomLevel))
+		using (Bitmap b = tp.DrawTile(map, x, y, zoomLevel))
 		{
 			// stream out the image
 			b.Save(Response.OutputStream, ImageFormat.Png);
