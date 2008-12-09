@@ -124,6 +124,12 @@ Finally, you have some control over the position of labels.  You have the abilit
 <LabelPixelOffset>1</LabelPixelOffset>
 }}}
 
+Also, for point features, you can set the angle of the label:
+
+{{{
+<LabelAngle>45</LabelAngle>
+}}}
+
 == Example == 
 
 The following provides some examples of what is possible:
