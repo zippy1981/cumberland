@@ -8,7 +8,8 @@
 		<BaseTypeName>System.Enum</BaseTypeName>
 	</Base>
 	<Docs>
-		<summary>Defines the effects applied to a label</remarks>
+		<summary>Defines the effects applied to a label</summary>
+		<remarks></remarks>
 	</Docs>
 	<Members>
 		<Member MemberName="None">
