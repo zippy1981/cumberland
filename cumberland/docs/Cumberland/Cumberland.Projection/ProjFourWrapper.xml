@@ -3,6 +3,7 @@
   <AssemblyInfo>
     <AssemblyName>Cumberland</AssemblyName>
     <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -33,24 +34,24 @@
       <MemberSignature Language="C#" Value="public ProjFourWrapper (int epsg);" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
       <Parameters><Parameter Name="epsg" Type="System.Int32" /></Parameters>
       <Docs><param name="epsg">The epsg code</param><summary>Creates an instance based on the given epsg code</summary><remarks></remarks></Docs>
     </Member><Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public ProjFourWrapper (string initParameters);" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
       <Parameters><Parameter Name="initParameters" Type="System.String" /></Parameters>
       <Docs><param name="initParameters">The Proj.4 string</param><summary>Creates an instance based on the given proj.4 string</summary><remarks></remarks></Docs>
     </Member><Member MemberName="Deproject">
       <MemberSignature Language="C#" Value="public Cumberland.Point Deproject (Cumberland.Point point);" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Point</ReturnType></ReturnValue>
       <Parameters><Parameter Name="point" Type="Cumberland.Point" /></Parameters>
       <Docs><param name="point">The point to deproject</param><summary>Deprojects the given point</summary><returns>The deprojected point</returns><remarks>Transforms this point from this coordinate system to a geographic coordinate system.
@@ -59,8 +60,8 @@
       <MemberSignature Language="C#" Value="public void Dispose ();" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>System.Void</ReturnType></ReturnValue>
       <Parameters />
       <Docs><summary>Dispose of the unmanaged Proj.4 reference</summary><remarks></remarks></Docs>
@@ -68,8 +69,8 @@
       <MemberSignature Language="C#" Value="protected virtual void Dispose (bool disposing);" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>System.Void</ReturnType></ReturnValue>
       <Parameters><Parameter Name="disposing" Type="System.Boolean" /></Parameters>
       <Docs><param name="disposing">Defines whether this is a Dispose or Finalize</param><summary>Dispose of the unmanaged Proj.4 reference</summary><remarks></remarks></Docs>
@@ -77,8 +78,8 @@
       <MemberSignature Language="C#" Value="public static string GetError ();" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
       <Parameters />
       <Docs><summary>Gets the current error in Proj.4 (if any)</summary><returns></returns><remarks></remarks></Docs>
@@ -86,34 +87,27 @@
       <MemberSignature Language="C#" Value="public bool IsGeocentric { get; }" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>System.Boolean</ReturnType></ReturnValue>
       <Docs><summary>Gets whether the current coordinate system is geocentric</summary><value>true if geocentric, false if not</value><remarks>Geocentric means a perfect sphere is used.</remarks></Docs>
     </Member><Member MemberName="IsLatLong">
       <MemberSignature Language="C#" Value="public bool IsLatLong { get; }" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>System.Boolean</ReturnType></ReturnValue>
       <Docs><summary>Gets whether the current coordinate system is geographic</summary><value>true if geographic, false if not</value><remarks>Geographic means the data is represented on a sphere, ellipse, or a datum that
       models the three dimensional planet.  A false value would mean that the coordinate system is projected.</remarks></Docs>
-    </Member><Member MemberName="PrepareEPSGCode">
-      <MemberSignature Language="C#" Value="public static string PrepareEPSGCode (int epsg);" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
-      <Parameters><Parameter Name="epsg" Type="System.Int32" /></Parameters>
-      <Docs><param name="epsg">The epsg code</param><summary>Converts an epsg code into a Proj.4 readable string</summary><returns>A Proj.4 string</returns><remarks>Helper method</remarks></Docs>
-    </Member><Member MemberName="Project">
+    </Member><Member MemberName="PrepareEpsgCode"><MemberSignature Language="C#" Value="public static string PrepareEpsgCode (int epsg);" /><MemberType>Method</MemberType><AssemblyInfo><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo><ReturnValue><ReturnType>System.String</ReturnType></ReturnValue><Parameters><Parameter Name="epsg" Type="System.Int32" /></Parameters>
+    <Docs><param name="epsg">The epsg code</param><summary>Converts an epsg code into a Proj.4 readable string</summary><returns>A Proj.4 string</returns><remarks>Helper method</remarks><since version="0.2" /></Docs></Member>
+    <Member MemberName="Project">
       <MemberSignature Language="C#" Value="public Cumberland.Point Project (Cumberland.Point point);" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Point</ReturnType></ReturnValue>
       <Parameters><Parameter Name="point" Type="Cumberland.Point" /></Parameters>
       <Docs><param name="point">The geographic point to be projected</param><summary>Projects the given geographic point</summary><returns>The given point, projected</returns><remarks>Transforms the given geographic point to the current coordinate system.  If the current coordinate 
@@ -122,28 +116,29 @@
       an exception will be thrown.</remarks></Docs>
     </Member><Member MemberName="SphericalMercatorProjection">
     <MemberSignature Language="C#" Value="public static string SphericalMercatorProjection { get; }" />
-    <MemberType>Property</MemberType><AssemblyInfo><AssemblyVersion>0.1.0.0</AssemblyVersion></AssemblyInfo>
+    <MemberType>Property</MemberType><AssemblyInfo><AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
     <ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
     <Docs><summary>Gets the projection string for a spherical mercator projection used by several popular web applications</summary><value></value><remarks>Provided for convenience</remarks></Docs></Member><Member MemberName="Transform">
       <MemberSignature Language="C#" Value="public Cumberland.Point Transform (Cumberland.Projection.ProjFourWrapper destinationProj, Cumberland.Point point);" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Point</ReturnType></ReturnValue>
       <Parameters><Parameter Name="destinationProj" Type="Cumberland.Projection.ProjFourWrapper" /><Parameter Name="point" Type="Cumberland.Point" /></Parameters>
       <Docs><param name="destinationProj">The destination coordinate system</param><param name="point">The point to be transformed</param><summary>Transforms the given point from the current coordinate system to the given destination coordinate system</summary><returns>The transformed point</returns><remarks></remarks></Docs>
-    </Member><Member MemberName="Version">
+    </Member><Member MemberName="TryParseEpsg"><MemberSignature Language="C#" Value="public static bool TryParseEpsg (string projection, out int epsg);" /><MemberType>Method</MemberType><AssemblyInfo><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo><ReturnValue><ReturnType>System.Boolean</ReturnType></ReturnValue><Parameters><Parameter Name="projection" Type="System.String" /><Parameter Name="epsg" Type="System.Int32&amp;" RefType="out" /></Parameters>
+    <Docs><param name="projection">the projection string</param><param name="epsg">The outputted epsg code</param><summary>Trys to parse an epsg code from a projection string</summary><returns>true if success, false if failure</returns><remarks></remarks><since version="0.2" /></Docs></Member><Member MemberName="Version">
       <MemberSignature Language="C#" Value="public static string Version { get; }" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
       <Docs><summary>Gets the Proj.4 version</summary><value></value><remarks></remarks></Docs>
     </Member><Member MemberName="WGS84">
     <MemberSignature Language="C#" Value="public static string WGS84 { get; }" />
-    <MemberType>Property</MemberType><AssemblyInfo><AssemblyVersion>0.1.0.0</AssemblyVersion></AssemblyInfo>
+    <MemberType>Property</MemberType><AssemblyInfo><AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
     <ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
     <Docs><summary>Gets the projection string for the ubiquitous WGS84 coordinate system</summary><value>the Proj.4 projection string</value><remarks>WGS84 is a common datum used for spatial data.</remarks></Docs></Member>
     </Members>

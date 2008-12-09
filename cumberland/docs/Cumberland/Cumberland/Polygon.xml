@@ -3,6 +3,7 @@
   <AssemblyInfo>
     <AssemblyName>Cumberland</AssemblyName>
     <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>Cumberland.Feature</BaseTypeName>
@@ -20,16 +21,16 @@
       <MemberSignature Language="C#" Value="public Polygon ();" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
       <Parameters />
       <Docs><summary></summary><remarks></remarks></Docs>
     </Member><Member MemberName="Rings">
       <MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Cumberland.Ring&gt; Rings { get; }" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Ring&gt;</ReturnType></ReturnValue>
       <Docs><summary>The rings of the polygon feature</summary><value>A list of <see cref="T:Cumberland.Ring" /></value><remarks></remarks></Docs>
     </Member>
