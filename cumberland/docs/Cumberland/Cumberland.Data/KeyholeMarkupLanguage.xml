@@ -15,7 +15,8 @@
   </Attributes>
   <Docs>
     <summary>Provide support for Google's Keyhole Markup Language (KML)</summary>
-    <remarks></remarks>
+    <remarks>
+    </remarks>
   </Docs>
   <Members>
     <Member MemberName="CreateFromMap">
@@ -26,9 +27,7 @@
       </AssemblyInfo>
       <ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
       <Parameters><Parameter Name="map" Type="Cumberland.Map" /></Parameters>
-      <Docs><param name="map">The map to export</param>
-      <summary>Creates a KML document from a map</summary><returns>A KML document</returns>
-      <remarks>As much symbology as supported by KML is preserved</remarks></Docs>
+      <Docs><param name="map">The map to export</param><summary>Creates a KML document from a map</summary><returns>A KML document</returns><remarks>As much symbology as supported by KML is preserved</remarks></Docs>
     </Member>
   </Members>
 </Type>

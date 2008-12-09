@@ -1,81 +1,62 @@
 <Type Name="LabelFont" FullName="Cumberland.LabelFont">
-	<TypeSignature Language="C#" Value="public enum LabelFont" />
-	<AssemblyInfo>
-		<AssemblyName>Cumberland</AssemblyName>
-		<AssemblyVersion>0.2.0.0</AssemblyVersion>
-	</AssemblyInfo>
-	<Base>
+  <TypeSignature Language="C#" Value="public enum LabelFont" />
+  <AssemblyInfo>
+    <AssemblyName>Cumberland</AssemblyName>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
 		<BaseTypeName>System.Enum</BaseTypeName>
 	</Base>
-	<Docs>
-		<summary>The general font type to use for labelling</summary>
-		<remarks></remarks>
-	</Docs>
-	<Members>
+  <Docs>
+    <summary>The general font type to use for labelling</summary>
+    <remarks>
+    </remarks>
+  </Docs>
+  <Members>
+		
+		
+		
+		
 		<Member MemberName="Custom">
 			<MemberSignature Language="C#" Value="Custom" />
 			<MemberType>Field</MemberType>
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 			</AssemblyInfo>
-			<ReturnValue>
-				<ReturnType>Cumberland.LabelFont</ReturnType>
-			</ReturnValue>
-			<Docs>
-				<summary>Use the font defined in <see cref="P:Cumberland.Style.LabelCustomFont" /></summary>
-			</Docs>
-		</Member>
-		<Member MemberName="Monospace">
+			<ReturnValue><ReturnType>Cumberland.LabelFont</ReturnType></ReturnValue>
+			<Docs><summary>Use the font defined in <see cref="P:Cumberland.Style.LabelCustomFont" /></summary></Docs>
+		</Member><Member MemberName="Monospace">
 			<MemberSignature Language="C#" Value="Monospace" />
 			<MemberType>Field</MemberType>
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 			</AssemblyInfo>
-			<ReturnValue>
-				<ReturnType>Cumberland.LabelFont</ReturnType>
-			</ReturnValue>
-			<Docs>
-				<summary>A monospace font</summary>
-			</Docs>
-		</Member>
-		<Member MemberName="None">
+			<ReturnValue><ReturnType>Cumberland.LabelFont</ReturnType></ReturnValue>
+			<Docs><summary>A monospace font</summary></Docs>
+		</Member><Member MemberName="None">
 			<MemberSignature Language="C#" Value="None" />
 			<MemberType>Field</MemberType>
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 			</AssemblyInfo>
-			<ReturnValue>
-				<ReturnType>Cumberland.LabelFont</ReturnType>
-			</ReturnValue>
-			<Docs>
-				<summary>Don't draw the label</summary>
-			</Docs>
-		</Member>
-		<Member MemberName="SansSerif">
+			<ReturnValue><ReturnType>Cumberland.LabelFont</ReturnType></ReturnValue>
+			<Docs><summary>Don't draw the label</summary></Docs>
+		</Member><Member MemberName="SansSerif">
 			<MemberSignature Language="C#" Value="SansSerif" />
 			<MemberType>Field</MemberType>
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 			</AssemblyInfo>
-			<ReturnValue>
-				<ReturnType>Cumberland.LabelFont</ReturnType>
-			</ReturnValue>
-			<Docs>
-				<summary>A sans serif font</summary>
-			</Docs>
-		</Member>
-		<Member MemberName="Serif">
+			<ReturnValue><ReturnType>Cumberland.LabelFont</ReturnType></ReturnValue>
+			<Docs><summary>A sans serif font</summary></Docs>
+		</Member><Member MemberName="Serif">
 			<MemberSignature Language="C#" Value="Serif" />
 			<MemberType>Field</MemberType>
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 			</AssemblyInfo>
-			<ReturnValue>
-				<ReturnType>Cumberland.LabelFont</ReturnType>
-			</ReturnValue>
-			<Docs>
-				<summary>A serif font</summary>
-			</Docs>
+			<ReturnValue><ReturnType>Cumberland.LabelFont</ReturnType></ReturnValue>
+			<Docs><summary>A serif font</summary></Docs>
 		</Member>
 	</Members>
 </Type>

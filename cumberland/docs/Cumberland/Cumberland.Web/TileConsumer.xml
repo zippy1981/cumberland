@@ -1,73 +1,54 @@
 <Type Name="TileConsumer" FullName="Cumberland.Web.TileConsumer">
-	<TypeSignature Language="C#" Value="public enum TileConsumer" />
-	<AssemblyInfo>
-		<AssemblyName>Cumberland</AssemblyName>
-		<AssemblyVersion>0.1.0.0</AssemblyVersion>
-		<AssemblyVersion>0.2.0.0</AssemblyVersion>
-	</AssemblyInfo>
-	<Base>
+  <TypeSignature Language="C#" Value="public enum TileConsumer" />
+  <AssemblyInfo>
+    <AssemblyName>Cumberland</AssemblyName>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
 		<BaseTypeName>System.Enum</BaseTypeName>
 	</Base>
-	<Docs>
-		<summary>Lists the supported consumers of <see cref="T:Cumberland.Web.TileProvider" /></summary>
-		<remarks>The Tile consumer defines the behavior of the Tile provider.</remarks>
-	</Docs>
-	<Members>
+  <Docs>
+    <summary>Lists the supported consumers of <see cref="T:Cumberland.Web.TileProvider" /></summary>
+    <remarks>The Tile consumer defines the behavior of the Tile provider.</remarks>
+  </Docs>
+  <Members>
+		
+		
+		
 		<Member MemberName="GoogleMaps">
 			<MemberSignature Language="C#" Value="GoogleMaps" />
 			<MemberType>Field</MemberType>
 			<AssemblyInfo>
-				<AssemblyVersion>0.1.0.0</AssemblyVersion>
-				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				
+				<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion>
 			</AssemblyInfo>
-			<ReturnValue>
-				<ReturnType>Cumberland.Web.TileConsumer</ReturnType>
-			</ReturnValue>
-			<Docs>
-				<summary>The Google Maps web interface</summary>
-			</Docs>
-		</Member>
-		<Member MemberName="None">
+			<ReturnValue><ReturnType>Cumberland.Web.TileConsumer</ReturnType></ReturnValue>
+			<Docs><summary>The Google Maps web interface</summary></Docs>
+		</Member><Member MemberName="None">
 			<MemberSignature Language="C#" Value="None" />
 			<MemberType>Field</MemberType>
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 			</AssemblyInfo>
-			<ReturnValue>
-				<ReturnType>Cumberland.Web.TileConsumer</ReturnType>
-			</ReturnValue>
-			<Docs>
-				<summary></summary>
-				<since version="0.2" />
-			</Docs>
-		</Member>
-		<Member MemberName="TileMapService">
+			<ReturnValue><ReturnType>Cumberland.Web.TileConsumer</ReturnType></ReturnValue>
+			<Docs><summary></summary><since version="0.2" /></Docs>
+		</Member><Member MemberName="TileMapService">
 			<MemberSignature Language="C#" Value="TileMapService" />
 			<MemberType>Field</MemberType>
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 			</AssemblyInfo>
-			<ReturnValue>
-				<ReturnType>Cumberland.Web.TileConsumer</ReturnType>
-			</ReturnValue>
-			<Docs>
-				<summary>The OSGeo's Tile Map Service specification</summary>
-				<since version="0.2" />
-			</Docs>
-		</Member>
-		<Member MemberName="VirtualEarth">
+			<ReturnValue><ReturnType>Cumberland.Web.TileConsumer</ReturnType></ReturnValue>
+			<Docs><summary>The OSGeo's Tile Map Service specification</summary><since version="0.2" /></Docs>
+		</Member><Member MemberName="VirtualEarth">
 			<MemberSignature Language="C#" Value="VirtualEarth" />
 			<MemberType>Field</MemberType>
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 			</AssemblyInfo>
-			<ReturnValue>
-				<ReturnType>Cumberland.Web.TileConsumer</ReturnType>
-			</ReturnValue>
-			<Docs>
-				<summary>Microsoft's VirtualEarth web interface</summary>
-				<since version="0.2" />
-			</Docs>
+			<ReturnValue><ReturnType>Cumberland.Web.TileConsumer</ReturnType></ReturnValue>
+			<Docs><summary>Microsoft's VirtualEarth web interface</summary><since version="0.2" /></Docs>
 		</Member>
 	</Members>
 </Type>
