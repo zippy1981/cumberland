@@ -78,6 +78,37 @@ Note the relative path, this is interpreted as relative to the map xml file.  Th
 
 A example of point symbols is found below.
 
+= Labelling =
+
+_Labelling is new to Cumberland 0.2_
+
+Cumberland provides a set of properties for configuring how you want labels to look.  To turn labelling on for a style, you set ShowLabels:
+
+{{{
+<ShowLabels>true</ShowLabels>
+}}}
+
+minimum and maximum scales can be set the same as layers and styles:
+
+{{{
+<LabelMaxScale>.008</LabelMaxScale>
+<LabelMinScale>.0000001</LabelMinScale>
+}}}
+
+The font style can be configured:
+
+{{{
+<LabelFont>SansSerif</LabelFont>
+<LabelColor>155,105,105,255</LabelColor>
+<LabelFontEmSize>8</LabelFontEmSize>
+}}}
+
+If LabelFont is set to 'Custom', you can set the LabelCustomFont property to point a font on your system.
+
+{{{
+<LabelCustomFont>Arial</LabelCustomFont>
+}}}
+
 = Thematic mapping =
 
 Thematic mapping allows using particular styles based on a feature's properties.  For example, drawing states based on their population.  This must be configured in the [mapXmlFormat#Layer_Elements Layer element].  The field that we test in the feature is specified by Layer->ThemeField.  The type of thematic mapping is specified in Layer->Theme.  Currently, there are two supported types of themes:
