@@ -367,7 +367,7 @@ namespace Cumberland.Xml.Serialization
 			m.Layers.Add(l);
 		}
 		
-		void DeserializeStyle(XmlNode node, Layer layer, string mapPath)
+		static void DeserializeStyle(XmlNode node, Layer layer, string mapPath)
 		{
 			Style style = new Style();
 			
@@ -648,7 +648,7 @@ namespace Cumberland.Xml.Serialization
 			                      int.Parse(p[3]));
 		}
 		
-		string AnchorPath(string mapPath, string filePath)
+		static string AnchorPath(string mapPath, string filePath)
 		{
 			if (filePath != null && mapPath != null && !Path.IsPathRooted(filePath))
 			{

@@ -1,3 +1,17 @@
+2008-12-09  Scott Ellington  <scott.ellington@gmail.com>
+
+	* Point.cs:
+	* Rectangle.cs:
+	* Web/TileProvider.cs:
+	* Drawing/MapDrawer.cs:
+	* Data/Shapefile/Shapefile.cs:
+	* Data/KeyholeMarkupLanguage.cs:
+	* Projection/ProjFourWrapper.cs:
+	* Data/Shapefile/DBaseIIIFile.cs:
+	* Xml/Serialization/MapSerializer.cs:
+	* Drawing/MapConfigurationException.cs:
+	* Projection/SphericalMercatorProjector.cs: gendarme fixes
+
 2008-12-08  Scott Ellington  <scott.ellington@gmail.com>
 
 	* Web/TileProvider.cs:

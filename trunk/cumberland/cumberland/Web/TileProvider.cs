@@ -313,7 +313,7 @@ namespace Cumberland.Web
 	
 					for (int ii=0; ii < numLineBreaks; ii++)
 					{
-						msg = msg.Insert(ii*numCharsPerRow, "\r\n");
+						msg = msg.Insert(ii*numCharsPerRow, Environment.NewLine);
 					}
 
 					gr.DrawString(msg,

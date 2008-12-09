@@ -56,6 +56,8 @@ namespace Cumberland.Tests
 			Point p2 = new Point(1,1);
 			
 			Assert.AreEqual(p1, p2);
+			Assert.IsTrue(p1.Equals(p2));
+			Assert.IsTrue(p1.Equals((object)p2));
 		}
 		
 		[Test]

@@ -243,7 +243,7 @@ namespace Cumberland.Data.Shapefile
 			}
 		}
 
-		internal class FieldDescriptor
+		internal sealed class FieldDescriptor
 		{
 			public string Name;
 			public char Type;

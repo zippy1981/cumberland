@@ -229,5 +229,15 @@ namespace Cumberland.Tests
 			Assert.IsFalse(r1 == null);
 			Assert.IsFalse(null == r1);
 		}
+
+		[Test]
+		public void TestEquals()
+		{
+			Rectangle r1 = new Rectangle(0,0,1,1);
+			Rectangle r2 = new Rectangle(0,0,1,1);
+
+			Assert.IsTrue(r1.Equals(r2));
+			Assert.IsTrue(r1.Equals((object)r2));
+		}
 	}
 }
