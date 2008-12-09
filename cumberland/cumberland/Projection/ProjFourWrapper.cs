@@ -242,6 +242,12 @@ namespace Cumberland.Projection
 		#endregion
 		
 		#region public static methods
+
+		[Obsolete("Please use PrepareEpsgCode instead")]
+		public static string PrepareEPSGCode(int epsg)
+		{
+			return PrepareEpsgCode(epsg);
+		}
 		
 		public static string PrepareEpsgCode(int epsg)
 		{

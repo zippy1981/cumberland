@@ -1,5 +1,10 @@
 2008-12-09  Scott Ellington  <scott.ellington@gmail.com>
 
+	* Web/TileProvider.cs:
+	* Projection/ProjFourWrapper.cs: readd obsolete members
+
+2008-12-09  Scott Ellington  <scott.ellington@gmail.com>
+
 	* AssemblyInfo.cs: bump to 0.2
 
 	* Layer.cs: internalize public methods nobody cares about
