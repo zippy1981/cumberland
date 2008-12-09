@@ -92,25 +92,7 @@ Additionally, you can use the SimpleFeatureSource class to create an inline feat
 
 The 'Styles' element, within the 'Layer' element can have zero to many 'Style' elements.  These affect how the features in the feature source are drawn.  If there is no Layer.Theme element or it is set to 'None', then the first Style element is used.  If theming is enabled, then the style element that is used depends on if the feature matches parameters specified within the style.  If there is no matching style for the feature, the feature is not drawn.
 
-The possible child elements for 'Style' are:
-
-{{{
-<Style>
-    <FillColor>255,100,255,100</FillColor>
-    <LineColor>255,0,155,0</LineColor>
-    <LineSize>1</LineSize>
-    <LineStyle>Solid</LineStyle>
-    <PointSize>5</PointSize>
-    <PointSymbol>Shape</PointSymbol>
-    <PointSymbolShape>Square</PointSymbolShape>
-    <PointSymbolImagePath>images/city_icon.png</PointSymbolImagePath>
-    <MinRangeThemeValue>0</MinRangeThemeValue>
-    <MaxRangeThemeValue>500000</MaxRangeThemeValue>
-    <UniqueThemeValue>Rio Grande de Santiago</UniqueThemeValue>
-</Style>
-}}}
-
-Most of these are obvious.  They describe how a feature should be drawn given it's type (point, polygon, polyline).  The format for colors is 'A,R,G,B'.  The ThemeValue properties are used in conjunction with the Layer.Theme and Layer.ThemeField to determine whether a style applies to a feature.  
+The style element is covered thoroughly in the [BasicSymbology basic symbology] page.
 
 = Examples =
 
