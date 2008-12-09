@@ -45,9 +45,9 @@ The BackgroundColor property has been added, with which you can set the backgrou
 <BackgroundColor>255,255,255,255</BackgroundColor>
 }}}
 
-== Layer Elements ==
+== The Layers Element ==
 
-A layer encompasses a single data source along with symbology information which tells the map drawer how to render it.  It supports the following child elements:
+The Layers element can have zero to many Layer elements.  A layer encompasses a single data source along with symbology information which tells the map drawer how to render it.  It supports the following child elements:
 
 {{{
 <Layer>
@@ -126,7 +126,7 @@ The Forced properties all tell cumberland what kind of data it is working with.
 
 Additionally, you can use the SimpleFeatureSource class to create an inline feature source ([http://code.google.com/p/cumberland/source/browse/trunk/cumberland/Cumberland.Tests/maps/simplefeatures.xml example here]).
 
-== Style elements ==
+== The Styles element ==
 
 The 'Styles' element, within the 'Layer' element can have zero to many 'Style' elements.  These affect how the features in the feature source are drawn.  If there is no Layer.Theme element or it is set to 'None', then the first Style element is used.  If theming is enabled, then the style element that is used depends on if the feature matches parameters specified within the style.  If there is no matching style for the feature, the feature is not drawn.
 
