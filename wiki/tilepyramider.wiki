@@ -7,35 +7,41 @@
 
 Most modern web mapping interfaces use tiles.  This has the advantage of allowing the tiles to be pre-generated instead of per-user.  Tilepyramider generates a pyramid of tile images into a directory structure that you can use with these interfaces.
 
-_Note: Currently only Google Maps is supported as a Tile Consumer._
+Supported tile consumers:
+
+  * Google Maps ([http://www.salmonsalvo.net/Cumberland:GoogleMapsTest demo])
+  * TileMapService (TMS) - can be used in OpenLayers (new to 0.2)
+  * Microsoft VirtualEarth (new to 0.2)
 
 = Usage = 
 
 Tilepyramider is a command line utility, its usage is as follows:
 
 {{{
-Usage: [mono] tilepyramider.exe [OPTIONS]+ "path to map file"
+Usage: [mono] tilepyramider.exe [OPTIONS]+ "path to map file" 
 Generates a pyramid of tile images for use for popular web mapping interfaces
 
-example: mono tilepyramider.exe  /path/to/map
+example: mono tilepyramider.exe  /path/to/map 
 
 Options:
-  -e, --extents=VALUE        comma-delimited extents for clipping tile generation 
-				(e.g. -180,-90,180,90).  Overrides the map file.  
-				(Must be in maps coordinate system)
+  -e, --extents=VALUE        comma-delimited extents for clipping tile generation (e.g. -180,-90,180,90).  Overrides the map file.  (Must be in map's coordinate system)
   -h, --help                 show this message and exit
-  -o, --output=VALUE         the path of the where to create.  
-				Defaults to current directory
+  -o, --output=VALUE         the path of the where to create.  Defaults to current directory
   -x, --maxzoom=VALUE        the maximum zoom level
   -n, --minzoom=VALUE        the minimum zoom level
   -t, --test                 Test - only calculate the total and return
+  -c, --consumer=VALUE       The consumer.  Valid values are 'googlemaps', 'tms'.
+  -w, --worldextents=VALUE   comma-delimited extents for defining world (e.g. -180,-90,180,90). Valid only for TMS
+  -b, --bleed=VALUE          the bleed in pixels for tiles (useful for catching overrunning symbols/labels from other tiles
 }}}
 
-The "map file" is defined by the [mapXmlFormat map xml format] which holds data sources and style information.
+The "map file" is defined by the [mapXmlFormat map xml format] which holds data sources and style information.  This generates a set of images in the output folder specified.  If no output folder is specified, the tiles are generated in the current directory.  
 
-This generates a set of folders, named by their zoom level, in the output folder specified.  If no output folder is specified, the tile folders are generated in the current directory.  Inside of each folder are the generated tiles.  They are named X_Y.png.  Where the 'X' and 'Y' are their tile coordinates.
+== Setting a bleed ==
 
-= Deployment =
+The bleed option provides the ability to have the tool render a larger map and crop it to size.  This way it can catch features whose symbology may extend across a tile.
+
+= Deployment: Google Maps =
 
 The directory can be copied to your web server.  In order to use Google Maps on your website, you will need a key ([http://code.google.com/apis/maps/signup.html sign up here]).  Finally, you will need to add the html and script to your web page:
 
@@ -149,7 +155,3 @@ function CustomGetTileUrl(point,zoom)
 }}}
 
 Basically, it shows a blank image tile whenever the map is out of scale or the tile requested is not within our bounds.  You'll need to edit this to fit your scale/bounds requirements.
-
-= Example =
-
-You can see a basic demo [http://www.salmonsalvo.net/Cumberland:GoogleMapsTest here].
