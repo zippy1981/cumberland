@@ -3,6 +3,7 @@
   <AssemblyInfo>
     <AssemblyName>Cumberland</AssemblyName>
     <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Enum</BaseTypeName>
@@ -16,24 +17,24 @@
       <MemberSignature Language="C#" Value="Circle" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.PointSymbolShapeType</ReturnType></ReturnValue>
       <Docs><summary>A circle will drawn</summary></Docs>
     </Member><Member MemberName="None">
       <MemberSignature Language="C#" Value="None" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.PointSymbolShapeType</ReturnType></ReturnValue>
       <Docs><summary>Nothing will be drawn</summary></Docs>
     </Member><Member MemberName="Square">
       <MemberSignature Language="C#" Value="Square" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.PointSymbolShapeType</ReturnType></ReturnValue>
       <Docs><summary>A square will be drawn</summary></Docs>
     </Member>

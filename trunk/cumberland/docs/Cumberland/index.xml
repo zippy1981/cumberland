@@ -1,9 +1,12 @@
 <Overview>
   <Assemblies>
-    <Assembly Name="Cumberland" Version="0.1.0.0">
+    <Assembly Name="Cumberland" Version="0.2.0.0">
       <Attributes>
         <Attribute>
           <AttributeName>System.Runtime.CompilerServices.RuntimeCompatibility(WrapNonExceptionThrows=true)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Runtime.CompilerServices.Extension</AttributeName>
         </Attribute>
         <Attribute>
           <AttributeName>System.Reflection.AssemblyTrademark("")</AttributeName>
@@ -35,6 +38,10 @@
   <Types>
     <Namespace Name="Cumberland">
       <Type Name="Feature" Kind="Class" />
+      <Type Name="FillStyle" Kind="Enumeration" />
+      <Type Name="LabelDecoration" Kind="Enumeration" />
+      <Type Name="LabelFont" Kind="Enumeration" />
+      <Type Name="LabelPosition" Kind="Enumeration" />
       <Type Name="Layer" Kind="Class" />
       <Type Name="Line" Kind="Class" />
       <Type Name="LineStyle" Kind="Enumeration" />
@@ -54,6 +61,7 @@
       <Type Name="IDatabaseFeatureSource" Kind="Interface" />
       <Type Name="IFeatureSource" Kind="Interface" />
       <Type Name="IFileFeatureSource" Kind="Interface" />
+      <Type Name="KeyholeMarkupLanguage" Kind="Class" />
       <Type Name="SimpleFeatureSource" Kind="Class" />
       <Type Name="SpatialType" Kind="Enumeration" />
     </Namespace>

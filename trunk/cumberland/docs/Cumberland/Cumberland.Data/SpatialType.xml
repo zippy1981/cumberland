@@ -3,6 +3,7 @@
   <AssemblyInfo>
     <AssemblyName>Cumberland</AssemblyName>
     <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Enum</BaseTypeName>
@@ -18,24 +19,24 @@
       <MemberSignature Language="C#" Value="Geographic" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Data.SpatialType</ReturnType></ReturnValue>
       <Docs><summary>Geographic spatial type (latitude/longitude).</summary></Docs>
     </Member><Member MemberName="Geometric">
       <MemberSignature Language="C#" Value="Geometric" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Data.SpatialType</ReturnType></ReturnValue>
       <Docs><summary>Geometric spatial type (x/y)</summary></Docs>
     </Member><Member MemberName="None">
       <MemberSignature Language="C#" Value="None" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Data.SpatialType</ReturnType></ReturnValue>
       <Docs><summary>None/unknown spatial type</summary></Docs>
     </Member>

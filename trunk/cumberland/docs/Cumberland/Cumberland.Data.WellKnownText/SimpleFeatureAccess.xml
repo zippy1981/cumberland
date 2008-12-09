@@ -3,6 +3,7 @@
   <AssemblyInfo>
     <AssemblyName>Cumberland</AssemblyName>
     <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -17,8 +18,8 @@
       <MemberSignature Language="C#" Value="public static string CreateFromPoint (Cumberland.Point point);" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
       <Parameters><Parameter Name="point" Type="Cumberland.Point" /></Parameters>
       <Docs><param name="point">The point to convert</param><summary>Converts the given point to WKT</summary><returns>Well-Known Text</returns><remarks></remarks></Docs>
@@ -26,21 +27,19 @@
       <MemberSignature Language="C#" Value="public static string CreateFromPolygon (Cumberland.Polygon polygon);" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
       <Parameters><Parameter Name="polygon" Type="Cumberland.Polygon" /></Parameters>
-      <Docs><param name="polygon">The polygon to convert</param><summary>Converts the given polygon to WKT</summary>
-      <returns>Well-Known Text</returns>
-      <remarks>If the polygon contains multiple exterior rings, a 'MULTIPOLYGON' WKT will be created.  Currently, an exterior ring
+      <Docs><param name="polygon">The polygon to convert</param><summary>Converts the given polygon to WKT</summary><returns>Well-Known Text</returns><remarks>If the polygon contains multiple exterior rings, a 'MULTIPOLYGON' WKT will be created.  Currently, an exterior ring
       is defined as a ring in which the points move in a clockwise direction.  A hole is defined as a ring in which
       the points move in a counter-clockwise direction.</remarks></Docs>
     </Member><Member MemberName="CreateFromPolyLine">
       <MemberSignature Language="C#" Value="public static string CreateFromPolyLine (Cumberland.PolyLine polyLine);" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
       <Parameters><Parameter Name="polyLine" Type="Cumberland.PolyLine" /></Parameters>
       <Docs><param name="polyLine">The PolyLine to convert</param><summary>Converts the given PolyLine to WKT</summary><returns>Well-Known Text</returns><remarks>Returns a 'MULTILINESTRING' WKT.</remarks></Docs>
@@ -48,8 +47,8 @@
       <MemberSignature Language="C#" Value="public static string CreateFromRectangle (Cumberland.Rectangle rectangle);" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
       <Parameters><Parameter Name="rectangle" Type="Cumberland.Rectangle" /></Parameters>
       <Docs><param name="rectangle">The Rectangle to convert</param><summary>Converts the given Rectangle to a 'POLYGON' WKT</summary><returns>Well-Known Text</returns><remarks></remarks></Docs>
@@ -57,8 +56,8 @@
       <MemberSignature Language="C#" Value="public static Cumberland.Feature Parse (string wkt);" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Feature</ReturnType></ReturnValue>
       <Parameters><Parameter Name="wkt" Type="System.String" /></Parameters>
       <Docs><param name="wkt">Well-known Text</param><summary>Attempts to parse the given WKT into a feature</summary><returns>The resulting feature, null if unknown/unsupported WKT type</returns><remarks></remarks></Docs>
@@ -66,8 +65,8 @@
       <MemberSignature Language="C#" Value="public static Cumberland.PolyLine ParseLineString (string wkt);" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.PolyLine</ReturnType></ReturnValue>
       <Parameters><Parameter Name="wkt" Type="System.String" /></Parameters>
       <Docs><param name="wkt">A 'LINESTRING' Well-Known Text</param><summary>Parses a 'LINESTRING' WKT into a PolyLine</summary><returns></returns><remarks>Any other type of WKT will throw an exception.</remarks></Docs>
@@ -75,8 +74,8 @@
       <MemberSignature Language="C#" Value="public static Cumberland.PolyLine ParseMultiLineString (string wkt);" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.PolyLine</ReturnType></ReturnValue>
       <Parameters><Parameter Name="wkt" Type="System.String" /></Parameters>
       <Docs><param name="wkt">A 'MULTILINESTRING' WKT</param><summary>Parses a 'MULTILINESTRING' into a PolyLine</summary><returns></returns><remarks>Any other type of WKT will throw an exception.</remarks></Docs>
@@ -84,8 +83,8 @@
       <MemberSignature Language="C#" Value="public static Cumberland.Polygon ParseMultiPolygon (string wkt);" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Polygon</ReturnType></ReturnValue>
       <Parameters><Parameter Name="wkt" Type="System.String" /></Parameters>
       <Docs><param name="wkt">The 'MULTIPOLYGON' WKT to parse</param><summary>Parses a 'MULTIPOLYGON' into a Polygon</summary><returns></returns><remarks>Any other type of WKT will throw an exception.</remarks></Docs>
@@ -93,8 +92,8 @@
       <MemberSignature Language="C#" Value="public static Cumberland.Point ParsePoint (string wkt);" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Point</ReturnType></ReturnValue>
       <Parameters><Parameter Name="wkt" Type="System.String" /></Parameters>
       <Docs><param name="wkt">The 'POINT' wkt to parse</param><summary>Parses a 'POINT' wkt into a Point</summary><returns></returns><remarks>Any other type of WKT will throw an exception.</remarks></Docs>
@@ -102,8 +101,8 @@
       <MemberSignature Language="C#" Value="public static Cumberland.Polygon ParsePolygon (string wkt);" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Polygon</ReturnType></ReturnValue>
       <Parameters><Parameter Name="wkt" Type="System.String" /></Parameters>
       <Docs><param name="wkt">The 'POLYGON' wkt to parse</param><summary>Parses a 'POLYGON' wkt into a Polygon</summary><returns></returns><remarks>Any other type of WKT will throw an exception.</remarks></Docs>

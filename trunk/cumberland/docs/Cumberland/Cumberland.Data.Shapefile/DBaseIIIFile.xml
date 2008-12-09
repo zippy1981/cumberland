@@ -3,6 +3,7 @@
   <AssemblyInfo>
     <AssemblyName>Cumberland</AssemblyName>
     <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -20,24 +21,24 @@
       <MemberSignature Language="C#" Value="public DBaseIIIFile (string file);" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
       <Parameters><Parameter Name="file" Type="System.String" /></Parameters>
       <Docs><param name="file">The dbf file to load</param><summary>Loads the given dbf file</summary><remarks></remarks></Docs>
     </Member><Member MemberName="LastUpdated">
       <MemberSignature Language="C#" Value="public DateTime LastUpdated { get; }" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>System.DateTime</ReturnType></ReturnValue>
       <Docs><summary>The last update of this dbf file</summary><value></value><remarks>As provided in the file</remarks></Docs>
     </Member><Member MemberName="Records">
       <MemberSignature Language="C#" Value="public System.Data.DataTable Records { get; }" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>System.Data.DataTable</ReturnType></ReturnValue>
       <Docs><summary>The records in the dbf</summary><value></value><remarks>Column names, column data types, and field records are provided from the dbf.</remarks></Docs>
     </Member>

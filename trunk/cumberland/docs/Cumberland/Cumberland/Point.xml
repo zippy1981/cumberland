@@ -3,6 +3,7 @@
   <AssemblyInfo>
     <AssemblyName>Cumberland</AssemblyName>
     <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>Cumberland.Feature</BaseTypeName>
@@ -18,33 +19,34 @@
       <MemberSignature Language="C#" Value="public Point ();" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
       <Parameters />
       <Docs><summary></summary><remarks>Creates a point at (0,0)</remarks></Docs>
     </Member><Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public Point (double tx, double ty);" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
       <Parameters><Parameter Name="tx" Type="System.Double" /><Parameter Name="ty" Type="System.Double" /></Parameters>
       <Docs><param name="tx">the X coordinate</param><param name="ty">the Y coordinate</param><summary></summary><remarks></remarks></Docs>
     </Member><Member MemberName="Clone">
-      <MemberSignature Language="C#" Value="public Cumberland.Point Clone ();" />
+      <MemberSignature Language="C#" Value="public virtual Cumberland.Point Clone ();" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Point</ReturnType></ReturnValue>
       <Parameters />
       <Docs><summary>Creates a deep copy</summary><returns></returns><remarks></remarks></Docs>
-    </Member><Member MemberName="op_Equality">
+    </Member><Member MemberName="Equals"><MemberSignature Language="C#" Value="public virtual bool Equals (Cumberland.Point p);" /><MemberType>Method</MemberType><AssemblyInfo><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo><ReturnValue><ReturnType>System.Boolean</ReturnType></ReturnValue><Parameters><Parameter Name="p" Type="Cumberland.Point" /></Parameters>
+    <Docs><param name="p">The point</param><summary>Tests for equality with this instance and the given point</summary><returns>true if equal, false if not</returns><remarks></remarks><since version="0.2" /></Docs></Member><Member MemberName="op_Equality">
       <MemberSignature Language="C#" Value="public static bool op_Equality (Cumberland.Point p1, Cumberland.Point p2);" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>System.Boolean</ReturnType></ReturnValue>
       <Parameters><Parameter Name="p1" Type="Cumberland.Point" /><Parameter Name="p2" Type="Cumberland.Point" /></Parameters>
       <Docs><param name="p1">Point #1</param><param name="p2">Point #2</param><summary>Compare if these two points are the same</summary><returns></returns><remarks></remarks></Docs>
@@ -52,8 +54,8 @@
       <MemberSignature Language="C#" Value="public static bool op_Inequality (Cumberland.Point p1, Cumberland.Point p2);" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>System.Boolean</ReturnType></ReturnValue>
       <Parameters><Parameter Name="p1" Type="Cumberland.Point" /><Parameter Name="p2" Type="Cumberland.Point" /></Parameters>
       <Docs><param name="p1">Point #1.</param><param name="p2">Point #2</param><summary>Compares if these two points are different</summary><returns></returns><remarks></remarks></Docs>
@@ -61,16 +63,16 @@
       <MemberSignature Language="C#" Value="public double X { set; get; }" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>System.Double</ReturnType></ReturnValue>
       <Docs><summary>The X Coordinate</summary><value></value><remarks></remarks></Docs>
     </Member><Member MemberName="Y">
       <MemberSignature Language="C#" Value="public double Y { set; get; }" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyVersion>0.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>System.Double</ReturnType></ReturnValue>
       <Docs><summary>The Y Coordinate</summary><value></value><remarks></remarks></Docs>
     </Member>
