@@ -8,7 +8,7 @@
 		<BaseTypeName>System.Enum</BaseTypeName>
 	</Base>
 	<Docs>
-		<summary>Defines drawing styles of a polygon's interion fill</summary>
+		<summary>Defines drawing styles of a polygon's interior fill</summary>
 		<remarks></remarks>
 	</Docs>
 	<Members>
