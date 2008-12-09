@@ -26,6 +26,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Text;
 
 using Cumberland;
 using Cumberland.Data;
@@ -64,6 +65,8 @@ namespace Cumberland.Drawing
 		#region vars
 		
 		List<LabelRequest> labels = new List<LabelRequest>();
+		SmoothingMode smoothing = SmoothingMode.HighQuality;
+		TextRenderingHint textRenderingHint = TextRenderingHint.AntiAlias;
 
 		#endregion
 		
@@ -73,7 +76,7 @@ namespace Cumberland.Drawing
 		
 #region Properties
 		
-		SmoothingMode smoothing = SmoothingMode.HighQuality;
+		
 		
 		public SmoothingMode Smoothing {
 			get {
@@ -81,6 +84,15 @@ namespace Cumberland.Drawing
 			}
 			set {
 				smoothing = value;
+			}
+		}
+
+		public TextRenderingHint TextRenderingHint {
+			get {
+				return textRenderingHint;
+			}
+			set {
+				textRenderingHint = value;
 			}
 		}
 		
@@ -110,6 +122,7 @@ namespace Cumberland.Drawing
 				
 				// set antialiasing mode
 				g.SmoothingMode = Smoothing;
+				g.TextRenderingHint = textRenderingHint;
 				
 				// we need to convert map points to pixel points 
 				// so let's do as much of this at once:
