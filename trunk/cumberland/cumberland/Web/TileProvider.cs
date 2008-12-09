@@ -120,6 +120,11 @@ namespace Cumberland.Web
 		#endregion
 		
 		#region ctors
+
+		[Obsolete("A map is no longer accepted in the constructor", true)]
+		public TileProvider(Map map) : this(TileConsumer.GoogleMaps)
+		{
+		}
 		
 		public TileProvider(TileConsumer consumer) : this(consumer, 
 		                                                  (consumer == TileConsumer.TileMapService ? Rectangle.GeographicWorldExtents : null))
@@ -165,6 +170,13 @@ namespace Cumberland.Web
 		#endregion
 
 		#region public methods
+
+		[Obsolete("Drawing a tile now requires a map", true)]
+		public Bitmap DrawTile(int x, int y, int zoomLevel)
+		{
+			throw new InvalidOperationException("drawing a tile now requires a map");
+		}
+
 		
 		public double CalculateMapUnitsPerPixel(int zoomLevel)
 		{
