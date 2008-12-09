@@ -105,7 +105,24 @@ A database data element looks like this:
 </Data>
 }}}
 
-_Note: there are other optional parameters for database feature sources that can be used for doing subqueries.  There is an example [http://code.google.com/p/cumberland/source/browse/trunk/cumberland/Cumberland.Tests/maps/postgis.xml here]._
+=== Subqueries on database feature sources ===
+
+There are other optional parameters for database feature sources that can be used for doing subqueries.  An Example:
+
+{{{
+<Data sourceType="Cumberland.Data.IDatabaseFeatureSource" sourceInstance="Cumberland.Data.PostGIS.PostGISFeatureSource">
+         <ConnectionString>Server=localhost;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;</ConnectionString>
+         <TableName>(select * from fdot_majroads where usroute = 'I    10') as interstates </TableName>
+         <ForcedSrid>3086</ForcedSrid>
+         <ForcedFeatureType>Polyline</ForcedFeatureType>
+         <ForcedGeometryColumn>the_geom</ForcedGeometryColumn>
+         <ForcedSpatialType>geography</ForcedSpatialType>
+</Data>
+}}}
+
+The Forced properties all tell cumberland what kind of data it is working with.
+
+=== Inline features (a.k.a. acetate layers) ===
 
 Additionally, you can use the SimpleFeatureSource class to create an inline feature source ([http://code.google.com/p/cumberland/source/browse/trunk/cumberland/Cumberland.Tests/maps/simplefeatures.xml example here]).
 
