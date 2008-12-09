@@ -30,6 +30,7 @@
     
   
     
+    
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public ProjFourWrapper (int epsg);" />
       <MemberType>Constructor</MemberType>
@@ -101,8 +102,7 @@
       <Docs><summary>Gets whether the current coordinate system is geographic</summary><value>true if geographic, false if not</value><remarks>Geographic means the data is represented on a sphere, ellipse, or a datum that
       models the three dimensional planet.  A false value would mean that the coordinate system is projected.</remarks></Docs>
     </Member><Member MemberName="PrepareEpsgCode"><MemberSignature Language="C#" Value="public static string PrepareEpsgCode (int epsg);" /><MemberType>Method</MemberType><AssemblyInfo><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo><ReturnValue><ReturnType>System.String</ReturnType></ReturnValue><Parameters><Parameter Name="epsg" Type="System.Int32" /></Parameters>
-    <Docs><param name="epsg">The epsg code</param><summary>Converts an epsg code into a Proj.4 readable string</summary><returns>A Proj.4 string</returns><remarks>Helper method</remarks><since version="0.2" /></Docs></Member>
-    <Member MemberName="Project">
+    <Docs><param name="epsg">The epsg code</param><summary>Converts an epsg code into a Proj.4 readable string</summary><returns>A Proj.4 string</returns><remarks>Helper method</remarks><since version="0.2" /></Docs></Member><Member MemberName="PrepareEPSGCode"><MemberSignature Language="C#" Value="public static string PrepareEPSGCode (int epsg);" /><MemberType>Method</MemberType><AssemblyInfo><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo><Attributes><Attribute><AttributeName>System.Obsolete("Please use PrepareEpsgCode instead")</AttributeName></Attribute></Attributes><ReturnValue><ReturnType>System.String</ReturnType></ReturnValue><Parameters><Parameter Name="epsg" Type="System.Int32" /></Parameters><Docs><param name="epsg"></param><summary>Obsolete</summary><returns></returns><remarks></remarks></Docs></Member><Member MemberName="Project">
       <MemberSignature Language="C#" Value="public Cumberland.Point Project (Cumberland.Point point);" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>

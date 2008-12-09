@@ -15,6 +15,7 @@
     </remarks>
   </Docs>
   <Members>
+    
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public Rectangle ();" />
       <MemberType>Constructor</MemberType>
@@ -31,14 +32,7 @@
       <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
       <Parameters><Parameter Name="minPoint" Type="Cumberland.Point" /><Parameter Name="maxPoint" Type="Cumberland.Point" /></Parameters>
       <Docs><param name="minPoint">The Point which represents the minimum boundary of the Rectangle</param><param name="maxPoint">The Point which represents the maximum boundary of the Rectangle</param><summary></summary><remarks></remarks></Docs>
-    </Member><Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Rectangle (double minx, double miny, double maxx, double maxy);" />
-      <MemberType>Constructor</MemberType>
-      <AssemblyInfo>
-        
-      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
-      <Docs><param name="minx">The minimum X coordinate</param><param name="miny">The minimum Y coordinate</param><param name="maxx">The maximum X coordinate</param><param name="maxy">The maximum Y coordinate</param><summary></summary><remarks></remarks></Docs>
-    </Member><Member MemberName="Area">
+    </Member><Member MemberName=".ctor"><MemberSignature Language="C#" Value="public Rectangle (double minx, double miny, double maxx, double maxy);" /><MemberType>Constructor</MemberType><AssemblyInfo><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo><Parameters><Parameter Name="minx" Type="System.Double" /><Parameter Name="miny" Type="System.Double" /><Parameter Name="maxx" Type="System.Double" /><Parameter Name="maxy" Type="System.Double" /></Parameters><Docs><param name="minx">To be added.</param><param name="miny">To be added.</param><param name="maxx">To be added.</param><param name="maxy">To be added.</param><summary>To be added.</summary><remarks>To be added.</remarks></Docs></Member><Member MemberName="Area">
       <MemberSignature Language="C#" Value="public double Area { get; }" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -75,8 +69,7 @@
       <Parameters />
       <Docs><summary>Creates a deep copy</summary><returns></returns><remarks></remarks></Docs>
     </Member><Member MemberName="Equals"><MemberSignature Language="C#" Value="public virtual bool Equals (Cumberland.Rectangle r);" /><MemberType>Method</MemberType><AssemblyInfo><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo><ReturnValue><ReturnType>System.Boolean</ReturnType></ReturnValue><Parameters><Parameter Name="r" Type="Cumberland.Rectangle" /></Parameters>
-    <Docs><param name="r">The rectangle</param><summary>Tests for equality with this instance and the given rectangle</summary><returns>true if equal, false if not</returns><remarks></remarks><since version="0.2" /></Docs></Member>
-    <Member MemberName="GeographicWorldExtents"><MemberSignature Language="C#" Value="public static Cumberland.Rectangle GeographicWorldExtents { get; }" /><MemberType>Property</MemberType><AssemblyInfo><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo><ReturnValue><ReturnType>Cumberland.Rectangle</ReturnType></ReturnValue>
+    <Docs><param name="r">The rectangle</param><summary>Tests for equality with this instance and the given rectangle</summary><returns>true if equal, false if not</returns><remarks></remarks><since version="0.2" /></Docs></Member><Member MemberName="GeographicWorldExtents"><MemberSignature Language="C#" Value="public static Cumberland.Rectangle GeographicWorldExtents { get; }" /><MemberType>Property</MemberType><AssemblyInfo><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo><ReturnValue><ReturnType>Cumberland.Rectangle</ReturnType></ReturnValue>
     <Docs><summary>Gets the world geographics extents</summary><value>-180,90,180,90</value><remarks>Convenience property</remarks><since version="0.2" /></Docs></Member><Member MemberName="Height">
       <MemberSignature Language="C#" Value="public double Height { set; get; }" />
       <MemberType>Property</MemberType>

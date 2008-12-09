@@ -1,37 +1,91 @@
 <Type Name="MapConfigurationException" FullName="Cumberland.Drawing.MapConfigurationException">
-  <TypeSignature Language="C#" Value="public class MapConfigurationException : Exception" />
-  <AssemblyInfo>
-    <AssemblyName>Cumberland</AssemblyName>
-    <AssemblyVersion>0.1.0.0</AssemblyVersion>
-    <AssemblyVersion>0.2.0.0</AssemblyVersion>
-  </AssemblyInfo>
-  <Base>
-    <BaseTypeName>System.Exception</BaseTypeName>
-  </Base>
-  <Interfaces />
-  <Docs>
-    <summary>An exception that specifies an invalid configuration in a <see cref="T:Cumberland.Map" /></summary>
-    <remarks>
-    </remarks>
-  </Docs>
-  <Members>
-    
-    <Member MemberName=".ctor"><MemberSignature Language="C#" Value="public MapConfigurationException ();" /><MemberType>Constructor</MemberType><AssemblyInfo><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo><Parameters /><Docs><summary>To be added.</summary><remarks>To be added.</remarks><since version="0.2" /></Docs></Member><Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public MapConfigurationException (string message);" />
-      <MemberType>Constructor</MemberType>
-      <AssemblyInfo>
-        
-      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
-      <Parameters><Parameter Name="message" Type="System.String" /></Parameters>
-      <Docs><param name="message"></param><summary></summary><remarks></remarks></Docs>
-    </Member><Member MemberName=".ctor"><MemberSignature Language="C#" Value="protected MapConfigurationException (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);" /><MemberType>Constructor</MemberType><AssemblyInfo><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo><Parameters><Parameter Name="info" Type="System.Runtime.Serialization.SerializationInfo" /><Parameter Name="context" Type="System.Runtime.Serialization.StreamingContext" /></Parameters><Docs><param name="info">To be added.</param><param name="context">To be added.</param><summary>To be added.</summary><remarks>To be added.</remarks><since version="0.2" /></Docs></Member><Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public MapConfigurationException (string message, Exception inner);" />
-      <MemberType>Constructor</MemberType>
-      <AssemblyInfo>
-        
-      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
-      <Parameters><Parameter Name="message" Type="System.String" /><Parameter Name="inner" Type="System.Exception" /></Parameters>
-      <Docs><param name="message"></param><param name="inner"></param><summary></summary><remarks></remarks></Docs>
-    </Member>
-  </Members>
+	<TypeSignature Language="C#" Value="public class MapConfigurationException : Exception" />
+	<AssemblyInfo>
+		<AssemblyName>Cumberland</AssemblyName>
+		<AssemblyVersion>0.1.0.0</AssemblyVersion>
+		<AssemblyVersion>0.2.0.0</AssemblyVersion>
+	</AssemblyInfo>
+	<Base>
+		<BaseTypeName>System.Exception</BaseTypeName>
+	</Base>
+	<Interfaces />
+	<Docs>
+		<summary>An exception that specifies an invalid configuration in a <see cref="T:Cumberland.Map" /></summary>
+		<remarks>
+		</remarks>
+	</Docs>
+	<Members>
+		<Member MemberName=".ctor">
+			<MemberSignature Language="C#" Value="public MapConfigurationException ();" />
+			<MemberType>Constructor</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<Parameters />
+			<Docs>
+				<summary></summary>
+				<remarks></remarks>
+				<since version="0.2" />
+			</Docs>
+		</Member>
+		<Member MemberName=".ctor">
+			<MemberSignature Language="C#" Value="public MapConfigurationException (string message);" />
+			<MemberType>Constructor</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.1.0.0</AssemblyVersion>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<Parameters>
+				<Parameter Name="message" Type="System.String" />
+			</Parameters>
+			<Docs>
+				<param name="message">
+				</param>
+				<summary>
+				</summary>
+				<remarks>
+				</remarks>
+			</Docs>
+		</Member>
+		<Member MemberName=".ctor">
+			<MemberSignature Language="C#" Value="protected MapConfigurationException (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);" />
+			<MemberType>Constructor</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<Parameters>
+				<Parameter Name="info" Type="System.Runtime.Serialization.SerializationInfo" />
+				<Parameter Name="context" Type="System.Runtime.Serialization.StreamingContext" />
+			</Parameters>
+			<Docs>
+				<param name="info"></param>
+				<param name="context"></param>
+				<summary></summary>
+				<remarks></remarks>
+				<since version="0.2" />
+			</Docs>
+		</Member>
+		<Member MemberName=".ctor">
+			<MemberSignature Language="C#" Value="public MapConfigurationException (string message, Exception inner);" />
+			<MemberType>Constructor</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.1.0.0</AssemblyVersion>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<Parameters>
+				<Parameter Name="message" Type="System.String" />
+				<Parameter Name="inner" Type="System.Exception" />
+			</Parameters>
+			<Docs>
+				<param name="message">
+				</param>
+				<param name="inner">
+				</param>
+				<summary>
+				</summary>
+				<remarks>
+				</remarks>
+			</Docs>
+		</Member>
+	</Members>
 </Type>

@@ -21,7 +21,9 @@
     
     
     
-  <Member MemberName=".ctor">
+  
+    
+    <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public Layer ();" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
@@ -46,10 +48,8 @@
       <ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
       <Docs><summary>An identification or name for the layer</summary><value></value><remarks></remarks></Docs>
     </Member><Member MemberName="LabelField"><MemberSignature Language="C#" Value="public string LabelField { set; get; }" /><MemberType>Property</MemberType><AssemblyInfo><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo><ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
-    <Docs><summary>Gets/sets the field to use in the underlying feature source for labelling</summary><value></value><remarks></remarks><since version="0.2" /></Docs></Member>
-    <Member MemberName="MaxScale"><MemberSignature Language="C#" Value="public double MaxScale { set; get; }" /><MemberType>Property</MemberType><AssemblyInfo><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo><ReturnValue><ReturnType>System.Double</ReturnType></ReturnValue>
-    <Docs><summary>Gets/sets the maximum scale to draw this layer</summary><value>The maximum scale (map units to pixels)</value><remarks>Use this to prevent layers from being drawn when zoomed out</remarks><since version="0.2" /></Docs></Member>
-    <Member MemberName="MinScale"><MemberSignature Language="C#" Value="public double MinScale { set; get; }" /><MemberType>Property</MemberType><AssemblyInfo><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo><ReturnValue><ReturnType>System.Double</ReturnType></ReturnValue>
+    <Docs><summary>Gets/sets the field to use in the underlying feature source for labelling</summary><value></value><remarks></remarks><since version="0.2" /></Docs></Member><Member MemberName="MaxScale"><MemberSignature Language="C#" Value="public double MaxScale { set; get; }" /><MemberType>Property</MemberType><AssemblyInfo><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo><ReturnValue><ReturnType>System.Double</ReturnType></ReturnValue>
+    <Docs><summary>Gets/sets the maximum scale to draw this layer</summary><value>The maximum scale (map units to pixels)</value><remarks>Use this to prevent layers from being drawn when zoomed out</remarks><since version="0.2" /></Docs></Member><Member MemberName="MinScale"><MemberSignature Language="C#" Value="public double MinScale { set; get; }" /><MemberType>Property</MemberType><AssemblyInfo><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo><ReturnValue><ReturnType>System.Double</ReturnType></ReturnValue>
     <Docs><summary>Gets/sets the minimum scale to draw this layer</summary><value>The minimum scale (map units to pixels)</value><remarks>Use this to prevent layers from being drawn when zoomed in</remarks><since version="0.2" /></Docs></Member><Member MemberName="Projection">
       <MemberSignature Language="C#" Value="public string Projection { set; get; }" />
       <MemberType>Property</MemberType>
