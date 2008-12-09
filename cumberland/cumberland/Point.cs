@@ -96,11 +96,12 @@ namespace Cumberland
 		}
 
 
-		public override bool Equals(object ob)
+		public override bool Equals(object obj)
 		{
-			Point p = ob as Point;
+			Point p = obj as Point;
 			
 			return this == p;
+
 		}
 
 		public override string ToString ()
@@ -124,9 +125,14 @@ namespace Cumberland
 		/// <returns>
 		/// A <see cref="Point"/>
 		/// </returns>
-		public Point Clone()
+		public virtual Point Clone()
 		{
 			return new Point(x, y);
+		}
+
+		public virtual bool Equals(Point p)
+		{
+			return this == p;
 		}
 		
 #endregion

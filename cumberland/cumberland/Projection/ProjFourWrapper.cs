@@ -30,7 +30,13 @@ namespace Cumberland.Projection
 {
     public class ProjFourWrapper : IDisposable, IProjector
     {
+		#region constants
+		
 		const double DegreesToRadians = Math.PI / 180;
+
+		#endregion
+
+		#region public static properties
 		
 		public static string SphericalMercatorProjection  
 		{
@@ -47,8 +53,16 @@ namespace Cumberland.Projection
 				return  "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs";
 			}
 		}
+
+		#endregion
+
+		#region vars
 		
         IntPtr projPJ;
+
+		#endregion
+
+		#region structs
 		
 		[StructLayout(LayoutKind.Sequential)]
 	    struct UV
@@ -62,13 +76,15 @@ namespace Cumberland.Projection
 	            this.V = v;
 	        }
 		}
+
+		#endregion
 		
-#region p/invokes
+		#region p/invokes
 		
 //        [DllImport("proj.dll")]
 //        static extern IntPtr pj_init(int argc, string[] args);
 
-		[DllImport("proj.dll")]
+		[DllImport("proj.dll", CharSet = CharSet.Auto)]
 		static extern IntPtr pj_init_plus(string args);
 		
         [DllImport("proj.dll")]
@@ -99,9 +115,9 @@ namespace Cumberland.Projection
         static extern int pj_is_geocent(IntPtr projPJ);
 		
 		
-#endregion
+		#endregion
 		
-#region properties
+		#region properties
 		
 		public bool IsLatLong
 		{
@@ -118,9 +134,9 @@ namespace Cumberland.Projection
 			get { return Marshal.PtrToStringAnsi(pj_get_release()); }
 		}
 		
-#endregion
+		#endregion
 		
-#region contructors
+		#region constructors
 		
 		private ProjFourWrapper()
 		{
@@ -147,9 +163,9 @@ namespace Cumberland.Projection
 		}
 		
 		
-#endregion
+		#endregion
 
-#region public methods
+		#region public methods
 		
         public Point Deproject(Point point)
         {
@@ -223,9 +239,9 @@ namespace Cumberland.Projection
 			return Marshal.PtrToStringAnsi(pj_strerrno(Marshal.ReadInt32(pj_get_errno_ref())));
 		}
 		
-#endregion
+		#endregion
 		
-#region public static methods
+		#region public static methods
 		
 		public static string PrepareEpsgCode(int epsg)
 		{
@@ -255,9 +271,9 @@ namespace Cumberland.Projection
 			return int.TryParse(code, out epsg);
 		}
 		
-#endregion
+		#endregion
 		
-#region dispose pattern
+		#region dispose pattern
 		
         public void Dispose()
         {
@@ -279,6 +295,6 @@ namespace Cumberland.Projection
 			Dispose(false);
 		}
 		
-#endregion
+		#endregion
     }
 }

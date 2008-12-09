@@ -24,8 +24,11 @@
 
 using System;
 
+using System.Runtime.Serialization;
+
 namespace Cumberland.Drawing
 {
+	[Serializable]
 	public class MapConfigurationException : Exception
 	{
 		public MapConfigurationException(string message) : base(message)
@@ -35,5 +38,11 @@ namespace Cumberland.Drawing
 		public MapConfigurationException(string message, Exception inner) : base(message, inner)
 		{
 		}
+
+		public MapConfigurationException() {}
+
+		protected MapConfigurationException(SerializationInfo info, StreamingContext context) :
+			base(info, context)
+		{}
 	}
 }

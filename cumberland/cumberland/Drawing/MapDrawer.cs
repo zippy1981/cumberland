@@ -36,7 +36,9 @@ namespace Cumberland.Drawing
 {
 	public class MapDrawer : IMapDrawer
 	{
-		class LabelRequest
+		#region inner classes
+		
+		sealed class LabelRequest
 		{
 			public Style Style;
 			public string Label;
@@ -57,7 +59,13 @@ namespace Cumberland.Drawing
 			}
 		}
 
+		#endregion
+
+		#region vars
+		
 		List<LabelRequest> labels = new List<LabelRequest>();
+
+		#endregion
 		
 		delegate void DrawPoint(Style s, Graphics g, System.Drawing.Point p);
 		
@@ -473,17 +481,17 @@ namespace Cumberland.Drawing
 
 		#region get style methods
 		
-		Style GetBasicStyleForFeature(Layer l, string fieldValue)
+		static Style GetBasicStyleForFeature(Layer l, string fieldValue)
 		{
 			return l.Styles[0];
 		}
 		
-		Style GetUniqueStyleForFeature(Layer l, string fieldValue)
+		static Style GetUniqueStyleForFeature(Layer l, string fieldValue)
 		{
 			return l.GetUniqueStyleForFeature(fieldValue);
 		}
 		
-		Style GetRangeStyleForFeature(Layer l, string fieldValue)
+		static Style GetRangeStyleForFeature(Layer l, string fieldValue)
 		{
 			return l.GetRangeStyleForFeature(fieldValue);
 		}
@@ -492,7 +500,7 @@ namespace Cumberland.Drawing
 
 		#region Draw Point methods
 		
-		void DrawSquarePoint(Style style, Graphics g, System.Drawing.Point pp)
+		static void DrawSquarePoint(Style style, Graphics g, System.Drawing.Point pp)
 		{
 			System.Drawing.Rectangle r = new System.Drawing.Rectangle(
 			                pp.X - (style.PointSize/2),
@@ -511,7 +519,7 @@ namespace Cumberland.Drawing
 			}
 		}
 		
-		void DrawCirclePoint(Style style, Graphics g, System.Drawing.Point pp)
+		static void DrawCirclePoint(Style style, Graphics g, System.Drawing.Point pp)
 		{
 			System.Drawing.Rectangle r = new System.Drawing.Rectangle(pp.X - (style.PointSize/2),
 			                pp.Y - (style.PointSize/2),
@@ -529,7 +537,7 @@ namespace Cumberland.Drawing
 			}
 		}
 		
-		void DrawImageOnPoint(Style style, Graphics g, System.Drawing.Point pp)
+		static void DrawImageOnPoint(Style style, Graphics g, System.Drawing.Point pp)
 		{
 			Bitmap b = new Bitmap(style.PointSymbolImagePath);
 			
@@ -540,13 +548,13 @@ namespace Cumberland.Drawing
 
 		#endregion
 		
-		System.Drawing.Point ConvertMapToPixel(Rectangle r, double scale, Point p)
+		static System.Drawing.Point ConvertMapToPixel(Rectangle r, double scale, Point p)
 		{
 			return new System.Drawing.Point(Convert.ToInt32((p.X - r.Min.X) / scale),
 			                                Convert.ToInt32((r.Max.Y - p.Y) / scale)); // image origin is top left	
 		}
 		
-		Pen ConvertLayerToPen(Style style)
+		static Pen ConvertLayerToPen(Style style)
 		{
 			Pen p = new Pen(style.LineColor, style.LineWidth);
 			
@@ -562,7 +570,7 @@ namespace Cumberland.Drawing
 			return p;
 		}
 		
-		void DrawLabel(Graphics g, Style s, System.Drawing.Point p, string label, float forcedLabelAngle)
+		static void DrawLabel(Graphics g, Style s, System.Drawing.Point p, string label, float forcedLabelAngle)
 		{		
 			FontFamily ff = FontFamily.GenericSansSerif;
 			if (s.LabelFont == LabelFont.None)
@@ -661,12 +669,12 @@ namespace Cumberland.Drawing
 			g.ResetTransform();
 		}
 
-		double CalculateSegmentLength(Point p1, Point p2)
+		static double CalculateSegmentLength(Point p1, Point p2)
 		{
 			return Math.Sqrt(Math.Pow(p2.X-p1.X, 2) + Math.Pow(p2.Y-p1.Y, 2));
 		}
 
-		float CalculateSegmentAngle(Point p1, Point p2)
+		static float CalculateSegmentAngle(Point p1, Point p2)
 		{
 			// - calculate the slope of the line
 			// - calculate the arctangent of the slope to get angle

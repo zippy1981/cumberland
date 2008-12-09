@@ -145,7 +145,7 @@ namespace Cumberland.Data.Shapefile
 #region Helper methods		
 		
 	
-        uint FlipEndian(uint iin)
+        static uint FlipEndian(uint iin)
         {
             byte[] temp = BitConverter.GetBytes(iin);
             Array.Reverse(temp);
@@ -252,7 +252,7 @@ namespace Cumberland.Data.Shapefile
 			}
 		}
 		
-		Polygon GetPolygon(BinaryReader stream, uint dlen)
+		static Polygon GetPolygon(BinaryReader stream, uint dlen)
 		{
 			//Polygons stored in a shapefile must be clean. A clean polygon is one that
 			// 1.  Has no self-intersections. This means that a segment belonging to one ring may
@@ -310,7 +310,7 @@ namespace Cumberland.Data.Shapefile
 			return po;
 		}
 		
-		PolyLine GetPolyLine(BinaryReader stream, uint dlen)
+		static PolyLine GetPolyLine(BinaryReader stream, uint dlen)
 		{
 			stream.ReadDouble(); // double xmin = 
 			stream.ReadDouble(); // double ymin = 

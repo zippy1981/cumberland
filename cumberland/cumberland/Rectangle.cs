@@ -193,9 +193,9 @@ namespace Cumberland
 		}
 
 
-		public override bool Equals(object ob)
+		public override bool Equals(object obj)
 		{
-			Rectangle r = ob as Rectangle;
+			Rectangle r = obj as Rectangle;
 			
 			return this == r;
 		}
@@ -215,7 +215,7 @@ namespace Cumberland
 		/// <returns>
 		/// A <see cref="Rectangle"/>
 		/// </returns>
-		public Rectangle Clone()
+		public virtual Rectangle Clone()
 		{
 			return new Rectangle(min.X, min.Y, max.X, max.Y);
 		}
@@ -228,7 +228,7 @@ namespace Cumberland
 			                     a.Max.Y > b.Max.Y ? a.Max.Y : b.Max.Y);
 		}
 		
-		public bool Overlaps(Rectangle r)
+		public virtual bool Overlaps(Rectangle r)
 		{
 			bool xoverlaps = false;
 			
@@ -273,6 +273,11 @@ namespace Cumberland
 			}
 			
 			return yoverlaps;
+		}
+
+		public virtual bool Equals(Rectangle r)
+		{
+			return this == r;
 		}
 		
 #endregion

@@ -184,7 +184,7 @@ namespace Cumberland.Data
 					!string.IsNullOrEmpty(feature.ThemeFieldValue) ?
 					feature.ThemeFieldValue : null;
 
-			if (feature is Point)
+			if (layer.Data.SourceFeatureType == FeatureType.Point)
 			{
 				Point pt = feature as Point;
 
@@ -200,7 +200,7 @@ namespace Cumberland.Data
 				                                 new XElement("coordinates",
 				                                              string.Format("{0},{1}", pt.X, pt.Y)))));
 			}
-			else if (feature is PolyLine)
+			else if (layer.Data.SourceFeatureType == FeatureType.Polyline)
 			{
 				PolyLine pl = feature as PolyLine;
 
@@ -216,7 +216,7 @@ namespace Cumberland.Data
 					                                              select string.Format("{0},{1} ", pt.X, pt.Y)))));
 				}
 			}
-			else if (feature is Polygon)
+			else if (layer.Data.SourceFeatureType == FeatureType.Polygon)
 			{
 				Polygon pg = feature as Polygon;
 
