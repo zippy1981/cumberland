@@ -117,7 +117,7 @@ You can also add an outline to your label:
 <LabelOutlineColor>255,255,0,0</LabelOutlineColor>
 }}}
 
-Finally, you have some control over the position of labels.  You have the ability to control where the location of the label in relation to the point of origin and how far away from the point it is:
+Finally, you have some control over the position of labels.  You have the ability to control where the location of the label in relation to the point of origin ([http://salmonsalvo.net/cumberland/docs/0.2/Cumberland/Cumberland/LabelPosition.html options]) and how far away from the point it is:
 
 {{{
 <LabelPosition>Top</LabelPosition>
