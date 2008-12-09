@@ -10,6 +10,8 @@ All styling is done in the Style element which is a property of the Layer elemen
 
 = Common Properties =
 
+These apply to all feature types:
+
 {{{
 <MaxScale>.013</MaxScale>
 <MinScale>.00001</MinScale>
@@ -48,7 +50,7 @@ The FillColor defines the interior color of the polygon.  The format is the same
 
 == New to 0.2 ==
 
-A FillStyle property has been add that will a polygon line to be drawn without a fill:
+A FillStyle property has been add that will allow a polygon line to be drawn without a fill:
 
 {{{
 <FillStyle>None</FillStyle>
