@@ -1,3 +1,12 @@
+2008-12-09  Scott Ellington  <scott.ellington@gmail.com>
+
+	* Cumberland.DrawMap/AssemblyInfo.cs:
+	* Cumberland.MapToKml/AssemblyInfo.cs:
+	* Cumberland.Data.PostGIS/AssemblyInfo.cs:
+	* Cumberland.Data.SqlServer/AssemblyInfo.cs:
+	* Cumberland.TilePyramidGenerator/AssemblyInfo.cs:
+	* Cumberland.Data.SqlServer.Loader/AssemblyInfo.cs: bump to 0.2
+
 2008-12-08  Scott Ellington  <scott.ellington@gmail.com>
 
 	* Cumberland.TilePyramidGenerator/Main.cs: add

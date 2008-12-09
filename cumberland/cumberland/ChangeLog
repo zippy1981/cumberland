@@ -1,5 +1,11 @@
 2008-12-09  Scott Ellington  <scott.ellington@gmail.com>
 
+	* AssemblyInfo.cs: bump to 0.2
+
+	* Layer.cs: internalize public methods nobody cares about
+
+2008-12-09  Scott Ellington  <scott.ellington@gmail.com>
+
 	* Point.cs:
 	* Rectangle.cs:
 	* Web/TileProvider.cs:

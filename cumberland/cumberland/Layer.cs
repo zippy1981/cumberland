@@ -149,9 +149,9 @@ namespace Cumberland
 		
 		#endregion
 
-		#region public methods
+		#region internal methods
 		
-		public Style GetRangeStyleForFeature(string fieldValue)
+		internal Style GetRangeStyleForFeature(string fieldValue)
 		{
 			double val;
 			if (!double.TryParse(fieldValue, out val))
@@ -171,7 +171,7 @@ namespace Cumberland
 			return null;
 		}
 
-		public Style GetUniqueStyleForFeature(string fieldValue)
+		internal Style GetUniqueStyleForFeature(string fieldValue)
 		{
 			foreach (Style s in Styles)
 			{
@@ -185,7 +185,7 @@ namespace Cumberland
 			return null;
 		}
 
-		public Style GetStyleForFeature(string fieldValue)
+		internal Style GetStyleForFeature(string fieldValue)
 		{
 			if (Styles.Count == 0) return null;
 			
