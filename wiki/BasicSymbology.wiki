@@ -117,9 +117,7 @@ You can also add an outline to your label:
 <LabelOutlineColor>255,255,0,0</LabelOutlineColor>
 }}}
 
-Finally, you have some control over the position of labels.  The point in polygons is the centroid. Polylines are a little trickier. Ideally, you’d want to the label to flow with the line, but for now it just looks for the longest segment and sets the angle to its slope and uses its midpoint as the point.
-
-From here, you have the ability to control where the location of the label in relation to the point of origin and how far away from the point it is:
+Finally, you have some control over the position of labels.  You have the ability to control where the location of the label in relation to the point of origin and how far away from the point it is:
 
 {{{
 <LabelPosition>Top</LabelPosition>
