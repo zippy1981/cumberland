@@ -37,6 +37,14 @@ This element supports several child elements:
 
 The Width/Height set the size of the image to draw in pixels.  The Projection defines the output projection of the map.  The extents define the portion of the map to draw.  Layers can hold zero to many 'Layer' elements.
 
+=== New to 0.2 ===
+
+The BackgroundColor property has been added, with which you can set the background color of the map:
+
+{{{
+<BackgroundColor>255,255,255,255</BackgroundColor>
+}}}
+
 == Layer Elements ==
 
 A layer encompasses a single data source along with symbology information which tells the map drawer how to render it.  It supports the following child elements:
@@ -57,6 +65,19 @@ A layer encompasses a single data source along with symbology information which 
 }}}
 
 The Id element is simply a holder you can put a name or unique id in for your own reference.  The Projection element holds the coordinate system of the underlying data.  The Theme and ThemeField are used for theming.  The 'Theme' specifies the type of theming to do, and the 'ThemeField' specifies the field in the underlying data source to do the theming on.
+
+=== New to 0.2 ===
+
+Several new elements have been added to Layer:
+
+{{{
+<LabelField>ROUTE</LabelField>
+<MaxScale>.013</MaxScale>
+<MinScale>.01</MinScale>
+<Visible>false</Visible>
+}}}
+
+LabelField is the field in the feature source to use for labels, MaxScale/MinScale can be used to control the maximum/minimum scale (in map unit per pixel) that this layer is visible at, and Visible can be used to turn off a layer.
 
 == The 'Data' Element ==
 
