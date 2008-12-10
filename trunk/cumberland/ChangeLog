@@ -1,5 +1,10 @@
 2008-12-09  Scott Ellington  <scott.ellington@gmail.com>
 
+	* Cumberland.Data.SqlServer.Loader/Cumberland.Data.SqlServer.Loader.csproj:
+	sync
+
+2008-12-09  Scott Ellington  <scott.ellington@gmail.com>
+
 	* Cumberland.Data.PostGIS/Cumberland.Data.PostGIS.csproj: sync release
 	name
 
