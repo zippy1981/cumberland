@@ -1,5 +1,10 @@
 2008-12-09  Scott Ellington  <scott.ellington@gmail.com>
 
+	* Cumberland.Data.PostGIS/Cumberland.Data.PostGIS.csproj: sync release
+	name
+
+2008-12-09  Scott Ellington  <scott.ellington@gmail.com>
+
 	* Cumberland.MapToKml/Cumberland.MapToKml.csproj: fix release output
 
 2008-12-09  Scott Ellington  <scott.ellington@gmail.com>
