@@ -81,7 +81,7 @@ Finally, we render our map, and flush it into the response output stream:
 			b.Save(Response.OutputStream, ImageFormat.Png);
 		}
 		
-		Response.Flush();
+		Response.End();
 }}}
 
 _Note: If we wanted to cache in a database, we'd store Bitmap b, along with the x,y and zoom level in a new record._
