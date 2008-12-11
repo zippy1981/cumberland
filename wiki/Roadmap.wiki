@@ -1,10 +1,16 @@
 #summary Future plans / goals
 
-  * Raster support
-  * New supported tile consumers:
-    * Yahoo (is this even possible?)
+= 0.3 =
+
+  * image symbol on PolyLine (for road markers, etc.)
   * Labelling:
     * Collision detection
     * wrap text onto polylines
     * force onto visible extents
     * remove duplicates
+
+= Later =
+
+  * Raster support
+  * New supported tile consumers:
+    * Yahoo (is this even possible?)
