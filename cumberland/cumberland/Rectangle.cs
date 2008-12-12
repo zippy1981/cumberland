@@ -22,6 +22,8 @@
 //
 //
 
+using System;
+
 namespace Cumberland
 {
 	public class Rectangle
@@ -278,6 +280,14 @@ namespace Cumberland
 		public virtual bool Equals(Rectangle r)
 		{
 			return this == r;
+		}
+
+		public static Rectangle Intersect(Rectangle a, Rectangle b)
+		{
+			return new Rectangle(Math.Max(a.Min.X, b.Min.X),
+			                     Math.Max(a.Min.Y, b.Min.Y),
+			                     Math.Min(a.Max.X, b.Max.X),
+			                     Math.Min(a.Max.Y, b.Max.Y));
 		}
 		
 #endregion

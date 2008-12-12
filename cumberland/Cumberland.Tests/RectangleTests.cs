@@ -239,5 +239,14 @@ namespace Cumberland.Tests
 			Assert.IsTrue(r1.Equals(r2));
 			Assert.IsTrue(r1.Equals((object)r2));
 		}
+
+		[Test]
+		public void TestIntersect()
+		{
+			Rectangle a = new Rectangle(0,0,5,5);
+			Rectangle b = new Rectangle(2,2,10,10);
+
+			Assert.AreEqual(new Rectangle(2,2,5,5), Rectangle.Intersect(a,b));
+		}
 	}
 }

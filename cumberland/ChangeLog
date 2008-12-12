@@ -1,3 +1,10 @@
+2008-12-11  Scott Ellington  <scott.ellington@gmail.com>
+
+	* Cumberland.TilePyramidGenerator/Cumberland.TilePyramidGenerator.csproj:
+	nothing
+
+	* docs/deploy/cumberland-deploy.doc: update docs
+
 2008-12-09  Scott Ellington  <scott.ellington@gmail.com>
 
 	* Cumberland.Data.SqlServer.Loader/Cumberland.Data.SqlServer.Loader.csproj:
