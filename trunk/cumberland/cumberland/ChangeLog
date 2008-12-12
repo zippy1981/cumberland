@@ -1,3 +1,10 @@
+2008-12-11  Scott Ellington  <scott.ellington@gmail.com>
+
+	* Web/TileProvider.cs: clip extents to world extents when calculating
+	tile rectangle,
+
+	* Rectangle.cs: add Rectangle.Intersect
+
 2008-12-09  Scott Ellington  <scott.ellington@gmail.com>
 
 	* Drawing/MapDrawer.cs: add TextRenderingHint 

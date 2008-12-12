@@ -198,35 +198,38 @@ namespace Cumberland.Web
 			
 			// get meters/pixel resolution for zoomlevel
 			double resolution = CalculateMapUnitsPerPixel(zoomLevel);
+
+			// restrict tile calculation to within world extents
+			Rectangle drawableExtents = Rectangle.Intersect(worldExtents, rectangle);
 			
 			// - first translate merc points to origin so they will all be positive
 			// - then convert to pixel coordinates 
 			//   (for google, Y pixel value must be reversed b/c google's origin is top-left, ours is bottom-right
 			// - divide by tile size to figure out which tile we're in
 
-			int minx = Convert.ToInt32(Math.Floor((rectangle.Min.X - worldExtents.Min.X) / (resolution * tileSize)));
+			int minx = Convert.ToInt32(Math.Floor((drawableExtents.Min.X - worldExtents.Min.X) / (resolution * tileSize)));
 			int miny, maxy;
 			
 			if (consumer == TileConsumer.GoogleMaps || consumer == TileConsumer.VirtualEarth)
 			{
 				miny = Convert.ToInt32(Math.Floor((tileSize*numTiles - 
-				                                       ((rectangle.Max.Y - worldExtents.Min.Y) / resolution)) / tileSize));
+				                                       ((drawableExtents.Max.Y - worldExtents.Min.Y) / resolution)) / tileSize));
 			}
 			else
 			{
-				miny = Convert.ToInt32(Math.Floor((rectangle.Min.Y - worldExtents.Min.Y) / (resolution * tileSize)));
+				miny = Convert.ToInt32(Math.Floor((drawableExtents.Min.Y - worldExtents.Min.Y) / (resolution * tileSize)));
 			}
 			
-			int maxx = Convert.ToInt32(Math.Floor((rectangle.Max.X - worldExtents.Min.X) / (resolution * tileSize)));
+			int maxx = Convert.ToInt32(Math.Floor((drawableExtents.Max.X - worldExtents.Min.X) / (resolution * tileSize)));
 			
 			if (consumer == TileConsumer.GoogleMaps || consumer == TileConsumer.VirtualEarth)
 			{
 				maxy = Convert.ToInt32(Math.Floor((tileSize*numTiles - 
-				                                       ((rectangle.Min.Y - worldExtents.Min.Y) / resolution)) / tileSize));
+				                                       ((drawableExtents.Min.Y - worldExtents.Min.Y) / resolution)) / tileSize));
 			}
 			else
 			{
-				maxy = Convert.ToInt32(Math.Floor((rectangle.Max.Y - worldExtents.Min.Y) / (resolution * tileSize)));
+				maxy = Convert.ToInt32(Math.Floor((drawableExtents.Max.Y - worldExtents.Min.Y) / (resolution * tileSize)));
 			}
 			
 			return new System.Drawing.Rectangle(minx, miny, (maxx-minx), (maxy-miny));
