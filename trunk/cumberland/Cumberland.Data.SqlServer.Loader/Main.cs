@@ -41,7 +41,7 @@ namespace Cumberland.Data.SqlServer.Loader
 	{
 		public static void Main(string[] args)
 		{
-#region handle parameters and configuration
+			#region handle parameters and configuration
 			
 			// application variables
 			string connectionString = null;
@@ -112,18 +112,18 @@ namespace Cumberland.Data.SqlServer.Loader
 				tableName = Path.GetFileNameWithoutExtension(path);
 			}
 			
-#endregion
+			#endregion
 			
-#region load shp and dbf
+			#region load shp and dbf
 			
 			Shapefile.Shapefile shp = new Shapefile.Shapefile(path);
 			DBaseIIIFile dbf = new DBaseIIIFile(Path.GetDirectoryName(path) + 
 			                                    Path.DirectorySeparatorChar + 
 			                                    Path.GetFileNameWithoutExtension(path) + 
 			                                    ".dbf");
-#endregion		
+			#endregion		
 
-#region create table
+			#region create table
 
 			using (SqlConnection connection = new SqlConnection(connectionString))
 			{
@@ -169,9 +169,9 @@ namespace Cumberland.Data.SqlServer.Loader
 					command.ExecuteNonQuery();
 				}
 
-#endregion
+				#endregion
 				
-#region insert rows
+				#region insert rows
 				
 				int idx = 0;
 				foreach (Feature f in shp.GetFeatures())
@@ -236,7 +236,16 @@ namespace Cumberland.Data.SqlServer.Loader
 					string wkt = string.Empty;
 					if (shp.SourceFeatureType == FeatureType.Polygon)
 					{
-						wkt = SimpleFeatureAccess.CreateFromPolygon(f as Polygon);
+						Polygon polygon = f as Polygon;
+
+						// Sql Server 2008 ring order is reverse of shapefiles
+						// http://blogs.msdn.com/edkatibah/archive/2008/08/19/working-with-invalid-data-and-the-sql-server-2008-geography-data-type-part-1b.aspx
+						foreach (Ring r in polygon.Rings)
+						{
+							r.Points.Reverse();
+						}
+						
+						wkt = SimpleFeatureAccess.CreateFromPolygon(polygon, PolygonHoleStrategy.InteriorToLeft);
 					}
 					else if (shp.SourceFeatureType == FeatureType.Point)
 					{
@@ -260,9 +269,9 @@ namespace Cumberland.Data.SqlServer.Loader
 					command.ExecuteNonQuery();
 				}
 				
-#endregion
+				#endregion
 				
-#region create spatial index
+				#region create spatial index
 				
 				if (createIndex)
 				{
@@ -286,7 +295,7 @@ namespace Cumberland.Data.SqlServer.Loader
 					command.ExecuteNonQuery();
 				}
 				
-#endregion
+				#endregion
 			}
 		}
 		

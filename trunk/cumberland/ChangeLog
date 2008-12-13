@@ -1,3 +1,7 @@
+2008-12-13  Scott Ellington  <scott.ellington@gmail.com>
+
+	* Cumberland.Data.SqlServer.Loader/Main.cs: fix bug #1
+
 2008-12-11  Scott Ellington  <scott.ellington@gmail.com>
 
 	* Cumberland.TilePyramidGenerator/Cumberland.TilePyramidGenerator.csproj:
