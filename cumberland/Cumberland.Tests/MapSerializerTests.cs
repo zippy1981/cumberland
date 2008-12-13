@@ -264,6 +264,9 @@ namespace Cumberland.Tests
 			s1.MaxScale = 1;
 			s1.LabelMinScale = 10;
 			s1.LabelMaxScale = 100;
+			s1.DrawPointSymbolOnPolyLine = true;
+			s1.CalculateLabelAngleForPolyLine = false;
+			
 			l1.Styles.Add(s1);
 			
 			m1.Layers.Add(l1);
@@ -700,6 +703,18 @@ namespace Cumberland.Tests
 		public void TestStyleLabelCustomFont()
 		{
 			Assert.AreEqual("font", m2.Layers[0].Styles[0].LabelCustomFont);
+		}
+
+		[Test]
+		public void TestStyleDrawPointImageOnPolyLine()
+		{
+			Assert.AreEqual(true, m2.Layers[0].Styles[0].DrawPointSymbolOnPolyLine);
+		}
+
+		[Test]
+		public void TestCalculateLabelAngleForPolyLine()
+		{
+			Assert.AreEqual(false, m2.Layers[0].Styles[0].CalculateLabelAngleForPolyLine);
 		}
 		
 #endregion

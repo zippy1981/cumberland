@@ -70,9 +70,9 @@ namespace Cumberland.Drawing
 
 		#endregion
 		
-		delegate void DrawPoint(Style s, Graphics g, System.Drawing.Point p);
+		delegate void PointDrawer(Style s, Graphics g, System.Drawing.Point p);
 		
-		delegate Style GetStyleForFeature(Layer l, string fieldValue);
+		delegate Style StyleForFeatureFinder(Layer l, string fieldValue);
 		
 #region Properties
 		
@@ -112,6 +112,8 @@ namespace Cumberland.Drawing
 
 			try
 			{
+				#region setup drawing
+				
 				Bitmap b = new Bitmap(width, height);
 				g = Graphics.FromImage(b);
 
@@ -157,7 +159,8 @@ namespace Cumberland.Drawing
 					dst = new ProjFourWrapper(map.Projection);
 				}
 				
-							
+				#endregion
+
 				int idx = -1;
 				foreach (Layer layer in map.Layers)
 				{
@@ -175,6 +178,8 @@ namespace Cumberland.Drawing
 									
 					try
 					{
+						#region set up layer drawing
+						
 						Rectangle layerEnvelope = envelope.Clone();
 						
 						// instantiate layer projection
@@ -220,7 +225,7 @@ namespace Cumberland.Drawing
 						}
 
 						// set up a delegate for getting style based on theme type
-						GetStyleForFeature getStyle = GetBasicStyleForFeature;
+						StyleForFeatureFinder getStyle = GetBasicStyleForFeature;
 						
 						if (layer.Theme == ThemeType.Unique)
 						{
@@ -230,6 +235,8 @@ namespace Cumberland.Drawing
 						{
 							getStyle = GetRangeStyleForFeature;
 						}
+
+						#endregion
 						
 						if (layer.Data.SourceFeatureType == FeatureType.Point)
 					    {	
@@ -248,30 +255,7 @@ namespace Cumberland.Drawing
 									continue;
 								}
 								
-								DrawPoint drawPoint = null;
-						
-								if (style.PointSymbol == PointSymbolType.Shape)
-								{
-									if (style.PointSymbolShape == PointSymbolShapeType.Square)
-									{
-										drawPoint = DrawSquarePoint;
-									}
-									else if (style.PointSymbolShape == PointSymbolShapeType.Circle)
-									{
-										drawPoint = DrawCirclePoint;
-									}
-									else continue;
-								}
-								else if (style.PointSymbol == PointSymbolType.Image)
-								{
-									if (string.IsNullOrEmpty(style.PointSymbolImagePath))
-									{
-										throw new MapConfigurationException("PointSymbolImagePath cannot be empty for PointSymbolType.Image");
-									}
-									    
-									drawPoint = DrawImageOnPoint;
-								}
-								else continue;	
+								PointDrawer drawPoint = GetPointDrawer(style);
 								
 								if (reproject)
 								{
@@ -339,10 +323,11 @@ namespace Cumberland.Drawing
 										
 										ppts[kk] = ConvertMapToPixel(envelope, scale, p);
 
-										if (style.ShowLabels && 
-										    kk > 0 && 
+										if ((style.DrawPointSymbolOnPolyLine ||
+										    (style.ShowLabels &&
 										    scale <= style.LabelMaxScale &&
-										    scale >= style.LabelMinScale)
+										    scale >= style.LabelMinScale)) && 
+										    kk > 0)
 										{
 											// find the segment with the longest length to pin a label to
 											
@@ -358,10 +343,11 @@ namespace Cumberland.Drawing
 								
 									g.DrawLines(ConvertLayerToPen(style), ppts);
 
-									if (style.ShowLabels && 
+									if (style.DrawPointSymbolOnPolyLine ||
+									    (style.ShowLabels &&
 									    pol.LabelFieldValue != null &&
 									    displayScale <= style.LabelMaxScale &&
-									    displayScale >= style.LabelMinScale)
+									    displayScale >= style.LabelMinScale))
 									{
 										Point start = r.Points[segmentIdx-1];
 										Point end = r.Points[segmentIdx];
@@ -370,15 +356,32 @@ namespace Cumberland.Drawing
 										Point polyCenter = new Point((start.X+end.X)/2, (start.Y+end.Y)/2);
 										//Point polyCenter = r.CalculateBounds().Center;
 
-										// calculate the slope of this line and use as our label angle
-										float angle = CalculateSegmentAngle(start, end);
-										
-										labels.Add(new LabelRequest(style,
-										                            pol.LabelFieldValue,
-										                            ConvertMapToPixel(envelope,
+										// transform (if neccessary) the convert to pixel point
+										System.Drawing.Point plpt = ConvertMapToPixel(envelope,
 										                                              scale,
-										                                              (reproject ? src.Transform(dst, polyCenter) : polyCenter)),
-										                            angle));
+										                                              (reproject ? src.Transform(dst, polyCenter) : polyCenter));
+										
+										if (style.DrawPointSymbolOnPolyLine)
+										{
+											GetPointDrawer(style)(style, g, plpt);
+										}
+										
+										if (style.ShowLabels)
+										{
+											
+											float angle = style.LabelAngle;
+											
+											if (style.CalculateLabelAngleForPolyLine)
+											{
+												// calculate the slope of this line and use as our label angle
+												CalculateSegmentAngle(start, end);
+											}
+											
+											labels.Add(new LabelRequest(style,
+											                            pol.LabelFieldValue,
+											                            plpt,
+											                            angle));
+										}
 									}
 								}
 							}
@@ -512,6 +515,10 @@ namespace Cumberland.Drawing
 		#endregion
 
 		#region Draw Point methods
+
+		static void DrawNoPoint(Style style, Graphics g, System.Drawing.Point pp)
+		{
+		}
 		
 		static void DrawSquarePoint(Style style, Graphics g, System.Drawing.Point pp)
 		{
@@ -560,6 +567,32 @@ namespace Cumberland.Drawing
 		}
 
 		#endregion
+
+		static PointDrawer GetPointDrawer(Style style)
+		{
+			if (style.PointSymbol == PointSymbolType.Shape)
+			{
+				if (style.PointSymbolShape == PointSymbolShapeType.Square)
+				{
+					return DrawSquarePoint;
+				}
+				else if (style.PointSymbolShape == PointSymbolShapeType.Circle)
+				{
+					return DrawCirclePoint;
+				}
+				else return DrawNoPoint;
+			}
+			else if (style.PointSymbol == PointSymbolType.Image)
+			{
+				if (string.IsNullOrEmpty(style.PointSymbolImagePath))
+				{
+					throw new MapConfigurationException("PointSymbolImagePath cannot be empty for PointSymbolType.Image");
+				}
+				    
+				return DrawImageOnPoint;
+			}
+			else return DrawNoPoint;	
+		}
 		
 		static System.Drawing.Point ConvertMapToPixel(Rectangle r, double scale, Point p)
 		{
@@ -659,8 +692,6 @@ namespace Cumberland.Drawing
 				sf.Alignment = StringAlignment.Center;
 				sf.LineAlignment = StringAlignment.Center;// draw the text to a path
 				
-				//g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
-				//g.InterpolationMode = InterpolationMode.HighQualityBicubic;
 				GraphicsPath gp = new GraphicsPath();
 				gp.AddString(label, 
 				             ff, 
@@ -671,8 +702,6 @@ namespace Cumberland.Drawing
 				
 				g.FillPath(new SolidBrush(s.LabelColor), gp);
 				g.DrawPath(new Pen(s.LabelOutlineColor, s.LabelOutlineWidth), gp);
-				
-				//g.DrawRectangle(new Pen(Color.Red), labelPt.X, labelPt.Y, size.Width, size.Height);
 			}
 			else
 			{
