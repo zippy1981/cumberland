@@ -49,7 +49,7 @@
 			</Data>
 		</Layer>
 		<Layer><!--Test a non-themed layer-->
-			<LabelField>ROUTE</LabelField>
+			<LabelField>RTE_NUM1</LabelField>
 			<MaxScale>.013</MaxScale>
 			<Styles>
 				<Style>
@@ -58,9 +58,14 @@
 					<LineColor>255,105,105,105</LineColor>
 					<LineStyle>Solid</LineStyle>
 					<ShowLabels>true</ShowLabels>
-					<LabelPosition>Top</LabelPosition>
+					<!--<LabelPosition>Top</LabelPosition>-->
 					<LabelFont>SansSerif</LabelFont>
+					<DrawPointSymbolOnPolyLine>true</DrawPointSymbolOnPolyLine>
 					<LabelMaxScale>.008</LabelMaxScale>
+					<PointSymbol>Shape</PointSymbol>
+					<PointSymbolShape>Circle</PointSymbolShape>
+					<PointSize>20</PointSize>
+					<CalculateLabelAngleForPolyLine>false</CalculateLabelAngleForPolyLine>
 				</Style>
 			</Styles>
 			<Projection>+init=epsg:4326</Projection>

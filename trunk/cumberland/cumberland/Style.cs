@@ -123,6 +123,10 @@ namespace Cumberland
 		double labelMinScale = double.MinValue;
 		double labelMaxScale = double.MaxValue;
 		
+		bool calculateLabelAngleForPolyLine = true;
+
+		bool drawPointSymbolOnPolyLine = false;
+		
 #endregion
 
 #region properties
@@ -376,6 +380,24 @@ namespace Cumberland
 			}
 			set {
 				labelCustomFont = value;
+			}
+		}
+
+		public bool DrawPointSymbolOnPolyLine {
+			get {
+				return drawPointSymbolOnPolyLine;
+			}
+			set {
+				drawPointSymbolOnPolyLine = value;
+			}
+		}
+
+		public bool CalculateLabelAngleForPolyLine {
+			get {
+				return calculateLabelAngleForPolyLine;
+			}
+			set {
+				calculateLabelAngleForPolyLine = value;
 			}
 		}
 		

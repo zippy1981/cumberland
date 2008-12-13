@@ -486,6 +486,14 @@ namespace Cumberland.Xml.Serialization
 				{
 					style.LabelCustomFont = child.InnerText;
 				}
+				else if (child.Name == "DrawPointSymbolOnPolyLine")
+				{
+					style.DrawPointSymbolOnPolyLine = bool.Parse(child.InnerText);
+				}
+				else if (child.Name == "CalculateLabelAngleForPolyLine")
+				{
+					style.CalculateLabelAngleForPolyLine = bool.Parse(child.InnerText);
+				}
 			}
 			
 			layer.Styles.Add(style);
@@ -615,6 +623,8 @@ namespace Cumberland.Xml.Serialization
 			                                                                     style.LabelMinScale.ToString());
 			if (style.LabelMaxScale < double.MaxValue) writer.WriteElementString("LabelMaxScale",
 			                                                                     style.LabelMaxScale.ToString());
+			if (style.DrawPointSymbolOnPolyLine) writer.WriteElementString("DrawPointSymbolOnPolyLine", style.DrawPointSymbolOnPolyLine.ToString());
+			if (!style.CalculateLabelAngleForPolyLine) writer.WriteElementString("CalculateLabelAngleForPolyLine", style.CalculateLabelAngleForPolyLine.ToString());
 			
 			writer.WriteEndElement(); // Style
 		}

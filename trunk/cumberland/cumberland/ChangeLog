@@ -1,5 +1,13 @@
 2008-12-13  Scott Ellington  <scott.ellington@gmail.com>
 
+	* Style.cs:
+	* Drawing/MapDrawer.cs:
+	* Xml/Serialization/MapSerializer.cs: add
+	Style.CalculateLabelAngleForPolyLine and
+	Style.DrawPointSymbolOnPolyLine
+
+2008-12-13  Scott Ellington  <scott.ellington@gmail.com>
+
 	* Cumberland.csproj:
 	* Data/WellKnownText/SimpleFeatureAccess.cs: fix bug #1
 
