@@ -1,3 +1,8 @@
+2008-12-13  Scott Ellington  <scott.ellington@gmail.com>
+
+	* Cumberland.csproj:
+	* Data/WellKnownText/SimpleFeatureAccess.cs: fix bug #1
+
 2008-12-11  Scott Ellington  <scott.ellington@gmail.com>
 
 	* Web/TileProvider.cs: clip extents to world extents when calculating

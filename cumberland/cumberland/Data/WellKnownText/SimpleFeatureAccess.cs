@@ -30,6 +30,13 @@ using Cumberland;
 
 namespace Cumberland.Data.WellKnownText
 {
+	public enum PolygonHoleStrategy
+	{
+		None,
+		InteriorToLeft,
+		InteriorToRight
+	}
+	
 	public static class SimpleFeatureAccess
 	{
 #region parse methods
@@ -239,6 +246,11 @@ namespace Cumberland.Data.WellKnownText
 		
 		public static string CreateFromPolygon (Polygon polygon)
 		{
+			return CreateFromPolygon(polygon, PolygonHoleStrategy.InteriorToRight);
+		}
+		
+		public static string CreateFromPolygon (Polygon polygon, PolygonHoleStrategy holeStrategy)
+		{
 			StringBuilder sb = new StringBuilder();
 			
 			int idx = -1;
@@ -248,7 +260,10 @@ namespace Cumberland.Data.WellKnownText
 			{
 				Ring ring = polygon.Rings[ii];	
 
-				if (ring.IsClockwise)
+				bool isClockwise = ring.IsClockwise;
+				if (holeStrategy == PolygonHoleStrategy.None || 
+				    (holeStrategy == PolygonHoleStrategy.InteriorToRight && isClockwise) ||
+				    (holeStrategy == PolygonHoleStrategy.InteriorToLeft && !isClockwise))
 				{
 					// this is an exterior ring
 					// we need to create a new polygon for it
