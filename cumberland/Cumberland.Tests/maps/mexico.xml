@@ -48,6 +48,18 @@
 				<FilePath>../shape_eg_data/mexico/states.shp</FilePath>
 			</Data>
 		</Layer>
+		<Layer>
+			<Visible>false</Visible>
+			<Styles>
+				<Style>
+				</Style>
+			</Styles>
+			<Projection>+init=epsg:4326</Projection>
+			<Id>roads rt</Id>
+			<Data sourceType="Cumberland.Data.IFileFeatureSource" sourceInstance="Cumberland.Data.Shapefile.Shapefile">
+				<FilePath>../shape_eg_data/mexico/roads_rt.shp</FilePath>
+			</Data>
+		</Layer>			
 		<Layer><!--Test a non-themed layer-->
 			<LabelField>RTE_NUM1</LabelField>
 			<MaxScale>.013</MaxScale>
@@ -80,6 +92,11 @@
 			<LabelField>NAME</LabelField>
 			<Styles>
 				<Style>
+					<ShowLabels>false</ShowLabels>
+					<LabelColor>255,105,105,255</LabelColor>
+					<LabelPosition>Top</LabelPosition>
+					<LabelDecoration>Outline</LabelDecoration>
+					<LabelFontEmSize>16</LabelFontEmSize>
 					<Id>RioGrandeDeSantiago</Id>
 					<UniqueThemeValue>Rio Grande de Santiago</UniqueThemeValue>
 					<LineWidth>3</LineWidth>
@@ -94,17 +111,19 @@
 			</Data>
 		</Layer>	
 		<Layer>
+			<ThemeField>NAME</ThemeField>
 			<LabelField>NAME</LabelField>
-			<Visible>false</Visible>
+			<!--<Visible>false</Visible>-->
 			<Styles>
 				<Style>
-					<ShowLabels>true</ShowLabels>
+					<ShowLabels>false</ShowLabels>
 					<LabelColor>155,105,105,255</LabelColor>
 				    <Id>LakesStyle</Id>
 					<LineWidth>3</LineWidth>
 					<LineColor>155,105,105,255</LineColor>
-					<LineStyle>Dotted</LineStyle>
-					<FillStyle>None</FillStyle>
+					<LineStyle>None</LineStyle>
+					<FillStyle>Texture</FillStyle>
+					<FillTexturePath>images/swamps.png</FillTexturePath>
 				</Style>
 			</Styles>
 			<Projection>+init=epsg:4326</Projection>
