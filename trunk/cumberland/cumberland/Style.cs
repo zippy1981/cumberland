@@ -54,7 +54,8 @@ namespace Cumberland
 	public enum FillStyle
 	{
 		None,
-		Solid
+		Solid,
+		Texture
 	}
 
 	public enum LabelFont
@@ -126,6 +127,7 @@ namespace Cumberland
 		bool calculateLabelAngleForPolyLine = true;
 
 		bool drawPointSymbolOnPolyLine = false;
+		string fillTexturePath = null;
 		
 #endregion
 
@@ -398,6 +400,15 @@ namespace Cumberland
 			}
 			set {
 				calculateLabelAngleForPolyLine = value;
+			}
+		}
+
+		public string FillTexturePath {
+			get {
+				return fillTexturePath;
+			}
+			set {
+				fillTexturePath = value;
 			}
 		}
 		

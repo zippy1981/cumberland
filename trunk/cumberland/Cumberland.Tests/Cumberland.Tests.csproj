@@ -105,6 +105,7 @@
     <None Include="lib\nunit.framework.dll" />
     <None Include="maps\simplefeatures.xml" />
     <None Include="docs\cumberland_release_test_plan.doc" />
+    <None Include="maps\images\swamps.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

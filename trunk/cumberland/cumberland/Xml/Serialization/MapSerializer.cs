@@ -494,6 +494,10 @@ namespace Cumberland.Xml.Serialization
 				{
 					style.CalculateLabelAngleForPolyLine = bool.Parse(child.InnerText);
 				}
+				else if (child.Name == "FillTexturePath")
+				{
+					style.FillTexturePath = AnchorPath(mapPath, child.InnerText);
+				}				
 			}
 			
 			layer.Styles.Add(style);
@@ -625,6 +629,8 @@ namespace Cumberland.Xml.Serialization
 			                                                                     style.LabelMaxScale.ToString());
 			if (style.DrawPointSymbolOnPolyLine) writer.WriteElementString("DrawPointSymbolOnPolyLine", style.DrawPointSymbolOnPolyLine.ToString());
 			if (!style.CalculateLabelAngleForPolyLine) writer.WriteElementString("CalculateLabelAngleForPolyLine", style.CalculateLabelAngleForPolyLine.ToString());
+
+			if (!string.IsNullOrEmpty(style.FillTexturePath)) writer.WriteElementString("FillTexturePath", style.FillTexturePath);
 			
 			writer.WriteEndElement(); // Style
 		}

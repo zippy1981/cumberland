@@ -374,7 +374,7 @@ namespace Cumberland.Drawing
 											if (style.CalculateLabelAngleForPolyLine)
 											{
 												// calculate the slope of this line and use as our label angle
-												CalculateSegmentAngle(start, end);
+												angle = CalculateSegmentAngle(start, end);
 											}
 											
 											labels.Add(new LabelRequest(style,
@@ -432,7 +432,23 @@ namespace Cumberland.Drawing
 								
 								if (style.FillStyle != FillStyle.None)
 								{
-									g.FillPath(new SolidBrush(style.FillColor), gp);
+									Brush fillBrush;
+
+									if (style.FillStyle == FillStyle.Texture)
+									{
+										if (string.IsNullOrEmpty(style.FillTexturePath))
+										{
+											throw new MapConfigurationException("A style with FillStyle.Texture must have a FillTexturePath");
+										}
+										
+										fillBrush = new TextureBrush(new Bitmap(style.FillTexturePath));
+									}
+									else
+									{
+										fillBrush = new SolidBrush(style.FillColor);										
+									}
+									
+									g.FillPath(fillBrush, gp);
 								}
 
 								if (style.LineStyle != LineStyle.None)

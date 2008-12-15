@@ -266,7 +266,7 @@ namespace Cumberland.Tests
 			s1.LabelMaxScale = 100;
 			s1.DrawPointSymbolOnPolyLine = true;
 			s1.CalculateLabelAngleForPolyLine = false;
-			
+			s1.FillTexturePath = "../../../Cumberland.Tests/maps/images/swamps.png";
 			l1.Styles.Add(s1);
 			
 			m1.Layers.Add(l1);
@@ -600,7 +600,7 @@ namespace Cumberland.Tests
 			MapSerializer ms = new MapSerializer();
 			Map m = ms.Deserialize("../../maps/mexico.xml");
 			
-			Assert.IsTrue(Path.IsPathRooted(m.Layers[4].Styles[2].PointSymbolImagePath));
+			Assert.IsTrue(Path.IsPathRooted(m.Layers[5].Styles[2].PointSymbolImagePath));
 		}
 
 		[Test]
@@ -715,6 +715,15 @@ namespace Cumberland.Tests
 		public void TestCalculateLabelAngleForPolyLine()
 		{
 			Assert.AreEqual(false, m2.Layers[0].Styles[0].CalculateLabelAngleForPolyLine);
+		}
+
+		[Test]
+		public void TestFillTexturePath()
+		{
+			MapSerializer ms = new MapSerializer();
+			Map m = ms.Deserialize("../../maps/mexico.xml");
+			
+			Assert.IsTrue(Path.IsPathRooted(m.Layers[4].Styles[0].FillTexturePath));
 		}
 		
 #endregion

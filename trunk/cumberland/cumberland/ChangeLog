@@ -1,3 +1,10 @@
+2008-12-15  Scott Ellington  <scott.ellington@gmail.com>
+
+	* Style.cs:
+	* Drawing/MapDrawer.cs:
+	* Xml/Serialization/MapSerializer.cs: add FillStyle.Texture and
+	Style.FillTexturePath
+
 2008-12-13  Scott Ellington  <scott.ellington@gmail.com>
 
 	* Style.cs:
