@@ -11,6 +11,8 @@
 
 = Later =
 
+  * Complex line symbology
+    * overlay multiple lines
   * Raster support
   * New supported tile consumers:
     * Yahoo (is this even possible?)
