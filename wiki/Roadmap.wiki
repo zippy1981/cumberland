@@ -2,7 +2,8 @@
 
 = 0.3 =
 
-  * image symbol on PolyLine (for road markers, etc.)
+  * image symbol on PolyLine (for road markers, etc.) *(done)*
+  * FillStyle.Texture for polygon fills *(done)*
   * Labelling:
     * Collision detection
     * wrap text onto polylines
