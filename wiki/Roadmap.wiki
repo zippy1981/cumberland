@@ -13,6 +13,7 @@
 
   * Complex line symbology
     * overlay multiple lines
+    * cross hatching (i.e. railroads)
   * Raster support
   * New supported tile consumers:
     * Yahoo (is this even possible?)
