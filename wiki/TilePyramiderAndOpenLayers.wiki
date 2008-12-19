@@ -4,7 +4,7 @@
 
 = Introduction =
 
-TMS is an [http://wiki.osgeo.org/wiki/Tile_Map_Service_Specification OSGeo specification], but our use is mainly for [http://openlayers.org/ OpenLayers].  Which is an open source web mapping interface comparable to Google Maps or Microsoft Virtual Earth.
+TMS is an [http://wiki.osgeo.org/wiki/Tile_Map_Service_Specification OSGeo specification], but our use is mainly for [http://openlayers.org/ OpenLayers], which is an open source web mapping interface comparable to Google Maps or Microsoft Virtual Earth.
 
 Unlike these other interfaces, you will need to supply your own tiles for base data (states, roads, cities, etc.).  Cumberland's [tilepyramider] allow you to build these tiles and the following article will help you to configure and deploy them with OpenLayers.
 
@@ -92,3 +92,7 @@ We then define that method and check if the tile's boundaries are within our ext
         return "tms/" + z + "/" + x + "/" + y + "." + this.type; 
    }    
 }}}
+
+= Example = 
+
+A example site is available here: [http://salmonsalvo.net/Cumberland:_OpenLayers_Test]
