@@ -62,7 +62,7 @@ You'll need to edit to fit your site and setup.  Finally, call the above method 
 
 = TMS that are a subset of the map boundaries =
 
-Currently, a TMS has to have an EPSG of 4326 and worldwide extents to work in OpenLayers ([http://openlayers.org/pipermail/users/2008-April/005449.html source]). This means you can't clip to a certain region by default (you'll get broken image links).
+Currently, a TMS has to have an EPSG of 4326 and worldwide extents to work in OpenLayers ([http://openlayers.org/pipermail/users/2008-April/005449.html source]). This means you can't clip to a certain region by default (you'll get broken image links in outlying areas).
 
 However, we can workaround this.  In the above example, the call to tilepyramider passes extents that are worldwide.  If we changed this to just a subset of the world, we would get dramatically fewer images.  If we want to use this, we need to override the 'getURL' method of a TMS and handle it ourselves:
 
