@@ -88,6 +88,8 @@ tileSource should point to the directory that tilepyramider created.  Finally, c
 ...
 }}}
 
+An example is available here: [http://salmonsalvo.net/Cumberland:_VirtualEarth_Test]
+
 = Deployment: TMS to Open Layers =
 
 Check out the [TilePyramiderAndOpenLayers tilepyramider and OpenLayers page] for details.
