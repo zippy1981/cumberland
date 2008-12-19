@@ -1,0 +1,21 @@
+#summary Tilepyramider configuration and deployment to Google Maps
+
+= Introduction =
+
+Google Maps is the granddaddy of tile-based web mapping interfaces, and is arguably still the best.  It also has very reasonable [http://code.google.com/apis/maps/terms.html licensing terms].
+
+Their API also allows overlaying of custom tiles on top of their excellent base data.  The [tilepyramider] tool can construct a set of tiles that can be used for this purpose.
+
+= Building the tile pyramid =
+
+e first build our tile pyramid, which is a directory structure of tile images based on zoom level and x and y coordinates. The tilepyramider command requires an argument that is the path to a cumberland map xml file. This is a simple xml format which stores data source info (shapefile, database) and symbology (colors, line widths, etc.).
+
+We call the tool as so:
+
+{{{
+tilepyramider.exe -x=7 -c=googlemaps -o=/home/scottell/Desktop/gm ../../../Cumberland.Tests/maps/mexico.xml
+}}}
+
+The 'c' option specifies that we output to consume in Google Maps.  The 'x' option is the max zoom level (the default minimum is 0) which prevents tiles from being created above that level.  The 'o' option specifies the output directory for  our tile pyramid.
+
+_Note: Google Maps is the default consumer, so the c option can be omitted in this case._
