@@ -30,7 +30,7 @@ Options:
   -x, --maxzoom=VALUE        the maximum zoom level
   -n, --minzoom=VALUE        the minimum zoom level
   -t, --test                 Test - only calculate the total and return
-  -c, --consumer=VALUE       The consumer.  Valid values are 'googlemaps', 'tms'.
+  -c, --consumer=VALUE       The consumer.  Valid values are 'googlemaps', 'tms', and 've'.
   -w, --worldextents=VALUE   comma-delimited extents for defining world (e.g. -180,-90,180,90). Valid only for TMS
   -b, --bleed=VALUE          the bleed in pixels for tiles (useful for catching overrunning symbols/labels from other tiles
 }}}
