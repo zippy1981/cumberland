@@ -201,44 +201,4 @@ tileSource should point to the directory that tilepyramider created.  Finally, c
 
 = Deployment: TMS to Open Layers =
 
-TMS is an OSGeo specification, but our use is mainly for OpenLayers.  Currently, a TMS has to have an EPSG of 4326 and worldwide extents to work in OpenLayers ([http://openlayers.org/pipermail/users/2008-April/005449.html source]). This means you can't clip to a certain region.  So, your map must be outputting geographic data (lat/longs), and then you could call the tool as so:
-
-{{{
-tilepyramider.exe -e=-180,-90,180,90 -o=/home/scottell/Desktop/tms -c=tms -x=6 ../../../Cumberland.Tests/maps/mexico.xml
-}}}
-
-Then you'll deploy the resulting 'tms' directory to your website and wire up a page with the following script:
-
-{{{
-function initialize()
-{
-    var options = {
-        maxExtent: new OpenLayers.Bounds(-180, -90, 180, 90),
-            numZoomLevels: 6,
-    };
-
-    var map = new OpenLayers.Map('map', options);
-    var layer = new OpenLayers.Layer.TMS( "Mexico", ["http://localhost/~scottell/"],
-    {
-        layername: 'tms',
-        serviceVersion: '',
-        type:'png',
-    } );
-   
-    map.addLayer(layer);
-    map.setCenter(new OpenLayers.LonLat(-105, 24), 4);
-}
-}}}
-
-Add a script reference to OpenLayers:
-
-{{{
-<script src="http://www.openlayers.org/api/OpenLayers.js" type="text/javascript"></script>
-}}}
-
-Finally, call initialize() on load and add your map div:
-
-{{{
-<body onload="initialize()">
-    <div id="map" style="width: 500px; height: 300px"></div>
-}}}
+Check out the [TilePyramiderAndOpenLayers tilepyramider and OpenLayers page] for details.
