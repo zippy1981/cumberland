@@ -1,0 +1,21 @@
+#summary Tilepyramider usage and deployment for OpenLayers
+
+= Introduction =
+
+TMS is an [http://wiki.osgeo.org/wiki/Tile_Map_Service_Specification OSGeo specification], but our use is mainly for [http://openlayers.org/ OpenLayers].  Which is an open source web mapping interface comparable to Google Maps or Microsoft Virtual Earth.
+
+Unlike these other interfaces, you will need to supply your own tiles for base data (states, roads, cities, etc.).  Cumberland's [tilepyramider] allow you to build these tiles and the following article will help you to configure and deploy them with OpenLayers.
+
+= Building the tile pyramid =
+
+We first build our tile pyramid, which is a directory structure of tile images based on zoom level and x and y coordinates.  The tilepyramider command requires an argument that is the path to a cumberland map xml file.  This is a [mapXmlFormat simple xml format] which stores data source info (shapefile, database) and symbology (colors, line widths, etc.).
+
+We call the tool as so:
+
+{{{
+tilepyramider.exe -e=-180,-90,180,90 -o=/home/scottell/Desktop/tms -c=tms -x=6 ../../../Cumberland.Tests/maps/mexico.xml
+}}}
+
+The 'c' option is what tells the tool that we want our output to be for TMS.  The 'x' option prevents defines that max  zoom level will be 6.  The default minimum zoom level is 0, thus this will generate 7 levels of tiles.
+
+_Note: In our example we are outputting our tiles in geographic coordinates (lat/longs), which is common in OpenLayers, but there is nothing stopping you from using your own coordinate system._
