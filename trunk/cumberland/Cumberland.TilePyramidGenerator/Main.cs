@@ -76,7 +76,7 @@ namespace Cumberland.TilePyramidGenerator
 			            "Test - only calculate the total and return",
 			            delegate (string v) { onlyCount = v != null; });
 			options.Add("c|consumer=",
-			            "The consumer.  Valid values are 'googlemaps', 'tms'.",
+			            "The consumer.  Valid values are 'googlemaps', 'tms', and 've'.",
 			            delegate (string v) 
 			            {
 				if (v == "googlemaps")

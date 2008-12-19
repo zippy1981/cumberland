@@ -1,3 +1,7 @@
+2008-12-19  Full Name  <Email Address>
+
+	* Cumberland.TilePyramidGenerator/Main.cs: mention ve consumer option
+
 2008-12-13  Scott Ellington  <scott.ellington@gmail.com>
 
 	* Cumberland.Data.SqlServer.Loader/Main.cs: fix bug #1
