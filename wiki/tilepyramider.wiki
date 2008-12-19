@@ -9,9 +9,9 @@ Most modern web mapping interfaces use tiles.  This has the advantage of allowin
 
 Supported tile consumers:
 
-  * Google Maps ([http://www.salmonsalvo.net/Cumberland:GoogleMapsTest demo])
-  * TileMapService (TMS) - can be used in OpenLayers (new to 0.2) ([http://salmonsalvo.net/Cumberland:_OpenLayers_Test demo])
-  * Microsoft VirtualEarth (new to 0.2) ([http://salmonsalvo.net/Cumberland:_VirtualEarth_Test demo])
+  * Google Maps
+  * TileMapService (TMS) - can be used in OpenLayers (new to 0.2)
+  * Microsoft VirtualEarth (new to 0.2)
 
 = Usage = 
 
