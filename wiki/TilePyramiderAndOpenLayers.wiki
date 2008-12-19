@@ -1,5 +1,7 @@
 #summary Tilepyramider usage and deployment for OpenLayers
 
+<wiki:toc max_depth="2" />
+
 = Introduction =
 
 TMS is an [http://wiki.osgeo.org/wiki/Tile_Map_Service_Specification OSGeo specification], but our use is mainly for [http://openlayers.org/ OpenLayers].  Which is an open source web mapping interface comparable to Google Maps or Microsoft Virtual Earth.
@@ -18,7 +20,7 @@ tilepyramider.exe -e=-180,-90,180,90 -o=/home/scottell/Desktop/tms -c=tms -x=6 .
 
 The 'c' option is what tells the tool that we want our output to be for TMS.  The 'x' option prevents defines that max  zoom level will be 6.  The default minimum zoom level is 0, thus this will generate 7 levels of tiles. The 'e' option allow us to override the extents as defined in the map file.
 
-In our example we are outputting our tiles in geographic coordinates (lat/longs), which is common in OpenLayers, but there is nothing stopping you from using your own coordinate system.  However, you will need to set the 'w' option to the world extents of your map as the default is geographic.  
+In our example we are outputting our tiles in geographic coordinates (lat/longs), which is common in OpenLayers, but there is nothing stopping you from using your own coordinate system in a TMS (though I have not tried this in OpenLayers).  However, you will need to set the 'w' option to the world extents of your map as the default is geographic.  
 
 = Deployment =
 
@@ -56,4 +58,37 @@ You'll need to edit to fit your site and setup.  Finally, call the above method 
 {{{
 <body onload="initialize()">
     <div id="map" style="width: 500px; height: 300px"></div>
+}}}
+
+= TMS that are a subset of the map boundaries =
+
+Currently, a TMS has to have an EPSG of 4326 and worldwide extents to work in OpenLayers ([http://openlayers.org/pipermail/users/2008-April/005449.html source]). This means you can't clip to a certain region by default (you'll get broken image links).
+
+However, we can workaround this.  In the above example, the call to tilepyramider passes extents that are worldwide.  If we changed this to just a subset of the world, we would get dramatically fewer images.  If we want to use this, we need to override the 'getURL' method of a TMS and handle it ourselves:
+
+{{{
+var layer = new OpenLayers.Layer.TMS("Name", "http://localhost/~scottell", { 'type':'png', 'getURL':getTileUrl });
+}}}
+
+We then define that method and check if the tile's boundaries are within our extents and zoom levels.  If not, we simple pass a URL to a blank image tile:
+
+{{{
+  function getTileUrl (bounds)
+  {
+  		if (bounds.left > -82 ||
+  			bounds.right <  -120 ||
+  			bounds.top < 12 ||
+  			bounds.bottom > 34 ||
+  			map.getZoom() > 8)
+  		{
+  			return 'blanktile.png';
+  		}
+  
+        var res = this.map.getResolution();
+        var x = Math.round ((bounds.left - this.maxExtent.left) / (res * this.tileSize.w));
+        var y = Math.round ((bounds.bottom - this.maxExtent.bottom) / (res * this.tileSize.h));
+        var z = this.map.getZoom();
+        
+        return "tms/" + z + "/" + x + "/" + y + "." + this.type; 
+   }    
 }}}
