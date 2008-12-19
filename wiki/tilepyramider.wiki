@@ -35,7 +35,7 @@ Options:
   -b, --bleed=VALUE          the bleed in pixels for tiles (useful for catching overrunning symbols/labels from other tiles
 }}}
 
-The "map file" is defined by the [mapXmlFormat map xml format] which holds data sources and style information.  This generates a set of images in the output folder specified.  If no output folder is specified, the tiles are generated in the current directory.  The worldextents, maxzoom, and minzoom options are only for customizing TMS output.
+The "map file" is defined by the [mapXmlFormat map xml format] which holds data sources and style information.  This generates a set of images in the output folder specified.  If no output folder is specified, the tiles are generated in the current directory.  The maxzoom and minzoom are used for restricting the zoom levels in which you want to generate tiles (as all tiles at all levels will be many tiles).  The worldextents is only for customizing TMS output.
 
 == Setting a bleed ==
 
@@ -242,4 +242,3 @@ Finally, call initialize() on load and add your map div:
 <body onload="initialize()">
     <div id="map" style="width: 500px; height: 300px"></div>
 }}}
-
