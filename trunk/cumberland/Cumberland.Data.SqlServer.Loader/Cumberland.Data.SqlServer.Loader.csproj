@@ -27,7 +27,6 @@
       <EnvironmentVariables />
     </EnvironmentVariables>
     <StartupObject />
-    <LangVersion>ISO_2</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -36,7 +35,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <StartupObject />
-    <LangVersion>ISO_2</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

@@ -1,5 +1,9 @@
 2008-12-19  Full Name  <Email Address>
 
+	* Cumberland.csproj: reset lang version
+
+2008-12-19  Full Name  <Email Address>
+
 	* Data/IFeatureSource.cs:
 	* Data/AbstractDatabaseFeatureSource.cs: add AbstractDataSource, add
 	IFeatureSource.Extents
