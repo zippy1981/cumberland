@@ -1,5 +1,27 @@
 2008-12-19  Full Name  <Email Address>
 
+	* Cumberland.TileViewerTest:
+	* Cumberland.TileViewerTest/images:
+	* Cumberland.TileViewerTest/web.config:
+	* Cumberland.TileViewerTest/Global.asax:
+	* Cumberland.TileViewerTest/Default.aspx:
+	* Cumberland.TileViewerTest/Global.asax.cs:
+	* Cumberland.TileViewerTest/Default.aspx.cs:
+	* Cumberland.TileViewerTest/TileProvider.aspx:
+	* Cumberland.TileViewerTest/TileProvider.aspx.cs:
+	* Cumberland.TileViewerTest/Default.aspx.designer.cs:
+	* Cumberland.TileViewerTest/TileProvider.aspx.designer.cs:
+	* Cumberland.TileViewerTest/Cumberland.TileViewerTest.csproj: delete old
+
+	* Cumberland.DrawMap/Cumberland.DrawMap.csproj:
+	* Cumberland.Data.PostGIS/Cumberland.Data.PostGIS.csproj:
+	* Cumberland.Data.SqlServer/Cumberland.Data.SqlServer.csproj:
+	* Cumberland.TilePyramidGenerator/Cumberland.TilePyramidGenerator.csproj:
+	* Cumberland.Data.SqlServer.Loader/Cumberland.Data.SqlServer.Loader.csproj:
+	reset lang version
+
+2008-12-19  Full Name  <Email Address>
+
 	* Cumberland.Data.PostGIS/PostGISFeatureSource.cs:
 	* Cumberland.Data.SqlServer/SqlServerFeatureSource.cs:
 	* Cumberland.Data.PostGIS/Cumberland.Data.PostGIS.csproj: add

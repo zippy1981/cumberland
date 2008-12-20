@@ -1,1 +1,0 @@
-<%@ Application Inherits="Cumberland.TileViewerTest.Global" %>
