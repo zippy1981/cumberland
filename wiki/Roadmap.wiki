@@ -4,17 +4,18 @@
 
   * image symbol on PolyLine (for road markers, etc.) *(done)*
   * FillStyle.Texture for polygon fills *(done)*
-  * Labelling:
-    * Collision detection
-    * wrap text onto polylines
-    * force onto visible extents
-    * remove duplicates
 
 = Later =
 
+  * Projection WKT parser ( for reading Shapefile .prj files)
   * Complex line symbology
     * overlay multiple lines
     * cross hatching (i.e. railroads)
   * Raster support
   * New supported tile consumers:
     * Yahoo (is this even possible?)
+  * Labelling:
+    * Collision detection
+    * wrap text onto polylines
+    * force onto visible extents
+    * remove duplicates
