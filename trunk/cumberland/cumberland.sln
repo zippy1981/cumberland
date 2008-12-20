@@ -15,8 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cumberland.Data.SqlServer",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cumberland.TilePyramidGenerator", "Cumberland.TilePyramidGenerator\Cumberland.TilePyramidGenerator.csproj", "{12B8F35A-A939-4177-9392-5B89B29C195A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cumberland.MapToKml", "Cumberland.MapToKml\Cumberland.MapToKml.csproj", "{70CDFE8C-DC99-41E8-8A0D-748EE58DDF46}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,10 +40,6 @@ Global
 		{6F5ECB63-A48C-42B8-B4E2-CD613C8CAFD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F5ECB63-A48C-42B8-B4E2-CD613C8CAFD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F5ECB63-A48C-42B8-B4E2-CD613C8CAFD2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{70CDFE8C-DC99-41E8-8A0D-748EE58DDF46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{70CDFE8C-DC99-41E8-8A0D-748EE58DDF46}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{70CDFE8C-DC99-41E8-8A0D-748EE58DDF46}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{70CDFE8C-DC99-41E8-8A0D-748EE58DDF46}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C7A608A4-54EE-44E3-B100-3E95C555BAC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C7A608A4-54EE-44E3-B100-3E95C555BAC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7A608A4-54EE-44E3-B100-3E95C555BAC9}.Release|Any CPU.ActiveCfg = Release|Any CPU

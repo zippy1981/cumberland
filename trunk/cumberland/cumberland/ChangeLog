@@ -1,3 +1,14 @@
+2008-12-19  Full Name  <Email Address>
+
+	* Data/IFeatureSource.cs:
+	* Data/AbstractDatabaseFeatureSource.cs: add AbstractDataSource, add
+	IFeatureSource.Extents
+
+	* Data/KeyholeMarkupLanguage.cs: remove kml so I don't have to deal with
+	it
+
+	* Cumberland.csproj: set c# to ISO 2
+
 2008-12-15  Scott Ellington  <scott.ellington@gmail.com>
 
 	* Style.cs:

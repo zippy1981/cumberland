@@ -33,67 +33,28 @@ using Npgsql;
 
 namespace Cumberland.Data.PostGIS
 {	
-	public class PostGISFeatureSource : IDatabaseFeatureSource
+	public class PostGISFeatureSource : AbstractDatabaseFeatureSource
 	{
 #region vars
 		
-		string connectionString, tableName, geometryColumn;
+		string geometryColumn;
 		int srid;
 		bool isInitialized = false;
 		FeatureType featureType = FeatureType.None;
-		int forcedSrid = -1;
-		FeatureType forcedFeatureType = FeatureType.None;
-		string forcedGeometryColumn;
 		
 #endregion
 
 #region Properties
 		
-		public FeatureType SourceFeatureType {
+		public override FeatureType SourceFeatureType {
 			get {
 				CheckIfInitialized();
 				
 				return featureType;
 			}
 		}
-		
-		public string TableName {
-			get {
-				return tableName;
-			}
-			set {
-				tableName = value;
-			}
-		}
-
-		public string ConnectionString {
-			get {
-				return connectionString;
-			}
-			set {
-				connectionString = value;
-			}
-		}
-
-		public int ForcedSrid {
-			get {
-				return forcedSrid;
-			}
-			set {
-				forcedSrid = value;
-			}
-		}
-
-		public FeatureType ForcedFeatureType {
-			get {
-				return forcedFeatureType;
-			}
-			set {
-				forcedFeatureType = value;
-			}
-		}
-
-		public SpatialType ForcedSpatialType {
+	
+		public override SpatialType ForcedSpatialType {
 			get {
 				return SpatialType.Geometric;
 			}
@@ -102,14 +63,43 @@ namespace Cumberland.Data.PostGIS
 			}
 		}
 
-		public string ForcedGeometryColumn {
-			get {
-				return forcedGeometryColumn;
-			}
-			set {
-				forcedGeometryColumn = value;
+		public override Rectangle Extents 
+		{
+			get 
+			{
+				CheckIfInitialized();
+				
+				using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
+				{
+					string sql = string.Format("select extent({0}) from {1}",
+					                           geometryColumn, TableName);
+					
+					//System.Console.WriteLine(sql);
+					
+					using (NpgsqlCommand comm = new NpgsqlCommand(sql, conn))
+					{
+						conn.Open();
+						
+						using (NpgsqlDataReader dr = comm.ExecuteReader())
+						{
+							if (!dr.HasRows) return new Rectangle();
+							
+							dr.Read();
+							string boxTwoD = dr.GetString(0);
+							
+							string[] bits = boxTwoD.Split(new char[] {'(',',',')',' '});
+							
+							return new Rectangle(Convert.ToDouble(bits[1]),
+							                     Convert.ToDouble(bits[2]),
+							                     Convert.ToDouble(bits[3]),
+							                     Convert.ToDouble(bits[4]));
+
+						}
+					}
+				}
 			}
 		}
+		
 
 #endregion
 
@@ -129,44 +119,44 @@ namespace Cumberland.Data.PostGIS
 		
 #region Public methods
 
-		public List<Feature> GetFeatures(string themeField)
+		public override List<Feature> GetFeatures(string themeField)
 		{
 			return GetFeatures(new Rectangle(), themeField);
 		}
 		
-		public List<Feature> GetFeatures (Rectangle rectangle)
+		public override List<Feature> GetFeatures (Rectangle rectangle)
 		{
 			return GetFeatures(rectangle, null);
 		}
 		
-		public List<Feature> GetFeatures()
+		public override List<Feature> GetFeatures()
 		{
 			return GetFeatures(new Rectangle());
 		}
 
-		public List<Feature> GetFeatures (string themeField, string labelField)
+		public override List<Feature> GetFeatures (string themeField, string labelField)
 		{
 			return GetFeatures(new Rectangle(), themeField, labelField);
 		}
 		
-		public List<Feature> GetFeatures(Rectangle rectangle, string themeField)
+		public override List<Feature> GetFeatures(Rectangle rectangle, string themeField)
 		{
 			return GetFeatures(rectangle, themeField, null);
 		}	
 
-		public List<Feature> GetFeatures (Rectangle rectangle, string themeField, string labelField)
+		public override List<Feature> GetFeatures (Rectangle rectangle, string themeField, string labelField)
 		{
 			CheckIfInitialized();
 			
 			List<Feature> feats = new List<Feature>();
 			
-			using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
+			using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
 			{
 				conn.Open();
 				
 				string sql = string.Format("select astext({0}) as {0} {2} {3} from {1}",
 				                           geometryColumn, 
-				                           tableName,
+				                           TableName,
 				                           (themeField != null ? ", " + themeField : string.Empty),
 				                           (labelField != null ? ", " + labelField : string.Empty));
 
@@ -174,7 +164,7 @@ namespace Cumberland.Data.PostGIS
 				{
 					sql += string.Format(" where {0} && SetSRID('BOX3D({2} {3}, {4} {5})'::box3d, {6})",
 					                     geometryColumn, 
-				                           tableName,
+				                           TableName,
 				                           rectangle.Min.X,
 				                           rectangle.Min.Y,
 				                           rectangle.Max.X,
@@ -182,6 +172,7 @@ namespace Cumberland.Data.PostGIS
 				                           srid);
 				}
 
+				
 				using (NpgsqlCommand comm = new NpgsqlCommand(sql, conn))
 				{
 					using (NpgsqlDataReader dr = comm.ExecuteReader())
@@ -243,10 +234,10 @@ namespace Cumberland.Data.PostGIS
 				return;
 			}
 
-			using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
+			using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
 			{
 				string sql = string.Format("select f_geometry_column, srid, type from geometry_columns where f_table_name = '{0}'",
-				                           tableName);
+				                           TableName);
 				
 				conn.Open();
 				
@@ -256,7 +247,7 @@ namespace Cumberland.Data.PostGIS
 					{
 						if (!dr.HasRows)
 						{
-							throw new ArgumentException(string.Format("row in geometry_columns for table '{0}' not found", tableName), "table");
+							throw new ArgumentException(string.Format("row in geometry_columns for table '{0}' not found", TableName), "table");
 						}
 						
 						dr.Read();

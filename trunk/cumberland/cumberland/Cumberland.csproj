@@ -26,6 +26,10 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <StartupObject />
+    <EnvironmentVariables>
+      <EnvironmentVariables />
+    </EnvironmentVariables>
+    <LangVersion>ISO_2</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -35,14 +39,13 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <StartupObject />
+    <LangVersion>ISO_2</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
@@ -71,8 +74,8 @@
     <Compile Include="Data\FeatureType.cs" />
     <Compile Include="Web\TileProvider.cs" />
     <Compile Include="Data\WellKnownText\SimpleFeatureAccess.cs" />
-    <Compile Include="Data\KeyholeMarkupLanguage.cs" />
     <Compile Include="Drawing\MapConfigurationException.cs" />
+    <Compile Include="Data\AbstractDatabaseFeatureSource.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -96,4 +99,7 @@
       </Properties>
     </MonoDevelop>
   </ProjectExtensions>
+  <ItemGroup>
+    <None Include="Data\KeyholeMarkupLanguage.cs" />
+  </ItemGroup>
 </Project>

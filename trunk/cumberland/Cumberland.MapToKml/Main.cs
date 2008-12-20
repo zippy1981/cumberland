@@ -49,7 +49,7 @@ namespace Cumberland.MapToKml
 			
 			Map map = ms.Deserialize(args[0]);
 
-			Console.WriteLine(KeyholeMarkupLanguage.CreateFromMap(map));
+			//Console.WriteLine(KeyholeMarkupLanguage.CreateFromMap(map));
 		}
 	}
 }
