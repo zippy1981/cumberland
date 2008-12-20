@@ -32,6 +32,7 @@ namespace Cumberland.Data
 	public interface IFeatureSource
 	{
 		FeatureType SourceFeatureType { get; }
+		Rectangle Extents { get; }
 		
 		List<Feature> GetFeatures();
 		

@@ -33,83 +33,29 @@ using Cumberland.Data.WellKnownText;
 
 namespace Cumberland.Data.SqlServer
 {
-	public class SqlServerFeatureSource : IDatabaseFeatureSource
+	public class SqlServerFeatureSource : AbstractDatabaseFeatureSource
 	{
 #region vars
 		
 		string geometryColumn = null;
 		string spatialType;
-		string connectionString;
+//		string connectionString;
 		bool isInitialized = false;		
-		string tableName;
+//		string tableName;
 		FeatureType featureType = FeatureType.None;
 		int srid = 0;
-		int forcedSrid = -1;
-		FeatureType forcedFeatureType = FeatureType.None;
-		SpatialType forcedSpatialType = SpatialType.Geometric;
-		string forcedGeometryColumn;
+//		int forcedSrid = -1;
+//		FeatureType forcedFeatureType = FeatureType.None;
+//		SpatialType forcedSpatialType = SpatialType.Geometric;
+//		string forcedGeometryColumn;
 
 #endregion
 		
 #region properties
 		
-		public FeatureType SourceFeatureType {
+		public override FeatureType SourceFeatureType {
 			get {
 				return featureType;
-			}
-		}
-
-		public string ConnectionString {
-			get {
-				return connectionString;
-			}
-			set {
-				connectionString = value;
-			}
-		}
-
-		public string TableName {
-			get {
-				return tableName;
-			}
-			set {
-				tableName = value;
-			}
-		}
-
-		public int ForcedSrid {
-			get {
-				return forcedSrid;
-			}
-			set {
-				forcedSrid = value;
-			}
-		}
-
-		public FeatureType ForcedFeatureType {
-			get {
-				return forcedFeatureType;
-			}
-			set {
-				forcedFeatureType = value;
-			}
-		}
-
-		public SpatialType ForcedSpatialType {
-			get {
-				return forcedSpatialType;
-			}
-			set {
-				forcedSpatialType = value;
-			}
-		}
-
-		public string ForcedGeometryColumn {
-			get {
-				return forcedGeometryColumn;
-			}
-			set {
-				forcedGeometryColumn = value;
 			}
 		}
 
@@ -132,44 +78,44 @@ namespace Cumberland.Data.SqlServer
 		
 #region public methods
 
-		public List<Feature> GetFeatures(string themeField)
+		public override List<Feature>GetFeatures(string themeField)
 		{
 			return GetFeatures(new Rectangle(), themeField);
 		}
 
-		public List<Feature> GetFeatures (Rectangle rectangle)
+		public override List<Feature>GetFeatures (Rectangle rectangle)
 		{
 			return GetFeatures(rectangle, null);
 		}
 		
-		public List<Feature> GetFeatures()
+		public override List<Feature>GetFeatures()
 		{
 			return GetFeatures(new Rectangle());
 		}
 
-		public List<Feature> GetFeatures (string themeField, string labelField)
+		public override List<Feature>GetFeatures (string themeField, string labelField)
 		{
 			return GetFeatures(new Rectangle(), themeField, labelField);
 		}
 		
-		public List<Feature> GetFeatures(Rectangle rectangle, string themeField)
+		public override List<Feature>GetFeatures(Rectangle rectangle, string themeField)
 		{
 			return GetFeatures(rectangle, themeField, null);
 		}	
 		
-		public List<Feature> GetFeatures (Rectangle rectangle, string themeField, string labelField)
+		public override List<Feature>GetFeatures (Rectangle rectangle, string themeField, string labelField)
 		{
 			CheckIfInitialized();
 			
 			List<Feature> feats = new List<Feature>();
 			
-			using (SqlConnection conn = new SqlConnection(connectionString))
+			using (SqlConnection conn = new SqlConnection(ConnectionString))
 			{
 				conn.Open();
 				
 				string sql = string.Format("select {0}.STAsText() {2} {3} from {1}",
 				                           geometryColumn, 
-				                           tableName,
+				                           TableName,
 				                           (themeField != null ? ", " + themeField : string.Empty),
 				                           (labelField != null ? ", " + labelField : string.Empty));
 
@@ -255,7 +201,7 @@ namespace Cumberland.Data.SqlServer
 				return;
 			}
 			
-			using (SqlConnection conn = new SqlConnection(connectionString))
+			using (SqlConnection conn = new SqlConnection(ConnectionString))
 			{
 				conn.Open();
 				
