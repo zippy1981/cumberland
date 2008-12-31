@@ -59,7 +59,10 @@ namespace Cumberland.Data.PostGIS
 				return SpatialType.Geometric;
 			}
 			set {
-				throw new NotSupportedException("PostGIS only provides a geometric data type");
+				if (value != SpatialType.Geometric)
+				{
+					throw new NotSupportedException("PostGIS only provides a geometric data type");
+				}
 			}
 		}
 
@@ -157,8 +160,8 @@ namespace Cumberland.Data.PostGIS
 				string sql = string.Format("select astext({0}) as {0} {2} {3} from {1}",
 				                           geometryColumn, 
 				                           TableName,
-				                           (themeField != null ? ", " + themeField : string.Empty),
-				                           (labelField != null ? ", " + labelField : string.Empty));
+				                           (!string.IsNullOrEmpty(themeField) ? ", " + themeField : string.Empty),
+				                           (!string.IsNullOrEmpty(labelField) ? ", " + labelField : string.Empty));
 
 				if (!rectangle.IsEmpty)
 				{
@@ -172,7 +175,6 @@ namespace Cumberland.Data.PostGIS
 				                           srid);
 				}
 
-				
 				using (NpgsqlCommand comm = new NpgsqlCommand(sql, conn))
 				{
 					using (NpgsqlDataReader dr = comm.ExecuteReader())
@@ -181,12 +183,12 @@ namespace Cumberland.Data.PostGIS
 						{
 							Feature f = SimpleFeatureAccess.Parse(dr.GetString(0));
 							
-							if (themeField != null)
+							if (!string.IsNullOrEmpty(themeField))
 							{
 								f.ThemeFieldValue = dr[1].ToString();
 							}
 
-							if (labelField != null)
+							if (!string.IsNullOrEmpty(labelField))
 							{
 								f.LabelFieldValue = dr[themeField != null ? 2 : 1].ToString();
 							}

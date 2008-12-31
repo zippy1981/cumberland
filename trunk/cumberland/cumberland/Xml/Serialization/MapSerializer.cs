@@ -187,7 +187,7 @@ namespace Cumberland.Xml.Serialization
 			writer.WriteElementString("Width", map.Width.ToString());
 			writer.WriteElementString("Height", map.Height.ToString());
 			writer.WriteElementString("Extents", PrepareRectangle(map.Extents));
-			writer.WriteElementString("Projection", map.Projection);
+			if (!string.IsNullOrEmpty(map.Projection)) writer.WriteElementString("Projection", map.Projection);
 			if (map.BackgroundColor != Color.Empty) writer.WriteElementString("BackgroundColor", PrepareColor(map.BackgroundColor));
 
 			writer.WriteStartElement("Layers");
@@ -514,11 +514,11 @@ namespace Cumberland.Xml.Serialization
 			writer.WriteStartElement("Layer");
 
 			// Layer properties
-			writer.WriteElementString("Projection", layer.Projection);
-			writer.WriteElementString("Id", layer.Id);
-			writer.WriteElementString("Theme", Enum.GetName(typeof(ThemeType), layer.Theme));
-			writer.WriteElementString("ThemeField", layer.ThemeField);
-			writer.WriteElementString("LabelField", layer.LabelField);
+			if (!string.IsNullOrEmpty(layer.Projection)) writer.WriteElementString("Projection", layer.Projection);
+			if (!string.IsNullOrEmpty(layer.Id)) writer.WriteElementString("Id", layer.Id);
+			if (layer.Theme != ThemeType.None) writer.WriteElementString("Theme", Enum.GetName(typeof(ThemeType), layer.Theme));
+			if (!string.IsNullOrEmpty(layer.ThemeField)) writer.WriteElementString("ThemeField", layer.ThemeField);
+			if (!string.IsNullOrEmpty(layer.LabelField)) writer.WriteElementString("LabelField", layer.LabelField);
 			writer.WriteElementString("Visible", layer.Visible.ToString());
 			if (layer.MinScale > double.MinValue) writer.WriteElementString("MinScale", layer.MinScale.ToString());
 			if (layer.MaxScale < double.MaxValue) writer.WriteElementString("MaxScale", layer.MaxScale.ToString());
@@ -596,13 +596,13 @@ namespace Cumberland.Xml.Serialization
 			writer.WriteElementString("LineStyle", Enum.GetName(typeof(LineStyle), style.LineStyle));
 			writer.WriteElementString("PointSymbol", Enum.GetName(typeof(PointSymbolType), style.PointSymbol));
 			writer.WriteElementString("PointSymbolShape", Enum.GetName(typeof(PointSymbolShapeType), style.PointSymbolShape));
-			writer.WriteElementString("PointSymbolImagePath", style.PointSymbolImagePath);
+			if (!string.IsNullOrEmpty(style.PointSymbolImagePath)) writer.WriteElementString("PointSymbolImagePath", style.PointSymbolImagePath);
 			writer.WriteElementString("LineWidth", style.LineWidth.ToString());
 			writer.WriteElementString("PointSize", style.PointSize.ToString());
 			writer.WriteElementString("LineColor", PrepareColor(style.LineColor));
 			writer.WriteElementString("FillColor", PrepareColor(style.FillColor));
 			
-			writer.WriteElementString("UniqueThemeValue", style.UniqueThemeValue);
+			if (!string.IsNullOrEmpty(style.UniqueThemeValue)) writer.WriteElementString("UniqueThemeValue", style.UniqueThemeValue);
 			writer.WriteElementString("MaxRangeThemeValue", style.MaxRangeThemeValue.ToString());
 			writer.WriteElementString("MinRangeThemeValue", style.MinRangeThemeValue.ToString());
 			if (!string.IsNullOrEmpty(style.Id)) writer.WriteElementString("Id", style.Id);
@@ -617,7 +617,7 @@ namespace Cumberland.Xml.Serialization
 			writer.WriteElementString("LabelDecoration", Enum.GetName(typeof(LabelDecoration), style.LabelDecoration));
 			writer.WriteElementString("LabelOutlineColor", PrepareColor(style.LabelOutlineColor));
 			writer.WriteElementString("LabelOutlineWidth", style.LabelOutlineWidth.ToString());
-			writer.WriteElementString("LabelAngle", style.LabelAngle.ToString());
+			if (style.LabelAngle != 0) writer.WriteElementString("LabelAngle", style.LabelAngle.ToString());
 			if (!string.IsNullOrEmpty(style.LabelCustomFont)) writer.WriteElementString("LabelCustomFont", style.LabelCustomFont);
 
 			if (style.MinScale > double.MinValue) writer.WriteElementString("MinScale", style.MinScale.ToString());

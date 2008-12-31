@@ -116,8 +116,8 @@ namespace Cumberland.Data.SqlServer
 				string sql = string.Format("select {0}.STAsText() {2} {3} from {1}",
 				                           geometryColumn, 
 				                           TableName,
-				                           (themeField != null ? ", " + themeField : string.Empty),
-				                           (labelField != null ? ", " + labelField : string.Empty));
+				                           (!string.IsNullOrEmpty(themeField) ? ", " + themeField : string.Empty),
+				                           (!string.IsNullOrEmpty(labelField) ? ", " + labelField : string.Empty));
 
 				if (!rectangle.IsEmpty)
 				{
@@ -143,12 +143,12 @@ namespace Cumberland.Data.SqlServer
 								continue;
 							}
 							
-							if (themeField != null)
+							if (!string.IsNullOrEmpty(themeField))
 							{
 								f.ThemeFieldValue = dr[1].ToString();
 							}
 
-							if (labelField != null)
+							if (!string.IsNullOrEmpty(labelField))
 							{
 								f.LabelFieldValue = dr[themeField != null ? 2 : 1].ToString();
 							}

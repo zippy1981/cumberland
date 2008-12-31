@@ -1,3 +1,9 @@
+2008-12-30  Scott Ellington  <scott.ellington@gmail.com>
+
+	* Cumberland.Data.PostGIS/PostGISFeatureSource.cs:
+	* Cumberland.Data.SqlServer/SqlServerFeatureSource.cs: check if string
+	is empty also
+
 2008-12-19  Full Name  <Email Address>
 
 	* Cumberland.TileViewerTest:
