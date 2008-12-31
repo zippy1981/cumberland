@@ -185,7 +185,7 @@ namespace Cumberland
 			return null;
 		}
 
-		internal Style GetStyleForFeature(string fieldValue)
+		public Style GetStyleForFeature(string fieldValue)
 		{
 			if (Styles.Count == 0) return null;
 			
