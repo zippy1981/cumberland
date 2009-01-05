@@ -25,9 +25,29 @@ using System.Collections.Generic;
 using System.Text;
 
 using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
 
 namespace Cumberland.Projection
 {
+	public class ProjFourException : Exception
+	{
+		public int ErrorCode = 0;
+
+		public ProjFourException() {}
+		
+		public ProjFourException(string message) : base(message) {}
+		
+		public ProjFourException(int errorCode, string message) : this(message)
+		{
+			ErrorCode = errorCode;
+		}
+
+		public ProjFourException(SerializationInfo info, StreamingContext context) : base(info, context)
+		{
+		}
+		                                 
+	}
+	
     public class ProjFourWrapper : IDisposable, IProjector
     {
 		#region constants
@@ -154,7 +174,7 @@ namespace Cumberland.Projection
 			
             if (projPJ == IntPtr.Zero)
 			{
-                throw new InvalidOperationException("Proj4 failed to initialize: " + GetError());
+                throw new ProjFourException("Proj4 failed to initialize: " + GetError());
 			}
         }
 		
@@ -195,7 +215,7 @@ namespace Cumberland.Projection
 			int errno = pj_transform(this.projPJ, destinationProj.projPJ, 1, 0, x, y, new double[] {0}) ;
 			if (errno != 0)
 			{
-				throw new InvalidOperationException("Proj4 transform failed: " + GetError() + " " + point.ToString());
+				throw new ProjFourException(errno, GetError() + " " + point.ToString());
 			}
 			
 			if (destinationProj.IsLatLong)
