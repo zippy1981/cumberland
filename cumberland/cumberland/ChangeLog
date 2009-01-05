@@ -1,5 +1,9 @@
 2009-01-05  Scott Ellington  <scott.ellington@gmail.com>
 
+	* Style.cs: add Clone()
+
+2009-01-05  Scott Ellington  <scott.ellington@gmail.com>
+
 	* Data/Shapefile/Shapefile.cs:  make DbfFile accessible
 
 	* Projection/ProjFourWrapper.cs: add ProjFourException

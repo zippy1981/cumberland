@@ -413,5 +413,43 @@ namespace Cumberland
 		}
 		
 #endregion
+
+		public Style Clone()
+		{
+			Style s = new Style();
+
+			s.LineWidth = this.LineWidth;
+			s.PointSize = this.PointSize;
+			s.LineColor = this.LineColor;
+			s.FillColor = this.FillColor;
+			s.LineStyle = this.LineStyle;
+			s.PointSymbol = this.PointSymbol;
+			s.PointSymbolImagePath = this.PointSymbolImagePath;
+			s.UniqueThemeValue = this.UniqueThemeValue;
+			s.MinRangeThemeValue = this.MinRangeThemeValue;
+			s.MaxRangeThemeValue = this.MaxRangeThemeValue;
+			s.Id = this.Id;
+			s.FillStyle = this.FillStyle;
+			s.ShowLabels = this.ShowLabels;
+			s.LabelFont = this.LabelFont;
+			s.LabelColor = this.LabelColor;
+			s.LabelFontEmSize = this.LabelFontEmSize;
+			s.LabelPosition = this.LabelPosition;
+			s.LabelPixelOffset = this.LabelPixelOffset;
+			s.LabelOutlineWidth = this.LabelOutlineWidth;
+			s.LabelOutlineColor = this.LabelOutlineColor;
+			s.LabelDecoration = this.LabelDecoration;
+			s.LabelAngle = this.LabelAngle;
+			s.MinScale = this.MinScale;
+			s.MaxScale = this.MaxScale;
+			s.LabelMinScale = this.LabelMinScale;
+			s.LabelMaxScale = this.LabelMaxScale;
+			s.labelCustomFont = this.LabelCustomFont;
+			s.DrawPointSymbolOnPolyLine = this.DrawPointSymbolOnPolyLine;
+			s.CalculateLabelAngleForPolyLine = this.CalculateLabelAngleForPolyLine;
+			s.FillTexturePath = this.FillTexturePath;
+			
+			return s;
+		}
 	}
 }
