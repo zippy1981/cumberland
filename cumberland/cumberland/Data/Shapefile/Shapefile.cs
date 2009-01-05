@@ -118,6 +118,17 @@ namespace Cumberland.Data.Shapefile
 				// TODO: open?
 			}
 		}
+
+		public DBaseIIIFile DbfFile {
+			get {
+				if (!isDbfLoaded) 
+				{
+					LoadDbf();
+				}
+				
+				return dbfFile;
+			}
+		}
 		
 		FeatureType featureType;
 		

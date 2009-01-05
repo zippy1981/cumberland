@@ -1,3 +1,9 @@
+2009-01-05  Scott Ellington  <scott.ellington@gmail.com>
+
+	* Data/Shapefile/Shapefile.cs:  make DbfFile accessible
+
+	* Projection/ProjFourWrapper.cs: add ProjFourException
+
 2008-12-30  Scott Ellington  <scott.ellington@gmail.com>
 
 	* Xml/Serialization/MapSerializer.cs: don't write empty options
