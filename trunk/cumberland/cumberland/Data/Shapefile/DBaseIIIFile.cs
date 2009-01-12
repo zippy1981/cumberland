@@ -62,10 +62,10 @@ namespace Cumberland.Data.Shapefile
 				List<FieldDescriptor> cols = ReadTableFileHeader(br);
 				
 				ReadTableRecords(br, cols);
-				
+
 				if (br.ReadByte() != 26)
 				{
-					throw new FormatException("DBF (dBase III) file not properly terminated");
+					throw new FormatException("DBF (dBase) file not properly terminated");
 				}
 			}
 		}	
@@ -76,7 +76,7 @@ namespace Cumberland.Data.Shapefile
 			
 			if (type != 3)
 			{
-				throw new FormatException("This does not appear to be a .DBF (dBase III) file");
+				throw new FormatException("This does not appear to be a .DBF (dBase) file");
 			}
 			
 			byte year = br.ReadByte();
@@ -102,6 +102,8 @@ namespace Cumberland.Data.Shapefile
 				fd.Type = Convert.ToChar(br.ReadByte());
 				
 				DataColumn dc = new DataColumn(fd.Name.TrimEnd('\0'));
+
+				bool skip = false;
 				
 				switch (fd.Type)
 				{
@@ -120,6 +122,9 @@ namespace Cumberland.Data.Shapefile
 					case 'M':
 						dc.DataType = typeof(string);
 						break;
+					case 'F':
+						dc.DataType = typeof(float);
+						break;
 				}
 
 				br.ReadBytes(4); // Field data address
@@ -131,7 +136,9 @@ namespace Cumberland.Data.Shapefile
 				br.ReadBytes(2); // Reserved for dBASE III PLUS on a LAN. 
 				br.ReadByte();  // SET FIELDS flag. 
 				br.ReadBytes(8); // Reserved bytes
-								
+
+				if (skip) continue;
+				
 				if (fd.Type != 'M')
 				{
 					records.Columns.Add(dc);
@@ -158,7 +165,7 @@ namespace Cumberland.Data.Shapefile
 				for (int jj=0; jj<cols.Count; jj++)
 				{
 					FieldDescriptor fd = cols[jj];
-					
+
 					switch (fd.Type)
 					{
 						
@@ -198,6 +205,7 @@ namespace Cumberland.Data.Shapefile
 						break;
 						
 					case 'N':
+					case 'F':
 
 						string numValue = ASCIIEncoding.ASCII.GetString(br.ReadBytes(fd.Length));
                         double num;
