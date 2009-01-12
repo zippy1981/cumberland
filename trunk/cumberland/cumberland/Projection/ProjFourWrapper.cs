@@ -133,7 +133,9 @@ namespace Cumberland.Projection
 
 		[DllImport("proj.dll")]
         static extern int pj_is_geocent(IntPtr projPJ);
-		
+
+		[DllImport("proj.dll")]
+		static extern void pj_set_searchpath ( int count, IntPtr path );
 		
 		#endregion
 		
@@ -263,6 +265,28 @@ namespace Cumberland.Projection
 		
 		#region public static methods
 
+		static string customSearchPath = null;
+		public static string CustomSearchPath
+		{
+			get { return customSearchPath; }
+			set
+			{
+				customSearchPath = value;
+
+				// set up pointer to array of pointers
+				IntPtr[] ptrs = new IntPtr[1];
+				IntPtr root = Marshal.AllocCoTaskMem(IntPtr.Size);
+				ptrs[0] = Marshal.StringToCoTaskMemAnsi(customSearchPath + '\0');
+				Marshal.Copy(ptrs, 0, root, 1);
+
+				pj_set_searchpath(1, root);
+
+				// free memory
+				Marshal.FreeCoTaskMem(ptrs[0]);
+				Marshal.FreeCoTaskMem(root);
+			}
+		}
+		
 		[Obsolete("Please use PrepareEpsgCode instead")]
 		public static string PrepareEPSGCode(int epsg)
 		{

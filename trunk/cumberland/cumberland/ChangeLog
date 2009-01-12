@@ -1,5 +1,12 @@
 2009-01-12  Scott Ellington  <scott.ellington@gmail.com>
 
+	* docs/epsg:
+	* Cumberland.csproj: add own copy of epsg codes
+
+	* Projection/ProjFourWrapper.cs: add CustomSearchPath
+
+2009-01-12  Scott Ellington  <scott.ellington@gmail.com>
+
 	* Data/Shapefile/DBaseIIIFile.cs: support float column in dBase IV
 
 2009-01-05  Scott Ellington  <scott.ellington@gmail.com>
