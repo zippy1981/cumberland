@@ -52,6 +52,7 @@ namespace Cumberland.DrawMap
 			int w = -1;
 			int h = -1;
 			Rectangle extents = new Rectangle();
+			bool showVersion = false;
 			
 			OptionSet options = new OptionSet();
 			options.Add("e|extents=", 
@@ -68,10 +69,19 @@ namespace Cumberland.DrawMap
 			options.Add("t|height=",
 			            "the height of the image in pixels",
 			            delegate (string v) { h = int.Parse(v); });
-		            
+			options.Add("v|version",
+			            "shows the version and exits", 
+			            delegate (string v) { showVersion = v != null; });
 		
 			List<string> rest = options.Parse(args);
 
+			if (showVersion)
+			{
+				System.Console.WriteLine("Version " + 
+				                         System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString());
+				return;
+			}
+			
 			if (showHelp)
 			{
 				ShowHelp(options);
@@ -84,10 +94,10 @@ namespace Cumberland.DrawMap
 				ShowHelp(options);
 				return;
 			}
-			
-			Stopwatch sw = new Stopwatch();
-			
-			sw.Start();
+
+			// search in the local directory for espg files 
+			// so Windows ppl don't have to have it installed
+			ProjFourWrapper.CustomSearchPath = ".";
 
 			MapSerializer ms = new MapSerializer();
 			ms.AddDatabaseFeatureSourceType(typeof(PostGISFeatureSource));
@@ -100,8 +110,6 @@ namespace Cumberland.DrawMap
 
 			System.Console.WriteLine(map.Layers.Count + " Layer(s) loaded");
 			
-			System.Console.WriteLine("Load Time (ms): " + sw.Elapsed.TotalMilliseconds);
-			
 			Bitmap b = drawer.Draw(map);
 			
 			if (System.IO.Path.GetExtension(path) != ".png")
@@ -110,10 +118,6 @@ namespace Cumberland.DrawMap
 			}
 			
 			b.Save(path, ImageFormat.Png);   
-			
-			sw.Stop();
-			
-			System.Console.WriteLine("Elapsed Time (ms): " + sw.Elapsed.TotalMilliseconds);
 		}
 		
 		static void ShowHelp (OptionSet p)

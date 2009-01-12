@@ -99,6 +99,9 @@
   </ProjectExtensions>
   <ItemGroup>
     <None Include="Data\KeyholeMarkupLanguage.cs" />
-    <None Include="docs\epsg" />
+    <None Include="epsg">
+      <Gettext-ScanForTranslations>false</Gettext-ScanForTranslations>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

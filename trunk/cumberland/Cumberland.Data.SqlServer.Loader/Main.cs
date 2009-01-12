@@ -53,6 +53,7 @@ namespace Cumberland.Data.SqlServer.Loader
 			bool createIndex = false;
 			bool useGeography = false;
 			bool append = false;
+			bool showVersion = false;
 			
 			// set up parameters
 			OptionSet options = new OptionSet();
@@ -79,9 +80,19 @@ namespace Cumberland.Data.SqlServer.Loader
 			            delegate (string v) { append = v != null; });
 			options.Add("h|help",  "show this message and exit",
 			            delegate (string v) { showHelp = v!= null; });
-			
+			options.Add("v|version",
+			            "shows the version and exits", 
+			            delegate (string v) { showVersion = v != null; });
+		
 			// parse the command line args
 			List<string> rest = options.Parse(args);
+
+			if (showVersion)
+			{
+				System.Console.WriteLine("Version " + 
+				                         System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString());
+				return;
+			}
 			
 			if (showHelp)
 			{

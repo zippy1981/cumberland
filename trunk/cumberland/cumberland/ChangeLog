@@ -1,5 +1,11 @@
 2009-01-12  Scott Ellington  <scott.ellington@gmail.com>
 
+	* epsg:
+	* docs/epsg:
+	* Cumberland.csproj: move to toplevel to workaround MD bug
+
+2009-01-12  Scott Ellington  <scott.ellington@gmail.com>
+
 	* docs/epsg:
 	* Cumberland.csproj: add own copy of epsg codes
 
