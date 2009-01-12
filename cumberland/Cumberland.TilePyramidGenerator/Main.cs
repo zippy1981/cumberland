@@ -56,6 +56,7 @@ namespace Cumberland.TilePyramidGenerator
 			bool mxzlChanged = false;
 			bool mnzlChanged = false;
 			int bleedInPixels = 0;
+			bool showVersion = false;
 			
 			OptionSet options = new OptionSet();
 			options.Add("e|extents=", 
@@ -104,8 +105,18 @@ namespace Cumberland.TilePyramidGenerator
 			options.Add("b|bleed=",
 			            "the bleed in pixels for tiles (useful for catching overrunning symbols/labels from other tiles",
 			            delegate (string v) { bleedInPixels = int.Parse(v); });
-			
+			options.Add("v|version",
+			            "shows the version and exits", 
+			            delegate (string v) { showVersion = v != null; });
+	
 			List<string> rest = options.Parse(args);
+
+			if (showVersion)
+			{
+				System.Console.WriteLine("Version " + 
+				                         System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString());
+				return;
+			}
 			
 			if (showHelp)
 			{
@@ -138,6 +149,10 @@ namespace Cumberland.TilePyramidGenerator
 #endregion
 			
 #region get map
+
+			// search in the local directory for espg files 
+			// so Windows ppl don't have to have it installed
+			ProjFourWrapper.CustomSearchPath = ".";
 			
 			MapSerializer ms = new MapSerializer();
 			ms.AddDatabaseFeatureSourceType(typeof(Cumberland.Data.PostGIS.PostGISFeatureSource));

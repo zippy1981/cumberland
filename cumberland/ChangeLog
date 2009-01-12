@@ -1,3 +1,9 @@
+2009-01-12  Scott Ellington  <scott.ellington@gmail.com>
+
+	* Cumberland.DrawMap/Main.cs:
+	* Cumberland.TilePyramidGenerator/Main.cs:
+	* Cumberland.Data.SqlServer.Loader/Main.cs: add version option
+
 2008-12-30  Scott Ellington  <scott.ellington@gmail.com>
 
 	* Cumberland.Data.PostGIS/PostGISFeatureSource.cs:
