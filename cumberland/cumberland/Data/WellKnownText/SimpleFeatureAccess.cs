@@ -282,7 +282,10 @@ namespace Cumberland.Data.WellKnownText
 				for (int jj=0; jj <ring.Points.Count; jj++)
 				{
 					Point point = ring.Points[jj];
-					polys[idx].AppendFormat("{0} {1}{2}", point.X, point.Y, jj < ring.Points.Count-1 ? "," : string.Empty);
+					polys[idx].AppendFormat("{0} {1}{2}", 
+					                        point.X.ToString(CultureInfo.InvariantCulture), 
+					                        point.Y.ToString(CultureInfo.InvariantCulture), 
+					                        jj < ring.Points.Count-1 ? "," : string.Empty);
 					
 				}
 
@@ -322,7 +325,10 @@ namespace Cumberland.Data.WellKnownText
 				for (int jj=0; jj <line.Points.Count; jj++)
 				{
 					Point point = line.Points[jj];
-					sb.AppendFormat("{0} {1}{2}", point.X, point.Y, jj <line.Points.Count-1 ? "," : string.Empty);
+					sb.AppendFormat("{0} {1}{2}", 
+					                point.X.ToString(CultureInfo.InvariantCulture), 
+					                point.Y.ToString(CultureInfo.InvariantCulture), 
+					                jj <line.Points.Count-1 ? "," : string.Empty);
 				}
 
 				sb.AppendFormat("){0}", ii < polyLine.Lines.Count-1 ? "," : string.Empty);
@@ -335,7 +341,9 @@ namespace Cumberland.Data.WellKnownText
 		
 		public static string CreateFromPoint(Point point)
 		{
-			return string.Format("POINT({0} {1})", point.X, point.Y);
+			return string.Format("POINT({0} {1})", 
+			                     point.X.ToString(CultureInfo.InvariantCulture), 
+			                     point.Y.ToString(CultureInfo.InvariantCulture));
 		}
 			
 #endregion		

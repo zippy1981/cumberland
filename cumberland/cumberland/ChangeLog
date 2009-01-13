@@ -1,5 +1,9 @@
 2009-01-13  Scott Ellington  <scott.ellington@gmail.com>
 
+	* Data/WellKnownText/SimpleFeatureAccess.cs: more locale fixes
+
+2009-01-13  Scott Ellington  <scott.ellington@gmail.com>
+
 	* Data/KeyholeMarkupLanguage.cs:
 	* Data/WellKnownText/SimpleFeatureAccess.cs: more localization fixes
 
