@@ -17,11 +17,9 @@ The xml document should be prefaced as usual and have a 'Map' element at the roo
 
 {{{
 <?xml version="1.0" encoding="utf-8"?>
-<Map version="0.1">
+<Map>
 ...
 }}}
-
-Applying the "version" attribute to the map forces cumberland to check the version.  If not set, cumberland will try to parse the xml.  If set, but to a version not supported, cumberland will throw an exception.
 
 This element supports several child elements:
 
