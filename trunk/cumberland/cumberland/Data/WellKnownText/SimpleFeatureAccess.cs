@@ -24,6 +24,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 
 using Cumberland;
@@ -351,8 +352,8 @@ namespace Cumberland.Data.WellKnownText
 				throw new ArgumentException(string.Format( "Invalid WKT: a coordinate should be '0 0' not '{0}'", wkt), "wkt");
 			}
 
-			return new Point(Convert.ToDouble(pieces[0], System.Globalization.CultureInfo.InvariantCulture),
-			                 Convert.ToDouble(pieces[1], System.Globalization.CultureInfo.InvariantCulture));
+			return new Point(Convert.ToDouble(pieces[0], CultureInfo.InvariantCulture),
+			                 Convert.ToDouble(pieces[1], CultureInfo.InvariantCulture));
 		}
 		
 #endregion
