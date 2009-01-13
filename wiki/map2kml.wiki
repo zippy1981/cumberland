@@ -8,7 +8,7 @@ The kml document will preserve symbology (including thematic mapping) and export
 
 = Usage =
 
-map2kml simply takes a [mapXmlFormat map xml file] as an argument and prints out the kml.  It canl be called as so:
+map2kml simply takes a [mapXmlFormat map xml file] as an argument and prints out the kml.  It can be called as so:
 
 {{{
 map2kml mymap.xml > mymap.kml
