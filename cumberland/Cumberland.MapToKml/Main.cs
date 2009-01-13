@@ -29,6 +29,7 @@ using NDesk.Options;
 using Cumberland;
 using Cumberland.Data;
 using Cumberland.Data.PostGIS;
+using Cumberland.Projection;
 using Cumberland.Xml.Serialization;
 
 namespace Cumberland.MapToKml
@@ -37,6 +38,10 @@ namespace Cumberland.MapToKml
 	{
 		public static void Main(string[] args)
 		{
+            // search the assembly path for proj lookup files (aka epsg)
+            // for windows users
+            ProjFourWrapper.CustomSearchPath = ".";
+
 			MapSerializer ms = new MapSerializer();
 			ms.AddDatabaseFeatureSourceType(typeof(PostGISFeatureSource));
 			ms.AddDatabaseFeatureSourceType(typeof(Cumberland.Data.SqlServer.SqlServerFeatureSource));
