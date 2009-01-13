@@ -28,6 +28,7 @@ using System.Drawing;
 using System.Xml;
 using System.IO;
 using System.Text;
+using System.Globalization;
 
 using Cumberland;
 using Cumberland.Projection;
@@ -149,7 +150,7 @@ namespace Cumberland.Data
 			if (featureType == FeatureType.Polyline || featureType == FeatureType.Polygon)
 			{
 				xtw.WriteStartElement("LineStyle");
-				xtw.WriteElementString("width", (style.LineStyle == LineStyle.None ? 0 : style.LineWidth).ToString());
+				xtw.WriteElementString("width", (style.LineStyle == LineStyle.None ? 0 : style.LineWidth).ToString(CultureInfo.InvariantCulture));
 				xtw.WriteElementString("color", ConvertToKmlColor(style.LineColor));
 				xtw.WriteEndElement(); // LineStyle
 			}
@@ -221,7 +222,9 @@ namespace Cumberland.Data
 				}
 				
 				xtw.WriteStartElement("Point");
-				xtw.WriteElementString("coordinates", string.Format("{0},{1}", pt.X, pt.Y));
+				xtw.WriteElementString("coordinates", string.Format("{0},{1}", 
+				                                                    pt.X.ToString(CultureInfo.InvariantCulture), 
+				                                                    pt.Y.ToString(CultureInfo.InvariantCulture)));
 				xtw.WriteEndElement(); // Point
 
 				xtw.WriteEndElement(); // Placemark
@@ -257,7 +260,9 @@ namespace Cumberland.Data
 							tpt = source.Transform(destination, pt);
 						}
 
-						sb.AppendFormat("{0},{1} ", tpt.X, tpt.Y);
+						sb.AppendFormat("{0},{1} ", 
+						                tpt.X.ToString(CultureInfo.InvariantCulture), 
+						                tpt.Y.ToString(CultureInfo.InvariantCulture));
 					}
 					
 					xtw.WriteElementString("coordinates", sb.ToString());
@@ -328,7 +333,9 @@ namespace Cumberland.Data
 								tpt = source.Transform(destination, pt);
 							}
 	
-							sb.AppendFormat("{0},{1} ", tpt.X, tpt.Y);
+							sb.AppendFormat("{0},{1} ", 
+							                tpt.X.ToString(CultureInfo.InvariantCulture), 
+							                tpt.Y.ToString(CultureInfo.InvariantCulture));
 						}
 						
 						xtw.WriteElementString("coordinates", sb.ToString());
@@ -352,7 +359,9 @@ namespace Cumberland.Data
 								tpt = source.Transform(destination, pt);
 							}
 	
-							sb.AppendFormat("{0},{1} ", tpt.X, tpt.Y);
+							sb.AppendFormat("{0},{1} ", 
+							                tpt.X.ToString(CultureInfo.InvariantCulture), 
+							                tpt.Y.ToString(CultureInfo.InvariantCulture));
 						}
 						
 						xtw.WriteElementString("coordinates", sb.ToString());
