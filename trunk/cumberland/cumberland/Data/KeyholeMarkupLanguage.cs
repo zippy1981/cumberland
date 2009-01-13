@@ -270,10 +270,26 @@ namespace Cumberland.Data
 				Polygon pg = feature as Polygon;
 
 				bool inRing = false;
-				
+                bool clockwiseIsExterior = true;
+
 				foreach (Ring r in pg.Rings)
 				{
-					if (r.IsClockwise)
+                    // Assumptions: 
+                    // - The first ring in an polygon is an exterior ring
+                    // - Interior rings will come consecutively after exterior rings
+                    // - Exterior/interior rings are determined by their ring orientation (clockwise/counter)
+
+                    // Therefore, we check the first ring's orientation and use that
+                    // to decide which orientation is exterior
+
+                    bool isClockwise = r.IsClockwise;
+
+                    if (!inRing)
+                    {
+                        clockwiseIsExterior = isClockwise;
+                    }
+  
+					if (clockwiseIsExterior == isClockwise)
 					{
 						// exterior ring
 
