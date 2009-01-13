@@ -6,6 +6,16 @@ map2kml is a command line tool that takes a [mapXmlFormat map xml document] and 
 
 The kml document will preserve symbology (including thematic mapping) and export data from your feature source.  Each layer in your map will be a folder in the kml Document.
 
+= Usage =
+
+map2kml simply takes a [mapXmlFormat map xml file] as an argument and prints out the kml.  It canl be called as so:
+
+{{{
+map2kml mymap.xml > mymap.kml
+}}}
+
+This will pipe the kml into the mymap.kml file.
+
 = Notes = 
 
   * All styles used in the map must have a unique Id property or they will be ignored.
@@ -15,4 +25,3 @@ The kml document will preserve symbology (including thematic mapping) and export
 In Google Earth:
 
 [http://cumberland.googlecode.com/files/screenshot-google-earth.jpg]
-
