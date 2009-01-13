@@ -1,5 +1,17 @@
 2009-01-12  Scott Ellington  <scott.ellington@gmail.com>
 
+	* cumberland.sln:
+	* Cumberland.MapToKml/Main.cs:
+	* Cumberland.DrawMap/Cumberland.DrawMap.csproj:
+	* Cumberland.MapToKml/Cumberland.MapToKml.csproj:
+	* Cumberland.Data.PostGIS/Cumberland.Data.PostGIS.csproj:
+	* Cumberland.Data.SqlServer/Cumberland.Data.SqlServer.csproj:
+	* Cumberland.TilePyramidGenerator/Cumberland.TilePyramidGenerator.csproj:
+	* Cumberland.Data.SqlServer.Loader/Cumberland.Data.SqlServer.Loader.csproj:
+	add back map2kml minus .net 3.5 stuff
+
+2009-01-12  Scott Ellington  <scott.ellington@gmail.com>
+
 	* Cumberland.DrawMap/Main.cs:
 	* Cumberland.TilePyramidGenerator/Main.cs:
 	* Cumberland.Data.SqlServer.Loader/Main.cs: add version option

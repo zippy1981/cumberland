@@ -1,5 +1,10 @@
 2009-01-12  Scott Ellington  <scott.ellington@gmail.com>
 
+	* Cumberland.csproj:
+	* Data/KeyholeMarkupLanguage.cs: add back map2kml minus .net 3.5 stuff
+
+2009-01-12  Scott Ellington  <scott.ellington@gmail.com>
+
 	* epsg:
 	* docs/epsg:
 	* Cumberland.csproj: move to toplevel to workaround MD bug

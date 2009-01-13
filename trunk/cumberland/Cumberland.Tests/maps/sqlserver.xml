@@ -17,7 +17,7 @@
 			<Projection>+proj=aea +lat_1=24 +lat_2=31.5 +lat_0=24 +lon_0=-84 +x_0=400000 +y_0=0 +ellps=GRS80 +units=m +no_defs</Projection>
 			<Id>counties</Id>
 			<Data sourceType="Cumberland.Data.IDatabaseFeatureSource" sourceInstance="Cumberland.Data.SqlServer.SqlServerFeatureSource">
-				<ConnectionString>Data Source=.\SQLExpress2008;Initial Catalog=spatialtest;Integrated Security=true</ConnectionString>
+				<ConnectionString>Data Source=.\SQLExpress08;Initial Catalog=spatial;Integrated Security=true</ConnectionString>
 				<TableName>cntshr</TableName>
 			</Data>
 		</Layer>
@@ -36,7 +36,7 @@
 			<Projection>+proj=aea +lat_1=24 +lat_2=31.5 +lat_0=24 +lon_0=-84 +x_0=400000 +y_0=0 +ellps=GRS80 +units=m +no_defs</Projection>
 			<Id>major roads</Id>
 			<Data sourceType="Cumberland.Data.IDatabaseFeatureSource" sourceInstance="Cumberland.Data.SqlServer.SqlServerFeatureSource">
-				<ConnectionString>Data Source=.\SQLExpress2008;Initial Catalog=spatialtest;Integrated Security=true</ConnectionString>
+				<ConnectionString>Data Source=.\SQLExpress08;Initial Catalog=spatial;Integrated Security=true</ConnectionString>
 				<TableName>(select * from majrds_apr08 where usroute = 'I    10 ') as interstates </TableName>
 				<ForcedSrid>3087</ForcedSrid>
 				<ForcedFeatureType>Polyline</ForcedFeatureType>
@@ -99,7 +99,7 @@
 			<Projection>+proj=aea +lat_1=24 +lat_2=31.5 +lat_0=24 +lon_0=-84 +x_0=400000 +y_0=0 +ellps=GRS80 +units=m +no_defs</Projection>
 			<Id>springs</Id>
 			<Data sourceType="Cumberland.Data.IDatabaseFeatureSource" sourceInstance="Cumberland.Data.SqlServer.SqlServerFeatureSource">
-				<ConnectionString>Data Source=.\SQLExpress2008;Initial Catalog=spatialtest;Integrated Security=true</ConnectionString>
+				<ConnectionString>Data Source=.\SQLExpress08;Initial Catalog=spatial;Integrated Security=true</ConnectionString>
 				<TableName>springs_fdep_2000</TableName>
 			</Data>
 		</Layer>
