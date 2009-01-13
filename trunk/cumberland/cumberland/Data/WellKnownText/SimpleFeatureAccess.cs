@@ -351,8 +351,8 @@ namespace Cumberland.Data.WellKnownText
 				throw new ArgumentException(string.Format( "Invalid WKT: a coordinate should be '0 0' not '{0}'", wkt), "wkt");
 			}
 
-			return new Point(Convert.ToDouble(pieces[0]),
-			                 Convert.ToDouble(pieces[1]));
+			return new Point(Convert.ToDouble(pieces[0], System.Globalization.CultureInfo.InvariantCulture),
+			                 Convert.ToDouble(pieces[1], System.Globalization.CultureInfo.InvariantCulture));
 		}
 		
 #endregion

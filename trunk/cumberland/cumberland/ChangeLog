@@ -1,3 +1,8 @@
+2009-01-13  Scott Ellington  <scott.ellington@gmail.com>
+
+	* Data/WellKnownText/SimpleFeatureAccess.cs: use invariant culture to
+	avoid locale problems
+
 2009-01-12  Scott Ellington  <scott.ellington@gmail.com>
 
 	* Cumberland.csproj:
