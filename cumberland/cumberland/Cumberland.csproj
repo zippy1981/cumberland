@@ -74,6 +74,7 @@
     <Compile Include="Data\WellKnownText\SimpleFeatureAccess.cs" />
     <Compile Include="Drawing\MapConfigurationException.cs" />
     <Compile Include="Data\AbstractDatabaseFeatureSource.cs" />
+    <Compile Include="Data\KeyholeMarkupLanguage.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -98,9 +99,7 @@
     </MonoDevelop>
   </ProjectExtensions>
   <ItemGroup>
-    <None Include="Data\KeyholeMarkupLanguage.cs" />
     <None Include="epsg">
-      <Gettext-ScanForTranslations>false</Gettext-ScanForTranslations>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

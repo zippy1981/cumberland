@@ -25,8 +25,6 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-//using System.Linq;
-//using System.Xml.Linq;
 using System.Xml;
 using System.IO;
 using System.Text;
@@ -61,7 +59,6 @@ namespace Cumberland.Data
 				}
 			}
 			
-			//XNamespace ns = XNamespace.Get("http://www.opengis.net/kml/2.2");
 			StringWriter tw = new StringWriter();
 			XmlTextWriter xtw = new XmlTextWriter(tw);
 
@@ -86,22 +83,10 @@ namespace Cumberland.Data
 				CreateFromLayer(xtw, l, extents);
 			}
 			
-//			XDocument doc = new XDocument(new XElement("kml",
-//			                                           new XElement("Document",
-//			                                                        from l in map.Layers
-//			                                                        where l.Data != null
-//			                                                        from s in l.Styles
-//			                                                        where !string.IsNullOrEmpty(s.Id)
-//			                                                        select CreateFromStyle(s, l.Data.SourceFeatureType),
-//			                                                        from l in map.Layers
-//			                                                        where l.Data != null
-//			                                                        select CreateFromLayer(l, extents))));
-
 			xtw.WriteEndElement(); // Document
 			xtw.WriteEndElement(); // kml
 			xtw.WriteEndDocument();
-			
-			//return doc.ToString(SaveOptions.DisableFormatting);
+
 			return tw.ToString();
 		}
 
@@ -128,16 +113,12 @@ namespace Cumberland.Data
 
 				xtw.WriteStartElement("Folder");
 				xtw.WriteElementString("name", layer.Id);
+				xtw.WriteElementString("visibility", layer.Visible ? "1" : "0");
 
 				foreach (Feature f in layer.Data.GetFeatures(queryExtents, layer.ThemeField, layer.LabelField))
 				{
 					CreateFromFeature(xtw, layer, f, src, dst);
 				}
-				
-//				return new XElement("Folder",
-//				                     new XElement("name", layer.Id),
-//				                     from f in layer.Data.GetFeatures(queryExtents, layer.ThemeField, layer.LabelField)
-//				                     select CreateFromFeature(layer, f, src, dst));
 
 				xtw.WriteEndElement(); // Folder
 			}
@@ -153,49 +134,27 @@ namespace Cumberland.Data
 
 		static void CreateFromStyle(XmlTextWriter xtw, Style style, FeatureType featureType)
 		{
-			if (string.IsNullOrEmpty(style.Id)) return null;
+			if (string.IsNullOrEmpty(style.Id)) return;
 
 			xtw.WriteStartElement("Style");
 			xtw.WriteElementString("id", style.Id);
 
 			if (featureType == FeatureType.Polygon)
 			{
-				
-//				return new XElement("Style",
-//				                    new XAttribute("id", style.Id),
-//				                    new XElement("LineStyle",
-//				                                 new XElement("width", (style.LineStyle == LineStyle.None ? 0 : style.LineWidth)),
-//				                                 new XElement("color", ConvertToKmlColor(style.LineColor))),
-//				                    new XElement("PolyStyle",
-//				                                 new XElement("color", (style.FillStyle == FillStyle.None ? "00ffffff" : ConvertToKmlColor(style.FillColor)))));
-
 				xtw.WriteStartElement("PolyStyle");
 				xtw.WriteElementString("color", (style.FillStyle == FillStyle.None ? "00ffffff" : ConvertToKmlColor(style.FillColor)));
-				xtw.WriteEndElement(); // PolyStyle
-				                                              
+				xtw.WriteEndElement(); // PolyStyle	                                              
 			}
 			
 			if (featureType == FeatureType.Polyline || featureType == FeatureType.Polygon)
 			{
-//				return new XElement("Style",
-//				                    new XAttribute("id", style.Id),
-//				                    new XElement("LineStyle",
-//				                                 new XElement("width", (style.LineStyle == LineStyle.None ? 0 : style.LineWidth)),
-//				                                 new XElement("color", ConvertToKmlColor(style.LineColor))));
-
 				xtw.WriteStartElement("LineStyle");
-				xtw.WriteElementString("width", (style.LineStyle == LineStyle.None ? 0 : style.LineWidth));
+				xtw.WriteElementString("width", (style.LineStyle == LineStyle.None ? 0 : style.LineWidth).ToString());
 				xtw.WriteElementString("color", ConvertToKmlColor(style.LineColor));
 				xtw.WriteEndElement(); // LineStyle
 			}
 			else if (featureType == FeatureType.Point)
 			{
-//				return new XElement("Style",
-//				                    new XAttribute("id", style.Id),
-//				                    new XElement("IconStyle",
-//				                                 (style.PointSymbol == PointSymbolType.Image ? new XElement("Icon", new XElement("href", style.PointSymbolImagePath)) : null),
-//				                                 (style.PointSymbol == PointSymbolType.Shape ? new XElement("color", ConvertToKmlColor(style.LineColor)) : null)));
-
 				xtw.WriteStartElement("IconStyle");
 
 				if (style.PointSymbol == PointSymbolType.Image)
@@ -229,10 +188,10 @@ namespace Cumberland.Data
 		                              ProjFourWrapper source,
 		                              ProjFourWrapper destination)
 		{
-			//List<XElement> xe = new List<XElement>();
-
 			Style style = layer.GetStyleForFeature(feature.ThemeFieldValue);
 
+			if (style == null) return;
+			
 			string name = !string.IsNullOrEmpty(feature.LabelFieldValue) ? 
 				feature.LabelFieldValue : 
 					!string.IsNullOrEmpty(feature.ThemeFieldValue) ?
@@ -249,12 +208,6 @@ namespace Cumberland.Data
 					pt = source.Transform(destination, pt);
 				}
 				
-//				xe.Add(new XElement("Placemark", 
-//				                    (style != null && !string.IsNullOrEmpty(style.Id) ? new XElement("styleUrl", "#" + style.Id) : null),
-//				                    (name != null ? new XElement("name", name) : null),
-//				                    new XElement("Point",
-//				                                 new XElement("coordinates",
-//				                                              string.Format("{0},{1}", pt.X, pt.Y)))));
 				xtw.WriteStartElement("Placemark");
 				
 				if (style != null && !string.IsNullOrEmpty(style.Id))
@@ -279,15 +232,6 @@ namespace Cumberland.Data
 
               	foreach (Line l in pl.Lines)
 				{
-					xe.Add(new XElement("Placemark",
-					                    (style != null && !string.IsNullOrEmpty(style.Id) ? new XElement("styleUrl", "#" + style.Id) : null),
-					                    (name != null ? new XElement("name", name) : null),
-					                    new XElement("LineString",
-					                                 new XElement("tessellate", "1"),
-					                                 new XElement("coordinates",
-					                                              from pt in l.Points.Transform(source, destination)
-					                                              select string.Format("{0},{1} ", pt.X, pt.Y)))));
-
 					xtw.WriteStartElement("Placemark");
 				
 					if (style != null && !string.IsNullOrEmpty(style.Id))
@@ -300,6 +244,7 @@ namespace Cumberland.Data
 						xtw.WriteElementString("name", name);
 					}
 
+					xtw.WriteStartElement("LineString");
 					xtw.WriteElementString("tessellate", "1");
 
 					StringBuilder sb = new StringBuilder();
@@ -312,11 +257,11 @@ namespace Cumberland.Data
 							tpt = source.Transform(destination, pt);
 						}
 
-						sb.AppendFormat("{0},{1} ", pt.X, pt.Y);
+						sb.AppendFormat("{0},{1} ", tpt.X, tpt.Y);
 					}
 					
 					xtw.WriteElementString("coordinates", sb.ToString());
-					
+					xtw.WriteEndElement(); // LineString
 					xtw.WriteEndElement(); // Placemark
 				}
 			}
@@ -324,40 +269,86 @@ namespace Cumberland.Data
 			{
 				Polygon pg = feature as Polygon;
 
-				XElement node = null;
+				bool inRing = false;
 				
 				foreach (Ring r in pg.Rings)
 				{
 					if (r.IsClockwise)
 					{
-						if (node != null)
+						// exterior ring
+
+						if (inRing)
 						{
-							xe.Add(node);
+							xtw.WriteEndElement(); // Polygon
+							xtw.WriteEndElement(); // Placemark
+						}
+
+						inRing = true;
+						
+						xtw.WriteStartElement("Placemark");
+
+						if (style != null && !string.IsNullOrEmpty(style.Id))
+						{
+							xtw.WriteElementString("styleUrl", "#" + style.Id);
+						}
+			
+						if (name != null)
+						{
+							xtw.WriteElementString("name", name);
+						}
+
+						xtw.WriteStartElement("Polygon");
+						xtw.WriteStartElement("outerBoundaryIs");
+						xtw.WriteStartElement("LinearRing");
+
+						xtw.WriteElementString("tessellate", "1");
+
+						StringBuilder sb = new StringBuilder();
+						foreach (Point pt in r.Points)
+						{
+							Point tpt = pt;
+							if (transform)
+							{
+								tpt = source.Transform(destination, pt);
+							}
+	
+							sb.AppendFormat("{0},{1} ", tpt.X, tpt.Y);
 						}
 						
-						node = new XElement("Placemark",
-						                    (style != null && !string.IsNullOrEmpty(style.Id) ? new XElement("styleUrl", "#" + style.Id) : null),
-						                    (name != null ? new XElement("name", name) : null),
-						                    new XElement("Polygon",
-						                                 new XElement("outerBoundaryIs",
-						                                              new XElement("LinearRing",
-						                                                           new XElement("tessellate", "1"),
-						                                                           new XElement("coordinates",
-						                                                                        from pt in r.Points.Transform(source, destination)
-						                                                                        select string.Format("{0},{1} ", pt.X, pt.Y) )))));
-					}
+						xtw.WriteElementString("coordinates", sb.ToString());
+						
+						xtw.WriteEndElement(); // LinearRing
+						xtw.WriteEndElement(); // outerBoundaryIs
+											}
 					else
 					{
-						node.Element("Polygon").Add(new XElement("innerBoundaryIs",
-						                                          new XElement("LinearRing",				                                 
-						                                                      new XElement("tessellate", "1"),
-						                                                      new XElement("coordinates",
-						                                                                   from pt in r.Points.Transform(source, destination)
-						                                                                   select string.Format("{0},{1} ", pt.X, pt.Y) ))));
+						xtw.WriteStartElement("innerBoundaryIs");
+						xtw.WriteStartElement("LinearRing");
+
+						xtw.WriteElementString("tessellate", "1");
+
+						StringBuilder sb = new StringBuilder();
+						foreach (Point pt in r.Points)
+						{
+							Point tpt = pt;
+							if (transform)
+							{
+								tpt = source.Transform(destination, pt);
+							}
+	
+							sb.AppendFormat("{0},{1} ", tpt.X, tpt.Y);
+						}
+						
+						xtw.WriteElementString("coordinates", sb.ToString());
+
+						xtw.WriteEndElement(); // LinearRing
+						xtw.WriteEndElement(); // innerBoundaryIs
 					}
 				}
 
-				xe.Add(node);
+				xtw.WriteEndElement(); // Polygon
+				xtw.WriteEndElement(); // Placemark
+				//xe.Add(node);
 			}
 		}
 	
