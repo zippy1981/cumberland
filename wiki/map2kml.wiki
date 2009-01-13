@@ -2,9 +2,7 @@
 
 = Introduction =
 
-map2kml is a command line tool that takes a [mapXmlFormat map xml document] and converts it into a Keyhole Markup Language (KML) document that can be loaded into Google Earth or Google Maps.
-
-The kml document will preserve symbology (including thematic mapping) and export data from your feature source.  Each layer in your map will be a folder in the kml Document.
+map2kml is a command line tool that takes a [mapXmlFormat map xml document] and converts it into a Keyhole Markup Language (KML) document that can be loaded into Google Earth or Google Maps.  The kml document will preserve symbology (including thematic mapping) and export data from your feature source.  Each layer in your map will be a folder in the kml Document.
 
 = Usage =
 
