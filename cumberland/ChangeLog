@@ -1,3 +1,8 @@
+2009-01-15  Scott Ellington  <scott.ellington@gmail.com>
+
+	* Cumberland.TilePyramidGenerator/Main.cs: force en-us culture on
+	extents for consistency
+
 2009-01-12  Scott Ellington  <scott.ellington@gmail.com>
 
 	* cumberland.sln:

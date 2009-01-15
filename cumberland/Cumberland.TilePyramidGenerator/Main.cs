@@ -26,6 +26,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Xml;
@@ -69,10 +70,10 @@ namespace Cumberland.TilePyramidGenerator
 			            delegate (string v) { path = v; });
 			options.Add("x|maxzoom=",
 			            "the maximum zoom level",
-			            delegate (string v) { maxZoomLevel = int.Parse(v); mxzlChanged = true; });
+			            delegate (string v) { maxZoomLevel = int.Parse(v, CultureInfo.InvariantCulture); mxzlChanged = true; });
 			options.Add("n|minzoom=",
 			            "the minimum zoom level",
-			            delegate (string v) { minZoomLevel = int.Parse(v); mnzlChanged = true; });
+			            delegate (string v) { minZoomLevel = int.Parse(v, CultureInfo.InvariantCulture); mnzlChanged = true; });
 			options.Add("t|test",
 			            "Test - only calculate the total and return",
 			            delegate (string v) { onlyCount = v != null; });
@@ -104,7 +105,7 @@ namespace Cumberland.TilePyramidGenerator
 			            delegate (string v) { worldExtents = ParseExtents(v); } );
 			options.Add("b|bleed=",
 			            "the bleed in pixels for tiles (useful for catching overrunning symbols/labels from other tiles",
-			            delegate (string v) { bleedInPixels = int.Parse(v); });
+			            delegate (string v) { bleedInPixels = int.Parse(v, CultureInfo.InvariantCulture); });
 			options.Add("v|version",
 			            "shows the version and exits", 
 			            delegate (string v) { showVersion = v != null; });
@@ -376,10 +377,10 @@ namespace Cumberland.TilePyramidGenerator
 		static Rectangle ParseExtents(string extents)
 		{
 			string[] coords = extents.Split(',');
-			return new Rectangle(Convert.ToDouble(coords[0]),
-			                     Convert.ToDouble(coords[1]),
-			                     Convert.ToDouble(coords[2]),
-			                     Convert.ToDouble(coords[3]));
+			return new Rectangle(Convert.ToDouble(coords[0], CultureInfo.InvariantCulture),
+			                     Convert.ToDouble(coords[1], CultureInfo.InvariantCulture),
+			                     Convert.ToDouble(coords[2], CultureInfo.InvariantCulture),
+			                     Convert.ToDouble(coords[3], CultureInfo.InvariantCulture));
 		}
 		
 		static void ShowHelp (OptionSet p)
