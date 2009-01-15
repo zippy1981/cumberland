@@ -55,6 +55,8 @@ namespace Cumberland.Data.SqlServer
 		
 		public override FeatureType SourceFeatureType {
 			get {
+                CheckIfInitialized();
+
 				return featureType;
 			}
 		}
