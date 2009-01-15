@@ -138,7 +138,7 @@ namespace Cumberland.Data
 			if (string.IsNullOrEmpty(style.Id)) return;
 
 			xtw.WriteStartElement("Style");
-			xtw.WriteElementString("id", style.Id);
+			xtw.WriteAttributeString("id", style.Id);
 
 			if (featureType == FeatureType.Polygon)
 			{

@@ -1,3 +1,7 @@
+2009-01-15  Scott Ellington  <scott.ellington@gmail.com>
+
+	* Data/KeyholeMarkupLanguage.cs: fix regression Style.id is attribute
+
 2009-01-13  Scott Ellington  <scott.ellington@gmail.com>
 
 	* Data/WellKnownText/SimpleFeatureAccess.cs: more locale fixes
