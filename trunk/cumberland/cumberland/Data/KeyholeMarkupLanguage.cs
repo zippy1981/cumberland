@@ -59,9 +59,11 @@ namespace Cumberland.Data
 					}
 				}
 			}
-			
-			StringWriter tw = new StringWriter();
-			XmlTextWriter xtw = new XmlTextWriter(tw);
+
+			MemoryStream ms = new MemoryStream();
+			//StringWriter sw = new StringWriter();
+						
+			XmlTextWriter xtw = new XmlTextWriter(ms, Encoding.UTF8);
 
 			xtw.WriteStartDocument();
 			xtw.WriteStartElement("kml", "http://www.opengis.net/kml/2.2");
@@ -87,8 +89,12 @@ namespace Cumberland.Data
 			xtw.WriteEndElement(); // Document
 			xtw.WriteEndElement(); // kml
 			xtw.WriteEndDocument();
-
-			return tw.ToString();
+			xtw.Flush();
+			
+			// Now read back
+			ms.Seek(0, SeekOrigin.Begin);
+			TextReader tr = new StreamReader(ms);
+			return tr.ReadToEnd();
 		}
 
 		#region helper methods

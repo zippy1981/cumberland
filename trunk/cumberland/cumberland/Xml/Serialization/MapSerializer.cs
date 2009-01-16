@@ -175,7 +175,12 @@ namespace Cumberland.Xml.Serialization
 			Serialize(ms, map);
 
 			//return sw.ToString();
-			return Encoding.UTF8.GetString(ms.GetBuffer());
+			//return Encoding.UTF8.GetString(ms.GetBuffer());
+
+			// Now read back
+			ms.Seek(0, SeekOrigin.Begin);
+			TextReader tr = new StreamReader(ms);
+			return tr.ReadToEnd();
 		}
 
 		public static void Serialize(Stream stream, Map map)
