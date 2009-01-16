@@ -25,6 +25,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Xml;
@@ -113,18 +114,18 @@ namespace Cumberland.Xml.Serialization
 			}
 			
 			// check for version attribute.  if none just try
-			XmlNode versionNode = mapNode.Attributes.GetNamedItem("version");
-			if (versionNode != null)
-			{
-				string version = versionNode.Value;
-				
-				if (version != currentVersion)
-				{
-					throw new NotSupportedException(string.Format("Version '{0}' is not supported.  Only '{1}'", 
-					                                              version,
-					                                              currentVersion));
-				}
-			}
+//			XmlNode versionNode = mapNode.Attributes.GetNamedItem("version");
+//			if (versionNode != null)
+//			{
+//				string version = versionNode.Value;
+//				
+//				if (version != currentVersion)
+//				{
+//					throw new NotSupportedException(string.Format("Version '{0}' is not supported.  Only '{1}'", 
+//					                                              version,
+//					                                              currentVersion));
+//				}
+//			}
 			
 			foreach (XmlNode node  in mapNode.ChildNodes)
 			{
@@ -145,11 +146,13 @@ namespace Cumberland.Xml.Serialization
 				}
 				else if (node.Name == "Width")
 				{
-					map.Width = int.Parse(node.InnerText);
+					map.Width = int.Parse(node.InnerText,
+					                      CultureInfo.InvariantCulture);
 				}
 				else if (node.Name == "Height")
 				{
-					map.Height = int.Parse(node.InnerText);
+					map.Height = int.Parse(node.InnerText,
+					                       CultureInfo.InvariantCulture);
 				}
 				else if (node.Name == "BackgroundColor")
 				{
@@ -184,11 +187,23 @@ namespace Cumberland.Xml.Serialization
 			writer.WriteStartElement("Map");
 			writer.WriteAttributeString("version", currentVersion);
 			
-			writer.WriteElementString("Width", map.Width.ToString());
-			writer.WriteElementString("Height", map.Height.ToString());
-			writer.WriteElementString("Extents", PrepareRectangle(map.Extents));
-			if (!string.IsNullOrEmpty(map.Projection)) writer.WriteElementString("Projection", map.Projection);
-			if (map.BackgroundColor != Color.Empty) writer.WriteElementString("BackgroundColor", PrepareColor(map.BackgroundColor));
+			writer.WriteElementString("Width", 
+			                          map.Width.ToString(CultureInfo.InvariantCulture));
+			writer.WriteElementString("Height", 
+			                          map.Height.ToString(CultureInfo.InvariantCulture));
+			writer.WriteElementString("Extents", 
+			                          PrepareRectangle(map.Extents));
+			
+			if (!string.IsNullOrEmpty(map.Projection)) 
+			{
+				writer.WriteElementString("Projection", map.Projection);
+			}
+			
+			if (map.BackgroundColor != Color.Empty)
+			{
+				writer.WriteElementString("BackgroundColor",
+				                          PrepareColor(map.BackgroundColor));
+			}
 
 			writer.WriteStartElement("Layers");
 			
@@ -272,7 +287,8 @@ namespace Cumberland.Xml.Serialization
 									
 								case "ForcedSrid":
 									
-									dfs.ForcedSrid = int.Parse(dnode.InnerText);
+									dfs.ForcedSrid = int.Parse(dnode.InnerText,
+									                           CultureInfo.InvariantCulture);
 									break;
 									
 								case "ForcedFeatureType":
@@ -305,7 +321,8 @@ namespace Cumberland.Xml.Serialization
 
 							if (instanceType == null)
 							{
-								throw new FormatException(string.Format("Source type '{0}' is not a supported file source", instance));
+								throw new FormatException(string.Format("Source type '{0}' is not a supported file source", 
+								                                        instance));
 							}
 							
 							l.Data = Activator.CreateInstance(instanceType) as IFeatureSource;
@@ -356,11 +373,13 @@ namespace Cumberland.Xml.Serialization
 				}
 				else if (child.Name == "MaxScale")
 				{
-					l.MaxScale = double.Parse(child.InnerText);
+					l.MaxScale = double.Parse(child.InnerText,
+					                          CultureInfo.InvariantCulture);
 				}
 				else if (child.Name == "MinScale")
 				{
-					l.MinScale = double.Parse(child.InnerText);
+					l.MinScale = double.Parse(child.InnerText,
+					                          CultureInfo.InvariantCulture);
 				}
 			}
 			
@@ -375,11 +394,13 @@ namespace Cumberland.Xml.Serialization
 			{
 				if (child.Name == "LineWidth")
 				{
-					style.LineWidth = Convert.ToInt32(child.InnerText);
+					style.LineWidth = Convert.ToInt32(child.InnerText,
+					                                  CultureInfo.InvariantCulture);
 				}
 				else if (child.Name == "PointSize")
 				{
-					style.PointSize = Convert.ToInt32(child.InnerText);
+					style.PointSize = Convert.ToInt32(child.InnerText,
+					                                  CultureInfo.InvariantCulture);
 				}
 				else if (child.Name == "LineColor")
 				{
@@ -391,11 +412,13 @@ namespace Cumberland.Xml.Serialization
 				}
 				else if (child.Name == "LineStyle")
 				{
-					style.LineStyle = (LineStyle) Enum.Parse(typeof(LineStyle), child.InnerText);
+					style.LineStyle = (LineStyle) Enum.Parse(typeof(LineStyle), 
+					                                         child.InnerText);
 				}
 				else if (child.Name == "PointSymbol")
 				{
-					style.PointSymbol = (PointSymbolType) Enum.Parse(typeof(PointSymbolType), child.InnerText);
+					style.PointSymbol = (PointSymbolType) Enum.Parse(typeof(PointSymbolType), 
+					                                                 child.InnerText);
 				}
 				else if (child.Name == "PointSymbolShape")
 				{
@@ -404,15 +427,18 @@ namespace Cumberland.Xml.Serialization
 				}
 				else if (child.Name == "PointSymbolImagePath")
 				{
-					style.PointSymbolImagePath = AnchorPath(mapPath, child.InnerText);
+					style.PointSymbolImagePath = AnchorPath(mapPath, 
+					                                        child.InnerText);
 				}
 				else if (child.Name == "MaxRangeThemeValue")
 				{
-					style.MaxRangeThemeValue = double.Parse(child.InnerText);
+					style.MaxRangeThemeValue = double.Parse(child.InnerText,
+					                                        CultureInfo.InvariantCulture);
 				}
 				else if (child.Name == "MinRangeThemeValue")
 				{
-					style.MinRangeThemeValue = double.Parse(child.InnerText);
+					style.MinRangeThemeValue = double.Parse(child.InnerText,
+					                                        CultureInfo.InvariantCulture);
 				}
 				else if (child.Name == "UniqueThemeValue")
 				{
@@ -424,11 +450,13 @@ namespace Cumberland.Xml.Serialization
 				}
 				else if (child.Name == "FillStyle")
 				{
-					style.FillStyle = (FillStyle) Enum.Parse(typeof(FillStyle), child.InnerText);
+					style.FillStyle = (FillStyle) Enum.Parse(typeof(FillStyle), 
+					                                         child.InnerText);
 				}
 				else if (child.Name == "LabelFont")
 				{
-					style.LabelFont = (LabelFont) Enum.Parse(typeof(LabelFont), child.InnerText);
+					style.LabelFont = (LabelFont) Enum.Parse(typeof(LabelFont), 
+					                                         child.InnerText);
 				}
 				else if (child.Name == "ShowLabels")
 				{
@@ -440,19 +468,23 @@ namespace Cumberland.Xml.Serialization
 				}
 				else if (child.Name == "LabelFontEmSize")
 				{
-					style.LabelFontEmSize = float.Parse(child.InnerText);
+					style.LabelFontEmSize = float.Parse(child.InnerText,
+					                                    CultureInfo.InvariantCulture);
 				}
 				else if (child.Name == "LabelPosition")
 				{
-					style.LabelPosition = (LabelPosition) Enum.Parse(typeof(LabelPosition), child.InnerText);
+					style.LabelPosition = (LabelPosition) Enum.Parse(typeof(LabelPosition), 
+					                                                 child.InnerText);
 				}
 				else if (child.Name == "LabelPixelOffset")
 				{
-					style.LabelPixelOffset = int.Parse(child.InnerText);
+					style.LabelPixelOffset = int.Parse(child.InnerText,
+					                                   CultureInfo.InvariantCulture);
 				}
 				else if (child.Name == "LabelDecoration")
 				{
-					style.LabelDecoration = (LabelDecoration) Enum.Parse(typeof(LabelDecoration), child.InnerText);
+					style.LabelDecoration = (LabelDecoration) Enum.Parse(typeof(LabelDecoration), 
+					                                                     child.InnerText);
 				}
 				else if (child.Name == "LabelOutlineColor")
 				{
@@ -460,27 +492,33 @@ namespace Cumberland.Xml.Serialization
 				}
 				else if (child.Name == "LabelOutlineWidth")
 				{
-					style.LabelOutlineWidth = float.Parse(child.InnerText);
+					style.LabelOutlineWidth = float.Parse(child.InnerText,
+					                                      CultureInfo.InvariantCulture);
 				}
 				else if (child.Name == "LabelAngle")
 				{
-					style.LabelAngle = float.Parse(child.InnerText);
+					style.LabelAngle = float.Parse(child.InnerText,
+					                               CultureInfo.InvariantCulture);
 				}
 				else if (child.Name == "MinScale")
 				{
-					style.MinScale = double.Parse(child.InnerText);
+					style.MinScale = double.Parse(child.InnerText,
+					                              CultureInfo.InvariantCulture);
 				}
 				else if (child.Name == "MaxScale")
 				{
-					style.MaxScale = double.Parse(child.InnerText);
+					style.MaxScale = double.Parse(child.InnerText,
+					                              CultureInfo.InvariantCulture);
 				}
 				else if (child.Name == "LabelMinScale")
 				{
-					style.LabelMinScale = double.Parse(child.InnerText);
+					style.LabelMinScale = double.Parse(child.InnerText,
+					                                   CultureInfo.InvariantCulture);
 				}
 				else if (child.Name == "LabelMaxScale")
 				{
-					style.LabelMaxScale = double.Parse(child.InnerText);
+					style.LabelMaxScale = double.Parse(child.InnerText,
+					                                   CultureInfo.InvariantCulture);
 				}
 				else if (child.Name == "LabelCustomFont")
 				{
@@ -514,14 +552,42 @@ namespace Cumberland.Xml.Serialization
 			writer.WriteStartElement("Layer");
 
 			// Layer properties
-			if (!string.IsNullOrEmpty(layer.Projection)) writer.WriteElementString("Projection", layer.Projection);
-			if (!string.IsNullOrEmpty(layer.Id)) writer.WriteElementString("Id", layer.Id);
-			if (layer.Theme != ThemeType.None) writer.WriteElementString("Theme", Enum.GetName(typeof(ThemeType), layer.Theme));
-			if (!string.IsNullOrEmpty(layer.ThemeField)) writer.WriteElementString("ThemeField", layer.ThemeField);
-			if (!string.IsNullOrEmpty(layer.LabelField)) writer.WriteElementString("LabelField", layer.LabelField);
+			if (!string.IsNullOrEmpty(layer.Projection)) 
+			{
+				writer.WriteElementString("Projection", layer.Projection);
+			}
+			
+			if (!string.IsNullOrEmpty(layer.Id))
+			{
+				writer.WriteElementString("Id", layer.Id);
+			}
+			
+			if (layer.Theme != ThemeType.None) 
+			{
+				writer.WriteElementString("Theme", Enum.GetName(typeof(ThemeType), layer.Theme));
+			}
+			
+			if (!string.IsNullOrEmpty(layer.ThemeField)) 
+			{
+				writer.WriteElementString("ThemeField", layer.ThemeField);
+			}
+			
+			if (!string.IsNullOrEmpty(layer.LabelField)) 
+			{
+				writer.WriteElementString("LabelField", layer.LabelField);
+			}
+			
 			writer.WriteElementString("Visible", layer.Visible.ToString());
-			if (layer.MinScale > double.MinValue) writer.WriteElementString("MinScale", layer.MinScale.ToString());
-			if (layer.MaxScale < double.MaxValue) writer.WriteElementString("MaxScale", layer.MaxScale.ToString());
+			
+			if (layer.MinScale > double.MinValue) 
+			{
+				writer.WriteElementString("MinScale", layer.MinScale.ToString(CultureInfo.InvariantCulture));
+			}
+			
+			if (layer.MaxScale < double.MaxValue) 
+			{
+				writer.WriteElementString("MaxScale", layer.MaxScale.ToString(CultureInfo.InvariantCulture));
+			}
 			
 			// handle Data Element
 			writer.WriteStartElement("Data");
@@ -550,30 +616,40 @@ namespace Cumberland.Xml.Serialization
 			else if (dfp != null)
 			{
 				// add sourceType attribute to Data element
-				writer.WriteAttributeString("sourceType", typeof(IDatabaseFeatureSource).ToString());
-				writer.WriteAttributeString("sourceInstance", layer.Data.GetType().ToString());
+				writer.WriteAttributeString("sourceType", 
+				                            typeof(IDatabaseFeatureSource).ToString());
+				writer.WriteAttributeString("sourceInstance", 
+				                            layer.Data.GetType().ToString());
 				
-				writer.WriteElementString("ConnectionString", dfp.ConnectionString);
-				writer.WriteElementString("TableName", dfp.TableName);
+				writer.WriteElementString("ConnectionString", 
+				                          dfp.ConnectionString);
+				writer.WriteElementString("TableName", 
+				                          dfp.TableName);
 				
 				if (dfp.ForcedSrid >= 0)
 				{
-					writer.WriteElementString("ForcedSrid", dfp.ForcedSrid.ToString());
+					writer.WriteElementString("ForcedSrid", 
+					                          dfp.ForcedSrid.ToString(CultureInfo.InvariantCulture));
 				}
 				
 				if (dfp.ForcedSpatialType != SpatialType.None)
 				{
-					writer.WriteElementString("ForcedSpatialType", Enum.GetName(typeof(SpatialType), dfp.ForcedSpatialType));
+					writer.WriteElementString("ForcedSpatialType", 
+					                          Enum.GetName(typeof(SpatialType), 
+					                                       dfp.ForcedSpatialType));
 				}
 				
 				if (dfp.ForcedFeatureType != FeatureType.None)
 				{
-					writer.WriteElementString("ForcedFeatureType", Enum.GetName(typeof(FeatureType), dfp.ForcedFeatureType));
+					writer.WriteElementString("ForcedFeatureType", 
+					                          Enum.GetName(typeof(FeatureType), 
+					                                       dfp.ForcedFeatureType));
 				}
 				
 				if (!string.IsNullOrEmpty(dfp.ForcedGeometryColumn))
 				{
-					writer.WriteElementString("ForcedGeometryColumn", dfp.ForcedGeometryColumn);
+					writer.WriteElementString("ForcedGeometryColumn", 
+					                          dfp.ForcedGeometryColumn);
 				}
 			}
 			writer.WriteEndElement(); // Data
@@ -593,75 +669,162 @@ namespace Cumberland.Xml.Serialization
 		{
 			writer.WriteStartElement("Style");
 			
-			writer.WriteElementString("LineStyle", Enum.GetName(typeof(LineStyle), style.LineStyle));
-			writer.WriteElementString("PointSymbol", Enum.GetName(typeof(PointSymbolType), style.PointSymbol));
-			writer.WriteElementString("PointSymbolShape", Enum.GetName(typeof(PointSymbolShapeType), style.PointSymbolShape));
-			if (!string.IsNullOrEmpty(style.PointSymbolImagePath)) writer.WriteElementString("PointSymbolImagePath", style.PointSymbolImagePath);
-			writer.WriteElementString("LineWidth", style.LineWidth.ToString());
-			writer.WriteElementString("PointSize", style.PointSize.ToString());
-			writer.WriteElementString("LineColor", PrepareColor(style.LineColor));
-			writer.WriteElementString("FillColor", PrepareColor(style.FillColor));
+			writer.WriteElementString("LineStyle", 
+			                          Enum.GetName(typeof(LineStyle), 
+			                                       style.LineStyle));
+			writer.WriteElementString("PointSymbol", 
+			                          Enum.GetName(typeof(PointSymbolType), 
+			                                       style.PointSymbol));
+			writer.WriteElementString("PointSymbolShape", 
+			                          Enum.GetName(typeof(PointSymbolShapeType), 
+			                                       style.PointSymbolShape));
+			if (!string.IsNullOrEmpty(style.PointSymbolImagePath))
+			{
+				writer.WriteElementString("PointSymbolImagePath", 
+				                          style.PointSymbolImagePath);
+			}
 			
-			if (!string.IsNullOrEmpty(style.UniqueThemeValue)) writer.WriteElementString("UniqueThemeValue", style.UniqueThemeValue);
-			writer.WriteElementString("MaxRangeThemeValue", style.MaxRangeThemeValue.ToString());
-			writer.WriteElementString("MinRangeThemeValue", style.MinRangeThemeValue.ToString());
-			if (!string.IsNullOrEmpty(style.Id)) writer.WriteElementString("Id", style.Id);
-			writer.WriteElementString("FillStyle", Enum.GetName(typeof(FillStyle), style.FillStyle));
+			writer.WriteElementString("LineWidth", 
+			                          style.LineWidth.ToString(CultureInfo.InvariantCulture));
+			writer.WriteElementString("PointSize", 
+			                          style.PointSize.ToString(CultureInfo.InvariantCulture));
+			writer.WriteElementString("LineColor", 
+			                          PrepareColor(style.LineColor));
+			writer.WriteElementString("FillColor", 
+			                          PrepareColor(style.FillColor));
+			
+			if (!string.IsNullOrEmpty(style.UniqueThemeValue)) 
+			{
+				writer.WriteElementString("UniqueThemeValue", 
+				                          style.UniqueThemeValue);
+			}
+			
+			writer.WriteElementString("MaxRangeThemeValue", 
+			                          style.MaxRangeThemeValue.ToString(CultureInfo.InvariantCulture));
+			writer.WriteElementString("MinRangeThemeValue", 
+			                          style.MinRangeThemeValue.ToString(CultureInfo.InvariantCulture));
+			if (!string.IsNullOrEmpty(style.Id))
+			{
+				writer.WriteElementString("Id", style.Id);
+			}
+			
+			writer.WriteElementString("FillStyle", 
+			                          Enum.GetName(typeof(FillStyle), 
+			                                       style.FillStyle));
 
-			writer.WriteElementString("LabelFont", Enum.GetName(typeof(LabelFont), style.LabelFont));
-			writer.WriteElementString("ShowLabels", style.ShowLabels.ToString());
-			writer.WriteElementString("LabelColor", PrepareColor(style.LabelColor));
-			writer.WriteElementString("LabelFontEmSize", style.LabelFontEmSize.ToString());
-			writer.WriteElementString("LabelPosition", Enum.GetName(typeof(LabelPosition), style.LabelPosition));
-			writer.WriteElementString("LabelPixelOffset", style.LabelPixelOffset.ToString());
-			writer.WriteElementString("LabelDecoration", Enum.GetName(typeof(LabelDecoration), style.LabelDecoration));
-			writer.WriteElementString("LabelOutlineColor", PrepareColor(style.LabelOutlineColor));
-			writer.WriteElementString("LabelOutlineWidth", style.LabelOutlineWidth.ToString());
-			if (style.LabelAngle != 0) writer.WriteElementString("LabelAngle", style.LabelAngle.ToString());
-			if (!string.IsNullOrEmpty(style.LabelCustomFont)) writer.WriteElementString("LabelCustomFont", style.LabelCustomFont);
+			writer.WriteElementString("LabelFont", 
+			                          Enum.GetName(typeof(LabelFont), 
+			                                       style.LabelFont));
+			writer.WriteElementString("ShowLabels", 
+			                          style.ShowLabels.ToString());
+			writer.WriteElementString("LabelColor", 
+			                          PrepareColor(style.LabelColor));
+			writer.WriteElementString("LabelFontEmSize", 
+			                          style.LabelFontEmSize.ToString(CultureInfo.InvariantCulture));
+			writer.WriteElementString("LabelPosition", 
+			                          Enum.GetName(typeof(LabelPosition), 
+			                                       style.LabelPosition));
+			writer.WriteElementString("LabelPixelOffset", 
+			                          style.LabelPixelOffset.ToString(CultureInfo.InvariantCulture));
+			writer.WriteElementString("LabelDecoration", 
+			                          Enum.GetName(typeof(LabelDecoration), 
+			                                       style.LabelDecoration));
+			writer.WriteElementString("LabelOutlineColor", 
+			                          PrepareColor(style.LabelOutlineColor));
+			writer.WriteElementString("LabelOutlineWidth", 
+			                          style.LabelOutlineWidth.ToString(CultureInfo.InvariantCulture));
+			if (style.LabelAngle != 0) 
+			{
+				writer.WriteElementString("LabelAngle", 
+				                          style.LabelAngle.ToString(CultureInfo.InvariantCulture));
+			}
+			
+			if (!string.IsNullOrEmpty(style.LabelCustomFont)) 
+			{
+				writer.WriteElementString("LabelCustomFont", 
+				                          style.LabelCustomFont);
+			}
 
-			if (style.MinScale > double.MinValue) writer.WriteElementString("MinScale", style.MinScale.ToString());
-			if (style.MaxScale < double.MaxValue) writer.WriteElementString("MaxScale", style.MaxScale.ToString());
+			if (style.MinScale > double.MinValue) 
+			{
+				writer.WriteElementString("MinScale", 
+				                          style.MinScale.ToString(CultureInfo.InvariantCulture));
+			}
+			
+			if (style.MaxScale < double.MaxValue)
+			{
+				writer.WriteElementString("MaxScale", 
+				                          style.MaxScale.ToString(CultureInfo.InvariantCulture));
+			}
 
-			if (style.LabelMinScale > double.MinValue) writer.WriteElementString("LabelMinScale", 
-			                                                                     style.LabelMinScale.ToString());
-			if (style.LabelMaxScale < double.MaxValue) writer.WriteElementString("LabelMaxScale",
-			                                                                     style.LabelMaxScale.ToString());
-			if (style.DrawPointSymbolOnPolyLine) writer.WriteElementString("DrawPointSymbolOnPolyLine", style.DrawPointSymbolOnPolyLine.ToString());
-			if (!style.CalculateLabelAngleForPolyLine) writer.WriteElementString("CalculateLabelAngleForPolyLine", style.CalculateLabelAngleForPolyLine.ToString());
+			if (style.LabelMinScale > double.MinValue)
+			{
+				writer.WriteElementString("LabelMinScale",
+				                          style.LabelMinScale.ToString(CultureInfo.InvariantCulture));
+			}
+			
+			if (style.LabelMaxScale < double.MaxValue) 
+			{
+				writer.WriteElementString("LabelMaxScale",
+				                          style.LabelMaxScale.ToString(CultureInfo.InvariantCulture));
+			}
+			
+			if (style.DrawPointSymbolOnPolyLine) 
+			{
+				writer.WriteElementString("DrawPointSymbolOnPolyLine", 
+				                          style.DrawPointSymbolOnPolyLine.ToString());
+			}
+			
+			if (!style.CalculateLabelAngleForPolyLine) 
+			{
+				writer.WriteElementString("CalculateLabelAngleForPolyLine", 
+				                          style.CalculateLabelAngleForPolyLine.ToString());
+			}
 
-			if (!string.IsNullOrEmpty(style.FillTexturePath)) writer.WriteElementString("FillTexturePath", style.FillTexturePath);
+			if (!string.IsNullOrEmpty(style.FillTexturePath)) 
+			{
+				writer.WriteElementString("FillTexturePath", 
+				                          style.FillTexturePath);
+			}
 			
 			writer.WriteEndElement(); // Style
 		}
 		
 		static string PrepareRectangle(Rectangle r)
 		{
-			return string.Format("{0},{1},{2},{3}", r.Min.X, r.Min.Y, r.Max.X, r.Max.Y);
+			return string.Format("{0},{1},{2},{3}", 
+			                     r.Min.X.ToString(CultureInfo.InvariantCulture), 
+			                     r.Min.Y.ToString(CultureInfo.InvariantCulture), 
+			                     r.Max.X.ToString(CultureInfo.InvariantCulture), 
+			                     r.Max.Y.ToString(CultureInfo.InvariantCulture));
 		}
 		
 		static Rectangle ParseRectangle(string s)
 		{
 			string[] parts = s.Split(',');
-			return new Rectangle(double.Parse(parts[0]),
-			                     double.Parse(parts[1]),
-			                     double.Parse(parts[2]),
-			                     double.Parse(parts[3]));
+			return new Rectangle(double.Parse(parts[0], CultureInfo.InvariantCulture),
+			                     double.Parse(parts[1], CultureInfo.InvariantCulture),
+			                     double.Parse(parts[2], CultureInfo.InvariantCulture),
+			                     double.Parse(parts[3], CultureInfo.InvariantCulture));
 		}
 
 		static string PrepareColor(Color c)
 		{
-			return string.Format("{0},{1},{2},{3}", c.A, c.R, c.G, c.B);
+			return string.Format("{0},{1},{2},{3}", 
+			                     c.A.ToString(CultureInfo.InvariantCulture), 
+			                     c.R.ToString(CultureInfo.InvariantCulture), 
+			                     c.G.ToString(CultureInfo.InvariantCulture), 
+			                     c.B.ToString(CultureInfo.InvariantCulture));
 		}
 		
 		static Color ParseColor(string s)
 		{
 			string[] p = s.Split(',');
 			
-			return Color.FromArgb(int.Parse(p[0]),
-			                      int.Parse(p[1]),
-			                      int.Parse(p[2]),
-			                      int.Parse(p[3]));
+			return Color.FromArgb(int.Parse(p[0], CultureInfo.InvariantCulture),
+			                      int.Parse(p[1], CultureInfo.InvariantCulture),
+			                      int.Parse(p[2], CultureInfo.InvariantCulture),
+			                      int.Parse(p[3], CultureInfo.InvariantCulture));
 		}
 		
 		static string AnchorPath(string mapPath, string filePath)
