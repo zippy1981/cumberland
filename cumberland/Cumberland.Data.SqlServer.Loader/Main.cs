@@ -54,6 +54,7 @@ namespace Cumberland.Data.SqlServer.Loader
 			bool useGeography = false;
 			bool append = false;
 			bool showVersion = false;
+            Encoding encoding = null;
 			
 			// set up parameters
 			OptionSet options = new OptionSet();
@@ -83,6 +84,9 @@ namespace Cumberland.Data.SqlServer.Loader
 			options.Add("v|version",
 			            "shows the version and exits", 
 			            delegate (string v) { showVersion = v != null; });
+            options.Add("e|encoding=",
+                        "Specifies the encoding to use for reading the DBF file (e.g. \"utf-32\")",
+                        delegate(string v) { encoding = Encoding.GetEncoding(v); });
 		
 			// parse the command line args
 			List<string> rest = options.Parse(args);
@@ -128,10 +132,12 @@ namespace Cumberland.Data.SqlServer.Loader
 			#region load shp and dbf
 			
 			Shapefile.Shapefile shp = new Shapefile.Shapefile(path);
+
 			DBaseIIIFile dbf = new DBaseIIIFile(Path.GetDirectoryName(path) + 
 			                                    Path.DirectorySeparatorChar + 
 			                                    Path.GetFileNameWithoutExtension(path) + 
-			                                    ".dbf");
+			                                    ".dbf",
+                                                encoding);
 			#endregion		
 
 			#region create table
