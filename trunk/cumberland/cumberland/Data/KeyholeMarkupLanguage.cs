@@ -60,11 +60,8 @@ namespace Cumberland.Data
 				}
 			}
 
-			//MemoryStream ms = new MemoryStream();
-			StringWriter sw = new StringWriter();
-			//StringWriterWithEncoding sw = new StringWriterWithEncoding(Encoding.UTF8);
-			XmlTextWriter xtw = new XmlTextWriter(sw);
-			//XmlTextWriter xtw = new XmlTextWriter(ms, Encoding.UTF8);
+			MemoryStream ms = new MemoryStream();
+            XmlTextWriter xtw = new XmlTextWriter(ms, Encoding.UTF8);
 			
 			xtw.WriteStartDocument();
 			xtw.WriteStartElement("kml", "http://www.opengis.net/kml/2.2");
@@ -93,11 +90,9 @@ namespace Cumberland.Data
 			xtw.Flush();
 			
 			// Now read back
-//			ms.Seek(0, SeekOrigin.Begin);
-//			TextReader tr = new StreamReader(ms);
-//			return tr.ReadToEnd();
-
-			return sw.ToString();
+            ms.Seek(0, SeekOrigin.Begin);
+            TextReader tr = new StreamReader(ms);
+            return tr.ReadToEnd();
 		}
 
 		#region helper methods
@@ -388,19 +383,4 @@ namespace Cumberland.Data
 	
 		#endregion
 	}
-
-//	public class StringWriterWithEncoding : StringWriter
-//	{
-//		Encoding encoding;
-//		
-//		public StringWriterWithEncoding (Encoding encoding)
-//		{
-//			this.encoding = encoding;
-//		}
-//		
-//		public override Encoding Encoding
-//		{
-//			get { return encoding; }
-//		}
-//	}
 }
