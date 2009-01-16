@@ -64,11 +64,7 @@ namespace Cumberland.MapToKml
 
             File.WriteAllText(args[1],
                 KeyholeMarkupLanguage.CreateFromMap(map),
-                Encoding.Unicode);
-
-            //Console.OutputEncoding = Encoding.UTF8;
-            //Console.WriteLine(KeyholeMarkupLanguage.CreateFromMap(map));
-            //Console.ReadLine();
+                Encoding.UTF8);
 		}
 	}
 }
