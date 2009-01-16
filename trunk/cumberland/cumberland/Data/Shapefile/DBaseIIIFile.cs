@@ -50,9 +50,20 @@ namespace Cumberland.Data.Shapefile
 		int recordCount;
 		
 		DataTable records;
-		
-		public DBaseIIIFile(string file)
+
+        Encoding encoding = Encoding.Default;
+
+		public DBaseIIIFile(string file) : this(file, null)
 		{
+        }
+
+        public DBaseIIIFile(string file, Encoding encoding)
+        {
+            if (encoding != null)
+            {
+                this.encoding = encoding;
+            }
+
 			records = new DataTable(Path.GetFileNameWithoutExtension(file));
 			
 			using (FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read))
@@ -98,7 +109,7 @@ namespace Cumberland.Data.Shapefile
 			while (br.PeekChar() != 13)
 			{
 				FieldDescriptor fd = new FieldDescriptor();
-				fd.Name = ASCIIEncoding.ASCII.GetString(br.ReadBytes(11));
+				fd.Name = encoding.GetString(br.ReadBytes(11));
 				fd.Type = Convert.ToChar(br.ReadByte());
 				
 				DataColumn dc = new DataColumn(fd.Name.TrimEnd('\0'));
@@ -170,8 +181,8 @@ namespace Cumberland.Data.Shapefile
 					{
 						
 					case 'C':
-						
-						string cValue = ASCIIEncoding.ASCII.GetString(br.ReadBytes(fd.Length)).Trim();
+
+						string cValue = encoding.GetString(br.ReadBytes(fd.Length)).Trim();
 
                         if (string.IsNullOrEmpty(cValue))
                         {
@@ -186,7 +197,7 @@ namespace Cumberland.Data.Shapefile
 						
 					case 'D':
 						
-                        string dtValue = ASCIIEncoding.ASCII.GetString(br.ReadBytes(8));
+                        string dtValue = encoding.GetString(br.ReadBytes(8));
                         DateTime date;
 
                         if (!DateTime.TryParseExact(dtValue, 
@@ -207,7 +218,7 @@ namespace Cumberland.Data.Shapefile
 					case 'N':
 					case 'F':
 
-						string numValue = ASCIIEncoding.ASCII.GetString(br.ReadBytes(fd.Length));
+						string numValue = encoding.GetString(br.ReadBytes(fd.Length));
                         double num;
 
                         if (!double.TryParse(numValue, out num))
