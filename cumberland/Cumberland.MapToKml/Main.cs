@@ -23,6 +23,8 @@
 //
 
 using System;
+using System.IO;
+using System.Text;
 
 using NDesk.Options;
 
@@ -51,10 +53,22 @@ namespace Cumberland.MapToKml
 				Console.WriteLine("No Map file specified");
 				return;
 			}
+
+            if (args.Length == 1)
+            {
+                Console.WriteLine("No output file specified");
+                return;
+            }
 			
 			Map map = ms.Deserialize(args[0]);
 
-			Console.WriteLine(KeyholeMarkupLanguage.CreateFromMap(map));
+            File.WriteAllText(args[1],
+                KeyholeMarkupLanguage.CreateFromMap(map),
+                Encoding.Unicode);
+
+            //Console.OutputEncoding = Encoding.UTF8;
+            //Console.WriteLine(KeyholeMarkupLanguage.CreateFromMap(map));
+            //Console.ReadLine();
 		}
 	}
 }
