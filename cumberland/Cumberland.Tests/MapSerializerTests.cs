@@ -308,15 +308,15 @@ namespace Cumberland.Tests
 		{
 			Assert.AreEqual(m1.Projection, m2.Projection);
 		}
-		
-		[Test, ExpectedException(typeof(NotSupportedException))]
-		public void TestMapVersionFails()
-		{
-			string xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><Map version=\"bad\">	<Width>500</Width>	<Height>400</Height>	<Extents>-1,-4,10,10</Extents>	<Projection>+init=epsg:4326</Projection>	<Layers /></Map>";
-			
-			MapSerializer ms = new MapSerializer();
-			ms.Deserialize(new MemoryStream(ASCIIEncoding.ASCII.GetBytes(xml)));
-		}
+//		
+//		[Test, ExpectedException(typeof(NotSupportedException))]
+//		public void TestMapVersionFails()
+//		{
+//			string xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><Map version=\"bad\">	<Width>500</Width>	<Height>400</Height>	<Extents>-1,-4,10,10</Extents>	<Projection>+init=epsg:4326</Projection>	<Layers /></Map>";
+//			
+//			MapSerializer ms = new MapSerializer();
+//			ms.Deserialize(new MemoryStream(ASCIIEncoding.ASCII.GetBytes(xml)));
+//		}
 
 		[Test]
 		public void TestMapBackgroundColor()
