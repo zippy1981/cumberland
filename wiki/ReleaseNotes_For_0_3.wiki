@@ -2,6 +2,8 @@
 
 *_This document is a draft_*
 
+<wiki:toc max_depth="1" />
+
 = New Features =
 
 Improvements in this release are symbology related:
@@ -34,3 +36,8 @@ Several bugs were fixed in this release:
   * KeyholeMarkupLanguage now sniffs out polygon ring orientation based on the orientation of the first ring in a polygon.  This allows counter-clockwise exterior rings (e.g. SQL Server 2008).
 
 _A big thank you to [http://foreverneilyoung.blogspot.com/ Neil Young] for his assistance in discovering and helping test solutions to all locale issues (several other issues as well)._
+
+= Miscellaneous =
+
+  * All command line tools now have a version option for getting the current version
+  * map2kml now provides a help option
