@@ -1,3 +1,11 @@
 #summary Release Notes for 0.3
 
 *_This document is a draft_*
+
+= New Features =
+
+= Fixes =
+
+Several bugs were fixed in this release:
+
+  * [http://code.google.com/p/cumberland/issues/detail?id=1&can=1 #1 -   	 shp2sqlserver: loading a polygon as geography fails].  This was a result of Sql Server 2008 requiring geography polygon's exterior rings to be counter-clockwise ([http://blogs.msdn.com/edkatibah/archive/2008/08/19/working-with-invalid-data-and-the-sql-server-2008-geography-data-type-part-1b.aspx details]).  By specification, Shapefiles use the opposite ring orientation.  Shp2SqlServer now flips all polygon rings to conform to SQL Server.  This has the added plus of not forcing the db to flip ring orientation on geometries during spatial operations.
