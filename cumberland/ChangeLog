@@ -1,3 +1,9 @@
+2009-01-22  Scott Ellington  <scott.ellington@gmail.com>
+
+	* Cumberland.MapToKml/Main.cs: add help and version options
+
+	* Cumberland.DrawMap/Main.cs: correct example usage
+
 2009-01-15  Scott Ellington  <scott.ellington@gmail.com>
 
 	* Cumberland.TilePyramidGenerator/Main.cs: force en-us culture on
