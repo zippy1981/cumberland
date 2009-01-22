@@ -1,5 +1,14 @@
 2009-01-22  Scott Ellington  <scott.ellington@gmail.com>
 
+	* Cumberland.DrawMap/AssemblyInfo.cs:
+	* Cumberland.MapToKml/AssemblyInfo.cs:
+	* Cumberland.Data.PostGIS/AssemblyInfo.cs:
+	* Cumberland.Data.SqlServer/AssemblyInfo.cs:
+	* Cumberland.TilePyramidGenerator/AssemblyInfo.cs:
+	* Cumberland.Data.SqlServer.Loader/AssemblyInfo.cs: bump version to 0.3
+
+2009-01-22  Scott Ellington  <scott.ellington@gmail.com>
+
 	* Cumberland.MapToKml/Main.cs: add help and version options
 
 	* Cumberland.DrawMap/Main.cs: correct example usage
