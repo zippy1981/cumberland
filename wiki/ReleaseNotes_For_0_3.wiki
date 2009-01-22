@@ -10,7 +10,7 @@ Improvements in this release are symbology related:
 
 == Polygon fill textures ==
 
-A new FillStyle option has been added.  Texture allows the uses of an external image file which will be repeated within the interior of a polygon.
+A new FillStyle option has been added.  'Texture' allows the use of an external image file which will be repeated within the interior of a polygon.
 
 == Point symbols on line features ==
 
