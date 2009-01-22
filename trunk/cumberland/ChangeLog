@@ -1,5 +1,9 @@
 2009-01-22  Scott Ellington  <scott.ellington@gmail.com>
 
+	* Cumberland.MapToKml/Cumberland.MapToKml.csproj: fix output name
+
+2009-01-22  Scott Ellington  <scott.ellington@gmail.com>
+
 	* Cumberland.DrawMap/AssemblyInfo.cs:
 	* Cumberland.MapToKml/AssemblyInfo.cs:
 	* Cumberland.Data.PostGIS/AssemblyInfo.cs:

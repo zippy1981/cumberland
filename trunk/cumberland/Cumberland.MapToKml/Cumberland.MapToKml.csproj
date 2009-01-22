@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -8,6 +8,7 @@
     <ProjectGuid>{E0DEBB1E-C6BD-4A61-A0C3-7746B528174A}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <AssemblyName>map2kml</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -18,10 +19,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <EnvironmentVariables>
-      <EnvironmentVariables xmlns="" />
+      <EnvironmentVariables />
     </EnvironmentVariables>
     <StartupObject />
-    <AssemblyName>map2kml</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -30,7 +30,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <StartupObject />
-    <AssemblyName>Cumberland.MapToKml</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\cumberland\Cumberland.csproj">
@@ -61,11 +60,4 @@
     <None Include="lib\NDesk.Options.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ProjectExtensions>
-    <MonoDevelop>
-      <Properties xmlns="">
-        <GtkDesignInfo />
-      </Properties>
-    </MonoDevelop>
-  </ProjectExtensions>
 </Project>
