@@ -4,6 +4,21 @@
 
 = New Features =
 
+Improvements in this release are symbology related:
+
+== FillStyle.Texture ==
+
+A new FillStyle option has been added.  Texture allows the uses of an external image file which will be repeated within the interior of a polygon.
+
+== Style.DrawPointSymbolOnPolyLine ==
+
+It is now possible to draw a point symbol on top of a line feature.  This is useful for road symbology.
+
+Here is an example of both of these:
+
+[http://cumberland.googlecode.com/files/cumberland_0_3_new.png]
+
+
 = Fixes =
 
 Several bugs were fixed in this release:
