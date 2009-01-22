@@ -40,6 +40,9 @@ namespace Cumberland.MapToKml
 	{
 		public static void Main(string[] args)
 		{
+			bool showHelp = false;
+			bool showVersion = false;
+			
             // search the assembly path for proj lookup files (aka epsg)
             // for windows users
             ProjFourWrapper.CustomSearchPath = ".";
@@ -48,15 +51,40 @@ namespace Cumberland.MapToKml
 			ms.AddDatabaseFeatureSourceType(typeof(PostGISFeatureSource));
 			ms.AddDatabaseFeatureSourceType(typeof(Cumberland.Data.SqlServer.SqlServerFeatureSource));
 
+			OptionSet options = new OptionSet();
+
+			options.Add("h|help",  "show this message and exit",
+			            delegate (string v) { showHelp = v!= null; });
+			options.Add("v|version",
+			            "Displays the version",
+			            delegate(string v) { showVersion = v != null; });
+
+			options.Parse(args);
+
+			if (showVersion)
+			{
+				System.Console.WriteLine("Version " + 
+				                         System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString());
+				return;
+			}
+
+			if (showHelp)
+			{
+				ShowHelp(options);
+				return;
+			}
+			
 			if (args.Length == 0)
 			{
 				Console.WriteLine("No Map file specified");
+				ShowHelp(options);
 				return;
 			}
 
             if (args.Length == 1)
             {
                 Console.WriteLine("No output file specified");
+				ShowHelp(options);
                 return;
             }
 			
@@ -66,5 +94,16 @@ namespace Cumberland.MapToKml
                 KeyholeMarkupLanguage.CreateFromMap(map),
                 Encoding.UTF8);
 		}
+
+		static void ShowHelp (OptionSet p)
+	    {
+	        Console.WriteLine ("Usage: [mono] map2kml.exe [OPTIONS]+ \"path to map file\" \"path to output kml file\" ");
+	        Console.WriteLine ("Exports a Cumberland map xml file to a kml document");
+	        Console.WriteLine ();
+			Console.WriteLine ("example: [mono] map2kml.exe /path/to/map.xml /path/to/ouput.kml");
+			Console.WriteLine ();
+	        Console.WriteLine ("Options:");
+	        p.WriteOptionDescriptions (Console.Out);
+	    }
 	}
 }

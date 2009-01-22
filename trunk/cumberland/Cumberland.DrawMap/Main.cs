@@ -122,10 +122,10 @@ namespace Cumberland.DrawMap
 		
 		static void ShowHelp (OptionSet p)
 	    {
-	        Console.WriteLine ("Usage: [mono] Cumberland.DrawMap.exe [OPTIONS]+ \"path to map file\" ");
+	        Console.WriteLine ("Usage: [mono] drawmap.exe [OPTIONS]+ \"path to map file\" ");
 	        Console.WriteLine ("Draws a map");
 	        Console.WriteLine ();
-			Console.WriteLine ("example: mono Cumberland.DrawMap.exe -o=my.png /path/to/map ");
+			Console.WriteLine ("example: mono drawmap.exe -o=my.png /path/to/map ");
 			Console.WriteLine ();
 	        Console.WriteLine ("Options:");
 	        p.WriteOptionDescriptions (Console.Out);
