@@ -48,8 +48,13 @@ namespace Cumberland.Tests
 			Assert.LessOrEqual(Math.Abs(p1.X-p2.X), errorMargin);
 			Assert.LessOrEqual(Math.Abs(p1.Y-p2.Y), errorMargin);   
 		}
-		
-		
+
+        [TestFixtureSetUp]
+        public void SetUp()
+        {
+            ProjFourWrapper.CustomSearchPath = ".";
+        }
+
 		[Test]
 		public void TestDeproject()
 		{
