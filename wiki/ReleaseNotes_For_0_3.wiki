@@ -13,4 +13,9 @@ Several bugs were fixed in this release:
   * [http://code.google.com/p/cumberland/issues/detail?id=3&can=1 #3 - Deserialization of map xml fails on german locale].  This manifested itself on locales that use a comma for a decimal place.  Cumberland now forces the map xml format to be in the InvariantCulture (which is the default, en-US).
   * [http://code.google.com/p/cumberland/issues/detail?id=4&can=1 #4 Export kml does not handle german characters].  map2kml now properly creates utf-8 encoded xml.  Instead of piping to console out, the output path is now a required second argument.
 
+== Other fixes ==
+
+  * TileProvider now clips requested extents to within world extents (this prevents tiles from being created that will never be requested by tile consumers).
+  * KeyholeMarkupLanguage now sniffs out polygon ring orientation based on the orientation of the first ring in a polygon.  This allows counter-clockwise exterior rings (e.g. SQL Server 2008).
+
 _A big thank you to [http://foreverneilyoung.blogspot.com/ Neil Young] for his assistance in discovering and helping test solutions to all locale issues (several other issues as well)._
