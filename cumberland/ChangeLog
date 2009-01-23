@@ -1,5 +1,13 @@
 2009-01-22  Scott Ellington  <scott.ellington@gmail.com>
 
+	* Cumberland.Data.PostGIS/lib/Mono.License.txt:
+	* Cumberland.Data.PostGIS/lib/Mono.Security.dll:
+	* Cumberland.Data.PostGIS/lib/Mono.Security.dll.mdb:
+	* Cumberland.Data.PostGIS/Cumberland.Data.PostGIS.csproj: explicitly add
+	mono.security for windows users
+
+2009-01-22  Scott Ellington  <scott.ellington@gmail.com>
+
 	* Cumberland.MapToKml/Cumberland.MapToKml.csproj: fix output name
 
 2009-01-22  Scott Ellington  <scott.ellington@gmail.com>
