@@ -62,7 +62,10 @@
     <None Include="lib\Npgsql.dll" />
     <None Include="lib\Npgsql.dll.mdb" />
     <None Include="lib\Npgsql.xml" />
-    <None Include="lib\Mono.License.txt" />
+    <None Include="lib\Mono.License.txt">
+      <Gettext-ScanForTranslations>false</Gettext-ScanForTranslations>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="lib\Mono.Security.dll" />
     <None Include="lib\Mono.Security.dll.mdb" />
   </ItemGroup>
