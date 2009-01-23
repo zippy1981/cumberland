@@ -29,7 +29,6 @@
 			<Styles>
 				<Style>
 					<ShowLabels>true</ShowLabels>
-					<LabelMaxScale>.004</LabelMaxScale>
 					<LineWidth>1</LineWidth>
 					<LineColor>255,145,145,145</LineColor>					
 					<LineStyle>Solid</LineStyle>
@@ -92,9 +91,11 @@
 					<LineColor>155,0,0,155</LineColor>			
 					<PointSize>14</PointSize>
 					<LineStyle>Solid</LineStyle>
+					<ShowLabels>true</ShowLabels>
+					<LabelPosition>Right</LabelPosition>
+					<LabelMaxScale>.004</LabelMaxScale>
 				</Style>
 				<Style>
-					<ShowLabels>true</ShowLabels>
 					<UniqueThemeValue>5</UniqueThemeValue>
 					<LineWidth>1</LineWidth>
 					<FillColor>155,100,100,255</FillColor>

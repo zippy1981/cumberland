@@ -25,6 +25,9 @@
     <WarningLevel>4</WarningLevel>
     <Commandlineparameters>-e=-110,20,-90,35 ../../../Cumberland.Tests/maps/mexico.xml</Commandlineparameters>
     <StartupObject />
+    <EnvironmentVariables>
+      <EnvironmentVariables />
+    </EnvironmentVariables>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -65,11 +68,4 @@
     <None Include="lib\NDesk.Options.dll" />
     <None Include="lib\NDesk.Options.COPYING" />
   </ItemGroup>
-  <ProjectExtensions>
-    <MonoDevelop>
-      <Properties>
-        <GtkDesignInfo />
-      </Properties>
-    </MonoDevelop>
-  </ProjectExtensions>
 </Project>
