@@ -6,13 +6,13 @@ map2kml is a command line tool that takes a [mapXmlFormat map xml document] and 
 
 = Usage =
 
-map2kml simply takes a [mapXmlFormat map xml file] as an argument and prints out the kml.  It can be called as so:
+As of 0.3, map2kml takes two arguments: a [mapXmlFormat map xml file] and the path to the new kml file.  It can be called as so:
 
 {{{
-map2kml mymap.xml > mymap.kml
+map2kml mymap.xml  mymap.kml
 }}}
 
-This will pipe the kml into the mymap.kml file.
+Previous versions print out the kml directly to the console.
 
 = Notes = 
 
