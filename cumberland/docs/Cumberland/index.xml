@@ -1,12 +1,9 @@
 <Overview>
   <Assemblies>
-    <Assembly Name="Cumberland" Version="0.2.0.0">
+    <Assembly Name="Cumberland" Version="0.3.0.0">
       <Attributes>
         <Attribute>
           <AttributeName>System.Runtime.CompilerServices.RuntimeCompatibility(WrapNonExceptionThrows=true)</AttributeName>
-        </Attribute>
-        <Attribute>
-          <AttributeName>System.Runtime.CompilerServices.Extension</AttributeName>
         </Attribute>
         <Attribute>
           <AttributeName>System.Reflection.AssemblyTrademark("")</AttributeName>
@@ -57,6 +54,7 @@
       <Type Name="ThemeType" Kind="Enumeration" />
     </Namespace>
     <Namespace Name="Cumberland.Data">
+      <Type Name="AbstractDatabaseFeatureSource" Kind="Class" />
       <Type Name="FeatureType" Kind="Enumeration" />
       <Type Name="IDatabaseFeatureSource" Kind="Interface" />
       <Type Name="IFeatureSource" Kind="Interface" />
@@ -71,6 +69,7 @@
       <Type Name="ShapeType" Kind="Enumeration" />
     </Namespace>
     <Namespace Name="Cumberland.Data.WellKnownText">
+      <Type Name="PolygonHoleStrategy" Kind="Enumeration" />
       <Type Name="SimpleFeatureAccess" Kind="Class" />
     </Namespace>
     <Namespace Name="Cumberland.Drawing">
@@ -80,6 +79,7 @@
     </Namespace>
     <Namespace Name="Cumberland.Projection">
       <Type Name="IProjector" Kind="Interface" />
+      <Type Name="ProjFourException" Kind="Class" />
       <Type Name="ProjFourWrapper" Kind="Class" />
     </Namespace>
     <Namespace Name="Cumberland.Web">

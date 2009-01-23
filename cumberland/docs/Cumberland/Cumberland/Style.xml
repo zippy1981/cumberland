@@ -1,321 +1,625 @@
 <Type Name="Style" FullName="Cumberland.Style">
-  <TypeSignature Language="C#" Value="public class Style" />
-  <AssemblyInfo>
-    <AssemblyName>Cumberland</AssemblyName>
-    <AssemblyVersion>0.1.0.0</AssemblyVersion>
-    <AssemblyVersion>0.2.0.0</AssemblyVersion>
-  </AssemblyInfo>
-  <Base>
+	<TypeSignature Language="C#" Value="public class Style" />
+	<AssemblyInfo>
+		<AssemblyName>Cumberland</AssemblyName>
+		<AssemblyVersion>0.1.0.0</AssemblyVersion>
+		<AssemblyVersion>0.2.0.0</AssemblyVersion>
+		<AssemblyVersion>0.3.0.0</AssemblyVersion>
+	</AssemblyInfo>
+	<Base>
 		<BaseTypeName>System.Object</BaseTypeName>
 	</Base>
-  <Interfaces />
-  <Docs>
-    <summary>Represents how a feature is to be drawn</summary>
-    <remarks>
+	<Interfaces />
+	<Docs>
+		<summary>Represents how a feature is to be drawn</summary>
+		<remarks>
 		</remarks>
-  </Docs>
-  <Members>
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+	</Docs>
+	<Members>
 		<Member MemberName=".ctor">
 			<MemberSignature Language="C#" Value="public Style ();" />
 			<MemberType>Constructor</MemberType>
 			<AssemblyInfo>
-				
-				<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.1.0.0</AssemblyVersion>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<Parameters />
-			<Docs><summary>
-				</summary><remarks>
-				</remarks></Docs>
-		</Member><Member MemberName="FillColor">
+			<Docs>
+				<summary>
+				</summary>
+				<remarks>
+				</remarks>
+			</Docs>
+		</Member>
+		<Member MemberName="CalculateLabelAngleForPolyLine">
+			<MemberSignature Language="C#" Value="public bool CalculateLabelAngleForPolyLine { set; get; }" />
+			<MemberType>Property</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<ReturnValue>
+				<ReturnType>System.Boolean</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>Gets/sets whether to calculate a lable angle for line features</summary>
+				<value>Default is true</value>
+				<remarks>Set to false to force an angle (useful for road symbols)</remarks>
+				<since version="0.3" />
+			</Docs>
+		</Member>
+		<Member MemberName="Clone">
+			<MemberSignature Language="C#" Value="public Cumberland.Style Clone ();" />
+			<MemberType>Method</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<ReturnValue>
+				<ReturnType>Cumberland.Style</ReturnType>
+			</ReturnValue>
+			<Parameters />
+			<Docs>
+				<summary>Creates a deep copy</summary>
+				<returns></returns>
+				<remarks></remarks>
+				<since version="0.3" />
+			</Docs>
+		</Member>
+		<Member MemberName="DrawPointSymbolOnPolyLine">
+			<MemberSignature Language="C#" Value="public bool DrawPointSymbolOnPolyLine { set; get; }" />
+			<MemberType>Property</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<ReturnValue>
+				<ReturnType>System.Boolean</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>Gets/sets whether to draw a point symbol on a line feature</summary>
+				<value></value>
+				<remarks>Uses the point style properties to draw a symbol on the point defined during labelling.
+				Useful for road symbology.</remarks>
+				<since version="0.3" />
+			</Docs>
+		</Member>
+		<Member MemberName="FillColor">
 			<MemberSignature Language="C#" Value="public System.Drawing.Color FillColor { set; get; }" />
 			<MemberType>Property</MemberType>
 			<AssemblyInfo>
-				
-				<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.1.0.0</AssemblyVersion>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
 			</AssemblyInfo>
-			<ReturnValue><ReturnType>System.Drawing.Color</ReturnType></ReturnValue>
-			<Docs><summary>The fill color</summary><value>
-				</value><remarks>Used only for <see cref="T:Cumberland.Polygon" /> and  
-      <see cref="T:Cumberland.Point" /> features</remarks></Docs>
-		</Member><Member MemberName="FillStyle">
+			<ReturnValue>
+				<ReturnType>System.Drawing.Color</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>The fill color</summary>
+				<value>
+				</value>
+				<remarks>Used only for <see cref="T:Cumberland.Polygon" /> and  
+      <see cref="T:Cumberland.Point" /> features</remarks>
+			</Docs>
+		</Member>
+		<Member MemberName="FillStyle">
 			<MemberSignature Language="C#" Value="public Cumberland.FillStyle FillStyle { set; get; }" />
 			<MemberType>Property</MemberType>
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
 			</AssemblyInfo>
-			<ReturnValue><ReturnType>Cumberland.FillStyle</ReturnType></ReturnValue>
-			<Docs><summary>The fill style of a polygon</summary><value></value><remarks></remarks><since version="0.2" /></Docs>
-		</Member><Member MemberName="Id">
+			<ReturnValue>
+				<ReturnType>Cumberland.FillStyle</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>The fill style of a polygon</summary>
+				<value>
+				</value>
+				<remarks>
+				</remarks>
+				<since version="0.2" />
+			</Docs>
+		</Member>
+		<Member MemberName="FillTexturePath">
+			<MemberSignature Language="C#" Value="public string FillTexturePath { set; get; }" />
+			<MemberType>Property</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<ReturnValue>
+				<ReturnType>System.String</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>The path to the image file to use as a fill texture</summary>
+				<value></value>
+				<remarks><see cref="P:Cumberland.Style.FillStyle" /> must be set to 'Texture'.</remarks>
+				<since version="0.3" />
+			</Docs>
+		</Member>
+		<Member MemberName="Id">
 			<MemberSignature Language="C#" Value="public string Id { set; get; }" />
 			<MemberType>Property</MemberType>
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
 			</AssemblyInfo>
-			<ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
-			<Docs><summary>The style id</summary><value></value><remarks></remarks><since version="0.2" /></Docs>
-		</Member><Member MemberName="LabelAngle">
+			<ReturnValue>
+				<ReturnType>System.String</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>The style id</summary>
+				<value>
+				</value>
+				<remarks>
+				</remarks>
+				<since version="0.2" />
+			</Docs>
+		</Member>
+		<Member MemberName="LabelAngle">
 			<MemberSignature Language="C#" Value="public float LabelAngle { set; get; }" />
 			<MemberType>Property</MemberType>
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
 			</AssemblyInfo>
-			<ReturnValue><ReturnType>System.Single</ReturnType></ReturnValue>
-			<Docs><summary>Gets/sets the label angle</summary><value></value><remarks>Use this to sets labels at an angle</remarks><since version="0.2" /></Docs>
-		</Member><Member MemberName="LabelColor">
+			<ReturnValue>
+				<ReturnType>System.Single</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>Gets/sets the label angle</summary>
+				<value>
+				</value>
+				<remarks>Use this to sets labels at an angle</remarks>
+				<since version="0.2" />
+			</Docs>
+		</Member>
+		<Member MemberName="LabelColor">
 			<MemberSignature Language="C#" Value="public System.Drawing.Color LabelColor { set; get; }" />
 			<MemberType>Property</MemberType>
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
 			</AssemblyInfo>
-			<ReturnValue><ReturnType>System.Drawing.Color</ReturnType></ReturnValue>
-			<Docs><summary>The label color</summary><value>Default is black</value><remarks></remarks><since version="0.2" /></Docs>
-		</Member><Member MemberName="LabelCustomFont">
+			<ReturnValue>
+				<ReturnType>System.Drawing.Color</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>The label color</summary>
+				<value>Default is black</value>
+				<remarks>
+				</remarks>
+				<since version="0.2" />
+			</Docs>
+		</Member>
+		<Member MemberName="LabelCustomFont">
 			<MemberSignature Language="C#" Value="public string LabelCustomFont { set; get; }" />
 			<MemberType>Property</MemberType>
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
 			</AssemblyInfo>
-			<ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
-			<Docs><summary>Gets/sets the custom label font</summary><value></value><remarks>Set this to a font name installed on your system.  LabelFont must be set to Custom.</remarks><since version="0.2" /></Docs>
-		</Member><Member MemberName="LabelDecoration">
+			<ReturnValue>
+				<ReturnType>System.String</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>Gets/sets the custom label font</summary>
+				<value>
+				</value>
+				<remarks>Set this to a font name installed on your system.  LabelFont must be set to Custom.</remarks>
+				<since version="0.2" />
+			</Docs>
+		</Member>
+		<Member MemberName="LabelDecoration">
 			<MemberSignature Language="C#" Value="public Cumberland.LabelDecoration LabelDecoration { set; get; }" />
 			<MemberType>Property</MemberType>
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
 			</AssemblyInfo>
-			<ReturnValue><ReturnType>Cumberland.LabelDecoration</ReturnType></ReturnValue>
-			<Docs><summary>Gets/sets the label decoration</summary><value>Default is none</value><remarks>Use this to set an outline on your label</remarks><since version="0.2" /></Docs>
-		</Member><Member MemberName="LabelFont">
+			<ReturnValue>
+				<ReturnType>Cumberland.LabelDecoration</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>Gets/sets the label decoration</summary>
+				<value>Default is none</value>
+				<remarks>Use this to set an outline on your label</remarks>
+				<since version="0.2" />
+			</Docs>
+		</Member>
+		<Member MemberName="LabelFont">
 			<MemberSignature Language="C#" Value="public Cumberland.LabelFont LabelFont { set; get; }" />
 			<MemberType>Property</MemberType>
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
 			</AssemblyInfo>
-			<ReturnValue><ReturnType>Cumberland.LabelFont</ReturnType></ReturnValue>
-			<Docs><summary>The label font</summary><value>Default is 'Serif'</value><remarks>Provides simple options for changing the label font.  More control can be
-				had by setting this to 'Custom' and setting the LabelCustomFont property.</remarks><since version="0.2" /></Docs>
-		</Member><Member MemberName="LabelFontEmSize">
+			<ReturnValue>
+				<ReturnType>Cumberland.LabelFont</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>The label font</summary>
+				<value>Default is 'Serif'</value>
+				<remarks>Provides simple options for changing the label font.  More control can be
+				had by setting this to 'Custom' and setting the LabelCustomFont property.</remarks>
+				<since version="0.2" />
+			</Docs>
+		</Member>
+		<Member MemberName="LabelFontEmSize">
 			<MemberSignature Language="C#" Value="public float LabelFontEmSize { set; get; }" />
 			<MemberType>Property</MemberType>
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
 			</AssemblyInfo>
-			<ReturnValue><ReturnType>System.Single</ReturnType></ReturnValue>
-			<Docs><summary>Gets/sets the label font size</summary><value>Default is 10</value><remarks></remarks><since version="0.2" /></Docs>
-		</Member><Member MemberName="LabelMaxScale">
+			<ReturnValue>
+				<ReturnType>System.Single</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>Gets/sets the label font size</summary>
+				<value>Default is 10</value>
+				<remarks>
+				</remarks>
+				<since version="0.2" />
+			</Docs>
+		</Member>
+		<Member MemberName="LabelMaxScale">
 			<MemberSignature Language="C#" Value="public double LabelMaxScale { set; get; }" />
 			<MemberType>Property</MemberType>
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
 			</AssemblyInfo>
-			<ReturnValue><ReturnType>System.Double</ReturnType></ReturnValue>
-			<Docs><summary>Gets/sets the maximum scale at which labels are drawn</summary><value></value><remarks>Use this to prevent labels being drawn when zoomed out</remarks><since version="0.2" /></Docs>
-		</Member><Member MemberName="LabelMinScale">
+			<ReturnValue>
+				<ReturnType>System.Double</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>Gets/sets the maximum scale at which labels are drawn</summary>
+				<value>
+				</value>
+				<remarks>Use this to prevent labels being drawn when zoomed out</remarks>
+				<since version="0.2" />
+			</Docs>
+		</Member>
+		<Member MemberName="LabelMinScale">
 			<MemberSignature Language="C#" Value="public double LabelMinScale { set; get; }" />
 			<MemberType>Property</MemberType>
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
 			</AssemblyInfo>
-			<ReturnValue><ReturnType>System.Double</ReturnType></ReturnValue>
-			<Docs><summary>The minimum scale at which labels are drawn</summary><value></value><remarks>Use this to prevent labels being drawn when zoomed in.</remarks><since version="0.2" /></Docs>
-		</Member><Member MemberName="LabelOutlineColor">
+			<ReturnValue>
+				<ReturnType>System.Double</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>The minimum scale at which labels are drawn</summary>
+				<value>
+				</value>
+				<remarks>Use this to prevent labels being drawn when zoomed in.</remarks>
+				<since version="0.2" />
+			</Docs>
+		</Member>
+		<Member MemberName="LabelOutlineColor">
 			<MemberSignature Language="C#" Value="public System.Drawing.Color LabelOutlineColor { set; get; }" />
 			<MemberType>Property</MemberType>
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
 			</AssemblyInfo>
-			<ReturnValue><ReturnType>System.Drawing.Color</ReturnType></ReturnValue>
-			<Docs><summary>Gets/sets the label outline color</summary><value></value><remarks>LabelDecoration must be set to Outline.</remarks><since version="0.2" /></Docs>
-		</Member><Member MemberName="LabelOutlineWidth">
+			<ReturnValue>
+				<ReturnType>System.Drawing.Color</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>Gets/sets the label outline color</summary>
+				<value>
+				</value>
+				<remarks>LabelDecoration must be set to Outline.</remarks>
+				<since version="0.2" />
+			</Docs>
+		</Member>
+		<Member MemberName="LabelOutlineWidth">
 			<MemberSignature Language="C#" Value="public float LabelOutlineWidth { set; get; }" />
 			<MemberType>Property</MemberType>
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
 			</AssemblyInfo>
-			<ReturnValue><ReturnType>System.Single</ReturnType></ReturnValue>
-			<Docs><summary>Gets/sets the label outline width in pixels</summary><value></value><remarks>LabelDecoration must be set to Outline.</remarks><since version="0.2" /></Docs>
-		</Member><Member MemberName="LabelPixelOffset">
+			<ReturnValue>
+				<ReturnType>System.Single</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>Gets/sets the label outline width in pixels</summary>
+				<value>
+				</value>
+				<remarks>LabelDecoration must be set to Outline.</remarks>
+				<since version="0.2" />
+			</Docs>
+		</Member>
+		<Member MemberName="LabelPixelOffset">
 			<MemberSignature Language="C#" Value="public int LabelPixelOffset { set; get; }" />
 			<MemberType>Property</MemberType>
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
 			</AssemblyInfo>
-			<ReturnValue><ReturnType>System.Int32</ReturnType></ReturnValue>
-			<Docs><summary>Gets/sets the offset in pixels a label is from its point of origin</summary><value></value><remarks></remarks><since version="0.2" /></Docs>
-		</Member><Member MemberName="LabelPosition">
+			<ReturnValue>
+				<ReturnType>System.Int32</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>Gets/sets the offset in pixels a label is from its point of origin</summary>
+				<value>
+				</value>
+				<remarks>
+				</remarks>
+				<since version="0.2" />
+			</Docs>
+		</Member>
+		<Member MemberName="LabelPosition">
 			<MemberSignature Language="C#" Value="public Cumberland.LabelPosition LabelPosition { set; get; }" />
 			<MemberType>Property</MemberType>
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
 			</AssemblyInfo>
-			<ReturnValue><ReturnType>Cumberland.LabelPosition</ReturnType></ReturnValue>
-			<Docs><summary>Gets/sets the location of the label in relation to its point of origin</summary><value></value><remarks></remarks><since version="0.2" /></Docs>
-		</Member><Member MemberName="LineColor">
+			<ReturnValue>
+				<ReturnType>Cumberland.LabelPosition</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>Gets/sets the location of the label in relation to its point of origin</summary>
+				<value>
+				</value>
+				<remarks>
+				</remarks>
+				<since version="0.2" />
+			</Docs>
+		</Member>
+		<Member MemberName="LineColor">
 			<MemberSignature Language="C#" Value="public System.Drawing.Color LineColor { set; get; }" />
 			<MemberType>Property</MemberType>
 			<AssemblyInfo>
-				
-				<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.1.0.0</AssemblyVersion>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
 			</AssemblyInfo>
-			<ReturnValue><ReturnType>System.Drawing.Color</ReturnType></ReturnValue>
-			<Docs><summary>The line color</summary><value>
-				</value><remarks>Used for all features 
+			<ReturnValue>
+				<ReturnType>System.Drawing.Color</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>The line color</summary>
+				<value>
+				</value>
+				<remarks>Used for all features 
       (including <see cref="T:Cumberland.Polygon" /> lines)
-      </remarks></Docs>
-		</Member><Member MemberName="LineStyle">
+      </remarks>
+			</Docs>
+		</Member>
+		<Member MemberName="LineStyle">
 			<MemberSignature Language="C#" Value="public Cumberland.LineStyle LineStyle { set; get; }" />
 			<MemberType>Property</MemberType>
 			<AssemblyInfo>
-				
-				<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.1.0.0</AssemblyVersion>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
 			</AssemblyInfo>
-			<ReturnValue><ReturnType>Cumberland.LineStyle</ReturnType></ReturnValue>
-			<Docs><summary>The line style</summary><value>
-				</value><remarks>Used for all features 
-      (including <see cref="T:Cumberland.Polygon" /> lines)</remarks></Docs>
-		</Member><Member MemberName="LineWidth">
+			<ReturnValue>
+				<ReturnType>Cumberland.LineStyle</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>The line style</summary>
+				<value>
+				</value>
+				<remarks>Used for all features 
+      (including <see cref="T:Cumberland.Polygon" /> lines)</remarks>
+			</Docs>
+		</Member>
+		<Member MemberName="LineWidth">
 			<MemberSignature Language="C#" Value="public int LineWidth { set; get; }" />
 			<MemberType>Property</MemberType>
 			<AssemblyInfo>
-				
-				<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.1.0.0</AssemblyVersion>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
 			</AssemblyInfo>
-			<ReturnValue><ReturnType>System.Int32</ReturnType></ReturnValue>
-			<Docs><summary>The line width in pixels</summary><value>
-				</value><remarks>Used for all features 
-      (including <see cref="T:Cumberland.Polygon" /> lines)</remarks></Docs>
-		</Member><Member MemberName="MaxRangeThemeValue">
+			<ReturnValue>
+				<ReturnType>System.Int32</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>The line width in pixels</summary>
+				<value>
+				</value>
+				<remarks>Used for all features 
+      (including <see cref="T:Cumberland.Polygon" /> lines)</remarks>
+			</Docs>
+		</Member>
+		<Member MemberName="MaxRangeThemeValue">
 			<MemberSignature Language="C#" Value="public double MaxRangeThemeValue { set; get; }" />
 			<MemberType>Property</MemberType>
 			<AssemblyInfo>
-				
-				<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.1.0.0</AssemblyVersion>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
 			</AssemblyInfo>
-			<ReturnValue><ReturnType>System.Double</ReturnType></ReturnValue>
-			<Docs><summary>The maximum range theme field value </summary><value>
-				</value><remarks>Sets a maximum range to draw this style in a range theme.  Note: 
+			<ReturnValue>
+				<ReturnType>System.Double</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>The maximum range theme field value </summary>
+				<value>
+				</value>
+				<remarks>Sets a maximum range to draw this style in a range theme.  Note: 
       <see cref="P:Cumberland.Layer.Theme" /> must be set to 'NumericRange' for this to work.
-      The field is defined by <see cref="P:Cumberland.Layer.ThemeField" /></remarks></Docs>
-		</Member><Member MemberName="MaxScale">
+      The field is defined by <see cref="P:Cumberland.Layer.ThemeField" /></remarks>
+			</Docs>
+		</Member>
+		<Member MemberName="MaxScale">
 			<MemberSignature Language="C#" Value="public double MaxScale { set; get; }" />
 			<MemberType>Property</MemberType>
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
 			</AssemblyInfo>
-			<ReturnValue><ReturnType>System.Double</ReturnType></ReturnValue>
-			<Docs><summary>Gets/sets the maximum scale to apply this style</summary><value></value><remarks>Use this to prevent the style to be applied on a feature when zoomed out</remarks><since version="0.2" /></Docs>
-		</Member><Member MemberName="MinRangeThemeValue">
+			<ReturnValue>
+				<ReturnType>System.Double</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>Gets/sets the maximum scale to apply this style</summary>
+				<value>
+				</value>
+				<remarks>Use this to prevent the style to be applied on a feature when zoomed out</remarks>
+				<since version="0.2" />
+			</Docs>
+		</Member>
+		<Member MemberName="MinRangeThemeValue">
 			<MemberSignature Language="C#" Value="public double MinRangeThemeValue { set; get; }" />
 			<MemberType>Property</MemberType>
 			<AssemblyInfo>
-				
-				<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.1.0.0</AssemblyVersion>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
 			</AssemblyInfo>
-			<ReturnValue><ReturnType>System.Double</ReturnType></ReturnValue>
-			<Docs><summary>The minimum range theme field value</summary><value>
-				</value><remarks>Sets a minimum range to draw this style in a range theme.  Note: 
+			<ReturnValue>
+				<ReturnType>System.Double</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>The minimum range theme field value</summary>
+				<value>
+				</value>
+				<remarks>Sets a minimum range to draw this style in a range theme.  Note: 
       <see cref="P:Cumberland.Layer.Theme" /> must be set to 'NumericRange' for this to work.
-      The field is defined by <see cref="P:Cumberland.Layer.ThemeField" /></remarks></Docs>
-		</Member><Member MemberName="MinScale">
+      The field is defined by <see cref="P:Cumberland.Layer.ThemeField" /></remarks>
+			</Docs>
+		</Member>
+		<Member MemberName="MinScale">
 			<MemberSignature Language="C#" Value="public double MinScale { set; get; }" />
 			<MemberType>Property</MemberType>
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
 			</AssemblyInfo>
-			<ReturnValue><ReturnType>System.Double</ReturnType></ReturnValue>
-			<Docs><summary>Gets/sets the minimum scale to apply this style</summary><value></value><remarks>Use this to prevent the application of a style when zoomed in</remarks><since version="0.2" /></Docs>
-		</Member><Member MemberName="PointSize">
+			<ReturnValue>
+				<ReturnType>System.Double</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>Gets/sets the minimum scale to apply this style</summary>
+				<value>
+				</value>
+				<remarks>Use this to prevent the application of a style when zoomed in</remarks>
+				<since version="0.2" />
+			</Docs>
+		</Member>
+		<Member MemberName="PointSize">
 			<MemberSignature Language="C#" Value="public int PointSize { set; get; }" />
 			<MemberType>Property</MemberType>
 			<AssemblyInfo>
-				
-				<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.1.0.0</AssemblyVersion>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
 			</AssemblyInfo>
-			<ReturnValue><ReturnType>System.Int32</ReturnType></ReturnValue>
-			<Docs><summary>The point size in pixels</summary><value>
-				</value><remarks>
-					<see cref="P:Cumberland.Style.PointSymbol" /> must be set to 'Shape' for this to work</remarks></Docs>
-		</Member><Member MemberName="PointSymbol">
+			<ReturnValue>
+				<ReturnType>System.Int32</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>The point size in pixels</summary>
+				<value>
+				</value>
+				<remarks>
+					<see cref="P:Cumberland.Style.PointSymbol" /> must be set to 'Shape' for this to work</remarks>
+			</Docs>
+		</Member>
+		<Member MemberName="PointSymbol">
 			<MemberSignature Language="C#" Value="public Cumberland.PointSymbolType PointSymbol { set; get; }" />
 			<MemberType>Property</MemberType>
 			<AssemblyInfo>
-				
-				<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.1.0.0</AssemblyVersion>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
 			</AssemblyInfo>
-			<ReturnValue><ReturnType>Cumberland.PointSymbolType</ReturnType></ReturnValue>
-			<Docs><summary>The type of point symbol to draw</summary><value>
-				</value><remarks>
-				</remarks></Docs>
-		</Member><Member MemberName="PointSymbolImagePath">
+			<ReturnValue>
+				<ReturnType>Cumberland.PointSymbolType</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>The type of point symbol to draw</summary>
+				<value>
+				</value>
+				<remarks>
+				</remarks>
+			</Docs>
+		</Member>
+		<Member MemberName="PointSymbolImagePath">
 			<MemberSignature Language="C#" Value="public string PointSymbolImagePath { set; get; }" />
 			<MemberType>Property</MemberType>
 			<AssemblyInfo>
-				
-				<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.1.0.0</AssemblyVersion>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
 			</AssemblyInfo>
-			<ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
-			<Docs><summary>The image path to draw point features</summary><value>
-				</value><remarks>
-					<see cref="P:Cumberland.Style.PointSymbol" /> must be set to 'Image' for this to work.</remarks></Docs>
-		</Member><Member MemberName="PointSymbolShape">
+			<ReturnValue>
+				<ReturnType>System.String</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>The image path to draw point features</summary>
+				<value>
+				</value>
+				<remarks>
+					<see cref="P:Cumberland.Style.PointSymbol" /> must be set to 'Image' for this to work.</remarks>
+			</Docs>
+		</Member>
+		<Member MemberName="PointSymbolShape">
 			<MemberSignature Language="C#" Value="public Cumberland.PointSymbolShapeType PointSymbolShape { set; get; }" />
 			<MemberType>Property</MemberType>
 			<AssemblyInfo>
-				
-				<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.1.0.0</AssemblyVersion>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
 			</AssemblyInfo>
-			<ReturnValue><ReturnType>Cumberland.PointSymbolShapeType</ReturnType></ReturnValue>
-			<Docs><summary>The shape to draw point features</summary><value>
-				</value><remarks>
-					<see cref="P:Cumberland.Style.PointSymbol" /> must be set to 'Shape' for this to work</remarks></Docs>
-		</Member><Member MemberName="ShowLabels">
+			<ReturnValue>
+				<ReturnType>Cumberland.PointSymbolShapeType</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>The shape to draw point features</summary>
+				<value>
+				</value>
+				<remarks>
+					<see cref="P:Cumberland.Style.PointSymbol" /> must be set to 'Shape' for this to work</remarks>
+			</Docs>
+		</Member>
+		<Member MemberName="ShowLabels">
 			<MemberSignature Language="C#" Value="public bool ShowLabels { set; get; }" />
 			<MemberType>Property</MemberType>
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
 			</AssemblyInfo>
-			<ReturnValue><ReturnType>System.Boolean</ReturnType></ReturnValue>
-			<Docs><summary>Gets/sets whether to show labels</summary><value></value><remarks></remarks><since version="0.2" /></Docs>
-		</Member><Member MemberName="UniqueThemeValue">
+			<ReturnValue>
+				<ReturnType>System.Boolean</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>Gets/sets whether to show labels</summary>
+				<value>
+				</value>
+				<remarks>
+				</remarks>
+				<since version="0.2" />
+			</Docs>
+		</Member>
+		<Member MemberName="UniqueThemeValue">
 			<MemberSignature Language="C#" Value="public string UniqueThemeValue { set; get; }" />
 			<MemberType>Property</MemberType>
 			<AssemblyInfo>
-				
-				<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.1.0.0</AssemblyVersion>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
 			</AssemblyInfo>
-			<ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
-			<Docs><summary>The unique theme field value</summary><value>
-				</value><remarks>The unique theme field value for this style.  Note: 
+			<ReturnValue>
+				<ReturnType>System.String</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>The unique theme field value</summary>
+				<value>
+				</value>
+				<remarks>The unique theme field value for this style.  Note: 
       <see cref="P:Cumberland.Layer.Theme" /> must be set to 'Unique' for this to work.
-      The field is defined by <see cref="P:Cumberland.Layer.ThemeField" /></remarks></Docs>
+      The field is defined by <see cref="P:Cumberland.Layer.ThemeField" /></remarks>
+			</Docs>
 		</Member>
 	</Members>
 </Type>

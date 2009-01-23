@@ -3,6 +3,7 @@
   <AssemblyInfo>
     <AssemblyName>Cumberland</AssemblyName>
     <AssemblyVersion>0.2.0.0</AssemblyVersion>
+    <AssemblyVersion>0.3.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
 		<BaseTypeName>System.Enum</BaseTypeName>
@@ -18,16 +19,16 @@
 			<MemberSignature Language="C#" Value="None" />
 			<MemberType>Field</MemberType>
 			<AssemblyInfo>
-				<AssemblyVersion>0.2.0.0</AssemblyVersion>
-			</AssemblyInfo>
+				
+			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>Cumberland.LabelDecoration</ReturnType></ReturnValue>
 			<Docs><summary>Apply no effects</summary></Docs>
 		</Member><Member MemberName="Outline">
 			<MemberSignature Language="C#" Value="Outline" />
 			<MemberType>Field</MemberType>
 			<AssemblyInfo>
-				<AssemblyVersion>0.2.0.0</AssemblyVersion>
-			</AssemblyInfo>
+				
+			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>Cumberland.LabelDecoration</ReturnType></ReturnValue>
 			<Docs><summary>Apply an outline effect</summary></Docs>
 		</Member>

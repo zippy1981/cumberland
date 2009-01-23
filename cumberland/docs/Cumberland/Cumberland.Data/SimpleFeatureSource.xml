@@ -4,6 +4,7 @@
     <AssemblyName>Cumberland</AssemblyName>
     <AssemblyVersion>0.1.0.0</AssemblyVersion>
     <AssemblyVersion>0.2.0.0</AssemblyVersion>
+    <AssemblyVersion>0.3.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
 		<BaseTypeName>System.Object</BaseTypeName>
@@ -35,8 +36,8 @@
 			<MemberType>Constructor</MemberType>
 			<AssemblyInfo>
 				
-				<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion>
-			</AssemblyInfo>
+				
+			<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
 			<Parameters />
 			<Docs><summary>
 				</summary><remarks>
@@ -46,8 +47,8 @@
 			<MemberType>Constructor</MemberType>
 			<AssemblyInfo>
 				
-				<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion>
-			</AssemblyInfo>
+				
+			<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
 			<Parameters><Parameter Name="fType" Type="Cumberland.Data.FeatureType" /></Parameters>
 			<Docs><param name="fType">The feature type</param><summary>Creates the object with the given feature type</summary><remarks>
 				</remarks></Docs>
@@ -56,8 +57,8 @@
 			<MemberType>Property</MemberType>
 			<AssemblyInfo>
 				
-				<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion>
-			</AssemblyInfo>
+				
+			<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>Cumberland.Rectangle</ReturnType></ReturnValue>
 			<Docs><summary>Gets the extents of the feature source</summary><value>
 				</value><remarks>Can be expensive as this must be calculated</remarks></Docs>
@@ -66,8 +67,8 @@
 			<MemberType>Property</MemberType>
 			<AssemblyInfo>
 				
-				<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion>
-			</AssemblyInfo>
+				
+			<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType></ReturnValue>
 			<Docs><summary>The features</summary><value>
 				</value><remarks>Add/remove feature to this list to create your feature source</remarks></Docs>
@@ -76,8 +77,8 @@
 			<MemberType>Method</MemberType>
 			<AssemblyInfo>
 				
-				<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion>
-			</AssemblyInfo>
+				
+			<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType></ReturnValue>
 			<Parameters />
 			<Docs><summary>Gets all features</summary><returns>
@@ -88,8 +89,8 @@
 			<MemberType>Method</MemberType>
 			<AssemblyInfo>
 				
-				<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion>
-			</AssemblyInfo>
+				
+			<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType></ReturnValue>
 			<Parameters><Parameter Name="rectangle" Type="Cumberland.Rectangle" /></Parameters>
 			<Docs><param name="rectangle">The extents to get features from</param><summary>Gets all features within the given extents</summary><returns>
@@ -99,8 +100,8 @@
 			<MemberType>Method</MemberType>
 			<AssemblyInfo>
 				
-				<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion>
-			</AssemblyInfo>
+				
+			<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType></ReturnValue>
 			<Parameters><Parameter Name="themeField" Type="System.String" /></Parameters>
 			<Docs><param name="themeField">The theme field (ignored)</param><summary>Gets all features</summary><returns>
@@ -111,8 +112,8 @@
 			<MemberType>Method</MemberType>
 			<AssemblyInfo>
 				
-				<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion>
-			</AssemblyInfo>
+				
+			<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType></ReturnValue>
 			<Parameters><Parameter Name="rectangle" Type="Cumberland.Rectangle" /><Parameter Name="themeField" Type="System.String" /></Parameters>
 			<Docs><param name="rectangle">The extents to get features from</param><param name="themeField">The theme field (ignored)</param><summary>Gets all features from within the given extents</summary><returns>
@@ -124,8 +125,8 @@
 			<MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Cumberland.Feature&gt; GetFeatures (string themeField, string labelField);" />
 			<MemberType>Method</MemberType>
 			<AssemblyInfo>
-				<AssemblyVersion>0.2.0.0</AssemblyVersion>
-			</AssemblyInfo>
+				
+			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType></ReturnValue>
 			<Parameters><Parameter Name="themeField" Type="System.String" /><Parameter Name="labelField" Type="System.String" /></Parameters>
 			<Docs><param name="themeField">The theme field (ignored)</param><param name="labelField">The label field (ignored)</param><summary>Gets all features</summary><returns></returns><remarks></remarks><since version="0.2" /></Docs>
@@ -133,8 +134,8 @@
 			<MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Cumberland.Feature&gt; GetFeatures (Cumberland.Rectangle rectangle, string themeField, string labelField);" />
 			<MemberType>Method</MemberType>
 			<AssemblyInfo>
-				<AssemblyVersion>0.2.0.0</AssemblyVersion>
-			</AssemblyInfo>
+				
+			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType></ReturnValue>
 			<Parameters><Parameter Name="rectangle" Type="Cumberland.Rectangle" /><Parameter Name="themeField" Type="System.String" /><Parameter Name="labelField" Type="System.String" /></Parameters>
 			<Docs><param name="rectangle">The bounds</param><param name="themeField">The theme field (ignored)</param><param name="labelField">The label field (ignored)</param><summary>Gets all features within the given bounds</summary><returns></returns><remarks></remarks><since version="0.2" /></Docs>
@@ -143,8 +144,8 @@
 			<MemberType>Property</MemberType>
 			<AssemblyInfo>
 				
-				<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion>
-			</AssemblyInfo>
+				
+			<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>Cumberland.Data.FeatureType</ReturnType></ReturnValue>
 			<Docs><summary>Get or sets the feature type</summary><value>
 				</value><remarks>
@@ -155,8 +156,8 @@
 			<MemberType>Property</MemberType>
 			<AssemblyInfo>
 				
-				<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion>
-			</AssemblyInfo>
+				
+			<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>Cumberland.Data.FeatureType</ReturnType></ReturnValue>
 			<Docs><summary>Gets the feature type</summary><value>
 				</value><remarks>

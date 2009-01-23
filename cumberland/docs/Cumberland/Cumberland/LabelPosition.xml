@@ -3,6 +3,7 @@
   <AssemblyInfo>
     <AssemblyName>Cumberland</AssemblyName>
     <AssemblyVersion>0.2.0.0</AssemblyVersion>
+    <AssemblyVersion>0.3.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
 		<BaseTypeName>System.Enum</BaseTypeName>
@@ -26,80 +27,80 @@
 			<MemberSignature Language="C#" Value="Bottom" />
 			<MemberType>Field</MemberType>
 			<AssemblyInfo>
-				<AssemblyVersion>0.2.0.0</AssemblyVersion>
-			</AssemblyInfo>
+				
+			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>Cumberland.LabelPosition</ReturnType></ReturnValue>
 			<Docs><summary></summary></Docs>
 		</Member><Member MemberName="BottomLeft">
 			<MemberSignature Language="C#" Value="BottomLeft" />
 			<MemberType>Field</MemberType>
 			<AssemblyInfo>
-				<AssemblyVersion>0.2.0.0</AssemblyVersion>
-			</AssemblyInfo>
+				
+			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>Cumberland.LabelPosition</ReturnType></ReturnValue>
 			<Docs><summary></summary></Docs>
 		</Member><Member MemberName="BottomRight">
 			<MemberSignature Language="C#" Value="BottomRight" />
 			<MemberType>Field</MemberType>
 			<AssemblyInfo>
-				<AssemblyVersion>0.2.0.0</AssemblyVersion>
-			</AssemblyInfo>
+				
+			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>Cumberland.LabelPosition</ReturnType></ReturnValue>
 			<Docs><summary></summary></Docs>
 		</Member><Member MemberName="Center">
 			<MemberSignature Language="C#" Value="Center" />
 			<MemberType>Field</MemberType>
 			<AssemblyInfo>
-				<AssemblyVersion>0.2.0.0</AssemblyVersion>
-			</AssemblyInfo>
+				
+			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>Cumberland.LabelPosition</ReturnType></ReturnValue>
 			<Docs><summary></summary></Docs>
 		</Member><Member MemberName="Left">
 			<MemberSignature Language="C#" Value="Left" />
 			<MemberType>Field</MemberType>
 			<AssemblyInfo>
-				<AssemblyVersion>0.2.0.0</AssemblyVersion>
-			</AssemblyInfo>
+				
+			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>Cumberland.LabelPosition</ReturnType></ReturnValue>
 			<Docs><summary></summary></Docs>
 		</Member><Member MemberName="None">
 			<MemberSignature Language="C#" Value="None" />
 			<MemberType>Field</MemberType>
 			<AssemblyInfo>
-				<AssemblyVersion>0.2.0.0</AssemblyVersion>
-			</AssemblyInfo>
+				
+			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>Cumberland.LabelPosition</ReturnType></ReturnValue>
 			<Docs><summary></summary></Docs>
 		</Member><Member MemberName="Right">
 			<MemberSignature Language="C#" Value="Right" />
 			<MemberType>Field</MemberType>
 			<AssemblyInfo>
-				<AssemblyVersion>0.2.0.0</AssemblyVersion>
-			</AssemblyInfo>
+				
+			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>Cumberland.LabelPosition</ReturnType></ReturnValue>
 			<Docs><summary></summary></Docs>
 		</Member><Member MemberName="Top">
 			<MemberSignature Language="C#" Value="Top" />
 			<MemberType>Field</MemberType>
 			<AssemblyInfo>
-				<AssemblyVersion>0.2.0.0</AssemblyVersion>
-			</AssemblyInfo>
+				
+			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>Cumberland.LabelPosition</ReturnType></ReturnValue>
 			<Docs><summary></summary></Docs>
 		</Member><Member MemberName="TopLeft">
 			<MemberSignature Language="C#" Value="TopLeft" />
 			<MemberType>Field</MemberType>
 			<AssemblyInfo>
-				<AssemblyVersion>0.2.0.0</AssemblyVersion>
-			</AssemblyInfo>
+				
+			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>Cumberland.LabelPosition</ReturnType></ReturnValue>
 			<Docs><summary></summary></Docs>
 		</Member><Member MemberName="TopRight">
 			<MemberSignature Language="C#" Value="TopRight" />
 			<MemberType>Field</MemberType>
 			<AssemblyInfo>
-				<AssemblyVersion>0.2.0.0</AssemblyVersion>
-			</AssemblyInfo>
+				
+			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>Cumberland.LabelPosition</ReturnType></ReturnValue>
 			<Docs><summary></summary></Docs>
 		</Member>

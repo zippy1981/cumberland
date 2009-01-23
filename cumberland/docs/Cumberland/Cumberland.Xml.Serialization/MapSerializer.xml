@@ -4,6 +4,7 @@
     <AssemblyName>Cumberland</AssemblyName>
     <AssemblyVersion>0.1.0.0</AssemblyVersion>
     <AssemblyVersion>0.2.0.0</AssemblyVersion>
+    <AssemblyVersion>0.3.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -20,7 +21,7 @@
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         
-      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
       <Parameters />
       <Docs><summary></summary><remarks></remarks></Docs>
     </Member><Member MemberName="AddDatabaseFeatureSourceType">
@@ -28,7 +29,7 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         
-      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>System.Void</ReturnType></ReturnValue>
       <Parameters><Parameter Name="type" Type="System.Type" /></Parameters>
       <Docs><param name="type">The object type (must implement <see cref="T:Cumberland.Data.IDatabaseFeatureSource" />)</param><summary>Adds a database feature source type for deserialization</summary><remarks>This method registers a class that implements <see cref="T:Cumberland.Data.IDatabaseFeatureSource" /> so that an
@@ -39,7 +40,7 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         
-      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>System.Void</ReturnType></ReturnValue>
       <Parameters><Parameter Name="type" Type="System.Type" /></Parameters>
       <Docs><param name="type">The object type (must implement <see cref="T:Cumberland.Data.IFileFeatureSource" />))</param><summary>Adds a file feature source type for deserialization</summary><remarks>TThis method registers a class that implements <see cref="T:Cumberland.Data.IFileFeatureSource" /> so that an
@@ -50,7 +51,7 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         
-      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Map</ReturnType></ReturnValue>
       <Parameters><Parameter Name="stream" Type="System.IO.Stream" /></Parameters>
       <Docs><param name="stream">The stream containing the Xml</param><summary>Creates an instance of <see cref="T:Cumberland.Map" /> by deserializing the xml from the stream</summary><returns>The deserialized map</returns><remarks></remarks></Docs>
@@ -59,7 +60,7 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         
-      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Map</ReturnType></ReturnValue>
       <Parameters><Parameter Name="mapPath" Type="System.String" /></Parameters>
       <Docs><param name="mapPath">the path to the map xml file</param><summary>Creates an instance of <see cref="T:Cumberland.Map" /> by deserializing the xml from the given file</summary><returns>The deserialized map</returns><remarks></remarks></Docs>
@@ -68,7 +69,7 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         
-      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
       <Parameters><Parameter Name="map" Type="Cumberland.Map" /></Parameters>
       <Docs><param name="map">The map to serialize</param><summary>Serializes the given map</summary><returns>The serialized Xml</returns><remarks></remarks></Docs>
@@ -77,7 +78,7 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         
-      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>System.Void</ReturnType></ReturnValue>
       <Parameters><Parameter Name="stream" Type="System.IO.Stream" /><Parameter Name="map" Type="Cumberland.Map" /></Parameters>
       <Docs><param name="stream">The stream to pipe the serialized map Xml to</param><param name="map">The map to serialize</param><summary>Serializes the given map to the provided stream</summary><remarks></remarks></Docs>
