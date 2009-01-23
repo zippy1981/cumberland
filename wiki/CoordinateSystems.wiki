@@ -13,7 +13,7 @@ Internally, cumberland uses the [http://trac.osgeo.org/proj/ Proj.4] C Library f
 
 Mac and Linux users will need to install the proj.4 library.  Most Linux distributions provide this directly.  For Mac, you can use [http://www.finkproject.org/ Fink].  Cumberland has been configured to run the Fink installation.
 
-For Windows users, cumberland comes with a build of proj.4.  However if you want to use SRID lookups (details below), you'll need to download proj.4 for windows and install.  (The default install location is c:\proj) 
+For Windows users, cumberland comes with a build of proj.4.
 
 = A Coordinate System Primer =
 
