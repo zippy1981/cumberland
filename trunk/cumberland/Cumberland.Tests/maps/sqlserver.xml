@@ -18,7 +18,10 @@
 			<Id>counties</Id>
 			<Data sourceType="Cumberland.Data.IDatabaseFeatureSource" sourceInstance="Cumberland.Data.SqlServer.SqlServerFeatureSource">
 				<ConnectionString>Data Source=.\SQLExpress08;Initial Catalog=spatial;Integrated Security=true</ConnectionString>
-				<TableName>cntshr</TableName>
+        <TableName>cntshr WITH(INDEX(cntshr_sidx))</TableName>
+        <ForcedSrid>3087</ForcedSrid>
+        <ForcedFeatureType>Polygon</ForcedFeatureType>
+        <ForcedGeometryColumn>the_geom</ForcedGeometryColumn>
 			</Data>
 		</Layer>
 		<Layer>
@@ -100,7 +103,10 @@
 			<Id>springs</Id>
 			<Data sourceType="Cumberland.Data.IDatabaseFeatureSource" sourceInstance="Cumberland.Data.SqlServer.SqlServerFeatureSource">
 				<ConnectionString>Data Source=.\SQLExpress08;Initial Catalog=spatial;Integrated Security=true</ConnectionString>
-				<TableName>springs_fdep_2000</TableName>
+        <TableName>springs_fdep_2000 WITH(INDEX(springs_fdep_2000_sidx))</TableName>
+        <ForcedSrid>3087</ForcedSrid>
+        <ForcedFeatureType>Point</ForcedFeatureType>
+        <ForcedGeometryColumn>the_geom</ForcedGeometryColumn>
 			</Data>
 		</Layer>
 	</Layers>
