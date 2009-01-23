@@ -1,0 +1,60 @@
+<Type Name="FillStyle" FullName="Cumberland.FillStyle">
+	<TypeSignature Language="C#" Value="public enum FillStyle" />
+	<AssemblyInfo>
+		<AssemblyName>Cumberland</AssemblyName>
+		<AssemblyVersion>0.2.0.0</AssemblyVersion>
+		<AssemblyVersion>0.3.0.0</AssemblyVersion>
+	</AssemblyInfo>
+	<Base>
+		<BaseTypeName>System.Enum</BaseTypeName>
+	</Base>
+	<Docs>
+		<summary>Defines drawing styles of a polygon's interior fill</summary>
+		<remarks>
+		</remarks>
+	</Docs>
+	<Members>
+		<Member MemberName="None">
+			<MemberSignature Language="C#" Value="None" />
+			<MemberType>Field</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<ReturnValue>
+				<ReturnType>Cumberland.FillStyle</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>Don't fill the polygon</summary>
+			</Docs>
+		</Member>
+		<Member MemberName="Solid">
+			<MemberSignature Language="C#" Value="Solid" />
+			<MemberType>Field</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<ReturnValue>
+				<ReturnType>Cumberland.FillStyle</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>Fill it with a solid color</summary>
+			</Docs>
+		</Member>
+		<Member MemberName="Texture">
+			<MemberSignature Language="C#" Value="Texture" />
+			<MemberType>Field</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<ReturnValue>
+				<ReturnType>Cumberland.FillStyle</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>Repeats an image provided by <see cref="P:Cumberland.Style.FillTexturePath" /></summary>
+				<since version="0.3" />
+			</Docs>
+		</Member>
+	</Members>
+</Type>

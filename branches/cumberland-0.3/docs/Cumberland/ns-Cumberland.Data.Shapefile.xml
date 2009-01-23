@@ -1,0 +1,6 @@
+<Namespace Name="Cumberland.Data.Shapefile">
+  <Docs>
+    <summary></summary>
+    <remarks>Holds classes related to interaction with Shapefiles.</remarks>
+  </Docs>
+</Namespace>

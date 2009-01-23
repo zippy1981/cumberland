@@ -1,0 +1,412 @@
+<Type Name="Rectangle" FullName="Cumberland.Rectangle">
+	<TypeSignature Language="C#" Value="public class Rectangle" />
+	<AssemblyInfo>
+		<AssemblyName>Cumberland</AssemblyName>
+		<AssemblyVersion>0.1.0.0</AssemblyVersion>
+		<AssemblyVersion>0.2.0.0</AssemblyVersion>
+		<AssemblyVersion>0.3.0.0</AssemblyVersion>
+	</AssemblyInfo>
+	<Base>
+		<BaseTypeName>System.Object</BaseTypeName>
+	</Base>
+	<Interfaces />
+	<Docs>
+		<summary>Represents a set of boundary coordinates on a <see cref="T:Cumberland.Map" /></summary>
+		<remarks>
+		</remarks>
+	</Docs>
+	<Members>
+		<Member MemberName=".ctor">
+			<MemberSignature Language="C#" Value="public Rectangle ();" />
+			<MemberType>Constructor</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.1.0.0</AssemblyVersion>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<Parameters />
+			<Docs>
+				<summary>
+				</summary>
+				<remarks>Creates an empty rectangle</remarks>
+			</Docs>
+		</Member>
+		<Member MemberName=".ctor">
+			<MemberSignature Language="C#" Value="public Rectangle (Cumberland.Point minPoint, Cumberland.Point maxPoint);" />
+			<MemberType>Constructor</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.1.0.0</AssemblyVersion>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<Parameters>
+				<Parameter Name="minPoint" Type="Cumberland.Point" />
+				<Parameter Name="maxPoint" Type="Cumberland.Point" />
+			</Parameters>
+			<Docs>
+				<param name="minPoint">The Point which represents the minimum boundary of the Rectangle</param>
+				<param name="maxPoint">The Point which represents the maximum boundary of the Rectangle</param>
+				<summary>
+				</summary>
+				<remarks>
+				</remarks>
+			</Docs>
+		</Member>
+		<Member MemberName=".ctor">
+			<MemberSignature Language="C#" Value="public Rectangle (double minx, double miny, double maxx, double maxy);" />
+			<MemberType>Constructor</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<Parameters>
+				<Parameter Name="minx" Type="System.Double" />
+				<Parameter Name="miny" Type="System.Double" />
+				<Parameter Name="maxx" Type="System.Double" />
+				<Parameter Name="maxy" Type="System.Double" />
+			</Parameters>
+			<Docs>
+				<param name="minx">The minimum X value</param>
+				<param name="miny">The minimum Y value</param>
+				<param name="maxx">The maximum X value</param>
+				<param name="maxy">The maximum Y value</param>
+				<summary>
+				</summary>
+				<remarks>
+				</remarks>
+			</Docs>
+		</Member>
+		<Member MemberName="Area">
+			<MemberSignature Language="C#" Value="public double Area { get; }" />
+			<MemberType>Property</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.1.0.0</AssemblyVersion>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<ReturnValue>
+				<ReturnType>System.Double</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>The area of the rectangle</summary>
+				<value>
+				</value>
+				<remarks>The <see cref="P:Cumberland.Rectangle.Width" /> multiplied by
+      the <see cref="P:Cumberland.Rectangle.Height" /></remarks>
+			</Docs>
+		</Member>
+		<Member MemberName="AspectRatioOfWidth">
+			<MemberSignature Language="C#" Value="public double AspectRatioOfWidth { set; get; }" />
+			<MemberType>Property</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.1.0.0</AssemblyVersion>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<ReturnValue>
+				<ReturnType>System.Double</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>The aspect ratio of width</summary>
+				<value>
+				</value>
+				<remarks>The <see cref="P:Cumberland.Rectangle.Width" /> divided by
+      the <see cref="P:Cumberland.Rectangle.Height" /> (A square would have a value of 1).  
+      Setting this will expand the map extents to meet the ratio</remarks>
+			</Docs>
+		</Member>
+		<Member MemberName="Center">
+			<MemberSignature Language="C#" Value="public Cumberland.Point Center { set; get; }" />
+			<MemberType>Property</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.1.0.0</AssemblyVersion>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<ReturnValue>
+				<ReturnType>Cumberland.Point</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>The center of the rectangle</summary>
+				<value>
+				</value>
+				<remarks>
+				</remarks>
+			</Docs>
+		</Member>
+		<Member MemberName="Clone">
+			<MemberSignature Language="C#" Value="public virtual Cumberland.Rectangle Clone ();" />
+			<MemberType>Method</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.1.0.0</AssemblyVersion>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<ReturnValue>
+				<ReturnType>Cumberland.Rectangle</ReturnType>
+			</ReturnValue>
+			<Parameters />
+			<Docs>
+				<summary>Creates a deep copy</summary>
+				<returns>
+				</returns>
+				<remarks>
+				</remarks>
+			</Docs>
+		</Member>
+		<Member MemberName="Equals">
+			<MemberSignature Language="C#" Value="public virtual bool Equals (Cumberland.Rectangle r);" />
+			<MemberType>Method</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<ReturnValue>
+				<ReturnType>System.Boolean</ReturnType>
+			</ReturnValue>
+			<Parameters>
+				<Parameter Name="r" Type="Cumberland.Rectangle" />
+			</Parameters>
+			<Docs>
+				<param name="r">The rectangle</param>
+				<summary>Tests for equality with this instance and the given rectangle</summary>
+				<returns>true if equal, false if not</returns>
+				<remarks>
+				</remarks>
+				<since version="0.2" />
+			</Docs>
+		</Member>
+		<Member MemberName="GeographicWorldExtents">
+			<MemberSignature Language="C#" Value="public static Cumberland.Rectangle GeographicWorldExtents { get; }" />
+			<MemberType>Property</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<ReturnValue>
+				<ReturnType>Cumberland.Rectangle</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>Gets the world geographics extents</summary>
+				<value>-180,90,180,90</value>
+				<remarks>Convenience property</remarks>
+				<since version="0.2" />
+			</Docs>
+		</Member>
+		<Member MemberName="Height">
+			<MemberSignature Language="C#" Value="public double Height { set; get; }" />
+			<MemberType>Property</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.1.0.0</AssemblyVersion>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<ReturnValue>
+				<ReturnType>System.Double</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>The height of the Rectangle</summary>
+				<value>
+				</value>
+				<remarks>
+				</remarks>
+			</Docs>
+		</Member>
+		<Member MemberName="Intersect">
+			<MemberSignature Language="C#" Value="public static Cumberland.Rectangle Intersect (Cumberland.Rectangle a, Cumberland.Rectangle b);" />
+			<MemberType>Method</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<ReturnValue>
+				<ReturnType>Cumberland.Rectangle</ReturnType>
+			</ReturnValue>
+			<Parameters>
+				<Parameter Name="a" Type="Cumberland.Rectangle" />
+				<Parameter Name="b" Type="Cumberland.Rectangle" />
+			</Parameters>
+			<Docs>
+				<param name="a">Rectangle 1</param>
+				<param name="b">Rectangle 2</param>
+				<summary>Calculates the rectangle defined by the intersection of the provided rectangles</summary>
+				<returns>The rectangle defined by the intersection of the provided rectangles</returns>
+				<remarks></remarks>
+				<since version="0.3" />
+			</Docs>
+		</Member>
+		<Member MemberName="IsEmpty">
+			<MemberSignature Language="C#" Value="public bool IsEmpty { get; }" />
+			<MemberType>Property</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.1.0.0</AssemblyVersion>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<ReturnValue>
+				<ReturnType>System.Boolean</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>Is the rectangle empty</summary>
+				<value>
+				</value>
+				<remarks>Occurs when the <see cref="P:Cumberland.Rectangle.Min" />
+      is greater than <see cref="P:Cumberland.Rectangle.Max" /></remarks>
+			</Docs>
+		</Member>
+		<Member MemberName="Max">
+			<MemberSignature Language="C#" Value="public Cumberland.Point Max { set; get; }" />
+			<MemberType>Property</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.1.0.0</AssemblyVersion>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<ReturnValue>
+				<ReturnType>Cumberland.Point</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>The maximum point of the rectangle</summary>
+				<value>
+				</value>
+				<remarks>
+				</remarks>
+			</Docs>
+		</Member>
+		<Member MemberName="Min">
+			<MemberSignature Language="C#" Value="public Cumberland.Point Min { set; get; }" />
+			<MemberType>Property</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.1.0.0</AssemblyVersion>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<ReturnValue>
+				<ReturnType>Cumberland.Point</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>The minimum point of the Rectangle</summary>
+				<value>
+				</value>
+				<remarks>
+				</remarks>
+			</Docs>
+		</Member>
+		<Member MemberName="op_Equality">
+			<MemberSignature Language="C#" Value="public static bool op_Equality (Cumberland.Rectangle r1, Cumberland.Rectangle r2);" />
+			<MemberType>Method</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.1.0.0</AssemblyVersion>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<ReturnValue>
+				<ReturnType>System.Boolean</ReturnType>
+			</ReturnValue>
+			<Parameters>
+				<Parameter Name="r1" Type="Cumberland.Rectangle" />
+				<Parameter Name="r2" Type="Cumberland.Rectangle" />
+			</Parameters>
+			<Docs>
+				<param name="r1">Rectangle #1</param>
+				<param name="r2">Rectangle #2</param>
+				<summary>Determines if the rectangles coordinates are the same</summary>
+				<returns>
+				</returns>
+				<remarks>
+				</remarks>
+			</Docs>
+		</Member>
+		<Member MemberName="op_Inequality">
+			<MemberSignature Language="C#" Value="public static bool op_Inequality (Cumberland.Rectangle r1, Cumberland.Rectangle r2);" />
+			<MemberType>Method</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.1.0.0</AssemblyVersion>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<ReturnValue>
+				<ReturnType>System.Boolean</ReturnType>
+			</ReturnValue>
+			<Parameters>
+				<Parameter Name="r1" Type="Cumberland.Rectangle" />
+				<Parameter Name="r2" Type="Cumberland.Rectangle" />
+			</Parameters>
+			<Docs>
+				<param name="r1">Rectangle #1</param>
+				<param name="r2">Rectangle #2</param>
+				<summary>Determines if two rectangles are different</summary>
+				<returns>
+				</returns>
+				<remarks>
+				</remarks>
+			</Docs>
+		</Member>
+		<Member MemberName="Overlaps">
+			<MemberSignature Language="C#" Value="public virtual bool Overlaps (Cumberland.Rectangle r);" />
+			<MemberType>Method</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.1.0.0</AssemblyVersion>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<ReturnValue>
+				<ReturnType>System.Boolean</ReturnType>
+			</ReturnValue>
+			<Parameters>
+				<Parameter Name="r" Type="Cumberland.Rectangle" />
+			</Parameters>
+			<Docs>
+				<param name="r">The rectangle for which to determine it overlaps</param>
+				<summary>Determine if the rectangle overlaps the provided rectangle</summary>
+				<returns>
+				</returns>
+				<remarks>
+				</remarks>
+			</Docs>
+		</Member>
+		<Member MemberName="Union">
+			<MemberSignature Language="C#" Value="public static Cumberland.Rectangle Union (Cumberland.Rectangle a, Cumberland.Rectangle b);" />
+			<MemberType>Method</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.1.0.0</AssemblyVersion>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<ReturnValue>
+				<ReturnType>Cumberland.Rectangle</ReturnType>
+			</ReturnValue>
+			<Parameters>
+				<Parameter Name="a" Type="Cumberland.Rectangle" />
+				<Parameter Name="b" Type="Cumberland.Rectangle" />
+			</Parameters>
+			<Docs>
+				<param name="a">Rectangle #1</param>
+				<param name="b">Rectangle #2</param>
+				<summary>Creates a new Rectangle that reflects the union of the provided rectangles</summary>
+				<returns>
+				</returns>
+				<remarks>
+				</remarks>
+			</Docs>
+		</Member>
+		<Member MemberName="Width">
+			<MemberSignature Language="C#" Value="public double Width { set; get; }" />
+			<MemberType>Property</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.1.0.0</AssemblyVersion>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<ReturnValue>
+				<ReturnType>System.Double</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>The width of the rectangle</summary>
+				<value>
+				</value>
+				<remarks>
+				</remarks>
+			</Docs>
+		</Member>
+	</Members>
+</Type>

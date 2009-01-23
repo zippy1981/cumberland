@@ -1,0 +1,44 @@
+<Type Name="PointSymbolType" FullName="Cumberland.PointSymbolType">
+  <TypeSignature Language="C#" Value="public enum PointSymbolType" />
+  <AssemblyInfo>
+    <AssemblyName>Cumberland</AssemblyName>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+    <AssemblyVersion>0.3.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Enum</BaseTypeName>
+  </Base>
+  <Docs>
+    <summary>Describes how a <see cref="T:Cumberland.Point" /> feature will be drawn</summary>
+    <remarks>'Shape' types are defined by the <see cref="P:Cumberland.Style.PointSymbolShape" /> property.  'Image' types
+    are defined by <see cref="P:Cumberland.Style.PointSymbolImagePath" /> property</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="Image">
+      <MemberSignature Language="C#" Value="Image" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>Cumberland.PointSymbolType</ReturnType></ReturnValue>
+      <Docs><summary>Draws an external image</summary></Docs>
+    </Member><Member MemberName="None">
+      <MemberSignature Language="C#" Value="None" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>Cumberland.PointSymbolType</ReturnType></ReturnValue>
+      <Docs><summary>Does not draw the point</summary></Docs>
+    </Member><Member MemberName="Shape">
+      <MemberSignature Language="C#" Value="Shape" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>Cumberland.PointSymbolType</ReturnType></ReturnValue>
+      <Docs><summary>Draws a shape</summary></Docs>
+    </Member>
+  </Members>
+</Type>

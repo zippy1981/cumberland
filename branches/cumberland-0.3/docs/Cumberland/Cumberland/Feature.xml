@@ -1,0 +1,60 @@
+<Type Name="Feature" FullName="Cumberland.Feature">
+  <TypeSignature Language="C#" Value="public abstract class Feature" />
+  <AssemblyInfo>
+    <AssemblyName>Cumberland</AssemblyName>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+    <AssemblyVersion>0.3.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.Xml.Serialization.XmlInclude(typeof(Cumberland.PolyLine))</AttributeName>
+    </Attribute>
+    <Attribute>
+      <AttributeName>System.Xml.Serialization.XmlInclude(typeof(Cumberland.Point))</AttributeName>
+    </Attribute>
+    <Attribute>
+      <AttributeName>System.Xml.Serialization.XmlInclude(typeof(Cumberland.Polygon))</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>A feature is considered a single entity within a map.</summary>
+    <remarks>This is the absract base class from which all features (polygons, points, polylines) inherit.</remarks>
+  </Docs>
+  <Members>
+    
+    
+    
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="protected Feature ();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
+      <Parameters />
+      <Docs><summary></summary><remarks></remarks></Docs>
+    </Member><Member MemberName="CalculateBounds">
+      <MemberSignature Language="C#" Value="public abstract Cumberland.Rectangle CalculateBounds ();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>Cumberland.Rectangle</ReturnType></ReturnValue>
+      <Parameters />
+      <Docs><summary>Calculates the bounds of the feature</summary><returns>The feature extents</returns><remarks></remarks></Docs>
+    </Member><Member MemberName="LabelFieldValue"><MemberSignature Language="C#" Value="public string LabelFieldValue { set; get; }" /><MemberType>Property</MemberType><AssemblyInfo><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo><ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
+    <Docs><summary>The value to use when labelling the feature</summary><value></value><remarks></remarks><since version="0.2" /></Docs></Member><Member MemberName="ThemeFieldValue">
+      <MemberSignature Language="C#" Value="public string ThemeFieldValue { set; get; }" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
+      <Docs><summary>The value to use when drawing the feature with a theme</summary><value></value><remarks></remarks></Docs>
+    </Member>
+  </Members>
+</Type>

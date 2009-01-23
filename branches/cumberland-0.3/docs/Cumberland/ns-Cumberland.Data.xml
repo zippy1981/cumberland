@@ -1,0 +1,6 @@
+<Namespace Name="Cumberland.Data">
+  <Docs>
+    <summary></summary>
+    <remarks>Contains the core functionality for interacting with external data sources to acquire spatial data.</remarks>
+  </Docs>
+</Namespace>

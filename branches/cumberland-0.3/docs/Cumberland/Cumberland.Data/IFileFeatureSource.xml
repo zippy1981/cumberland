@@ -1,0 +1,30 @@
+<Type Name="IFileFeatureSource" FullName="Cumberland.Data.IFileFeatureSource">
+  <TypeSignature Language="C#" Value="public interface IFileFeatureSource : Cumberland.Data.IFeatureSource" />
+  <AssemblyInfo>
+    <AssemblyName>Cumberland</AssemblyName>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+    <AssemblyVersion>0.3.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>Cumberland.Data.IFeatureSource</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Docs>
+    <summary>Describes a file based feature source</summary>
+    <remarks>This interface can be implemented to allow access to any file based source of 
+    spatial data.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="FilePath">
+      <MemberSignature Language="C#" Value="public string FilePath { set; get; }" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
+      <Docs><summary>The path to the file</summary><value></value><remarks></remarks></Docs>
+    </Member>
+  </Members>
+</Type>

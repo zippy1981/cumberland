@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Map version="0.1">
+	<Width>500</Width>
+	<Height>400</Height>
+	<Extents>-84.5,28.5,-82,31</Extents>
+	<Projection>+init=epsg:4326</Projection>
+	<Layers>
+		<Layer>
+			<LabelField>name</LabelField>
+			<Styles>
+				<Style>
+					<ShowLabels>false</ShowLabels>
+					<LabelColor>255,65,145,65</LabelColor>
+					<LineWidth>1</LineWidth>
+					<LineColor>255,65,145,65</LineColor>
+					<FillColor>255,240,255,208</FillColor>
+					<LineStyle>Solid</LineStyle>
+				</Style>
+			</Styles>
+			<Projection>+init=epsg:3087</Projection>
+			<Id>pg1</Id>
+			<Data sourceType="Cumberland.Data.IDatabaseFeatureSource" sourceInstance="Cumberland.Data.PostGIS.PostGISFeatureSource">
+				<ConnectionString>Server=localhost;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;</ConnectionString>
+				<TableName>counties</TableName>
+			</Data>
+		</Layer>
+		<Layer>
+			<LabelField>name</LabelField>
+			<Styles>
+				<Style>
+					<ShowLabels>true</ShowLabels>
+					<LineWidth>1</LineWidth>
+					<LineColor>255,145,145,145</LineColor>					
+					<LineStyle>Solid</LineStyle>
+					<LabelPosition>Top</LabelPosition>
+					<LabelPixelOffset>1</LabelPixelOffset>					
+				</Style>
+			</Styles>
+			<Projection>+init=epsg:3086</Projection>
+			<Id>major roads</Id>
+			<Data sourceType="Cumberland.Data.IDatabaseFeatureSource" sourceInstance="Cumberland.Data.PostGIS.PostGISFeatureSource">
+				<ConnectionString>Server=localhost;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;</ConnectionString>
+				<TableName>(select * from fdot_majroads where usroute = 'I    10') as interstates </TableName>
+				<ForcedSrid>3086</ForcedSrid>
+				<ForcedFeatureType>Polyline</ForcedFeatureType>
+				<ForcedGeometryColumn>the_geom</ForcedGeometryColumn>
+			</Data>
+		</Layer>	
+		<Layer>
+			<MaxScale>.008</MaxScale>
+			<LabelField>name</LabelField>
+			<Theme>Unique</Theme>
+			<ThemeField>magnitude</ThemeField>					
+			<Styles>
+				<Style>
+					<UniqueThemeValue>0</UniqueThemeValue>
+					<LineWidth>1</LineWidth>
+					<FillColor>155,100,100,255</FillColor>
+					<LineColor>155,0,0,155</LineColor>			
+					<PointSize>2</PointSize>
+					<LineStyle>Solid</LineStyle>
+				</Style>
+				<Style>
+					<UniqueThemeValue>1</UniqueThemeValue>
+					<LineWidth>1</LineWidth>
+					<FillColor>155,100,100,255</FillColor>
+					<LineColor>155,0,0,155</LineColor>			
+					<PointSize>5</PointSize>
+					<LineStyle>Solid</LineStyle>
+				</Style>
+				<Style>
+					<UniqueThemeValue>2</UniqueThemeValue>
+					<LineWidth>1</LineWidth>
+					<FillColor>155,100,100,255</FillColor>
+					<LineColor>155,0,0,155</LineColor>			
+					<PointSize>8</PointSize>
+					<LineStyle>Solid</LineStyle>
+				</Style>
+				<Style>
+					<UniqueThemeValue>3</UniqueThemeValue>
+					<LineWidth>1</LineWidth>
+					<FillColor>155,100,100,255</FillColor>
+					<LineColor>155,0,0,155</LineColor>			
+					<PointSize>11</PointSize>
+					<LineStyle>Solid</LineStyle>
+				</Style>
+				<Style>
+					<UniqueThemeValue>4</UniqueThemeValue>
+					<LineWidth>1</LineWidth>
+					<FillColor>155,100,100,255</FillColor>
+					<LineColor>155,0,0,155</LineColor>			
+					<PointSize>14</PointSize>
+					<LineStyle>Solid</LineStyle>
+					<ShowLabels>true</ShowLabels>
+					<LabelPosition>Right</LabelPosition>
+					<LabelMaxScale>.004</LabelMaxScale>
+				</Style>
+				<Style>
+					<UniqueThemeValue>5</UniqueThemeValue>
+					<LineWidth>1</LineWidth>
+					<FillColor>155,100,100,255</FillColor>
+					<LineColor>155,0,0,155</LineColor>			
+					<PointSize>17</PointSize>
+					<LineStyle>Solid</LineStyle>
+				</Style>
+			</Styles>
+			<Projection>+init=epsg:3086</Projection>
+			<Id>springs</Id>
+			<Data sourceType="Cumberland.Data.IDatabaseFeatureSource" sourceInstance="Cumberland.Data.PostGIS.PostGISFeatureSource">
+				<ConnectionString>Server=localhost;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;</ConnectionString>
+				<TableName>springs_fdep_2000</TableName>
+			</Data>
+		</Layer>					
+	</Layers>
+</Map>

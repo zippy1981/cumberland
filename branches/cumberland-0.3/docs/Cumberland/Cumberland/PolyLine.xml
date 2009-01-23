@@ -1,0 +1,39 @@
+<Type Name="PolyLine" FullName="Cumberland.PolyLine">
+  <TypeSignature Language="C#" Value="public class PolyLine : Cumberland.Feature" />
+  <AssemblyInfo>
+    <AssemblyName>Cumberland</AssemblyName>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+    <AssemblyVersion>0.3.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Cumberland.Feature</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>A feature comprised of one to many <see cref="T:Cumberland.Line" /></summary>
+    <remarks>
+    </remarks>
+  </Docs>
+  <Members>
+    
+    
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public PolyLine ();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
+      <Parameters />
+      <Docs><summary></summary><remarks></remarks></Docs>
+    </Member><Member MemberName="Lines">
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Cumberland.Line&gt; Lines { get; }" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Line&gt;</ReturnType></ReturnValue>
+      <Docs><summary>The lines in the feature</summary><value>A List of <see cref="T:Cumberland.Line" /></value><remarks></remarks></Docs>
+    </Member>
+  </Members>
+</Type>
