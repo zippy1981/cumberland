@@ -4,6 +4,7 @@
     <AssemblyName>Cumberland</AssemblyName>
     <AssemblyVersion>0.1.0.0</AssemblyVersion>
     <AssemblyVersion>0.2.0.0</AssemblyVersion>
+    <AssemblyVersion>0.3.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
 		<BaseTypeName>System.Enum</BaseTypeName>
@@ -21,32 +22,32 @@
 			<MemberType>Field</MemberType>
 			<AssemblyInfo>
 				
-				<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion>
-			</AssemblyInfo>
+				
+			<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>Cumberland.Web.TileConsumer</ReturnType></ReturnValue>
 			<Docs><summary>The Google Maps web interface</summary></Docs>
 		</Member><Member MemberName="None">
 			<MemberSignature Language="C#" Value="None" />
 			<MemberType>Field</MemberType>
 			<AssemblyInfo>
-				<AssemblyVersion>0.2.0.0</AssemblyVersion>
-			</AssemblyInfo>
+				
+			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>Cumberland.Web.TileConsumer</ReturnType></ReturnValue>
 			<Docs><summary></summary><since version="0.2" /></Docs>
 		</Member><Member MemberName="TileMapService">
 			<MemberSignature Language="C#" Value="TileMapService" />
 			<MemberType>Field</MemberType>
 			<AssemblyInfo>
-				<AssemblyVersion>0.2.0.0</AssemblyVersion>
-			</AssemblyInfo>
+				
+			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>Cumberland.Web.TileConsumer</ReturnType></ReturnValue>
 			<Docs><summary>The OSGeo's Tile Map Service specification</summary><since version="0.2" /></Docs>
 		</Member><Member MemberName="VirtualEarth">
 			<MemberSignature Language="C#" Value="VirtualEarth" />
 			<MemberType>Field</MemberType>
 			<AssemblyInfo>
-				<AssemblyVersion>0.2.0.0</AssemblyVersion>
-			</AssemblyInfo>
+				
+			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>Cumberland.Web.TileConsumer</ReturnType></ReturnValue>
 			<Docs><summary>Microsoft's VirtualEarth web interface</summary><since version="0.2" /></Docs>
 		</Member>

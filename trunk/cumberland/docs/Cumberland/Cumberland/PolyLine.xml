@@ -4,6 +4,7 @@
     <AssemblyName>Cumberland</AssemblyName>
     <AssemblyVersion>0.1.0.0</AssemblyVersion>
     <AssemblyVersion>0.2.0.0</AssemblyVersion>
+    <AssemblyVersion>0.3.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>Cumberland.Feature</BaseTypeName>
@@ -22,7 +23,7 @@
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         
-      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
       <Parameters />
       <Docs><summary></summary><remarks></remarks></Docs>
     </Member><Member MemberName="Lines">
@@ -30,7 +31,7 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         
-      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Line&gt;</ReturnType></ReturnValue>
       <Docs><summary>The lines in the feature</summary><value>A List of <see cref="T:Cumberland.Line" /></value><remarks></remarks></Docs>
     </Member>

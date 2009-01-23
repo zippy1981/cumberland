@@ -4,6 +4,7 @@
     <AssemblyName>Cumberland</AssemblyName>
     <AssemblyVersion>0.1.0.0</AssemblyVersion>
     <AssemblyVersion>0.2.0.0</AssemblyVersion>
+    <AssemblyVersion>0.3.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -19,7 +20,7 @@
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         
-      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
       <Parameters />
       <Docs><summary></summary><remarks></remarks></Docs>
     </Member><Member MemberName="CalculateArea">
@@ -27,7 +28,7 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         
-      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>System.Double</ReturnType></ReturnValue>
       <Parameters />
       <Docs><summary>Calculates the area of the ring</summary><returns></returns><remarks>Can be expensive as it must traverse all the points in the ring</remarks></Docs>
@@ -36,7 +37,7 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         
-      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Rectangle</ReturnType></ReturnValue>
       <Parameters />
       <Docs><summary>Calculates the bounds of this ring</summary><returns></returns><remarks>Can be expensive as it must traverse all the points in the ring</remarks></Docs>
@@ -45,7 +46,7 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         
-      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>System.Void</ReturnType></ReturnValue>
       <Parameters />
       <Docs><summary>Closes the ring</summary><remarks>If not already closed, adds the first point in the ring to the end</remarks></Docs>
@@ -54,7 +55,7 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         
-      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>System.Boolean</ReturnType></ReturnValue>
       <Docs><summary>Determines the order of points in the ring</summary><value></value><remarks>Can be expensive as it must traverse all the points in the ring</remarks></Docs>
     </Member><Member MemberName="IsClosed">
@@ -62,7 +63,7 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         
-      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>System.Boolean</ReturnType></ReturnValue>
       <Docs><summary>Determines if the ring is closed</summary><value></value><remarks></remarks></Docs>
     </Member><Member MemberName="Points">
@@ -70,7 +71,7 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         
-      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Point&gt;</ReturnType></ReturnValue>
       <Docs><summary>The points in the ring</summary><value>A list of <see cref="T:Cumberland.Point" /></value><remarks></remarks></Docs>
     </Member><Member MemberName="Validate">
@@ -78,7 +79,7 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         
-      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>System.Boolean</ReturnType></ReturnValue>
       <Parameters />
       <Docs><summary>Determines if the ring is valid</summary><returns></returns><remarks>Currently, only checks if there are enough points to at least create a triangle</remarks></Docs>

@@ -4,6 +4,7 @@
     <AssemblyName>Cumberland</AssemblyName>
     <AssemblyVersion>0.1.0.0</AssemblyVersion>
     <AssemblyVersion>0.2.0.0</AssemblyVersion>
+    <AssemblyVersion>0.3.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Interfaces />
   <Docs>
@@ -17,7 +18,7 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         
-      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Point</ReturnType></ReturnValue>
       <Parameters><Parameter Name="p" Type="Cumberland.Point" /></Parameters>
       <Docs><param name="p">The point to be deprojected</param><summary>Deprojects the given point</summary><returns>The deprojected point</returns><remarks>Transforms the point from a cartesian coordinate system to a geographic coordinate system.  The details
@@ -27,7 +28,7 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         
-      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion></AssemblyInfo>
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Point</ReturnType></ReturnValue>
       <Parameters><Parameter Name="p" Type="Cumberland.Point" /></Parameters>
       <Docs><param name="p">The point to project</param><summary>Projects the given point</summary><returns>The projected point</returns><remarks>Transforms the point from a geographic coordinate system to a cartesian coordinate system.  The details
