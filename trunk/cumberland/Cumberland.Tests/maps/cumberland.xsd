@@ -1,13 +1,14 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="http://salmonsalvo.net/cumberland"
+		xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:element name="Map">
     <xs:complexType>
       <xs:all>
-        <xs:element name="Width" type="xs:string" minOccurs="0" msdata:Ordinal="0" />
-        <xs:element name="Height" type="xs:string" minOccurs="0" msdata:Ordinal="1" />
-        <xs:element name="Extents" type="xs:string" minOccurs="0" msdata:Ordinal="2" />
-        <xs:element name="Projection" type="xs:string" minOccurs="0" msdata:Ordinal="3" />
-        <xs:element name="Layers" minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Width" type="xs:integer" minOccurs="0" />
+        <xs:element name="Height" type="xs:integer" minOccurs="0"/>
+        <xs:element name="Extents" type="xs:string" minOccurs="0" />
+        <xs:element name="Projection" type="xs:string" minOccurs="0" />
+        <xs:element name="Layers" minOccurs="0" maxOccurs="1">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Layer" minOccurs="0" maxOccurs="unbounded">
@@ -60,7 +61,7 @@
                     <xs:element name="Data" minOccurs="0" maxOccurs="1">
                       <xs:complexType>
                         <xs:all>
-                          <xs:element name="FilePath" type="xs:string" minOccurs="0" msdata:Ordinal="0" />
+                          <xs:element name="FilePath" type="xs:string" minOccurs="0" />
                         </xs:all>
                         <xs:attribute name="sourceType" type="xs:string" />
                         <xs:attribute name="sourceInstance" type="xs:string" />
