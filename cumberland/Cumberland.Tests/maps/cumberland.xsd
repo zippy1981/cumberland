@@ -1,80 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema targetNamespace="http://salmonsalvo.net/cumberland"
-		xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:element name="Map">
-    <xs:complexType>
-      <xs:all>
-        <xs:element name="Width" type="xs:integer" minOccurs="0" />
-        <xs:element name="Height" type="xs:integer" minOccurs="0"/>
-        <xs:element name="Extents" type="xs:string" minOccurs="0" />
-        <xs:element name="Projection" type="xs:string" minOccurs="0" />
-        <xs:element name="Layers" minOccurs="0" maxOccurs="1">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="Layer" minOccurs="0" maxOccurs="unbounded">
-                <xs:complexType>
-                  <xs:all>
-                    <xs:element name="Visible" type="xs:string" minOccurs="0" />
-                    <xs:element name="Theme" type="xs:string" minOccurs="0" />
-                    <xs:element name="ThemeField" type="xs:string" minOccurs="0" />
-                    <xs:element name="LabelField" type="xs:string" minOccurs="0" />
-                    <xs:element name="MaxScale" type="xs:string" minOccurs="0" />
-                    <xs:element name="Projection" type="xs:string" minOccurs="0" />
-                    <xs:element name="Id" type="xs:string" minOccurs="0" />
-                    <xs:element name="Styles" minOccurs="0" maxOccurs="1">
-                      <xs:complexType>
-                        <xs:sequence>
-                          <xs:element name="Style" minOccurs="0" maxOccurs="unbounded">
-                            <xs:complexType>
-                              <xs:all>
-                                <xs:element name="ShowLabels" type="xs:string" minOccurs="0" />
-                                <xs:element name="LabelFont" type="xs:string" minOccurs="0" />
-                                <xs:element name="LabelFontEmSize" type="xs:string" minOccurs="0" />
-                                <xs:element name="LabelMaxScale" type="xs:string" minOccurs="0" />
-                                <xs:element name="Id" type="xs:string" minOccurs="0" />
-                                <xs:element name="LineWidth" type="xs:string" minOccurs="0" />
-                                <xs:element name="LineStyle" type="xs:string" minOccurs="0" />
-                                <xs:element name="LineColor" type="xs:string" minOccurs="0" />
-                                <xs:element name="FillColor" type="xs:string" minOccurs="0" />
-                                <xs:element name="MinRangeThemeValue" type="xs:string" minOccurs="0" />
-                                <xs:element name="MaxRangeThemeValue" type="xs:string" minOccurs="0" />
-                                <xs:element name="DrawPointSymbolOnPolyLine" type="xs:string" minOccurs="0" />
-                                <xs:element name="PointSymbol" type="xs:string" minOccurs="0" />
-                                <xs:element name="PointSymbolShape" type="xs:string" minOccurs="0" />
-                                <xs:element name="PointSize" type="xs:string" minOccurs="0" />
-                                <xs:element name="CalculateLabelAngleForPolyLine" type="xs:string" minOccurs="0" />
-                                <xs:element name="LabelColor" type="xs:string" minOccurs="0" />
-                                <xs:element name="LabelPosition" type="xs:string" minOccurs="0" />
-                                <xs:element name="LabelDecoration" type="xs:string" minOccurs="0" />
-                                <xs:element name="UniqueThemeValue" type="xs:string" minOccurs="0" />
-                                <xs:element name="FillStyle" type="xs:string" minOccurs="0" />
-                                <xs:element name="FillTexturePath" type="xs:string" minOccurs="0" />
-                                <xs:element name="MaxScale" type="xs:string" minOccurs="0" />
-                                <xs:element name="LineSize" type="xs:string" minOccurs="0" />
-                                <xs:element name="PointSymbolImagePath" type="xs:string" minOccurs="0" />
-                              </xs:all>
-                            </xs:complexType>
-                          </xs:element>
-                        </xs:sequence>
-                      </xs:complexType>
-                    </xs:element>
-                    <xs:element name="Data" minOccurs="0" maxOccurs="1">
-                      <xs:complexType>
-                        <xs:all>
-                          <xs:element name="FilePath" type="xs:string" minOccurs="0" />
-                        </xs:all>
-                        <xs:attribute name="sourceType" type="xs:string" />
-                        <xs:attribute name="sourceInstance" type="xs:string" />
-                      </xs:complexType>
-                    </xs:element>
-                  </xs:all>
-                </xs:complexType>
-              </xs:element>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-      </xs:all>
-      <xs:attribute name="version" type="xs:string" />
-    </xs:complexType>
-  </xs:element>
+<xs:schema targetNamespace="http://salmonsalvo.net/cumberland" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="Map">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="Width" type="xs:integer" minOccurs="0" maxOccurs="1" />
+				<xs:element name="Height" type="xs:integer" minOccurs="0" maxOccurs="1" />
+				<xs:element name="Extents" type="xs:string" minOccurs="0" maxOccurs="1" />
+				<xs:element name="Projection" type="xs:string" minOccurs="0" maxOccurs="1" />
+				<xs:element name="BackgroundColor" type="xs:string" minOccurs="0" maxOccurs="1" />
+				<xs:element name="Layers" minOccurs="0" maxOccurs="1">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Layer" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:all>
+										<xs:element name="Visible" type="xs:boolean" minOccurs="0" maxOccurs="1" />
+										<xs:element name="Theme" type="xs:string" minOccurs="0" maxOccurs="1" />
+										<xs:element name="ThemeField" type="xs:string" minOccurs="0" maxOccurs="1" />
+										<xs:element name="LabelField" type="xs:string" minOccurs="0" maxOccurs="1" />
+										<xs:element name="MaxScale" type="xs:string" minOccurs="0" maxOccurs="1" />
+										<xs:element name="Projection" type="xs:string" minOccurs="0" maxOccurs="1" />
+										<xs:element name="Id" type="xs:string" minOccurs="0" maxOccurs="1" />
+										<xs:element name="Styles" minOccurs="0" maxOccurs="1">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="Style" minOccurs="0" maxOccurs="unbounded">
+														<xs:complexType>
+															<xs:all>
+																<xs:element name="ShowLabels" type="xs:string" minOccurs="0" maxOccurs="1" />
+																<xs:element name="LabelFont" type="xs:string" minOccurs="0" maxOccurs="1" />
+																<xs:element name="LabelFontEmSize" type="xs:string" minOccurs="0" maxOccurs="1" />
+																<xs:element name="LabelMaxScale" type="xs:string" minOccurs="0" maxOccurs="1" />
+																<xs:element name="LabelMinScale" type="xs:string" minOccurs="0" maxOccurs="1" />
+																<xs:element name="Id" type="xs:string" minOccurs="0" maxOccurs="1" />
+																<xs:element name="LineWidth" type="xs:string" minOccurs="0" maxOccurs="1" />
+																<xs:element name="LineStyle" type="xs:string" minOccurs="0" maxOccurs="1" />
+																<xs:element name="LineColor" type="xs:string" minOccurs="0" maxOccurs="1" />
+																<xs:element name="FillColor" type="xs:string" minOccurs="0" maxOccurs="1" />
+																<xs:element name="MinRangeThemeValue" type="xs:string" minOccurs="0" maxOccurs="1" />
+																<xs:element name="MaxRangeThemeValue" type="xs:string" minOccurs="0" maxOccurs="1" />
+																<xs:element name="DrawPointSymbolOnPolyLine" type="xs:string" minOccurs="0" maxOccurs="1" />
+																<xs:element name="PointSymbol" type="xs:string" minOccurs="0" maxOccurs="1" />
+																<xs:element name="PointSymbolShape" type="xs:string" minOccurs="0" maxOccurs="1" />
+																<xs:element name="PointSize" type="xs:string" minOccurs="0" maxOccurs="1" />
+																<xs:element name="CalculateLabelAngleForPolyLine" type="xs:string" minOccurs="0" maxOccurs="1" />
+																<xs:element name="LabelAngle" type="xs:integer" minOccurs="0" maxOccurs="1" />
+																<xs:element name="LabelColor" type="xs:string" minOccurs="0" maxOccurs="1" />
+																<xs:element name="LabelPosition" type="xs:string" minOccurs="0" maxOccurs="1" />
+																<xs:element name="LabelDecoration" type="xs:string" minOccurs="0" maxOccurs="1" />
+																<xs:element name="LabelCustomFont" type="xs:string" minOccurs="0" maxOccurs="1" />
+																<xs:element name="LabelPixelOffset" type="xs:integer" minOccurs="0" maxOccurs="1" />
+																<xs:element name="UniqueThemeValue" type="xs:string" minOccurs="0" maxOccurs="1" />
+																<xs:element name="FillStyle" type="xs:string" minOccurs="0" maxOccurs="1" />
+																<xs:element name="FillTexturePath" type="xs:string" minOccurs="0" maxOccurs="1" />
+																<xs:element name="MaxScale" type="xs:string" minOccurs="0" maxOccurs="1" />
+																<xs:element name="MinScale" type="xs:string" minOccurs="0" maxOccurs="1" />
+																<xs:element name="LineSize" type="xs:string" minOccurs="0" maxOccurs="1" />
+																<xs:element name="PointSymbolImagePath" type="xs:string" minOccurs="0" maxOccurs="1" />
+															</xs:all>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="Data" minOccurs="0" maxOccurs="1">
+											<xs:complexType>
+												<xs:all>
+													<xs:element name="FilePath" type="xs:string" minOccurs="0" maxOccurs="1" />
+													<xs:element name="ConnectionString" type="xs:string" minOccurs="0" maxOccurs="1" />
+													<xs:element name="TableName" type="xs:string" minOccurs="0" maxOccurs="1" />
+													<xs:element name="ForcedSrid" type="xs:integer" minOccurs="0" maxOccurs="1" />
+													<xs:element name="ForcedGeometryColumn" type="xs:string" minOccurs="0" maxOccurs="1" />
+													<xs:element name="ForcedFeatureType" type="xs:string" minOccurs="0" maxOccurs="1" />
+													<xs:element name="ForcedSpatialType" type="xs:string" minOccurs="0" maxOccurs="1" />
+													<xs:element name="SimpleFeatureSource" minOccurs="0" maxOccurs="1">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:all>
+												<xs:attribute name="sourceType" type="xs:string" use="required" />
+												<xs:attribute name="sourceInstance" type="xs:string" use="required" />
+											</xs:complexType>
+										</xs:element>
+									</xs:all>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:all>
+			<xs:attribute name="version" type="xs:string" />
+		</xs:complexType>
+	</xs:element>
 </xs:schema>
