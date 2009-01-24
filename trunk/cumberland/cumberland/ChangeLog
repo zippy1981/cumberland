@@ -1,3 +1,7 @@
+2009-01-24  Scott Ellington  <scott.ellington@gmail.com>
+
+	* Xml/Serialization/MapSerializer.cs: use LocalName for xml nodes
+
 2009-01-22  Scott Ellington  <scott.ellington@gmail.com>
 
 	* AssemblyInfo.cs: bump version to 0.3

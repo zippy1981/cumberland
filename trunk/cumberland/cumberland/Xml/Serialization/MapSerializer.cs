@@ -101,7 +101,7 @@ namespace Cumberland.Xml.Serialization
 			XmlNode mapNode = null;
 			foreach(XmlNode node in doc.ChildNodes)
 			{
-				if (node.Name == "Map")
+				if (node.LocalName == "Map")
 				{
 					mapNode = node;
 					break;
@@ -129,32 +129,34 @@ namespace Cumberland.Xml.Serialization
 			
 			foreach (XmlNode node  in mapNode.ChildNodes)
 			{
-				if (node.Name == "Layers")
+				string name = node.LocalName;
+				
+				if (name == "Layers")
 				{
 					foreach (XmlNode lnode in node.ChildNodes)
 					{
 						DeserializeLayer(lnode, map, mapPath);
 					}
 				}
-				else if (node.Name == "Extents")
+				else if (name == "Extents")
 				{
 					map.Extents = ParseRectangle(node.InnerText);
 				}
-				else if (node.Name == "Projection")
+				else if (name == "Projection")
 				{
 					map.Projection = node.InnerText;
 				}
-				else if (node.Name == "Width")
+				else if (name == "Width")
 				{
 					map.Width = int.Parse(node.InnerText,
 					                      CultureInfo.InvariantCulture);
 				}
-				else if (node.Name == "Height")
+				else if (name == "Height")
 				{
 					map.Height = int.Parse(node.InnerText,
 					                       CultureInfo.InvariantCulture);
 				}
-				else if (node.Name == "BackgroundColor")
+				else if (name == "BackgroundColor")
 				{
 					map.BackgroundColor = ParseColor(node.InnerText);
 				}
@@ -236,7 +238,9 @@ namespace Cumberland.Xml.Serialization
 			
 			foreach (XmlNode child in node.ChildNodes)
 			{
-				if (child.Name == "Data")
+				string name = child.LocalName;
+				
+				if (name == "Data")
 				{
 #region parse data
 					string source = child.Attributes.GetNamedItem("sourceType").Value;
@@ -277,7 +281,7 @@ namespace Cumberland.Xml.Serialization
 							foreach (XmlNode dnode in child.ChildNodes)
 							{
 								IDatabaseFeatureSource dfs = (l.Data as IDatabaseFeatureSource);
-								switch (dnode.Name)
+								switch (dnode.LocalName)
 								{
 							
 								case "ConnectionString":
@@ -334,7 +338,7 @@ namespace Cumberland.Xml.Serialization
 							
 							foreach (XmlNode dnode in child.ChildNodes)
 							{
-								if (dnode.Name == "FilePath")
+								if (dnode.LocalName == "FilePath")
 								{	
 									(l.Data as IFileFeatureSource).FilePath = AnchorPath(mapPath, dnode.InnerText);
 								
@@ -345,43 +349,43 @@ namespace Cumberland.Xml.Serialization
 					}
 #endregion
 				}
-				else if (child.Name == "Projection")
+				else if (name == "Projection")
 				{
 					l.Projection = child.InnerText;
 				}
-				else if (child.Name == "Id")
+				else if (name == "Id")
 				{
 					l.Id = child.InnerText;
 				}
-				else if (child.Name == "Styles")
+				else if (name == "Styles")
 				{
 					foreach (XmlNode lnode in child.ChildNodes)
 					{
 						DeserializeStyle(lnode, l, mapPath);
 					}
 				}
-				else if (child.Name == "Theme")
+				else if (name == "Theme")
 				{
 					l.Theme = (ThemeType) Enum.Parse(typeof(ThemeType), child.InnerText);
 				}
-				else if (child.Name == "ThemeField")
+				else if (name == "ThemeField")
 				{
 					l.ThemeField = child.InnerText;
 				}
-				else if (child.Name == "LabelField")
+				else if (name == "LabelField")
 				{
 					l.LabelField = child.InnerText;
 				}
-				else if (child.Name == "Visible")
+				else if (name == "Visible")
 				{
 					l.Visible = bool.Parse(child.InnerText);
 				}
-				else if (child.Name == "MaxScale")
+				else if (name == "MaxScale")
 				{
 					l.MaxScale = double.Parse(child.InnerText,
 					                          CultureInfo.InvariantCulture);
 				}
-				else if (child.Name == "MinScale")
+				else if (name == "MinScale")
 				{
 					l.MinScale = double.Parse(child.InnerText,
 					                          CultureInfo.InvariantCulture);
@@ -397,147 +401,149 @@ namespace Cumberland.Xml.Serialization
 			
 			foreach (XmlNode child in node.ChildNodes)
 			{
-				if (child.Name == "LineWidth")
+				string name = child.LocalName;
+				
+				if (name == "LineWidth")
 				{
 					style.LineWidth = Convert.ToInt32(child.InnerText,
 					                                  CultureInfo.InvariantCulture);
 				}
-				else if (child.Name == "PointSize")
+				else if (name == "PointSize")
 				{
 					style.PointSize = Convert.ToInt32(child.InnerText,
 					                                  CultureInfo.InvariantCulture);
 				}
-				else if (child.Name == "LineColor")
+				else if (name == "LineColor")
 				{
 					style.LineColor = ParseColor(child.InnerText);
 				}
-				else if (child.Name == "FillColor")
+				else if (name == "FillColor")
 				{
 					style.FillColor = ParseColor(child.InnerText);
 				}
-				else if (child.Name == "LineStyle")
+				else if (name == "LineStyle")
 				{
 					style.LineStyle = (LineStyle) Enum.Parse(typeof(LineStyle), 
 					                                         child.InnerText);
 				}
-				else if (child.Name == "PointSymbol")
+				else if (name == "PointSymbol")
 				{
 					style.PointSymbol = (PointSymbolType) Enum.Parse(typeof(PointSymbolType), 
 					                                                 child.InnerText);
 				}
-				else if (child.Name == "PointSymbolShape")
+				else if (name == "PointSymbolShape")
 				{
 					style.PointSymbolShape = (PointSymbolShapeType) Enum.Parse(typeof(PointSymbolShapeType),
 					                                                       child.InnerText);
 				}
-				else if (child.Name == "PointSymbolImagePath")
+				else if (name == "PointSymbolImagePath")
 				{
 					style.PointSymbolImagePath = AnchorPath(mapPath, 
 					                                        child.InnerText);
 				}
-				else if (child.Name == "MaxRangeThemeValue")
+				else if (name == "MaxRangeThemeValue")
 				{
 					style.MaxRangeThemeValue = double.Parse(child.InnerText,
 					                                        CultureInfo.InvariantCulture);
 				}
-				else if (child.Name == "MinRangeThemeValue")
+				else if (name == "MinRangeThemeValue")
 				{
 					style.MinRangeThemeValue = double.Parse(child.InnerText,
 					                                        CultureInfo.InvariantCulture);
 				}
-				else if (child.Name == "UniqueThemeValue")
+				else if (name == "UniqueThemeValue")
 				{
 					style.UniqueThemeValue = child.InnerText;
 				}
-				else if (child.Name == "Id")
+				else if (name == "Id")
 				{
 					style.Id = child.InnerText;
 				}
-				else if (child.Name == "FillStyle")
+				else if (name == "FillStyle")
 				{
 					style.FillStyle = (FillStyle) Enum.Parse(typeof(FillStyle), 
 					                                         child.InnerText);
 				}
-				else if (child.Name == "LabelFont")
+				else if (name == "LabelFont")
 				{
 					style.LabelFont = (LabelFont) Enum.Parse(typeof(LabelFont), 
 					                                         child.InnerText);
 				}
-				else if (child.Name == "ShowLabels")
+				else if (name == "ShowLabels")
 				{
 					style.ShowLabels = bool.Parse(child.InnerText);
 				}
-				else if (child.Name == "LabelColor")
+				else if (name == "LabelColor")
 				{
 					style.LabelColor = ParseColor(child.InnerText);
 				}
-				else if (child.Name == "LabelFontEmSize")
+				else if (name == "LabelFontEmSize")
 				{
 					style.LabelFontEmSize = float.Parse(child.InnerText,
 					                                    CultureInfo.InvariantCulture);
 				}
-				else if (child.Name == "LabelPosition")
+				else if (name == "LabelPosition")
 				{
 					style.LabelPosition = (LabelPosition) Enum.Parse(typeof(LabelPosition), 
 					                                                 child.InnerText);
 				}
-				else if (child.Name == "LabelPixelOffset")
+				else if (name == "LabelPixelOffset")
 				{
 					style.LabelPixelOffset = int.Parse(child.InnerText,
 					                                   CultureInfo.InvariantCulture);
 				}
-				else if (child.Name == "LabelDecoration")
+				else if (name == "LabelDecoration")
 				{
 					style.LabelDecoration = (LabelDecoration) Enum.Parse(typeof(LabelDecoration), 
 					                                                     child.InnerText);
 				}
-				else if (child.Name == "LabelOutlineColor")
+				else if (name == "LabelOutlineColor")
 				{
 					style.LabelOutlineColor = ParseColor(child.InnerText);
 				}
-				else if (child.Name == "LabelOutlineWidth")
+				else if (name == "LabelOutlineWidth")
 				{
 					style.LabelOutlineWidth = float.Parse(child.InnerText,
 					                                      CultureInfo.InvariantCulture);
 				}
-				else if (child.Name == "LabelAngle")
+				else if (name == "LabelAngle")
 				{
 					style.LabelAngle = float.Parse(child.InnerText,
 					                               CultureInfo.InvariantCulture);
 				}
-				else if (child.Name == "MinScale")
+				else if (name == "MinScale")
 				{
 					style.MinScale = double.Parse(child.InnerText,
 					                              CultureInfo.InvariantCulture);
 				}
-				else if (child.Name == "MaxScale")
+				else if (name == "MaxScale")
 				{
 					style.MaxScale = double.Parse(child.InnerText,
 					                              CultureInfo.InvariantCulture);
 				}
-				else if (child.Name == "LabelMinScale")
+				else if (name == "LabelMinScale")
 				{
 					style.LabelMinScale = double.Parse(child.InnerText,
 					                                   CultureInfo.InvariantCulture);
 				}
-				else if (child.Name == "LabelMaxScale")
+				else if (name == "LabelMaxScale")
 				{
 					style.LabelMaxScale = double.Parse(child.InnerText,
 					                                   CultureInfo.InvariantCulture);
 				}
-				else if (child.Name == "LabelCustomFont")
+				else if (name == "LabelCustomFont")
 				{
 					style.LabelCustomFont = child.InnerText;
 				}
-				else if (child.Name == "DrawPointSymbolOnPolyLine")
+				else if (name == "DrawPointSymbolOnPolyLine")
 				{
 					style.DrawPointSymbolOnPolyLine = bool.Parse(child.InnerText);
 				}
-				else if (child.Name == "CalculateLabelAngleForPolyLine")
+				else if (name == "CalculateLabelAngleForPolyLine")
 				{
 					style.CalculateLabelAngleForPolyLine = bool.Parse(child.InnerText);
 				}
-				else if (child.Name == "FillTexturePath")
+				else if (name == "FillTexturePath")
 				{
 					style.FillTexturePath = AnchorPath(mapPath, child.InnerText);
 				}				
