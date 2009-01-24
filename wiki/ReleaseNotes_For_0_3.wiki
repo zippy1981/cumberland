@@ -1,5 +1,7 @@
 #summary Release Notes for 0.3
 
+0.3 is mainly a bugfix release but also contains a few new features
+
 <wiki:toc max_depth="1" />
 
 = New Features =
