@@ -12,7 +12,7 @@
             <xs:sequence>
               <xs:element name="Layer" minOccurs="0" maxOccurs="unbounded">
                 <xs:complexType>
-                  <xs:sequence>
+                  <xs:all>
                     <xs:element name="Visible" type="xs:string" minOccurs="0" />
                     <xs:element name="Theme" type="xs:string" minOccurs="0" />
                     <xs:element name="ThemeField" type="xs:string" minOccurs="0" />
@@ -20,12 +20,12 @@
                     <xs:element name="MaxScale" type="xs:string" minOccurs="0" />
                     <xs:element name="Projection" type="xs:string" minOccurs="0" />
                     <xs:element name="Id" type="xs:string" minOccurs="0" />
-                    <xs:element name="Styles" minOccurs="0" maxOccurs="unbounded">
+                    <xs:element name="Styles" minOccurs="0" maxOccurs="1">
                       <xs:complexType>
                         <xs:sequence>
                           <xs:element name="Style" minOccurs="0" maxOccurs="unbounded">
                             <xs:complexType>
-                              <xs:sequence>
+                              <xs:all>
                                 <xs:element name="ShowLabels" type="xs:string" minOccurs="0" />
                                 <xs:element name="LabelFont" type="xs:string" minOccurs="0" />
                                 <xs:element name="LabelFontEmSize" type="xs:string" minOccurs="0" />
@@ -51,22 +51,22 @@
                                 <xs:element name="MaxScale" type="xs:string" minOccurs="0" />
                                 <xs:element name="LineSize" type="xs:string" minOccurs="0" />
                                 <xs:element name="PointSymbolImagePath" type="xs:string" minOccurs="0" />
-                              </xs:sequence>
+                              </xs:all>
                             </xs:complexType>
                           </xs:element>
                         </xs:sequence>
                       </xs:complexType>
                     </xs:element>
-                    <xs:element name="Data" minOccurs="0" maxOccurs="unbounded">
+                    <xs:element name="Data" minOccurs="0" maxOccurs="1">
                       <xs:complexType>
-                        <xs:sequence>
+                        <xs:all>
                           <xs:element name="FilePath" type="xs:string" minOccurs="0" msdata:Ordinal="0" />
-                        </xs:sequence>
+                        </xs:all>
                         <xs:attribute name="sourceType" type="xs:string" />
                         <xs:attribute name="sourceInstance" type="xs:string" />
                       </xs:complexType>
                     </xs:element>
-                  </xs:sequence>
+                  </xs:all>
                 </xs:complexType>
               </xs:element>
             </xs:sequence>
@@ -74,13 +74,6 @@
         </xs:element>
       </xs:all>
       <xs:attribute name="version" type="xs:string" />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
-    <xs:complexType>
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element ref="Map" />
-      </xs:choice>
     </xs:complexType>
   </xs:element>
 </xs:schema>
