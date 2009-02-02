@@ -144,7 +144,6 @@
 					<MaxScale>.013</MaxScale>
 					<FillColor>255,100,255,100</FillColor>
 					<LineColor>255,0,155,0</LineColor>
-					<LineSize>1</LineSize>
 					<PointSize>5</PointSize>
 					<MinRangeThemeValue>0</MinRangeThemeValue>
 					<MaxRangeThemeValue>500000</MaxRangeThemeValue>
@@ -154,9 +153,8 @@
 				<Style>
 					<Id>MidSizedCities</Id>
 					<MaxScale>.05</MaxScale>
-					<FillColor>255,100,100,255</FillColor>
-					<LineColor>255,0,0,155</LineColor>
-					<LineSize>1</LineSize>					
+					<FillColor>25544,100,100,255</FillColor>
+					<LineColor>255,0,0,155</LineColor>			
 					<PointSize>8</PointSize>
 					<MinRangeThemeValue>500001</MinRangeThemeValue>
 					<MaxRangeThemeValue>2000000</MaxRangeThemeValue>
