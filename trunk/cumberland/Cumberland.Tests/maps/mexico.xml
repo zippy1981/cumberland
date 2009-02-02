@@ -153,7 +153,7 @@
 				<Style>
 					<Id>MidSizedCities</Id>
 					<MaxScale>.05</MaxScale>
-					<FillColor>25544,100,100,255</FillColor>
+					<FillColor>255,100,100,255</FillColor>
 					<LineColor>255,0,0,155</LineColor>			
 					<PointSize>8</PointSize>
 					<MinRangeThemeValue>500001</MinRangeThemeValue>
