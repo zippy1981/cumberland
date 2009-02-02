@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema targetNamespace="http://salmonsalvo.net/cumberland" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema targetNamespace="http://salmonsalvo.net/cumberland" 
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:ss="http://salmonsalvo.net/cumberland">
 	<xs:element name="Map">
 		<xs:complexType>
 			<xs:all>
@@ -36,8 +38,8 @@
 																<xs:element name="Id" type="xs:string" minOccurs="0" maxOccurs="1" />
 																<xs:element name="LineWidth" type="xs:integer" minOccurs="0" maxOccurs="1" />
 																<xs:element name="LineStyle" type="xs:string" minOccurs="0" maxOccurs="1" />
-																<xs:element name="LineColor" type="color" minOccurs="0" maxOccurs="1" />
-																<xs:element name="FillColor" type="color" minOccurs="0" maxOccurs="1" />
+																<xs:element name="LineColor" type="ss:color" minOccurs="0" maxOccurs="1" />
+																<xs:element name="FillColor" type="ss:color" minOccurs="0" maxOccurs="1" />
 																<xs:element name="MinRangeThemeValue" type="xs:double" minOccurs="0" maxOccurs="1" />
 																<xs:element name="MaxRangeThemeValue" type="xs:double" minOccurs="0" maxOccurs="1" />
 																<xs:element name="DrawPointSymbolOnPolyLine" type="xs:boolean" minOccurs="0" maxOccurs="1" />
@@ -46,7 +48,7 @@
 																<xs:element name="PointSize" type="xs:integer" minOccurs="0" maxOccurs="1" />
 																<xs:element name="CalculateLabelAngleForPolyLine" type="xs:boolean" minOccurs="0" maxOccurs="1" />
 																<xs:element name="LabelAngle" type="xs:float" minOccurs="0" maxOccurs="1" />
-																<xs:element name="LabelColor" type="color" minOccurs="0" maxOccurs="1" />
+																<xs:element name="LabelColor" type="ss:color" minOccurs="0" maxOccurs="1" />
 																<xs:element name="LabelPosition" type="xs:string" minOccurs="0" maxOccurs="1" />
 																<xs:element name="LabelDecoration" type="xs:string" minOccurs="0" maxOccurs="1" />
 																<xs:element name="LabelCustomFont" type="xs:string" minOccurs="0" maxOccurs="1" />
