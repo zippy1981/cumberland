@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<c:Map version="0.1" xmlns:c="http://salmonsalvo.net/cumberland" >
+<c:Map xmlns:c="http://salmonsalvo.net/cumberland" >
 	<Width>400</Width>
 	<Height>400</Height>
 	<Extents>-120,12,-82,34</Extents>
