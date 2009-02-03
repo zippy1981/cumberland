@@ -9,7 +9,7 @@
 				<xs:element name="Height" type="xs:integer" minOccurs="0" maxOccurs="1" />
 				<xs:element name="Extents" type="xs:string" minOccurs="0" maxOccurs="1" />
 				<xs:element name="Projection" type="xs:string" minOccurs="0" maxOccurs="1" />
-				<xs:element name="BackgroundColor" type="xs:string" minOccurs="0" maxOccurs="1" />
+				<xs:element name="BackgroundColor" type="ss:color" minOccurs="0" maxOccurs="1" />
 				<xs:element name="Layers" minOccurs="0" maxOccurs="1">
 					<xs:complexType>
 						<xs:sequence>
@@ -17,7 +17,15 @@
 								<xs:complexType>
 									<xs:all>
 										<xs:element name="Visible" type="xs:boolean" minOccurs="0" maxOccurs="1" />
-										<xs:element name="Theme" type="xs:string" minOccurs="0" maxOccurs="1" />
+										<xs:element name="Theme" minOccurs="0" maxOccurs="1">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="None" />
+													<xs:enumeration value="Unique" />
+													<xs:enumeration value="NumericRange" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
 										<xs:element name="ThemeField" type="xs:string" minOccurs="0" maxOccurs="1" />
 										<xs:element name="LabelField" type="xs:string" minOccurs="0" maxOccurs="1" />
 										<xs:element name="MaxScale" type="xs:double" minOccurs="0" maxOccurs="1" />
@@ -31,30 +39,97 @@
 														<xs:complexType>
 															<xs:all>
 																<xs:element name="ShowLabels" type="xs:boolean" minOccurs="0" maxOccurs="1" />
-																<xs:element name="LabelFont" type="xs:string" minOccurs="0" maxOccurs="1" />
+																<xs:element name="LabelFont" minOccurs="0" maxOccurs="1">
+																	<xs:simpleType>
+																		<xs:restriction base="xs:string">
+																			<xs:enumeration value="None" />
+																			<xs:enumeration value="Serif" />
+																			<xs:enumeration value="SansSerif" />
+																			<xs:enumeration value="Monospace" />
+																			<xs:enumeration value="Custom" />
+																		</xs:restriction>
+																	</xs:simpleType>
+																</xs:element>
 																<xs:element name="LabelFontEmSize" type="xs:float" minOccurs="0" maxOccurs="1" />
 																<xs:element name="LabelMaxScale" type="xs:double" minOccurs="0" maxOccurs="1" />
 																<xs:element name="LabelMinScale" type="xs:double" minOccurs="0" maxOccurs="1" />
 																<xs:element name="Id" type="xs:string" minOccurs="0" maxOccurs="1" />
 																<xs:element name="LineWidth" type="xs:integer" minOccurs="0" maxOccurs="1" />
-																<xs:element name="LineStyle" type="xs:string" minOccurs="0" maxOccurs="1" />
+																<xs:element name="LineStyle" minOccurs="0" maxOccurs="1">
+																	<xs:simpleType>
+																		<xs:restriction base="xs:string">
+																			<xs:enumeration value="None" />
+																			<xs:enumeration value="Solid" />
+																			<xs:enumeration value="Dashed" />
+																			<xs:enumeration value="Dotted" />
+																		</xs:restriction>
+																	</xs:simpleType>
+																</xs:element>
 																<xs:element name="LineColor" type="ss:color" minOccurs="0" maxOccurs="1" />
 																<xs:element name="FillColor" type="ss:color" minOccurs="0" maxOccurs="1" />
 																<xs:element name="MinRangeThemeValue" type="xs:double" minOccurs="0" maxOccurs="1" />
 																<xs:element name="MaxRangeThemeValue" type="xs:double" minOccurs="0" maxOccurs="1" />
 																<xs:element name="DrawPointSymbolOnPolyLine" type="xs:boolean" minOccurs="0" maxOccurs="1" />
-																<xs:element name="PointSymbol" type="xs:string" minOccurs="0" maxOccurs="1" />
-																<xs:element name="PointSymbolShape" type="xs:string" minOccurs="0" maxOccurs="1" />
+																<xs:element name="PointSymbol" minOccurs="0" maxOccurs="1">
+																	<xs:simpleType>
+																		<xs:restriction base="xs:string">
+																			<xs:enumeration value="None" />
+																			<xs:enumeration value="Shape" />
+																			<xs:enumeration value="Image" />
+																		</xs:restriction>
+																	</xs:simpleType>
+																</xs:element>
+																<xs:element name="PointSymbolShape" minOccurs="0" maxOccurs="1">
+																	<xs:simpleType>
+																		<xs:restriction base="xs:string">
+																			<xs:enumeration value="None" />
+																			<xs:enumeration value="Circle" />
+																			<xs:enumeration value="Square" />
+																		</xs:restriction>
+																	</xs:simpleType>
+																</xs:element>
 																<xs:element name="PointSize" type="xs:integer" minOccurs="0" maxOccurs="1" />
 																<xs:element name="CalculateLabelAngleForPolyLine" type="xs:boolean" minOccurs="0" maxOccurs="1" />
 																<xs:element name="LabelAngle" type="xs:float" minOccurs="0" maxOccurs="1" />
+																<xs:element name="LabelDecoration" minOccurs="0" maxOccurs="1">
+																	<xs:simpleType>
+																		<xs:restriction base="xs:string">
+																			<xs:enumeration value="None" />
+																			<xs:enumeration value="Outline" />
+																		</xs:restriction>
+																	</xs:simpleType>
+																</xs:element>
 																<xs:element name="LabelColor" type="ss:color" minOccurs="0" maxOccurs="1" />
-																<xs:element name="LabelPosition" type="xs:string" minOccurs="0" maxOccurs="1" />
-																<xs:element name="LabelDecoration" type="xs:string" minOccurs="0" maxOccurs="1" />
+																<xs:element name="LabelPosition" minOccurs="0" maxOccurs="1">
+																	<xs:simpleType>
+																		<xs:restriction base="xs:string">
+																			<xs:enumeration value="None" />
+																			<xs:enumeration value="Center" />
+																			<xs:enumeration value="Right" />
+																			<xs:enumeration value="BottomRight" />
+																			<xs:enumeration value="Bottom" />
+																			<xs:enumeration value="BottomLeft" />
+																			<xs:enumeration value="Left" />
+																			<xs:enumeration value="TopLeft" />
+																			<xs:enumeration value="Top" />
+																			<xs:enumeration value="TopRight" />
+																		</xs:restriction>
+																	</xs:simpleType>
+																</xs:element>
 																<xs:element name="LabelCustomFont" type="xs:string" minOccurs="0" maxOccurs="1" />
+																<xs:element name="LabelOutlineColor" type="ss:color" minOccurs="0" maxOccurs="1" />
+																<xs:element name="LabelOutlineWidth" type="xs:width" minOccurs="0" maxOccurs="1" />
 																<xs:element name="LabelPixelOffset" type="xs:integer" minOccurs="0" maxOccurs="1" />
 																<xs:element name="UniqueThemeValue" type="xs:string" minOccurs="0" maxOccurs="1" />
-																<xs:element name="FillStyle" type="xs:string" minOccurs="0" maxOccurs="1" />
+																<xs:element name="FillStyle" minOccurs="0" maxOccurs="1">
+																	<xs:simpleType>
+																		<xs:restriction base="xs:string">
+																			<xs:enumeration value="None" />
+																			<xs:enumeration value="Solid" />
+																			<xs:enumeration value="Texture" />
+																		</xs:restriction>
+																	</xs:simpleType>
+																</xs:element>
 																<xs:element name="FillTexturePath" type="xs:string" minOccurs="0" maxOccurs="1" />
 																<xs:element name="MaxScale" type="xs:double" minOccurs="0" maxOccurs="1" />
 																<xs:element name="MinScale" type="xs:double" minOccurs="0" maxOccurs="1" />
@@ -73,8 +148,25 @@
 													<xs:element name="TableName" type="xs:string" minOccurs="0" maxOccurs="1" />
 													<xs:element name="ForcedSrid" type="xs:integer" minOccurs="0" maxOccurs="1" />
 													<xs:element name="ForcedGeometryColumn" type="xs:string" minOccurs="0" maxOccurs="1" />
-													<xs:element name="ForcedFeatureType" type="xs:string" minOccurs="0" maxOccurs="1" />
-													<xs:element name="ForcedSpatialType" type="xs:string" minOccurs="0" maxOccurs="1" />
+													<xs:element name="ForcedFeatureType" minOccurs="0" maxOccurs="1">
+														<xs:simpleType>
+															<xs:restriction base="xs:string">
+																<xs:enumeration value="None" />
+																<xs:enumeration value="Point" />
+																<xs:enumeration value="Polygon" />
+																<xs:enumeration value="Polyline" />
+															</xs:restriction>
+														</xs:simpleType>
+													</xs:element>
+													<xs:element name="ForcedSpatialType" minOccurs="0" maxOccurs="1">
+														<xs:simpleType>
+															<xs:restriction base="xs:string">
+																<xs:enumeration value="None" />
+																<xs:enumeration value="Geometric" />
+																<xs:enumeration value="Geographic" />
+															</xs:restriction>
+														</xs:simpleType>
+													</xs:element>
 													<xs:element name="SimpleFeatureSource" minOccurs="0" maxOccurs="1">
 														<xs:complexType>
 															<xs:sequence>
