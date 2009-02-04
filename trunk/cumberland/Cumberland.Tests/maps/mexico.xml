@@ -2,7 +2,7 @@
 <c:Map xmlns:c="http://salmonsalvo.net/cumberland" >
 	<Width>400</Width>
 	<Height>400</Height>
-	<Extents>-120,12,-82,34</Extents>
+	<Extents>-120.1,12,-82,34</Extents>
 	<Projection>+init=epsg:4326</Projection>
 	<Layers>
 		<Layer>
