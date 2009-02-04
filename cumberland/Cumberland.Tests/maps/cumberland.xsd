@@ -175,7 +175,14 @@
 														</xs:complexType>
 													</xs:element>
 												</xs:all>
-												<xs:attribute name="sourceType" type="xs:string" use="required" />
+												<xs:attribute name="sourceType" use="required">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="Cumberland.Data.IFileFeatureSource" />
+															<xs:enumeration value="Cumberland.Data.IDatabaseFeatureSource" />
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
 												<xs:attribute name="sourceInstance" type="xs:string" use="required" />
 											</xs:complexType>
 										</xs:element>
