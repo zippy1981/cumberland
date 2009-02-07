@@ -186,15 +186,15 @@ namespace Cumberland.Data.Shapefile
             // get shape type
             shapetype = (ShapeType) stream.ReadUInt32();
 			
-			if (shapetype == ShapeType.Point)
+			if (shapetype == ShapeType.Point || shapetype == ShapeType.PointM)
 			{
 				featureType = FeatureType.Point;
 			}
-			else if (shapetype == ShapeType.Polygon)
+			else if (shapetype == ShapeType.Polygon || shapetype == ShapeType.PolygonM)
 			{
 				featureType = FeatureType.Polygon;
 			}
-			else if (shapetype == ShapeType.PolyLine)
+			else if (shapetype == ShapeType.PolyLine || shapetype == ShapeType.PolyLineM)
 			{
 				featureType = FeatureType.Polyline;
 			}
@@ -229,26 +229,37 @@ namespace Cumberland.Data.Shapefile
 				
 				// Chop off 32 bit from our remaining record because we read the shape type
 				uint dataleft = recordLen - 2;
-				switch (recordShp)
+				switch ((ShapeType) recordShp)
 				{
-				   	case 0:
+				   	case ShapeType.Null:
 					   	// Null Object, nothing to read in
 					   	//Console.WriteLine("INFO: Null Shape Found");
 						break;
-					case 1:
+					case ShapeType.Point:
 						// Read in Point object
 						Point p = new Point(stream.ReadDouble(), stream.ReadDouble());
 						features.Add(p);
 						break;
-					case 3:
+					case ShapeType.PolyLine:
 						// Read in PolyLine object
 					   	PolyLine po = GetPolyLine(stream, dataleft);
 						features.Add(po);						
 						break;
-					case 5:
+					case ShapeType.Polygon:
 						// Read in Polygon object
 					   	Polygon pol = GetPolygon(stream, dataleft);
 						features.Add(pol);						
+						break;
+					case ShapeType.PolyLineM:
+						features.Add(GetPolyLine(stream, dataleft, true));
+						break;
+					case ShapeType.PolygonM:
+						features.Add(GetPolygon(stream, dataleft, true));
+						break;
+					case ShapeType.PointM:
+						features.Add(new Point(stream.ReadDouble(),
+						                       stream.ReadDouble()));
+						stream.ReadDouble(); // M
 						break;
 					default:
 						// Anything unsupported gets dumped
@@ -264,6 +275,11 @@ namespace Cumberland.Data.Shapefile
 		}
 		
 		static Polygon GetPolygon(BinaryReader stream, uint dlen)
+		{
+			return GetPolygon(stream, dlen, false);
+		}
+		
+		static Polygon GetPolygon(BinaryReader stream, uint dlen, bool hasMeasure)
 		{
 			//Polygons stored in a shapefile must be clean. A clean polygon is one that
 			// 1.  Has no self-intersections. This means that a segment belonging to one ring may
@@ -318,10 +334,26 @@ namespace Cumberland.Data.Shapefile
 
 			po.Rings.Add(rings[ii]);
 			
+			if (hasMeasure)
+			{
+				stream.ReadDouble(); // Mmin
+				stream.ReadDouble(); // Mmax
+				
+				for (int jj=0; jj < numPoints; jj++)
+				{
+					stream.ReadDouble(); // Marray
+				}
+			}
+			
 			return po;
 		}
-		
+
 		static PolyLine GetPolyLine(BinaryReader stream, uint dlen)
+		{
+			return GetPolyLine(stream, dlen, false);
+		}
+
+		static PolyLine GetPolyLine(BinaryReader stream, uint dlen, bool hasMeasure)
 		{
 			stream.ReadDouble(); // double xmin = 
 			stream.ReadDouble(); // double ymin = 
@@ -356,6 +388,17 @@ namespace Cumberland.Data.Shapefile
 				lines[ii].Points.Add(p);				
 			}
 			po.Lines.Add(lines[ii]);
+			
+			if (hasMeasure)
+			{
+				stream.ReadDouble(); // Mmin
+				stream.ReadDouble(); // Mmax
+				
+				for (int jj=0; jj < numPoints; jj++)
+				{
+					stream.ReadDouble(); // Marray
+				}
+			}
 			
 			return po;
 		}
