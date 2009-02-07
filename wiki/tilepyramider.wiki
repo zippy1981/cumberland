@@ -48,9 +48,7 @@ For more details on coordinate systems and setting this property, see the [Coord
 
 == Setting a bleed ==
 
-The bleed option provides the ability to have the tool render a larger map and crop it to size.  This way it can catch features whose symbology may extend across a tile.
-
-The below diagram shows before and after a bleed is set in a Virtual Earth application.  Notice the vertical line in the left image where point data is not rendered which extends over the neighboring tile.  
+The bleed option provides the ability to have the tool render a larger map and crop it to size.  This way it can catch features whose symbology may extend across a tile.  The below diagram shows before and after a bleed is set in a Virtual Earth application.  Notice the vertical line in the left image where point data is not rendered which extends over the neighboring tile.  
 
 [http://cumberland.googlecode.com/files/bleed-comparison.jpg]
 
