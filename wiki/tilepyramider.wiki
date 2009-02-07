@@ -50,6 +50,12 @@ For more details on coordinate systems and setting this property, see the [Coord
 
 The bleed option provides the ability to have the tool render a larger map and crop it to size.  This way it can catch features whose symbology may extend across a tile.
 
+The below diagram shows before and after a bleed is set in a Virtual Earth application.  Notice the vertical line in the left image where point data is not rendered which extends over the neighboring tile.  
+
+[http://cumberland.googlecode.com/files/bleed-comparison.jpg]
+
+A bleed of 5 works for this data because the point symbols are of size 5.
+
 = Deployment: Google Maps =
 
 Check out the [TilePyramiderAndGoogleMaps tilepyramider and google maps page] for details.
