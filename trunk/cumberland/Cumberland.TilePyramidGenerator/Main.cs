@@ -28,6 +28,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
+using System.Reflection;
 using System.Text;
 using System.Xml;
 
@@ -153,8 +154,8 @@ namespace Cumberland.TilePyramidGenerator
 
 			// search in the local directory for espg files 
 			// so Windows ppl don't have to have it installed
-			ProjFourWrapper.CustomSearchPath = ".";
-			
+            ProjFourWrapper.CustomSearchPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
 			MapSerializer ms = new MapSerializer();
 			ms.AddDatabaseFeatureSourceType(typeof(Cumberland.Data.PostGIS.PostGISFeatureSource));
 			ms.AddDatabaseFeatureSourceType(typeof(Cumberland.Data.SqlServer.SqlServerFeatureSource));
