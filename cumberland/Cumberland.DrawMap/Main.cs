@@ -27,6 +27,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 
 using Cumberland;
 using Cumberland.Data.Shapefile;
@@ -97,7 +98,7 @@ namespace Cumberland.DrawMap
 
 			// search in the local directory for espg files 
 			// so Windows ppl don't have to have it installed
-			ProjFourWrapper.CustomSearchPath = ".";
+            ProjFourWrapper.CustomSearchPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
 			MapSerializer ms = new MapSerializer();
 			ms.AddDatabaseFeatureSourceType(typeof(PostGISFeatureSource));
