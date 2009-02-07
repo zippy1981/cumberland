@@ -40,21 +40,11 @@ LineWidth is the width of the line in pixels, LineColor is the color of the line
 
 = Polygon styles =
 
-Polygon styles inherit the line styles for drawing the polygon outline and has an additional property: the FillColor:
+Polygon styles inherit the line styles for drawing the polygon outline.  Additionally, there is a FillStyle property which can be set to:
 
-{{{
-<FillColor>255,240,255,208</FillColor>
-}}}
-
-The FillColor defines the interior color of the polygon.  The format is the same as LineColor.
-
-== New to 0.2 ==
-
-A FillStyle property has been add that will allow a polygon line to be drawn without a fill:
-
-{{{
-<FillStyle>None</FillStyle>
-}}}
+  * None - The polygon will not be filled
+  * Solid - The polygon will be filled with a solid color as defined by FillColor (format is 'A,R,G,B' just as LineColor).
+  * Texture - The polygon will be filled with a texture as defined by FillTexturePath.  This must point to an image file.
 
 = Point styles =
 
