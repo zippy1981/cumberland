@@ -52,7 +52,7 @@ The bleed option provides the ability to have the tool render a larger map and c
 
 [http://cumberland.googlecode.com/files/bleed-comparison.jpg]
 
-A bleed of 5 works for this data because the point symbols are of size 5.
+_Note: A bleed of 5 works for this data because the point symbols are of size 5._
 
 = Deployment: Google Maps =
 
