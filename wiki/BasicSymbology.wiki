@@ -20,6 +20,28 @@ These apply to all feature types:
 
 MinScale/MaxScale can be set to prevent a style from being drawn at certain scales (map units per pixels).  Id is used by the kml exporter. 
 
+= Point styles =
+
+Currently, cumberland supports a limited set of symbology for points.  There are shapes, currently squares and rectangles, or external images.  To use shapes, set the following properties:
+
+{{{
+...
+<PointSize>5</PointSize>
+<PointSymbol>Shape</PointSymbol>
+<PointSymbolShape>Square</PointSymbolShape>
+}}}
+
+The point size is the width/height of the square or the diameter of the circle.  The PointSymbolShape can be Square,Circle, or None.  The fill color, line styles for shape point symbols is inherited from polygons.  The PointSymbol element define the type of point symbol.  For external images, it is set to 'Image':
+
+{{{
+<PointSymbol>Image</PointSymbol>
+<PointSymbolImagePath>images/city_icon.png</PointSymbolImagePath>
+}}}
+
+Note the relative path, this is interpreted as relative to the map xml file.  This allows the images to be bundled with the map.
+
+A example of point symbols is found below.
+
 = Line styles =
 
 Lines in cumberland are styled with the following properties:
@@ -45,28 +67,6 @@ Polygon styles inherit the line styles for drawing the polygon outline.  Additio
   * None - The polygon will not be filled
   * Solid - The polygon will be filled with a solid color as defined by FillColor (format is 'A,R,G,B' just as LineColor).
   * Texture - The polygon will be filled with a texture as defined by FillTexturePath.  This must point to an image file.
-
-= Point styles =
-
-Currently, cumberland supports a limited set of symbology for points.  There are shapes, currently squares and rectangles, or external images.  To use shapes, set the following properties:
-
-{{{
-...
-<PointSize>5</PointSize>
-<PointSymbol>Shape</PointSymbol>
-<PointSymbolShape>Square</PointSymbolShape>
-}}}
-
-The point size is the width/height of the square or the diameter of the circle.  The PointSymbolShape can be Square,Circle, or None.  The fill color, line styles for shape point symbols is inherited from polygons.  The PointSymbol element define the type of point symbol.  For external images, it is set to 'Image':
-
-{{{
-<PointSymbol>Image</PointSymbol>
-<PointSymbolImagePath>images/city_icon.png</PointSymbolImagePath>
-}}}
-
-Note the relative path, this is interpreted as relative to the map xml file.  This allows the images to be bundled with the map.
-
-A example of point symbols is found below.
 
 = Labelling =
 
