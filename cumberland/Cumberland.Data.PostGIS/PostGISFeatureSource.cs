@@ -259,27 +259,29 @@ namespace Cumberland.Data.PostGIS
 						switch (dr.GetString(2).ToUpper())
 						{
 							
-						case "MULTILINESTRING":
-							
-							featureType = FeatureType.Polyline;
-							
-							break;
-							
-						case "MULTIPOLYGON":
-							
-							featureType = FeatureType.Polygon;
-							
-							break;
-							
-						case "POINT":
-							
-							featureType = FeatureType.Point;
-							
-							break;
-							
-						default:
-							throw new NotSupportedException(string.Format("'{0}' is not a supported geometry type", dr.GetString(2)));
-							
+						    case "MULTILINESTRING":
+                            case "MULTILINESTRINGM": // astext will return regular
+    							
+							    featureType = FeatureType.Polyline;
+    							
+							    break;
+    							
+						    case "MULTIPOLYGON":
+                            case "MULTIPOLYGONM": // astext will return regular
+    							
+							    featureType = FeatureType.Polygon;
+							    break;
+    							
+						    case "POINT":
+                            case "POINTM": // astext will return regular
+    							
+							    featureType = FeatureType.Point;
+    							
+							    break;
+    							
+						    default:
+							    throw new NotSupportedException(string.Format("'{0}' is not a supported geometry type", dr.GetString(2)));
+    							
 						}
 						
 					}
