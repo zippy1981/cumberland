@@ -150,8 +150,8 @@ namespace Cumberland
 		#endregion
 
 		#region internal methods
-		
-		internal Style GetRangeStyleForFeature(string fieldValue)
+	
+		internal Style GetRangeStyleForFeature(string fieldValue, double scale, bool testScale)
 		{
 			double val;
 			if (!double.TryParse(fieldValue, out val))
@@ -164,6 +164,11 @@ namespace Cumberland
 				if (val <= s.MaxRangeThemeValue &&
 				    val >= s.MinRangeThemeValue)
 				{
+					if (testScale && TestForScale(s, scale))
+					{
+						continue;
+					}
+					
 					return s;
 				}
 			}
@@ -171,15 +176,34 @@ namespace Cumberland
 			return null;
 		}
 
-		internal Style GetUniqueStyleForFeature(string fieldValue)
+		internal Style GetUniqueStyleForFeature(string fieldValue, double scale, bool testScale)
 		{
 			foreach (Style s in Styles)
 			{
 				if (s.UniqueThemeValue == fieldValue)
 				{
+					if (testScale && TestForScale(s, scale))
+					{
+						continue;
+					}
+					
 					return s;
 				}		
-
+			}
+			
+			return null;
+		}
+		
+		internal Style GetBasicStyleForFeature(string fieldValue, double scale, bool testScale)
+		{
+			foreach (Style s in Styles)
+			{
+				if (testScale && TestForScale(s, scale))
+				{
+					continue;
+				}
+				
+				return s;	
 			}
 			
 			return null;
@@ -187,20 +211,36 @@ namespace Cumberland
 
 		public Style GetStyleForFeature(string fieldValue)
 		{
+			return GetStyleForFeature(fieldValue, 1, false);
+		}
+		
+		public Style GetStyleForFeature(string fieldValue, double scale)
+		{
+			return GetStyleForFeature(fieldValue, scale, true);
+		}
+		
+		Style GetStyleForFeature(string fieldValue, double scale, bool testScale)
+		{
 			if (Styles.Count == 0) return null;
 			
 			if (Theme == ThemeType.NumericRange)
 			{
-				return GetRangeStyleForFeature(fieldValue);
+				return GetRangeStyleForFeature(fieldValue, scale, testScale);
 			}
 			else if (Theme == ThemeType.Unique)
 			{
-				return GetUniqueStyleForFeature(fieldValue);
+				return GetUniqueStyleForFeature(fieldValue, scale, testScale);
 			}
 			else
 			{
-				return Styles[0];
+				return GetBasicStyleForFeature(fieldValue, scale, testScale);
 			}
+		}
+		
+		bool TestForScale(Style s, double scale)
+		{
+			return  scale >= s.MaxScale ||
+				    scale <= s.MinScale;
 		}
 
 		#endregion

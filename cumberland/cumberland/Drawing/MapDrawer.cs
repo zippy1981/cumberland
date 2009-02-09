@@ -72,7 +72,7 @@ namespace Cumberland.Drawing
 		
 		delegate void PointDrawer(Style s, Graphics g, System.Drawing.Point p);
 		
-		delegate Style StyleForFeatureFinder(Layer l, string fieldValue);
+		delegate Style StyleForFeatureFinder(Layer l, string fieldValue, double scale);
 		
 #region Properties
 		
@@ -246,11 +246,9 @@ namespace Cumberland.Drawing
 							{
 								Point p = features[ii] as Point;
 								
-								Style style = getStyle(layer, p.ThemeFieldValue);
+								Style style = getStyle(layer, p.ThemeFieldValue, displayScale);
 								
-								if (style == null ||
-								    displayScale > style.MaxScale ||
-								    displayScale < style.MinScale)
+								if (style == null)
 								{
 									continue;
 								}
@@ -282,18 +280,18 @@ namespace Cumberland.Drawing
 						{
 							#region Handle line rendering
 							
-							if (layer.Theme == ThemeType.None &&
-							    getStyle(layer, null).LineStyle == LineStyle.None)
-							{
-								// skip the layer
-								continue;
-							}
+//							if (layer.Theme == ThemeType.None &&
+//							    getStyle(layer, null, displayScale).LineStyle == LineStyle.None)
+//							{
+//								// skip the layer
+//								continue;
+//							}
 							
 						    for (int ii=0; ii < features.Count; ii++)
 							{
 								PolyLine pol = (PolyLine) features[ii];
 								
-								Style style = getStyle(layer, pol.ThemeFieldValue);
+								Style style = getStyle(layer, pol.ThemeFieldValue, displayScale);
 								
 								if (style == null || 
 								    style.LineStyle == LineStyle.None ||
@@ -396,11 +394,9 @@ namespace Cumberland.Drawing
 							{
 								Polygon po = features[ii] as Polygon;	
 								
-								Style style = getStyle(layer, po.ThemeFieldValue);								
+								Style style = getStyle(layer, po.ThemeFieldValue, displayScale);								
 								
-								if (style == null ||
-								    displayScale > style.MaxScale ||
-								    displayScale < style.MinScale)
+								if (style == null)
 								{
 									continue;
 								}
@@ -513,19 +509,19 @@ namespace Cumberland.Drawing
 
 		#region get style methods
 		
-		static Style GetBasicStyleForFeature(Layer l, string fieldValue)
+		static Style GetBasicStyleForFeature(Layer l, string fieldValue, double scale)
 		{
-			return l.Styles[0];
+			return l.GetBasicStyleForFeature(fieldValue, scale, true);
 		}
 		
-		static Style GetUniqueStyleForFeature(Layer l, string fieldValue)
+		static Style GetUniqueStyleForFeature(Layer l, string fieldValue, double scale)
 		{
-			return l.GetUniqueStyleForFeature(fieldValue);
+			return l.GetUniqueStyleForFeature(fieldValue, scale, true);
 		}
 		
-		static Style GetRangeStyleForFeature(Layer l, string fieldValue)
+		static Style GetRangeStyleForFeature(Layer l, string fieldValue, double scale)
 		{
-			return l.GetRangeStyleForFeature(fieldValue);
+			return l.GetRangeStyleForFeature(fieldValue, scale, true);
 		}
 
 		#endregion
