@@ -267,6 +267,10 @@ namespace Cumberland.Tests
 			s1.DrawPointSymbolOnPolyLine = true;
 			s1.CalculateLabelAngleForPolyLine = false;
 			s1.FillTexturePath = "../../../Cumberland.Tests/maps/images/swamps.png";
+			
+			s1.Simplify = true;
+			s1.SimplifyTolerance = 99;
+			
 			l1.Styles.Add(s1);
 			
 			m1.Layers.Add(l1);
@@ -724,6 +728,18 @@ namespace Cumberland.Tests
 			Map m = ms.Deserialize("../../maps/mexico.xml");
 			
 			Assert.IsTrue(Path.IsPathRooted(m.Layers[4].Styles[0].FillTexturePath));
+		}
+		
+		[Test]
+		public void TestStyleSimplifySerialized()
+		{
+			Assert.AreEqual(true, m2.Layers[0].Styles[0].Simplify);
+		}
+		
+		[Test]
+		public void TestStyleSimplifyToleranceSerialized()
+		{
+			Assert.AreEqual(99, m2.Layers[0].Styles[0].SimplifyTolerance);
 		}
 		
 #endregion
