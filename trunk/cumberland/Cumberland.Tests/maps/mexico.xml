@@ -62,7 +62,6 @@
 		</Layer>			
 		<Layer><!--Test a non-themed layer-->
 			<LabelField>RTE_NUM1</LabelField>
-			<MaxScale>.013</MaxScale>
 			<Styles>
 				<Style>
 				    <Id>RoadsStyle</Id>

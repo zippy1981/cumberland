@@ -303,8 +303,13 @@ namespace Cumberland.Drawing
 								
 								for (int jj=0; jj < pol.Lines.Count; jj++)
 								{
-									Line r = pol.Lines[jj] as Line;
+									Line r = pol.Lines[jj];
 								
+									if (style.Simplify)
+									{
+										r = r.Simplify(style.SimplifyTolerance);
+									}
+									
 									System.Drawing.Point[] ppts = new System.Drawing.Point[r.Points.Count];
 
 									int segmentIdx = 1;
@@ -406,6 +411,11 @@ namespace Cumberland.Drawing
 								for (int jj = 0; jj < po.Rings.Count; jj++)
 							    {
 									Ring r = po.Rings[jj];
+									
+									if (style.Simplify)
+									{
+										r = r.Simplify(style.SimplifyTolerance);
+									}
 									
 									System.Drawing.Point[] ppts = new System.Drawing.Point[r.Points.Count];
 									

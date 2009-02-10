@@ -546,7 +546,15 @@ namespace Cumberland.Xml.Serialization
 				else if (name == "FillTexturePath")
 				{
 					style.FillTexturePath = AnchorPath(mapPath, child.InnerText);
-				}				
+				}			
+				else if (name == "Simplify")
+				{
+					style.Simplify = bool.Parse(child.InnerText);
+				}
+				else if (name == "SimplifyTolerance")
+				{
+					style.SimplifyTolerance = double.Parse(child.InnerText);
+				}
 			}
 			
 			layer.Styles.Add(style);
@@ -796,6 +804,12 @@ namespace Cumberland.Xml.Serialization
 			{
 				writer.WriteElementString("FillTexturePath", 
 				                          style.FillTexturePath);
+			}
+			
+			if (style.Simplify)
+			{
+				writer.WriteElementString("Simplify", style.Simplify.ToString());
+				writer.WriteElementString("SimplifyTolerance", style.SimplifyTolerance.ToString());
 			}
 			
 			writer.WriteEndElement(); // Style

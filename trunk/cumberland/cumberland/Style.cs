@@ -129,6 +129,9 @@ namespace Cumberland
 		bool drawPointSymbolOnPolyLine = false;
 		string fillTexturePath = null;
 		
+		bool simplify = false;
+		double simplifyTolerance = 1;
+		
 #endregion
 
 #region properties
@@ -411,6 +414,24 @@ namespace Cumberland
 				fillTexturePath = value;
 			}
 		}
+
+		public double SimplifyTolerance {
+			get {
+				return simplifyTolerance;
+			}
+			set {
+				simplifyTolerance = value;
+			}
+		}
+
+		public bool Simplify {
+			get {
+				return simplify;
+			}
+			set {
+				simplify = value;
+			}
+		}
 		
 #endregion
 
@@ -448,6 +469,8 @@ namespace Cumberland
 			s.DrawPointSymbolOnPolyLine = this.DrawPointSymbolOnPolyLine;
 			s.CalculateLabelAngleForPolyLine = this.CalculateLabelAngleForPolyLine;
 			s.FillTexturePath = this.FillTexturePath;
+			s.Simplify = this.Simplify;
+			s.SimplifyTolerance = this.SimplifyTolerance;
 			
 			return s;
 		}

@@ -143,7 +143,6 @@ namespace Cumberland
 			r.points = Simplificator.Simplify(r.points, tolerance, true);
 			
 			r.Close();
-			System.Console.WriteLine(r.Points.Count);
 			
 			return r;
 		}
