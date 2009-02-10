@@ -555,6 +555,10 @@ namespace Cumberland.Xml.Serialization
 				{
 					style.SimplifyTolerance = double.Parse(child.InnerText);
 				}
+				else if (name == "UniqueElseFlag")
+				{
+					style.UniqueElseFlag = bool.Parse(child.InnerText);
+				}
 			}
 			
 			layer.Styles.Add(style);
@@ -810,6 +814,11 @@ namespace Cumberland.Xml.Serialization
 			{
 				writer.WriteElementString("Simplify", style.Simplify.ToString());
 				writer.WriteElementString("SimplifyTolerance", style.SimplifyTolerance.ToString());
+			}
+			
+			if (style.UniqueElseFlag)
+			{
+				writer.WriteElementString("UniqueElseFlag", style.UniqueElseFlag.ToString());
 			}
 			
 			writer.WriteEndElement(); // Style

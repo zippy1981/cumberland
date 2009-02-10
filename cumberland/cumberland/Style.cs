@@ -132,6 +132,9 @@ namespace Cumberland
 		bool simplify = false;
 		double simplifyTolerance = 1;
 		
+		bool uniqueElseFlag = false;
+
+		
 #endregion
 
 #region properties
@@ -430,6 +433,15 @@ namespace Cumberland
 			}
 			set {
 				simplify = value;
+			}
+		}
+
+		public bool UniqueElseFlag {
+			get {
+				return uniqueElseFlag;
+			}
+			set {
+				uniqueElseFlag = value;
 			}
 		}
 		

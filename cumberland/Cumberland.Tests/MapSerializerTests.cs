@@ -271,6 +271,8 @@ namespace Cumberland.Tests
 			s1.Simplify = true;
 			s1.SimplifyTolerance = 99;
 			
+			s1.UniqueElseFlag = true;
+			
 			l1.Styles.Add(s1);
 			
 			m1.Layers.Add(l1);
@@ -740,6 +742,12 @@ namespace Cumberland.Tests
 		public void TestStyleSimplifyToleranceSerialized()
 		{
 			Assert.AreEqual(99, m2.Layers[0].Styles[0].SimplifyTolerance);
+		}
+		
+		[Test]
+		public void TestStyleUniqueElseFlagSerialized()
+		{
+			Assert.AreEqual(true, m2.Layers[0].Styles[0].UniqueElseFlag);
 		}
 		
 #endregion
