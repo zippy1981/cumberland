@@ -87,7 +87,7 @@ function init()
     tileSourceSpec.MinZoom    = 1;
     tileSourceSpec.MaxZoom    = 5;
     tileSourceSpec.Opacity    = 1;
-    tileSourceSpec.ZIndex     = 110;
+    tileSourceSpec.ZIndex     = 99;
 
     map.AddTileLayer(tileSourceSpec, true);
 }
