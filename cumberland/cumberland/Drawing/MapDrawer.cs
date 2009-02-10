@@ -625,7 +625,9 @@ namespace Cumberland.Drawing
 		static Pen ConvertLayerToPen(Style style)
 		{
 			Pen p = new Pen(style.LineColor, style.LineWidth);
-			
+            p.StartCap = LineCap.Round;
+            p.EndCap = LineCap.Round;
+
 			if (style.LineStyle == LineStyle.Dashed)
 			{
 				p.DashStyle = DashStyle.Dash;
