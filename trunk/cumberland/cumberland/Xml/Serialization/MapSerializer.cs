@@ -722,10 +722,18 @@ namespace Cumberland.Xml.Serialization
 				                          style.UniqueThemeValue);
 			}
 			
-			writer.WriteElementString("MaxRangeThemeValue", 
-			                          style.MaxRangeThemeValue.ToString(CultureInfo.InvariantCulture));
-			writer.WriteElementString("MinRangeThemeValue", 
-			                          style.MinRangeThemeValue.ToString(CultureInfo.InvariantCulture));
+			if (style.MaxRangeThemeValue < double.MaxValue)
+			{
+				writer.WriteElementString("MaxRangeThemeValue", 
+				                          style.MaxRangeThemeValue.ToString(CultureInfo.InvariantCulture));
+			}
+			
+			if (style.MinRangeThemeValue > double.MinValue)
+			{
+				writer.WriteElementString("MinRangeThemeValue", 
+				                          style.MinRangeThemeValue.ToString(CultureInfo.InvariantCulture));
+			}
+			
 			if (!string.IsNullOrEmpty(style.Id))
 			{
 				writer.WriteElementString("Id", style.Id);

@@ -1,3 +1,9 @@
+2009-02-10  Scott Ellington  <scott.ellington@gmail.com>
+
+	* Style.cs:
+	* Xml/Serialization/MapSerializer.cs: range min/max should
+	defaut to double min/max respectively
+
 2009-01-24  Scott Ellington  <scott.ellington@gmail.com>
 
 	* Xml/Serialization/MapSerializer.cs: use LocalName for xml nodes

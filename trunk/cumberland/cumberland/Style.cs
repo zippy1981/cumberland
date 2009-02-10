@@ -102,8 +102,8 @@ namespace Cumberland
 		Color fillColor = Color.AliceBlue;
 		LineStyle lineStyle = LineStyle.Solid;
 		string uniqueThemeValue = null;
-		double maxRangeThemeValue = 1;
-		double minRangeThemeValue = 0;
+		double maxRangeThemeValue = double.MaxValue;
+		double minRangeThemeValue = double.MinValue;
 		string id;
 		FillStyle fillStyle = FillStyle.Solid;
 		
