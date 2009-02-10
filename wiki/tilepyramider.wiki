@@ -39,7 +39,7 @@ The "map file" is defined by the [mapXmlFormat map xml format] which holds data 
 
 == Projection properties ==
 
-Google maps and Virtual Earth use as spherical mercator projection for tiles, so unless your data is in this coordinate system (which it probably is not), you'll need to set some properties to let cumberland know what coordinate system to transform from:
+Google maps and Virtual Earth use as spherical mercator projection for tiles, so unless your data is in this coordinate system (which it probably is not), you'll need to set some properties in your map xml to let cumberland know what coordinate system to transform from:
 
   # Map.Projection - set this to the coordinate system of the extents of your map and those defined in the extents option.
   # Layer.Projection - each layer will need this property set which defines the coordinate system of the underlying data.
