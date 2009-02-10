@@ -180,7 +180,7 @@ namespace Cumberland
 		{
 			foreach (Style s in Styles)
 			{
-				if (s.UniqueThemeValue == fieldValue)
+				if (s.UniqueThemeValue == fieldValue || s.UniqueElseFlag)
 				{
 					if (testScale && TestForScale(s, scale))
 					{
