@@ -6,7 +6,7 @@
 
 TMS is an [http://wiki.osgeo.org/wiki/Tile_Map_Service_Specification OSGeo specification], but our use is mainly for [http://openlayers.org/ OpenLayers], which is an open source web mapping interface comparable to Google Maps or Microsoft Virtual Earth.
 
-Unlike these other interfaces, you will need to supply your own tiles for base data (states, roads, cities, etc.).  Cumberland's [tilepyramider] allow you to build these tiles and the following article will help you to configure and deploy them with OpenLayers.
+Unlike these other interfaces, you will need to supply your own tiles for base data (states, roads, cities, etc.).  Cumberland's [tilepyramider] allows you to build these tiles and the following article will help you to configure and deploy them with OpenLayers.
 
 = Building the tile pyramid =
 
