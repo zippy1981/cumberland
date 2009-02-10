@@ -10,7 +10,7 @@ Their API also allows overlaying of custom tiles on top of their excellent base 
 
 = Building the tile pyramid =
 
-We first build our tile pyramid, which is a directory structure of tile images based on zoom level and x and y coordinates. The tilepyramider command requires an argument that is the path to a cumberland map xml file. This is a simple xml format which stores data source info (shapefile, database) and symbology (colors, line widths, etc.).
+We first build our tile pyramid, which is a directory structure of tile images based on zoom level and x and y coordinates. The tilepyramider command requires an argument that is the path to a cumberland [mapXmlFormat map xml file]. This is a simple xml format which stores data source info (shapefile, database) and symbology (colors, line widths, etc.).
 
 We call the tool as so:
 
