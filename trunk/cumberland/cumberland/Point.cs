@@ -22,6 +22,8 @@
 //
 //
 
+using System;
+
 namespace Cumberland
 {
     public class Point : Feature
@@ -137,5 +139,19 @@ namespace Cumberland
 		
 #endregion
 		
+		public double Distance(Point p)
+		{
+			return Math.Sqrt(Math.Pow(this.X-p.X, 2) +
+			                 Math.Pow(this.Y-p.Y, 2));
+		}
+		
+		public double Distance(Point p1, Point p2)
+		{
+			double d = p1.Distance(p2);
+			
+			if (d == 0) return this.Distance(p2);
+			
+			return Math.Abs((p2.X-p1.X) * (p1.Y-this.Y) - (p1.X-this.X) * (p2.Y-p1.Y)) / d;
+		}		
     }
 }

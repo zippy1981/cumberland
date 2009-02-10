@@ -130,6 +130,24 @@ namespace Cumberland
 			return points.Count > 2;
 		}
 		
+		public Ring Simplify(double tolerance)
+		{
+			Ring r = new Ring();
+			r.points = new List<Point>(this.points);
+			
+			if (r.IsClosed)
+			{
+				r.points.RemoveAt(r.Points.Count-1);
+			}
+			
+			r.points = Simplificator.Simplify(r.points, tolerance, true);
+			
+			r.Close();
+			System.Console.WriteLine(r.Points.Count);
+			
+			return r;
+		}
+		
 #endregion
     }
 }

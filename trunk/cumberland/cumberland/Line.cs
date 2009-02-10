@@ -71,5 +71,12 @@ namespace Cumberland
 			
 			return new Rectangle(minx, miny, maxx, maxy);
 		}
+		
+		public Line Simplify(double tolerance)
+		{
+			Line l = new Line();
+			l.points = Simplificator.Simplify(new List<Point>(this.Points), tolerance, false);
+			return l;
+		}
     }
 }
