@@ -76,5 +76,36 @@ namespace Cumberland.Tests
 			Assert.IsFalse(p1 == null);
 			Assert.IsFalse(null == p1);
 		}
+		
+		[Test]
+		public void TestPointDistance()
+		{
+			// test via pythagorean theorem
+			Assert.AreEqual(Math.Sqrt(2), new Point(0,0).Distance(new Point(1,1)));
+		}
+		
+		[Test]
+		public void TestPointDistanceWhenSame()
+		{
+			Assert.AreEqual(0, new Point(0,0).Distance(new Point(0,0)));
+		}
+		
+		[Test]
+		public void TestDistanceFromLine()
+		{
+			Assert.AreEqual(1, new Point(1,0).Distance(new Point(0,1), new Point(4,1)));
+		}
+		
+		[Test]
+		public void TestDistanceFromLineWhichIsSamePoint()
+		{
+			Assert.AreEqual(1, new Point(1,0).Distance(new Point(1,1), new Point(1,1)));
+		}
+		
+		[Test]
+		public void TestDistanceFromLineWhenPointOnLine()
+		{
+			Assert.AreEqual(0, new Point(1,1).Distance(new Point(0,1), new Point(4,1)));
+		}
 	}
 }

@@ -75,6 +75,7 @@
     <Compile Include="Drawing\MapConfigurationException.cs" />
     <Compile Include="Data\AbstractDatabaseFeatureSource.cs" />
     <Compile Include="Data\KeyholeMarkupLanguage.cs" />
+    <Compile Include="Simplificator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -91,13 +92,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ProjectExtensions>
-    <MonoDevelop>
-      <Properties>
-        <GtkDesignInfo />
-      </Properties>
-    </MonoDevelop>
-  </ProjectExtensions>
   <ItemGroup>
     <None Include="epsg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
