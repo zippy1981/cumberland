@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Map xmlns="http://salmonsalvo.net/cumberland">
+  <Extents xmlns="">52668.02734375,57882.65625,793973.9375,781606.0625</Extents>
+  <Projection xmlns="">+init=epsg:3087</Projection>
+  <BackgroundColor xmlns="">255,166,201,227</BackgroundColor>
+  <Layers xmlns="">
+    <Layer>
+      <!--US States Layer-->
+      <Id>states</Id>
+      <Theme>Unique</Theme>
+      <ThemeField>state</ThemeField>
+      <Projection>+init=epsg:4269</Projection>
+      <Data sourceInstance="Cumberland.Data.PostGIS.PostGISFeatureSource"
+            sourceType="Cumberland.Data.IDatabaseFeatureSource">
+        <ConnectionString>Server=192.168.1.102;Port=5432;User Id=pguser;Password=pgpublic;Database=postgis;</ConnectionString>
+        <TableName>states</TableName>
+      </Data>
+      <Styles>
+        <Style>
+          <!--Florida at high scale / less details-->
+          <MinScale>600</MinScale>
+          <UniqueThemeValue>FL</UniqueThemeValue>
+          <FillColor>255,227,222,206</FillColor>
+          <LineColor>255,227,222,206</LineColor>          
+        </Style>
+        <Style>
+          <!--Don't draw FL, Higher detailed counties data will handle-->
+          <MaxScale>599</MaxScale>
+          <UniqueThemeValue>FL</UniqueThemeValue>
+          <FillStyle>None</FillStyle>
+          <LineStyle>None</LineStyle>
+        </Style>
+        <Style>
+          <!--Draw other states as dark-->
+          <UniqueElseFlag>true</UniqueElseFlag>
+          <FillColor>255,195,186,171</FillColor>
+          <LineColor>255,195,186,171</LineColor>
+        </Style>
+      </Styles>
+    </Layer>
+    <Layer>
+      <!--Florida counties layer-->
+      <Visible>true</Visible>
+      <LabelField>NAME</LabelField>
+      <MaxScale>599</MaxScale>
+      <Projection>+init=epsg:3087</Projection>
+      <Data sourceType="Cumberland.Data.IDatabaseFeatureSource"
+            sourceInstance="Cumberland.Data.PostGIS.PostGISFeatureSource">
+        <ConnectionString>Server=192.168.1.102;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;</ConnectionString>
+        <TableName>(select * from counties where water = '0') as counties</TableName>
+        <ForcedFeatureType>Polygon</ForcedFeatureType>
+        <ForcedGeometryColumn>the_geom</ForcedGeometryColumn>
+        <ForcedSrid>3087</ForcedSrid>
+      </Data>
+      <Styles>
+        <Style>
+          <MinScale>200</MinScale>
+          <FillColor>255,227,222,206</FillColor>
+          <LineColor>255,227,222,206</LineColor>
+        </Style>
+        <Style>
+          <MaxScale>199</MaxScale>
+          <FillColor>255,227,222,206</FillColor>
+          <LineColor>255,195,186,171</LineColor>
+        </Style>
+      </Styles>
+    </Layer>
+    <Layer>
+      <!--Florida city limits-->
+      <Projection>+init=epsg:3087</Projection>
+      <Data sourceType="Cumberland.Data.IDatabaseFeatureSource"
+            sourceInstance="Cumberland.Data.PostGIS.PostGISFeatureSource">
+        <ConnectionString>Server=192.168.1.102;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;</ConnectionString>
+        <TableName>par_citylm_2007</TableName>
+      </Data>
+      <MaxScale>600</MaxScale>
+      <Styles>
+        <Style>
+          <FillColor>255,200,200,200</FillColor>
+          <LineColor>255,200,200,200</LineColor>
+        </Style>
+      </Styles>
+    </Layer>
+    <Layer>
+      <!--Lakes-->
+      <Visible>false</Visible>
+      <LabelField>name</LabelField>
+      <Projection>+init=epsg:3087</Projection>
+      <Data sourceType="Cumberland.Data.IDatabaseFeatureSource"
+            sourceInstance="Cumberland.Data.PostGIS.PostGISFeatureSource">
+        <ConnectionString>Server=192.168.1.102;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;</ConnectionString>
+        <TableName>lakes</TableName>
+      </Data>
+      <MaxScale>2000</MaxScale>
+      <Styles>
+        <Style>
+          <ShowLabels>true</ShowLabels>
+          <LabelMaxScale>100</LabelMaxScale>
+          <FillColor>255,160,190,253</FillColor>
+          <LineColor>255,160,190,253</LineColor>
+          <LabelColor>255,104,131,201</LabelColor>
+        </Style>
+      </Styles>
+    </Layer>
+    <Layer>
+      <!--Interstates 1-->
+      <LabelField>name</LabelField>
+      <ThemeField>funclass</ThemeField>
+      <Projection>+init=epsg:3086</Projection>
+      <Data sourceType="Cumberland.Data.IDatabaseFeatureSource"
+            sourceInstance="Cumberland.Data.PostGIS.PostGISFeatureSource">
+        <ConnectionString>Server=192.168.1.102;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;</ConnectionString>
+        <TableName>(select * from fdot_majroads where funclass = '01' or funclass = '11') as interstates</TableName>
+        <ForcedFeatureType>Polyline</ForcedFeatureType>
+        <ForcedGeometryColumn>the_geom</ForcedGeometryColumn>
+        <ForcedSrid>3086</ForcedSrid>
+      </Data>
+      <Styles>
+        <Style>
+          <Simplify>true</Simplify>
+          <SimplifyTolerance>800</SimplifyTolerance>
+          <MinScale>1000</MinScale>
+          <LineColor>255,255,156,0</LineColor>
+          <LineWidth>2</LineWidth>
+        </Style>
+        <Style>
+          <Simplify>true</Simplify>
+          <SimplifyTolerance>400</SimplifyTolerance>
+          <MaxScale>999</MaxScale>
+          <LineColor>255,155,56,0</LineColor>
+          <LineWidth>6</LineWidth>
+        </Style>
+      </Styles>
+    </Layer>
+    <Layer>
+      <!--Interstates 2-->
+      <LabelField>name</LabelField>
+      <ThemeField>funclass</ThemeField>
+      <Projection>+init=epsg:3086</Projection>
+      <Data sourceType="Cumberland.Data.IDatabaseFeatureSource"
+            sourceInstance="Cumberland.Data.PostGIS.PostGISFeatureSource">
+        <ConnectionString>Server=192.168.1.102;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;</ConnectionString>
+        <TableName>(select * from fdot_majroads where funclass = '01' or funclass = '11') as interstates</TableName>
+        <ForcedFeatureType>Polyline</ForcedFeatureType>
+        <ForcedGeometryColumn>the_geom</ForcedGeometryColumn>
+        <ForcedSrid>3086</ForcedSrid>
+      </Data>
+      <Styles>
+        <Style>
+          <Simplify>true</Simplify>
+          <SimplifyTolerance>400</SimplifyTolerance>
+          <MaxScale>999</MaxScale>
+          <LineColor>255,255,156,0</LineColor>
+          <LineWidth>4</LineWidth>
+        </Style>
+      </Styles>
+    </Layer>
+  </Layers>
+</Map>
