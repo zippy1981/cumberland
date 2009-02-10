@@ -5,7 +5,7 @@
 
 = Introduction =
 
-Most modern web mapping interfaces use tiles.  This has the advantage of allowing the tiles to be pre-generated instead of per-user.  Tilepyramider generates a pyramid of tile images into a directory structure that you can use with these interfaces.  The output can be copied to your web server.  
+Most modern web mapping interfaces use tiles.  This has the advantage of allowing the tiles to be pre-generated instead of created per user as traditional web mapping has done (think ArcIMS).  Tilepyramider generates a pyramid of tile images into a directory structure that you can use with these interfaces.  The output can be copied to your web server.  
 
 Supported tile consumers:
 
