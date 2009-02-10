@@ -34,6 +34,7 @@ Global
 		{102E6FF6-201B-4366-BE2B-6304EF756F2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{102E6FF6-201B-4366-BE2B-6304EF756F2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{102E6FF6-201B-4366-BE2B-6304EF756F2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{102E6FF6-201B-4366-BE2B-6304EF756F2B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{12B8F35A-A939-4177-9392-5B89B29C195A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{12B8F35A-A939-4177-9392-5B89B29C195A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12B8F35A-A939-4177-9392-5B89B29C195A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -59,7 +60,14 @@ Global
 		name = cumberland
 		version = 0.1
 		StartupItem = cumberland\Cumberland.csproj
-		MonoDevelop.ChangeLogAddIn.ChangeLogInfo = $0
-		$0.policy = UpdateNearestChangeLog
+		Policies = $0
+		$0.ChangeLogPolicy = $1
+		$1.UpdateMode = Nearest
+		$1.VcsIntegration = RequireEntry
+		$1.MessageStyle = $2
+		$2.LineAlign = 0
+		$1.inheritsSet = Mono
+		MonoDevelop.ChangeLogAddIn.ChangeLogInfo = $3
+		$3.policy = UpdateNearestChangeLog
 	EndGlobalSection
 EndGlobal

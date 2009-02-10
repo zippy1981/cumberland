@@ -64,11 +64,4 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ProjectExtensions>
-    <MonoDevelop>
-      <Properties>
-        <GtkDesignInfo />
-      </Properties>
-    </MonoDevelop>
-  </ProjectExtensions>
 </Project>
