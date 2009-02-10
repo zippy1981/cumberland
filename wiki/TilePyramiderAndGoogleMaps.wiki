@@ -24,7 +24,9 @@ _Note: Google Maps is the default consumer, so the c option can be omitted in th
 
 = Deployment = 
 
-In order to use Google Maps on your website, you will need a key ([http://code.google.com/apis/maps/signup.html sign up here]).  Finally, you will need to add the html and script to your web page:
+The output of tilepyramider will be a directory structure of images.  You'll first need to upload this to your web server.
+
+Next, in order to use Google Maps on your website, you will need a key ([http://code.google.com/apis/maps/signup.html sign up here]).  Finally, you will need to add the html and script to your web page:
 
 Add a div element for the map:
 
