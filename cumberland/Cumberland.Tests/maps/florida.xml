@@ -71,11 +71,30 @@
       <Data sourceType="Cumberland.Data.IDatabaseFeatureSource"
             sourceInstance="Cumberland.Data.PostGIS.PostGISFeatureSource">
         <ConnectionString>Server=192.168.1.102;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;</ConnectionString>
-        <TableName>par_citylm_2007</TableName>
+        <TableName>
+          (select 	b.name as name,
+          coalesce(b.population, -99998) as pop,
+          a.the_geom as the_geom
+          from par_citylm_2007 a left outer join cities_pop b
+          on a.name = UPPER(b.name)) as cities
+        </TableName>
+        <ForcedGeometryColumn>the_geom</ForcedGeometryColumn>
+        <ForcedFeatureType>Polygon</ForcedFeatureType>
+        <ForcedSrid>3087</ForcedSrid>
       </Data>
+      <LabelField>name</LabelField>
+      <Theme>NumericRange</Theme>
+      <ThemeField>pop</ThemeField>
       <MaxScale>600</MaxScale>
       <Styles>
         <Style>
+          <MinRangeThemeValue>100000</MinRangeThemeValue>
+          <ShowLabels>true</ShowLabels>
+          <LabelDecoration>Outline</LabelDecoration>
+          <LabelFont>SansSerif</LabelFont>
+          <LabelFontEmSize>12</LabelFontEmSize>
+          <LabelOutlineColor>255,255,255,255</LabelOutlineColor>
+          <LabelOutlineWidth>2</LabelOutlineWidth>
           <FillColor>255,200,200,200</FillColor>
           <LineColor>255,200,200,200</LineColor>
         </Style>
