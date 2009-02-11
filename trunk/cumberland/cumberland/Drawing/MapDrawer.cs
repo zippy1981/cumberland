@@ -724,8 +724,22 @@ namespace Cumberland.Drawing
 				             new RectangleF(new PointF(labelPt.X, labelPt.Y), size), 
 				             sf);
 				
-				g.FillPath(new SolidBrush(s.LabelColor), gp);
-				g.DrawPath(new Pen(s.LabelOutlineColor, s.LabelOutlineWidth), gp);
+				// HACK: to avoid GdipWidenPath not implemented in mono
+				if (Type.GetType ("Mono.Runtime") != null)
+				{
+					g.FillPath(new SolidBrush(s.LabelColor), gp);
+					g.DrawPath(new Pen(s.LabelOutlineColor, s.LabelOutlineWidth), gp);
+				}
+				else
+				{
+					// create outline path
+					GraphicsPath outlinePath = (GraphicsPath)gp.Clone();
+					Pen pen = new Pen(s.LabelOutlineColor, s.LabelOutlineWidth);
+					outlinePath.Widen(pen);
+					
+					g.FillPath(new SolidBrush(s.LabelOutlineColor), outlinePath);
+					g.FillPath(new SolidBrush(s.LabelColor), gp);
+				}
 			}
 			else
 			{
