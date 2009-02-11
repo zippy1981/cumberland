@@ -1,5 +1,9 @@
 2009-02-10  Scott Ellington  <scott.ellington@gmail.com>
 
+	* Drawing/MapDrawer.cs: use better outline label on ms.net
+
+2009-02-10  Scott Ellington  <scott.ellington@gmail.com>
+
 	* Style.cs:
 	* Xml/Serialization/MapSerializer.cs: range min/max should
 	defaut to double min/max respectively
