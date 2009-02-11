@@ -710,12 +710,12 @@ namespace Cumberland.Drawing
 			g.TranslateTransform(p.X, p.Y);
 			g.RotateTransform(forcedLabelAngle);
 			
+			StringFormat sf = new StringFormat();
+			sf.Alignment = StringAlignment.Center;
+			sf.LineAlignment = StringAlignment.Center;// draw the text to a path
+			
 			if (s.LabelDecoration == LabelDecoration.Outline)
 			{
-				StringFormat sf = new StringFormat();
-				sf.Alignment = StringAlignment.Center;
-				sf.LineAlignment = StringAlignment.Center;// draw the text to a path
-				
 				GraphicsPath gp = new GraphicsPath();
 				gp.AddString(label, 
 				             ff, 
@@ -743,7 +743,11 @@ namespace Cumberland.Drawing
 			}
 			else
 			{
-				g.DrawString(label, font, new SolidBrush(s.LabelColor), labelPt);
+				g.DrawString(label, 
+				             font, 
+				             new SolidBrush(s.LabelColor), 
+				             new RectangleF(new PointF(labelPt.X, labelPt.Y), size),
+				             sf);
 			}
 
 			g.ResetTransform();

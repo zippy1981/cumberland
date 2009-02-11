@@ -1,3 +1,7 @@
+2009-02-11  Scott Ellington  <scott.ellington@gmail.com>
+
+	* Drawing/MapDrawer.cs: center labels
+
 2009-02-10  Scott Ellington  <scott.ellington@gmail.com>
 
 	* Drawing/MapDrawer.cs: use better outline label on ms.net
