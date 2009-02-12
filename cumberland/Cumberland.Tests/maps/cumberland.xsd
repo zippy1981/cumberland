@@ -32,6 +32,7 @@
 										<xs:element name="MinScale" type="xs:double" minOccurs="0" maxOccurs="1" />
 										<xs:element name="Projection" type="xs:string" minOccurs="0" maxOccurs="1" />
 										<xs:element name="Id" type="xs:string" minOccurs="0" maxOccurs="1" />
+                    <xs:element name="AllowDuplicateLabels" type="xs:boolean" minOccurs="0" maxOccurs="1" />
 										<xs:element name="Styles" minOccurs="1" maxOccurs="1">
 											<xs:complexType>
 												<xs:sequence>

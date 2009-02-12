@@ -228,6 +228,7 @@ namespace Cumberland.Tests
 			l1.Visible = false;
 			l1.MinScale = 99;
 			l1.MaxScale = 88;
+            l1.AllowDuplicateLabels = false;
 			
 			db.ConnectionString = "MyConnString";
 			db.ForcedFeatureType = FeatureType.Polyline;
@@ -423,6 +424,12 @@ namespace Cumberland.Tests
 		{
 			Assert.AreEqual(88, m2.Layers[0].MaxScale);
 		}
+
+        [Test]
+        public void TestLayerAllowDuplicateLabels()
+        {
+            Assert.IsFalse(m2.Layers[0].AllowDuplicateLabels);
+        }
 				
 #endregion
 		

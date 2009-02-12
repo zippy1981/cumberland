@@ -128,6 +128,18 @@ namespace Cumberland
 			}
 		}
 
+        public bool AllowDuplicateLabels
+        {
+            get
+            {
+                return allowDuplicateLabels;
+            }
+            set
+            {
+                allowDuplicateLabels = value;
+            }
+        }
+
 		IFeatureSource data;
 		
 		string projection = null;
@@ -146,6 +158,8 @@ namespace Cumberland
 
 		double minScale = double.MinValue;
 		double maxScale = double.MaxValue;
+
+        bool allowDuplicateLabels = true;
 		
 		#endregion
 
