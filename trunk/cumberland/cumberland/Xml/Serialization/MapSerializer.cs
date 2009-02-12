@@ -390,6 +390,10 @@ namespace Cumberland.Xml.Serialization
 					l.MinScale = double.Parse(child.InnerText,
 					                          CultureInfo.InvariantCulture);
 				}
+                else if (name == "AllowDuplicateLabels")
+                {
+                    l.AllowDuplicateLabels = bool.Parse(child.InnerText);
+                }
 			}
 			
 			m.Layers.Add(l);
@@ -553,7 +557,8 @@ namespace Cumberland.Xml.Serialization
 				}
 				else if (name == "SimplifyTolerance")
 				{
-					style.SimplifyTolerance = double.Parse(child.InnerText);
+					style.SimplifyTolerance = double.Parse(child.InnerText,
+                        CultureInfo.InvariantCulture);
 				}
 				else if (name == "UniqueElseFlag")
 				{
@@ -611,6 +616,11 @@ namespace Cumberland.Xml.Serialization
 			{
 				writer.WriteElementString("MaxScale", layer.MaxScale.ToString(CultureInfo.InvariantCulture));
 			}
+
+            if (!layer.AllowDuplicateLabels)
+            {
+                writer.WriteElementString("AllowDuplicateLabels", layer.AllowDuplicateLabels.ToString());
+            }
 			
 			// handle Data Element
 			writer.WriteStartElement("Data");

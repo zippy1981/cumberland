@@ -45,26 +45,29 @@ namespace Cumberland.Drawing
 			public string Label;
 			public System.Drawing.Point Coord;
 			public float ForcedLabelAngle;
+            public bool AllowDuplicates = true;
+            public List<string> Names;
 
-			public LabelRequest(Style s, string l, System.Drawing.Point c)
+			public LabelRequest(Style s, string l, System.Drawing.Point c, bool a, List<string> n)
 			{
 				Style = s;
 				Label = l;
 				Coord = c;
 				ForcedLabelAngle = s.LabelAngle;
+                AllowDuplicates = a;
+                Names = n;
 			}
 
-			public LabelRequest(Style s, string l, System.Drawing.Point c, float a) : this(s,l,c)
+			public LabelRequest(Style s, string l, System.Drawing.Point c, bool a, List<string> n, float g) : this(s,l,c,a,n)
 			{
-				ForcedLabelAngle = a;
+				ForcedLabelAngle = g;
 			}
 		}
 
 		#endregion
 
 		#region vars
-		
-		List<LabelRequest> labels = new List<LabelRequest>();
+	
 		SmoothingMode smoothing = SmoothingMode.HighQuality;
 		TextRenderingHint textRenderingHint = TextRenderingHint.AntiAlias;
 
@@ -75,8 +78,6 @@ namespace Cumberland.Drawing
 		delegate Style StyleForFeatureFinder(Layer l, string fieldValue, double scale);
 		
 #region Properties
-		
-		
 		
 		public SmoothingMode Smoothing {
 			get {
@@ -109,6 +110,8 @@ namespace Cumberland.Drawing
 		{			
 			ProjFourWrapper dst = null;
 			Graphics g = null;
+            List<string> label_names = new List<string>();
+            List<LabelRequest> labels = new List<LabelRequest>();
 
 			try
 			{
@@ -161,11 +164,8 @@ namespace Cumberland.Drawing
 				
 				#endregion
 
-				int idx = -1;
 				foreach (Layer layer in map.Layers)
 				{
-					idx++;
-
 					if (!layer.Visible || 
 					    layer.Data == null ||
 					    displayScale > layer.MaxScale ||
@@ -224,6 +224,9 @@ namespace Cumberland.Drawing
 							throw new MapConfigurationException("Layer lacks a Style");
 						}
 
+                        List<string> names = new List<string>();
+
+
 						// set up a delegate for getting style based on theme type
 						StyleForFeatureFinder getStyle = GetBasicStyleForFeature;
 						
@@ -270,7 +273,11 @@ namespace Cumberland.Drawing
 								    displayScale <= style.LabelMaxScale &&
 								    displayScale >= style.LabelMinScale)
 								{
-									labels.Add(new LabelRequest(style, p.LabelFieldValue, pp));
+									labels.Add(new LabelRequest(style, 
+                                        p.LabelFieldValue, 
+                                        pp, 
+                                        layer.AllowDuplicateLabels, 
+                                        names));
 								}
 							}
 
@@ -279,14 +286,7 @@ namespace Cumberland.Drawing
 						else if (layer.Data.SourceFeatureType == FeatureType.Polyline)
 						{
 							#region Handle line rendering
-							
-//							if (layer.Theme == ThemeType.None &&
-//							    getStyle(layer, null, displayScale).LineStyle == LineStyle.None)
-//							{
-//								// skip the layer
-//								continue;
-//							}
-							
+														
 						    for (int ii=0; ii < features.Count; ii++)
 							{
 								PolyLine pol = (PolyLine) features[ii];
@@ -294,9 +294,7 @@ namespace Cumberland.Drawing
 								Style style = getStyle(layer, pol.ThemeFieldValue, displayScale);
 								
 								if (style == null || 
-								    style.LineStyle == LineStyle.None ||
-								    displayScale > style.MaxScale ||
-								    displayScale < style.MinScale)
+								    style.LineStyle == LineStyle.None)
 								{
 									continue;
 								}
@@ -334,7 +332,7 @@ namespace Cumberland.Drawing
 										{
 											// find the segment with the longest length to pin a label to
 											
-											double seg = CalculateSegmentLength(r.Points[kk-1], r.Points[kk]);
+											double seg = r.Points[kk-1].Distance(r.Points[kk]);
 											
 											if (seg > maxSegment)
 											{
@@ -363,12 +361,7 @@ namespace Cumberland.Drawing
 										System.Drawing.Point plpt = ConvertMapToPixel(envelope,
 										                                              scale,
 										                                              (reproject ? src.Transform(dst, polyCenter) : polyCenter));
-										
-										if (style.DrawPointSymbolOnPolyLine)
-										{
-											GetPointDrawer(style)(style, g, plpt);
-										}
-										
+																			
 										if (style.ShowLabels)
 										{
 											
@@ -383,6 +376,8 @@ namespace Cumberland.Drawing
 											labels.Add(new LabelRequest(style,
 											                            pol.LabelFieldValue,
 											                            plpt,
+                                                                        layer.AllowDuplicateLabels,
+                                                                        names,
 											                            angle));
 										}
 									}
@@ -473,7 +468,9 @@ namespace Cumberland.Drawing
 									                            po.LabelFieldValue,
 									                            ConvertMapToPixel(envelope,
 									                                              scale,
-									                                              (reproject ? src.Transform(dst, polyCenter): polyCenter))));
+									                                              (reproject ? src.Transform(dst, polyCenter): polyCenter)),
+                                                                layer.AllowDuplicateLabels,
+                                                                names));
 								}
 							}
 							
@@ -493,6 +490,18 @@ namespace Cumberland.Drawing
 
 				foreach (LabelRequest lr in labels)
 				{
+                    if (!lr.AllowDuplicates)
+                    {
+                        if (label_names.Contains(lr.Label)) continue;
+
+                        label_names.Add(lr.Label);
+                    }
+
+                    if (lr.Style.DrawPointSymbolOnPolyLine)
+                    {
+                        GetPointDrawer(lr.Style)(lr.Style, g, lr.Coord);
+                    }
+
 					DrawLabel(g, lr.Style, lr.Coord, lr.Label, lr.ForcedLabelAngle);
 				}
 				
@@ -751,11 +760,6 @@ namespace Cumberland.Drawing
 			}
 
 			g.ResetTransform();
-		}
-
-		static double CalculateSegmentLength(Point p1, Point p2)
-		{
-			return Math.Sqrt(Math.Pow(p2.X-p1.X, 2) + Math.Pow(p2.Y-p1.Y, 2));
 		}
 
 		static float CalculateSegmentAngle(Point p1, Point p2)

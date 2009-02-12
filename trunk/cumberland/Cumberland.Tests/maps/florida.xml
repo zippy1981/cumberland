@@ -61,7 +61,7 @@
         <Style>
           <MaxScale>199</MaxScale>
           <FillColor>255,227,222,206</FillColor>
-          <LineColor>255,195,186,171</LineColor>
+          <LineColor>255,205,196,181</LineColor>
         </Style>
       </Styles>
     </Layer>
@@ -123,15 +123,15 @@
           <ShowLabels>true</ShowLabels>
           <LabelMaxScale>50</LabelMaxScale>
           <MinRangeThemeValue>4000</MinRangeThemeValue>
-          <FillColor>255,160,190,253</FillColor>
-          <LineColor>255,160,190,253</LineColor>
+          <FillColor>255,166,201,227</FillColor>
+          <LineColor>255,166,201,227</LineColor>
           <LabelColor>255,84,111,181</LabelColor>
           <LabelFont>SansSerif</LabelFont>
           <LabelFontEmSize>8</LabelFontEmSize>
         </Style>
         <Style>
-          <FillColor>255,160,190,253</FillColor>
-          <LineColor>255,160,190,253</LineColor>
+          <FillColor>255,166,201,227</FillColor>
+          <LineColor>255,166,201,227</LineColor>
           <LabelColor>255,104,131,201</LabelColor>
         </Style>
       </Styles>
@@ -142,7 +142,7 @@
       <Data sourceType="Cumberland.Data.IDatabaseFeatureSource"
             sourceInstance="Cumberland.Data.PostGIS.PostGISFeatureSource">
         <ConnectionString>Server=192.168.1.102;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;</ConnectionString>
-        <TableName>(select * from fdot_majroads where funclass = '19' or funclass = '09') as local</TableName>
+        <TableName>(select * from fdot_majroads where funclass = '19' or funclass = '09' or funclass = '17') as local</TableName>
         <ForcedFeatureType>Polyline</ForcedFeatureType>
         <ForcedGeometryColumn>the_geom</ForcedGeometryColumn>
         <ForcedSrid>3086</ForcedSrid>
@@ -255,9 +255,10 @@
     </Layer>
     <Layer>
       <!--Interstates 2-->
-      <LabelField>name</LabelField>
+      <LabelField>usroute_num</LabelField>
       <ThemeField>funclass</ThemeField>
       <Projection>+init=epsg:3086</Projection>
+      <AllowDuplicateLabels>false</AllowDuplicateLabels>
       <Data sourceType="Cumberland.Data.IDatabaseFeatureSource"
             sourceInstance="Cumberland.Data.PostGIS.PostGISFeatureSource">
         <ConnectionString>Server=192.168.1.102;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;</ConnectionString>
@@ -276,6 +277,16 @@
           <LineWidth>2</LineWidth>
         </Style>
         <Style>
+          <ShowLabels>true</ShowLabels>
+          <LabelPixelOffset>0</LabelPixelOffset>
+          <LabelFont>SansSerif</LabelFont>
+          <LabelFontEmSize>6</LabelFontEmSize>
+          <DrawPointSymbolOnPolyLine>true</DrawPointSymbolOnPolyLine>
+          <CalculateLabelAngleForPolyLine>false</CalculateLabelAngleForPolyLine>
+          <PointSymbol>Image</PointSymbol>
+          <PointSize>15</PointSize>
+          <FillColor>255,255,0,0</FillColor>
+          <PointSymbolImagePath>images/interstate.png</PointSymbolImagePath>
           <Simplify>true</Simplify>
           <SimplifyTolerance>200</SimplifyTolerance>
           <MaxScale>399</MaxScale>
