@@ -120,5 +120,6 @@
     </Content>
     <Content Include="maps\florida.xml" />
     <Content Include="maps\images\interstate.png" />
+    <Content Include="maps\images\usroute.png" />
   </ItemGroup>
 </Project>
