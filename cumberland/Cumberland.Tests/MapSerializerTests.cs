@@ -207,8 +207,8 @@ namespace Cumberland.Tests
 		public void SetUp()
 		{
 			MapSerializer ms = new MapSerializer();
-			ms.AddDatabaseFeatureSourceType(typeof(DummyDBProvider));
-			ms.AddFileFeatureSourceType(typeof(DummyFileProvider));
+			ms.AddDatabaseFeatureSourceType<DummyDBProvider>();
+			ms.AddFileFeatureSourceType<DummyFileProvider>();
 			
 			m1 = new Map();
 			m1.Extents = new Rectangle(0,0,10,10);
@@ -368,7 +368,7 @@ namespace Cumberland.Tests
 			// should fail as this not a supported provider
 			m2 = ms.Deserialize(new MemoryStream(UTF8Encoding.UTF8.GetBytes((x))));
 		}
-
+		
 #endregion
 		
 #region test layer properties serialized
