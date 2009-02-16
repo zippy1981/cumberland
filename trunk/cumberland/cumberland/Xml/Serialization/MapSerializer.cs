@@ -51,13 +51,24 @@ namespace Cumberland.Xml.Serialization
 		
 		public MapSerializer()
 		{
-			AddFileFeatureSourceType(typeof(Shapefile));
+			AddFileFeatureSourceType<Shapefile>();
 		}
 		
 #endregion
 		
 #region public methods
 		
+		public void AddFileFeatureSourceType<T>() where T : IFileFeatureSource 
+		{
+			fileFeatureSourceTypes.Add(typeof(T));
+		}
+		
+		public void AddDatabaseFeatureSourceType<T>() where T : IDatabaseFeatureSource
+		{
+			dbFeatureSourceTypes.Add(typeof(T));
+		}
+		
+		[Obsolete("Use AddFileFeatureSourceType<T>() instead")]
 		public void AddFileFeatureSourceType(Type type)
 		{
 			if (type.GetInterface(typeof(IFileFeatureSource).ToString()) == null)
@@ -68,6 +79,7 @@ namespace Cumberland.Xml.Serialization
 			fileFeatureSourceTypes.Add(type);
 		}
 		
+		[Obsolete("Use AddDatabaseFeatureSourceType<T>() instead")]
 		public void AddDatabaseFeatureSourceType(Type type)
 		{
 			if (type.GetInterface(typeof(IDatabaseFeatureSource).ToString()) == null)

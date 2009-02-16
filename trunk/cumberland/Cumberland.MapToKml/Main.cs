@@ -48,8 +48,8 @@ namespace Cumberland.MapToKml
             ProjFourWrapper.CustomSearchPath = ".";
 
 			MapSerializer ms = new MapSerializer();
-			ms.AddDatabaseFeatureSourceType(typeof(PostGISFeatureSource));
-			ms.AddDatabaseFeatureSourceType(typeof(Cumberland.Data.SqlServer.SqlServerFeatureSource));
+			ms.AddDatabaseFeatureSourceType<PostGISFeatureSource>();
+			ms.AddDatabaseFeatureSourceType<Cumberland.Data.SqlServer.SqlServerFeatureSource>();
 
 			OptionSet options = new OptionSet();
 

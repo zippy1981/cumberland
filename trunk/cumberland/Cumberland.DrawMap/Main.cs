@@ -101,8 +101,8 @@ namespace Cumberland.DrawMap
             ProjFourWrapper.CustomSearchPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
 			MapSerializer ms = new MapSerializer();
-			ms.AddDatabaseFeatureSourceType(typeof(PostGISFeatureSource));
-			ms.AddDatabaseFeatureSourceType(typeof(SqlServerFeatureSource));
+			ms.AddDatabaseFeatureSourceType<PostGISFeatureSource>();
+			ms.AddDatabaseFeatureSourceType<SqlServerFeatureSource>();
 			
 			Map map = ms.Deserialize(rest[0]);
 			if (w > 0) map.Width = w;

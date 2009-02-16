@@ -157,8 +157,8 @@ namespace Cumberland.TilePyramidGenerator
             ProjFourWrapper.CustomSearchPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
 			MapSerializer ms = new MapSerializer();
-			ms.AddDatabaseFeatureSourceType(typeof(Cumberland.Data.PostGIS.PostGISFeatureSource));
-			ms.AddDatabaseFeatureSourceType(typeof(Cumberland.Data.SqlServer.SqlServerFeatureSource));
+			ms.AddDatabaseFeatureSourceType<Cumberland.Data.PostGIS.PostGISFeatureSource>();
+			ms.AddDatabaseFeatureSourceType<Cumberland.Data.SqlServer.SqlServerFeatureSource>();
 			
 			Map map = ms.Deserialize(rest[0]);
 			
