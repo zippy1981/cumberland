@@ -24,6 +24,7 @@
 
 using System;
 using System.IO;
+using System.Reflection;
 using System.Text;
 
 using NDesk.Options;
@@ -43,9 +44,9 @@ namespace Cumberland.MapToKml
 			bool showHelp = false;
 			bool showVersion = false;
 			
-            // search the assembly path for proj lookup files (aka epsg)
-            // for windows users
-            ProjFourWrapper.CustomSearchPath = ".";
+			// search in the local directory for espg files 
+			// so Windows ppl don't have to have it installed
+            ProjFourWrapper.CustomSearchPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
 			MapSerializer ms = new MapSerializer();
 			ms.AddDatabaseFeatureSourceType<PostGISFeatureSource>();
