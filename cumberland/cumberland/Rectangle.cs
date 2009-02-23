@@ -26,7 +26,7 @@ using System;
 
 namespace Cumberland
 {
-	public class Rectangle
+	public class Rectangle : IEquatable<Rectangle>
 	{
 #region static properties
 		

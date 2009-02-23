@@ -1,3 +1,8 @@
+2009-02-23  Scott Ellington  <scott.ellington@gmail.com>
+
+	* Point.cs:
+	* Rectangle.cs: implement IEquatable<T>
+
 2009-02-16  Scott Ellington  <scott.ellington@gmail.com>
 
 	* Xml/Serialization/MapSerializer.cs: use generic type methods

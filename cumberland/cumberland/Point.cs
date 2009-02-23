@@ -26,7 +26,7 @@ using System;
 
 namespace Cumberland
 {
-    public class Point : Feature
+    public class Point : Feature, IEquatable<Point>
     {
         private double x, y;
         
