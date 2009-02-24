@@ -115,7 +115,7 @@ namespace Cumberland.Data.SqlServer
 			{
 				conn.Open();
 				
-				string sql = string.Format("select {0}.STAsText() {2} {3} from {1}",
+				string sql = string.Format("select {0}.STAsBinary() {2} {3} from {1}",
 				                           geometryColumn, 
 				                           TableName,
 				                           (!string.IsNullOrEmpty(themeField) ? ", " + themeField : string.Empty),
@@ -136,8 +136,8 @@ namespace Cumberland.Data.SqlServer
 					{
 						while (dr.Read())
 						{
-							string wkt = dr.GetString(0);
-							Feature f = WellKnownText.Parse(wkt);
+							//string wkt = dr.GetString(0);
+							Feature f = WellKnownBinary.Parse((byte[]) dr.GetValue(0));
 
 							if (f == null)
 							{
