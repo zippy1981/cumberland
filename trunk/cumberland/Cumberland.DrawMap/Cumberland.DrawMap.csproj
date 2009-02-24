@@ -23,7 +23,7 @@
     <DefineConstants>DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Commandlineparameters>-e=-110,20,-90,35 ../../../Cumberland.Tests/maps/mexico.xml</Commandlineparameters>
+    <Commandlineparameters>../../../Cumberland.Tests/maps/florida.xml</Commandlineparameters>
     <StartupObject />
     <EnvironmentVariables>
       <EnvironmentVariables />

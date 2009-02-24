@@ -1,3 +1,10 @@
+2009-02-24  Scott Ellington  <scott.ellington@gmail.com>
+
+	* maps/postgis.xml:
+	* WellKnownTextTests.cs:
+	* WellKnownBinaryTests.cs:
+	* Cumberland.Tests.csproj: add WKB parser
+
 2009-02-16  Scott Ellington  <scott.ellington@gmail.com>
 
 	* MapSerializerTests.cs: use generic type methods

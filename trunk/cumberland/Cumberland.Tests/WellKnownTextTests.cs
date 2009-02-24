@@ -25,7 +25,7 @@
 using System;
 using System.Collections.Generic;
 using Cumberland;
-using Cumberland.Data.WellKnownText;
+using Cumberland.Data.SimpleFeatureAccess;
 
 using NUnit.Framework;
 
@@ -49,35 +49,35 @@ namespace Cumberland.Tests
 		[Test]
 		public void TestParsePoint()
 		{
-			Point p = SimpleFeatureAccess.ParsePoint(pointWkt);
+			Point p = WellKnownText.ParsePoint(pointWkt);
 			Assert.AreEqual(new Point(0,0), p);
 		}
 		
 		[Test]
 		public void TestParseMultiLineString()
 		{
-			PolyLine l = SimpleFeatureAccess.ParseMultiLineString(multiLineStringWkt);
+			PolyLine l = WellKnownText.ParseMultiLineString(multiLineStringWkt);
 			Assert.AreEqual(2, l.Lines.Count);
 		}
 		
 		[Test]
 		public void TestParseMultiPolygon()
 		{
-			Polygon p = SimpleFeatureAccess.ParseMultiPolygon(multiPolygonWkt);
+			Polygon p = WellKnownText.ParseMultiPolygon(multiPolygonWkt);
 			Assert.AreEqual(3, p.Rings.Count);
 		}
 		
 		[Test]
 		public void TestParsePolygon()
 		{
-			Polygon p = SimpleFeatureAccess.ParsePolygon(polygonWkt);
+			Polygon p = WellKnownText.ParsePolygon(polygonWkt);
 			Assert.AreEqual(2, p.Rings.Count);
 		}
 		
 		[Test]
 		public void TestParseLineString()
 		{
-			PolyLine l = SimpleFeatureAccess.ParseLineString(lineStringWkt);
+			PolyLine l = WellKnownText.ParseLineString(lineStringWkt);
 			Assert.AreEqual(3, l.Lines[0].Points.Count);
 		}
 		
@@ -85,19 +85,19 @@ namespace Cumberland.Tests
 		public void TestParse()
 		{
 			Assert.AreEqual(typeof(Point), 
-			                SimpleFeatureAccess.Parse(pointWkt).GetType());
+			                WellKnownText.Parse(pointWkt).GetType());
 			
 			Assert.AreEqual(typeof(Polygon),
-			                SimpleFeatureAccess.Parse(polygonWkt).GetType());
+			                WellKnownText.Parse(polygonWkt).GetType());
 			
 			Assert.AreEqual(typeof(Polygon),
-			                SimpleFeatureAccess.Parse(multiPolygonWkt).GetType());
+			                WellKnownText.Parse(multiPolygonWkt).GetType());
 			
 			Assert.AreEqual(typeof(PolyLine),
-			                SimpleFeatureAccess.Parse(lineStringWkt).GetType());
+			                WellKnownText.Parse(lineStringWkt).GetType());
 			
 			Assert.AreEqual(typeof(PolyLine),
-			                SimpleFeatureAccess.Parse(multiLineStringWkt).GetType());
+			                WellKnownText.Parse(multiLineStringWkt).GetType());
 		}
 		
 #endregion
@@ -116,7 +116,7 @@ namespace Cumberland.Tests
 			r1.Close();
 			p.Rings.Add(r1);
 			
-			Assert.AreEqual("POLYGON((0 0,0 5,5 6,5 0,0 0))", SimpleFeatureAccess.CreateFromPolygon(p));
+			Assert.AreEqual("POLYGON((0 0,0 5,5 6,5 0,0 0))", WellKnownText.CreateFromPolygon(p));
 			
 			// add hole
 			Ring r2 = new Ring();
@@ -128,7 +128,7 @@ namespace Cumberland.Tests
 			p.Rings.Add(r2);
 			
 			Assert.AreEqual("POLYGON((0 0,0 5,5 6,5 0,0 0),(1.1 1.1,1.6 1.1,1.4 1.4,1.1 1.6,1.1 1.1))", 
-			                SimpleFeatureAccess.CreateFromPolygon(p));
+			                WellKnownText.CreateFromPolygon(p));
 			
 			// add another poly
 			Ring r3 = new Ring();
@@ -140,7 +140,7 @@ namespace Cumberland.Tests
 			p.Rings.Add(r3);
 			
 			Assert.AreEqual("MULTIPOLYGON(((0 0,0 5,5 6,5 0,0 0),(1.1 1.1,1.6 1.1,1.4 1.4,1.1 1.6,1.1 1.1)),((10 10,10 15,15 15,15 10,10 10)))", 
-			                SimpleFeatureAccess.CreateFromPolygon(p));
+			                WellKnownText.CreateFromPolygon(p));
 		}
 		
 		[Test]
@@ -154,7 +154,7 @@ namespace Cumberland.Tests
 			l1.Points.Add(new Point(0,5));
 			p.Lines.Add(l1);
 			
-			Assert.AreEqual("MULTILINESTRING((0 0,5 0,5 6,0 5))", SimpleFeatureAccess.CreateFromPolyLine(p));
+			Assert.AreEqual("MULTILINESTRING((0 0,5 0,5 6,0 5))", WellKnownText.CreateFromPolyLine(p));
 			
 			Line l2 = new Line();
 			l2.Points.Add(new Point(1.1,1.1));
@@ -164,14 +164,14 @@ namespace Cumberland.Tests
 			p.Lines.Add(l2);
 			
 			Assert.AreEqual("MULTILINESTRING((0 0,5 0,5 6,0 5),(1.1 1.1,1.6 1.1,1.4 1.4,1.6 1.1))", 
-			                SimpleFeatureAccess.CreateFromPolyLine(p));
+			                WellKnownText.CreateFromPolyLine(p));
 		}
 		
 		[Test]
 		public void TestCreateFromPoint()
 		{
 			Point p = new Point(3,4);
-			Assert.AreEqual("POINT(3 4)", SimpleFeatureAccess.CreateFromPoint(p));
+			Assert.AreEqual("POINT(3 4)", WellKnownText.CreateFromPoint(p));
 		}
 		
 		[Test]
@@ -180,7 +180,7 @@ namespace Cumberland.Tests
 			Rectangle r = new Rectangle(0,0,15,15);
 			
 			Assert.AreEqual("POLYGON((0 0,0 15,15 15,15 0,0 0))",
-			                SimpleFeatureAccess.CreateFromRectangle(r));
+			                WellKnownText.CreateFromRectangle(r));
 		}
 
 #endregion

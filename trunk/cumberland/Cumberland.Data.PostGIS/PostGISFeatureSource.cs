@@ -27,7 +27,7 @@ using System.Collections.Generic;
 
 using Cumberland;
 using Cumberland.Data;
-using Cumberland.Data.WellKnownText;
+using Cumberland.Data.SimpleFeatureAccess;
 
 using Npgsql;
 
@@ -157,7 +157,7 @@ namespace Cumberland.Data.PostGIS
 			{
 				conn.Open();
 				
-				string sql = string.Format("select astext({0}) as {0} {2} {3} from {1}",
+				string sql = string.Format("select asbinary({0}) as {0} {2} {3} from {1}",
 				                           geometryColumn, 
 				                           TableName,
 				                           (!string.IsNullOrEmpty(themeField) ? ", " + themeField : string.Empty),
@@ -181,7 +181,8 @@ namespace Cumberland.Data.PostGIS
 					{
 						while (dr.Read())
 						{
-							Feature f = SimpleFeatureAccess.Parse(dr.GetString(0));
+							Feature f = WellKnownBinary.Parse((byte[]) dr.GetValue(0));
+							//Feature f = WellKnownText.Parse(dr.GetString(0));
 							
 							if (!string.IsNullOrEmpty(themeField))
 							{
