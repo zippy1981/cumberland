@@ -31,7 +31,7 @@ using System.Text;
 
 using Cumberland;
 using Cumberland.Data.Shapefile;
-using Cumberland.Data.WellKnownText;
+using Cumberland.Data.SimpleFeatureAccess;
 
 using NDesk.Options;
 
@@ -262,15 +262,15 @@ namespace Cumberland.Data.SqlServer.Loader
 							r.Points.Reverse();
 						}
 						
-						wkt = SimpleFeatureAccess.CreateFromPolygon(polygon, PolygonHoleStrategy.InteriorToLeft);
+						wkt = WellKnownText.CreateFromPolygon(polygon, PolygonHoleStrategy.InteriorToLeft);
 					}
 					else if (shp.SourceFeatureType == FeatureType.Point)
 					{
-						wkt = SimpleFeatureAccess.CreateFromPoint(f as Point);
+						wkt = WellKnownText.CreateFromPoint(f as Point);
 					}
 					else
 					{
-						wkt = SimpleFeatureAccess.CreateFromPolyLine(f as PolyLine);
+						wkt = WellKnownText.CreateFromPolyLine(f as PolyLine);
 					}
 					
 					sql.AppendFormat("{2}::STGeomFromText('{0}', {1})", 

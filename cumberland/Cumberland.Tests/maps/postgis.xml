@@ -9,8 +9,6 @@
 			<LabelField>name</LabelField>
 			<Styles>
 				<Style>
-					<Simplify>true</Simplify>
-					<SimplifyTolerance>200</SimplifyTolerance>
 					<ShowLabels>false</ShowLabels>
 					<LabelColor>255,65,145,65</LabelColor>
 					<LineWidth>1</LineWidth>
@@ -28,11 +26,10 @@
 		</Layer>
 		<Layer>
 			<LabelField>name</LabelField>
+			<Visible>true</Visible>
 			<Styles>
 				<Style>
 					<ShowLabels>true</ShowLabels>
-					<Simplify>true</Simplify>
-					<SimplifyTolerance>200</SimplifyTolerance>
 					<LineWidth>1</LineWidth>
 					<LineColor>255,145,145,145</LineColor>					
 					<LineStyle>Solid</LineStyle>
@@ -54,7 +51,8 @@
 			<MaxScale>.008</MaxScale>
 			<LabelField>name</LabelField>
 			<Theme>Unique</Theme>
-			<ThemeField>magnitude</ThemeField>					
+			<ThemeField>magnitude</ThemeField>	
+			<Visible>true</Visible>				
 			<Styles>
 				<Style>
 					<UniqueThemeValue>0</UniqueThemeValue>

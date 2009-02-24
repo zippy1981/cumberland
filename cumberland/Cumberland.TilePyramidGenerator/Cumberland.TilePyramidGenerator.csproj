@@ -28,6 +28,7 @@
       <EnvironmentVariables />
     </EnvironmentVariables>
     <StartupObject />
+    <Commandlineparameters>-x=6 -n=5 ../../../Cumberland.Tests/maps/florida.xml</Commandlineparameters>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
