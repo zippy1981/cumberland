@@ -127,8 +127,8 @@ namespace Cumberland.Data.SimpleFeatureAccess
 				for (int jj=0; jj < numPoints; jj++)
 				{
 					r.Points.Add(new Point(BitConverter.ToDouble(wkb, idx),
-					                       BitConverter.ToDouble(wkb, idx+8)));
-					idx+=16;
+					                       BitConverter.ToDouble(wkb, idx+=8)));
+					idx+=8;
 				}
 				
 				p.Rings.Add(r);
@@ -173,8 +173,8 @@ namespace Cumberland.Data.SimpleFeatureAccess
 				for (int jj=0; jj < numPoints; jj++)
 				{
 					l.Points.Add(new Point(BitConverter.ToDouble(wkb, idx),
-					                       BitConverter.ToDouble(wkb, idx+8)));
-					idx+=16;
+					                       BitConverter.ToDouble(wkb, idx+=8)));
+					idx+=8;
 				}
 				
 				p.Lines.Add(l);
