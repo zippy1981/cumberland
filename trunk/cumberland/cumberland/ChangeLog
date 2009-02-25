@@ -1,5 +1,9 @@
 2009-02-24  Scott Ellington  <scott.ellington@gmail.com>
 
+	* Data/SimpleFeatureAccess/WellKnownBinary.cs: minor tweak
+
+2009-02-24  Scott Ellington  <scott.ellington@gmail.com>
+
 	* Cumberland.csproj:
 	* Data/WellKnownText:
 	* Data/SimpleFeatureAccess:
