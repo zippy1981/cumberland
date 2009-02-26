@@ -1,3 +1,7 @@
+2009-02-26  Scott Ellington  <scott.ellington@gmail.com>
+
+	* Drawing/MapDrawer.cs: fix #8
+
 2009-02-24  Scott Ellington  <scott.ellington@gmail.com>
 
 	* Data/SimpleFeatureAccess/WellKnownBinary.cs: minor tweak
