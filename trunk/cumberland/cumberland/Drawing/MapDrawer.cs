@@ -136,7 +136,8 @@ namespace Cumberland.Drawing
 				// set aspect ratio to image
 				envelope.AspectRatioOfWidth = width / height;
 				// get the scale
-				double scale = envelope.Width / width;
+				double scale = Convert.ToDouble(envelope.Width) / 
+										 Convert.ToDouble(width);
 				double displayScale = scale;
 			
 				// instantiate output projection
