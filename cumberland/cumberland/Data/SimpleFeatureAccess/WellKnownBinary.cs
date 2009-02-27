@@ -95,6 +95,11 @@ namespace Cumberland.Data.SimpleFeatureAccess
 					return ParsePolyLine(wkb);
 				case WkbGeometryType.WkbMultiPolygon:
 					return ParseMultiPolygon(wkb);
+				case WkbGeometryType.WkbLineString:
+					PolyLine p = new PolyLine();
+					int idx = 0;
+					p.Lines.Add(ParseLine(wkb, ref idx));
+			        return p;
 				default:
 					throw new NotSupportedException(string.Format("{0} is not a supported Wkb type",
 					                                              (WkbGeometryType) type));
@@ -163,24 +168,29 @@ namespace Cumberland.Data.SimpleFeatureAccess
 			
 			for (int ii=0; ii < numLines; ii++)
 			{
-				Line l = new Line();
-				
-				idx+=5; // skip byte order and type
-				
-				uint numPoints = BitConverter.ToUInt32(wkb, idx);
-				idx+=4;
-				
-				for (int jj=0; jj < numPoints; jj++)
-				{
-					l.Points.Add(new Point(BitConverter.ToDouble(wkb, idx),
-					                       BitConverter.ToDouble(wkb, idx+=8)));
-					idx+=8;
-				}
-				
-				p.Lines.Add(l);
+				p.Lines.Add(ParseLine(wkb, ref idx));
 			}
 			
 			return p;
+		}
+		
+		static Line ParseLine(byte[] wkb, ref int idx)
+		{
+			Line l = new Line();
+				
+			idx+=5; // skip byte order and type
+			
+			uint numPoints = BitConverter.ToUInt32(wkb, idx);
+			idx+=4;
+			
+			for (int jj=0; jj < numPoints; jj++)
+			{
+				l.Points.Add(new Point(BitConverter.ToDouble(wkb, idx),
+				                       BitConverter.ToDouble(wkb, idx+=8)));
+				idx+=8;
+			}
+			
+			return l;
 		}
 	}
 }
