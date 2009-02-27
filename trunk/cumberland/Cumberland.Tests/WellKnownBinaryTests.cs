@@ -64,6 +64,13 @@ namespace Cumberland.Tests
 			Assert.AreEqual(2, ((PolyLine) WellKnownBinary.Parse(ToByteArray(wkb))).Lines[0].Points.Count);
 		}
 
+		[Test]
+		public void TestLine()
+		{
+			string wkb = "0102000000020000000000000000000000000000000000000000000000000014400000000000000000";
+			
+			Assert.AreEqual(2, ((PolyLine) WellKnownBinary.Parse(ToByteArray(wkb))).Lines[0].Points.Count);
+		}
 		
 		
 		public static byte[] ToByteArray(String hexString)
