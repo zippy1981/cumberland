@@ -1,3 +1,7 @@
+2009-02-27  Scott Ellington  <scott.ellington@gmail.com>
+
+	* AssemblyInfo.cs: bump version
+
 2009-02-24  Scott Ellington  <scott.ellington@gmail.com>
 
 	* Cumberland.DrawMap.csproj: add WKB parser

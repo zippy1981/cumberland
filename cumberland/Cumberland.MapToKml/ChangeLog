@@ -1,3 +1,7 @@
+2009-02-27  Scott Ellington  <scott.ellington@gmail.com>
+
+	* AssemblyInfo.cs: bump version
+
 2009-02-23  Scott Ellington  <scott.ellington@gmail.com>
 
 	* Main.cs: set CustomSearchPath correctly
