@@ -1,7 +1,5 @@
 #summary Release Notes for 0.4
 
-*_This page is a draft_*
-
 <wiki:toc max_depth="2" />
 
 = New Features =
