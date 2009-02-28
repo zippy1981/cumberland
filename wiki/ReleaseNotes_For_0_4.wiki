@@ -2,14 +2,19 @@
 
 *_This page is a draft_*
 
+<wiki:toc max_depth="2" />
+
 = New Features =
 
  * Shapefile - support 'M' shapetypes (value is ignored)
  * Cascading styles - The Style class has had MinScale/MaxScale properties, but now they work as expected in that if a style is out of scale, it keeps looking.  Previously the scale properties were applied after the style was found.
+ * added Style.UniqueElseFlag which can be used to style remaining features
 
 == Line and Ring Simplification ==
 
 Style now has Simplify and SimplifyTolerance properties which allows the ability to simplify features which can have the effect of making them appear nicer when zoomed far out ([http://www.salmonsalvo.net/blog/?p=205 details]).
+
+[http://cumberland.googlecode.com/files/poly_tolerance.png]
 
 = Fixes = 
 
