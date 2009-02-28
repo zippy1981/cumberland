@@ -5,6 +5,7 @@
     <AssemblyVersion>0.1.0.0</AssemblyVersion>
     <AssemblyVersion>0.2.0.0</AssemblyVersion>
     <AssemblyVersion>0.3.0.0</AssemblyVersion>
+    <AssemblyVersion>0.4.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Enum</BaseTypeName>
@@ -23,7 +24,7 @@
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         
-      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.LineStyle</ReturnType></ReturnValue>
       <Docs><summary>Draws a dashed line</summary></Docs>
     </Member><Member MemberName="Dotted">
@@ -31,7 +32,7 @@
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         
-      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.LineStyle</ReturnType></ReturnValue>
       <Docs><summary>Draws a dotted line</summary></Docs>
     </Member><Member MemberName="None">
@@ -39,7 +40,7 @@
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         
-      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.LineStyle</ReturnType></ReturnValue>
       <Docs><summary>Does not draw the line</summary></Docs>
     </Member><Member MemberName="Solid">
@@ -47,7 +48,7 @@
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         
-      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.LineStyle</ReturnType></ReturnValue>
       <Docs><summary>Draws a solid line</summary></Docs>
     </Member>

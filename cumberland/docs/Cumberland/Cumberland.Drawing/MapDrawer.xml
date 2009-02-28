@@ -5,6 +5,7 @@
     <AssemblyVersion>0.1.0.0</AssemblyVersion>
     <AssemblyVersion>0.2.0.0</AssemblyVersion>
     <AssemblyVersion>0.3.0.0</AssemblyVersion>
+    <AssemblyVersion>0.4.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
 		<BaseTypeName>System.Object</BaseTypeName>
@@ -30,7 +31,7 @@
 			<AssemblyInfo>
 				
 				
-			<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
+			<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
 			<Parameters />
 			<Docs><summary>
 				</summary><remarks>
@@ -41,7 +42,7 @@
 			<AssemblyInfo>
 				
 				
-			<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
+			<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>System.Drawing.Bitmap</ReturnType></ReturnValue>
 			<Parameters><Parameter Name="map" Type="Cumberland.Map" /></Parameters>
 			<Docs><param name="map">The map to draw</param><summary>Draws the given map</summary><returns>A rendered bitmap</returns><remarks>
@@ -51,7 +52,7 @@
 			<MemberType>Method</MemberType>
 			<AssemblyInfo>
 				
-			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
+			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>System.Drawing.Bitmap</ReturnType></ReturnValue>
 			<Parameters><Parameter Name="map" Type="Cumberland.Map" /><Parameter Name="extents" Type="Cumberland.Rectangle" /><Parameter Name="projection" Type="System.String" /><Parameter Name="width" Type="System.Int32" /><Parameter Name="height" Type="System.Int32" /></Parameters>
 			<Docs><param name="map">The map</param><param name="extents">The extents</param><param name="projection">The projection</param><param name="width">The output image width in pixels</param><param name="height">The output image height in pixels</param><summary>Draws a map overriden with the additional parameters</summary><returns>A rendered map</returns><remarks>
@@ -62,7 +63,7 @@
 			<AssemblyInfo>
 				
 				
-			<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
+			<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>System.Drawing.Drawing2D.SmoothingMode</ReturnType></ReturnValue>
 			<Docs><summary>Gets or sets the smoothing mode for drawing maps</summary><value>
 				</value><remarks>This can be changed to enable/disable anti-aliasing.</remarks></Docs>
@@ -71,7 +72,7 @@
 			<MemberType>Property</MemberType>
 			<AssemblyInfo>
 				
-			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
+			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>System.Drawing.Text.TextRenderingHint</ReturnType></ReturnValue>
 			<Docs><summary>Gets/sets a text rendering hint</summary><value>Default is Antialias</value><remarks>You can change this to turn off antialiasing of labels on MS .Net</remarks></Docs>
 		</Member>

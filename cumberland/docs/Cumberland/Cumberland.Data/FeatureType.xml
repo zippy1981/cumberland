@@ -5,6 +5,7 @@
     <AssemblyVersion>0.1.0.0</AssemblyVersion>
     <AssemblyVersion>0.2.0.0</AssemblyVersion>
     <AssemblyVersion>0.3.0.0</AssemblyVersion>
+    <AssemblyVersion>0.4.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Enum</BaseTypeName>
@@ -23,7 +24,7 @@
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         
-      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Data.FeatureType</ReturnType></ReturnValue>
       <Docs><summary>No features</summary></Docs>
     </Member><Member MemberName="Point">
@@ -31,7 +32,7 @@
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         
-      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Data.FeatureType</ReturnType></ReturnValue>
       <Docs><summary><see cref="T:Cumberland.Point" /> features</summary></Docs>
     </Member><Member MemberName="Polygon">
@@ -39,7 +40,7 @@
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         
-      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Data.FeatureType</ReturnType></ReturnValue>
       <Docs><summary><see cref="T:Cumberland.Polygon" /> features</summary></Docs>
     </Member><Member MemberName="Polyline">
@@ -47,7 +48,7 @@
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         
-      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
       <ReturnValue><ReturnType>Cumberland.Data.FeatureType</ReturnType></ReturnValue>
       <Docs><summary><see cref="T:Cumberland.PolyLine" /> features</summary></Docs>
     </Member>

@@ -5,6 +5,7 @@
 		<AssemblyVersion>0.1.0.0</AssemblyVersion>
 		<AssemblyVersion>0.2.0.0</AssemblyVersion>
 		<AssemblyVersion>0.3.0.0</AssemblyVersion>
+		<AssemblyVersion>0.4.0.0</AssemblyVersion>
 	</AssemblyInfo>
 	<Base>
 		<BaseTypeName>System.Object</BaseTypeName>
@@ -23,6 +24,7 @@
 				<AssemblyVersion>0.1.0.0</AssemblyVersion>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<Parameters />
 			<Docs>
@@ -37,6 +39,7 @@
 			<MemberType>Property</MemberType>
 			<AssemblyInfo>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>System.Boolean</ReturnType>
@@ -53,6 +56,7 @@
 			<MemberType>Method</MemberType>
 			<AssemblyInfo>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>Cumberland.Style</ReturnType>
@@ -60,8 +64,10 @@
 			<Parameters />
 			<Docs>
 				<summary>Creates a deep copy</summary>
-				<returns></returns>
-				<remarks></remarks>
+				<returns>
+				</returns>
+				<remarks>
+				</remarks>
 				<since version="0.3" />
 			</Docs>
 		</Member>
@@ -70,13 +76,15 @@
 			<MemberType>Property</MemberType>
 			<AssemblyInfo>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>System.Boolean</ReturnType>
 			</ReturnValue>
 			<Docs>
 				<summary>Gets/sets whether to draw a point symbol on a line feature</summary>
-				<value></value>
+				<value>
+				</value>
 				<remarks>Uses the point style properties to draw a symbol on the point defined during labelling.
 				Useful for road symbology.</remarks>
 				<since version="0.3" />
@@ -89,6 +97,7 @@
 				<AssemblyVersion>0.1.0.0</AssemblyVersion>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>System.Drawing.Color</ReturnType>
@@ -107,6 +116,7 @@
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>Cumberland.FillStyle</ReturnType>
@@ -125,14 +135,17 @@
 			<MemberType>Property</MemberType>
 			<AssemblyInfo>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>System.String</ReturnType>
 			</ReturnValue>
 			<Docs>
 				<summary>The path to the image file to use as a fill texture</summary>
-				<value></value>
-				<remarks><see cref="P:Cumberland.Style.FillStyle" /> must be set to 'Texture'.</remarks>
+				<value>
+				</value>
+				<remarks>
+					<see cref="P:Cumberland.Style.FillStyle" /> must be set to 'Texture'.</remarks>
 				<since version="0.3" />
 			</Docs>
 		</Member>
@@ -142,6 +155,7 @@
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>System.String</ReturnType>
@@ -161,6 +175,7 @@
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>System.Single</ReturnType>
@@ -179,6 +194,7 @@
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>System.Drawing.Color</ReturnType>
@@ -197,6 +213,7 @@
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>System.String</ReturnType>
@@ -215,6 +232,7 @@
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>Cumberland.LabelDecoration</ReturnType>
@@ -232,6 +250,7 @@
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>Cumberland.LabelFont</ReturnType>
@@ -250,6 +269,7 @@
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>System.Single</ReturnType>
@@ -268,6 +288,7 @@
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>System.Double</ReturnType>
@@ -286,6 +307,7 @@
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>System.Double</ReturnType>
@@ -304,6 +326,7 @@
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>System.Drawing.Color</ReturnType>
@@ -322,6 +345,7 @@
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>System.Single</ReturnType>
@@ -340,6 +364,7 @@
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>System.Int32</ReturnType>
@@ -359,6 +384,7 @@
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>Cumberland.LabelPosition</ReturnType>
@@ -379,6 +405,7 @@
 				<AssemblyVersion>0.1.0.0</AssemblyVersion>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>System.Drawing.Color</ReturnType>
@@ -399,6 +426,7 @@
 				<AssemblyVersion>0.1.0.0</AssemblyVersion>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>Cumberland.LineStyle</ReturnType>
@@ -418,6 +446,7 @@
 				<AssemblyVersion>0.1.0.0</AssemblyVersion>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>System.Int32</ReturnType>
@@ -437,6 +466,7 @@
 				<AssemblyVersion>0.1.0.0</AssemblyVersion>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>System.Double</ReturnType>
@@ -456,6 +486,7 @@
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>System.Double</ReturnType>
@@ -475,6 +506,7 @@
 				<AssemblyVersion>0.1.0.0</AssemblyVersion>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>System.Double</ReturnType>
@@ -494,6 +526,7 @@
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>System.Double</ReturnType>
@@ -513,6 +546,7 @@
 				<AssemblyVersion>0.1.0.0</AssemblyVersion>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>System.Int32</ReturnType>
@@ -532,6 +566,7 @@
 				<AssemblyVersion>0.1.0.0</AssemblyVersion>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>Cumberland.PointSymbolType</ReturnType>
@@ -551,6 +586,7 @@
 				<AssemblyVersion>0.1.0.0</AssemblyVersion>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>System.String</ReturnType>
@@ -570,6 +606,7 @@
 				<AssemblyVersion>0.1.0.0</AssemblyVersion>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>Cumberland.PointSymbolShapeType</ReturnType>
@@ -588,6 +625,7 @@
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>System.Boolean</ReturnType>
@@ -601,6 +639,52 @@
 				<since version="0.2" />
 			</Docs>
 		</Member>
+		<Member MemberName="Simplify">
+			<MemberSignature Language="C#" Value="public bool Simplify { set; get; }" />
+			<MemberType>Property</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<ReturnValue>
+				<ReturnType>System.Boolean</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>Gets/sets whether to simplify features</summary>
+				<value>true to simplify, false to not</value>
+				<remarks>Set <see cref="P:Cumberland.Style.SimplifyTolerance" /> to define the tolerance used
+				for simplification.</remarks>
+			</Docs>
+		</Member>
+		<Member MemberName="SimplifyTolerance">
+			<MemberSignature Language="C#" Value="public double SimplifyTolerance { set; get; }" />
+			<MemberType>Property</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<ReturnValue>
+				<ReturnType>System.Double</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>Gets/sets the tolerance in data units for simplification</summary>
+				<value>the tolerance in the data's units</value>
+				<remarks>Set <see cref="P:Cumberland.Style.Simplify" /> to true to enable this.</remarks>
+			</Docs>
+		</Member>
+		<Member MemberName="UniqueElseFlag">
+			<MemberSignature Language="C#" Value="public bool UniqueElseFlag { set; get; }" />
+			<MemberType>Property</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<ReturnValue>
+				<ReturnType>System.Boolean</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>Gets/sets a flag to use the style for all other features that do not match a <see cref="P:Cumberland.Style.UniqueThemeValue" /></summary>
+				<value>true to enable, false to disable.</value>
+				<remarks></remarks>
+			</Docs>
+		</Member>
 		<Member MemberName="UniqueThemeValue">
 			<MemberSignature Language="C#" Value="public string UniqueThemeValue { set; get; }" />
 			<MemberType>Property</MemberType>
@@ -608,6 +692,7 @@
 				<AssemblyVersion>0.1.0.0</AssemblyVersion>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>System.String</ReturnType>
