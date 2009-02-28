@@ -4,6 +4,7 @@
     <AssemblyName>Cumberland</AssemblyName>
     <AssemblyVersion>0.2.0.0</AssemblyVersion>
     <AssemblyVersion>0.3.0.0</AssemblyVersion>
+    <AssemblyVersion>0.4.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
 		<BaseTypeName>System.Enum</BaseTypeName>
@@ -23,7 +24,7 @@
 			<MemberType>Field</MemberType>
 			<AssemblyInfo>
 				
-			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
+			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>Cumberland.LabelFont</ReturnType></ReturnValue>
 			<Docs><summary>Use the font defined in <see cref="P:Cumberland.Style.LabelCustomFont" /></summary></Docs>
 		</Member><Member MemberName="Monospace">
@@ -31,7 +32,7 @@
 			<MemberType>Field</MemberType>
 			<AssemblyInfo>
 				
-			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
+			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>Cumberland.LabelFont</ReturnType></ReturnValue>
 			<Docs><summary>A monospace font</summary></Docs>
 		</Member><Member MemberName="None">
@@ -39,7 +40,7 @@
 			<MemberType>Field</MemberType>
 			<AssemblyInfo>
 				
-			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
+			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>Cumberland.LabelFont</ReturnType></ReturnValue>
 			<Docs><summary>Don't draw the label</summary></Docs>
 		</Member><Member MemberName="SansSerif">
@@ -47,7 +48,7 @@
 			<MemberType>Field</MemberType>
 			<AssemblyInfo>
 				
-			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
+			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>Cumberland.LabelFont</ReturnType></ReturnValue>
 			<Docs><summary>A sans serif font</summary></Docs>
 		</Member><Member MemberName="Serif">
@@ -55,7 +56,7 @@
 			<MemberType>Field</MemberType>
 			<AssemblyInfo>
 				
-			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
+			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>Cumberland.LabelFont</ReturnType></ReturnValue>
 			<Docs><summary>A serif font</summary></Docs>
 		</Member>

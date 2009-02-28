@@ -5,6 +5,7 @@
 		<AssemblyVersion>0.1.0.0</AssemblyVersion>
 		<AssemblyVersion>0.2.0.0</AssemblyVersion>
 		<AssemblyVersion>0.3.0.0</AssemblyVersion>
+		<AssemblyVersion>0.4.0.0</AssemblyVersion>
 	</AssemblyInfo>
 	<Base>
 		<BaseTypeName>System.Object</BaseTypeName>
@@ -22,6 +23,7 @@
 				<AssemblyVersion>0.1.0.0</AssemblyVersion>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<Parameters />
 			<Docs>
@@ -31,6 +33,21 @@
 				</remarks>
 			</Docs>
 		</Member>
+		<Member MemberName="AllowDuplicateLabels">
+			<MemberSignature Language="C#" Value="public bool AllowDuplicateLabels { set; get; }" />
+			<MemberType>Property</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<ReturnValue>
+				<ReturnType>System.Boolean</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>Gets/sets whether this layer allows duplicate labels when drawn</summary>
+				<value>true to allow duplicate labels, false to disallow.  Default is true</value>
+				<remarks></remarks>
+			</Docs>
+		</Member>
 		<Member MemberName="Data">
 			<MemberSignature Language="C#" Value="public Cumberland.Data.IFeatureSource Data { set; get; }" />
 			<MemberType>Property</MemberType>
@@ -38,6 +55,7 @@
 				<AssemblyVersion>0.1.0.0</AssemblyVersion>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>Cumberland.Data.IFeatureSource</ReturnType>
@@ -55,6 +73,7 @@
 			<MemberType>Method</MemberType>
 			<AssemblyInfo>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>Cumberland.Style</ReturnType>
@@ -71,6 +90,28 @@
 				<since version="0.3" />
 			</Docs>
 		</Member>
+		<Member MemberName="GetStyleForFeature">
+			<MemberSignature Language="C#" Value="public Cumberland.Style GetStyleForFeature (string fieldValue, double scale);" />
+			<MemberType>Method</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<ReturnValue>
+				<ReturnType>Cumberland.Style</ReturnType>
+			</ReturnValue>
+			<Parameters>
+				<Parameter Name="fieldValue" Type="System.String" />
+				<Parameter Name="scale" Type="System.Double" />
+			</Parameters>
+			<Docs>
+				<param name="fieldValue">The field value</param>
+				<param name="scale">The scale</param>
+				<summary>Acquires the <see cref="P:Cumberland.Style" /> for the provided field value and scale.</summary>
+				<returns>The <see cref="P:Cumberland.Style" />, null if no result</returns>
+				<remarks>This method applies the theming rules (if any) on the given field value.  If no theming,
+				it returns the first Style.  It also tests the MinScale/MaxScale properties.</remarks>
+			</Docs>
+		</Member>
 		<Member MemberName="Id">
 			<MemberSignature Language="C#" Value="public string Id { set; get; }" />
 			<MemberType>Property</MemberType>
@@ -78,6 +119,7 @@
 				<AssemblyVersion>0.1.0.0</AssemblyVersion>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>System.String</ReturnType>
@@ -96,6 +138,7 @@
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>System.String</ReturnType>
@@ -115,6 +158,7 @@
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>System.Double</ReturnType>
@@ -132,6 +176,7 @@
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>System.Double</ReturnType>
@@ -150,6 +195,7 @@
 				<AssemblyVersion>0.1.0.0</AssemblyVersion>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>System.String</ReturnType>
@@ -169,6 +215,7 @@
 				<AssemblyVersion>0.1.0.0</AssemblyVersion>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>System.Collections.Generic.List&lt;Cumberland.Style&gt;</ReturnType>
@@ -187,6 +234,7 @@
 				<AssemblyVersion>0.1.0.0</AssemblyVersion>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>Cumberland.ThemeType</ReturnType>
@@ -205,6 +253,7 @@
 				<AssemblyVersion>0.1.0.0</AssemblyVersion>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>System.String</ReturnType>
@@ -222,6 +271,7 @@
 			<AssemblyInfo>
 				<AssemblyVersion>0.2.0.0</AssemblyVersion>
 				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
 			</AssemblyInfo>
 			<ReturnValue>
 				<ReturnType>System.Boolean</ReturnType>

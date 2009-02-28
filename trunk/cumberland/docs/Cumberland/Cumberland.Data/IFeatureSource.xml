@@ -1,192 +1,119 @@
 <Type Name="IFeatureSource" FullName="Cumberland.Data.IFeatureSource">
-	<TypeSignature Language="C#" Value="public interface IFeatureSource" />
-	<AssemblyInfo>
-		<AssemblyName>Cumberland</AssemblyName>
-		<AssemblyVersion>0.1.0.0</AssemblyVersion>
-		<AssemblyVersion>0.2.0.0</AssemblyVersion>
-		<AssemblyVersion>0.3.0.0</AssemblyVersion>
-	</AssemblyInfo>
-	<Interfaces />
-	<Docs>
-		<summary>Describes an object that can provide features</summary>
-		<remarks>
+  <TypeSignature Language="C#" Value="public interface IFeatureSource" />
+  <AssemblyInfo>
+    <AssemblyName>Cumberland</AssemblyName>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+    <AssemblyVersion>0.3.0.0</AssemblyVersion>
+    <AssemblyVersion>0.4.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Interfaces />
+  <Docs>
+    <summary>Describes an object that can provide features</summary>
+    <remarks>
 		</remarks>
-	</Docs>
-	<Members>
+  </Docs>
+  <Members>
+		
+		
+		
+		
+		
+		
+		
 		<Member MemberName="Extents">
 			<MemberSignature Language="C#" Value="public Cumberland.Rectangle Extents { get; }" />
 			<MemberType>Property</MemberType>
 			<AssemblyInfo>
-				<AssemblyVersion>0.3.0.0</AssemblyVersion>
-			</AssemblyInfo>
-			<ReturnValue>
-				<ReturnType>Cumberland.Rectangle</ReturnType>
-			</ReturnValue>
-			<Docs>
-				<summary>Gets the extents of the data</summary>
-				<value></value>
-				<remarks></remarks>
-				<since version="0.3" />
-			</Docs>
-		</Member>
-		<Member MemberName="GetFeatures">
+				
+			<AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+			<ReturnValue><ReturnType>Cumberland.Rectangle</ReturnType></ReturnValue>
+			<Docs><summary>Gets the extents of the data</summary><value></value><remarks></remarks><since version="0.3" /></Docs>
+		</Member><Member MemberName="GetFeatures">
 			<MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Cumberland.Feature&gt; GetFeatures ();" />
 			<MemberType>Method</MemberType>
 			<AssemblyInfo>
-				<AssemblyVersion>0.1.0.0</AssemblyVersion>
-				<AssemblyVersion>0.2.0.0</AssemblyVersion>
-				<AssemblyVersion>0.3.0.0</AssemblyVersion>
-			</AssemblyInfo>
-			<ReturnValue>
-				<ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType>
-			</ReturnValue>
+				
+				
+				
+			<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+			<ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType></ReturnValue>
 			<Parameters />
-			<Docs>
-				<summary>Gets all features</summary>
-				<returns>A List of <see cref="T:Cumberland.Feature" /></returns>
-				<remarks>
-				</remarks>
-			</Docs>
-		</Member>
-		<Member MemberName="GetFeatures">
+			<Docs><summary>Gets all features</summary><returns>A List of <see cref="T:Cumberland.Feature" /></returns><remarks>
+				</remarks></Docs>
+		</Member><Member MemberName="GetFeatures">
 			<MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Cumberland.Feature&gt; GetFeatures (Cumberland.Rectangle rectangle);" />
 			<MemberType>Method</MemberType>
 			<AssemblyInfo>
-				<AssemblyVersion>0.1.0.0</AssemblyVersion>
-				<AssemblyVersion>0.2.0.0</AssemblyVersion>
-				<AssemblyVersion>0.3.0.0</AssemblyVersion>
-			</AssemblyInfo>
-			<ReturnValue>
-				<ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType>
-			</ReturnValue>
-			<Parameters>
-				<Parameter Name="rectangle" Type="Cumberland.Rectangle" />
-			</Parameters>
-			<Docs>
-				<param name="rectangle">The extents to get features from</param>
-				<summary>Gets all features within the given extents</summary>
-				<returns>A List of <see cref="T:Cumberland.Feature" /></returns>
-				<remarks>
-				</remarks>
-			</Docs>
-		</Member>
-		<Member MemberName="GetFeatures">
+				
+				
+				
+			<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+			<ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType></ReturnValue>
+			<Parameters><Parameter Name="rectangle" Type="Cumberland.Rectangle" /></Parameters>
+			<Docs><param name="rectangle">The extents to get features from</param><summary>Gets all features within the given extents</summary><returns>A List of <see cref="T:Cumberland.Feature" /></returns><remarks>
+				</remarks></Docs>
+		</Member><Member MemberName="GetFeatures">
 			<MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Cumberland.Feature&gt; GetFeatures (string themeField);" />
 			<MemberType>Method</MemberType>
 			<AssemblyInfo>
-				<AssemblyVersion>0.1.0.0</AssemblyVersion>
-				<AssemblyVersion>0.2.0.0</AssemblyVersion>
-				<AssemblyVersion>0.3.0.0</AssemblyVersion>
-			</AssemblyInfo>
-			<ReturnValue>
-				<ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType>
-			</ReturnValue>
-			<Parameters>
-				<Parameter Name="themeField" Type="System.String" />
-			</Parameters>
-			<Docs>
-				<param name="themeField">The theme field</param>
-				<summary>Gets all features and sets <see cref="P:Cumberland.Feature.ThemeFieldValue" /> based on the given field</summary>
-				<returns>A List of <see cref="T:Cumberland.Feature" /></returns>
-				<remarks>
-				</remarks>
-			</Docs>
-		</Member>
-		<Member MemberName="GetFeatures">
+				
+				
+				
+			<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+			<ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType></ReturnValue>
+			<Parameters><Parameter Name="themeField" Type="System.String" /></Parameters>
+			<Docs><param name="themeField">The theme field</param><summary>Gets all features and sets <see cref="P:Cumberland.Feature.ThemeFieldValue" /> based on the given field</summary><returns>A List of <see cref="T:Cumberland.Feature" /></returns><remarks>
+				</remarks></Docs>
+		</Member><Member MemberName="GetFeatures">
 			<MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Cumberland.Feature&gt; GetFeatures (Cumberland.Rectangle rectangle, string themeField);" />
 			<MemberType>Method</MemberType>
 			<AssemblyInfo>
-				<AssemblyVersion>0.1.0.0</AssemblyVersion>
-				<AssemblyVersion>0.2.0.0</AssemblyVersion>
-				<AssemblyVersion>0.3.0.0</AssemblyVersion>
-			</AssemblyInfo>
-			<ReturnValue>
-				<ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType>
-			</ReturnValue>
-			<Parameters>
-				<Parameter Name="rectangle" Type="Cumberland.Rectangle" />
-				<Parameter Name="themeField" Type="System.String" />
-			</Parameters>
-			<Docs>
-				<param name="rectangle">The extents to get features from</param>
-				<param name="themeField">The theme field</param>
-				<summary>Gets all features within the given extents and sets <see cref="P:Cumberland.Feature.ThemeFieldValue" /> 
-      based on the given field</summary>
-				<returns>A List of <see cref="T:Cumberland.Feature" /></returns>
-				<remarks>
-				</remarks>
-			</Docs>
-		</Member>
-		<Member MemberName="GetFeatures">
+				
+				
+				
+			<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+			<ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType></ReturnValue>
+			<Parameters><Parameter Name="rectangle" Type="Cumberland.Rectangle" /><Parameter Name="themeField" Type="System.String" /></Parameters>
+			<Docs><param name="rectangle">The extents to get features from</param><param name="themeField">The theme field</param><summary>Gets all features within the given extents and sets <see cref="P:Cumberland.Feature.ThemeFieldValue" /> 
+      based on the given field</summary><returns>A List of <see cref="T:Cumberland.Feature" /></returns><remarks>
+				</remarks></Docs>
+		</Member><Member MemberName="GetFeatures">
 			<MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Cumberland.Feature&gt; GetFeatures (string themeField, string labelField);" />
 			<MemberType>Method</MemberType>
 			<AssemblyInfo>
-				<AssemblyVersion>0.2.0.0</AssemblyVersion>
-				<AssemblyVersion>0.3.0.0</AssemblyVersion>
-			</AssemblyInfo>
-			<ReturnValue>
-				<ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType>
-			</ReturnValue>
-			<Parameters>
-				<Parameter Name="themeField" Type="System.String" />
-				<Parameter Name="labelField" Type="System.String" />
-			</Parameters>
-			<Docs>
-				<param name="themeField">The theme field</param>
-				<param name="labelField">The label field</param>
-				<summary>Gets all features and sets the label and theme values</summary>
-				<returns>
-				</returns>
-				<remarks>
-				</remarks>
-				<since version="0.2" />
-			</Docs>
-		</Member>
-		<Member MemberName="GetFeatures">
+				
+				
+			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+			<ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType></ReturnValue>
+			<Parameters><Parameter Name="themeField" Type="System.String" /><Parameter Name="labelField" Type="System.String" /></Parameters>
+			<Docs><param name="themeField">The theme field</param><param name="labelField">The label field</param><summary>Gets all features and sets the label and theme values</summary><returns>
+				</returns><remarks>
+				</remarks><since version="0.2" /></Docs>
+		</Member><Member MemberName="GetFeatures">
 			<MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Cumberland.Feature&gt; GetFeatures (Cumberland.Rectangle rectangle, string themeField, string labelField);" />
 			<MemberType>Method</MemberType>
 			<AssemblyInfo>
-				<AssemblyVersion>0.2.0.0</AssemblyVersion>
-				<AssemblyVersion>0.3.0.0</AssemblyVersion>
-			</AssemblyInfo>
-			<ReturnValue>
-				<ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType>
-			</ReturnValue>
-			<Parameters>
-				<Parameter Name="rectangle" Type="Cumberland.Rectangle" />
-				<Parameter Name="themeField" Type="System.String" />
-				<Parameter Name="labelField" Type="System.String" />
-			</Parameters>
-			<Docs>
-				<param name="rectangle">The search bounds</param>
-				<param name="themeField">The theme field</param>
-				<param name="labelField">The label field</param>
-				<summary>Gets features within the given bounds and sets the theme and label values</summary>
-				<returns>
-				</returns>
-				<remarks>
-				</remarks>
-				<since version="0.2" />
-			</Docs>
-		</Member>
-		<Member MemberName="SourceFeatureType">
+				
+				
+			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+			<ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType></ReturnValue>
+			<Parameters><Parameter Name="rectangle" Type="Cumberland.Rectangle" /><Parameter Name="themeField" Type="System.String" /><Parameter Name="labelField" Type="System.String" /></Parameters>
+			<Docs><param name="rectangle">The search bounds</param><param name="themeField">The theme field</param><param name="labelField">The label field</param><summary>Gets features within the given bounds and sets the theme and label values</summary><returns>
+				</returns><remarks>
+				</remarks><since version="0.2" /></Docs>
+		</Member><Member MemberName="SourceFeatureType">
 			<MemberSignature Language="C#" Value="public Cumberland.Data.FeatureType SourceFeatureType { get; }" />
 			<MemberType>Property</MemberType>
 			<AssemblyInfo>
-				<AssemblyVersion>0.1.0.0</AssemblyVersion>
-				<AssemblyVersion>0.2.0.0</AssemblyVersion>
-				<AssemblyVersion>0.3.0.0</AssemblyVersion>
-			</AssemblyInfo>
-			<ReturnValue>
-				<ReturnType>Cumberland.Data.FeatureType</ReturnType>
-			</ReturnValue>
-			<Docs>
-				<summary>The feature type of the source data</summary>
-				<value>
-				</value>
-				<remarks>
-				</remarks>
-			</Docs>
+				
+				
+				
+			<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+			<ReturnValue><ReturnType>Cumberland.Data.FeatureType</ReturnType></ReturnValue>
+			<Docs><summary>The feature type of the source data</summary><value>
+				</value><remarks>
+				</remarks></Docs>
 		</Member>
 	</Members>
 </Type>

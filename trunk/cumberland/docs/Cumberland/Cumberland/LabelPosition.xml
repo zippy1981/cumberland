@@ -4,6 +4,7 @@
     <AssemblyName>Cumberland</AssemblyName>
     <AssemblyVersion>0.2.0.0</AssemblyVersion>
     <AssemblyVersion>0.3.0.0</AssemblyVersion>
+    <AssemblyVersion>0.4.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
 		<BaseTypeName>System.Enum</BaseTypeName>
@@ -28,7 +29,7 @@
 			<MemberType>Field</MemberType>
 			<AssemblyInfo>
 				
-			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
+			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>Cumberland.LabelPosition</ReturnType></ReturnValue>
 			<Docs><summary></summary></Docs>
 		</Member><Member MemberName="BottomLeft">
@@ -36,7 +37,7 @@
 			<MemberType>Field</MemberType>
 			<AssemblyInfo>
 				
-			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
+			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>Cumberland.LabelPosition</ReturnType></ReturnValue>
 			<Docs><summary></summary></Docs>
 		</Member><Member MemberName="BottomRight">
@@ -44,7 +45,7 @@
 			<MemberType>Field</MemberType>
 			<AssemblyInfo>
 				
-			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
+			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>Cumberland.LabelPosition</ReturnType></ReturnValue>
 			<Docs><summary></summary></Docs>
 		</Member><Member MemberName="Center">
@@ -52,7 +53,7 @@
 			<MemberType>Field</MemberType>
 			<AssemblyInfo>
 				
-			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
+			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>Cumberland.LabelPosition</ReturnType></ReturnValue>
 			<Docs><summary></summary></Docs>
 		</Member><Member MemberName="Left">
@@ -60,7 +61,7 @@
 			<MemberType>Field</MemberType>
 			<AssemblyInfo>
 				
-			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
+			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>Cumberland.LabelPosition</ReturnType></ReturnValue>
 			<Docs><summary></summary></Docs>
 		</Member><Member MemberName="None">
@@ -68,7 +69,7 @@
 			<MemberType>Field</MemberType>
 			<AssemblyInfo>
 				
-			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
+			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>Cumberland.LabelPosition</ReturnType></ReturnValue>
 			<Docs><summary></summary></Docs>
 		</Member><Member MemberName="Right">
@@ -76,7 +77,7 @@
 			<MemberType>Field</MemberType>
 			<AssemblyInfo>
 				
-			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
+			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>Cumberland.LabelPosition</ReturnType></ReturnValue>
 			<Docs><summary></summary></Docs>
 		</Member><Member MemberName="Top">
@@ -84,7 +85,7 @@
 			<MemberType>Field</MemberType>
 			<AssemblyInfo>
 				
-			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
+			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>Cumberland.LabelPosition</ReturnType></ReturnValue>
 			<Docs><summary></summary></Docs>
 		</Member><Member MemberName="TopLeft">
@@ -92,7 +93,7 @@
 			<MemberType>Field</MemberType>
 			<AssemblyInfo>
 				
-			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
+			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>Cumberland.LabelPosition</ReturnType></ReturnValue>
 			<Docs><summary></summary></Docs>
 		</Member><Member MemberName="TopRight">
@@ -100,7 +101,7 @@
 			<MemberType>Field</MemberType>
 			<AssemblyInfo>
 				
-			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion></AssemblyInfo>
+			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
 			<ReturnValue><ReturnType>Cumberland.LabelPosition</ReturnType></ReturnValue>
 			<Docs><summary></summary></Docs>
 		</Member>

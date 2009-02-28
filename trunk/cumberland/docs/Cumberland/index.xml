@@ -1,6 +1,6 @@
 <Overview>
   <Assemblies>
-    <Assembly Name="Cumberland" Version="0.3.0.0">
+    <Assembly Name="Cumberland" Version="0.4.0.0">
       <Attributes>
         <Attribute>
           <AttributeName>System.Runtime.CompilerServices.RuntimeCompatibility(WrapNonExceptionThrows=true)</AttributeName>
@@ -68,9 +68,10 @@
       <Type Name="Shapefile" Kind="Class" />
       <Type Name="ShapeType" Kind="Enumeration" />
     </Namespace>
-    <Namespace Name="Cumberland.Data.WellKnownText">
+    <Namespace Name="Cumberland.Data.SimpleFeatureAccess">
       <Type Name="PolygonHoleStrategy" Kind="Enumeration" />
-      <Type Name="SimpleFeatureAccess" Kind="Class" />
+      <Type Name="WellKnownBinary" Kind="Class" />
+      <Type Name="WellKnownText" Kind="Class" />
     </Namespace>
     <Namespace Name="Cumberland.Drawing">
       <Type Name="IMapDrawer" Kind="Interface" />
