@@ -1,0 +1,12 @@
+#summary Release Notes for 0.4
+
+*_This page is a draft_*
+
+= New Features =
+
+ * Shapefile - support 'M' shapetypes (value is ignored)
+
+= Fixes = 
+
+ * #7 - tilepyramider throws exception when placed in PATH on Windows and called elsewhere
+ * #8 - OverflowException is thrown
