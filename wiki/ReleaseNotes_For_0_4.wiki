@@ -9,12 +9,18 @@
  * Shapefile - support 'M' shapetypes (value is ignored)
  * Cascading styles - The Style class has had MinScale/MaxScale properties, but now they work as expected in that if a style is out of scale, it keeps looking.  Previously the scale properties were applied after the style was found.
  * added Style.UniqueElseFlag which can be used to style remaining features
+ * label outlines have been improved on Microsoft .NET
+ * added Layer.AllowDuplicateLabels.  Setting this to false will not draw a label string that has already been drawn for this Layer.
 
 == Line and Ring Simplification ==
 
 Style now has Simplify and SimplifyTolerance properties which allows the ability to simplify features which can have the effect of making them appear nicer when zoomed far out ([http://www.salmonsalvo.net/blog/?p=205 details]).
 
 [http://cumberland.googlecode.com/files/poly_tolerance.png]
+
+== switch to Well-Known Binary ==
+
+Querying SQL Server and PostGIS previously used Well-Known Text.  This has been switched to Well-Known Binary.  The speed-up is substantial.
 
 = Fixes = 
 
