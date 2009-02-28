@@ -23,7 +23,10 @@ Style now has Simplify and SimplifyTolerance properties which allows the ability
 Querying SQL Server and PostGIS previously used Well-Known Text.  This has been switched to Well-Known Binary.  The speed-up is substantial.  For example, take this PostGIS WKT Query:
 
 {{{
-select astext(the_geom) as the_geom , perimeter , name2 from lakes where the_geom && SetSRID('BOX3D(1.74622982740402E-10 -6499.99999999873, 795000 788500.000000004)'::box3d, 3087)
+select astext(the_geom) as the_geom , perimeter , name2 
+from lakes 
+where the_geom && 
+SetSRID('BOX3D(1.74622982740402E-10 -6499.99999999873, 795000 788500.000000004)'::box3d, 3087)
 }}}
 
 It takes approx. 3 seconds.  Switch the 'astext' to 'asbinary', and the query takes ~500 milliseconds.  There is also a substantial improvement in SQL Server.  Parsing is also faster.  For the above query, parsing the WKT took about 5 seconds.  The WKB took 4.
