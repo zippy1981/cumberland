@@ -1,0 +1,165 @@
+<Type Name="AbstractDatabaseFeatureSource" FullName="Cumberland.Data.AbstractDatabaseFeatureSource">
+  <TypeSignature Language="C#" Value="public abstract class AbstractDatabaseFeatureSource : Cumberland.Data.IDatabaseFeatureSource" />
+  <AssemblyInfo>
+    <AssemblyName>Cumberland</AssemblyName>
+    <AssemblyVersion>0.3.0.0</AssemblyVersion>
+    <AssemblyVersion>0.4.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>Cumberland.Data.IDatabaseFeatureSource</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Docs>
+    <summary>A convenience abstract class for creating database feature sources</summary>
+    <remarks>
+    </remarks>
+    <since version="0.3" />
+  </Docs>
+  <Members>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="protected AbstractDatabaseFeatureSource ();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+      <Parameters />
+      <Docs><summary></summary><remarks></remarks><since version="0.3" /></Docs>
+    </Member><Member MemberName="ConnectionString">
+      <MemberSignature Language="C#" Value="public virtual string ConnectionString { set; get; }" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
+      <Docs><summary></summary><value></value><remarks></remarks><since version="0.3" /></Docs>
+    </Member><Member MemberName="Extents">
+      <MemberSignature Language="C#" Value="public virtual Cumberland.Rectangle Extents { get; }" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>Cumberland.Rectangle</ReturnType></ReturnValue>
+      <Docs><summary></summary><value></value><remarks></remarks><since version="0.3" /></Docs>
+    </Member><Member MemberName="ForcedFeatureType">
+      <MemberSignature Language="C#" Value="public virtual Cumberland.Data.FeatureType ForcedFeatureType { set; get; }" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>Cumberland.Data.FeatureType</ReturnType></ReturnValue>
+      <Docs><summary></summary><value></value><remarks></remarks><since version="0.3" /></Docs>
+    </Member><Member MemberName="ForcedGeometryColumn">
+      <MemberSignature Language="C#" Value="public virtual string ForcedGeometryColumn { set; get; }" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
+      <Docs><summary></summary><value></value><remarks></remarks><since version="0.3" /></Docs>
+    </Member><Member MemberName="ForcedSpatialType">
+      <MemberSignature Language="C#" Value="public virtual Cumberland.Data.SpatialType ForcedSpatialType { set; get; }" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>Cumberland.Data.SpatialType</ReturnType></ReturnValue>
+      <Docs><summary></summary><value></value><remarks></remarks><since version="0.3" /></Docs>
+    </Member><Member MemberName="ForcedSrid">
+      <MemberSignature Language="C#" Value="public virtual int ForcedSrid { set; get; }" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>System.Int32</ReturnType></ReturnValue>
+      <Docs><summary></summary><value></value><remarks></remarks><since version="0.3" /></Docs>
+    </Member><Member MemberName="GetFeatures">
+      <MemberSignature Language="C#" Value="public abstract System.Collections.Generic.List&lt;Cumberland.Feature&gt; GetFeatures ();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType></ReturnValue>
+      <Parameters />
+      <Docs><summary></summary><returns></returns><remarks></remarks><since version="0.3" /></Docs>
+    </Member><Member MemberName="GetFeatures">
+      <MemberSignature Language="C#" Value="public abstract System.Collections.Generic.List&lt;Cumberland.Feature&gt; GetFeatures (Cumberland.Rectangle rectangle);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType></ReturnValue>
+      <Parameters><Parameter Name="rectangle" Type="Cumberland.Rectangle" /></Parameters>
+      <Docs><param name="rectangle"></param><summary></summary><returns></returns><remarks></remarks><since version="0.3" /></Docs>
+    </Member><Member MemberName="GetFeatures">
+      <MemberSignature Language="C#" Value="public abstract System.Collections.Generic.List&lt;Cumberland.Feature&gt; GetFeatures (string themeField);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType></ReturnValue>
+      <Parameters><Parameter Name="themeField" Type="System.String" /></Parameters>
+      <Docs><param name="themeField"></param><summary></summary><returns></returns><remarks></remarks><since version="0.3" /></Docs>
+    </Member><Member MemberName="GetFeatures">
+      <MemberSignature Language="C#" Value="public abstract System.Collections.Generic.List&lt;Cumberland.Feature&gt; GetFeatures (Cumberland.Rectangle rectangle, string themeField);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType></ReturnValue>
+      <Parameters><Parameter Name="rectangle" Type="Cumberland.Rectangle" /><Parameter Name="themeField" Type="System.String" /></Parameters>
+      <Docs><param name="rectangle"></param><param name="themeField"></param><summary></summary><returns></returns><remarks></remarks><since version="0.3" /></Docs>
+    </Member><Member MemberName="GetFeatures">
+      <MemberSignature Language="C#" Value="public abstract System.Collections.Generic.List&lt;Cumberland.Feature&gt; GetFeatures (string themeField, string labelField);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType></ReturnValue>
+      <Parameters><Parameter Name="themeField" Type="System.String" /><Parameter Name="labelField" Type="System.String" /></Parameters>
+      <Docs><param name="themeField"></param><param name="labelField"></param><summary></summary><returns></returns><remarks></remarks><since version="0.3" /></Docs>
+    </Member><Member MemberName="GetFeatures">
+      <MemberSignature Language="C#" Value="public abstract System.Collections.Generic.List&lt;Cumberland.Feature&gt; GetFeatures (Cumberland.Rectangle rectangle, string themeField, string labelField);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>System.Collections.Generic.List&lt;Cumberland.Feature&gt;</ReturnType></ReturnValue>
+      <Parameters><Parameter Name="rectangle" Type="Cumberland.Rectangle" /><Parameter Name="themeField" Type="System.String" /><Parameter Name="labelField" Type="System.String" /></Parameters>
+      <Docs><param name="rectangle"></param><param name="themeField"></param><param name="labelField"></param><summary></summary><returns></returns><remarks></remarks><since version="0.3" /></Docs>
+    </Member><Member MemberName="SourceFeatureType">
+      <MemberSignature Language="C#" Value="public abstract Cumberland.Data.FeatureType SourceFeatureType { get; }" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>Cumberland.Data.FeatureType</ReturnType></ReturnValue>
+      <Docs><summary></summary><value></value><remarks></remarks><since version="0.3" /></Docs>
+    </Member><Member MemberName="TableName">
+      <MemberSignature Language="C#" Value="public virtual string TableName { set; get; }" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>System.String</ReturnType></ReturnValue>
+      <Docs><summary></summary><value></value><remarks></remarks><since version="0.3" /></Docs>
+    </Member>
+  </Members>
+</Type>
