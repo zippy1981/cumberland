@@ -8,8 +8,8 @@
     <BaseTypeName>System.Enum</BaseTypeName>
   </Base>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Defines when to treat rings as holes</summary>
+    <remarks>Currently used when creating polygon well-known text.</remarks>
   </Docs>
   <Members>
     <Member MemberName="InteriorToLeft">

@@ -27,7 +27,7 @@
       </Parameters>
       <Docs>
         <param name="wkb">The well-known binary to parse</param>
-        <summary>Parses the given well-known binary in a feature.</summary>
+        <summary>Parses the given well-known binary into a feature.</summary>
         <returns>The feature</returns>
         <remarks>Supports only a subset of WKB: Polygon, MultiPolygon, LineString, MultiString, and Point.</remarks>
       </Docs>
