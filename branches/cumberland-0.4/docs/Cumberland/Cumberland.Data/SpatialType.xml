@@ -1,0 +1,46 @@
+<Type Name="SpatialType" FullName="Cumberland.Data.SpatialType">
+  <TypeSignature Language="C#" Value="public enum SpatialType" />
+  <AssemblyInfo>
+    <AssemblyName>Cumberland</AssemblyName>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+    <AssemblyVersion>0.3.0.0</AssemblyVersion>
+    <AssemblyVersion>0.4.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Enum</BaseTypeName>
+  </Base>
+  <Docs>
+    <summary>Specifies the spatial type of the <see cref="T:Cumberland.Data.IDatabaseFeatureSource" /></summary>
+    <remarks>Some databases support both a geometric and geographic type for spatial data because
+    of the differences in handling the data.  This enumeration specifies those types.  Specifying 'None'
+    will force the feature source to look up the type.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="Geographic">
+      <MemberSignature Language="C#" Value="Geographic" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>Cumberland.Data.SpatialType</ReturnType></ReturnValue>
+      <Docs><summary>Geographic spatial type (latitude/longitude).</summary></Docs>
+    </Member><Member MemberName="Geometric">
+      <MemberSignature Language="C#" Value="Geometric" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>Cumberland.Data.SpatialType</ReturnType></ReturnValue>
+      <Docs><summary>Geometric spatial type (x/y)</summary></Docs>
+    </Member><Member MemberName="None">
+      <MemberSignature Language="C#" Value="None" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>Cumberland.Data.SpatialType</ReturnType></ReturnValue>
+      <Docs><summary>None/unknown spatial type</summary></Docs>
+    </Member>
+  </Members>
+</Type>

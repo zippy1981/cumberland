@@ -1,0 +1,65 @@
+<Type Name="ProjFourException" FullName="Cumberland.Projection.ProjFourException">
+  <TypeSignature Language="C#" Value="public class ProjFourException : Exception" />
+  <AssemblyInfo>
+    <AssemblyName>Cumberland</AssemblyName>
+    <AssemblyVersion>0.3.0.0</AssemblyVersion>
+    <AssemblyVersion>0.4.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Exception</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>An exception which denotes an internal error in Proj.4 cartographic library</summary>
+    <remarks>
+    </remarks>
+    <since version="0.3" />
+  </Docs>
+  <Members>
+    
+    
+    
+    
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public ProjFourException ();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+      <Parameters />
+      <Docs><summary></summary><remarks></remarks><since version="0.3" /></Docs>
+    </Member><Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public ProjFourException (string message);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+      <Parameters><Parameter Name="message" Type="System.String" /></Parameters>
+      <Docs><param name="message"></param><summary></summary><remarks></remarks><since version="0.3" /></Docs>
+    </Member><Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public ProjFourException (int errorCode, string message);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+      <Parameters><Parameter Name="errorCode" Type="System.Int32" /><Parameter Name="message" Type="System.String" /></Parameters>
+      <Docs><param name="errorCode"></param><param name="message"></param><summary></summary><remarks></remarks><since version="0.3" /></Docs>
+    </Member><Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public ProjFourException (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+      <Parameters><Parameter Name="info" Type="System.Runtime.Serialization.SerializationInfo" /><Parameter Name="context" Type="System.Runtime.Serialization.StreamingContext" /></Parameters>
+      <Docs><param name="info"></param><param name="context"></param><summary></summary><remarks></remarks><since version="0.3" /></Docs>
+    </Member><Member MemberName="ErrorCode">
+      <MemberSignature Language="C#" Value="public int ErrorCode;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>System.Int32</ReturnType></ReturnValue>
+      <Docs><summary>The error code as provided by Proj.4</summary><remarks>The error message can be acquired by using <see cref="M:Cumberland.Projection.ProjFourWrapper.GetError" />.</remarks><since version="0.3" /></Docs>
+    </Member>
+  </Members>
+</Type>

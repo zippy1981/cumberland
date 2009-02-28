@@ -1,0 +1,368 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Map xmlns="http://salmonsalvo.net/cumberland">
+  <Extents xmlns="">0,0,795000,782000</Extents>
+  <Projection xmlns="">+init=epsg:3087</Projection>
+  <BackgroundColor xmlns="">255,166,201,227</BackgroundColor>
+  <Layers xmlns="">
+    <Layer>
+      <!--US States Layer-->
+      <Id>states</Id>
+      <Theme>Unique</Theme>
+      <ThemeField>state</ThemeField>
+      <Projection>+init=epsg:4269</Projection>
+      <Data sourceInstance="Cumberland.Data.PostGIS.PostGISFeatureSource"
+            sourceType="Cumberland.Data.IDatabaseFeatureSource">
+        <ConnectionString>Server=192.168.1.102;Port=5432;User Id=pguser;Password=pgpublic;Database=postgis;</ConnectionString>
+        <TableName>states</TableName>
+      </Data>
+      <Styles>
+        <Style>
+          <!--Florida at high scale / less details-->
+          <MinScale>600</MinScale>
+          <UniqueThemeValue>FL</UniqueThemeValue>
+          <FillColor>255,227,222,206</FillColor>
+          <LineColor>255,227,222,206</LineColor>          
+        </Style>
+        <Style>
+          <!--Don't draw FL, Higher detailed counties data will handle-->
+          <MaxScale>599</MaxScale>
+          <UniqueThemeValue>FL</UniqueThemeValue>
+          <FillStyle>None</FillStyle>
+          <LineStyle>None</LineStyle>
+        </Style>
+        <Style>
+          <!--Draw other states as dark-->
+          <UniqueElseFlag>true</UniqueElseFlag>
+          <FillColor>255,195,186,171</FillColor>
+          <LineColor>255,195,186,171</LineColor>
+        </Style>
+      </Styles>
+    </Layer>
+    <Layer>
+      <!--Florida counties layer-->
+      <Visible>true</Visible>
+      <LabelField>NAME</LabelField>
+      <MaxScale>599</MaxScale>
+      <Projection>+init=epsg:3087</Projection>
+      <Data sourceType="Cumberland.Data.IDatabaseFeatureSource"
+            sourceInstance="Cumberland.Data.PostGIS.PostGISFeatureSource">
+        <ConnectionString>Server=192.168.1.102;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;</ConnectionString>
+        <TableName>(select * from counties where water = '0') as counties</TableName>
+        <ForcedFeatureType>Polygon</ForcedFeatureType>
+        <ForcedGeometryColumn>the_geom</ForcedGeometryColumn>
+        <ForcedSrid>3087</ForcedSrid>
+      </Data>
+      <Styles>
+        <Style>
+          <MinScale>200</MinScale>
+          <FillColor>255,227,222,206</FillColor>
+          <LineColor>255,227,222,206</LineColor>
+        </Style>
+        <Style>
+          <MaxScale>199</MaxScale>
+          <FillColor>255,227,222,206</FillColor>
+          <LineColor>255,205,196,181</LineColor>
+        </Style>
+      </Styles>
+    </Layer>
+    <Layer>
+      <!--Florida city limits-->
+      <Projection>+init=epsg:3087</Projection>
+      <Data sourceType="Cumberland.Data.IDatabaseFeatureSource"
+            sourceInstance="Cumberland.Data.PostGIS.PostGISFeatureSource">
+        <ConnectionString>Server=192.168.1.102;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;</ConnectionString>
+        <TableName>
+          (select 	b.name as name,
+          coalesce(b.population, -99998) as pop,
+          a.the_geom as the_geom
+          from par_citylm_2007 a left outer join cities_pop b
+          on a.name = UPPER(b.name)) as cities
+        </TableName>
+        <ForcedGeometryColumn>the_geom</ForcedGeometryColumn>
+        <ForcedFeatureType>Polygon</ForcedFeatureType>
+        <ForcedSrid>3087</ForcedSrid>
+      </Data>
+      <LabelField>name</LabelField>
+      <Theme>NumericRange</Theme>
+      <ThemeField>pop</ThemeField>
+      <MaxScale>2000</MaxScale>
+      <Styles>
+        <Style>
+          <LabelMaxScale>700</LabelMaxScale>
+          <MinRangeThemeValue>100000</MinRangeThemeValue>
+          <ShowLabels>true</ShowLabels>
+          <LabelDecoration>Outline</LabelDecoration>
+          <LabelFont>SansSerif</LabelFont>
+          <LabelFontEmSize>10</LabelFontEmSize>
+          <LabelOutlineColor>255,255,255,255</LabelOutlineColor>
+          <LabelOutlineWidth>3</LabelOutlineWidth>
+          <FillColor>255,210,210,210</FillColor>
+          <LineColor>255,210,210,210</LineColor>
+        </Style>
+        <Style>
+          <LabelMaxScale>200</LabelMaxScale>
+          <MaxRangeThemeValue>99999</MaxRangeThemeValue>
+          <MinRangeThemeValue>10000</MinRangeThemeValue>
+          <ShowLabels>true</ShowLabels>
+          <LabelDecoration>Outline</LabelDecoration>
+          <LabelFont>SansSerif</LabelFont>
+          <LabelFontEmSize>10</LabelFontEmSize>
+          <LabelOutlineColor>255,255,255,255</LabelOutlineColor>
+          <LabelOutlineWidth>3</LabelOutlineWidth>
+          <FillColor>255,210,210,210</FillColor>
+          <LineColor>255,210,210,210</LineColor>
+        </Style>
+        <Style>
+          <LabelMaxScale>100</LabelMaxScale>
+          <MaxRangeThemeValue>9999</MaxRangeThemeValue>
+          <ShowLabels>true</ShowLabels>
+          <LabelDecoration>Outline</LabelDecoration>
+          <LabelFont>SansSerif</LabelFont>
+          <LabelFontEmSize>10</LabelFontEmSize>
+          <LabelOutlineColor>255,255,255,255</LabelOutlineColor>
+          <LabelOutlineWidth>3</LabelOutlineWidth>
+          <FillColor>255,210,210,210</FillColor>
+          <LineColor>255,210,210,210</LineColor>
+        </Style>
+      </Styles>
+    </Layer>
+    <Layer>
+      <!--Lakes-->
+      <Visible>true</Visible>
+      <LabelField>name2</LabelField>
+      <Theme>NumericRange</Theme>
+      <ThemeField>perimeter</ThemeField>
+      <Projection>+init=epsg:3087</Projection>
+      <Data sourceType="Cumberland.Data.IDatabaseFeatureSource"
+            sourceInstance="Cumberland.Data.PostGIS.PostGISFeatureSource">
+        <ConnectionString>Server=192.168.1.102;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;</ConnectionString>
+        <TableName>lakes</TableName>
+      </Data>
+      <MaxScale>4000</MaxScale>
+      <Styles>
+        <Style>
+          <ShowLabels>true</ShowLabels>
+          <LabelMaxScale>50</LabelMaxScale>
+          <MinRangeThemeValue>4000</MinRangeThemeValue>
+          <FillColor>255,166,201,227</FillColor>
+          <LineColor>255,166,201,227</LineColor>
+          <LabelColor>255,84,111,181</LabelColor>
+          <LabelFont>SansSerif</LabelFont>
+          <LabelFontEmSize>8</LabelFontEmSize>
+        </Style>
+        <Style>
+          <FillColor>255,166,201,227</FillColor>
+          <LineColor>255,166,201,227</LineColor>
+          <LabelColor>255,104,131,201</LabelColor>
+        </Style>
+      </Styles>
+    </Layer>
+    <Layer>
+      <!--Local roads-->
+      <Projection>+init=epsg:3086</Projection>
+      <Data sourceType="Cumberland.Data.IDatabaseFeatureSource"
+            sourceInstance="Cumberland.Data.PostGIS.PostGISFeatureSource">
+        <ConnectionString>Server=192.168.1.102;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;</ConnectionString>
+        <TableName>(select * from fdot_majroads where funclass = '19' or funclass = '09' or funclass = '17') as local</TableName>
+        <ForcedFeatureType>Polyline</ForcedFeatureType>
+        <ForcedGeometryColumn>the_geom</ForcedGeometryColumn>
+        <ForcedSrid>3086</ForcedSrid>
+      </Data>
+      <MaxScale>50</MaxScale>
+      <Styles>
+        <Style>
+          <LineColor>255,190,190,190</LineColor>
+        </Style>
+      </Styles>
+    </Layer>
+    <Layer>
+      <!--Minor Arterial-->
+      <Projection>+init=epsg:3086</Projection>
+      <Data sourceType="Cumberland.Data.IDatabaseFeatureSource"
+            sourceInstance="Cumberland.Data.PostGIS.PostGISFeatureSource">
+        <ConnectionString>Server=192.168.1.102;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;</ConnectionString>        
+        <TableName>(select * from fdot_majroads where funclass = '06' or funclass = '16') as min_art</TableName>
+        <ForcedFeatureType>Polyline</ForcedFeatureType>
+        <ForcedGeometryColumn>the_geom</ForcedGeometryColumn>
+        <ForcedSrid>3086</ForcedSrid>
+      </Data>
+      <MaxScale>100</MaxScale>
+      <Styles>
+        <Style>
+          <LineColor>255,120,120,120</LineColor>
+        </Style>
+      </Styles>
+    </Layer>
+    <Layer>
+      <!--Major Arterial / Highways / Expressways 1 -->
+      <Projection>+init=epsg:3086</Projection>
+      <Data sourceType="Cumberland.Data.IDatabaseFeatureSource"
+            sourceInstance="Cumberland.Data.PostGIS.PostGISFeatureSource">
+        <ConnectionString>Server=192.168.1.102;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;</ConnectionString>
+        <TableName>(select * from fdot_majroads where funclass = '02' or funclass = '12' or funclass = '14') as major</TableName>
+        <ForcedFeatureType>Polyline</ForcedFeatureType>
+        <ForcedGeometryColumn>the_geom</ForcedGeometryColumn>
+        <ForcedSrid>3086</ForcedSrid>
+      </Data>
+      <MaxScale>2000</MaxScale>
+      <Styles>
+        <Style>
+          <MinScale>400</MinScale>
+          <LineColor>255,198,184,109</LineColor>
+        </Style>
+        <Style>
+          <MaxScale>399</MaxScale>
+          <LineWidth>3</LineWidth>
+          <LineColor>255,198,184,109</LineColor>
+        </Style>
+      </Styles>
+    </Layer>
+    <Layer>
+      <!--Major Arterial / Highways / Expressways 2 -->
+      <Projection>+init=epsg:3086</Projection>
+      <Data sourceType="Cumberland.Data.IDatabaseFeatureSource"
+            sourceInstance="Cumberland.Data.PostGIS.PostGISFeatureSource">
+        <ConnectionString>Server=192.168.1.102;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;</ConnectionString>
+        <TableName>(select * from fdot_majroads where funclass = '02' or funclass = '12' or funclass = '14') as major</TableName>
+        <ForcedFeatureType>Polyline</ForcedFeatureType>
+        <ForcedGeometryColumn>the_geom</ForcedGeometryColumn>
+        <ForcedSrid>3086</ForcedSrid>
+      </Data>
+      <MaxScale>399</MaxScale>
+      <LabelField>usroute_num</LabelField>
+      <Theme>Unique</Theme>
+      <ThemeField>routetype</ThemeField>
+      <AllowDuplicateLabels>false</AllowDuplicateLabels>
+      <Styles>
+        <Style>
+          <UniqueThemeValue>u</UniqueThemeValue>
+          <LineWidth>2</LineWidth>
+          <LineColor>255,228,214,139</LineColor>
+          <ShowLabels>true</ShowLabels>
+          <LabelPixelOffset>0</LabelPixelOffset>
+          <LabelFont>SansSerif</LabelFont>
+          <LabelFontEmSize>6</LabelFontEmSize>
+          <DrawPointSymbolOnPolyLine>true</DrawPointSymbolOnPolyLine>
+          <CalculateLabelAngleForPolyLine>false</CalculateLabelAngleForPolyLine>
+          <PointSymbol>Image</PointSymbol>
+          <PointSymbolImagePath>images/usroute.png</PointSymbolImagePath>
+        </Style>
+        <Style>
+          <UniqueElseFlag>true</UniqueElseFlag>
+          <LineWidth>2</LineWidth>
+          <LineColor>255,228,214,139</LineColor>
+        </Style>
+      </Styles>
+    </Layer>
+    <Layer>
+      <!--Interstates 1-->
+      <LabelField>name</LabelField>
+      <ThemeField>funclass</ThemeField>
+      <Projection>+init=epsg:3086</Projection>
+      <Data sourceType="Cumberland.Data.IDatabaseFeatureSource"
+            sourceInstance="Cumberland.Data.PostGIS.PostGISFeatureSource">
+        <ConnectionString>Server=192.168.1.102;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;</ConnectionString>
+        <TableName>(select * from fdot_majroads where funclass = '01' or funclass = '11') as interstates</TableName>
+        <ForcedFeatureType>Polyline</ForcedFeatureType>
+        <ForcedGeometryColumn>the_geom</ForcedGeometryColumn>
+        <ForcedSrid>3086</ForcedSrid>
+      </Data>
+      <Styles>
+        <Style>
+          <Simplify>true</Simplify>
+          <SimplifyTolerance>800</SimplifyTolerance>
+          <MinScale>1000</MinScale>
+          <LineColor>255,255,156,0</LineColor>
+          <LineWidth>2</LineWidth>
+        </Style>
+        <Style>
+          <Simplify>true</Simplify>
+          <SimplifyTolerance>400</SimplifyTolerance>
+          <MaxScale>999</MaxScale>
+          <MinScale>400</MinScale>
+          <LineColor>255,155,56,0</LineColor>
+          <LineWidth>3</LineWidth>
+        </Style>
+        <Style>
+          <Simplify>true</Simplify>
+          <SimplifyTolerance>200</SimplifyTolerance>
+          <MaxScale>399</MaxScale>
+          <LineColor>255,155,56,0</LineColor>
+          <LineWidth>6</LineWidth>
+        </Style>
+      </Styles>
+    </Layer>
+    <Layer>
+      <!--Interstates 2-->
+      <LabelField>usroute_num</LabelField>
+      <Projection>+init=epsg:3086</Projection>
+      <AllowDuplicateLabels>false</AllowDuplicateLabels>
+      <Data sourceType="Cumberland.Data.IDatabaseFeatureSource"
+            sourceInstance="Cumberland.Data.PostGIS.PostGISFeatureSource">
+        <ConnectionString>Server=192.168.1.102;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;</ConnectionString>
+        <TableName>(select * from fdot_majroads where funclass = '01' or funclass = '11') as interstates</TableName>
+        <ForcedFeatureType>Polyline</ForcedFeatureType>
+        <ForcedGeometryColumn>the_geom</ForcedGeometryColumn>
+        <ForcedSrid>3086</ForcedSrid>
+      </Data>
+      <MaxScale>999</MaxScale>
+      <Styles>
+        <Style>
+          <Simplify>true</Simplify>
+          <SimplifyTolerance>400</SimplifyTolerance>
+          <MinScale>400</MinScale>
+          <LineColor>255,255,156,0</LineColor>
+          <LineWidth>2</LineWidth>
+        </Style>
+        <Style>
+          <ShowLabels>true</ShowLabels>
+          <LabelPixelOffset>0</LabelPixelOffset>
+          <LabelFont>SansSerif</LabelFont>
+          <LabelFontEmSize>6</LabelFontEmSize>
+          <DrawPointSymbolOnPolyLine>true</DrawPointSymbolOnPolyLine>
+          <CalculateLabelAngleForPolyLine>false</CalculateLabelAngleForPolyLine>
+          <PointSymbol>Image</PointSymbol>
+          <PointSize>15</PointSize>
+          <FillColor>255,255,0,0</FillColor>
+          <PointSymbolImagePath>images/interstate.png</PointSymbolImagePath>
+          <Simplify>true</Simplify>
+          <SimplifyTolerance>200</SimplifyTolerance>
+          <MaxScale>399</MaxScale>
+          <LineColor>255,255,156,0</LineColor>
+          <LineWidth>4</LineWidth>
+        </Style>
+      </Styles>
+    </Layer>
+    <Layer>
+      <!--City points-->
+      <Projection>+init=epsg:3087</Projection>
+      <MinScale>2001</MinScale>
+      <Data sourceType="Cumberland.Data.IDatabaseFeatureSource"
+            sourceInstance="Cumberland.Data.PostGIS.PostGISFeatureSource">
+        <ConnectionString>Server=192.168.1.102;Port=5432;User Id=pguser;Password=pgpublic;Database=florida;</ConnectionString>
+        <TableName>cities_feb04</TableName>
+      </Data>
+      <Theme>NumericRange</Theme>
+      <ThemeField>pop_2000</ThemeField>
+      <MaxScale>8000</MaxScale>
+      <Styles>
+        <Style>
+          <MinRangeThemeValue>250000</MinRangeThemeValue>
+          <PointSize>5</PointSize>
+          <PointSymbolShape>Circle</PointSymbolShape>
+          <LineColor>255,0,0,0</LineColor>
+          <FillColor>255,0,0,255</FillColor>
+        </Style>
+        <Style>
+          <MaxScale>4000</MaxScale>
+          <MaxRangeThemeValue>249999</MaxRangeThemeValue>
+          <MinRangeThemeValue>100000</MinRangeThemeValue>
+          <PointSize>3</PointSize>
+          <PointSymbolShape>Circle</PointSymbolShape>
+          <LineColor>255,0,0,0</LineColor>
+          <FillColor>255,0,255,0</FillColor>
+        </Style>
+      </Styles>
+    </Layer>
+  </Layers>
+</Map>

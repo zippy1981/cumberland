@@ -1,0 +1,6 @@
+<Namespace Name="Cumberland.Data.SimpleFeatureAccess">
+  <Docs>
+    <summary>Provides classes for dealing with the OGC's Simple Feature Access standard.</summary>
+    <remarks>Provides classes for dealing with the OGC's Simple Feature Access standard.</remarks>
+  </Docs>
+</Namespace>

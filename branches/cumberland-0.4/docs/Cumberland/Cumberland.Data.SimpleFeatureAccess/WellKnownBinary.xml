@@ -1,0 +1,36 @@
+<Type Name="WellKnownBinary" FullName="Cumberland.Data.SimpleFeatureAccess.WellKnownBinary">
+  <TypeSignature Language="C#" Value="public static class WellKnownBinary" />
+  <AssemblyInfo>
+    <AssemblyName>Cumberland</AssemblyName>
+    <AssemblyVersion>0.4.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Provides methods for dealing with Well-Known Binary</summary>
+    <remarks></remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="Parse">
+      <MemberSignature Language="C#" Value="public static Cumberland.Feature Parse (byte[] wkb);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.4.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Cumberland.Feature</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="wkb" Type="System.Byte[]" />
+      </Parameters>
+      <Docs>
+        <param name="wkb">The well-known binary to parse</param>
+        <summary>Parses the given well-known binary into a feature.</summary>
+        <returns>The feature</returns>
+        <remarks>Supports only a subset of WKB: Polygon, MultiPolygon, LineString, MultiString, and Point.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

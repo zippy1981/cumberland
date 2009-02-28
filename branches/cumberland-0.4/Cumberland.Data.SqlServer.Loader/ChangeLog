@@ -1,0 +1,14 @@
+2009-02-27  Scott Ellington  <scott.ellington@gmail.com>
+
+	* AssemblyInfo.cs: bump version
+
+2009-02-24  Scott Ellington  <scott.ellington@gmail.com>
+
+	* Main.cs: add WKB parser
+
+2009-02-10  Scott Ellington  <scott.ellington@gmail.com>
+
+	* ChangeLog: add ChangeLogs
+
+	* Cumberland.Data.SqlServer.Loader.csproj: md doin stuff
+

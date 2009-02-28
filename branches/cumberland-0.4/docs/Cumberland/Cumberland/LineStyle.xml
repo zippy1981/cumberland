@@ -1,0 +1,56 @@
+<Type Name="LineStyle" FullName="Cumberland.LineStyle">
+  <TypeSignature Language="C#" Value="public enum LineStyle" />
+  <AssemblyInfo>
+    <AssemblyName>Cumberland</AssemblyName>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+    <AssemblyVersion>0.3.0.0</AssemblyVersion>
+    <AssemblyVersion>0.4.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Enum</BaseTypeName>
+  </Base>
+  <Docs>
+    <summary>Describes how the line is to be drawn</summary>
+    <remarks>
+    </remarks>
+  </Docs>
+  <Members>
+    
+    
+    
+    <Member MemberName="Dashed">
+      <MemberSignature Language="C#" Value="Dashed" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>Cumberland.LineStyle</ReturnType></ReturnValue>
+      <Docs><summary>Draws a dashed line</summary></Docs>
+    </Member><Member MemberName="Dotted">
+      <MemberSignature Language="C#" Value="Dotted" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>Cumberland.LineStyle</ReturnType></ReturnValue>
+      <Docs><summary>Draws a dotted line</summary></Docs>
+    </Member><Member MemberName="None">
+      <MemberSignature Language="C#" Value="None" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>Cumberland.LineStyle</ReturnType></ReturnValue>
+      <Docs><summary>Does not draw the line</summary></Docs>
+    </Member><Member MemberName="Solid">
+      <MemberSignature Language="C#" Value="Solid" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        
+      <AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+      <ReturnValue><ReturnType>Cumberland.LineStyle</ReturnType></ReturnValue>
+      <Docs><summary>Draws a solid line</summary></Docs>
+    </Member>
+  </Members>
+</Type>

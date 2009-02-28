@@ -1,0 +1,98 @@
+<Type Name="Line" FullName="Cumberland.Line">
+	<TypeSignature Language="C#" Value="public class Line" />
+	<AssemblyInfo>
+		<AssemblyName>Cumberland</AssemblyName>
+		<AssemblyVersion>0.1.0.0</AssemblyVersion>
+		<AssemblyVersion>0.2.0.0</AssemblyVersion>
+		<AssemblyVersion>0.3.0.0</AssemblyVersion>
+		<AssemblyVersion>0.4.0.0</AssemblyVersion>
+	</AssemblyInfo>
+	<Base>
+		<BaseTypeName>System.Object</BaseTypeName>
+	</Base>
+	<Interfaces />
+	<Docs>
+		<summary>A Line is comprised of a set of points which are connected to create line segments</summary>
+		<remarks>
+		</remarks>
+	</Docs>
+	<Members>
+		<Member MemberName=".ctor">
+			<MemberSignature Language="C#" Value="public Line ();" />
+			<MemberType>Constructor</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.1.0.0</AssemblyVersion>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<Parameters />
+			<Docs>
+				<summary>
+				</summary>
+				<remarks>
+				</remarks>
+			</Docs>
+		</Member>
+		<Member MemberName="CalculateBounds">
+			<MemberSignature Language="C#" Value="public Cumberland.Rectangle CalculateBounds ();" />
+			<MemberType>Method</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.1.0.0</AssemblyVersion>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<ReturnValue>
+				<ReturnType>Cumberland.Rectangle</ReturnType>
+			</ReturnValue>
+			<Parameters />
+			<Docs>
+				<summary>Calculates the bounds of the Line</summary>
+				<returns>
+				</returns>
+				<remarks>
+				</remarks>
+			</Docs>
+		</Member>
+		<Member MemberName="Points">
+			<MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Cumberland.Point&gt; Points { get; }" />
+			<MemberType>Property</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.1.0.0</AssemblyVersion>
+				<AssemblyVersion>0.2.0.0</AssemblyVersion>
+				<AssemblyVersion>0.3.0.0</AssemblyVersion>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<ReturnValue>
+				<ReturnType>System.Collections.Generic.List&lt;Cumberland.Point&gt;</ReturnType>
+			</ReturnValue>
+			<Docs>
+				<summary>A list of <see cref="T:Cumberland.Point" /> that comprise this Line</summary>
+				<value>
+				</value>
+				<remarks>
+				</remarks>
+			</Docs>
+		</Member>
+		<Member MemberName="Simplify">
+			<MemberSignature Language="C#" Value="public Cumberland.Line Simplify (double tolerance);" />
+			<MemberType>Method</MemberType>
+			<AssemblyInfo>
+				<AssemblyVersion>0.4.0.0</AssemblyVersion>
+			</AssemblyInfo>
+			<ReturnValue>
+				<ReturnType>Cumberland.Line</ReturnType>
+			</ReturnValue>
+			<Parameters>
+				<Parameter Name="tolerance" Type="System.Double" />
+			</Parameters>
+			<Docs>
+				<param name="tolerance">The tolerance in data units to simplify</param>
+				<summary>Simplify the line</summary>
+				<returns>The new simplified line</returns>
+				<remarks>This method removes points whose line segments is smaller then the specified tolerance.</remarks>
+			</Docs>
+		</Member>
+	</Members>
+</Type>

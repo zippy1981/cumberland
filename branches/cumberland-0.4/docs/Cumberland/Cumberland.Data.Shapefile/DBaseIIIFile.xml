@@ -1,0 +1,66 @@
+<Type Name="DBaseIIIFile" FullName="Cumberland.Data.Shapefile.DBaseIIIFile">
+  <TypeSignature Language="C#" Value="public class DBaseIIIFile" />
+  <AssemblyInfo>
+    <AssemblyName>Cumberland</AssemblyName>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+    <AssemblyVersion>0.3.0.0</AssemblyVersion>
+    <AssemblyVersion>0.4.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+		<BaseTypeName>System.Object</BaseTypeName>
+	</Base>
+  <Interfaces />
+  <Docs>
+    <summary>Provides acess to a Dbase III (DBF) file</summary>
+    <remarks>The Dbase III (DBF) file format is an old format for storing records of data.  It is used by the Shapefile
+    specification as its non-spatial data storage format.</remarks>
+  </Docs>
+  <Members>
+		
+		
+		
+		<Member MemberName=".ctor">
+			<MemberSignature Language="C#" Value="public DBaseIIIFile (string file);" />
+			<MemberType>Constructor</MemberType>
+			<AssemblyInfo>
+				
+				
+				
+			<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+			<Parameters><Parameter Name="file" Type="System.String" /></Parameters>
+			<Docs><param name="file">The dbf file to load</param><summary>Loads the given dbf file</summary><remarks>
+				</remarks></Docs>
+		</Member><Member MemberName=".ctor">
+			<MemberSignature Language="C#" Value="public DBaseIIIFile (string file, System.Text.Encoding encoding);" />
+			<MemberType>Constructor</MemberType>
+			<AssemblyInfo>
+				
+			<AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+			<Parameters><Parameter Name="file" Type="System.String" /><Parameter Name="encoding" Type="System.Text.Encoding" /></Parameters>
+			<Docs><param name="file">The Dbf file</param><param name="encoding">The Encoding to use when parsing strings</param><summary></summary><remarks></remarks><since version="0.3" /></Docs>
+		</Member><Member MemberName="LastUpdated">
+			<MemberSignature Language="C#" Value="public DateTime LastUpdated { get; }" />
+			<MemberType>Property</MemberType>
+			<AssemblyInfo>
+				
+				
+				
+			<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+			<ReturnValue><ReturnType>System.DateTime</ReturnType></ReturnValue>
+			<Docs><summary>The last update of this dbf file</summary><value>
+				</value><remarks>As provided in the file</remarks></Docs>
+		</Member><Member MemberName="Records">
+			<MemberSignature Language="C#" Value="public System.Data.DataTable Records { get; }" />
+			<MemberType>Property</MemberType>
+			<AssemblyInfo>
+				
+				
+				
+			<AssemblyVersion>0.1.0.0</AssemblyVersion><AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+			<ReturnValue><ReturnType>System.Data.DataTable</ReturnType></ReturnValue>
+			<Docs><summary>The records in the dbf</summary><value>
+				</value><remarks>Column names, column data types, and field records are provided from the dbf.</remarks></Docs>
+		</Member>
+	</Members>
+</Type>

@@ -1,0 +1,55 @@
+<Type Name="PolygonHoleStrategy" FullName="Cumberland.Data.SimpleFeatureAccess.PolygonHoleStrategy">
+  <TypeSignature Language="C#" Value="public enum PolygonHoleStrategy" />
+  <AssemblyInfo>
+    <AssemblyName>Cumberland</AssemblyName>
+    <AssemblyVersion>0.4.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Enum</BaseTypeName>
+  </Base>
+  <Docs>
+    <summary>Defines when to treat rings as holes</summary>
+    <remarks>Currently used when creating polygon well-known text.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="InteriorToLeft">
+      <MemberSignature Language="C#" Value="InteriorToLeft" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.4.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Cumberland.Data.SimpleFeatureAccess.PolygonHoleStrategy</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Assumes the interior of a polygon is on the left side</summary>
+      </Docs>
+    </Member>
+    <Member MemberName="InteriorToRight">
+      <MemberSignature Language="C#" Value="InteriorToRight" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.4.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Cumberland.Data.SimpleFeatureAccess.PolygonHoleStrategy</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Assumes the interior of a polygon is on the right side</summary>
+      </Docs>
+    </Member>
+    <Member MemberName="None">
+      <MemberSignature Language="C#" Value="None" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>0.4.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Cumberland.Data.SimpleFeatureAccess.PolygonHoleStrategy</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Does not create interior rings</summary>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

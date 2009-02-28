@@ -1,0 +1,37 @@
+<Type Name="LabelDecoration" FullName="Cumberland.LabelDecoration">
+  <TypeSignature Language="C#" Value="public enum LabelDecoration" />
+  <AssemblyInfo>
+    <AssemblyName>Cumberland</AssemblyName>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+    <AssemblyVersion>0.3.0.0</AssemblyVersion>
+    <AssemblyVersion>0.4.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+		<BaseTypeName>System.Enum</BaseTypeName>
+	</Base>
+  <Docs>
+    <summary>Defines the effects applied to a label</summary>
+    <remarks>
+    </remarks>
+  </Docs>
+  <Members>
+		
+		<Member MemberName="None">
+			<MemberSignature Language="C#" Value="None" />
+			<MemberType>Field</MemberType>
+			<AssemblyInfo>
+				
+			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+			<ReturnValue><ReturnType>Cumberland.LabelDecoration</ReturnType></ReturnValue>
+			<Docs><summary>Apply no effects</summary></Docs>
+		</Member><Member MemberName="Outline">
+			<MemberSignature Language="C#" Value="Outline" />
+			<MemberType>Field</MemberType>
+			<AssemblyInfo>
+				
+			<AssemblyVersion>0.2.0.0</AssemblyVersion><AssemblyVersion>0.3.0.0</AssemblyVersion><AssemblyVersion>0.4.0.0</AssemblyVersion></AssemblyInfo>
+			<ReturnValue><ReturnType>Cumberland.LabelDecoration</ReturnType></ReturnValue>
+			<Docs><summary>Apply an outline effect</summary></Docs>
+		</Member>
+	</Members>
+</Type>

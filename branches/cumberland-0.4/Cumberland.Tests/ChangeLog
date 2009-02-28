@@ -1,0 +1,25 @@
+2009-02-27  Scott Ellington  <scott.ellington@gmail.com>
+
+	* WellKnownBinaryTests.cs: add parse linestring
+
+2009-02-27  Scott Ellington  <scott.ellington@gmail.com>
+
+	* AssemblyInfo.cs: bump version
+
+2009-02-24  Scott Ellington  <scott.ellington@gmail.com>
+
+	* maps/postgis.xml:
+	* WellKnownTextTests.cs:
+	* WellKnownBinaryTests.cs:
+	* Cumberland.Tests.csproj: add WKB parser
+
+2009-02-16  Scott Ellington  <scott.ellington@gmail.com>
+
+	* MapSerializerTests.cs: use generic type methods
+
+2009-02-10  Scott Ellington  <scott.ellington@gmail.com>
+
+	* ChangeLog: add ChangeLogs
+
+	* Cumberland.Tests.csproj: md doin stuff
+
