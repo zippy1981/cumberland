@@ -133,8 +133,11 @@ namespace Cumberland.Drawing
 				// so let's do as much of this at once:
 				// calculate map rectangle based on image width/height
 				Rectangle envelope = extents.Clone();
+				
 				// set aspect ratio to image
-				envelope.AspectRatioOfWidth = width / height;
+				envelope.AspectRatioOfWidth = Convert.ToDouble(width) / 
+					Convert.ToDouble(height);
+				
 				// get the scale
 				double scale = Convert.ToDouble(envelope.Width) / 
 										 Convert.ToDouble(width);
