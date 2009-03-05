@@ -1,3 +1,7 @@
+2009-03-05  Scott Ellington  <scott.ellington@gmail.com>
+
+	* Drawing/MapDrawer.cs: fix #8 really
+
 2009-02-27  Scott Ellington  <scott.ellington@gmail.com>
 
 	* Data/SimpleFeatureAccess/WellKnownBinary.cs: add parse
