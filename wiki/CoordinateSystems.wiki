@@ -13,7 +13,9 @@ Internally, cumberland uses the [http://trac.osgeo.org/proj/ Proj.4] C Library f
 
 Mac and Linux users will need to install the proj.4 library.  Most Linux distributions provide this directly.  For Mac, you can use [http://www.finkproject.org/ Fink].  Cumberland has been configured to run the Fink installation.
 
-For Windows users, cumberland comes with a build of proj.4.
+For Window users, cumberland comes with a build of proj.4.
+
+'It has been noted that this build of proj.4 will not work out of the box on Vista as it lacks msvcr71.dll by default.  This can be downloaded.  XP should work fine.'
 
 = A Coordinate System Primer =
 
