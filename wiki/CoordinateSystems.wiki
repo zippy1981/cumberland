@@ -15,7 +15,7 @@ Mac and Linux users will need to install the proj.4 library.  Most Linux distrib
 
 For Window users, cumberland comes with a build of proj.4.
 
-'It has been noted that this build of proj.4 will not work out of the box on Vista as it lacks msvcr71.dll by default.  This can be downloaded.  XP should work fine.'
+_It has been noted that this build of proj.4 will not work out of the box on Vista as it lacks msvcr71.dll by default.  This can be downloaded.  XP should work fine._
 
 = A Coordinate System Primer =
 
