@@ -134,4 +134,4 @@ The style element is covered thoroughly in the [BasicSymbology basic symbology] 
 
 That's the basics of the map xml format.  Several example maps are stored in the source:
 
-[http://code.google.com/p/cumberland/source/browse/#svn/branches/cumberland-0.3/Cumberland.Tests/maps]
+[http://code.google.com/p/cumberland/source/browse/#svn/trunk/cumberland/Cumberland.Tests/maps]
