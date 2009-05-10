@@ -98,7 +98,7 @@ namespace Cumberland.Data
 				
 				foreach (Feature f in GetFeatures())
 				{
-					Rectangle.Union(r, f.CalculateBounds());
+					r = Rectangle.Union(r, f.CalculateBounds());
 				}
 
 				return r;
