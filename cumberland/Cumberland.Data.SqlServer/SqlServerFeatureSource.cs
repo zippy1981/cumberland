@@ -210,7 +210,7 @@ namespace Cumberland.Data.SqlServer
 				string sql = "SELECT COLUMN_NAME, DATA_TYPE " + 
 					"FROM INFORMATION_SCHEMA.COLUMNS " +
 						string.Format("WHERE TABLE_NAME = '{0}'", TableName) + 
-						" AND DATA_TYPE = 'geometry' OR DATA_TYPE = 'geography'";
+						" AND (DATA_TYPE = 'geometry' OR DATA_TYPE = 'geography')";
 				
 				using (SqlCommand comm = new SqlCommand(sql, conn))
 				{
