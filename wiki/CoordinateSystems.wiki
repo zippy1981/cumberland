@@ -28,7 +28,7 @@ Now, with all the cartographers in all the world projecting their data in their 
 
 = Finding our SRID = 
 
-If you are not sure what coordinate system your data is, you should check with your data provider.  If your data is in a Shapefile, most times it will come with file with extension 'prj'.  This is its projection in [http://en.wikipedia.org/wiki/Well-known_text Well-Known Text] format.
+If you are not sure what coordinate system your data is, you should check with your data provider.  If your data is in a Shapefile, most times it will come with a file with extension 'prj'.  This is its projection in [http://en.wikipedia.org/wiki/Well-known_text Well-Known Text] format.
 
 For example, here is one from some data I have:
 
