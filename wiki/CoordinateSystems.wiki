@@ -15,7 +15,7 @@ Mac and Linux users will need to install the proj.4 library.  Most Linux distrib
 
 For Window users, cumberland comes with a build of proj.4.
 
-_There have been reports that this build of proj.4 will not work out of the box on Vista because it lacks msvcr71.dll by default.  This dll can be downloaded on the internet and it will work.  XP should work fine though._
+_Note: There have been reports that this build of proj.4 will not work out of the box on Vista because it lacks msvcr71.dll by default.  This dll can be downloaded on the internet and it will work.  XP should work fine though._
 
 = A Coordinate System Primer =
 
@@ -24,7 +24,7 @@ a projection that causes the least distortion in the area they want to map.
 
 Additionally, the Earth is not a sphere.  It is more of an ellipsoid.  When dealing with coordinate systems, it's shape must be taken into account or there is more distortion.  So, we need a coordinate frame, or datum, that describes the Earth as accurately as possible.  The latest of these is WGS84 (World Geodetic System).  It is used by the Global Positioning System (GPS) and many others.  Data may or may not be projected, but it should always have a datum.
 
-Now, with all the cartographers in all the world projecting their data in their own local way, shouldn't there be a way to coordinate this so data can be transferred with ease?  Well there is, actually there are multiple, but we'll refer to the [http://www.epsg.org/ EPSG] which provides a set of spatial reference ids (SRIDs) that can we can use to lookup via Proj.4 to acquire our coordinate system.
+Now, with all the cartographers in all the world projecting their data in their own local way, shouldn't there be a way to coordinate this so data can be transferred with ease?  Well there is, actually there are multiple, but we'll refer to the [http://www.epsg.org/ EPSG] which provides a set of spatial reference ids (SRIDs) that we can use to lookup via Proj.4 to acquire our coordinate system.
 
 = Finding our SRID = 
 
