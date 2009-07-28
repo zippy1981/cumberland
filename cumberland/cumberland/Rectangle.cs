@@ -204,7 +204,7 @@ namespace Cumberland
 		
 		public override string ToString ()
 		{
-			return string.Format("{{minx:{0}, miny:{1} maxx:{2} maxy:{3}}}", min.X, min.Y, max.X, max.Y);
+			return string.Format("{{minx:{0} miny:{1} maxx:{2} maxy:{3}}}", min.X, min.Y, max.X, max.Y);
 		}
 		
 #endregion
