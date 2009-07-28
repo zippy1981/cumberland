@@ -58,7 +58,7 @@ Global
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		description = A mapping framework for .NET/Mono
-		version = 0.4
+		version = 0.4.2
 		StartupItem = cumberland\Cumberland.csproj
 		Policies = $0
 		$0.ChangeLogPolicy = $1

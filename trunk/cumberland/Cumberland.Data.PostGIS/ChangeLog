@@ -1,5 +1,9 @@
 2009-07-28  Scott Ellington  <scott.ellington@gmail.com>
 
+	* AssemblyInfo.cs: bump version to 0.4.2
+
+2009-07-28  Scott Ellington  <scott.ellington@gmail.com>
+
 	* Cumberland.Data.PostGIS.csproj: MD changed these
 
 2009-02-27  Scott Ellington  <scott.ellington@gmail.com>

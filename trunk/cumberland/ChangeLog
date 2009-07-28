@@ -1,5 +1,9 @@
 2009-07-28  Scott Ellington  <scott.ellington@gmail.com>
 
+	* cumberland.sln: bump version to 0.4.2
+
+2009-07-28  Scott Ellington  <scott.ellington@gmail.com>
+
 	* cumberland.sln: MD changed these
 
 	* docs/deploy/cumberland-deploy.doc: old changes
