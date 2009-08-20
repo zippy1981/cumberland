@@ -30,4 +30,4 @@ Options:
 = Limitations =
 
   * This is alpha level software. I have loaded some complex shapefiles up to 20MB with it, but it could bomb on yours.
-  * The Shapefile loader only supports Point, Polyline, Polygon, and there associated *M types (measurement value is ignored)
+  * The Shapefile loader only supports Point, Polyline, Polygon, and there associated `*`M types (measurement value is ignored)
