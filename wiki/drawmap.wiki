@@ -7,7 +7,7 @@ Drawmap is a command line tool that takes a [mapXmlFormat map xml file] as an ar
 = Usage =
 
 {{{
-Usage: [mono] Cumberland.DrawMap.exe [OPTIONS]+ "path to map file" 
+Usage: [mono]  drawmap.exe [OPTIONS]+ "path to map file" 
 Draws a map
 
 example: mono Cumberland.DrawMap.exe -o=my.png /path/to/map 
