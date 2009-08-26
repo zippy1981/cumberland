@@ -191,16 +191,16 @@ namespace Cumberland.Projection
 		
         public Point Deproject(Point point)
         {
-            UV uv = pj_fwd(new UV(point.X * DegreesToRadians, point.Y * DegreesToRadians), projPJ);
+			UV uv = pj_inv(new UV(point.X, point.Y), projPJ);
 			
-			return new Point(uv.U, uv.V);
+			return new Point(uv.U / DegreesToRadians, uv.V / DegreesToRadians);
         }
 
         public Point Project(Point point)
         {
-			UV uv = pj_inv(new UV(point.X, point.Y), projPJ);
+            UV uv = pj_fwd(new UV(point.X * DegreesToRadians, point.Y * DegreesToRadians), projPJ);
 			
-			return new Point(uv.U / DegreesToRadians, uv.V / DegreesToRadians);
+			return new Point(uv.U, uv.V);
         }
 
 		public Point Transform(ProjFourWrapper destinationProj, Point point)
