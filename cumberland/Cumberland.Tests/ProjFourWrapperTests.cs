@@ -56,11 +56,11 @@ namespace Cumberland.Tests
         }
 
 		[Test]
-		public void TestDeproject()
+		public void TestProject()
 		{
 			using (ProjFourWrapper proj = new ProjFourWrapper("+init=epsg:2236"))
 			{
-				Point pt = proj.Deproject(new Point(-81, 26));
+				Point pt = proj.Project(new Point(-81, 26));
 
 				// used proj command line to acquire this
 				CompareAlbersPoints(new Point(656166.67, 605690.54), pt);				
@@ -68,11 +68,11 @@ namespace Cumberland.Tests
 		}
 		
 		[Test]
-		public void TestProject()
+		public void TestDeproject()
 		{
 			using (ProjFourWrapper proj = new ProjFourWrapper("+init=epsg:2236"))
 			{
-				Point pt = proj.Project(new Point(656166.67, 605690.54));
+				Point pt = proj.Deproject(new Point(656166.67, 605690.54));
 				
 				// used proj command line to acquire this
 				CompareLLPoints(new Point(-81, 26), pt);				
