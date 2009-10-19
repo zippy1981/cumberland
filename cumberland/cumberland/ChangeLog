@@ -1,3 +1,8 @@
+2009-10-19  scottell  <${AuthorEmail}>
+
+	* Data/Shapefile/Shapefile.cs: fix bug which doesn't reload
+	features (allow changes)
+
 2009-08-26  Scott Ellington  <scott.ellington@gmail.com>
 
 	* Projection/ProjFourWrapper.cs: Project and Deproject were

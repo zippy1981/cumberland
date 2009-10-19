@@ -464,9 +464,7 @@ namespace Cumberland.Data.Shapefile
 			if (!isShapefileLoaded) LoadShapefile();
 
 			// either or both of the fields have been required and are not already loaded
-			if (((themeField != null && themeField != currentThemeField) || 
-			     (labelField != null && labelField != currentLabelField) &&
-			    !isDbfLoaded))
+			if (themeField != null || labelField != null)
 			{
 				LoadDbf();
 				
