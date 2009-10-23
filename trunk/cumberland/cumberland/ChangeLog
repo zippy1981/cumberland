@@ -1,3 +1,9 @@
+2009-10-23  scottell  <${AuthorEmail}>
+
+	* Data/Shapefile/DBaseIIIFile.cs: don't test for termination
+	byte in dbf file, as files from qgis and postgis don't seem to
+	have it
+
 2009-10-19  scottell  <${AuthorEmail}>
 
 	* Data/Shapefile/Shapefile.cs: fix bug which doesn't reload
