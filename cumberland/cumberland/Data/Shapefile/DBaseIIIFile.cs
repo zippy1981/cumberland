@@ -74,10 +74,10 @@ namespace Cumberland.Data.Shapefile
 				
 				ReadTableRecords(br, cols);
 
-				if (br.ReadByte() != 26)
-				{
-					throw new FormatException("DBF (dBase) file not properly terminated");
-				}
+//				if (br.ReadByte() != 26)
+//				{
+//					throw new FormatException("DBF (dBase) file not properly terminated");
+//				}
 			}
 		}	
 		
