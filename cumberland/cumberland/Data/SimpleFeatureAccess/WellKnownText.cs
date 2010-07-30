@@ -277,7 +277,12 @@ namespace Cumberland.Data.SimpleFeatureAccess
 				{
 					polys[idx].Append(",");
 				}
-				
+
+                if (idx < 0)
+                {
+                    throw new FormatException("Exterior ring direction does not match polygon hole strategy");
+                }
+
 				polys[idx].Append("(");
 				
 				for (int jj=0; jj <ring.Points.Count; jj++)
