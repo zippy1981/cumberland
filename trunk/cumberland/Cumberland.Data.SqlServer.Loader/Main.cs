@@ -299,7 +299,8 @@ namespace Cumberland.Data.SqlServer.Loader
 					
 					if (!useGeography)
 					{
-					sql.AppendFormat("BOUNDING_BOX = (xmin={0}, ymin={1}, xmax={2}, ymax={3}),", 
+					sql.AppendFormat(System.Globalization.CultureInfo.InvariantCulture,
+                                     "BOUNDING_BOX = (xmin={0}, ymin={1}, xmax={2}, ymax={3}),", 
 					                 shp.Extents.Min.X,
 					                 shp.Extents.Min.Y,
 					                 shp.Extents.Max.X,
@@ -309,6 +310,7 @@ namespace Cumberland.Data.SqlServer.Loader
 					sql.Append(" GRIDS = (LEVEL_1 = LOW, LEVEL_2 = LOW, LEVEL_3 = HIGH, LEVEL_4 = HIGH), CELLS_PER_OBJECT = 16)");
 					
 					command = new SqlCommand(sql.ToString(), connection);
+                    command.CommandTimeout = 0; // no timeout 
 					command.ExecuteNonQuery();
 				}
 				
