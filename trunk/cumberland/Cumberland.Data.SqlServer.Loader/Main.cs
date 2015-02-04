@@ -133,9 +133,8 @@ namespace Cumberland.Data.SqlServer.Loader
 			
 			Shapefile.Shapefile shp = new Shapefile.Shapefile(path);
 
-			DBaseIIIFile dbf = new DBaseIIIFile(Path.GetDirectoryName(path) + 
-			                                    Path.DirectorySeparatorChar + 
-			                                    Path.GetFileNameWithoutExtension(path) + 
+			DBaseIIIFile dbf = new DBaseIIIFile(Path.Combine(Path.GetDirectoryName(path), 
+			                                    Path.GetFileNameWithoutExtension(path)) + 
 			                                    ".dbf",
                                                 encoding);
 			#endregion		
