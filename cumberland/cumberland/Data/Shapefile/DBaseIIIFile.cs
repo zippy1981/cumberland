@@ -48,6 +48,7 @@ namespace Cumberland.Data.Shapefile
 		}
 		
 		int recordCount;
+	    int colCount;
 		
 		DataTable records;
 
@@ -71,6 +72,7 @@ namespace Cumberland.Data.Shapefile
 				BinaryReader br = new BinaryReader(fs);
 
 				List<FieldDescriptor> cols = ReadTableFileHeader(br);
+			    colCount = cols.Count;
 				
 				ReadTableRecords(br, cols);
 
@@ -173,7 +175,7 @@ namespace Cumberland.Data.Shapefile
 				DataRow row = records.NewRow();
 
 				// iterate columns
-				for (int jj=0; jj<cols.Count; jj++)
+                for (int jj=0; jj<colCount; jj++)
 				{
 					FieldDescriptor fd = cols[jj];
 
