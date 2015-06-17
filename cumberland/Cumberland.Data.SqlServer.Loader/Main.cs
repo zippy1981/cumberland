@@ -143,8 +143,17 @@ namespace Cumberland.Data.SqlServer.Loader
 
 			using (SqlConnection connection = new SqlConnection(connectionString))
 			{
-				connection.Open();
-				StringBuilder sql = new StringBuilder();
+			    try
+			    {
+			        connection.Open();
+			    }
+			    catch (SqlException ex)
+			    {
+                    Console.Error.WriteLine("Error connecting to {0}. Exception details:", connectionString);
+			        Console.Error.WriteLine(ex.Message);
+                    Environment.Exit(1);
+			    }
+			    StringBuilder sql = new StringBuilder();
 				SqlCommand command = null;
 				
 				if (!append)

@@ -1,0 +1,6 @@
+*.suo
+*user
+bin/
+obj/
+Backup/
+Upgradelog.htm
