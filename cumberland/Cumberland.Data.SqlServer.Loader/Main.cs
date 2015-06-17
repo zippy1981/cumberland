@@ -26,9 +26,10 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
-
+using System.Threading;
 using Cumberland;
 using Cumberland.Data.Shapefile;
 using Cumberland.Data.SimpleFeatureAccess;
@@ -52,8 +53,10 @@ namespace Cumberland.Data.SqlServer.Loader
 			bool showHelp = false;
 			bool createIndex = false;
 			bool useGeography = false;
-			bool append = false;
-			bool showVersion = false;
+		    bool dropTable = false;
+            bool append = false;
+            bool verbose = false;
+            bool showVersion = false;
             Encoding encoding = null;
 			
 			// set up parameters
@@ -75,10 +78,13 @@ namespace Cumberland.Data.SqlServer.Loader
 			            delegate (string v) { createIndex = v != null; });
 			options.Add("l|latlong",
 			            "Add spatial data as geography type",
-			            delegate (string v) { useGeography = v != null; });
-			options.Add("a|append",
-			            "Append data.  If not specified, table will be created",
-			            delegate (string v) { append = v != null; });
+                        delegate(string v) { useGeography = v != null; });
+            options.Add("a|append",
+                        "Append data.  If not specified, table will be created",
+                        delegate(string v) { append = v != null; });
+            options.Add("dropTable",
+                        "Drop table if it exists. Mutually exclusive to -a|--append.",
+                        delegate(string d) { dropTable = d != null; });
 			options.Add("h|help",  "show this message and exit",
 			            delegate (string v) { showHelp = v!= null; });
 			options.Add("v|version",
@@ -87,6 +93,9 @@ namespace Cumberland.Data.SqlServer.Loader
             options.Add("e|encoding=",
                         "Specifies the encoding to use for reading the DBF file (e.g. \"utf-32\")",
                         delegate(string v) { encoding = Encoding.GetEncoding(v); });
+            options.Add("verbose",
+                        "Verbose output",
+                        delegate(string v) { verbose = v != null; });
 		
 			// parse the command line args
 			List<string> rest = options.Parse(args);
@@ -125,27 +134,41 @@ namespace Cumberland.Data.SqlServer.Loader
 		    {
 				// use the shapefile name as table name if none provided
 				tableName = Path.GetFileNameWithoutExtension(path);
+                if (verbose) Console.WriteLine("Table name not specified. Defaulting to {0}", tableName);
 			}
 			
 			#endregion
 			
 			#region load shp and dbf
 			
-			Shapefile.Shapefile shp = new Shapefile.Shapefile(path);
+            var tmr = new Stopwatch();
+            if(verbose) Console.Write("Opening {0} . . .", path);
+            tmr.Start();
+            Shapefile.Shapefile shp = new Shapefile.Shapefile(path);
+            if(verbose) Console.WriteLine("Done ({0})", tmr.Elapsed);
 
-			DBaseIIIFile dbf = new DBaseIIIFile(Path.Combine(Path.GetDirectoryName(path), 
-			                                    Path.GetFileNameWithoutExtension(path)) + 
-			                                    ".dbf",
-                                                encoding);
-			#endregion		
+		    var pathDbf = Path.Combine(Path.GetDirectoryName(path),
+		        Path.GetFileNameWithoutExtension(path)) +
+		                  ".dbf";
+            if (verbose) Console.Write("Opening {0} . . .", pathDbf);
+            tmr.Reset();
+            tmr.Start();
+            DBaseIIIFile dbf = new DBaseIIIFile(pathDbf, encoding);
+            if (verbose) Console.WriteLine("Done ({0})", tmr.Elapsed);
+            tmr.Stop();
+            #endregion		
 
-			#region create table
+			#region drop/create table
 
 			using (SqlConnection connection = new SqlConnection(connectionString))
 			{
 			    try
 			    {
-			        connection.Open();
+                    if (verbose) Console.Write("Connection to {0} . . .", connection.Database);
+			        tmr.Start();
+                    connection.Open();
+                    if(verbose) Console.WriteLine("Complete ({0})", tmr.Elapsed);
+                    tmr.Stop();
 			    }
 			    catch (SqlException ex)
 			    {
@@ -154,11 +177,29 @@ namespace Cumberland.Data.SqlServer.Loader
                     Environment.Exit(1);
 			    }
 			    StringBuilder sql = new StringBuilder();
-				SqlCommand command = null;
 				
 				if (!append)
 				{
-					sql.AppendFormat("create table {0} (", tableName);
+				    if (dropTable)
+                    {
+                        if (verbose) Console.Write("Dropping table {0} . . . ", tableName);
+                        sql.AppendFormat(
+@"IF OBJECT_ID('{0}', 'U') IS NOT NULL
+BEGIN
+    DROP TABLE [{0}]; 
+END;"
+                            , tableName);
+                        using (var cmd = connection.CreateCommand())
+                        {
+                            cmd.CommandText = sql.ToString();
+                            cmd.ExecuteNonQuery();
+                        }
+                        
+				    }
+
+                    if (verbose) Console.Write("Creating table {0} . . . ", tableName);
+					sql = new StringBuilder();
+                    sql.AppendFormat("create table {0} (", tableName);
 					sql.AppendFormat("{0} int identity(1,1) not null", idColumn);
 					
 					foreach (DataColumn dc in dbf.Records.Columns)
@@ -189,9 +230,20 @@ namespace Cumberland.Data.SqlServer.Loader
 					sql.AppendFormat("CONSTRAINT PK_{0} PRIMARY KEY CLUSTERED ({1} ASC) ON [PRIMARY]", tableName, idColumn);
 					
 					sql.Append(")");
-					
-					command = new SqlCommand(sql.ToString(), connection);
-					command.ExecuteNonQuery();
+
+				    using (var command = new SqlCommand(sql.ToString(), connection))
+				    {
+				        try
+				        {
+				            command.ExecuteNonQuery();
+				        }
+				        catch (SqlException ex)
+				        {
+                            Console.Error.WriteLine(ex.Message);
+                            Environment.Exit(2);
+				        }
+				    }
+				    if (verbose) Console.WriteLine("Done");
 				}
 
 				#endregion
@@ -201,6 +253,10 @@ namespace Cumberland.Data.SqlServer.Loader
 				int idx = 0;
 				foreach (Feature f in shp.GetFeatures())
 		        {
+		            if (verbose && idx%100 == 0)
+		            {
+		                Console.WriteLine("Inserting shape {0}", idx);
+		            }
 					sql = new StringBuilder();
 					sql.AppendFormat("insert into {0} values (", tableName);
 	
@@ -289,9 +345,19 @@ namespace Cumberland.Data.SqlServer.Loader
 					sql.Append(")");
 					
 					idx++;
-					
-					command = new SqlCommand(sql.ToString(), connection);
-					command.ExecuteNonQuery();
+
+		            using (var command = new SqlCommand(sql.ToString(), connection))
+		            {
+		                try
+		                {
+		                    command.ExecuteNonQuery();
+		                }
+		                catch (SqlException ex)
+		                {
+		                    Console.Error.WriteLine(ex.Message);
+                            Environment.Exit(2);
+		                }
+		            }
 				}
 				
 				#endregion
@@ -316,10 +382,11 @@ namespace Cumberland.Data.SqlServer.Loader
 					}
 					
 					sql.Append(" GRIDS = (LEVEL_1 = LOW, LEVEL_2 = LOW, LEVEL_3 = HIGH, LEVEL_4 = HIGH), CELLS_PER_OBJECT = 16)");
-					
-					command = new SqlCommand(sql.ToString(), connection);
-                    command.CommandTimeout = 0; // no timeout 
-					command.ExecuteNonQuery();
+				    using (var command = new SqlCommand(sql.ToString(), connection))
+				    {
+				        command.CommandTimeout = 0; // no timeout 
+				        command.ExecuteNonQuery();
+				    }
 				}
 				
 				#endregion
