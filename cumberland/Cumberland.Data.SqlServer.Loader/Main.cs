@@ -366,6 +366,7 @@ END;"
 				
 				if (createIndex)
 				{
+                    if (verbose) Console.WriteLine("Creating Spatial index");
 					sql = new StringBuilder();
 					sql.AppendFormat("CREATE SPATIAL INDEX {0}_sidx", tableName);
 					sql.AppendFormat(" ON {0}({1})", tableName, geomColumn);
@@ -388,8 +389,9 @@ END;"
 				        command.ExecuteNonQuery();
 				    }
 				}
-				
-				#endregion
+			    else if (verbose) Console.WriteLine("Skipping spatial index creation");
+
+			    #endregion
 			}
 		}
 		
