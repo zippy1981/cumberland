@@ -28,9 +28,10 @@ using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using Microsoft.SqlServer.Types;
 using System.Text;
-using System.Threading;
-using Cumberland;
+
 using Cumberland.Data.Shapefile;
 using Cumberland.Data.SimpleFeatureAccess;
 
@@ -45,8 +46,7 @@ namespace Cumberland.Data.SqlServer.Loader
 			#region handle parameters and configuration
 			
 			// application variables
-			string connectionString = null;
-			int srid = 0;
+		    int srid = 0;
 			string idColumn = "gid";
 			string geomColumn = "the_geom";
 			string tableName = null;
@@ -60,50 +60,44 @@ namespace Cumberland.Data.SqlServer.Loader
             Encoding encoding = null;
 			
 			// set up parameters
-			OptionSet options = new OptionSet();
-			options.Add("s|srid=",
-			            "The Spatial Reference ID (SRID).  If not specified it defaults to -1.",
-			            delegate (string v) { srid = int.Parse(v); });
-			options.Add("g|geometry_column=",
-			            "The name of the geometry column",
-			            delegate (string v) { geomColumn = v; });
-			options.Add("t|table_name=",
-			            "The table name to use",
-			            delegate (string v) { tableName = v; });
-			options.Add("k|key_column=",
-			            "The name of the identity column to create for a primary key",
-			            delegate (string v) { idColumn = v; });
-			options.Add("i|index",
-			            "Create a spatial index",
-			            delegate (string v) { createIndex = v != null; });
-			options.Add("l|latlong",
-			            "Add spatial data as geography type",
-                        delegate(string v) { useGeography = v != null; });
-            options.Add("a|append",
-                        "Append data.  If not specified, table will be created",
-                        delegate(string v) { append = v != null; });
-            options.Add("dropTable",
-                        "Drop table if it exists. Mutually exclusive to -a|--append.",
-                        delegate(string d) { dropTable = d != null; });
-			options.Add("h|help",  "show this message and exit",
-			            delegate (string v) { showHelp = v!= null; });
-			options.Add("v|version",
-			            "shows the version and exits", 
-			            delegate (string v) { showVersion = v != null; });
-            options.Add("e|encoding=",
-                        "Specifies the encoding to use for reading the DBF file (e.g. \"utf-32\")",
-                        delegate(string v) { encoding = Encoding.GetEncoding(v); });
-            options.Add("verbose",
-                        "Verbose output",
-                        delegate(string v) { verbose = v != null; });
-		
-			// parse the command line args
+		    OptionSet options = new OptionSet
+		    {
+		        {
+		            "s|srid=", "The Spatial Reference ID (SRID).  If not specified it defaults to -1.",
+		            delegate(string v) { srid = int.Parse(v); }
+		        },
+		        {"g|geometry_column=", "The name of the geometry column", delegate(string v) { geomColumn = v; }},
+		        {"t|table_name=", "The table name to use", delegate(string v) { tableName = v; }},
+		        {
+		            "k|key_column=", "The name of the identity column to create for a primary key",
+		            delegate(string v) { idColumn = v; }
+		        },
+		        {"i|index", "Create a spatial index", delegate(string v) { createIndex = v != null; }},
+		        {"l|latlong", "Add spatial data as geography type", delegate(string v) { useGeography = v != null; }},
+		        {
+		            "a|append", "Append data.  If not specified, table will be created",
+		            delegate(string v) { append = v != null; }
+		        },
+		        {
+		            "dropTable", "Drop table if it exists. Mutually exclusive to -a|--append.",
+		            delegate(string d) { dropTable = d != null; }
+		        },
+		        {"h|help", "show this message and exit", delegate(string v) { showHelp = v != null; }},
+		        {"v|version", "shows the version and exits", delegate(string v) { showVersion = v != null; }},
+		        {
+		            "e|encoding=", "Specifies the encoding to use for reading the DBF file (e.g. \"utf-32\")",
+		            delegate(string v) { encoding = Encoding.GetEncoding(v); }
+		        },
+		        {"verbose", "Verbose output", delegate(string v) { verbose = v != null; }}
+		    };
+
+		    // parse the command line args
 			List<string> rest = options.Parse(args);
 
 			if (showVersion)
 			{
-				System.Console.WriteLine("Version " + 
-				                         System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString());
+				Console.WriteLine("Version " + 
+				                         System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);
 				return;
 			}
 			
@@ -115,19 +109,19 @@ namespace Cumberland.Data.SqlServer.Loader
 
 			if (rest.Count == 0)
 			{
-				System.Console.WriteLine("Error: A connection string is required");
+				Console.WriteLine("Error: A connection string is required");
 				ShowHelp(options);
 				return;
 			}
 			
 			if (rest.Count == 1)
 			{
-				System.Console.WriteLine("Error: No path to shapefile provided");
+				Console.WriteLine("Error: No path to shapefile provided");
 				ShowHelp(options);
 				return;
 			}
 			
-			connectionString = rest[0];
+			var connectionString = rest[0];
 			string path = rest[1];
 			
 			if (string.IsNullOrEmpty(tableName))
@@ -244,123 +238,91 @@ END;"
 				        }
 				    }
 				    if (verbose) Console.WriteLine("Done");
-				}
+                }
+            #endregion
 
-				#endregion
-				
-				#region insert rows
-				
-				int idx = 0;
-				foreach (Feature f in shp.GetFeatures())
-		        {
-		            if (verbose && idx%100 == 0)
-		            {
-		                Console.WriteLine("Inserting shape {0}", idx);
-		            }
-					sql = new StringBuilder();
-					sql.AppendFormat("insert into {0} values (", tableName);
-	
-					for (int ii=0; ii < dbf.Records.Columns.Count; ii++)
-					{
-						DataColumn dc = dbf.Records.Columns[ii];
-						object field = dbf.Records.Rows[idx][ii];
-						
-						if (dc.DataType == typeof(DateTime))
-					    {
-                            if (field is DBNull)
-                            {
-                                sql.Append(SqlDateTime.Null);
-                            }
-                            else
-                            {
-                                sql.AppendFormat("CAST('{0}' AS date)",
-                                    ((DateTime)field).ToShortDateString());
-                            }
-						}
-						else if (dc.DataType == typeof(double))
-						{
-                            if (field is DBNull)
-                            {
-                                sql.Append(SqlDouble.Null);
-                            }
-                            else
-                            {
-                                sql.Append(field.ToString());
-                            }
-						}
-					    else if (dc.DataType == typeof(bool))
-						{
-                            if (field is DBNull)
-                            {
-                                sql.Append(SqlBinary.Null);
-                            }
-                            else
-                            {
-                                sql.AppendFormat("{0}", ((bool)field) ? 1 : 0);
-                            }
-						}
-						else
-						{
-                            if (field is DBNull)
-                            {
-                                sql.Append(SqlString.Null);
-                            }
-                            else
-                            {
-                                sql.AppendFormat("'{0}'", field.ToString().Replace("'", "''"));
-                            }
-						}
-						
-						sql.Append(", ");
-					}
-					
-					string wkt = string.Empty;
-					if (shp.SourceFeatureType == FeatureType.Polygon)
-					{
-						Polygon polygon = f as Polygon;
+                using (var command = connection.CreateCommand())
+			    {
+			        var columnList = (from DataColumn column in dbf.Records.Columns select column.ColumnName).ToList();
+			        columnList.Add(geomColumn);
+			        sql = new StringBuilder();
+			        sql.AppendFormat("insert into {0} ({1}) values (", tableName, string.Join(", ", columnList));
+                    foreach (DataColumn dc in dbf.Records.Columns)
+			        {
+			            sql.AppendFormat("@{0}, ", dc.ColumnName);
+			            command.Parameters.Add(string.Format("@{0}", dc.ColumnName), dc.DataType);
+			        }
 
-						// Sql Server 2008 ring order is reverse of shapefiles
-						// http://blogs.msdn.com/edkatibah/archive/2008/08/19/working-with-invalid-data-and-the-sql-server-2008-geography-data-type-part-1b.aspx
-						foreach (Ring r in polygon.Rings)
-						{
-							r.Points.Reverse();
-						}
-						
-						wkt = WellKnownText.CreateFromPolygon(polygon, PolygonHoleStrategy.InteriorToLeft);
-					}
-					else if (shp.SourceFeatureType == FeatureType.Point)
-					{
-						wkt = WellKnownText.CreateFromPoint(f as Point);
-					}
-					else
-					{
-						wkt = WellKnownText.CreateFromPolyLine(f as PolyLine);
-					}
-					
-					sql.AppendFormat("{2}::STGeomFromText('{0}', {1})", 
-					                 wkt, 
-					                 srid,
-					                 useGeography ? "geography" : "geometry");
-	
-					sql.Append(")");
-					
-					idx++;
+                    sql.AppendFormat("@{0});", geomColumn);
+                    command.CommandText = sql.ToString();
+                    var geoParam = new SqlParameter(string.Format("@{0}", geomColumn), SqlDbType.Udt);
+                    geoParam.UdtTypeName = useGeography? "geography" : "geometry";
+                    command.Parameters.Add(geoParam);
 
-		            using (var command = new SqlCommand(sql.ToString(), connection))
-		            {
-		                try
-		                {
-		                    command.ExecuteNonQuery();
-		                }
-		                catch (SqlException ex)
-		                {
-		                    Console.Error.WriteLine(ex.Message);
-                            Environment.Exit(2);
-		                }
-		            }
-				}
-				
-				#endregion
+			        #region insert rows
+
+			        int idx = 0;
+
+			        foreach (Feature f in shp.GetFeatures())
+			        {
+			            if (verbose && idx%100 == 0)
+			            {
+			                Console.WriteLine("Inserting shape {0}", idx);
+			            }
+
+			            foreach (DataColumn dc in dbf.Records.Columns)
+                        {
+                            object field = dbf.Records.Rows[idx][dc.ColumnName];
+                            command.Parameters["@" + dc.ColumnName].Value = field;
+			            }
+
+			            string wkt;
+			            if (shp.SourceFeatureType == FeatureType.Polygon)
+			            {
+			                var polygon = (Polygon) f;
+
+			                // Sql Server 2008 ring order is reverse of shapefiles
+			                // http://blogs.msdn.com/edkatibah/archive/2008/08/19/working-with-invalid-data-and-the-sql-server-2008-geography-data-type-part-1b.aspx
+			                foreach (Ring r in polygon.Rings)
+			                {
+			                    r.Points.Reverse();
+			                }
+
+			                wkt = WellKnownText.CreateFromPolygon(polygon, PolygonHoleStrategy.InteriorToLeft);
+			            }
+			            else if (shp.SourceFeatureType == FeatureType.Point)
+			            {
+			                wkt = WellKnownText.CreateFromPoint(f as Point);
+			            }
+			            else
+			            {
+			                wkt = WellKnownText.CreateFromPolyLine(f as PolyLine);
+			            }
+
+			            if (useGeography)
+			            {
+                            command.Parameters["@" + geomColumn].Value = SqlGeography.STGeomFromText(new SqlChars(wkt), srid);
+			            }
+			            else
+			            {
+                            command.Parameters["@" + geomColumn].Value = SqlGeometry.STGeomFromText(new SqlChars(wkt), srid);
+			            }
+
+			            idx++;
+
+			            try
+			            {
+			                command.ExecuteNonQuery();
+			            }
+			            catch (SqlException ex)
+			            {
+			                Console.Error.WriteLine(ex.Message);
+			                Environment.Exit(2);
+			            }
+			        }
+			    }
+
+			    #endregion
 				
 				#region create spatial index
 				
