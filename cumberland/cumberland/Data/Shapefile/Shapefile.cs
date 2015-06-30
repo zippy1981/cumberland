@@ -80,8 +80,8 @@ namespace Cumberland.Data.Shapefile
 			}
 		}
 		ShapeType shapetype = ShapeType.Null;
-		
-		List<Feature> features = new List<Feature>();
+
+		readonly List<Feature> features = new List<Feature>();
 		
 		[XmlIgnore]
 		public Rectangle Extents {
@@ -516,7 +516,6 @@ namespace Cumberland.Data.Shapefile
 		}
 
 #endregion
-						
-    }
+	}
 }
 
